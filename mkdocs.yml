@@ -94,6 +94,7 @@ nav:
         - 'integration/payment.md'
         - 'integration/alipay service window h5.md'
         - 'integration/Transaction Enquiry.md'
+        - 'integration/PaymentElement.md'
     - 'Checkout Page': 'https://checkout-sdk.qfapi.com/'
     - 'Android SDK': 'https://android-sdk.qfapi.com/'
 
