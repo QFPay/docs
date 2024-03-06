@@ -108,6 +108,8 @@ General notification rule applies. For details, please refer to the Asynchronous
 Upon successful execution of the following actions, you should be able to receive a notification
 
 - payment completion (captured)
+- unfreeze funds
+- refund
 
 
 These notifications will follow the same format as below. For different notification, the value of the field `notify_type` will differ
