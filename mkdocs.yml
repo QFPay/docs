@@ -53,7 +53,7 @@ theme:
     - navigation.top
     
     # - toc.follow
-    - toc.integrate
+    # - toc.integrate
 
 extra:
   robots: 'noindex,noarchive,nofollow'
