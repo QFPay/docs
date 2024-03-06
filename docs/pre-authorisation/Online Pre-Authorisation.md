@@ -1,5 +1,5 @@
 
-# Online Pre-authorization Trade APIs
+# Online Pre-authorization Payment APIs
 [Common APIs](#common-apis)
 [Create Pre-Authorization Payment (freeze funds)](#create-pre-authorization-payment)
 [Complete payment for pre-authorised transactions (deduct funds)](#complete-payment-for-pre-authorized-transactions)
