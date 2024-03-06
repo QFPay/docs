@@ -19,8 +19,11 @@ The Pre-authorization Step has to be achieved using the Payment Element componen
 >Charge the customer for the amount booked in pre-authorised transactions
 
 **url** :   /trade/v1/authtrade
+
 **method** : POST
+
 **header**:
+
 | Header name | Must | Description |
 | -------------- | ---- | ------------------ |
 | X-QF-APPCODE | Y | app code |
@@ -56,8 +59,11 @@ The Pre-authorization Step has to be achieved using the Payment Element componen
 >Only the non-captured (charged) amount in the transaction can be unfreezed (released back to the customer). This action can only be done ONCE.
 
 **url** :   /trade/v1/unfreeze
+
 **method** : POST
+
 **header**:
+
 | Header name | Must | Description |
 | -------------- | ---- | ------------------ |
 | X-QF-APPCODE | Y | app code |

@@ -95,6 +95,8 @@ nav:
         - 'integration/alipay service window h5.md'
         - 'integration/Transaction Enquiry.md'
         - 'integration/PaymentElement.md'
+    - 'Pre-Authorisation':
+        - 'pre-authorisation/Online Pre-Authorisation.md'
     - 'Checkout Page': 'https://checkout-sdk.qfapi.com/'
     - 'Android SDK': 'https://android-sdk.qfapi.com/'
 
