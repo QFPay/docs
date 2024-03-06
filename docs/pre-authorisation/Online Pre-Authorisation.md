@@ -99,3 +99,48 @@ The Pre-authorization Step has to be achieved using the Payment Element componen
 ## Refunding Completed (captured) Transactions
 
 For integration, please refer to the "Common API" section of the documentation. Please note that the syssn used in the refund transaction should correspond to the syssn returned upon the /authtrade request.
+
+
+## Notifications
+
+General notification rule applies. For details, please refer to the Asynchronous Notifications section in the documentations (https://sdk.qfapi.com/?python#asynchronous-notifications)
+
+Upon successful execution of the following actions, you should be able to receive a notification
+
+- payment completion (captured)
+
+
+These notifications will follow the same format as below. For different notification, the value of the field `notify_type` will differ
+
+| Action Completed | notify_type value |
+| -------------- | ------------------ |
+| Payment Complete (captured) | payment |
+| Unfreeze funds | unfreeze |
+| Refund | refund |
+
+
+```json
+{
+  "status": "1",
+  "pay_type": "800101",
+  "sysdtm": "2020-05-14 12:32:56",
+  "paydtm": "2020-05-14 12:33:56",
+  "goods_name": "",
+  "txcurrcd": "HKD",
+  "txdtm": "2020-05-14 12:32:56",
+  "mchid": "",
+  "txamt": "10",
+  "exchange_rate": "",
+  "chnlsn2": "",
+  "out_trade_no": "YEPE7WTW46NVU30JW5N90H7DHD94N56B",
+  "syssn": "20200514000300020093755455",
+  "cash_fee_type": "",
+  "cancel": "0",
+  "respcd": "0000",
+  "goods_info": "",
+  "cash_fee": "0",
+  "notify_type": "payment",
+  "chnlsn": "",
+  "cardcd": ""
+}
+```
