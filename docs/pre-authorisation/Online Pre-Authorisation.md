@@ -12,6 +12,7 @@ For instance you may find the following useful before you start the integration:
 - API credentials to be used
 - testing environments
 - signature generation for api requests
+- Common error codes
 
 You can also find common APIs that are also applicable to pre-authorisation payments: 
 - Transaction Enquiry (https://sdk.qfapi.com/?python#transaction-enquiry)
@@ -19,6 +20,8 @@ You can also find common APIs that are also applicable to pre-authorisation paym
 
 
 ## Creating and capturing payments
+
+![Pre-authorisation payment flow](https://www.plantuml.com/plantuml/png/XOynJWKX441xJZ6r2HUmCDzu0HihOp61mIM1WSpE57fwTv4biJ0_eHZ8UpouxOgYLelRSYIWslKB8kr1SjVSsBq_V83tJ_0gz6owDSdV51-X2tcSUpn1m33uFzmmNx2hoIc5t-b_z8sJ48s0pN72SAnafG3MPgoEcn8KIWejhOBRhVSc2Xr5CvOhw8WZd8Qxo54xlhOExjU5AcRE_0dSs8VfpVU0M_Aw-dPKhPOV)
 
 ### Step 1: Create Pre-Authorisation Payment
 
