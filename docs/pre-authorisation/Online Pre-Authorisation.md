@@ -6,17 +6,28 @@
 * [Cancel payment for pre-authorised transactions](#cancel-payment-for-pre-authorised-transactions)
 
 ## Common APIs
-For API introduction and common APIs including **transaction refund** and **transaction enquiry**, you can refer to [https://sdk.qfapi.com/#introduction](https://sdk.qfapi.com/#introduction)
+Instructions on general integration with the development environment is available on [https://sdk.qfapi.com/#introduction](https://sdk.qfapi.com/#introduction)
+
+For instance you may find the following useful before you start the integration:
+- API credentials to be used
+- testing environments
+- signature generation for api requests
+
+You can also find common APIs that are also applicable to pre-authorisation payments: 
+- Transaction Enquiry (https://sdk.qfapi.com/?python#transaction-enquiry)
+- Transaction Refunds (https://sdk.qfapi.com/?python#refunds)
 
 
-## Create Pre-Authorization Payment
+## Creating and capturing payments
 
-The Pre-authorization Step has to be achieved using the Payment Element component. For details of the integration, please refer to the respective sessions in the payment element documentation.
+### Step 1: Create Pre-Authorisation Payment
+
+The Pre-authorisation Step has to be achieved using the Payment Element component. For details of the integration, please refer to the respective sessions in the payment element documentation.
 
 
-## Complete payment for pre-authorised transactions
+### Step 2: Capture payment for pre-authorised transactions
 
->Charge the customer for the amount booked in pre-authorised transactions
+Capture the amount booked by the customer in pre-authorised transactions
 
 **url** :   /trade/v1/authtrade
 
@@ -28,14 +39,18 @@ The Pre-authorization Step has to be achieved using the Payment Element componen
 | -------------- | ---- | ------------------ |
 | X-QF-APPCODE | Y | app code |
 | X-QF-SIGN | Y | app key |
+
 **parameters** : 
+
 | Field          | Must | Description        |
 | -------------- | ---- | ------------------ |
 | txamt          | Y    | transaction amount |
 | txcurrcd       | N    | transaction currency |
 | mchid          | N    | mchid, merchant id |
-| syssn          | Y    | original transaction ID from pre-authorized payment |
+| syssn          | Y    | original transaction ID from pre-authorised payment |
+
 **response** :
+
 ```json
 {
 	 "sysdtm": "2024-02-26 15:04:12",
@@ -54,9 +69,10 @@ The Pre-authorization Step has to be achieved using the Payment Element componen
 	 "cardcd": ""
 }
 ```
-## Unfreeze amount for pre-authorised transactions
 
->Only the non-captured (charged) amount in the transaction can be unfreezed (released back to the customer). This action can only be done ONCE.
+## Unfreeze amount for `PRE-AUTHORISED` transactions
+
+>Only the non-captured (`pre-authorised amount - captured amount`) amount in the transaction can be unfreezed (released back to the customer). This action can only be done ONCE.
 
 **url** :   /trade/v1/unfreeze
 
@@ -68,7 +84,9 @@ The Pre-authorization Step has to be achieved using the Payment Element componen
 | -------------- | ---- | ------------------ |
 | X-QF-APPCODE | Y | app code |
 | X-QF-SIGN | Y | app key |
+
 **parameters** : 
+
 | Field          | Must | Description        |
 | -------------- | ---- | ------------------ |
 | txamt          | Y    | transaction amount      |
@@ -76,6 +94,7 @@ The Pre-authorization Step has to be achieved using the Payment Element componen
 | syssn          | Y    | original transaction ID |
 | out_trade_no   | Y    | original merchant order id |
 | mchid          | N    | mchid, merchant id |
+
 **response** :
 ```json
 {
@@ -96,7 +115,7 @@ The Pre-authorization Step has to be achieved using the Payment Element componen
 }
 ```
 
-## Refunding Completed (captured) Transactions
+## Refunding Completed (`CAPTURED`) Transactions
 
 For integration, please refer to the "Common API" section of the documentation. Please note that the syssn used in the refund transaction should correspond to the syssn returned upon the /authtrade request.
 
@@ -116,7 +135,7 @@ These notifications will follow the same format as below. For different notifica
 
 | Action Completed | notify_type value |
 | -------------- | ------------------ |
-| Payment Complete (captured) | payment |
+| Payment Captured | payment |
 | Unfreeze funds | unfreeze |
 | Refund | refund |
 
