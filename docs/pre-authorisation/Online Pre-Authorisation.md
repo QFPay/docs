@@ -1,8 +1,8 @@
 
-# Online Pre-authorization Payment APIs
+# Online Pre-authorisation Payment APIs
 * [Common APIs](#common-apis)
-* [Create Pre-Authorization Payment (freeze funds)](#create-pre-authorization-payment)
-* [Complete payment for pre-authorised transactions (deduct funds)](#complete-payment-for-pre-authorized-transactions)
+* [Create Pre-Authorisation Payment (freeze funds)](#create-pre-authorisation-payment)
+* [Complete payment for pre-authorised transactions (deduct funds)](#complete-payment-for-pre-authorised-transactions)
 * [Cancel payment for pre-authorised transactions](#cancel-payment-for-pre-authorised-transactions)
 
 ## Common APIs
