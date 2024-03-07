@@ -15,6 +15,7 @@ For instance you may find the following useful before you start the integration:
 - Common error codes
 
 You can also find common APIs that are also applicable to pre-authorisation payments: 
+
 - Transaction Enquiry (https://sdk.qfapi.com/?python#transaction-enquiry)
 - Transaction Refunds (https://sdk.qfapi.com/?python#refunds)
 
