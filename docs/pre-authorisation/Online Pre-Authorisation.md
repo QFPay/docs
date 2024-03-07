@@ -1,9 +1,9 @@
 
 # Online Pre-authorization Payment APIs
-[Common APIs](#common-apis)
-[Create Pre-Authorization Payment (freeze funds)](#create-pre-authorization-payment)
-[Complete payment for pre-authorised transactions (deduct funds)](#complete-payment-for-pre-authorized-transactions)
-[Cancel payment for pre-authorised transactions](#cancel-payment-for-pre-authorised-transactions)
+* [Common APIs](#common-apis)
+* [Create Pre-Authorization Payment (freeze funds)](#create-pre-authorization-payment)
+* [Complete payment for pre-authorised transactions (deduct funds)](#complete-payment-for-pre-authorized-transactions)
+* [Cancel payment for pre-authorised transactions](#cancel-payment-for-pre-authorised-transactions)
 
 ## Common APIs
 For API introduction and common APIs including **transaction refund** and **transaction enquiry**, you can refer to [https://sdk.qfapi.com/#introduction](https://sdk.qfapi.com/#introduction)
