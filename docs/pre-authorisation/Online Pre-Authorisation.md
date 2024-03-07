@@ -9,6 +9,7 @@
 Instructions on general integration with the development environment is available on [https://sdk.qfapi.com/#introduction](https://sdk.qfapi.com/#introduction)
 
 For instance you may find the following useful before you start the integration:
+
 - API credentials to be used
 - testing environments
 - signature generation for api requests
