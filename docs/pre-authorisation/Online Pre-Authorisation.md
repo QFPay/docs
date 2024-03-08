@@ -25,6 +25,8 @@ You can also find common APIs that are also applicable to pre-authorisation paym
 
 ![Pre-authorisation payment flow](https://www.plantuml.com/plantuml/png/XOynJWKX441xJZ6r2HUmCDzu0HihOp61mIM1WSpE57fwTv4biJ0_eHZ8UpouxOgYLelRSYIWslKB8kr1SjVSsBq_V83tJ_0gz6owDSdV51-X2tcSUpn1m33uFzmmNx2hoIc5t-b_z8sJ48s0pN72SAnafG3MPgoEcn8KIWejhOBRhVSc2Xr5CvOhw8WZd8Qxo54xlhOExjU5AcRE_0dSs8VfpVU0M_Aw-dPKhPOV)
 
+![Pre-authorisation payment flow](https://cdn-0.plantuml.com/plantuml/png/dL51Rjmm3Bph5KJEpGVsKAI71kYXG8g-G9Pfhr1Br59KaCthAmcXQnTni-YD5cU6C-E7B9QbXCLO9yJWIXOAo63pEh-jwkJEDafRwMm6Ue7lklXvpOB19ClYdK_jwMvb9MAnorrZJyH7gC6wNnZ73Wl37lJZySbU0HSC6AKXT3QL0TL9TzDHU-ANfs-GaP-zmqwxJAb2b6HcffB0CLf1I8ptjiYPsBzQyHIXOlkH-agnX07Ph2tTVrOF9_0n5G5dUQpZH2QI8B2Vps8UYHLNTu8pT-bFa1QqkQ9mGWOX-Fe66icLDLaJCagl5xlza_e2nal1B8PH2iVDSowBQ3gRhz4r9Jzvru-RBjFqmd0wZWsvE8SvxxdDLXTkazueSMB4LuIfn35l-zBVswwrdt_wWyq9NTC5uh4YsrOzhHXD68Or_cwxozzrWD6XVyOHR7NgC_WQY6bcpDcOXQYv5R_0Z0Buaj09ZbhPxeoFb-BvkW_tzqrTgWB6SHl_nd-WAXzLlktSsII5twdydSuLUrYvGWuQtoyrl7x-gtBuhyuF3cwUjMmmS5l7olsuuZPIuMGUwbZ2yXi0)
+
 ### Step 1: Create Pre-Authorisation Payment
 
 The Pre-authorisation Step has to be achieved using the Payment Element component. For details of the integration, please refer to the respective sessions in the payment element documentation.
