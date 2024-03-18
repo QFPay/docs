@@ -24,8 +24,8 @@ For instance you may find the following useful before you start the integration:
 
 You can also find common APIs that are also applicable to pre-authorisation payments: 
 
-- Transaction Enquiry (https://sdk.qfapi.com/?python#transaction-enquiry)
-- Transaction Refunds (https://sdk.qfapi.com/?python#refunds)
+- [Transaction Enquiry](../common-api/transaction-enquiry)
+- [Transaction Refunds](../common-api/refunds)
 
 ## Creating and capturing payments
 

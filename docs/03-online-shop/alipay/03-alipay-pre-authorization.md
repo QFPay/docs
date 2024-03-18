@@ -8,7 +8,9 @@ import Link from '@docusaurus/Link';
 
 At the moment only Alipay wallet funds can be used for pre-authorization, credit-cards are not supported. Authorization requests lose their validity after 15min. In case of technical or currency related integration difficulties please contact technical.support@qfpay.com for support. Merchants can, at any time, unfreeze the funds in which case the assets will be available for spending on the original wallet. In addition, merchants can initiate a transfer for a fraction or all of the frozen funds in order to collect money for open customer invoices.
 
-:::note Alipay pre-authorization currently supports the following currencies: AUD, HKD, MYR, NZD, PHP, SGD, THB and USD:::
+:::note
+Alipay pre-authorization currently supports the following currencies: AUD, HKD, MYR, NZD, PHP, SGD, THB and USD
+:::
 
 <Link to="/img/alipay_preauth_process.jpg" target="_blank">![Alipay Pre-Auth process-flow](@site/static/img/alipay_preauth_process.jpg)</Link>
 

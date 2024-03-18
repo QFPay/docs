@@ -180,6 +180,7 @@ for example
 
 ## 4. Fields explanation
 
+```plaintext
 1、 func_type : business type
     (1) 1001 Trade
     (2) 1002 Refund
@@ -203,12 +204,15 @@ for example
 
 4、orderId: Transaction reference number, the same as out_trade_no
 
+```
+
 ## 5. Response format
 
 ```json
 {\"respcd\": \"6000\",\"data\": \"{"aaaaaa"}\",\"respmsg\": \"xxxxxxxxxx\",\"resperr\":\"xxxxxxxxxx\"}
 ```
 
+```plaintext
 1、respcd: response code
     （1）、"4003"，POS-KEY is invalid
     （2）、"5001"，Decryption failed
@@ -276,6 +280,7 @@ for example
             origbusicd;original business code
             chnlsn;channel serial number
             cardscheme;card scheme, e.g. VISA
+```
 
 ## 6. USB data transmission method
 

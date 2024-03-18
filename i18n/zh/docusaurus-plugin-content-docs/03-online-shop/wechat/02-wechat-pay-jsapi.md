@@ -272,8 +272,8 @@ Optionally merchants can activate real-name authentication with WeChat. Currentl
 
 ### Request Parameters
 
-|Parameter code | Mandatory | Parameter type | Description |
-|:----    |:---|:----- | -----   |-----   |
+| Parameter code | Mandatory | Parameter type | Description |
+|----------------|-----------|----------------|-------------|
 |`mchntnm` | Yes | String(128) | Custom business name. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters |
 |`txamt`  | Yes  | Int(11) | Amount |
 |`currency`   | Yes  | String(3)|  |

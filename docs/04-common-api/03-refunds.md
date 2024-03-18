@@ -300,7 +300,7 @@ Merchants can use the refund interface to refund transactions. The merchant acco
 ### Response Parameters
 
 |Parameter name|Parameter code|Parameter type|Description|
-|-----    |----|------ |-----   |-----   |
+|-----    |----|------ |-----   |
 |Refund Transaction ID | `syssn`  |String(40)   |New transaction ID referring to the newly created refund transaction|
 |Original Transaction ID| `orig_syssn`  |String(128)   |Previous transaction ID referring to the original transaction that has been refunded|
 |Refund amount| `txamt`   |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1)|
