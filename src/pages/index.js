@@ -1,33 +1,9 @@
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import HomepageCard from '@site/src/components/HomepageCard';
 
 import Heading from '@theme/Heading';
-import styles from './index.module.css';
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          {/* <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link> */}
-        </div>
-      </div>
-    </header>
-  );
-}
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
@@ -35,11 +11,19 @@ export default function Home() {
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
-      <main>
+      <main class="qf-main">
+        <div className="container">
+          <Heading as="h3" style={{marginTop: "52px"}}>Introduction</Heading>
+          <p>QFPay API is a comprehensive payment solution that offers various payment methods to meet the needs of different businesses. This API documents the process of integrating with QFPay and the requirements for developing a successful integration.</p>
+        </div>
+        <div className="container">
+          <Heading as="h3" style={{marginTop: "52px"}}>Build your integration, let our products empower your business</Heading>
+        </div>
         <HomepageFeatures />
+        <div className="container">
+          <Heading as="h3" style={{marginTop: "52px"}}>Resources</Heading>
+        </div>
         <HomepageFeatures />
-        {/* <HomepageCard title="test"/> */}
       </main>
     </Layout>
   );

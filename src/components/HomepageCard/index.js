@@ -35,20 +35,15 @@ export default function HomepageCard(props) {
   };
 
   return (
-    <Card className={clsx('col col--4')} sx={{ maxWidth: 345, position:"relative", height:"fit-content"}}>
+    <Card className={[clsx('col col--4'), "qf-homepage-card"]}>
       <CardMedia
         component="img"
-        height="194"
         image={props.url}
         alt="Paella dish"
-        className={styles.featureSvg}
+        className={[styles.featureSvg, "qf-homepage-card-media"]}
       />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {props.title}
-        </Typography>
-      </CardContent>
-      <CardActions  disableSpacing>
+      {props.links.length > 4 ? 
+      <CardActions  className={"qf-homepage-card-actions"} disableSpacing>
         <ExpandMore
           sx={{marginRight: "auto"}}
           expand={expanded}
@@ -56,12 +51,21 @@ export default function HomepageCard(props) {
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <ExpandMoreIcon />
+          <ExpandMoreIcon sx={{color: "var(--ifm-color-base)"}}/>
         </ExpandMore>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>{props.description}</Typography>
+      : <></>}
+      <Collapse in={expanded} className={"qf-homepage-card-collapse"}timeout="auto" collapsedSize={320}>
+        <CardContent style={{padding: "20px", paddingBottom: "48px"}}>
+          <Typography variant="body2" color="text.primary" className="qf-homepage-card-title">
+            {props.title}
+          </Typography>
+          <Typography paragraph className="qf-homepage-card-description">{props.description}</Typography>
+          <ul style={{display:"flex", flexDirection:"column", gap:"12px", padding: 0, margin: 0}}>
+          {props.links.map((item,index) => {
+            return <li style={{textAlign: "left", listStyleType:"none"}} key={index}><a href={item["url"]} target="_self">{item["title"]}</a></li>
+          })}
+          </ul>
         </CardContent>
       </Collapse>
     </Card>

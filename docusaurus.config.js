@@ -50,10 +50,6 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          // editUrl:
-          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -75,12 +71,12 @@ const config = {
           srcDark: 'img/logo_dark.jpg',
           width: 112,
           height: 20,
+          href: 'https://qfpay.global/',
         },
         items: [
           {
-            to: 'docs/Preparation',
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            to: '/',
+            // type: 'docSidebar',
             position: 'left',
             label: 'Home',
             className: 'qf-display-link'
@@ -109,11 +105,6 @@ const config = {
             label: 'Sign In',
             className: 'qf-display-link-blue',
           },
-          {
-            type: 'html',
-            position: 'left',
-            value: '<div class="qf-nav-menu"><a href="/qf-sdk/">Home</a><a href="/qf-sdk/docs/Preparation/introduction">Integration</a><a>Resources</a></div>'
-          },
         ],
       },
       footer: {
@@ -127,6 +118,11 @@ const config = {
         darkTheme: prismThemes.dracula,
         additionalLanguages: ['java', 'php', 'json'],
       },
+      docs:{
+        sidebar:{
+          hideable: true,
+        }
+      }
     }),
 };
 
