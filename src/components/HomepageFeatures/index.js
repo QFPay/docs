@@ -13,9 +13,9 @@ const FeatureList = [
       </>
     ),
     links:[
-      {title:"PayMe Offline Payment", url:"docs/in-store/payme-offline-payment"},
       {title:"Merchant Present QRCode Mode", url:"docs/in-store/MPM"},
-      {title:"Consumer Present QRCode Mode", url:"docs/in-store/CPM"}
+      {title:"Consumer Present QRCode Mode", url:"docs/in-store/CPM"},
+      {title:"POS API", url:"docs/in-store/pos-api"}
     ]
   },
   {
@@ -27,14 +27,13 @@ const FeatureList = [
       </>
     ),
     links:[
-      {title:"PayMe Online Payment", url:"docs/online-shop/payme-online-payment"},
+      {title:"Visa/Mastercard Online Payments", url:"docs/online-shop/visa-master-online-payment"},
+      {title:"QFPay Checkout Services", url:"docs/online-shop/checkout"},
+      {title:"QFPay Component", url:"docs/online-shop/paymentelement"},
+      {title:"QFPay Recurring Payment", url:"docs/online-shop/qfpay-recurring-payment"},
+      {title:"Online Pre-authorisation Payment", url:"docs/online-shop/online-pre-authorisation"},
       {title:"Alipay", url:"docs/category/alipay"},
       {title:"WeChat", url:"docs/category/wechat"},
-      {title:"Checkout Services", url:"docs/online-shop/checkout"},
-      {title:"Online Pre-authorisation Payment APIs", url:"docs/online-shop/online-pre-authorisation"},
-      {title:"QFPay Element SDK", url:"docs/online-shop/paymentelement"},
-      {title:"QFPay Subscription API", url:"docs/online-shop/subscription"},
-      {title:"Visa/Mastercard Online Payments", url:"docs/online-shop/visa-master-online-payment"}
     ]
   },
   {
@@ -46,7 +45,10 @@ const FeatureList = [
       </>
     ),
     links:[
-      {title:"POS Integration", url:"docs/category/cdi"}
+      {title:"Shopify", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26Shopify-SetupGuideline.pdf"},
+      {title:"Magento", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26Magento-SetupGuideline.pdf"},
+      {title:"Woocommerce", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26WooCommerce-SetupGuideline.pdf"},
+      {title:"Opencart", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26OpenCart-SetupGuideline.pdf"},
     ]
   },
 ];

@@ -1,6 +1,6 @@
 import Link from '@docusaurus/Link';
 
-# Checkout
+# QFPay Checkout Services
 
 ## Introduction
 

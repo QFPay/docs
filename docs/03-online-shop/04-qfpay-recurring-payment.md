@@ -2,7 +2,7 @@
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# QFPay Subscription API
+# QFPay Recurring Payment
 
 <!-- <sub><sup>last modified 20230816<sup><sub> -->
 

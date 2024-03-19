@@ -54,7 +54,7 @@ export default function HomepageCard(props) {
         </ExpandMore>
       </CardActions>
       : <></>}
-      <Collapse in={expanded} className={"qf-homepage-card-collapse"}timeout="auto" collapsedSize={320}>
+      <Collapse in={expanded} className={"qf-homepage-card-collapse"}timeout="auto" collapsedSize={props.links.length > 4? 320: 340}>
         <CardContent style={{padding: "20px", paddingBottom: "48px"}}>
           <Typography variant="body2" color="text.primary" className="qf-homepage-card-title">
             {props.title}
