@@ -1,30 +1,33 @@
 import styles from './styles.module.css';
 import HomeCard from '../HomepageCard';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
+const {siteConfig} = useDocusaurusContext();
+const {baseUrl} = siteConfig;
 const FeatureList = [
   {
     title: 'In-Store',
-    Svg: '/qf-sdk/img/homepage/in-store.png',
+    Svg: baseUrl + 'img/homepage/in-store.png',
     description: (
       <>
         Experience swift, secure shopping with our in-store payment solution. Accepts all major cards and e-wallets. Quick, convenient, and crafted for you.
       </>
     ),
     links:[
-      {title:"POS Integration", url:"/qf-sdk/docs/category/cdi"},
-      {title:"In-Store common API -MPQR & CPQR", url:"/docs/category/cdi"}
+      {title:"POS Integration", url:baseUrl + "docs/category/cdi"},
+      {title:"In-Store common API -MPQR & CPQR", url:baseUrl + "docs/category/cdi"}
     ]
   },
   {
     title: 'Online Shop',
-    Svg: '/qf-sdk/img/homepage/online-shop.png',
+    Svg: baseUrl + 'img/homepage/online-shop.png',
     description: (
       <>
         Enjoy secure, instant online payments with our solution. Supports all major online scenarios and e-wallets / credit cards. Fast, flexible, and designed for your convenience.
       </>
     ),
     links:[
-      {title:"Checkout Services", url:"/qf-sdk/docs/category/cdi"},
+      {title:"Checkout Services", url:baseUrl + "docs/category/cdi"},
       {title:"Embedded Component", url:""},
       {title:"Recurring Payment", url:""},
       {title:"Official Accounts/ Mini Programs", url:""},
@@ -35,14 +38,14 @@ const FeatureList = [
   },
   {
     title: 'E-Commerce',
-    Svg: '/qf-sdk/img/homepage/e-commerce.png',
+    Svg: baseUrl + 'img/homepage/e-commerce.png',
     description: (
       <>
         Boost your online store payment abilities with our e-commerce plugins for Shopify, WooCommerce, OpenCart, and Magento. Easy to integrate, reliable, and designed to enhance your business.
       </>
     ),
     links:[
-      {title:"POS Integration", url:"/qf-sdk/docs/category/cdi"}
+      {title:"POS Integration", url:baseUrl + "docs/category/cdi"}
     ]
   },
 ];
