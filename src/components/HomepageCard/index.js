@@ -62,7 +62,11 @@ export default function HomepageCard(props) {
           <Typography paragraph className="qf-homepage-card-description">{props.description}</Typography>
           <ul style={{display:"flex", flexDirection:"column", gap:"12px", padding: 0, margin: 0}}>
           {props.links.map((item,index) => {
-            return <li style={{textAlign: "left", listStyleType:"none"}} key={index}><a href={props.baseUrl + item["url"]} target="_self">{item["title"]}</a></li>
+            if(item["url"].startsWith("http") || item["url"].startsWith("mailto:")){
+              return <li style={{textAlign: "left", listStyleType:"none"}} key={index}><a href={item["url"]} target="_self">{item["title"]}</a></li>
+            }else{
+              return <li style={{textAlign: "left", listStyleType:"none"}} key={index}><a href={props.baseUrl + item["url"]} target="_self">{item["title"]}</a></li>
+            }
           })}
           </ul>
         </CardContent>

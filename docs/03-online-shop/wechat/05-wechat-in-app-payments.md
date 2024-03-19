@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 
 # WeChat in-APP Payments
 
-<Link href="https://sdk.qfapi.com/images/wechat-in-app.png" target="_blank">![WeChat APP Payment process-flow](@site/static/img/wechat-in-app.png)</Link>
+<Link href="/img/wechat-in-app.png" target="_blank">![WeChat APP Payment process-flow](@site/static/img/wechat-in-app.png)</Link>
 
 ### HTTP Request
 

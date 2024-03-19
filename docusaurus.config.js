@@ -84,7 +84,7 @@ const config = {
           {
             to: 'docs/Preparation',
             type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            sidebarId: 'qfpaySidebar',
             position: 'left',
             label: 'Integration',
             className: 'qf-display-link'
@@ -100,7 +100,7 @@ const config = {
           },
           {
             type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            sidebarId: 'qfpaySidebar',
             position: 'right',
             label: 'Sign In',
             className: 'qf-display-link-blue',

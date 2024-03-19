@@ -19,11 +19,11 @@ export default function Home() {
         <div className="container">
           <Heading as="h3" style={{marginTop: "52px"}}>Build your integration, let our products empower your business</Heading>
         </div>
-        <HomepageFeatures />
+        <HomepageFeatures type="feature"/>
         <div className="container">
           <Heading as="h3" style={{marginTop: "52px"}}>Resources</Heading>
         </div>
-        <HomepageFeatures />
+        <HomepageFeatures type="resource"/>
       </main>
     </Layout>
   );

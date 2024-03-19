@@ -1,9 +1,10 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Link from '@docusaurus/Link';
 
 # Consumer Present Mode (CPM)
 
-![CPM process-flow](@site/static/img/cpm_process.jpg)
+<Link href="/img/cpm_process.jpg" target="_blank">![CPM process-flow](@site/static/img/cpm_process.jpg)</Link>
 
 ## CPM API Request
 

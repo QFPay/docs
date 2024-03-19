@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 
 # WeChat Pay JSAPI (in wechat browser)
 
-<Link href="https://sdk.qfapi.com/images/wechat_jsapi_process.jpg" target="_blank">![WeChat JSAPI process-flow](@site/static/img/wechat_jsapi_process.jpg)</Link>
+<Link href="/img/wechat_jsapi_process.jpg" target="_blank">![WeChat JSAPI process-flow](@site/static/img/wechat_jsapi_process.jpg)</Link>
 
 :::warning
 Official account payments must be initiated from the WeChat in-app browser. They cannot be initiated from another browser, such as Chrome or Safari.

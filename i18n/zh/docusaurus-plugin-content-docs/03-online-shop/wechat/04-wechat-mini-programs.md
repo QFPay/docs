@@ -137,9 +137,9 @@ Obtain the `pay_params` parameter, and then provide payment details accordingly.
 
 ## WeChat Mini Program Boilerplate
 
-To get started quickly, download the <Link href="https://sdk.qfapi.com/files/qfpay_mini_program_payments_boilerplate.zip" download>QF Pay WeChat Mini Program Boilerplate</Link> and get access to the MD5 hash algorithm. 
+To get started quickly, download the [QF Pay WeChat Mini Program Boilerplate](@site/static/files/qfpay_mini_program_payments_boilerplate.zip) and get access to the MD5 hash algorithm.
 
-<Link href="https://sdk.qfapi.com/images/miniprogram_boilerplate.png" target="_blank">![WeChat Mini Program Boilerplate](@site/static/img/miniprogram_boilerplate.png)</Link>
+<Link href="/img/miniprogram_boilerplate.png" target="_blank">![WeChat Mini Program Boilerplate](@site/static/img/miniprogram_boilerplate.png)</Link>
 
 <br/>
 **Setup Instructions**
@@ -147,6 +147,5 @@ To get started quickly, download the <Link href="https://sdk.qfapi.com/files/qfp
 1) Sign up with QFPay and we bind your WeChat appid to your API credentials. <br/>
 2) Visit the WeChat MP portal at [https://mp.weixin.qq.com](https://mp.weixin.qq.com) and whitelist our environment for incoming server traffic: <br/>
 开发 -> 开发设置 -> 服务器域名 -> request合法域名: e.g. https://openapi-sg.qfapi.com <br/>
-3) Copy and paste the files from the zip file to your local harddrive and setup a cloudfunction environment. <br/>
-4) Obtain the user openid with the cloudfunction "getUserOpenID" and run the API calls accroding to the code. <br/>
-
+1) Copy and paste the files from the zip file to your local harddrive and setup a cloudfunction environment. <br/>
+2) Obtain the user openid with the cloudfunction "getUserOpenID" and run the API calls accroding to the code. <br/>

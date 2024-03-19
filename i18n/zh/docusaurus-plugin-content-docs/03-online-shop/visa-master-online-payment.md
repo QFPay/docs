@@ -1,7 +1,8 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Link from '@docusaurus/Link';
 
-#  Visa / Mastercard Online Payments
+# Visa / Mastercard Online Payments
 
 We currently support credit card payments in the [Hong Kong environment](../preparation/introduction#environments). All major credit card issuers are supported.
 
@@ -9,12 +10,12 @@ We currently support credit card payments in the [Hong Kong environment](../prep
 |-------- |---------------------------------- |
 | 802801  | Visa / Mastercard Online Payments |
 
-
 ## Payment Steps
 
-![Credit Card Payment Flow](@site/static/img/credit_card_payment_flow_integration.png)
+<Link href="/img/credit_card_payment_flow_integration.png">![Credit Card Payment Flow](@site/static/img/credit_card_payment_flow_integration.png)</Link>
 
 ### 1. DDC request
+
 Merchant server requests a Data collector form before the merchant checkout is loaded. The DDC JWT is returned
 
 ```shell

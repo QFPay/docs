@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 
 # WeChat Pay H5 (in mobile browser)
 
-<Link href="https://sdk.qfapi.com/images/wechat-h5.png" target="_blank">![WeChat H5 process-flow](@site/static/img/wechat-h5.png)</Link>
+<Link href="/img/wechat-h5.png" target="_blank">![WeChat H5 process-flow](@site/static/img/wechat-h5.png)</Link>
 
 ### HTTP Request
 

@@ -9,13 +9,13 @@ Verify that your API credentials allow for the selected `pay_type`.
 
 ### PayType Table
 
-Code | Description 
---------- | ------- 
+Code | Description
+--------- | -------
 800008 | Consumer Present QR Code Mode (CPM) for WeChat, Alipay, UNIONPAY Quick Pass
 800101 | Alipay Merchant Presented QR Code Payment in store (MPM) (Overseas Merchants)
 800108 | Alipay Consumer Presented QR Code Payment (CPM) (Overseas & HK Merchants)
 801101 | Alipay Online WEB (in browser Chrome etc.) Payment (Overseas Merchants) **
-801107 | Alipay Online WAP (in mobile browser Chrome etc.) Payment (Overseas Merchants) 
+801107 | Alipay Online WAP (in mobile browser Chrome etc.) Payment (Overseas Merchants)
 801110 | Alipay in-APP Payments (Overseas Merchants)
 800107 | Alipay Service Window H5 Payment (in Alipay APP H5 payments)
 801501 | Alipay Merchant Presented QR Code (MPM) Payment (HK Merchants)
@@ -28,40 +28,40 @@ Code | Description
 800212 | WeChat H5 Payment (In mobile browser)
 800210 | WeChat in-APP Payment (Overseas & HK Merchants)
 800213 | WeChat Mini-Program Payment (Overseas & HK Merchants)
-801008 | WeChat Pay HK Consumer Presented QR Code Payment (CPM) (Direct Settlement, HK Merchants) 
-801010 | WeChat Pay HK In-App Payment (Direct Settlement, HK Merchants) 
+801008 | WeChat Pay HK Consumer Presented QR Code Payment (CPM) (Direct Settlement, HK Merchants)
+801010 | WeChat Pay HK In-App Payment (Direct Settlement, HK Merchants)
 805801 | PayMe Merchant Presented QR Code Payment in store (MPM) (HK Merchants)
 805808 | PayMe Consumer Presented QR Code Payment (CPM) (HK Merchants)
 805814 | PayMe Online WEB (in browser Chrome etc.) Payment (HK Merchants)
-805812 | PayMe Online WAP (in mobile browser Chrome etc.) Payment (HK Merchants) 
-800701 | UNIONPAY Quick Pass Merchant Presented QR Code Payment (MPM) 
-800708 | UNIONPAY Quick Pass Consumer Presented QR Code Payment (CPM) 
+805812 | PayMe Online WAP (in mobile browser Chrome etc.) Payment (HK Merchants)
+800701 | UNIONPAY Quick Pass Merchant Presented QR Code Payment (MPM)
+800708 | UNIONPAY Quick Pass Consumer Presented QR Code Payment (CPM)
 800712 | UNIONPAY WAP Payment (HK Merchants)
 800714 | UNIONPAY PC-Web Payment (HK Merchants)
 800710 | UNIONPAY In-App Payment (HK Merchants)
 801208 | LINEPAY dynamic QRC Payment - Consumer Present Mode (CPM) (TH Merchants)
 801301 | LINEPAY Online Payment (TH Merchants)
 801408 | AIRPAY dynamic QRC Payment - Consumer Present Mode (CPM) (TH Merchants)
-801701 | NETSPAY Merchant Presented QR Code Payment (MPM) 
+801701 | NETSPAY Merchant Presented QR Code Payment (MPM)
 801801 | Alipay Pre-Authorization dynamic QRC Payment - Consumer Present Mode (CPM)
 801808 | Alipay Pre-Authorization dynamic QRC Payment - Merchant Present Mode (MPM)  
 801810 | Alipay Pre-Authorization in-APP Payment
 801814 | Alipay Pre-Authorization Online Payment
-801908 | Origami Consumer Presented QR Code Payment (CPM) 
-802001 | FPS Merchant Presented QR Code Payment (MPM) (HK Merchants)*** 
+801908 | Origami Consumer Presented QR Code Payment (CPM)
+802001 | FPS Merchant Presented QR Code Payment (MPM) (HK Merchants)***
 802201 | AIRPAY Online Payment (TH Merchants)
-802301 | PayNow Merchant Presented QR Code Payment (MPM) (SG Merchants)*** 
+802301 | PayNow Merchant Presented QR Code Payment (MPM) (SG Merchants)***
 802901 | PromptPay dynamic QRC Payment - Merchant Present Mode (MPM) (TH Merchants)***
 803001 | eWallet dynamic QRC Payment - Merchant Present Mode (MPM)
 803008 | eWallet dynamic QRC Payment - Consumer Present Mode (CPM)
 803101 | VIA dynamic QRC Payment - Merchant Present Mode (MPM) (JP and HK Merchants)
 803108 | VIA dynamic QRC Payment - Consumer Present Mode (CPM) (JP and HK Merchants)
-803208 | Touch 'n Go (TNG) dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)   
+803208 | Touch 'n Go (TNG) dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
 803214 | Touch 'n Go (TNG) Online Payment (MY Merchants)**
 803301 | Razer dynamic QRC Payment - Merchant Present Mode (MPM) (MY Merchants)
 803308 | Razer dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
 803314 | Razer Online Payment ** (MY Merchants)
-803701 | Octopus dynamic QRC Payment - Merchant Present Mode (MPM) (HK Merchants) 
+803701 | Octopus dynamic QRC Payment - Merchant Present Mode (MPM) (HK Merchants)
 803801 | Dash dynamic QRC Payment - Merchant Present Mode (MPM) (SG Merchants)
 803808 | Dash dynamic QRC Payment - Consumer Present Mode (CPM) (SG Merchants)
 804001 | Boost dynamic QRC Payment - Merchant Present Mode (MPM) (MY Merchants)
@@ -75,8 +75,8 @@ Code | Description
 804214 | GrabPay Online Payment (MY Merchant)** (SG Merchants)*
 805208 | TrueMoney dynamic QRC Payment - Consumer Present Mode (CPM) (TH Merchants)
 805401 | ThaiQR dynamic QRC Payment - Merchant Present Mode (MPM) (SG and MY Merchants)***
-805508 | Credit Card: first_data Quick Payment Mode (HK Merchant) |
-805514 | Credit Card: first_data Security Verification Payment Mode (HK Merchants) |
+805508 | Credit Card: first_data Quick Payment Mode (HK Merchant)
+805514 | Credit Card: first_data Security Verification Payment Mode (HK Merchants)
 802801 | Visa / Mastercard Online Payments
 802808 | Visa / Mastercard Offline Payments
 805601 | GoPay dynamic QRC Payment - Merchant Present Mode (MPM)***
@@ -91,6 +91,7 @@ Code | Description
 
 :::note
   **(\*)**
+
   1. Differently from Public Payment Parameters, `return_url` is a mandatory request parameter.
   2. `web_url` parameter in response contains the payment url.
 
@@ -108,16 +109,16 @@ Code | Description
 
 The below listed currencies are currently available in our payment network. Please consult **technical.support@qfpay.com** to verify that your API credentials and selected `pay_type` support your desired currency.
 
-Code | Description 
---------- | ------- 
+Code | Description
+--------- | -------
 AED | Arab Emirates Dirham
 CNY | Chinese Yuan
-EUR | Euro 
-HKD | Hong Kong Dollar 
+EUR | Euro
+HKD | Hong Kong Dollar
 IDR | Indonesian Rupiah
 JPY | Japanese Yen
 MMK | Myanmar Kyat
-MYR | Malaysian Ringgit 
+MYR | Malaysian Ringgit
 SGD | Singapore Dollar
 THB | Thai Baht
 USD | United States Dollar
@@ -429,18 +430,18 @@ Asynchronous Notification URL | `notify_url` | No | String(256) |Asynchronous no
 
 ### Public Payment Response Parameters
 
-Parameter name | Parameter code | Type | Description 
---------- | -------- | --------- | ------- 
+Parameter name | Parameter code | Type | Description
+--------- | -------- | --------- | -------
 Payment type | `pay_type` | String(6) | Please refer to the section [Payment Codes](#payment-codes) for a complete list of payment types 
 System transaction time | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
 Request transaction time | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  |
-Response message | `resperr` | String(128) |  
-Payment amount | `txamt` | Int(11) |  
+Response message | `resperr` | String(128) | 
+Payment amount | `txamt` | Int(11) |
 Other message information | `respmsg` | String(128) |  
 External transaction number | `out_trade_no` | String(128) | External transaction number  
 QFPay transaction number | `syssn` | String(40) | 
 Wallet/Channel transaction number| `chnlsn` | String | 
-Return code | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](#transaction-status-codes) for a complete list of response codes. 
+Return code | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](#transaction-status-codes) for a complete list of response codes.
 
 ## Transaction Status Codes
 

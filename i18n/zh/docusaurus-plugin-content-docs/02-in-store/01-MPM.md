@@ -1,9 +1,10 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Link from '@docusaurus/Link';
 
 # Merchant Present Mode (MPM)
 
-![MPM process-flow](@site/static/img/mpm_process.jpg)
+<Link href="/img/mpm_process.jpg" target="_blank">![MPM process-flow](@site/static/img/mpm_process.jpg)</Link>
 
 ## MPM API Request
 
