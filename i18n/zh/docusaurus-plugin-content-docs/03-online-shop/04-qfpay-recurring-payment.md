@@ -2,363 +2,363 @@
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# QFPay Recurring Payment
+# QFPay订阅支付接口
 
 <!-- <sub><sup>last modified 20230816<sup><sub> -->
 
-Create and manage subscriptions and recurring payment
+创建并管理订阅及周期支付
 
-## How subscription works
+## 周期支付运行流程
 
-### API Environment
+### 接口运行环境
 
-| Environment Name | URL |
+| 环境名称 | 地址 |
 |--|--|
 | Sandbox | https://openapi-int.qfapi.com |
 
-### API Resources
+### 接口资源
 
-For build and manage subscriptions, the following API resources are required:
+如需要创建并管理一个订阅支付活动,需要如下的接口资源:
 
-| API Resources |
+| 接口资源 |
 |---|
 |[Customer](#customer)|
-|[Payment Token](#payment-token)
+|[Payment Token](#payment-token)|
 |[Product](#product)|
 |[Subscription](#subscription)|
 
-### Create subscription steps
+### 创建订阅支付的流程
 
-![enter image description here](http://www.plantuml.com/plantuml/png/hLHBRrCz4DtxLuow-hu5aNYmwGAr892weWXO8OGczYGn-8xTyRZX_dlk8t5wRsbI13jhvipZd3FoHLOKBKqmQ3KAs98rDYI0kRvtgUvbDyZQfUhRc8IYtlhK9vflkSrz-gnYku1ISpQ1tQmIjWFimxjhR7-BsQO1qAKROeKrAcsnFJDcBR4aUBgubkYALOD58vTcIMBgq2UlnbNEmGgX4gGTU8ZswM65UHhYyZjP1Q6RGbaDHoKGlzweKK7EQDL71cnYuMd85X5YsnfY1tsP6JaU5X7I8bmdUTT3zsoUBTvKgHz3fnepvpFB7o5K8OmDcIOkVI133VfWkcVml0PqJYZdavnggocfvukzUP_Y3sBuyZaJl0qqX3mhhGK7yTuBN5vVmTKXzFMk3BNzOR3dL1GiYkkUgxXuI0ST1XyH0SLjOd0x6M0807SDwMVoqeBhkym50JDbVCBnKOHnbvb4BnOVop9RyQbdVO9q7g5BWfp8-fMt-slA3_4VIeRcnrG8FYl4rPtR16G7DmLPlROJjdCsLHlRsa0P4Wesf2IdpoOVg0-THaamjsmt4ZcM37HBhFVgKycRQVL8r-tmn1EHNovUJtUyg_C8MNd92dig_rrQzRV3_MneCkX_Wq6XBszGlSKGMj1En3K9B5iOVhF3kjjq3eu6ILU5NPL-cmvEZPaHHJqabw26GgPzOt9Tw_hVpfsU3vXv2_SDcyjURVhxlMTEFKIE_z3hMPl77WNsBjBi9aAC2Ggh3p2vNEXbY08MsL88vFwf72V8rEqkY5rfmYy0)
+![enter image description here](http://www.plantuml.com/plantuml/png/hLHBRrCz4DtxLuow-hu5aNYmwGAr892weWXO8OGczYGn-8xTyRZX_dlk8t5wRsbI13jhvipZd3FoHLOKBKqmQ3KAs98rDYI0kRvtgUvbDyZQfUhRc8IYtlhK9vflkSrz-gnYku1ISpQ1tQmIjWFimxjhR7-BsQO1qAKROeKrAcsnFJDcBR4aUBgubkYALOD58vTcIMBgq2UlnbNEmGgX4gGTU8ZswM65UHhYyZjP1Q6RGbaDHoKGlzweKK7EQDL71cnYuMd85X5YsnfY1tsP6JaU5X7I8bmdUTT3zsoUBTvKgHz3fnepvpFB7o5K8OmDcIOkVI133VfWkcVml0PqJYZdavnggocfvukzUP_Y3sBuyZaJl0qqX3mhhGK7yTuBN5vVmTKXzFMk3BNzOR3dL1GiYkkUgxXuI0ST1XyH0SLjOd0x6M0807SDwMVoqeBhkym50JDbVCBnKOHnbvb4BnOVop9RyQbdVO9q7g5BWfp8-fMt-slA3_4VIeRcnrG8FYl4rPtR16G7DmLPlROJjdCsLHlRsa0P4Wesf2IdpoOVg0-THaamjsmt4ZcM37HBhFVgKycRQVL8r-tmn1EH否vUJtUyg_C8MNd92dig_rrQzRV3_MneCkX_Wq6XBszGlSKGMj1En3K9B5iOVhF3kjjq3eu6ILU5NPL-cmvEZPaHHJqabw26GgPzOt9Tw_hVpfsU3vXv2_SDcyjURVhxlMTEFKIE_z3hMPl77WNsBjBi9aAC2Ggh3p2vNEXbY08MsL88vFwf72V8rEqkY5rfmYy0)
 
-### Subscription state
+### 订阅支付的状态
 
-[state diagram](https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Recurring_payment.drawio#R5Vxbc5s4FP41mdl9cIY7%2bDFxku7OtLuZpp3dPu0oRrFpMXgENHZ//QqQAEnYxkGA6uYllpCE0NH5zlW6Mheb3TsEtusPsQ/DK0Pzd1fm3ZWB/xwd/8tr9mWNPjfNsmaFAp/U1RVPwQ9IKjVSmwU%2bTJiGaRyHabBlK5dxFMFlytQBhOJXttlLHLJv3YIVFCqeliAUa/8J/HRd1nqGW9f/AYPVmr5Zd%2bblkw2gjcmXJGvgx6%2bNKvP%2bylygOE7LX5vdAob56tF1Kfs9HHhaTQzBKO3Swd59/WT/vcmSb/67J%2bP2fmW9%2bDOTfEeS7ukXQx8vACnGKF3HqzgC4X1de4viLPJhPqyGS3Wb93G8xZU6rvwK03RPqAmyNMZV63QTkqd4xmj/b7PwJR/s2qbFux0ZvCztSUn8ZLIKSZyhJTzynXTrALSC6ZF2nl02zBeh8Qayou9gvIF4QrgBgiFIg%2b/sLgFks62qdlXXxzjAczY0whm2R3YF4QvL0tghypmSXjVV8Y/GNOqqgtbn0N0rX/cdhBn5hocAJfkMFwiCFFO3bV%2b8B8%2bYwRlagjBYRfj3EtMEIlzxHaI0wAx0Qx5sAt8vtw1Mgh/guRgvp%2bY2/7jic%2b3bK/uulb5HN23%2bJrhrgwHyFobTGPKRXjPt2tI1nSGFUZZ6EnhGx9nTMjtC/PKSwEFIqwuUFUkZhhg/c5q8BGG4iMMYE%2b4uSVH8DZJSk8QH2U4gwMGFdjVuvxuE0V5rUDVJk3UDT03t8MIzC3f2KpmTAp82FvB5HYFP18cBPtNmN4I57wZ8NwiBfaMZAY/D76EbjAPYes%2bUI8plPUfgvUew38BiYi8gCJWGVcoSUmDVcJjl1%2bWAqs51GRBFLZUUI1cBgDBkA0Q//LaPsNpTtlzCJFGZ1yxZvKZda54U5mLxcjYap4maqEA3tI43z1kiRxUxdVYCYd1kYlVkWhusoX18YbBFug3W1QjTvZF0EY/d8zZP4oGNMENUF/6Ki8WlQAYiv4Cz52SJgm0axFG%2bLLttgNTWJGQaaLo1Z5Gpp4E2PKKZc5V0h1OqA9wFaQMHcOlL40ndKS%2bMCALDYMC5ZoRlcMKCQMagZgT1BbU4ZyodR1nep5tfCu%2bbjs46Z0zVeV8X3S9/Rst4sw1hCgWynUOqNMeBBkwUnZ6TOMxSeIOWBBeK2rqUk9IHyboCltd1kMKnLSiY9BWBrSSlyub9O6JSpVstWhXv95SmVVlKGXADeraNjoBqqWXAWaIB95FM4EF1T4kl0XqzWOWmJ8DRwBvrfTHZ/sOhn623Um0iU0afnun0uVJMZxsC030AUQbyjksQLfPorbJcZx%2bSSm/RLLS5zXJeTw/l8LzlTBOxoNZB0za4Nqip0G4eNBjSGMu50JkjpYvBdgjmArxVGoDkOEdlLND3EGv5oWt7XTva3rGPNR/G/nGoeG2qBssMoSBale4RhVHKkRlFsbS5I0Uh4FwoVCwNj1qu6M0dE7VI5KSTU0NhNcIdJjp7LtjoJocG2nHwqFzr7e2HQQ%2bXMmCNHoUDNa0cqJ%2bCDTbFtWyrMIxQvpETjHVd1o3S14dKvWMuOypVL0dws4iK7M2y%2bJLLdbFwvGR29LC49mGy9otbiZG72tX136EoxeXQg3N52drULi/bmUTWji825x3Fpu0OIjZFuchlt3njxhHpejQYcVEY821etMvhP27NxYTCkR3O00b9zuQ%2bqiFTbbnhph4g6keN358ty4hCPGOJJrCIyidsVL4K2jsh/sDbZ4R/rfJfvy2yJMXzQfnLot8V1jnpDpaSlGRRW6FvWhLvIOfUmeF0zPnE4vS8CFK7o25yhp4Pc6DibDeZyYkLy2IC%2bac76NoIkX9DxJvP0RYEFyzGZ6bGZWq3HA0YV5JTi0kNSX7KZ97O%2bO5QnN/dZ%2bWMo3zPOEat8jtPaN%2bnB9K4gcq16e%2by580Fw3OGhxZXtNYfQZaIDhN19BHKh1L0EcdmYUbOiQTbZLWT0Rxg9k91fmlca4PqHBNE598ECFNoGrYYY/uJMgGkxdgwMJjKR/7nSh0QGM6vRzPUJjAq%2bnl%2bxGDEIyjSde%2byCw5ICJq7YU/uAXcFSoisUx1%2bblAiWYNt/hxG/lMK0vzp4aPREtbO41dOWLhRjyC5v0iyLA2DThA56EcfMat8QQJtF%2bwaMHg7aWp4cacWxMZIkpja7spk03HHcExn3AibK0bYPsIk2yhtPUu9JcV2DIYCM%2bW1Zs%2bbhFmrzDPMGk1jFyvxR5PPcOERogB/db4/%2brrnR7rNw%2bKvMRooy5V/j%2bEcz3I9NK9BTWpPBIlPKCgs6vtIFNPqIAXlFEnHdekJQElHWkawr5U6tTJcjrzRVftVJGhHz%2bMfdNgb5hgxOVH3Jmx9qXq35XBoa3VUvAezT71fJLPN6%2bq5li/ge9GHXuJ1kkcUEnr08g0pQs8ze17CM4I%2b/Itc9dmZh%2bRfedcP48QD0QLBpF6EZOunEy9G9ULOx16BmcHlcM9FQTfuVVCaqGyoJPk656Iwd8lQu1h2nLdzvIhapYOnohj8ASn%2bdssDKSSnR6qY882WtfSsc80Q9iq9wQHu1iBL1L5FuOY1KRqAQU%2btUtL30wdoagDbYcBzmm1Xl7alB12MlTPTudOJZtfw5RvgHxfrm95LmtUX5pv3/wM=)
+[state diagram](https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Recurring_payment.drawio#R5Vxbc5s4FP41mdl9cIY7%2bDFxku7OtLuZpp3dPu0oRrFpMXgENHZ//QqQAEnYxkGA6uYllpCE0NH5zlW6Mheb3TsEtusPsQ/DK0Pzd1fm3ZWB/xwd/8tr9mWNPjfNsmaFAp/U1RVPwQ9IKjVSmwU%2bTJiGaRyHabBlK5dxFMFlytQBhOJXttlLHLJv3YIVFCqeliAUa/8J/HRd1nqGW9f/AYPVmr5Zd%2bblkw2gjcmXJGvgx6%2bNKvP%2bylygOE7LX5vdAob56tF1Kfs9HHhaTQzBKO3Swd59/WT/vcmSb/67J%2bP2fmW9%2bDOTfEeS7ukXQx8vACnGKF3HqzgC4X1de4viLPJhPqyGS3Wb93G8xZU6rvwK03RPqAmyNMZV63QTkqd4xmj/b7PwJR/s2qbFux0ZvCztSUn8ZLIKSZyhJTzynXTrALSC6ZF2nl02zBeh8Qayou9gvIF4QrgBgiFIg%2b/sLgFks62qdlXXxzjAczY0whm2R3YF4QvL0tghypmSXjVV8Y/GNOqqgtbn0N0rX/cdhBn5hocAJfkMFwiCFFO3bV%2b8B8%2bYwRlagjBYRfj3EtMEIlzxHaI0wAx0Qx5sAt8vtw1Mgh/guRgvp%2bY2/7jic%2b3bK/uulb5HN23%2bJrhrgwHyFobTGPKRXjPt2tI1nSGFUZZ6EnhGx9nTMjtC/PKSwEFIqwuUFUkZhhg/c5q8BGG4iMMYE%2b4uSVH8DZJSk8QH2U4gwMGFdjVuvxuE0V5rUDVJk3UDT03t8MIzC3f2KpmTAp82FvB5HYFP18cBPtNmN4I57wZ8NwiBfaMZAY/D76EbjAP是%2bUI8plPUfgvUew38BiYi8gCJWGVcoSUmDVcJjl1%2bWAqs51GRBFLZUUI1cBgDBkA0Q//LaPsNpTtlzCJFGZ1yxZvKZda54U5mLxcjYap4maqEA3tI43z1kiRxUxdVYCYd1kYlVkWhusoX18YbBFug3W1QjTvZF0EY/d8zZP4oGNMENUF/6Ki8WlQAYiv4Cz52SJgm0axFG%2bLLttgNTWJGQaaLo1Z5Gpp4E2PKKZc5V0h1OqA9wFaQMHcOlL40ndKS%2bMCALDYMC5ZoRlcMKCQMagZgT1BbU4ZyodR1nep5tfCu%2bbjs46Z0zVeV8X3S9/Rst4sw1hCgWynUOqNMeBBkwUnZ6TOMxSeIOWBBeK2rqUk9IHyboCltd1kMKnLSiY9BWBrSSlyub9O6JSpVstWhXv95SmVVlKGXADeraNjoBqqWXAWaIB95FM4EF1T4kl0XqzWOWmJ8DRwBvrfTHZ/sOhn623Um0iU0afnun0uVJMZxsC030AUQbyjksQLfPorbJcZx%2bSSm/RLLS5zXJeTw/l8LzlTBOxoNZB0za4Nqip0G4eNBjSGMu50JkjpYvBdgjmArxVGoDkOEdlLND3EGv5oWt7XTva3rGPNR/G/nGoeG2qBssMoSBale4RhVHKkRlFsbS5I0Uh4FwoVCwNj1qu6M0dE7VI5KSTU0NhNcIdJjp7LtjoJocG2nHwqFzr7e2HQQ%2bXMmCNHoUDNa0cqJ%2bCDTbFtWyrMIxQvpETjHVd1o3S14dKvWMuOypVL0dws4iK7M2y%2bJLLdbFwvGR29LC49mGy9otbiZG72tX136EoxeXQg3N52drULi/bmUTWji825x3Fpu0OIjZFuchlt3njxhHpejQYcVEY821etMvhP27NxYTCkR3O00b9zuQ%2bqiFTbbnhph4g6keN358ty4hCPGOJJrCIyidsVL4K2jsh/sDbZ4R/rfJfvy2yJMXzQfnLot8V1jnpDpaSlGRRW6FvWhLvIOfUmeF0zPnE4vS8CFK7o25yhp4Pc6DibDeZyYkLy2IC%2bac76否IkX9DxJvP0RYEFyzGZ6bGZWq3HA0YV5JTi0kNSX7KZ97O%2bO5QnN/dZ%2bWMo3zPOEat8jtPaN%2bnB9K4gcq16e%2by580Fw3OGhxZXtNYfQZaIDhN19BHKh1L0EcdmYUbOiQTbZLWT0Rxg9k91fmlca4PqHBNE598ECF否GrYYY/uJMgGkxdgwMJjKR/7nSh0QGM6vRzPUJjAq%2bnl%2bxGDEIyjSde%2byCw5ICJq7YU/uAXcFSoisUx1%2bblAiWYNt/hxG/lMK0vzp4aPREtbO41dOWLhRjyC5v0iyLA2DThA56EcfMat8QQJtF%2bwaMHg7aWp4cacWxMZIkpja7spk03HHcExn3AibK0bYPsIk2yhtPUu9JcV2DIYCM%2bW1Zs%2bbhFmrzDPMGk1jFyvxR5PPcOERogB/db4/%2brrnR7rNw%2bKvMRooy5V/j%2bEcz3I9NK9BTWpPBIlPKCgs6vtIFNPqIAXlFEnHdekJQElHWkawr5U6tTJcjrzRVftVJGhHz%2bMfdNgb5hgxOVH3Jmx9qXq35XBoa3VUvAezT71fJLPN6%2bq5li/ge9GHXuJ1kkcUEnr08g0pQs8ze17CM4I%2b/Itc9dmZh%2bRfedcP48QD0QLBpF6EZOunEy9G9ULOx16BmcHlcM9FQTfuVVCaqGyoJPk656Iwd8lQu1h2nLdzvIhapYOnohj8ASn%2bdssDKSSnR6qY882WtfSsc80Q9iq9wQHu1iBL1L5FuOY1KRqAQU%2btUtL30wdoagDbYcBzmm1Xl7alB12MlTPTudOJZtfw5RvgHxfrm95LmtUX5pv3/wM=)
 All subscription state will be pushed to merchant's backend service once triggered
 
-## Common API response parameter
+## 通用响应参数列表
 
-|Parameter Name| Data Type |Description|
+|参数名称| 参数类型 |描述|
 |---|---|---|
-|respcd|String|Return code, 0000 = API call succeeded|
-|resperr|String| result description|
-|respmsg|String| information description|
-|page|Int| page no.,present in inquiry API|
-|page_size|Int| page size,presented in inquiry API|
-|data|Object|result, JSON object or list of JSON object|
+|respcd|String|返回码, 0000 = 接口呼叫成功|
+|resperr|String| 呼叫结果的详情|
+|respmsg|String| 呼叫的信息详情|
+|page|Int| 查询页数,在查询接口中出现|
+|page_size|Int| 查询页大小,在查询接口中出现|
+|data|Object|结果值, JSON对象或由JSON对象组成的列表|
 
 ## Customer
 
-Customer is an API resource for merchant to store customer's information. This object can be used in PaymentToken, Subscription APIs
+Customer 是一个提供给商户用于存储客户信息的接口资源. 这个对象可以被应用在 PaymentToken, Subscription 接口中.
 
-### Create customer object
+### 创建 Customer 对象
 
 ```
-API path: /customer/v1/create
+接口路径: /customer/v1/create
 ```
 
-Request parameters:
+请求参数列表:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
-|name|String|No|customer name|
-|phone|String|No|customer contact no.|
-|email|String|No|customer email address|
-|billing_address|String|No|customer billing address, stringify JSON object|
+|name|String|否|客户姓名|
+|phone|String|否|客户联系方式|
+|email|String|否|客户邮箱|
+|billing_address|String|否|客户账单地址, 字符串化的JSON对象|
 
-Response parameters in **data** field:
+在**data**部分的响应参数列表:
 
-|Parameter Name|Data Type|Description|
+|参数名称|参数类型|描述|
 |---|---|---|
-|customer_id|String|unqiue customer ID in QF system|
-|name|String|customer name|
-|phone|String|customer contact no.|
-|email|String|customer email address|
-|billing_address|JSON|customer billing address|
+|customer_id|String|钱方系统生成的唯一 customer 对象ID值|
+|name|String|客户姓名|
+|phone|String|客户联系方式|
+|email|String|客户邮箱|
+|billing_address|JSON|客户账单地址|
 
-### Update customer object
+### 更新 customer 对象
 
 ```
-API path: /customer/v1/update
+接口路径: /customer/v1/update
 ```
 
-Request parameters:
+请求参数列表:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
-|customer_id|String|Yes|unqiue customer ID in QF system|
-|name|String|No|customer name|
-|phone|String|No|customer contact no.|
-|email|String|No|customer email address|
-|billing_address|JSON|No|customer billing address|
+|customer_id|String|是|钱方系统生成的唯一 customer 对象ID值|
+|name|String|否|客户姓名|
+|phone|String|否|客户联系方式|
+|email|String|否|客户邮箱|
+|billing_address|JSON|否|客户账单地址|
 
-Response parameters in **data** field:
+在**data**部分的响应参数列表:
 
-|Parameter Name|Data Type|Description|
+|参数名称|参数类型|描述|
 |---|---|---|
-|customer_id|String|unqiue customer ID in QF system|
-|name|String|customer name|
-|phone|String|customer contact no.|
-|email|String|customer email address|
-|billing_address|JSON|customer billing address|
+|customer_id|String|钱方系统生成的唯一 customer 对象ID值|
+|name|String|客户姓名|
+|phone|String|客户联系方式|
+|email|String|客户邮箱|
+|billing_address|JSON|客户账单地址|
 
-### Inquiry customer object
+### 查询 customer 对象
 
 ```
-API path: /customer/v1/query
+接口路径: /customer/v1/query
 ```
 
-Request parameters:
+请求参数列表:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
-|customer_id|String|No|unqiue customer Id in QF system|
-|name|String|No|customer name|
-|phone|String|No|customer contact no.|
-|email|String|No|customer email address|
-|page|Int|No|default value = 1|
-|page_size|Int|No|default value = 10, the max value is 100|
+|customer_id|String|否|钱方系统生成的唯一 customer 对象ID值|
+|name|String|否|客户姓名|
+|phone|String|否|客户联系方式|
+|email|String|否|客户邮箱|
+|page|Int|否|默认值 = 1|
+|page_size|Int|否|默认值 = 10, 最大值是100|
 
-Response parameters in **data** field:
+在**data**部分的响应参数列表:
 
-|Parameter Name|Data Type|Description|
+|参数名称|参数类型|描述|
 |---|---|---|
-|customer_id|String|unqiue customer ID in QF system|
-|name|String|customer name|
-|phone|String|customer contact no.|
-|email|String|customer email address|
+|customer_id|String|钱方系统生成的唯一 customer 对象ID值|
+|name|String|客户姓名|
+|phone|String|客户联系方式|
+|email|String|客户邮箱|
 
-### Delete customer object
+### 删除 customer 对象
 
-permanently delete customer object, cannot be undo. Any subscription plan associated with the deleted customer will be cancelled.
+永久删除 customer 对象, 不能撤销. 任何与已删除的 customer 对象相关联的订阅计划将会被取消
 ```
-API path: /customer/v1/delete
+接口路径: /customer/v1/delete
 ```
 
-Request parameters:
+请求参数列表:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
-|customer_id|String|Yes|unique customer identifier in QF system|
+|customer_id|String|是|钱方系统生成的唯一 customer 对象ID值|
 
 ## Product
 
-Products are the model for goods or services that merchants will provide to the customers. It defines transaction amount, transaction currency and billing cycles(if applicable). This object will be used in subscription API.
+Product 是商户要提供给客户的商品和服务的模型.它定义了交易金额, 交易货币和扣款周期(如可用). 这个对象可被用于 subscription 接口
 
-### Create product object
+### 创建 product 对象
 
-create a new product
+创建一个新的 product 对象
 
 ```
-API path: /product/v1/create
+接口路径: /product/v1/create
 ```
 
-|Parameter Name|Data Type|Mandatory|Description|
+|参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
-|name|String|Yes|product name that displays to the customer|
-|type|String|No|default value=onetime, possible values: onetime, recurring
-|description|String|No|product descritpion|
-|txamt|Int|Yes|transaction amount, e.g. $1=100|
-|txcurrcd|String|Yes|transaction currency, e.g. HKD|
-|interval|String|No|possible values: monthly, yearly, mandatory for recurring product|
-|interval_count|Int|No|interval between 2 charges, maximum 1 year allowed, mandatory for recurring product|
-|usage_type|String|No|default value=licensed, possible values: licensed|
+|name|String|是|展示给客户的产品名称|
+|type|String|否|默认值=onetime, 可用值: onetime, recurring
+|description|String|否|产品描述|
+|txamt|Int|是|交易金额, e.g. $1=100|
+|txcurrcd|String|是|交易货币, e.g. HKD|
+|interval|String|否|可用值: monthly, yearly, 周期扣款产品必传|
+|interval_count|Int|否|两次扣款的间隔, 最高允许1年, 周期扣款产品必传|
+|usage_type|String|否|默认值=licensed, 可用值: licensed|
 
-Response parameters in **data** field:
+在**data**部分的响应参数列表:
 
-|Parameter Name|Data Type|Description|
+|参数名称|参数类型|描述|
 |---|---|---|
-|product_id|String|unique identifer generated in QF system|
-|name|String|product name that displays to the customer|
-|type|String|default value=onetime, possible values: onetime, recurring
-|description|String|product descritpion|
-|txamt|Int|transaction amount, e.g. $1=100|
-|txcurrcd|String|transaction currency, e.g. HKD|
-|interval|String|possible values: monthly, yearly|
-|interval_count|Int|interval between 2 charges|
-|usage_type|String|default value=licensed, possible values: licensed|
+|product_id|String|钱方系统生成的唯一 product 对象的ID值|
+|name|String|展示给客户的产品名称|
+|type|String|默认值=onetime, 可用值: onetime, recurring
+|description|String|产品描述|
+|txamt|Int|交易金额, e.g. $1=100|
+|txcurrcd|String|交易货币, e.g. HKD|
+|interval|String|可用值: monthly, yearly|
+|interval_count|Int|两次扣款的间隔|
+|usage_type|String|默认值=licensed, 可用值: licensed|
 
-### Update product object
+### 更新 product 对象
 
-update current product information
+更新当前的 product 对象信息
 ```
-API path: /product/v1/update
+接口路径: /product/v1/update
 ```
 
-Request parameters:
+请求参数列表:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
-|product_id|String|Yes|unique identifier generated in QF system|
-|name|String|No|product name that displays to the customer|
-|description|String|No|product descritpion|
+|product_id|String|是|钱方系统生成的唯一 product 对象的ID值|
+|name|String|否|展示给客户的产品名称|
+|description|String|否|产品描述|
 
-Response parameters in **data** field:
+在**data**部分的响应参数列表:
 
-|Parameter Name|Data Type|Description|
+|参数名称|参数类型|描述|
 |---|---|---|
-|product_id|String|unique product identifer generated in QF system|
-|name|String|product name that displays to the customer|
-|type|String|default value=onetime, possible values: onetime, recurring
-|description|String|product descritpion|
-|txamt|Int|transaction amount, e.g. $1=100|
-|txcurrcd|String|transaction currency, e.g. HKD|
-|interval|String|possible values: monthly, yearly|
-|interval_count|Int|interval between 2 charges|
-|usage_type|String|default value=licensed, possible values: licensed|
+|product_id|String|钱方系统生成的唯一 product 对象的ID值|
+|name|String|展示给客户的产品名称|
+|type|String|默认值=onetime, 可用值: onetime, recurring
+|description|String|产品描述|
+|txamt|Int|交易金额, e.g. $1=100|
+|txcurrcd|String|交易货币, e.g. HKD|
+|interval|String|可用值: monthly, yearly|
+|interval_count|Int|两次扣款的间隔|
+|usage_type|String|默认值=licensed, 可用值: licensed|
 
-### Inquiry product object
+### 查询 product 对象
 
 ```
-API path: /product/v1/create
+接口路径: /product/v1/create
 ```
 
-Request parameters:
+请求参数列表:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
-|product_id|String|No|unique product identifier generated in QF system|
-|name|String|No|product name that displays to the customer|
-|description|String|No|product descritpion|
-|txcurrcd|String|No|transaction currency|
-|interval|String|No|possible values: monthly,yearly|
-|page|Int|No|page no., default value=1|
-|page_size|Int|No| page size, default value=10,max value=100|
+|product_id|String|否|钱方系统生成的唯一 product 对象的ID值|
+|name|String|否|展示给客户的产品名称|
+|description|String|否|产品描述|
+|txcurrcd|String|否|交易货币|
+|interval|String|否|可用值: monthly,yearly|
+|page|Int|否|page no., 默认值=1|
+|page_size|Int|否| page size, 默认值=10,max value=100|
 
-Response parameters in **data** field:
+在**data**部分的响应参数列表:
 
-|product_id|String|unique identifer generated in QF system|
+|product_id|String|钱方系统生成的唯一 product 对象的ID值|
 |---|---|---|
-|name|String|product name that displays to the customer|
-|type|String|possible values: onetime, recurring
-|description|String|product descritpion|
-|txamt|Int|transaction amount, e.g. $1=100|
-|txcurrcd|String|transaction currency, e.g. HKD|
-|interval|String|possible values: monthly, yearly|
-|interval_count|Int|interval between 2 charges|
-|usage_type|String|possible values: licensed|
+|name|String|展示给客户的产品名称|
+|type|String|可用值: onetime, recurring
+|description|String|产品描述|
+|txamt|Int|交易金额, e.g. $1=100|
+|txcurrcd|String|交易货币, e.g. HKD|
+|interval|String|可用值: monthly, yearly|
+|interval_count|Int|两次扣款的间隔|
+|usage_type|String|可用值: licensed|
 
-### Delete product object
+### 删除 product 对象
 
 ```
-only can delete product that is not assoicated with any subscription object
+只能够删除不与任何  subscription 对象关联的 product 对象
 ```
 
-API path: /product/v1/delete
+接口路径: /product/v1/delete
 
-Request parameters:
+请求参数列表:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
-|product_id|String|No|unique product identifier generated in QF system|
+|product_id|String|否|钱方系统生成的唯一 product 对象的ID值|
 
 ## Subscription
 
-QFPay automatically charges the customers on every billing cycle based on the product with the provided Payment Token until the subscription is finished or cancelled. Before create subscription, **payment token**, **customer** and **product** must be created.
+QFPay 会基于产品类型和支付令牌,在每个扣款周期自动向客户收费直到订阅结束或是取消. 在创建 subscription 对象之前, **payment token**, **customer** 和 **product** 必须被创建.
 
-### Create subscription object
+### 创建 subscription 对象
 
 ```
-API path: /subscription/v1/create
+接口路径: /subscription/v1/create
 ```
 
-Request parameters:
+请求参数列表:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
-|customer_id|String|Yes|unique customer identifier in QF system|
-|token_id|String|Yes| unique payment token identifier in QF system|
-|products|Object|Yes| list of unique product identifier in QF system and quantity|
-|total_billing_cycles|Int|No|the total billing cycles of the subscirption, infinity if null value|
-|start_time|String|No|the time subscription will start to work, the first payment will be  |
+|customer_id|String|是|钱方系统生成的唯一 customer 对象ID值|
+|token_id|String|是| 钱方系统生成的唯一 payment token 对象的ID值|
+|products|Object|是| 钱方系统生成的唯一 product 对象的ID值和相应数量的列表|
+|total_billing_cycles|Int|否|订阅支付总的扣款周期, 若为null值则为无限|
+|start_time|String|否|订阅开始时间,订阅将开始首次扣款 |
 
-parameters in products:
+products 中的参数:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
-|product_id|String|Yes|unique production identifier in QF system|
-|quantity|Int|No| default value=1|
+|product_id|String|是|钱方系统生成的唯一 product 对象的ID值|
+|quantity|Int|否|默认值=1|
 
-Response parameters in **data** field:
+在**data**部分的响应参数列表:
 
-|Parameter Name|Data Type|Description|
+|参数名称|参数类型|描述|
 |---|---|---|
-|customer_id|String|unique customer identifier in QF system|
-|token_id|String| unique payment token identifier in QF system|
-|products|Object| list of unique product identifier in QF system and quantity|
-|total_billing_cycles|Int|the total billing cycles of the subscirption, infinity cycles if null value|
-|start_time|String|No|the time subscription will start to work |
+|customer_id|String|钱方系统生成的唯一 customer 对象ID值|
+|token_id|String|  钱方系统生成的唯一 payment token 对象的ID值|
+|products|Object| 钱方系统生成的唯一 product 对象的ID值和相应数量的列表|
+|total_billing_cycles|Int|订阅支付总的扣款周期, 若为null值则为无限|
+|start_time|String|否|订阅开始时间|
 
-### Update subscription object
+### 更新 subscription 对象
 
-update current subscription
+更新当前的 subscription 对象
 ```
-API path: /subscription/v1/update
+接口路径: /subscription/v1/update
 ```
 
-Request parameters:
+请求参数列表:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
-|subscription_id|String|Yes|unique subscription identifier in QF system|
-|total_billing_cycles|Int|No|the total billing cycles of the subscirption, infinity if null value|
-|start_time|String|No|the time that subscription will start to work, it will be the first subscription payment time|
-|token_id|String|No| unique payment token identifier in QF system|
-|products|Object|No| list of unique product identifier in QF system and quantity|
+|subscription_id|String|是|钱方系统生成的唯一 subscription 对象的ID值|
+|total_billing_cycles|Int|否|订阅支付总的扣款周期, 若为null值则为无限|
+|start_time|String|否|订阅开始时间,订阅将开始首次扣款|
+|token_id|String|否| 钱方系统生成的唯一 payment token 对象的ID值|
+|products|Object|否| 钱方系统生成的唯一 product 对象的ID值和想赢数量的列表|
 
-Response parameters in **data** field:
+在**data**部分的响应参数列表:
 
-|Parameter Name|Data Type|Description|
+|参数名称|参数类型|描述|
 |---|---|---|
-|subscription_id|String|unique subscription identifier in QF system|
-|customer_id|String|unique customer identifier in QF system|
-|token_id|String| unique payment token identifier in QF system|
-|products|Object| list of unique product identifier in QF system and quantity|
-|total_billing_cycles|Int|the total billing cycles of the subscirption, infinity cycles if null value|
-|start_time|String|the time that subscription will start to work, it will be the first subscription payment time|
-|state|String| subscription state|
+|subscription_id|String|钱方系统生成的唯一 subscription 对象的ID值|
+|customer_id|String|钱方系统生成的唯一 customer 对象ID值|
+|token_id|String| 钱方系统生成的唯一 payment token 对象的ID值|
+|products|Object| 钱方系统生成的唯一 product 对象的ID值和相应数量的列表|
+|total_billing_cycles|Int|订阅支付总的扣款周期, 若为null值则为无限|
+|start_time|String|订阅开始时间,订阅将开始首次扣款|
+|state|String| 订阅的状态|
 
-### Inquiry subscription object
+### 查询 subscription 对象
 
 ```
-API path: /subscription/v1/query
+接口路径: /subscription/v1/query
 ```
 
-Request parameters:
+请求参数列表:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
-|page|Int|No| page no.,default value=1|
-|page_size|Int|No| page size, default value=10, max value=100|
-|subscritpion_id|String|No|unique subscription identifier in QF system|
-|customer_id|String|No|unique customer identifier in QF system|
-|token_id|String|No|unique payment otken identifier in QF system|
-|state|String|No|subscription state, e.g. incompelete, active,...|
+|page|Int|否| 查询页数,默认值=1|
+|page_size|Int|否| 查询页面大小, 默认值=10, 最大值=100|
+|subscritpion_id|String|否|钱方系统生成的唯一 subscription 对象的ID值|
+|customer_id|String|否|钱方系统生成的唯一 customer 对象ID值|
+|token_id|String|否|钱方系统生成的唯一 payment token 对象的ID值|
+|state|String|否|订阅的状态, e.g. incompelete, active,...|
 
-Response parameters in **data** field:
+在**data**部分的响应参数列表:
 
-|Parameter Name|Data Type|Description|
+|参数名称|参数类型|描述|
 |---|---|---|
-|subscription_id|String|unique subscription identifier in QF system|
-|customer_id|String|unique customer identifier in QF system|
-|token_id|String| unique payment token identifier in QF system|
-|products|Object| list of unique product identifier in QF system and quantity|
-|total_billing_cycles|Int|the total billing cycles of the subscirption, infinity cycles if null value|
-|state|String| subscription state|
-|next_billing_time|String| next fund deduct time |
-|last_billing_time|String| previous fund deduct time|
-|completed_billing_iteration|Int| how many billing cycles completed|
-|start_time|String|the time that subscription will start to work, it will be the first subscription payment time|
+|subscription_id|String|钱方系统生成的唯一 subscription 对象的ID值|
+|customer_id|String|钱方系统生成的唯一 customer 对象ID值|
+|token_id|String| 钱方系统生成的唯一 payment token 对象的ID值|
+|products|Object| 钱方系统生成的唯一 product 对象的ID值和相应数量的列表|
+|total_billing_cycles|Int|订阅支付总的扣款周期, 若为null值则为无限|
+|state|String| 订阅的状态|
+|next_billing_time|String| 下次扣款时间 |
+|last_billing_time|String|上次扣款时间|
+|completed_billing_iteration|Int| 已完成的扣款次数|
+|start_time|String|订阅开始时间,订阅将开始首次扣款|
 
-### Cancel subscription object
+### Cancel subscription 对象
 
-cancel customer's subscription immediately
+立即取消客户的订阅
 ```
-API path: /subscription/v1/cancel
+接口路径: /subscription/v1/cancel
 ```
 
-Request parameters:
+请求参数列表:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
-|subscription_id|String|Yes|unique ID of subscription object|
+|subscription_id|String|是|钱方系统中的唯一订阅对象ID|
