@@ -82,9 +82,7 @@ const config = {
             className: 'qf-display-link'
           },
           {
-            to: 'docs/Preparation',
-            type: 'docSidebar',
-            sidebarId: 'qfpaySidebar',
+            to: '/docs/preparation/introduction',
             position: 'left',
             label: 'Integration',
             className: 'qf-display-link'
@@ -98,13 +96,13 @@ const config = {
             type: 'localeDropdown',
             position: 'right',
           },
-          {
-            type: 'docSidebar',
-            sidebarId: 'qfpaySidebar',
-            position: 'right',
-            label: 'Sign In',
-            className: 'qf-display-link-blue',
-          },
+          // {
+          //   type: 'docSidebar',
+          //   sidebarId: 'qfpaySidebar',
+          //   position: 'right',
+          //   label: 'Sign In',
+          //   className: 'qf-display-link-blue',
+          // },
         ],
       },
       footer: {
