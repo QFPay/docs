@@ -38,35 +38,35 @@ import Link from '@docusaurus/Link';
 
  | 参数名称 | 参数类型 | 是否必填 | 描述 | 范例 |
 | ---------- | ----------- | ----------- | ----------- | ----------- |
- | appcode | String(64) | Yes|API credentials assigned by QFPay|	A6A49A******************5032|
-|sign_type | String(256)|Yes|SHA256 or MD5, SHA256 is recommended|	sha256|
-|sign | String(128)	|Yes|	Request signature for authentication|	3b020a6349646684ebeeb0ec2cd3d1fb|
-|paysource	 | String(12)|	Yes|	Must end in _checkout|	remotepay_checkout|
-|txamt	 | Int(11)|	Yes|	Payment amount in unit cents|	1099|
-|txcurrcd |String(3)|	Yes	Currency code|	HKD|
-|out_trade_no|	String(128)|	Yes|	Unique external transaction number|	202005270001|
-|txdtm	|String(32)	|Yes|	Order time	|2020-06-24 20:04:37, Format: YYYY-MM-DD hh:mm:ss|
-|return_url|	String(256)|	Yes	|Redirect URL after payment has been successful	|https://xxx.com/return/success|
-|failed_url	|String(256)|	Yes	|Redirect URL after payment has failed	|https://xxx.com/return/failed|
-|notify_url	|String(256)|	Yes	|Asynchronous notification URL	|https://xxx.com/notify/success|
-|mchntid	|String(16)|	No|QFPay Merchant Identifier for Agents|PAKjVHJmQe|
-|goods_name	|String(64)|	No	|No special characters, no more than 20 letters or Chinese characters (app payment parameters must be |passed). If you want to display the merchant name on the clearing file, this parameter must be empty.|
-|txzone	|String(5)	|No	|Timezone	|This field is used to record the local order time, the default is Beijing time +0800.|
-|udid	|String(40	|No	|Unique device ID	|0001|
-|expired_time	|String(3)	|No	|QRC expiration time|Unit in minutes, minimum 5 minutes, maximum 120 minutes, only WeChat Pay, Alipay |and Alipay_hk support this parameter|
-|checkout_expired_time	|String(3)	|No	|client side expiration time|Unit in minutes, the checkout page will be redirect to fail url when time is up|
-|limit_pay	|String(3)	|No	|Prohibit credit card use|The parameter value is specified as no_credit, which prohibits the use of |credit card payments, only WeChat Pay supports this feature.|
-|lang|String(5)|No|UI Language|possible values: <br/> zh-hk (Hong Kong Traditional Chinese) <br/> zh-cn (Simplified Chinese) <br/> en (English) <br/> The checkout page will use default language of browser if do not pass this parameter in checkout request. If pass this parameter in checkout request, do not include this parameter in generating signature.|
+ | appcode | String(64) | 是 |QFPay 提供的API凭证|	A6A49A******************5032|
+|sign_type | String(256)|是|SHA256 or MD5, 建议SHA256|	sha256|
+|sign | String(128)	|是|	请求签名以进行认证 |	3b020a6349646684ebeeb0ec2cd3d1fb|
+|paysource	 | String(12)|	是|	结尾必须是 _checkout|	remotepay_checkout|
+|txamt	 | Int(11)|	是|	付款金额（单位：分）|	1099|
+|txcurrcd |String(3)|	是	| 货币代码|	HKD|
+|out_trade_no|	String(128)|	是|	唯一的外部交易号|	202005270001|
+|txdtm	|String(32)	|是|	下单时间	|2020-06-24 20:04:37, Format: YYYY-MM-DD hh:mm:ss|
+|return_url|	String(256)|	是	|支付成功后的重定向URL	|https://xxx.com/return/success|
+|failed_url	|String(256)|	是	|支付失敗后的重定向URL	|https://xxx.com/return/failed|
+|notify_url	|String(256)|	是	|异步通知URL	|https://xxx.com/notify/success|
+|mchntid	|String(16)|	否 |QFPay 代理商商户标识符|PAKjVHJmQe|
+|goods_name	|String(64)|	是	|不能有特殊字符，不超过20个字母或汉字（需传入app支付参数）。 如果要在清算文件中显示商户名称，则该参数必须为空。| |
+|txzone	|String(5)	|是	|时区	|该字段用于记录本地下单时间, 默认为北京时间 +0800.|
+|udid	|String(40)	|是	|唯一設備ID	|0001|
+|expired_time	|String(3)	|是	|二维码过期时间|单位为分钟，最短5分钟，最长120分钟，仅微信支付、支付宝、支付宝香港支持此参数|
+|checkout_expired_time	|String(3)	|是	|客户端过期时间|单位为5分钟， 时间到了后，结账页面会跳转至 支付失败后的重定向URL|
+|limit_pay	|String(3)	|是	|禁止使用信用卡|参数值指定为no_credit，即禁止使用信用卡支付，仅微信支付支持此功能。|
+|lang|String(5)|是|界面语言|可能值 <br/> zh-hk (香港繁体中文) <br/> zh-cn (简体中文) <br/> en (英文) <br/>如果结帐请求中不传递该参数，则结帐页面将使用浏览器的默认语言。 如果结帐请求中传递该参数，则生成签名时不包含该参数。|
 
-## Create a New Checkout Order
+## 创建新订单
 
 :::info
-Each checkout order is unique so merchants are requested to create a unique external transaction number `out_trade_no` when redirecting to the hosted checkout page.
+每笔订单都是唯一的，因此商家在重定向到托管结账页面时需要创建唯一的外部交易号“out_trade_no”。
 ::: 
 
-In order to create a new checkout order, a GET request with authentication signature must be send. For this signature the above parameters have to be concatenated and then hashed with the app_key which is provided by QFPay. For API credentials or technical support please contact **technical.support@qfpay.com**.
+创建新的结帐订单，必须发送带有身份验证签名的 GET 请求。 对于此签名，必须连接上述参数，然后使用 QFPay 提供的 app_key 进行哈希处理。 如需 API 凭证或技术支持，请联系 **technical.support@qfpay.com**。
 
-The example to the right illustrates the signature generation algorithm. You can also download the [QFPay Online Checkout Boilerplate](@site/static/files/qfpay_online_checkout.html download) and open the HTML in your default browser.
+右侧的示例说明了签名生成算法。 您还可以下载 [QFPay Online Checkout Boilerplate](@site/static/files/qfpay_online_checkout.html download) 并在默认浏览器中打开 HTML。
 
 ```html
 <!DOCTYPE html>
