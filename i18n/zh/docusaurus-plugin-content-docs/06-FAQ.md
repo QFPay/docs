@@ -1,28 +1,28 @@
 # FAQs
 
-**Q1. In provided test account credentials which one is the partner or the merchant identifier?** <br/>
-A1. If you're an agent which provides payment services for merchants; X-QF-APPCODE and ClientKey are the partner while MCHID is the merchant identifier.
-    If you're a merchant then X-QF-APPCODE and ClientKey are merchant identifier and MCHID is not provided.
+**Q1. 在提供的测试账户凭据中，哪个是合作伙伴标识符或商家标识符？** <br/>
+A1. 如果您是为商户提供支付服务的代理商； X-QF-APPCODE 和 ClientKey 是合作伙伴标识符，而 MCHID 是商户标识符。
+    如果您是商家，则 X-QF-APPCODE 和 ClientKey 是商家标识符，并且不提供 MCHID。
 
-**Q2. Can I use given (Test/Production) account in another country?** <br/>
-A2. No. An (Test/Production) account is country specific.
+**Q2. 我可以在另一个国家/地区使用给定的（测试/生产）帐户吗？** <br/>
+A2. 不可以。（测试/生产）帐户是特定于国家/地区的。
 
-**Q3. How can I test a transaction?** <br/>
-A3. Since test environment is a replica of production you can use production wallets to test transactions. If you need any assistance please contact tech support.
+**Q3. 如何测试交易？** <br/>
+A3. 由于测试环境是生产环境的副本，您可以使用生产钱包来测试交易。 如果您需要任何帮助，请联系技术支持。
 
-**Q4. I receive a <code>1143/1145</code> response code, what should I do next?** <br/>
-A4. It's advised to keep querying transaction status. If partner/merchant wants to process as binary status (success/fail), can mark the transaction as failed and upon a successful asynchronous notifications can apply for refund at backend.
+**Q4. 我收到 <code>1143/1145</code> 响应代码，接下来我应该做什么？** <br/>
+A4. 建议持续查询交易状态。 如果合作伙伴/商户希望处理为成功状态或者失败状态，可以将交易标记为失败，并在收到交易成功异步通知后, 在后端申请退款。
 
-**Q5. There is no specific title for the payment method I want to integrate, what should I do?** <br/>
-A5. You should use [Public Payment Parameters](./preparation/paycode#api-endpoint-for-payments) and check the special cases in Notes section at the end of the [Payment Codes](./preparation/paycode#payment-codes).
+**Q5. 我想要整合的付款方式没有具体标题，我该怎么办？** <br/>
+A5. 您应该使用 [Public Payment Parameters](./preparation/paycode#api-endpoint-for-payments) 并检查[Payment Codes](./preparation/paycode#payment-codes)末尾注释部分的特殊情况。
 
-**Q6. Can I refund a transaction made n day(s) ago?** <br/>
-A6.	Only if the total transaction of the day is equal or greater than the refund amount you can refund.
+**Q6. 我可以对 n 天前进行的交易进行退款吗？** <br/>
+A6.	只有当日交易总额等于或大于退款金额时才可以退款。
 
-**Q7. Do you transfer funds to our bank account when we test transactions in the sandbox environment?** <br/>
-A7. There are no settlements possible in the sandbox environment. Please make sure that you refund test transactions immediately after testing. 
+**Q7. 当我们在沙盒环境中测试交易时，您是否会将资金转入我们的银行账户？** <br/>
+A7. 沙盒环境中不会有清算动作，请确保在测试后立即退款测试交易。
 
-**Q8. Can I use my overseas Alipay wallet to pay?** <br/>
-A8. No, currently only real-name identified Alipay wallets which belong to Mainland Chinese citizens can be used to conduct cross-border transactions.  
+**Q8. 我可以使用我的海外支付宝钱包付款吗？** <br/>
+A8. 不可以，目前只有中国大陆公民实名认证的支付宝钱包才可以进行跨境交易。
 
 <br/>
