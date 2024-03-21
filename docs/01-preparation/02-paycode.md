@@ -38,22 +38,26 @@ Code | Description
 800708 | UNIONPAY Quick Pass Consumer Presented QR Code Payment (CPM)
 800712 | UNIONPAY WAP Payment (HK Merchants)
 800714 | UNIONPAY PC-Web Payment (HK Merchants)
-800710 | UNIONPAY In-App Payment (HK Merchants)
-801208 | LINEPAY dynamic QRC Payment - Consumer Present Mode (CPM) (TH Merchants)
-801301 | LINEPAY Online Payment (TH Merchants)
-801408 | AIRPAY dynamic QRC Payment - Consumer Present Mode (CPM) (TH Merchants)
-801701 | NETSPAY Merchant Presented QR Code Payment (MPM)
-801801 | Alipay Pre-Authorization dynamic QRC Payment - Consumer Present Mode (CPM)
-801808 | Alipay Pre-Authorization dynamic QRC Payment - Merchant Present Mode (MPM)  
-801810 | Alipay Pre-Authorization in-APP Payment
-801814 | Alipay Pre-Authorization Online Payment
-801908 | Origami Consumer Presented QR Code Payment (CPM)
 802001 | FPS Merchant Presented QR Code Payment (MPM) (HK Merchants)***
-802201 | AIRPAY Online Payment (TH Merchants)
-802301 | PayNow Merchant Presented QR Code Payment (MPM) (SG Merchants)***
-802901 | PromptPay dynamic QRC Payment - Merchant Present Mode (MPM) (TH Merchants)***
-803001 | eWallet dynamic QRC Payment - Merchant Present Mode (MPM)
-803008 | eWallet dynamic QRC Payment - Consumer Present Mode (CPM)
+803701 | Octopus dynamic QRC Payment - Merchant Present Mode (MPM) (HK Merchants)
+802801 | Visa / Mastercard Online Payments
+802808 | Visa / Mastercard Offline Payments
+806527 | ApplePay Online Payments
+806708 | UnionPay Card Offline Payments
+806808 | American Express Card Offline Payments
+<!-- 804101 | Maybank dynamic QRC Payment - Merchant Present Mode (MPM) (MY Merchants)
+804108 | Maybank dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
+804114 | Maybank Online Payment (MY Merchants)**
+804201 | GrabPay dynamic QRC Payment - Merchant Present Mode (MPM) (MY and SG Merchants)
+804208 | GrabPay dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
+804214 | GrabPay Online Payment (MY Merchant)** (SG Merchants)*
+803801 | Dash dynamic QRC Payment - Merchant Present Mode (MPM) (SG Merchants)
+803808 | Dash dynamic QRC Payment - Consumer Present Mode (CPM) (SG Merchants)
+804001 | Boost dynamic QRC Payment - Merchant Present Mode (MPM) (MY Merchants)
+804008 | Boost dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
+804014 | Boost Online Payment (MY Merchants)**
+805208 | TrueMoney dynamic QRC Payment - Consumer Present Mode (CPM) (TH Merchants)
+805401 | ThaiQR dynamic QRC Payment - Merchant Present Mode (MPM) (SG and MY Merchants)***
 803101 | VIA dynamic QRC Payment - Merchant Present Mode (MPM) (JP and HK Merchants)
 803108 | VIA dynamic QRC Payment - Consumer Present Mode (CPM) (JP and HK Merchants)
 803208 | Touch 'n Go (TNG) dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
@@ -61,29 +65,26 @@ Code | Description
 803301 | Razer dynamic QRC Payment - Merchant Present Mode (MPM) (MY Merchants)
 803308 | Razer dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
 803314 | Razer Online Payment ** (MY Merchants)
-803701 | Octopus dynamic QRC Payment - Merchant Present Mode (MPM) (HK Merchants)
-803801 | Dash dynamic QRC Payment - Merchant Present Mode (MPM) (SG Merchants)
-803808 | Dash dynamic QRC Payment - Consumer Present Mode (CPM) (SG Merchants)
-804001 | Boost dynamic QRC Payment - Merchant Present Mode (MPM) (MY Merchants)
-804008 | Boost dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
-804014 | Boost Online Payment (MY Merchants)**
-804101 | Maybank dynamic QRC Payment - Merchant Present Mode (MPM) (MY Merchants)
-804108 | Maybank dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
-804114 | Maybank Online Payment (MY Merchants)**
-804201 | GrabPay dynamic QRC Payment - Merchant Present Mode (MPM) (MY and SG Merchants)
-804208 | GrabPay dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
-804214 | GrabPay Online Payment (MY Merchant)** (SG Merchants)*
-805208 | TrueMoney dynamic QRC Payment - Consumer Present Mode (CPM) (TH Merchants)
-805401 | ThaiQR dynamic QRC Payment - Merchant Present Mode (MPM) (SG and MY Merchants)***
-805508 | Credit Card: first_data Quick Payment Mode (HK Merchant)
-805514 | Credit Card: first_data Security Verification Payment Mode (HK Merchants)
-802801 | Visa / Mastercard Online Payments
-802808 | Visa / Mastercard Offline Payments
+802201 | AIRPAY Online Payment (TH Merchants)
+802301 | PayNow Merchant Presented QR Code Payment (MPM) (SG Merchants)***
+802901 | PromptPay dynamic QRC Payment - Merchant Present Mode (MPM) (TH Merchants)***
+801908 | Origami Consumer Presented QR Code Payment (CPM)
+801208 | LINEPAY dynamic QRC Payment - Consumer Present Mode (CPM) (TH Merchants)
+801301 | LINEPAY Online Payment (TH Merchants)
+801408 | AIRPAY dynamic QRC Payment - Consumer Present Mode (CPM) (TH Merchants)
+801701 | NETSPAY Merchant Presented QR Code Payment (MPM)
 805601 | GoPay dynamic QRC Payment - Merchant Present Mode (MPM)***
 805612 | GoPay WAP Payment***
-806527 | ApplePay Online Payments
-806708 | UnionPay Card Offline Payments
-806808 | American Express Card Offline Payments
+800710 | UNIONPAY In-App Payment (HK Merchants)
+801801 | Alipay Pre-Authorization dynamic QRC Payment - Consumer Present Mode (CPM)
+801808 | Alipay Pre-Authorization dynamic QRC Payment - Merchant Present Mode (MPM)  
+801810 | Alipay Pre-Authorization in-APP Payment
+801814 | Alipay Pre-Authorization Online Payment
+803001 | eWallet dynamic QRC Payment - Merchant Present Mode (MPM)
+803008 | eWallet dynamic QRC Payment - Consumer Present Mode (CPM)
+805508 | Credit Card: first_data Quick Payment Mode (HK Merchant)
+805514 | Credit Card: first_data Security Verification Payment Mode (HK Merchants)
+-->
 
 :::warning
     Notes

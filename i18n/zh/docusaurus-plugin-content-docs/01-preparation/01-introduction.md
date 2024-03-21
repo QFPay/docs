@@ -2,56 +2,81 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# Introduction
+# 简介
 
-Welcome to the **official QF Pay open API documentation**. To get started, please review the [Developer Instructions](#developer-instructions) below.
+欢迎查阅 **钱方开放接口文档平台**. 首先, 请阅读以下[开发人员接入规范](#开发人员接入规范).
 
-There are language bindings available in Python, Java, Node.js and PHP! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right corner.
+如果您想要在<Link href="https://www.postman.com/">Postman</Link>快速测试支付功能, 我们提供了一套生成签名的脚本, 您可以从[这里](paycode#api-endpoint-for-payments)下载该文件.
 
-If you would like to quickly test the payment function in <Link href="https://www.postman.com/">Postman</Link> we provide a collection that includes a pre-request script to generate the signature, download the file from [here](paycode#api-endpoint-for-payments).
-
-## Developer Instructions
+## 开发人员接入规范
 
 :::note
- If the `mchid` is provided, it is mandatory to submit the `mchid` when calling the API (unless otherwise specified). On the contrary, if `mchid` is not provided, merchants shall not pass in the `mchid` parameter in the API request.
+ 如果已经被提供 `mchid` , 除特殊情况下在呼叫接口时必须提交 `mchid`. 与之相反的是, 如果并未被提供 `mchid`, 商户无需在接口请求中传递参数 `mchid`.
 :::
 
-In order to use the QF Pay open API, you must have active API credentials, including an **app_code** and **client_key**. In case of technical issues please contact **technical.support@qfpay.com**.
+为了使用钱方公共接口, 您必须拥有已激活的接口证书, 包括一个**app_code**以及**client_key**.
+如遇到技术问题,请联系**technical.support@qfpay.com**.
 
-There are seperate environments available for application testing and development as well as production.
+对于应用程序的测试我们提供了测试, 开发以及生产运行环境.
 
-Please note that transactions conducted in the sandbox environment will not have settlement. Therefore, make sure to test with small amounts and process refunds using the API refund endpoint or Merchant APP on the same day as the original transaction day.
+请注意在沙盒环境进行的测试交易不会被结算. 因此, 请务必使用小笔金额测试并在原始交易日当天使用退款终端或是商户APP进行退款.
 
-Each merchant will be provided with a set of app code and key with or without `mchid`. Merchants with multiple branches will usually be supplied with app code, key and `mchid`. The hashed `mchid` is used to identify shops and outlets. Otherwise, only app code and key will be given.
+每个商户将会被提供一系列有或没有`mchid`的`app_code`和`client_key`, 拥有多个分支的商家通常会同时拥有`app_code`,`client_key`和`mchid`.经过哈希编码的`mchid`被用作辨别商店和网店.除此之外只有`app_code`和`client_key`会被提供.
 
-### Encoding Description
+### 编码机制
 
-All return parameters from API are in `UTF-8` code unless otherwise noted.
+所有从接口返回的参数如无特别说明将使用 `UTF-8` 编码.
 
-## Environments
+## 开发环境
 
 :::warning
-Remember to immediately refund transactions that were made in the test environment.
+请谨记立即将在测试环境进行的交易退款
 :::
 
-### API Environments
+### 接口环境
 
-The table below depicts **base URLs** for each country/ region. There is a general sandbox available to everybody, and country/ region specifiy test environments.
+下表描述了每个国家/地区的**基本URL**. 沙盒环境适用于所有人而国家/地区会有特定的测试环境.
 
-Environment Name                           | Test URL                           | Prod. URL
+环境名称                           | 测试环境URL                           | 生产环境URL
 ------------------------------------------ | ---------------------------------- | -------
-Sandbox (Only for credit card simulations) | https://openapi-int.qfapi.com      |
-Live Test                                  | https://openapi-test.qfpay.com     |
-China Mainland                             | https://openapi-test.qfpay.com     | https://openapi.qfpay.com 
-Hong Kong                                  | https://test-openapi-hk.qfapi.com  | https://openapi-hk.qfapi.com
-Japan                                      |                                    | https://openapi-jp.qfapi.com
+沙盒环境 (只用于模拟信用卡) | https://openapi-int.qfapi.com      |
+线上测试环境                                  | https://openapi-test.qfpay.com     |
+中国大陆                             | https://openapi-test.qfpay.com     | https://openapi.qfpay.com 
+中国香港                              | https://test-openapi-hk.qfapi.com  | https://openapi-hk.qfapi.com
+<!-- Japan                                      |                                    | https://openapi-jp.qfapi.com
 Thailand                                   | https://test-openapi-th.qfapi.com  | https://openapi-th.qfapi.com 
 Dubai                                      | https://test-openapi-db.qfapi.com  | https://openapi-db.qfapi.com
 Singapore, Malaysia, Canada, Philippines   | https://test-openapi-sg.qfapi.com  | https://openapi-sg.qfapi.com
 Indonesia                                  | https://test-openapi-id.qfapi.com  | https://openapi-id.qfapi.com
-Europe                                     | https://test-openapi-eur.qfapi.com | https://openapi-eur.qfapi.com
+Europe                                     | https://test-openapi-eur.qfapi.com | https://openapi-eur.qfapi.com -->
 
-## Signature Generation
+## 签名机制
+
+:::tip
+如无特别要求,在HTTP头部一定要在 `X-QF-SIGN` 中提交签名
+:::
+
+**步骤1:** 根据参数名称升序排序所有参数
+
+参数列表: abc=value1 bcd=value2 bad=value3
+排序结果: abc=value1 bad=value3 bcd=value2
+
+**步骤2:** 以&作为分隔符拼接所有参数,获得用于签名的字符串
+
+abc=value1&bad=value3&bcd=value2
+
+**步骤3:** 在字符串的末尾拼接钱方的`client_key`.
+
+abc=value1&bad=value3&bcd=value2Key
+
+**步骤4:** 使用 MD5 或 SHA256 加密第三步得到的字符串, 推荐使用 SHA256.
+
+MD5(abc=value1&bad=value3&bcd=value2Key)
+HASH(“SHA256”, abc=value1&bad=value3&bcd=value2Key)
+
+**步骤5:** 使用签名请求接口
+
+将签名结果（密文）保存到http请求头部的`X-QF-SIGN`字段中；
 
 ```plaintext
 For code instructions select Python, Java, Node.js or PHP with the tabs above.
@@ -249,7 +274,7 @@ ob_end_flush();
 </TabItem>
 </Tabs>
 
-> The above command returns JSON structured like this:
+> 上述指令会返回结构如下的JSON代码:
 
 ```json
 {
@@ -257,48 +282,22 @@ ob_end_flush();
 }
 ```
 
-:::tip
-Always submit the signature in the HTTP header `X-QF-SIGN` unless noted otherwise.
-:::
-
-**Step 1:** Sort all parameters in ascending order according to parameter names
-
-Parameter list: abc=value1 bcd=value2 bad=value3
-Sort result: abc=value1 bad=value3 bcd=value2
-
-**Step 2:** Connect all parameters with ‘&’,and get the string to be signed
-
-abc=value1&bad=value3&bcd=value2
-
-**Step 3:** Combine the string with `client_key` from QFPay.
-
-abc=value1&bad=value3&bcd=value2Key
-
-**Step 4:** Sign the string from step 3 with MD5 or SHA256. We recommend to use SHA256.
-
-MD5(abc=value1&bad=value3&bcd=value2Key)
-HASH(“SHA256”, abc=value1&bad=value3&bcd=value2Key)
-
-**Step 5:** Request API with the signature
-
-Save the signature in the http header field `X-QF-SIGN` unless otherwise specified in this document.
-
-### Request Description
+### 请求描述
 
 :::note
-The API will return response content in JSON format. We encourage developers to verify the signature in the response header in order to ensure message integrity.
+接口将会返回JSON格式的响应内容.我们推荐开发者验证响应头部的签名以确保消息的完整性
 :::
 
-Field | Description
+名称 | 描述
 --------- | -------
 Character | `UTF-8`  
-Method | **POST/ GET** (Depends on individual API function)
+Method | **POST/ GET** (视实际接口功能而定)
 Content-type | `application/x-www-form-urlencoded`
 
-### Required Parameter Settings in HTTP Header to Request the API
+### 在请求接口时HTTP头部所需的参数配置
 
-Field | Mandatory | Description
+名称 | 是否必须 | 描述
 --------- | ------- | -------
-`X-QF-APPCODE` | Yes | App code assigned to the merchant
-`X-QF-SIGN` | Yes | Signature generated according to the signature formulation method described above
-`X-QF-SIGNTYPE` | No | Signature algorithm used to generate the signature. If SHA256 is used, the developer must pass the value as `SHA256`. The default value is `MD5` in case this field is not passed to the API.
+`X-QF-APPCODE` | 是 | 分配给开发者的`app_code`
+`X-QF-SIGN` | 是 | 按照签名算法生成的签名
+`X-QF-SIGNTYPE` | 否 | 生成签名的算法. 如果使用了 SHA256 , 开发者必须传`SHA256`,为空默认`MD5`.

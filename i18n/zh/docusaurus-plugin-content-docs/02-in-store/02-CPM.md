@@ -2,11 +2,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# Consumer Present Mode (CPM)
+# 付款码支付
 
 <Link href="/img/cpm_process.jpg" target="_blank">![CPM process-flow](@site/static/img/cpm_process.jpg)</Link>
 
-## CPM API Request
+## 付款码支付接口请求
 
 ```plaintext
 Request Header:
@@ -290,14 +290,14 @@ ob_end_flush();
 
 The customer generates a dynamic QR code in their QR code wallet and presents it to the cashier for scanning. This szenario applies to offline payments only. If the response codes `1143/1145` are returned, the transaction is being processed or the customer is required to input the wallet password. Merchants have to [query the transaction result](../common-api/transaction-enquiry) for a final assessment of the transaction status.
 
-## Request Parameters
+## 请求参数
 
 |Parameter name | Parameter code | Mandatory | Parameter type | Description |
 |:----    |:---|:----- |-----   |----   |
 |Public payment parameters | — | — |— |— |
 Authorization Code | `auth_code` | Yes<br/> (CPM only) | String(128) | Specifies the authorization code for scanning a barcode/QR Code. The `auth_code` returned is unique in each authorization. Each `auth_code` can only be used once and will automatically expire. For testing CPM with Alipay and WeChat Pay the `auth_code` can be extracted by any QRC reader or manually found in the consumer wallet below the barcode.
 
-## Response Parameters
+## 响应参数
 
 |Parameter name | Parameter code | Mandatory | Parameter type | Description |
 |:----    |:---|:----- |-----   |----   |

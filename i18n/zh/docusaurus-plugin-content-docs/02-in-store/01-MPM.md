@@ -2,11 +2,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# Merchant Present Mode (MPM)
+# 扫码支付
 
 <Link href="/img/mpm_process.jpg" target="_blank">![MPM process-flow](@site/static/img/mpm_process.jpg)</Link>
 
-## MPM API Request
+## 扫码支付接口请求
 
 ```plaintext
 Request Header:
@@ -290,7 +290,7 @@ ob_end_flush();
 
 The merchant generates a dynamic QR code based on the Alipay / WeChat Pay protocol and presents it to the customer. The user opens their Alipay / WeChat Pay wallet and scans the displayed QRC in order to complete payment. This szenario applies to offline as well as online payments, for instance on websites.
 
-## Request Parameters
+## 请求参数
 
 |Parameter name| Parameter code|Mandatory|Parameter type|Description|
 |:----    |:---|:----- |-----   |-----   |
@@ -299,7 +299,7 @@ The merchant generates a dynamic QR code based on the Alipay / WeChat Pay protoc
 Order expiration time | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong WAP payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas WAP payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP
 |Designated payment method    |`limit_pay`|No |String   |The parameter value is specified as no_credit, and credit card payment is prohibited. This setting only applies to mainland China.  |
 
-## Response Parameters
+## 响应参数
 
 |Parameter code|Secondary parameter code|Parameter type|Parameter name|Description|
 |:----    |:---|:----- |-----   |-----   |

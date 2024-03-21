@@ -11,76 +11,46 @@ Verify that your API credentials allow for the selected `pay_type`.
 
 Code | Description
 --------- | -------
-800008 | Consumer Present QR Code Mode (CPM) for WeChat, Alipay, UNIONPAY Quick Pass
-800101 | Alipay Merchant Presented QR Code Payment in store (MPM) (Overseas Merchants)
-800108 | Alipay Consumer Presented QR Code Payment (CPM) (Overseas & HK Merchants)
-801101 | Alipay Online WEB (in browser Chrome etc.) Payment (Overseas Merchants) **
-801107 | Alipay Online WAP (in mobile browser Chrome etc.) Payment (Overseas Merchants)
-801110 | Alipay in-APP Payments (Overseas Merchants)
-800107 | Alipay Service Window H5 Payment (in Alipay APP H5 payments)
-801501 | Alipay Merchant Presented QR Code (MPM) Payment (HK Merchants)
-801510 | Alipay In-App Payment (HK Merchants)
-801512 | Alipay Online WAP Payment (HK Merchants)
-801514 | Alipay Online WEB Payment (HK Merchants)
-800201 | WeChat Merchant Presented QR Code Payment (MPM) (Overseas & HK Merchants)
-800208 | WeChat Consumer Presented QR Code Payment (CPM) (Overseas & HK Merchants)
-800207 | WeChat JSAPI Payment - WeChat Official Account Payment (in Wechat App)(Overseas & HK Merchants)
-800212 | WeChat H5 Payment (In mobile browser)
-800210 | WeChat in-APP Payment (Overseas & HK Merchants)
-800213 | WeChat Mini-Program Payment (Overseas & HK Merchants)
-801008 | WeChat Pay HK Consumer Presented QR Code Payment (CPM) (Direct Settlement, HK Merchants)
-801010 | WeChat Pay HK In-App Payment (Direct Settlement, HK Merchants)
-805801 | PayMe Merchant Presented QR Code Payment in store (MPM) (HK Merchants)
-805808 | PayMe Consumer Presented QR Code Payment (CPM) (HK Merchants)
-805814 | PayMe Online WEB (in browser Chrome etc.) Payment (HK Merchants)
-805812 | PayMe Online WAP (in mobile browser Chrome etc.) Payment (HK Merchants)
-800701 | UNIONPAY Quick Pass Merchant Presented QR Code Payment (MPM)
-800708 | UNIONPAY Quick Pass Consumer Presented QR Code Payment (CPM)
-800712 | UNIONPAY WAP Payment (HK Merchants)
-800714 | UNIONPAY PC-Web Payment (HK Merchants)
-800710 | UNIONPAY In-App Payment (HK Merchants)
-801208 | LINEPAY dynamic QRC Payment - Consumer Present Mode (CPM) (TH Merchants)
-801301 | LINEPAY Online Payment (TH Merchants)
-801408 | AIRPAY dynamic QRC Payment - Consumer Present Mode (CPM) (TH Merchants)
-801701 | NETSPAY Merchant Presented QR Code Payment (MPM)
-801801 | Alipay Pre-Authorization dynamic QRC Payment - Consumer Present Mode (CPM)
-801808 | Alipay Pre-Authorization dynamic QRC Payment - Merchant Present Mode (MPM)  
-801810 | Alipay Pre-Authorization in-APP Payment
-801814 | Alipay Pre-Authorization Online Payment
-801908 | Origami Consumer Presented QR Code Payment (CPM)
-802001 | FPS Merchant Presented QR Code Payment (MPM) (HK Merchants)***
-802201 | AIRPAY Online Payment (TH Merchants)
-802301 | PayNow Merchant Presented QR Code Payment (MPM) (SG Merchants)***
-802901 | PromptPay dynamic QRC Payment - Merchant Present Mode (MPM) (TH Merchants)***
+800008 | 微信、支付宝﹑银联云閃付反扫支付
+800101 | 支付宝跨境線下扫码支付
+800108 | 支付宝跨境反扫支付
+801101 | 支付宝線上扫码支付 (海外商戶) **
+801107 | 支付宝線上WAP支付 (海外商戶)
+801110 | 支付宝In-App支付 (海外商戶)
+800107 | 支付宝服务窗H5跨境支付
+801501 | 支付宝線上扫码支付 (香港商戶)
+801510 | 支付宝In-App支付 (香港商戶)
+801512 | 支付宝線上WAP支付 (香港商戶)
+801514 | 支付宝線上WEB支付 (香港商戶)
+800201 | 微信扫码支付
+800208 | 微信反扫支付
+800207 | 微信JSAPI支付 (微信公众號支付)
+800212 | 微信移动端浏览器H5跨境支付
+800210 | 微信 In-App 支付
+800213 | 微信小程序支付
+801008 | 微信香港反扫支付 (適用於向微信香港申請的商戶)
+801010 | 微信香港In-App支付 (適用於向微信香港申請的商戶)
+805801 | PayMe 扫码支付
+805808 | PayMe 反扫支付
+805814 | PayMe 線上WEB支付 (香港商戶)
+805812 | PayMe 線上WAP支付 (香港商戶)
+800701 | 银联云闪付扫码支付
+800708 | 银联云闪付反扫支付
+800712 | 银联云闪付WAP支付 (香港商戶)
+800714 | 银联云闪付 PC-Web Payment (HK Merchants)
+800710 | 银联云闪付 In-App Payment (HK Merchants)
+801801 | 支付宝预授权反扫
+801808 | 支付宝预授权正扫
+801810 | 支付宝预授权in-APP支付
+801814 | 支付宝预授权線上支付
+802001 | 香港轉數快扫码支付***
 803001 | eWallet dynamic QRC Payment - Merchant Present Mode (MPM)
 803008 | eWallet dynamic QRC Payment - Consumer Present Mode (CPM)
-803101 | VIA dynamic QRC Payment - Merchant Present Mode (MPM) (JP and HK Merchants)
-803108 | VIA dynamic QRC Payment - Consumer Present Mode (CPM) (JP and HK Merchants)
-803208 | Touch 'n Go (TNG) dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
-803214 | Touch 'n Go (TNG) Online Payment (MY Merchants)**
-803301 | Razer dynamic QRC Payment - Merchant Present Mode (MPM) (MY Merchants)
-803308 | Razer dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
-803314 | Razer Online Payment ** (MY Merchants)
 803701 | Octopus dynamic QRC Payment - Merchant Present Mode (MPM) (HK Merchants)
-803801 | Dash dynamic QRC Payment - Merchant Present Mode (MPM) (SG Merchants)
-803808 | Dash dynamic QRC Payment - Consumer Present Mode (CPM) (SG Merchants)
-804001 | Boost dynamic QRC Payment - Merchant Present Mode (MPM) (MY Merchants)
-804008 | Boost dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
-804014 | Boost Online Payment (MY Merchants)**
-804101 | Maybank dynamic QRC Payment - Merchant Present Mode (MPM) (MY Merchants)
-804108 | Maybank dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
-804114 | Maybank Online Payment (MY Merchants)**
-804201 | GrabPay dynamic QRC Payment - Merchant Present Mode (MPM) (MY and SG Merchants)
-804208 | GrabPay dynamic QRC Payment - Consumer Present Mode (CPM) (MY Merchants)
-804214 | GrabPay Online Payment (MY Merchant)** (SG Merchants)*
-805208 | TrueMoney dynamic QRC Payment - Consumer Present Mode (CPM) (TH Merchants)
-805401 | ThaiQR dynamic QRC Payment - Merchant Present Mode (MPM) (SG and MY Merchants)***
 805508 | Credit Card: first_data Quick Payment Mode (HK Merchant)
 805514 | Credit Card: first_data Security Verification Payment Mode (HK Merchants)
 802801 | Visa / Mastercard Online Payments
 802808 | Visa / Mastercard Offline Payments
-805601 | GoPay dynamic QRC Payment - Merchant Present Mode (MPM)***
-805612 | GoPay WAP Payment***
 806527 | ApplePay Online Payments
 806708 | UnionPay Card Offline Payments
 806808 | American Express Card Offline Payments
@@ -92,20 +62,20 @@ Code | Description
 :::note
   **(\*)**
 
-  1. Differently from Public Payment Parameters, `return_url` is a mandatory request parameter.
-  2. `web_url` parameter in response contains the payment url.
+  1. 与公共支付的参数不同的是, `return_url` 是一个必须的请求变量.
+  2. 在响应中的`web_url` 参数包含了支付链接.
 
   **(\*\*)**
-  1. Transaction amount must be greater than 1 MYR.
+  1. 交易金额必须大于 1 MYR.
 
   **(\*\*\*)**
-  1. Payment method does not support refunds.
+  1. 该支付方式不支持退款.
 
   **(\*\*\*\*)**
-  1. Please refer to [this](../online-shop/alipay/alipay-online-payments#alipay-online-payments) section for payment request and response.
+  1. 对于支付请求和响应请参考[此](../online-shop/alipay/alipay-online-payments#alipay-online-payments)部分内容.
 :::
 
-## Currencies
+## 货币种类
 
 The below listed currencies are currently available in our payment network. Please consult **technical.support@qfpay.com** to verify that your API credentials and selected `pay_type` support your desired currency.
 
@@ -187,7 +157,7 @@ def make_req_sign(data, key):
 # Body payload
 txamt = '10' #In USD,EUR,etc. Cent
 txcurrcd = 'EUR'
-pay_type = '800101' # Alipay CPM = 800108 , MPM = 800101
+pay_type = '800101' # 支付宝 CPM = 800108 , MPM = 800101
 auth_code='283854702356157409' #CPM only
 out_trade_no = '01234567890123'
 txdtm = current_time
@@ -272,7 +242,7 @@ console.log(tradenumber)
 var payload = {
 'txamt': '10', // In USD,EUR,etc. Cent
 'txcurrcd': 'EUR',
-'pay_type': '800101', // Alipay CPM = 800108 , MPM = 800101
+'pay_type': '800101', // 支付宝 CPM = 800108 , MPM = 800101
 'out_trade_no': tradenumber,
 'txdtm': dateTime,
 'mchid': 'ZaMVg*****'
@@ -405,72 +375,72 @@ ob_end_flush();
 }
 ```
 
-### HTTP Request
+### HTTP 请求
 
 `POST ../trade/v1/payment`
 
 Listed below are the most common parameters for the payment endpoint. Please refer to the payment scenario applicable to you for additional parameters.
 
-### Public Payment Request Parameters
+### 公共请求参数列表
 
-Parameter name | Parameter code | Mandatory | Type | Description
+参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述
 --------- | -------- | --------- | ------- | ------- 
-Payment amount | `txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1)
-Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](#currencies) table for a complete list of available currencies
-Payment type | `pay_type` | Yes | String(6) | Please refer to the section [Payment Codes](#payment-codes) for a complete list of payment types
-API Order Number | `out_trade_no` | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
-Request transaction time | `txdtm` | Yes | String(20) | Transaction time format：<br/> YYYY-MM-DD hh:mm:ss 
-Authorization Code | `auth_code` | Yes<br/> (CPM only) | String(128) | Specifies the authorization code for scanning a barcode/QR Code. The `auth_code` returned is unique in each authorization. Each `auth_code` can be used only once and will automatically expire in one day. For testing CPM with Alipay and WeChat Pay the `auth_code` can be extracted with any QRC reader or manually found in the consumer wallet below the barcode.
-Order expiration time | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong WAP payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas WAP payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP
-Product name identification | `goods_name` | No | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
-QF Pay merchant number | `mchid` | No | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass in the MCHID parameter in the API request. 
-Time zone | `txzone` | No | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800).
-Device ID | `udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal. 
-Asynchronous Notification URL | `notify_url` | No | String(256) |Asynchronous notification URL
+订单支付金额 | `txamt` | 是 | Int(11) | 以当前货币最小计量单位计算，只允许整数类型 (i.e. 100 = $1)
+币种 | `txcurrcd` | 是 | String(3) | 交易币种, 请查看[币种](#currencies)表以获取完整的可选用的币种
+支付类型 | `pay_type` | 是 | String(6) | 请查看[支付类型](#payment-codes)表以获取完整的可选用的支付类型
+外部订单号 | `out_trade_no` | 是 | String(128)| 开发者自定义订单号，在同一商户账户中的每笔交易和退款请求该参数值唯一
+请求交易时间 | `txdtm` | 是 | String(20) | 格式：yyyy-MM-dd HH:mm:ss
+Authorization Code | `auth_code` | 是<br/> (CPM only) | String(128) | Specifies the authorization code for scanning a barcode/QR Code. The `auth_code` returned is unique in each authorization. Each `auth_code` can be used only once and will automatically expire in one day. For testing CPM with 支付宝 and WeChat Pay the `auth_code` can be extracted with any QRC reader or manually found in the consumer wallet below the barcode.
+交易到期时间 | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - 支付宝 scan code <br/>801512 - 支付宝 Hong Kong WAP payment<br/>801501 - 支付宝 Hong Kong scan code<br/>801107 - 支付宝 overseas WAP payment<br/>801101 - 支付宝 overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - 支付宝 Hong Kong APP
+商品名称标识 | `goods_name` | 否| String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
+子商户号 | `mchid` | 否| String(16) | 标识子商户身份，由钱方分配（渠道系统后台查看对应商户(非业务员)子商户号，被视为对应商户的交易）
+时区 | `txzone` | 否| String(5) | 用于记录本地下单时间，默认为北京时间+0800
+设备唯一id | `udid` | 否| String(40) |  Unique transaction device ID. Is displayed on the merchant portal. 
+异步通知地址 | `notify_url` | 否| String(256) |异步通知地址
 
-### Public Payment Response Parameters
+### 公共响应参数列表
 
-Parameter name | Parameter code | Type | Description
+参数名称 | 参数编码 | 参数类型 | 描述
 --------- | -------- | --------- | -------
-Payment type | `pay_type` | String(6) | Please refer to the section [Payment Codes](#payment-codes) for a complete list of payment types 
-System transaction time | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
-Request transaction time | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  |
-Response message | `resperr` | String(128) | 
-Payment amount | `txamt` | Int(11) |
-Other message information | `respmsg` | String(128) |  
-External transaction number | `out_trade_no` | String(128) | External transaction number  
-QFPay transaction number | `syssn` | String(40) | 
+支付类型 | `pay_type` | String(6) | Please refer to the section [Payment Codes](#payment-codes) for a complete list of payment types 
+系统交易时间 | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
+请求交易时间 | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  |
+信息描述 | `resperr` | String(128) | 
+订单支付金额 | `txamt` | Int(11) |
+调试信息 | `respmsg` | String(128) |  
+外部订单号 | `out_trade_no` | String(128) | External transaction number  
+钱方订单号 | `syssn` | String(40) | 
 Wallet/Channel transaction number| `chnlsn` | String | 
-Return code | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](#transaction-status-codes) for a complete list of response codes.
+返回码 | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](#transaction-status-codes) for a complete list of response codes.
 
-## Transaction Status Codes
+## 支付状态码
 
-| Return code | Description                                               |
+| 返回码 | 描述                                              |
 | ---------- | ------------------------------------------------------------ |
-| 0000       | Transaction successful    |
-| 1100       | System under maintenance (1100)    |
-| 1101       | Reversal error (1101)     |
-| 1102       | Duplicate request (1102)  |
-| 1103       | Request format error (1103)  |
-| 1104       | Request parameter error (1104)  | 
-| 1105       | Device not activated (1105)  |
-| 1106       | Invalid device (1106)  |
-| 1107       | Device not allowed (1107)  |
-| 1108       | Signature error (1108)    |
-| 1125       | Transaction has been refunded already (1125)    |
-| 1136       | The transaction does not exist or is not operational (1136)    |
-| 1142       | Order already closed (1142)    |
-| 1143       | The order has not been paid for, the password is currently being entered (1143)   |
-| 1145       | Please wait while processing (1145)    |
-| 1147       | Wechat pay transaction error (1147)    |
-| 1150       | Your billing method is T0 and does not support canceling transactions. (1150)    |
-| 1155       | Refund request denied (1155)    |
-| 1181       | Order expired (1181)    |
-| 1201       | Insufficient balance, please use a different payment method (1201)   |
-| 1202       | Incorrect or expired payment code, please show the correct payment code or refresh the payment code and retry (1202)   |
-| 1203       | Merchant account error, confirm that the payment account is configured correctly (1203)  |
-| 1204       | Bank error, confirm that the payment wallet is functionable (1204)  |
-| 1205       | The transaction failed. Please try again later (1205)  |
+| 0000       | 交易成功；success   |
+| 1100       | 系统维护中 (1100)    |
+| 1101       | Reversal 错误 (1101)     |
+| 1102       | 重复请求 (1102)  |
+| 1103       | 请求格式错误 (1103)  |
+| 1104       | 请求参数错误 (1104)  | 
+| 1105       | 设备未激活 (1105)  |
+| 1106       | 无效设备 (1106)  |
+| 1107       | 设备无权限 (1107)  |
+| 1108       | 签名错误 (1108)    |
+| 1125       | 交易已退款 (1125)    |
+| 1136       | 交易不存在或无法处理 (1136)    |
+| 1142       | 订单已关闭 (1142)    |
+| 1143       | 订单还未支付，或者正在输入密码中 (1143)   |
+| 1145       | 处理中，请稍等 (1145)    |
+| 1147       | 微信支付交易错误 (1147)    |
+| 1150       | 您的结算方式为T0，不支持撤销交易 (1150)    |
+| 1155       | 退款请求被拒绝 (1155)    |
+| 1181       | 订单过期 (1181)    |
+| 1201       | 余额不足，请更换支付方式支付 (1201)   |
+| 1202       | 付款码错误或过期，请出示正确的付款码或刷新付款码后重新支付 (1202)   |
+| 1203       | 账户错误，请确认支付账户可用 (1203)  |
+| 1204       | 银行错误，请确认支付账户可用 (1204)  |
+| 1205       | 交易失败，请稍后重试 (1205)  |
 | 1212       | Please use the UnionPay overseas payment code (1212)  |
 | 1241       | The store does not exist or the status is incorrect. Do not conduct payments (1241)  |
 | 1242       | The store has not been configured correctly, unable to conduct payments (1242)  |
