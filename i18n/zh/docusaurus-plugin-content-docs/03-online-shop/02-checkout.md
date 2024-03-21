@@ -2,40 +2,41 @@ import Link from '@docusaurus/Link';
 
 # QFPay Checkout Services
 
-## Introduction
+## 介紹
 
-Welcome to the **QFPay Online Checkout documentation.** This manual introduces QFPay's hosted checkout page, through which developers can add a variety of payment methods to their online store. There are language bindings available in HTML. You can view code examples in the dark area to the right.
+欢迎使用 **QFPay 安全收银台** 本手册介绍了 QFPay 的托管结账页面，开发者可以通过该页面向其在线商店添加多种支付方式。
 
-## Checkout Page Design
+## 结账页面設計
 
 <Link href="/img/shouyintai.png"> ![shouyintai](@site/static/img/shouyintai.png) </Link>
 
-The checkout page is fully responsive and automatically adjust to all screen sizes. The UI currently supports English as well as simplified and traditional Chinese languages. Available eWallets as well as the design and descriptions can be configured based on merchant demand. If you have explicit requirements please send an email to **technical.support@qfpay.com** for assistance.
+结帐页面具有完全响应能力，能自动调整以适应所有屏幕尺寸。 介面目前支持英语，简体中文以及繁体中文。 另外结帐页面可以根据商家的需求，例如可用的电子钱包以及设计和描述，进行配置 。 如果您有相關明确要求，请发送电子邮件至 **technical.support@qfpay.com** 寻求協助。
 
-## API Environment
+## API环境
 
 :::danger
-Remember to immediately refund test transactions via the Merchant Management System, QFPay APP or open API.
+请记住立即通过商户管理系统、QFPay APP或开放API对测试交易进行退款。
 :::
 
-The table below depicts base URLs for each region.
+下表描述了每个区域的基本 URL。
 
-| Environment Name | URL              |
+| 環境 | URL              |
 | ---------- | ------------------------- |
-| Hong Kong | https://openapi-hk.qfapi.com/checkstand/#/? |
+| 香港 | https://openapi-hk.qfapi.com/checkstand/#/? |
 
-## Process Flow
+## 流程
 
 <Link href="/img/flowchart.png"> ![shouyintai](@site/static/img/flowchart.png) </Link>
 
-Customers browse the client's website and proceed to make payment. Once they click the pay button they will be forwarded to the QFPay hosted checkout page. Here consumers can find a variety of payment methods available for checkout and complete payment on desktop or mobile devices. Once payment has been conducted successfully the user is redirected back to the merchant website for a "payment successful notification" and to continue to browse the shop.
+消费者浏览商户的网站并继续付款。 一旦他们点击支付按钮，他们将被转发到 QFPay 托管的结账页面。 在这里，消费者可以找到多种支付方式，可在桌面或移动设备上结账并完成支付。 付款成功后，用户将被重定向回商家网站以获取“付款成功通知”并继续浏览商店。
 
-## API Request Parameters
+## API請求參數
 
 `GET https://openapi-hk.qfapi.com/checkstand/#/?..` <br/>
-The following body parameters are necessary to create a new checkout request;
 
- | Parameter | Type | Mandatory | Description | Example |
+创建新的结帐请求需要以下主体参数；
+
+ | 参数名称 | 参数类型 | 是否必填 | 描述 | 范例 |
 | ---------- | ----------- | ----------- | ----------- | ----------- |
  | appcode | String(64) | Yes|API credentials assigned by QFPay|	A6A49A******************5032|
 |sign_type | String(256)|Yes|SHA256 or MD5, SHA256 is recommended|	sha256|
