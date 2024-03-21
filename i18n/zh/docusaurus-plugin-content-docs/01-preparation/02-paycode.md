@@ -1,15 +1,15 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Payment Codes
+# 支付接口
 
 :::warning
-Verify that your API credentials allow for the selected `pay_type`.
+验证您的接口证书支持当前选中的`pay_type`.
 :::
 
-### PayType Table
+### 支付类型表
 
-Code | Description
+编码 | 描述
 --------- | -------
 800008 | 微信、支付宝﹑银联云閃付反扫支付
 800101 | 支付宝跨境線下扫码支付
@@ -37,26 +37,17 @@ Code | Description
 800701 | 银联云闪付扫码支付
 800708 | 银联云闪付反扫支付
 800712 | 银联云闪付WAP支付 (香港商戶)
-800714 | 银联云闪付 PC-Web Payment (HK Merchants)
-800710 | 银联云闪付 In-App Payment (HK Merchants)
-801801 | 支付宝预授权反扫
-801808 | 支付宝预授权正扫
-801810 | 支付宝预授权in-APP支付
-801814 | 支付宝预授权線上支付
+800714 | 银联云闪付 PC-Web Payment (香港商户)
 802001 | 香港轉數快扫码支付***
-803001 | eWallet dynamic QRC Payment - Merchant Present Mode (MPM)
-803008 | eWallet dynamic QRC Payment - Consumer Present Mode (CPM)
-803701 | Octopus dynamic QRC Payment - Merchant Present Mode (MPM) (HK Merchants)
-805508 | Credit Card: first_data Quick Payment Mode (HK Merchant)
-805514 | Credit Card: first_data Security Verification Payment Mode (HK Merchants)
-802801 | Visa / Mastercard Online Payments
-802808 | Visa / Mastercard Offline Payments
-806527 | ApplePay Online Payments
-806708 | UnionPay Card Offline Payments
-806808 | American Express Card Offline Payments
+803701 | 八达通动态二维码支付(香港商户)
+802801 | Visa / Mastercard 卡线上支付
+802808 | Visa / Mastercard 卡线下刷卡支付
+806527 | ApplePay 线上支付
+806708 | 银联卡线下刷卡支付
+806808 | American Express 卡线下刷卡支付
 
 :::warning
-    Notes
+    注意
 :::
 
 :::note
@@ -77,9 +68,9 @@ Code | Description
 
 ## 货币种类
 
-The below listed currencies are currently available in our payment network. Please consult **technical.support@qfpay.com** to verify that your API credentials and selected `pay_type` support your desired currency.
+以下列出的货币是目前我们的支付网络支持的货币种类.请联系 **technical.support@qfpay.com** 来验证您的接口证书和选中的`pay_type`是否支持您期望的货币. 
 
-Code | Description
+编码 | 描述
 --------- | -------
 AED | Arab Emirates Dirham
 CNY | Chinese Yuan
@@ -95,16 +86,16 @@ USD | United States Dollar
 CAD | Canadian Dollar
 AUD | Australian Dollar
 
-## API Endpoint for Payments
+## 支付接口端点
 
 :::warning
-Remember to immediately refund transactions that were made in the sandbox environment.
+请谨记立即将在测试环境进行的交易退款
 :::
 
-If you would like to quickly test the payment function in Postman we provide a collection that includes a pre-request script to generate the signature, download the file from here: [Payment Request in Postman](@site/static/files/qfpay_openapi_payment_request.postman_collection.json)
+如果您想要在Postman快速测试支付功能,我们提供了一套可生成签名的预请求脚本,请从此处下载文件: [Postman中的支付请求](@site/static/files/qfpay_openapi_payment_request.postman_collection.json)
 
 ```plaintext
-Request Header:
+请求头部:
 
 {
   Content-Type: application/x-www-form-urlencoded;
@@ -112,7 +103,7 @@ Request Header:
   X-QF-SIGN: 6FB43AC29175B4602FF95F8332028F19
 }
 
-Request Body:
+请求正文:
 
 {
   mchid=ZaMVg*****&out_trade_no=01234567890123&pay_type=800101&txamt=10&txcurrcd=EUR&txdtm=2019-12-25 14:21:28
@@ -402,16 +393,16 @@ Authorization Code | `auth_code` | 是<br/> (CPM only) | String(128) | Specifies
 
 参数名称 | 参数编码 | 参数类型 | 描述
 --------- | -------- | --------- | -------
-支付类型 | `pay_type` | String(6) | Please refer to the section [Payment Codes](#payment-codes) for a complete list of payment types 
-系统交易时间 | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
-请求交易时间 | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  |
+支付类型 | `pay_type` | String(6) | 请参阅 [Payment Codes](#payment-codes) 获取完整的支付类型 
+系统交易时间 | `sysdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss <br/> 这个参数值被用作结算截止时间| 
+请求交易时间 | `txdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss  |
 信息描述 | `resperr` | String(128) | 
 订单支付金额 | `txamt` | Int(11) |
 调试信息 | `respmsg` | String(128) |  
-外部订单号 | `out_trade_no` | String(128) | External transaction number  
+外部订单号 | `out_trade_no` | String(128) | 外部订单号  
 钱方订单号 | `syssn` | String(40) | 
-Wallet/Channel transaction number| `chnlsn` | String | 
-返回码 | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](#transaction-status-codes) for a complete list of response codes.
+钱包/渠道交易码| `chnlsn` | String | 
+返回码 | `respcd` | String(4) | 0000 = 请求成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [Transaction Status Codes](#transaction-status-codes) 获得完整返回类型列表
 
 ## 支付状态码
 
@@ -441,31 +432,31 @@ Wallet/Channel transaction number| `chnlsn` | String |
 | 1203       | 账户错误，请确认支付账户可用 (1203)  |
 | 1204       | 银行错误，请确认支付账户可用 (1204)  |
 | 1205       | 交易失败，请稍后重试 (1205)  |
-| 1212       | Please use the UnionPay overseas payment code (1212)  |
-| 1241       | The store does not exist or the status is incorrect. Do not conduct payments (1241)  |
-| 1242       | The store has not been configured correctly, unable to conduct payments (1242)  |
-| 1243       | The store has been disabled. Do not conduct payments, contact the owner to confirm (1243)  |
-| 1250       | The transaction is forbidden. For more information please contact QFPay Customer Service Team (1250) |
-| 1251       | The store has not been configured correctly, we are currently working to fix this problem (1251)  |
-| 1252       | System error when making the order request (1252)  |
-| 1254       | A problem occured. We are currently resolving the issue (1254)  |
-| 1260       | The order has already been paid for, please confirm the transaction result before conducting more transactions (1260) |
-| 1261       | The order has not been paid for, please confirm the transaction result before conducting more transactions (1261)  |
-| 1262       | The order has been refunded, please confirm the order status before conducting more transactions (1262)  |
-| 1263       | The order has been cancelled, please confirm the order status before conducting more transactions (1263) |
-| 1264       | The order has been closed, please confirm the order status before conducting more transactions (1264)  |
-| 1265       | The transaction cannot be refunded. Refunds for transactions between 11:30pm to 0:30am and special promotions cannot be processed. (1265)  |
-| 1266       | The transaction amount is wrong, please confirm the order status (1266)  |
-| 1267       | The order information does not match, please confirm the order status (1267) |
-| 1268       | The order does not exist, please confirm the order status (1268) |
-| 1269       | Today's unsettled transaction amount is insufficient. Refunds cannot be processed. Please confirm that the balance is sufficient (1269) |
-| 1270       | This currency does not support partial refunds (1270) |
-| 1271       | The selected transaction does not support partial refunds (1271) |
-| 1272       | The refund amount is greater than the maximum amount that can be refunded for the original transaction (1272) |
-| 1294       | The transaction may be non-compliant and has been prohibited by the bank (1294) |
-| 1295       | The connection is slow, waiting for a network response (1295) |
-| 1296       | The connection is slow, waiting for a network response. Please try again later or use other payment methods (1296) |
-| 1297       | The banking system is busy. Please try again later or use other payment methods (1297) |
-| 1298       | The connection is slow, waiting for a network response. In case you have already paid, do not repeat the payment. Please confirm the result later (1298) |
-| 2005       | The customer payment code is incorrect or has expired, please refresh and restart the transaction process (2005) |
-| 2011       | Transaction serial number repeats (2011) |
+| 1212       | 请消费者使用银联境外码付款 (1212)  |
+| 1241       | 店铺不存在或状态不正确，请勿进行支付 (1241)  |
+| 1242       | 该店铺配置有些问题，无法进行交易 (1242)  |
+| 1243       | 该店铺被禁用，请勿进行支付，联系店主确认 (1243)  |
+| 1250       | 该交易禁止进行，如有疑问请联系钱方客服 (1250) |
+| 1251       | 该店铺配置有些问题，我们正在加紧解决中 (1251)  |
+| 1252       | 进行交易请求时出现系统错误 (1252)  |
+| 1254       | 系统出了点小差，我们正在加紧解决中 (1254)  |
+| 1260       | 该订单已支付，请确认交易结果后再操作 (1260) |
+| 1261       | 该订单未支付，请确认交易结果后再操作 (1261)  |
+| 1262       | 该订单已退款，请确认订单状态再操作 (1262)  |
+| 1263       | 该订单已撤销，请确认订单状态再操作 (1263) |
+| 1264       | 该订单已关闭，请确认订单状态再操作 (1264)  |
+| 1265       | 该笔订单被禁止退款，23:30-00:30的交易以及部分特殊交易会被禁止 (1265)  |
+| 1266       | 该订单金额错误，请确认后再操作( (1266)  |
+| 1267       | 该订单信息不匹配，请确认后再操作 (1267) |
+| 1268       | 该订单不存在，请确认后再操作 (1268) |
+| 1269       | 当日未结算金额不足，无法操作，请确认余额充足 (1269) |
+| 1270       | 该币种不支持部分退款 (1270) |
+| 1271       | 该交易不支持部分退款 (1271) |
+| 1272       | 该退款金额大于原交易可退款的最大金额 (1272) |
+| 1294       | 该笔交易可能存在风险，已被银行禁止交易 (1294) |
+| 1295       | 网络有些拥堵，我们正在加速解决中 (1295) |
+| 1296       | 网络有些拥堵，请稍后再试或使用其他支付方式( (1296) |
+| 1297       | 银行系统繁忙，请稍后再试或使用其他支付方式 (1297) |
+| 1298       | 网络有些拥堵，切勿重复支付，如已支付请稍后确认结果 (1298) |
+| 2005       | 消费者付款码错误或已过期请刷新后重新支付 (2005) |
+| 2011       | 交易流水号重复 (2011) |
