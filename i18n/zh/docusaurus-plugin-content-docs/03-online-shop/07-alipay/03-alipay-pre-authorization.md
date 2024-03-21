@@ -2,9 +2,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# Alipay Pre-Authorization
+# 支付宝预授权
 
-## Freeze Funds
+## 资金授权冻结
 
 At the moment only Alipay wallet funds can be used for pre-authorization, credit-cards are not supported. Authorization requests lose their validity after 15min. In case of technical or currency related integration difficulties please contact technical.support@qfpay.com for support. Merchants can, at any time, unfreeze the funds in which case the assets will be available for spending on the original wallet. In addition, merchants can initiate a transfer for a fraction or all of the frozen funds in order to collect money for open customer invoices.
 
@@ -14,7 +14,7 @@ Alipay pre-authorization currently supports the following currencies: AUD, HKD, 
 
 <Link to="/img/alipay_preauth_process.jpg" target="_blank">![Alipay Pre-Auth process-flow](@site/static/img/alipay_preauth_process.jpg)</Link>
 
-### HTTP Request
+### HTTP请求
 
 `POST ../trade/v1/payment` <br/>
 
@@ -27,7 +27,7 @@ PayType | Description
 801810 | Alipay Pre-Authorization in-APP Payment
 801814 | Alipay Pre-Authorization Online Payment
 
-### Request Parameters
+### 请求参数
 
 ```plaintext
 
@@ -66,21 +66,46 @@ Request Body:
 | Alipay openid  |`openid`  |No | String(64)  | Corresponding to the APP authorization method.   |
 | Alipay payment code   |`auth_code`|No |String(128)   | Specifies the authorization code for scanning a barcode/QR Code. The `auth_code` returned is unique in each authorization. Each `auth_code` can only be used once and will automatically expire. For testing CPM with Alipay and WeChat Pay the auth_code can be extracted by any QRC reader or manually found in the consumer wallet below the barcode. |
 
-### Response Parameters
+### 响应参数
 
 |Parameter code | Second parameter code | Parameter type | Parameter name | Description |
 |:----    |:---|:----- |-----   |----   |
 |Public response parameters |—  |— |—   |—|
 
-## Unfreeze Funds
+## 资金授权撤销
 
 Only calls `alipay.fund.auth.operation.cancel` when the merchant’s system encounters timeout and has to stop the subsequent processes, or when the pre-auth result is unknown. If you want to perform a similar task for normal pre-auth (freezing) transactions, please call `alipay.fund.auth.order.unfreeze`. After submitting the fund authorization call **Order Inquiry**, and there is no clear authorization result and then call **Fund Authorization Cancellation**.
 
-### HTTP Request
+### HTTP请求
 
 `POST ../trade/v1/reversal`
 
-## Request Parameters
+## 请求参数
+
+|Parameter name | Parameter code | Mandatory | Parameter type | Description |
+|:----    |:---|:----- |-----   |-----   |
+|Merchant ID    |`mchid` | Yes  |String   | The unique merchant ID is created by QF Pay during the merchant onboarding process.    |
+|QF Pay transaction number    | `syssn` | No | String    | Multiple entries are separated by English commas |
+|External transaction number    | `out_trade_no` | No | String    | e.g. Developer platform order number |
+|Transaction amount    | `txamt` |No |    Int   |Whether to pass this parameter depends on the payment channel, Alipay and WeChat Pay do not need to submit this information  |
+|Transaction request time    |`txdtm`  |Yes  |String    |Format: YYYY-MM-dd hh&#58;mm:ss  |
+|Unique device id   |`udid` |No|String    |   |
+|Time zone    |`txzone` | No |String    |Used to record the local order time. The default is Beijing time GMT+8 (+0800)  |
+
+### 响应参数
+
+|Parameter code | Parameter type | Parameter name | Description |
+|:----    |:---|:----- |-----   |
+|`syssn` |String(40)| QF Pay transaction number |  |
+|`orig_syssn` |String(40)| External transaction number| Developer platform transaction number |
+|`txdtm`  |String(20)| Time of the transaction request| Format: YYYY-MM-dd hh&#58;mm:ss |
+|`txamt`  |Int(11)| Order payment amount |  |
+|`sysdtm`   |String(20)| System trading time|  Format: YYYY-MM-dd hh&#58;mm:ss <br/> This parameter value is used as the cut-off time for settlements. |
+|`respcd`   |String(4)| Return code |  |
+|`respmsg`    | String(128)| Information description |  |
+|`resperr`    |String(128)| Description error |  |
+|`cardcd`     |String| Card number |  |
+|`txcurrcd`   |String(3)| Currency  | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
 
 ```plaintext
 
@@ -110,38 +135,39 @@ Request Body:
 }
 ```
 
-|Parameter name | Parameter code | Mandatory | Parameter type | Description |
-|:----    |:---|:----- |-----   |-----   |
-|Merchant ID    |`mchid` | Yes  |String   | The unique merchant ID is created by QF Pay during the merchant onboarding process.    |
-|QF Pay transaction number    | `syssn` | No | String    | Multiple entries are separated by English commas |
-|External transaction number    | `out_trade_no` | No | String    | e.g. Developer platform order number |
-|Transaction amount    | `txamt` |No |    Int   |Whether to pass this parameter depends on the payment channel, Alipay and WeChat Pay do not need to submit this information  |
-|Transaction request time    |`txdtm`  |Yes  |String    |Format: YYYY-MM-dd hh&#58;mm:ss  |
-|Unique device id   |`udid` |No|String    |   |
-|Time zone    |`txzone` | No |String    |Used to record the local order time. The default is Beijing time GMT+8 (+0800)  |
+## 授权冻结转扣款
 
-**Response Parameter**
-
-|Parameter code | Parameter type | Parameter name | Description |
-|:----    |:---|:----- |-----   |
-|`syssn` |String(40)| QF Pay transaction number |  |
-|`orig_syssn` |String(40)| External transaction number| Developer platform transaction number |
-|`txdtm`  |String(20)| Time of the transaction request| Format: YYYY-MM-dd hh&#58;mm:ss |
-|`txamt`  |Int(11)| Order payment amount |  |
-|`sysdtm`   |String(20)| System trading time|  Format: YYYY-MM-dd hh&#58;mm:ss <br/> This parameter value is used as the cut-off time for settlements. |
-|`respcd`   |String(4)| Return code |  |
-|`respmsg`    | String(128)| Information description |  |
-|`resperr`    |String(128)| Description error |  |
-|`cardcd`     |String| Card number |  |
-|`txcurrcd`   |String(3)| Currency  | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
-
-## Deduct Funds
-
-### HTTP Request
+### HTTP请求
 
 `POST ../trade/v1/authtrade`
 
-### Request Parameters
+### 请求参数
+
+| Parameter name | Parameter code | Mandatory | Parameter type | Description |
+|:----    |:---|:----- |-----   |----   |
+|Merchant ID    | `mchid`  | No | String  | The unique merchant ID is created by QF Pay during the merchant onboarding process. |
+|QF Pay transaction number | `syssn`  | Yes | String   |  Fund authorization number  |
+|External transaction number    | `out_trade_no` | Yes | String    |Developer platform transaction number |
+|Transaction amount    | `txamt`  | Yes | int     |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen funds|
+|Transaction request time    | `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh&#58;mm:ss|
+| Device ID   | `udid`   | No | String         |Must be unique|
+| Time zone | `txzone`    | No | String        |Used to record the local order time. The default is Beijing time GMT+8 (+0800)|
+| Redirect URL   | `return_url`   | No | String        | Redirect to address after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters. |
+
+### Response Parameters
+
+| Parameter code | Parameter type | Parameter name | Description |
+|:----    |:---|:----- |-----   |
+|`syssn` |   String(40) | QF Pay Transaction number | This number is being used when freezing funds, detucting money from the frozen amount as well as unfreezing funds. |
+|`orig_syssn`    |String(40)| External transaction number | Developer platform transaction number |
+|`txdtm`     | String(20) | Transaction request time | Format: YYYY-MM-DD hh&#58;mm:ss  |
+|`txamt`    |Int(11)| Transaction amount | |
+|`sysdtm`     |String(20)| System transaction time |Format: YYYY-MM-DD hh&#58;mm:ss |
+|`respcd`    |String(4)| Return code |  |
+|`respmsg`    |String(128)| Information description|  |
+|`resperr`     |String(128)| Description error |  |
+|`cardcd`      |String| Card number |  |
+|`txcurrcd`      |String| Currency  | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies
 
 ```plaintext
 
@@ -169,29 +195,3 @@ Request Body:
   "orig_syssn": 20190722000300020081074842
 }
 ```
-
-| Parameter name | Parameter code | Mandatory | Parameter type | Description |
-|:----    |:---|:----- |-----   |----   |
-|Merchant ID    | `mchid`  | No | String  | The unique merchant ID is created by QF Pay during the merchant onboarding process. |
-|QF Pay transaction number | `syssn`  | Yes | String   |  Fund authorization number  |
-|External transaction number    | `out_trade_no` | Yes | String    |Developer platform transaction number |
-|Transaction amount    | `txamt`  | Yes | int     |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen funds|
-|Transaction request time    | `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh&#58;mm:ss|
-| Device ID   | `udid`   | No | String         |Must be unique|
-| Time zone | `txzone`    | No | String        |Used to record the local order time. The default is Beijing time GMT+8 (+0800)|
-| Redirect URL   | `return_url`   | No | String        | Redirect to address after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters. |
-
-### Response Parameters
-
-| Parameter code | Parameter type | Parameter name | Description |
-|:----    |:---|:----- |-----   |
-|`syssn` |   String(40) | QF Pay Transaction number | This number is being used when freezing funds, detucting money from the frozen amount as well as unfreezing funds. |
-|`orig_syssn`    |String(40)| External transaction number | Developer platform transaction number |
-|`txdtm`     | String(20) | Transaction request time | Format: YYYY-MM-DD hh&#58;mm:ss  |
-|`txamt`    |Int(11)| Transaction amount | |
-|`sysdtm`     |String(20)| System transaction time |Format: YYYY-MM-DD hh&#58;mm:ss |
-|`respcd`    |String(4)| Return code |  |
-|`respmsg`    |String(128)| Information description|  |
-|`resperr`     |String(128)| Description error |  |
-|`cardcd`      |String| Card number |  |
-|`txcurrcd`      |String| Currency  | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |

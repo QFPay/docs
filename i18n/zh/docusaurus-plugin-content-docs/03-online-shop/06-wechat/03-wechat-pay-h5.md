@@ -2,15 +2,15 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# WeChat Pay H5 (in mobile browser)
+# 微信H5支付（第三方浏览器）
 
 <Link href="/img/wechat-h5.png" target="_blank">![WeChat H5 process-flow](@site/static/img/wechat-h5.png)</Link>
 
-### HTTP Request
+### HTTP请求
 
 `POST ../trade/v1/payment` `PayType: 800212`
 
-### Request Parameters
+### 请求参数
 
 |Parameter name|  Parameter code | Mandatory| Parameter type | Description |
 |:----    |:---|:----- |-----   |-----   |
@@ -40,9 +40,7 @@ extend_info:
 |||`wap_name`|Yes|String|mobile website name|
 |`spbill_create_ip`|||Yes|String|IP address of user|
 
-
-
-### Response Parameters
+### 响应参数
 
 |Parameter code| Secondary parameter code| Parameter Type| Parameter name|Description|
 |:----    |:---|:----- |-----   |----   |

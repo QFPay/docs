@@ -1,8 +1,8 @@
 {
-    "label": "Alipay",
+    "label": "支付宝",
     "position": 1,
     "link":{
         "type": "generated-index",
-        "description":"Alipay related documents"
+        "description":"支付宝支付相关文档"
     }
 }

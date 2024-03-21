@@ -1,8 +1,8 @@
 {
-    "label": "WeChat",
+    "label": "微信",
     "position": 2,
     "link":{
         "type": "generated-index",
-        "description":"WeChat related documents"
+        "description":"微信支付相关文档"
     }
 }

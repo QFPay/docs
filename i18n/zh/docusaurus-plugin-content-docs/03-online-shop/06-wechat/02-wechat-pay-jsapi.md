@@ -2,7 +2,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# WeChat Pay JSAPI (in wechat browser)
+# 微信JSAPI支付(微信浏览器)
 
 <Link href="/img/wechat_jsapi_process.jpg" target="_blank">![WeChat JSAPI process-flow](@site/static/img/wechat_jsapi_process.jpg)</Link>
 
@@ -10,7 +10,7 @@ import Link from '@docusaurus/Link';
 Official account payments must be initiated from the WeChat in-app browser. They cannot be initiated from another browser, such as Chrome or Safari.
 :::
 
-**JSAPI Payment Types**
+**JSAPI 支付类型**
 
 Note: Merchants in Canada, please refer to [this](../alipay/alipay-online-payments#alipay-online-payments) section for payment request and response parameters with `pay_type` 800207. <br/>
 
@@ -18,7 +18,7 @@ There are two different methods how JSAPI payments can be implemented.
 
 <br/>
 
-**1. JSAPI with Real Name Authenticated Official Accounts**
+**1. 拥有实名认证的公众号JSAPI支付**
 
 For this kind of integration, merchants shall register their own official account with WeChat and we will bind the official account to the merchant's QF Pay payment account. In this case merchants can create and publish their own content, access customer information and collect their own followers. When choosing this implementation method, merchants have to acquire the `oauth_code`, user `openid` and trigger WeChat Pay via the <Link href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_1">official WeChat platform</Link>. Merchants only need to refer to the QF Pay [transaction enquiry API endpoint](../../common-api/transaction-enquiry).
 
@@ -30,11 +30,11 @@ For this kind of integration, merchants shall register their own official accoun
 
 <br/>
 
-**2. JSAPI without a Real Name Registered Official Account**
+**2. 未拥有实名认证的公众号JSAPI支付**
 
 For this kind of payment, merchants can build upon QF Pay's official account. This integration is only applicable to merchants who are using the indirect settlement option (i.e. settlement is provided by QFPay). For this implementation, merchants shall use QFPay's API to get the `oauth_code`, user `openid` and trigger WeChat Pay as described below.
 
-## GET oauth_code
+## 获取微信oauth_code
 
 ```plaintext
 GET WeChat oauth_code request:
@@ -90,13 +90,13 @@ def get_out_code():
 }
 ```
 
-### HTTP Request
+### HTTP请求
 
 `GET ../tool/v1/get_weixin_oauth_code`
 
 Both the `app_code` and `sign` have to be submitted as parameters instead of in the http header. The URL request has to be send in the WeChat environment. Everytime a payment is initiated the WeChat `oauth_code` and `openid` have to be obtained again.
 
-### Request Parameters
+### 请求参数
 
 |Parameter name| Parameter code | Mandatory | Parameter type | Description |
 |:----    |:---|:----- |-----   |-----   |
@@ -105,7 +105,7 @@ Both the `app_code` and `sign` have to be submitted as parameters instead of in 
 |Merchant ID | `mchid` | No | String(16) | The `mchid` is a unique identification for every merchant assigned by QFPay  |
 | Signature| `sign`  | Yes | String | Signature obtained according to the unified framework |
 
-## GET openid
+## 获取微信openid
 
 ```plaintext
 
@@ -146,26 +146,24 @@ def get_open_id(data):
 :::note Everytime the payment interface is called a new `oauth_code` and `openid` must be obtained. In order to request the `openid` the `X-QF-APPCODE` and `X-QF-SIGN` have to be submitted in the http header.
 :::
 
-### HTTP Request
+### HTTP请求
 
 `GET ../tool/v1/get_weixin_openid`
 
-### Request Parameters
+### 请求参数
 
 |Parameter code|Secondary parameter code | Mandatory| Parameter type | Description |
 |:-----  |:-----|----- |----- |----- |
 |WeChat oauth_code|  `code` |Yes  | String | The code is returned by the [GET oauth_code request](#get-oauth_code). It is unique and can only be used once. |
 |Merchant ID|  `mchid`  |No  | String(16) | The `mchid` is a unique identification for every merchant assigned by QFPay |
 
-
-### Response Parameters
+### 响应参数
 
 |Parameter code|Secondary parameter code | Parameter type |Parameter name | Description |
 |:-----  |:-----|----- |----- |----- |
 |`openid`|   | String(64)  | WeChat openid | Every WeChat user is assigned a unique openid |
 
-
-## POST Payments 
+## 微信申请支付
 
 ```plaintext
 For code instructions select Python with the tabs above.
@@ -235,11 +233,11 @@ if __name__ == '__main__':
 
 Optionally merchants can activate real-name authentication with WeChat. Currently real-name identification is only available for Mainland Chinese citizens and include a person's real name and national ID card number. In case identification is provided the payer's wallet information like a connected bank card must be identical with the data provided by merchants. If customers did not yet bind their WeChat account to a bank card the payment will go through regardless.
 
-### HTTP Request
+### HTTP 请求
 
 `POST ../trade/v1/payment` `PayType: 800207`
 
-### Request Parameters
+### 请求参数
 
 |Parameter name|  Parameter code | Mandatory| Parameter type | Description |
 |:----    |:---|:----- |-----   |-----   |
@@ -248,7 +246,7 @@ Optionally merchants can activate real-name authentication with WeChat. Currentl
 |Designated payment method    |`limit_pay`|No|String   |Used to limit credit card transactions   |
 |Extended Customer Info    |`extend_info`|No|Object   | Real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'  |
 
-### Response Parameters
+### 响应参数
 
 |Parameter code| Secondary parameter code | Parameter type | Parameter name | Description |
 |:----    |:---|:----- |-----   |-----   |
@@ -261,16 +259,16 @@ Optionally merchants can activate real-name authentication with WeChat. Currentl
 |— |Public response parameters    |— |—   | —|
 |`txcurrcd`  | |  String(3) |  | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
 
-## GET WeChat Pay Data
+## 调用微信支付模块
 
 :::note Directly submit the related parameters to the interface, there is no need to define `X-QF-APPCODE` or `X-QF-SIGN` in the HTTP header during this step.
 :::
 
-### HTTP Request
+### HTTP 请求
 
 `GET https://o2.qfpay.com/q/direct`
 
-### Request Parameters
+### 请求参数
 
 | Parameter code | Mandatory | Parameter type | Description |
 |----------------|-----------|----------------|-------------|

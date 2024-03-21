@@ -1,5 +1,5 @@
 {
-    "label": "Common API",
+    "label": "公共接口",
     "position": 3,
     "link":{
         "type": "generated-index",

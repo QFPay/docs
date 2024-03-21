@@ -2,11 +2,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# WeChat in-APP Payments
+# 微信in-APP支付
 
 <Link href="/img/wechat-in-app.png" target="_blank">![WeChat APP Payment process-flow](@site/static/img/wechat-in-app.png)</Link>
 
-### HTTP Request
+### HTTP 请求
 
 `POST ../trade/v1/payment`
 `PayType: 800210`
@@ -17,7 +17,7 @@ Optionally merchants can activate real-name authentication with WeChat. Currentl
 
 To download Wechat SDK please refer to this [link](https://developers.weixin.qq.com/doc/oplatform/Downloads/iOS_Resource.html).
 
-### Request Parameters
+### 请求参数
 
 ```plaintext
 
@@ -73,7 +73,7 @@ Request Body:
 | Redirect URL   | `return_url`   | No | String        | Redirect to address after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters.|
 |Extended Customer Info    | `extend_info`  | No | Object  | Real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
 
-### Response Parameters
+### 响应参数
 
 | Parameter code | Parameter type | Parameter name | Description |
 |:----    |:---|:----- |-----   |

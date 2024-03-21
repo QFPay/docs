@@ -2,7 +2,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# Alipay Online Payments
+# 支付宝线上上扫码支付
 
 ```plaintext
 
@@ -266,10 +266,10 @@ ob_end_flush();
 
 :::noteAlipay Hong Kong does not support the native Alipay Checkout page. Instead developers are required to request the QR code and embed it using `iframe`:::
 
-### Web/WAP Payment
+### Web/WAP支付
 Customers make purchases on a merchant website with Alipay. The user scans the displayed QR code to pay, confimrs the total amount and makes payment. Finally the customer can be redirected to a selected page on the merchant's website using the `return_url` parameter. Alipay deducts the payment amount from the consumer's Alipay wallet in real-time in CNY and QFPay settles the payment amount to merchants in local currency.  
 
-### HTTP Request
+### HTTP请求
 
 `POST ../trade/v1/payment` <br/>
 `PayType: 801101` `Overseas Merchants Web` <br/>
@@ -277,7 +277,7 @@ Customers make purchases on a merchant website with Alipay. The user scans the d
 `PayType: 801501` `Hong Kong Merchants Web` <br/>
 `PayType: 801512` `Hong Kong Merchants WAP` <br/>
 
-### Request Parameters
+### 请求参数
 
 Parameter name | Parameter code | Mandatory | Type | Description
 --------- | -------- | --------- | ------- | ------- 
@@ -293,7 +293,7 @@ Time zone | `txzone` | No | String(5) | Transaction Time zone: Record of the tra
 Device ID | `udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal. 
 Redirect URL | `return_url` | No | String(512) | Address for user redirect after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters.
 
-### Response Parameters
+### 响应参数
 
 Parameter name | Parameter code | Type | Description 
 --------- | -------- | --------- | ------- 

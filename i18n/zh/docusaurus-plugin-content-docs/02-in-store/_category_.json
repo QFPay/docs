@@ -1,5 +1,5 @@
 {
-    "label": "In-Store",
+    "label": "线下支付",
     "position": 1,
     "link":{
         "type": "generated-index",

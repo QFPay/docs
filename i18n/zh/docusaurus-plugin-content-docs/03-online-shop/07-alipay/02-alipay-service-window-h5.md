@@ -2,7 +2,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# Alipay Service Window H5
+# 支付宝服务窗H5跨境支付
 
 ```plaintext
 
@@ -266,10 +266,10 @@ ob_end_flush();
 
 <Link to="/img/alipay_h5_process.jpg" target="_blank">![Alipay H5 process-flow](@site/static/img/alipay_h5_process.jpg)</Link>
 
-### Alipay Service Window H5 Payment (WAP)
+### 支付宝服务窗H5跨境支付(WAP)
 Alipay Service Window H5 Payment enables merchants to call the Alipay payment module by using the JSAPI interface to collect payments. The customer checks out on the merchant's mobile website in Alipay, confirms the total amount and makes the payment.
 
-### HTTP Request
+### HTTP请求
 
 `POST ../trade/v1/payment` `PayType: 800107`
 
@@ -278,7 +278,7 @@ For more details about how to acquire the user id please refer to the [official 
 
 **Step 2:** Request Payment
 
-### Payment Parameters
+### 请求支付参数
 
 |Parameter name | Parameter code | Mandatory | Parameter type | Description |
 |:----    |:---|:----- |-----   |----   |
@@ -287,8 +287,7 @@ For more details about how to acquire the user id please refer to the [official 
 |Redirect URL | `return_url` | No | String(512) | Address for user redirect after successful payment |
 |Designated payment method |`limit_pay`  |No |String   |Only applicable for mainland China   |
 
-### Response Parameters
-
+### 响应参数
 |Parameter name | Secondary parameter code | Parameter type | Parameter name | Description |
 |:----    |:---|:----- |-----   |----   |
 |`pay_params`|`tradeNO`   |String  | Transaction number| Provide the transaction number in the call function |

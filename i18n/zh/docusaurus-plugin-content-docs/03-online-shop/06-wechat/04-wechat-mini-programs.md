@@ -2,10 +2,10 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# WeChat Mini Programs
+# 微信小程序支付
 <Link href="https://sdk.qfapi.com/images/wechat_mp_process.jpg" target="_blank">![WeChat MiniProgram process-flow](@site/static/img/wechat_mp_process.jpg)</Link>
 
-### HTTP Request
+### HTTP请求
 
 `POST ../trade/v1/payment` `PayType: 800213`
 
@@ -86,7 +86,7 @@ qfPayOpenAPI: function () {
    },
 ```
 
-### Request Parameters 
+### 请求参数
 
 |Parameter name| Parameter code| Mandatory| Parameter type|Description|
 |:----    |:---|:----- |-----   |----   |
@@ -96,7 +96,7 @@ Order expiration time | `expired_time` | No | String(3)  | QRC expiration time i
 |Designated payment method   |`limit_pay`|No |String    |The parameter value is specified as `no_credit`, and credit card payment is prohibited. This setting is only valid for mainland China.  |
 |Extended Customer Info | `extend_info` | No | Object | Real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'|
 
-### Response Parameters
+### 响应参数
 
 |Parameter code| Secondary parameter code| Parameter Type| Parameter name|Description|
 |:----    |:---|:----- |-----   |----   |
@@ -108,7 +108,6 @@ Order expiration time | `expired_time` | No | String(3)  | QRC expiration time i
 |—    |`paySign`  |String(64) |Signature  |  |
 |Public response parameters    |—  |— |—  | — |
 |`txcurrcd`    |  | |Currency   | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
-
 
 **Step 4:** Evoke the payment module
 
@@ -135,7 +134,7 @@ weChatPayment: function(res) {
 Obtain the `pay_params` parameter, and then provide payment details accordingly. For more details, please refer to the
 [Wechat documentation](https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&index=5).
 
-## WeChat Mini Program Boilerplate
+## 微信小程序样板
 
 To get started quickly, download the [QF Pay WeChat Mini Program Boilerplate](@site/static/files/qfpay_mini_program_payments_boilerplate.zip) and get access to the MD5 hash algorithm.
 
