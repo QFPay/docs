@@ -2,17 +2,17 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# Customs Declaration
+# 报关接口
 
 Customs declaration API auto-sends the WeChat/Alipay payment data to the customs to simplify the clearance process and saves time for online cross-border stores.
 
-## Push Customs Declaration
+## 推送报关
 
-### HTTP Request
+### HTTP请求
 
 `POST ../custom/v1/declare`
 
-### Request Parameters
+### 请求参数
 
 | Parameter code| Mandatory| Parameter type|Description|
 |:---|:----- |-----   |----   |
@@ -34,7 +34,7 @@ The following fields should be passed in case splitting or modifying order: <br/
 |`product_fee`|C|String(8)|Product price (in 0.01 CNY). It is required if there is a split order. Example：888|
 |`transport_fee`|C|String(8)|Logistics fee (in 0.01 CNY). It is required if there is a split order. Example：888|
 
-### Response Parameters
+### 响应参数
 
 | Parameter code| Mandatory| Parameter type|Description|
 |:---|:----- |-----   |----   |
@@ -45,15 +45,15 @@ The following fields should be passed in case splitting or modifying order: <br/
 |`verify_department`|||Verification organization|
 |`verify_department_trade_id`|||Transaction number of verification organization|
 
-## Query Customs Declaration
+## 查询报关
 
 Merchants query declaration status by QFPay transaction number.
 
-### HTTP Request
+### HTTP请求
 
 `POST/GET ../custom/v1/query`
 
-### Request Parameters
+### 请求参数
 
 | Parameter code| Mandatory| Parameter type|Description|
 |:---|:----- |-----   |----   |
@@ -62,7 +62,7 @@ Merchants query declaration status by QFPay transaction number.
 |`syssn`|Y|String(32)|QFPay transaction number|
 |`sub_order_no`|N|String(40)|Sub order number. It is required if there is a split order.|
 
-### Response Parameters
+### 响应参数
 
 | Parameter code| Mandatory| Parameter type|Description|
 |:---|:----- |-----   |----   |
@@ -72,15 +72,15 @@ Merchants query declaration status by QFPay transaction number.
 |`respmsg`||String(128)|Other message information|
 |`data`|||Customs declaration details \[\{"resperr" : "", "errmsg" : null, "sub_order_no" : "15752730835729139712", "verify_department" : "OTHERS", "verify_department_trade_id" : "4200000459201911265585026208"\}\]|
 
-## Repush Customs Declaration
+## 重新报关
 
 If additional order information has been submitted to the customs but is lost in the electronic port, the customs declaration re-push API can be used to push the information to the customs again.
 
-### HTTP Request
+### HTTP请求
 
 `POST ../custom/v1/redeclare`
 
-### Request Parameters
+### 请求参数
 | Parameter code| Mandatory| Parameter type|Description|
 |:---|:----- |-----   |----   |
 |`trade_type`|Y|String(8)|weixin or alipay|

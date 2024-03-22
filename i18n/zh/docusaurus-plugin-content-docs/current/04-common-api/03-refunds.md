@@ -1,16 +1,16 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Refunds
+# 退款
 
 :::tip
-Only transactions with the return code 0000 (transaction successful) can be refunded.
+只有返回码为0000(交易成功)的交易可以被退款
 :::
 
-## API Endpoint for Refunds
+## 退款接口端点
 
 ```plaintext
-Request Header:
+请求头部:
 
 {
   Content-Type: application/x-www-form-urlencoded;
@@ -18,7 +18,7 @@ Request Header:
   X-QF-SIGN: 6FB43AC29175B4602FF95F8332028F19
 }
 
-Request Body:
+请求正文:
 
 {
   txamt=10&syssn=20191227000200020061752831&out_trade_no=12345678&txdtm=2019-12-27 10:39:39&key=0E32A59A8B454940A2FF39**********&mchid=ZaMVg*****
@@ -275,15 +275,13 @@ ob_end_flush();
 }
 ```
 
-### HTTP Request
+### HTTP请求
 
 `POST ../trade/v1/refund`
 
 Merchants can use the refund interface to refund transactions. The merchant account must have a sufficient transaction amount on the same trading day in order to refund transactions. The maximum refund amount for a transaction must not exceed to original payment amount. Unless otherwise specified, once a refund request is submitted and accepted, it is not reversible. The refund capability and the maximum time period for refund varies across payment channels. Please contact your QFPay support representative for more information.
 
-
-
-### Request Parameters
+### 请求参数
 
 |Parameter name|Parameter code|Mandatory|Parameter type|Description|
 |----    |---|----- |-----   |-----   |
@@ -295,9 +293,7 @@ Merchants can use the refund interface to refund transactions. The merchant acco
 |Transaction time | ` txzone `   |No |String(5)  |Used to record the local transaction time. The default is Beijing time UTC+8 (+0800)|
 |Device ID | ` udid `    |No |String(40)  |Unique transaction device ID|
 
-
-
-### Response Parameters
+### 响应参数
 
 |Parameter name|Parameter code|Parameter type|Description|
 |-----    |----|------ |-----   |

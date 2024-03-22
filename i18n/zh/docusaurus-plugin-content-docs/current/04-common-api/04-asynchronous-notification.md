@@ -1,8 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Asynchronous Notifications
-
+# 异步通知
 
 :::note
  To configure your notification URL of choice, please send the address as well as merchant and store information via email to technical.support@qfpay.com
@@ -10,12 +9,11 @@ import TabItem from '@theme/TabItem';
 
 Notifications are available for payments **"notify_type": "payment"** and refunds **"notify_type": "refund"**. The request parameters from Asynchronous Notifications may include additional parameters in future versions. Developers must ensure that their programs can support new parameters. In addition, developers can get the latest development documentation from this website. 
 
-
-### Description
+### 描述
 
 Upon successful payment and refund, QFPay API will send an asynchronous notification message to the URL address defined by the merchant. Merchant can develop an end-point to receive this notification message and update the status of a transaction accordingly. We recommend merchants to use the query function of the API in conjunction with the asynchronous notification end point to retireve the payment status. Asynchronous notifications only work with ports 80 and 443 due to security requirements.
 
-## Asynchronous Notification Rules
+## 异步通知规则
 
 1) The merchant will only be notified after the payment or refund transaction has been successful.
 
@@ -29,8 +27,7 @@ Upon successful payment and refund, QFPay API will send an asynchronous notifica
 
 6) Method: POST content-type: `application/json`
 
-## Signature Verification
-
+## 签名验证
 
 ```plaintext
 For code instructions select Python with the tabs above.
@@ -75,8 +72,7 @@ The signature generation method for notifications is slightly different from oth
 
 **Step 4:** Compare the MD5 result with the signature from `X-QF-SIGN`, return an HTTP response with status code 200 OK and SUCCESS in the response body if the verification is successful
 
-
-## Response Parameters of Asynchronous Notifications
+## 异步通知的响应参数
 
 > Asynchronous Notifications POST data in JSON form structured like this:
 
@@ -107,8 +103,8 @@ The signature generation method for notifications is slightly different from oth
 ```
 
 Parameter | Send always | Type | Description  
---------- | ------- | --------- | ------- 
-`status` | Yes | String | 1 = payment success 
+--------- | ------- | --------- | -------
+`status` | Yes | String | 1 = payment success
 `pay_type` | Yes | String | Please refer to the section [Payment Codes](../preparation/paycode#payment-codes) for a complete list of payment types.
 `sysdtm` | Yes | String | Transaction creation time in the system. This parameter value is used as the cut-off time for settlements.
 `paydtm` | Yes | String | Payment time of the transaction. 

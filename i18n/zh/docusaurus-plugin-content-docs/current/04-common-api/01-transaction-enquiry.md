@@ -8,9 +8,9 @@ test
 If the `mchid` is provided, it is mandatory to submit the `mchid` when calling the API (unless otherwise specified). On the contrary, if `mchid` is not provided, merchants shall not pass the `mchid` field in the API request.
 :::
 
-## API Endpoint for Transaction Enquiry
+## 交易查询接口端点
 
-### HTTP Request
+### HTTP请求
 
 `POST ../trade/v1/query`
 
@@ -287,7 +287,6 @@ ob_end_flush();
 }
 ```
 
-
 After making a payment, refund or cancellation request, the merchant can use the query interface to obtain the transaction status.
 
 The merchant can use the query interface to enquire transaction status of one or multiple transactions. In case the interface does not return `syssn` in time, use `out_trade_no` as a condition to query the transaction status.
@@ -296,8 +295,7 @@ If merchants would like to query transactions in a month, they can provide `star
 
 When the query transaction is a refund then an additional parameter `origssn` will be returned. The `origssn` shows the QFPay transaction number of the original transaction that has been refunded.   
 
-
-### Request Parameters
+### 请求参数
 
 |Parameter name| Parameter code|Mandatory|Parameter type|Description|
 |----    |---|----- |-----   |-----   |
@@ -312,9 +310,7 @@ When the query transaction is a refund then an additional parameter `origssn` wi
 |Number of pages | ` page `   |No |  Int(8) | Default value is 1   |
 |Number of items displayed per page | ` page_size ` |No |  Int(8) | By default 10 transactions will be displayed. The maximum `page_size` value is 100  |
 
-
-### Response Parameters
-
+### 响应参数
 
 |Parameter name|Parameter code|Parameter type|Description|
 |----    |------|------  |------   |
@@ -343,23 +339,18 @@ When the query transaction is a refund then an additional parameter `origssn` wi
 | Net refund amount | `cash_refund_fee` | String | Actual refund amount |
 | Refund currency | `cash_refund_fee_type` | String | Actual refund currency e.g. CNY |
 
-
-
-## Account Statement 
+## 账户报表
 
 The clearing statement for a particular payment channel is downloaded regularly. Additional requests can only be made in the production environment. The system response is in form of a compressed zip file. Data is based on the selected payment channel and contains all merchants therefore the `mchid` cannot be passed in as a request parameter.
 
+## 账户报表接口端点
 
-## API Endpoint for Account Statement
-
-### HTTP Request
+### HTTP请求
 
 `GET ../download/v1/trade_bill`
 
-### Request Parameter
+### 请求参数
 
 |Request code | Mandatory | Parameter type | Description
 |----    |---|----- |-----   |
 | `trade_date` | Yes | String(10) | Get a specific account statement for the selected date. Example: 2017-10-17
-
-

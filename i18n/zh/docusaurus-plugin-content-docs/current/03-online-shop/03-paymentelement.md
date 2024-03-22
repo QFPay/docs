@@ -38,6 +38,7 @@
           return_url: 'https://xxx.xxx.com'
         })
         ```
+
     2. 完整支付功能，包括visa/master card-form、visa/master pre-auth、支付宝香港、支付宝大陆、微信、银联云闪付、Payme、转数快等。
         ```js
         // 初始化 qfpay 对象
@@ -107,6 +108,7 @@
           alert('支付失败' + JSON.stringify(res))
        }
         ```
+
 2. 创建token模式
     1. visa/master card-form支付
     ```js

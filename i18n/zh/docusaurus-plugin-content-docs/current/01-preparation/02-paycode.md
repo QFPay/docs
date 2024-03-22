@@ -11,34 +11,34 @@ import TabItem from '@theme/TabItem';
 
 编码 | 描述
 --------- | -------
-800008 | 微信、支付宝﹑银联云閃付反扫支付
-800101 | 支付宝跨境線下扫码支付
+800008 | 微信、支付宝﹑银联云闪付反扫支付
+800101 | 支付宝跨境线下扫码支付
 800108 | 支付宝跨境反扫支付
-801101 | 支付宝線上扫码支付 (海外商戶) **
-801107 | 支付宝線上WAP支付 (海外商戶)
+801101 | 支付宝线上上扫码支付 (海外商戶) **
+801107 | 支付宝线上上WAP支付 (海外商戶)
 801110 | 支付宝In-App支付 (海外商戶)
 800107 | 支付宝服务窗H5跨境支付
-801501 | 支付宝線上扫码支付 (香港商戶)
+801501 | 支付宝线上扫码支付 (香港商戶)
 801510 | 支付宝In-App支付 (香港商戶)
-801512 | 支付宝線上WAP支付 (香港商戶)
-801514 | 支付宝線上WEB支付 (香港商戶)
+801512 | 支付宝线上WAP支付 (香港商戶)
+801514 | 支付宝线上WEB支付 (香港商戶)
 800201 | 微信扫码支付
 800208 | 微信反扫支付
-800207 | 微信JSAPI支付 (微信公众號支付)
+800207 | 微信JSAPI支付 (微信公众号支付)
 800212 | 微信移动端浏览器H5跨境支付
 800210 | 微信 In-App 支付
 800213 | 微信小程序支付
-801008 | 微信香港反扫支付 (適用於向微信香港申請的商戶)
-801010 | 微信香港In-App支付 (適用於向微信香港申請的商戶)
+801008 | 微信香港反扫支付 (适用于向微信香港申请的商戶)
+801010 | 微信香港In-App支付 (适用于向微信香港申请的商戶)
 805801 | PayMe 扫码支付
 805808 | PayMe 反扫支付
-805814 | PayMe 線上WEB支付 (香港商戶)
-805812 | PayMe 線上WAP支付 (香港商戶)
+805814 | PayMe 线上WEB支付 (香港商戶)
+805812 | PayMe 线上WAP支付 (香港商戶)
 800701 | 银联云闪付扫码支付
 800708 | 银联云闪付反扫支付
 800712 | 银联云闪付WAP支付 (香港商戶)
 800714 | 银联云闪付 PC-Web Payment (香港商户)
-802001 | 香港轉數快扫码支付***
+802001 | 香港转数快扫码支付***
 803701 | 八达通动态二维码支付(香港商户)
 802801 | Visa / Mastercard 卡线上支付
 802808 | Visa / Mastercard 卡线下刷卡支付
@@ -68,7 +68,7 @@ import TabItem from '@theme/TabItem';
 
 ## 货币种类
 
-以下列出的货币是目前我们的支付网络支持的货币种类.请联系 **technical.support@qfpay.com** 来验证您的接口证书和选中的`pay_type`是否支持您期望的货币. 
+以下列出的货币是目前我们的支付网络支持的货币种类.请联系 **technical.support@qfpay.com** 来验证您的接口证书和选中的`pay_type`是否支持您期望的货币.
 
 编码 | 描述
 --------- | -------
@@ -344,7 +344,7 @@ ob_end_flush();
 </TabItem>
 </Tabs>
 
-> The above command returns JSON structured like this:
+> 上述指令会返回结构如下的JSON代码:
 
 ```json
 {
@@ -366,34 +366,34 @@ ob_end_flush();
 }
 ```
 
-### HTTP 请求
+### HTTP请求
 
 `POST ../trade/v1/payment`
 
-Listed below are the most common parameters for the payment endpoint. Please refer to the payment scenario applicable to you for additional parameters.
+如下列出的是支付接口端点最常用的参数.请根据实际的支付场景增加额外的参数.
 
 ### 公共请求参数列表
 
 参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述
 --------- | -------- | --------- | ------- | ------- 
 订单支付金额 | `txamt` | 是 | Int(11) | 以当前货币最小计量单位计算，只允许整数类型 (i.e. 100 = $1)
-币种 | `txcurrcd` | 是 | String(3) | 交易币种, 请查看[币种](#currencies)表以获取完整的可选用的币种
-支付类型 | `pay_type` | 是 | String(6) | 请查看[支付类型](#payment-codes)表以获取完整的可选用的支付类型
+币种 | `txcurrcd` | 是 | String(3) | 交易币种, 请查看[币种](#货币种类)表以获取完整的可选用的币种
+支付类型 | `pay_type` | 是 | String(6) | 请查看[支付类型](#支付类型表)表以获取完整的可选用的支付类型
 外部订单号 | `out_trade_no` | 是 | String(128)| 开发者自定义订单号，在同一商户账户中的每笔交易和退款请求该参数值唯一
 请求交易时间 | `txdtm` | 是 | String(20) | 格式：yyyy-MM-dd HH:mm:ss
-Authorization Code | `auth_code` | 是<br/> (CPM only) | String(128) | Specifies the authorization code for scanning a barcode/QR Code. The `auth_code` returned is unique in each authorization. Each `auth_code` can be used only once and will automatically expire in one day. For testing CPM with 支付宝 and WeChat Pay the `auth_code` can be extracted with any QRC reader or manually found in the consumer wallet below the barcode.
-交易到期时间 | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - 支付宝 scan code <br/>801512 - 支付宝 Hong Kong WAP payment<br/>801501 - 支付宝 Hong Kong scan code<br/>801107 - 支付宝 overseas WAP payment<br/>801101 - 支付宝 overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - 支付宝 Hong Kong APP
-商品名称标识 | `goods_name` | 否| String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
+授权码 | `auth_code` | 是<br/> (仅限付款码支付) | String(128) | 指定扫描条码/二维码的授权码。 返回的`auth_code`在每个授权中都是唯一的, 且每个“auth_code”只能使用一次，并会在一天后自动过期. 为了使用支付宝和微信支付测试付款码支付，可以使用任何可扫描二维码设备提取`auth_code`，或者在条形码下方的消费者钱包中手动找到`auth_code`.
+交易到期时间 | `expired_time` | No<br/> (仅限扫码支付) | String(3)  | 以分钟为计时的二维码过期时间,默认的过期时间是30分钟. 该参数可以被手动设置为最小5分钟,最大120分钟<br/> 该参数可用于: <br/>800201 - 微信扫码支付<br/>800101 - 支付宝跨境线下扫码支付 <br/>801512 - 支付宝线上WAP支付 (香港商戶)<br/>801501 - 支付宝线上扫码支付 (香港商戶)<br/>801107 - 支付宝线上上WAP支付 (海外商戶)<br/>801101 - 支付宝线上上扫码支付 (海外商戶)<br/>微信香港In-App支付<br/>801510 - 支付宝In-App支付 (香港商戶)
+商品名称标识 | `goods_name` | 否| String(64) | 商品名称 / 标识: 不能超过 20 个字母数字或包含特殊字符。 APP支付不能为空。 如果参数是汉字，则需要使用**UTF-8**编码。
 子商户号 | `mchid` | 否| String(16) | 标识子商户身份，由钱方分配（渠道系统后台查看对应商户(非业务员)子商户号，被视为对应商户的交易）
 时区 | `txzone` | 否| String(5) | 用于记录本地下单时间，默认为北京时间+0800
-设备唯一id | `udid` | 否| String(40) |  Unique transaction device ID. Is displayed on the merchant portal. 
+设备唯一id | `udid` | 否| String(40) |  唯一的设备ID,显示在商户管理后台上.
 异步通知地址 | `notify_url` | 否| String(256) |异步通知地址
 
 ### 公共响应参数列表
 
 参数名称 | 参数编码 | 参数类型 | 描述
 --------- | -------- | --------- | -------
-支付类型 | `pay_type` | String(6) | 请参阅 [Payment Codes](#payment-codes) 获取完整的支付类型 
+支付类型 | `pay_type` | String(6) | 请参阅 [支付类型表](#支付类型表) 获取完整的支付类型
 系统交易时间 | `sysdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss <br/> 这个参数值被用作结算截止时间| 
 请求交易时间 | `txdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss  |
 信息描述 | `resperr` | String(128) | 
@@ -402,7 +402,7 @@ Authorization Code | `auth_code` | 是<br/> (CPM only) | String(128) | Specifies
 外部订单号 | `out_trade_no` | String(128) | 外部订单号  
 钱方订单号 | `syssn` | String(40) | 
 钱包/渠道交易码| `chnlsn` | String | 
-返回码 | `respcd` | String(4) | 0000 = 请求成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [Transaction Status Codes](#transaction-status-codes) 获得完整返回类型列表
+返回码 | `respcd` | String(4) | 0000 = 请求成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](#支付状态码) 获得完整返回类型列表
 
 ## 支付状态码
 

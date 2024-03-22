@@ -1,4 +1,4 @@
-# Transaction Notes
+# 订单备注
 
 :::note
 This Endpoint is only available to merchants who do not pass in the `mchid`
@@ -6,7 +6,7 @@ This Endpoint is only available to merchants who do not pass in the `mchid`
 
 Merchant can use this interface to add remarks to a transaction. This remarks value will be displayed in the Merchant Management System (MMS) and on the transaction report.
 
-## API Endpoint for Transaction Notes
+## 订单备注接口端点
 
 ```plaintext
 Request Header:
@@ -38,11 +38,11 @@ Request Body:
 }
 ```
 
-### HTTP Request
+### HTTP请求
 
 `POST ../trade/v1/add_note`
 
-### Request Parameters
+### 请求参数
 
 |Parameter name|Parameter code|Mandatory|Parameter type|Description|
 |----    |---|----- |-----   |----- |
@@ -50,7 +50,7 @@ Request Body:
 |Transaction number | `syssn` | Yes |String(40) | QFPay transaction number, returned by the system once payment is completed |
 |Remarks| `note`   |Yes   |String(200）   | Remarks value  |
 
-### Response Parameters
+### 响应参数
 
 |Parameter code|Parameter type | Parameter name |Description|
 |----    |---|-----   |-----   |
