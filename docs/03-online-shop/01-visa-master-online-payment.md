@@ -10,11 +10,11 @@ We currently support credit card payments in the [Hong Kong environment](../prep
 
 For credit card online payment integration, merchant can select one the the following integration methods
 
-1. [QFPay Checkout Services]()
-2. [QFPay Element SDK]()
-
+1. [QFPay Checkout Services](./checkout)
+2. [QFPay Element SDK](./paymentelement)
 
 ## Asynchronous Notification
+
 QFPay will also send the asynchronous payment notification for the transaction status update
 
 > Sample notification payload

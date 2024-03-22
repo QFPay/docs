@@ -3,7 +3,6 @@ import TabItem from '@theme/TabItem';
 
 # 交易查询
 
-test
 :::warning
  如果已经被提供 `mchid` , 除特殊情况下在呼叫API时必须提交 `mchid`. 与之相反的是, 如果并未被提供 `mchid`, 商户无需在API请求中传递参数 `mchid`.
 :::

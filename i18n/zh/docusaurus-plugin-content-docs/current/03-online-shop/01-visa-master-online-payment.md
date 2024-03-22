@@ -10,11 +10,11 @@ import Link from '@docusaurus/Link';
 
 对于信用卡在线支付集成，商户可以选择以下集成方式之一
 
-1. [QFPay Checkout Services]()
-2. [QFPay Element SDK]()
-
+1. [QFPay Checkout Services](./checkout)
+2. [QFPay Element SDK](./paymentelement)
 
 ## 异步通知
+
 QFPay也会发送交易状态更新的异步支付通知
 
 > 通知范例
