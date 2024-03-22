@@ -8,7 +8,7 @@ test
 If the `mchid` is provided, it is mandatory to submit the `mchid` when calling the API (unless otherwise specified). On the contrary, if `mchid` is not provided, merchants shall not pass the `mchid` field in the API request.
 :::
 
-## 交易查询接口端点
+## 交易查询API端点
 
 ### HTTP请求
 
@@ -343,7 +343,7 @@ When the query transaction is a refund then an additional parameter `origssn` wi
 
 The clearing statement for a particular payment channel is downloaded regularly. Additional requests can only be made in the production environment. The system response is in form of a compressed zip file. Data is based on the selected payment channel and contains all merchants therefore the `mchid` cannot be passed in as a request parameter.
 
-## 账户报表接口端点
+## 账户报表API端点
 
 ### HTTP请求
 

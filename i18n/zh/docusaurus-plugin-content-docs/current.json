@@ -1,0 +1,42 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.qfpaySidebar.category.Preparation": {
+    "message": "接入准备",
+    "description": "The label for category Preparation in sidebar qfpaySidebar"
+  },
+  "sidebar.qfpaySidebar.category.In-Store": {
+    "message": "线下支付",
+    "description": "The label for category In-Store in sidebar qfpaySidebar"
+  },
+  "sidebar.qfpaySidebar.category.POS API": {
+    "message": "POSAPI",
+    "description": "The label for category POS API in sidebar qfpaySidebar"
+  },
+  "sidebar.qfpaySidebar.category.Online Shop": {
+    "message": "线上支付",
+    "description": "The label for category Online Shop in sidebar qfpaySidebar"
+  },
+  "sidebar.qfpaySidebar.category.Wechat": {
+    "message": "微信",
+    "description": "The label for category Wechat in sidebar qfpaySidebar"
+  },
+  "sidebar.qfpaySidebar.category.Alipay": {
+    "message": "支付宝",
+    "description": "The label for category Alipay in sidebar qfpaySidebar"
+  },
+  "sidebar.qfpaySidebar.category.Common API": {
+    "message": "公共API",
+    "description": "The label for category Common API in sidebar qfpaySidebar"
+  },
+  "sidebar.qfpaySidebar.doc.ECR Integration": {
+    "message": "ECR Integration",
+    "description": "The label for the doc item ECR Integration in sidebar qfpaySidebar, linking to the doc in-store/pos-api/ECR"
+  },
+  "sidebar.qfpaySidebar.doc.App call App": {
+    "message": "App call App",
+    "description": "The label for the doc item App call App in sidebar qfpaySidebar, linking to the doc in-store/pos-api/app-call-app"
+  }
+}

@@ -2,8 +2,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# 线上预授权支付接口
-- [线上预授权支付接口](#线上预授权支付接口)
+# 线上预授权支付API
+- [线上预授权支付API](#线上预授权支付API)
 	- [Common APIs](#common-apis)
 	- [Creating and capturing payments](#creating-and-capturing-payments)
 		- [Step 1: Create Pre-Authorisation Payment](#step-1-create-pre-authorisation-payment)

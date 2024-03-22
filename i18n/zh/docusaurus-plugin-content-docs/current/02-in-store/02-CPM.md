@@ -6,7 +6,7 @@ import Link from '@docusaurus/Link';
 
 <Link href="/img/cpm_process.jpg" target="_blank">![CPM process-flow](@site/static/img/cpm_process.jpg)</Link>
 
-## 付款码支付接口请求
+## 付款码支付API请求
 
 ```plaintext
 Request Header:
