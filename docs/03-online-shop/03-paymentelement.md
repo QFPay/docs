@@ -16,9 +16,8 @@ create your own checkout flows by using QFPay prebuilt UI components
 
 #### Code examples
 1. payment mode
+1.1 credit card form (visa/mastercard)
 ```js
-//1.1 credit card form (visa/mastercard)
-
 // initialize qfpay object
 const qfpay = QFpay.config()
 
@@ -42,8 +41,9 @@ const response = qfpay.confirmPayment({
   return_url: 'https://xxx.xxx.com'
 })
 ```
+1.2 complete payment function including credit card form, Alipay HK, Alipay CN, WechatPay, QuickPass, FPS, Payme etc
 ```js
-//1.2 wallet list (including credit card form, Alipay HK, Alipay CN, WechatPay, QuickPass, FPS, Payme
+
 // initialize qfpay object
 const qfpay = QFpay.config()
 
@@ -62,6 +62,9 @@ payment.walletPay({
 	out_trade_no: intentParams.out_trade_no,
 	txamt:  intentParams.txamt,
 	txcurrcd:  intentParams.txcurrcd,
+	support_pay_type: ['Alipay', 'WeChat', 'UnionPay', 'AlipayHK', 
+					'FPS', 'VisaMasterCardPayment', 'ApplePay', 
+					'VisaMasterCardPreAuth']
 },intentParams.payment_intent);
 // initalize element object and create wallet list
 const  appearance = {
@@ -89,6 +92,7 @@ return_url:  'https://xxx.xxx.com'
 })
 ```
 2. payment token creation mode
+2.1 visa/master card-form
 ```js
 //2.1 credit card form
 // initialize qfpay object
@@ -316,6 +320,7 @@ payment.pay({
  *     out_trade_no: merchant order id, mandatory
  *     txamt: transaction amount, mandatory
  *     txcurrcd: transaction currency, mandatory
+ *     support_pay_type: customize display of activited payment methods, optional, show all activated methods if not pass this parameter, detail parameter values please refer to the folllwoing description
  *     params2, mandatory, string, payment intent value from 
  * extra special parameters in 'params1':
  *         customer_id: params1 optional parameter，QFPay generated customer Id
@@ -326,6 +331,18 @@ payment.pay({
  *         if would like to collect card information for tokenization purpose, then need pass above parameters
  * return: No
  * purpose：set payment parameters
+ */
+/**
+ * params1 support_pay_type parameter value list
+ * 'Alipay'                  // 'Alipay CN',
+ * 'WeChat'                  // 'Wechat',
+ * 'UnionPay'                // 'UnionPay and QuickPass',
+ * 'AlipayHK'                //  'Alipay HK',
+ * 'FPS'                     //  'FPS',
+ * 'VisaMasterCardPayment'   //  'Visa/MasterCard'
+ * 'PayMe'                   //  'PayMe'
+ * 'ApplePay'                //   'ApplePay'
+ * 'VisaMasterCardPreAuth'   //  'Visa/MasterCard Pre-Authorization'
  */
 payment.walletPay({
 	goods_info:  'goods_info',

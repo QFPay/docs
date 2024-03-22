@@ -325,7 +325,7 @@ payment.pay({
  *               out_trade_no: 外部订单号，必填, 
  *               txamt:交易金额，必填,
  *               txcurrcd: 币种， 必填,
- *               support_pay_type: 自定义显示已开通的支付方式, 必填，具体传参见下方说明 
+ *               support_pay_type: 自定义显示已开通的支付方式, 非必填。不填的情况下返回所有已开通支付方式列表，具体传参见下方说明 
  *               out_trade_no，txamt，txcurrcd在第三方获取intent的时候皆有返回
  *      params2, 必填, string, 值为根据商户 code&key 生成的 payment intent 字符串
  * 特殊参数：customer_id: params1中的选填参数，表示消费者在QF系统中的唯一标识
