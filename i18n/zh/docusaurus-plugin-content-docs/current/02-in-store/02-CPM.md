@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 ## 付款码支付API请求
 
 ```plaintext
-Request Header:
+请求头部:
 
 {
   Content-Type: application/x-www-form-urlencoded; 
@@ -20,7 +20,7 @@ Request Header:
   X-QF-SIGN:3b020a6349646684ebeeb0ec2cd3d1fb
 }
 
-Request Body:
+请求本体:
 
 {
   auth_code=13485790*******88557&goods_name=qfpay&mchid=R1zQrTdJnn&out_trade_no=Native201907221520536a25477909&pay_type=800208&txamt=10&txcurrcd=HKD&txdtm=2019-07-22 15:20:54&udid=AA
@@ -288,17 +288,17 @@ ob_end_flush();
 
 `POST ../trade/v1/payment`
 
-The customer generates a dynamic QR code in their QR code wallet and presents it to the cashier for scanning. This szenario applies to offline payments only. If the response codes `1143/1145` are returned, the transaction is being processed or the customer is required to input the wallet password. Merchants have to [query the transaction result](../common-api/transaction-enquiry) for a final assessment of the transaction status.
+客户在他们的二维码钱包生成一个动态二维码并展示给收银机扫描,改场景仅限于线下支付. 如果返回的响应编码是 `1143/1145`, 则表示交易正在处理中或要求客户输入钱包密码. 商户必须 [查询交易结果](../common-api/transaction-enquiry) 对交易状态进行最终评估.
 
 ## 请求参数
 
-|Parameter name | Parameter code | Mandatory | Parameter type | Description |
+|参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述 |
 |:----    |:---|:----- |-----   |----   |
-|Public payment parameters | — | — |— |— |
-Authorization Code | `auth_code` | Yes<br/> (CPM only) | String(128) | Specifies the authorization code for scanning a barcode/QR Code. The `auth_code` returned is unique in each authorization. Each `auth_code` can only be used once and will automatically expire. For testing CPM with Alipay and WeChat Pay the `auth_code` can be extracted by any QRC reader or manually found in the consumer wallet below the barcode.
+|公共支付参数 | — | — |— |— |
+微信或者支付宝的授权码 | `auth_code` | 是<br/> (仅限于付款码支付) | String(128) | 指定扫描条码/二维码的授权码, 在每个授权中返回的 `auth_code` 是唯一的. 每个 `auth_code` 只能使用一次并且会自动过期. 为了测试支付宝和微信支付的付款码支付, `auth_code`可以通过任何二维码读取器提取, 或者在条形码下方的消费者钱包中手动找到“auth_code”.
 
 ## 响应参数
 
-|Parameter name | Parameter code | Mandatory | Parameter type | Description |
+|参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述 |
 |:----    |:---|:----- |-----   |----   |
-|Public payment parameters | — | — |— |— |
+|公共响应参数 | — | — |— |— |

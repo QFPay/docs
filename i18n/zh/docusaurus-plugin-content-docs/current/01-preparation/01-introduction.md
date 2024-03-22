@@ -41,7 +41,6 @@ import Link from '@docusaurus/Link';
 ------------------------------------------ | ---------------------------------- | -------
 沙盒环境 (只用于模拟信用卡) | https://openapi-int.qfapi.com      |
 线上测试环境                                  | https://openapi-test.qfpay.com     |
-中国大陆                             | https://openapi-test.qfpay.com     | https://openapi.qfpay.com 
 中国香港                              | https://test-openapi-hk.qfapi.com  | https://openapi-hk.qfapi.com
 
 ## 签名机制

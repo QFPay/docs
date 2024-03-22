@@ -1,13 +1,13 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Payment Codes
+# Payment Methods Code
 
 :::warning
 Verify that your API credentials allow for the selected `pay_type`.
 :::
 
-### PayType Table
+## PayType
 
 Code | Description
 --------- | -------
