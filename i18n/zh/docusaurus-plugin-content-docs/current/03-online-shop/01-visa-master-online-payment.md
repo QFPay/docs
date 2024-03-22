@@ -46,17 +46,17 @@ QFPay也会发送交易状态更新的异步支付通知
 }
 ```
 
-## 测试卡
+## 测试卡号
 
-测试卡可用于沙盒环境以进行结果模拟。
+测试卡号可用于沙盒环境以进行结果模拟。
 
-Field             | Value            | Expected Result
+卡类型             | 卡号            | 预期结果
 ------------------| ---------------- | ---------------
-card - MasterCard | 5200000000001096 | valid
-card - Visa       | 4000000000001091 | valid
-card - MasterCard | 5200000000001005 | valid (3DS frictionless)
-card - Visa       | 4000000000001000 | valid (3DS frictionless)
-card - MasterCard | 5200000000001120 | failed (at verification)
-card - Visa       | 4000000000001125 | failed (at verification)
-card - MasterCard | 5200000000001013 | failed (at  3DS frictionless)
-card - Visa       | 4000000000001018 | failed (at  3DS frictionless)
+card - MasterCard | 5200000000001096 | 成功
+card - Visa       | 4000000000001091 | 成功
+card - MasterCard | 5200000000001005 | 成功 (无摩擦认证流程)
+card - Visa       | 4000000000001000 | 成功 (无摩擦认证流程)
+card - MasterCard | 5200000000001120 | 失败 (认证流程)
+card - Visa       | 4000000000001125 | 失败 (认证流程)
+card - MasterCard | 5200000000001013 | 失败 (无摩擦认证流程)
+card - Visa       | 4000000000001018 | 失败 (无摩擦认证流程)
