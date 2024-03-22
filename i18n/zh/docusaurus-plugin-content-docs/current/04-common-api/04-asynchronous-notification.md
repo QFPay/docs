@@ -4,26 +4,26 @@ import TabItem from '@theme/TabItem';
 # 异步通知
 
 :::note
- To configure your notification URL of choice, please send the address as well as merchant and store information via email to technical.support@qfpay.com
+ 要配置您选择的通知 URL，请将地址以及商户和商店信息通过电子邮件发送至technical.support@qfpay.com
 :::
 
-Notifications are available for payments **"notify_type": "payment"** and refunds **"notify_type": "refund"**. The request parameters from Asynchronous Notifications may include additional parameters in future versions. Developers must ensure that their programs can support new parameters. In addition, developers can get the latest development documentation from this website. 
+通知功能可以用于支付 **"notify_type": "payment"** 和退款 **"notify_type": "refund"**. 在未来版本中, 异步通知可能会在请求中包含额外的参数.请开发者确保程序可以支持新的参数. 除此之外, 开发者可以从万战获取最新的开发者文档.
 
 ### 描述
 
-Upon successful payment and refund, QFPay API will send an asynchronous notification message to the URL address defined by the merchant. Merchant can develop an end-point to receive this notification message and update the status of a transaction accordingly. We recommend merchants to use the query function of the API in conjunction with the asynchronous notification end point to retireve the payment status. Asynchronous notifications only work with ports 80 and 443 due to security requirements.
+支付和退款成功后，钱方 API 将向商户定义的URL地址发送异步通知消息. 商户可以开发一个端点来接收此通知消息并相应地更新交易状态. 我们建议商户使用API的查询功能结合异步通知端点来获取支付状态. 由于安全要求，异步通知仅适用于端口 80 和 443.
 
 ## 异步通知规则
 
-1) The merchant will only be notified after the payment or refund transaction has been successful.
+1) 付款和交易成功后, 商户才会收到通知.
 
-2) Please send an email with your notification endpoint URL address to **technical.support@qfpay.com** for the asynchronous notification setup. Our technical support team will setup the provided URL for you.
+2) 将您的通知端点地址发送给**technical.support@qfpay.com**来设置异步通知. 我们的技术支持团队会将为您设置您提供的地址.
 
-3) Upon receiving the notification, merchant shall verifiy the message integrity according to signature verification procedure described below. If the verification is successful, the system is required to response with status code 200 OK and the string SUCCESS in the response body.
+3) 在商户收到通知后, 商户应该按照以下的签名验证流程消息的完整性. 如果验证成功, 系统需要返回状态码 `200 OK`, 并且响应正文中会包含字符串 `SUCCESS`.
 
-4) If our API does not receive a response with status code 200 OK and SUCCESS message, we will send out asynchronous notifications at the following intervals after the first message; 2m, 10m, 10m, 60m, 2h, 6h, 15h. Notifications will stop when the response with status code 200 OK and SUCCESS message is received.
+4) 如果我们的 API 没有收到状态码 `200 OK` 和 `SUCCESS` 消息的响应, 我们将在第一条通知消息后按照如下的时间间隔发送异步通知: 2m, 10m, 10m, 60m, 2h, 6h, 15h. 当收到状态码 `200 OK` 和 `SUCCESS` 消息的响应后, 通知将会停止发送.
 
-5) One set of app code and key can be setup with one notification URL address only. Patners shall use one notification URL address for their sub-merchants.
+5) 一组 `app_code` 和 `client_key` 仅能用于设定一个通知地址. 大商户应该为所有子商户设置同一个通知地址.
 
 6) Method: POST content-type: `application/json`
 
@@ -62,19 +62,19 @@ print(signature)
 "A4021A3B1EBBB0F05451EF94E9EXXXXX"
 ```
 
-The signature generation method for notifications is slightly different from other POST requests. In order to generate the signature simply take the raw content and add the `client_key` to the end. Then hash the encoded string with the MD5 algorithm.
+通知的签名生成方法和其他的 POST 请求略有不同. 生成签名只需要获取原始内容并将 `client_key` 添加到末尾. 然后使用 `MD5` 算法对字符串进行编码处理.
 
-**Step 1:** Obtain the signature from the `X-QF-SIGN` field in the HTTP request header
+**步骤 1:** 从 HTTP 请求头部 `X-QF-SIGN` 获取签名
 
-**Step 2:** Attach the key to the end of the request body received by the end point
+**步骤 2:** 将 `client_key` 添加到从端点收到的请求正文的末尾
 
-**Step 3:** Sign the string from step 2 with MD5 algorithm
+**步骤 3:** 使用 `MD5` 算法对步骤2得到的字符串加密
 
-**Step 4:** Compare the MD5 result with the signature from `X-QF-SIGN`, return an HTTP response with status code 200 OK and SUCCESS in the response body if the verification is successful
+**步骤 4:** 将 `MD5` 加密得到的结果和从 `X-QF-SIGN` 获取的签名对比, 如果验证成功则在返回正文中返回状态码 `200 OK` 和 `SUCCESS`
 
 ## 异步通知的响应参数
 
-> Asynchronous Notifications POST data in JSON form structured like this:
+> 如下是异步通知的 POST JSON格式的数据样例:
 
 ```json
 {
@@ -102,28 +102,28 @@ The signature generation method for notifications is slightly different from oth
 }
 ```
 
-Parameter | Send always | Type | Description  
+参数编码 | 是否必须 | 参数类型 | 描述  
 --------- | ------- | --------- | -------
-`status` | Yes | String | 1 = payment success
-`pay_type` | Yes | String | Please refer to the section [Payment Codes](../preparation/paycode#payment-codes) for a complete list of payment types.
-`sysdtm` | Yes | String | Transaction creation time in the system. This parameter value is used as the cut-off time for settlements.
-`paydtm` | Yes | String | Payment time of the transaction. 
-`txcurrcd` | Yes | String | Transaction currency. View the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies.
-`txdtm` | Yes | String | Order creation time provided by the merchant in the payment request.
-`txamt` | Yes | String | Transaction amount in Cents.
-`out_trade_no` | Yes | String | External transaction number.
-`syssn` | Yes | String | QFPay transaction number.
-`cancel` | Yes | String  | Transaction cancel status: <br/> 0 = Not cancelled <br/> 1 = For CPM: Transaction reversed or refunded successfully <br/> 2 = For MPM: Transaction canceled successfully <br/> 3 = Transaction refunded <br/> 4 = Alipay Preauth order finished <br/> 5 = Transaction partially refunded.
-`respcd` | Yes | String | Transaction status - will be `0000` in the async notification message 
-`notify_type` | Yes | String | Notification Type: `payment` or `refund` 
-`mchid` | No |  String | Unique merchant ID. This parameter is only returned to agents.
-`goods_name` | No | String | Goods name or marking. Custom goods name. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters. 
-`exchange_rate` | No | String | Applied currency conversion exchange rate
-`chnlsn2` | No | String | Additional transaction number added to the order
-`goods_info` | No | String | Product description
-`chnlsn` | No | String | Transaction number from the payment channel 
-`cardcd` | No | String | Card number
-`cash_fee` | No | String | Actual payment amount by user = transaction amount - discounts 
-`cash_fee_type` | No | String | Actual payment currency e.g. CNY 
-`cash_refund_fee` | No | String | Actual refund amount
-`cash_refund_fee_type` | No | String | Actual refund currency e.g. CNY 
+`status` | 是 | String | 1 = 支付成功
+`pay_type` | 是 | String | 请根据 [支付类型编码](../preparation/paycode#支付类型编码)查看完整的交易类型.
+`sysdtm` | 是 | String | 系统的交易创建时间. 这个值被用作结算截止时间.
+`paydtm` | 是 | String | 交易的支付时间.
+`txcurrcd` | 是 | String | 交易货币. 可查看 [货币种类](../preparation/paycode#货币种类) 获取完整的支持的货币类型列表.
+`txdtm` | 是 | String | 由商户在付款请求中提供的订单创建时间.
+`txamt` | 是 | String | 以分为单位的交易金额.
+`out_trade_no` | 是 | String | 外部订单号.
+`syssn` | 是 | String | 钱方交易流水号.
+`cancel` | 是 | String  | 交易取消状态: <br/> 0 = 没有取消 <br/> 1 = 用于付款码支付: 交易撤销或者退款成功 <br/> 2 = 扫码支付: 交易取消成功 <br/> 3 = 交易已退款 <br/> 4 = 支付宝预授权订单完成 <br/> 5 = 交易部分退款.
+`respcd` | 是 | String | 交易状态 - 在异步通知消息中会是 `0000`
+`notify_type` | 是 | String |通知类型: `payment` 或 `refund`
+`mchid` | 否 |  String | 唯一商户标识ID, 这个参数只返回给代理商.
+`goods_name` | 否 | String | 商品名称或标记, 定制商品名称. 如果是参数是中文字符, 则需要是**UTF-8**编码.
+`exchange_rate` | 否 | String | 适用的货币换算汇率
+`chnlsn2` | 否 | String | 订单附加的交易流水号
+`goods_info` | 否 | String | 产品描述
+`chnlsn` | 否 | String | 支付通道的交易码
+`cardcd` | 否 | String | 卡号
+`cash_fee` | 否 | String | 用户实际付款金额 = 交易金额 - 优惠
+`cash_fee_type` | 否 | String | 实际支付货币 e.g. CNY
+`cash_refund_fee` | 否 | String | 实际退款金额
+`cash_refund_fee_type` | 否 | String | 实际退款货币 e.g. CNY

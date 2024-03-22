@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 只有返回码为0000(交易成功)的交易可以被退款
 :::
 
-## 退款接口端点
+## 退款API端点
 
 ```plaintext
 请求头部:
@@ -279,31 +279,31 @@ ob_end_flush();
 
 `POST ../trade/v1/refund`
 
-Merchants can use the refund interface to refund transactions. The merchant account must have a sufficient transaction amount on the same trading day in order to refund transactions. The maximum refund amount for a transaction must not exceed to original payment amount. Unless otherwise specified, once a refund request is submitted and accepted, it is not reversible. The refund capability and the maximum time period for refund varies across payment channels. Please contact your QFPay support representative for more information.
+商户可以使用退款接口对交易进行退款。商户账户必须在同一交易日有足够的交易金额才能进行交易退款, 单笔交易的最高退款金额不得超过原始付款金额。除非另有说明，退款请求一旦提交并被接受，就不可撤销。不同支付渠道的退款限量和最长退款期限有所不同, 请联系您的钱方支援代表以获取更多信息。
 
 ### 请求参数
 
-|Parameter name|Parameter code|Mandatory|Parameter type|Description|
+|参数名称|参数编码|是否必填|参数类型|描述|
 |----    |---|----- |-----   |-----   |
-|QF Pay transaction number | ` syssn ` |Yes |String(128)  | Original transaction ID `syssn`  that is supposed to be refunded|
-|API order number | ` out_trade_no `  |Yes |String(128)  | External refund transaction number / Merchant platform refund transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.|
-|Refund amount | ` txamt `   |Yes |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1) <br/> Required for both full refund and partial refund. Some payment channel may not support partial refund.|
-|Transaction request time | ` txdtm `   |Yes |String(20) |Format: YYYY-MM-DD hh&#58;mm:ss|
-|Merchant ID | ` mchid `  |No |String(16)  | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID. On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. |
-|Transaction time | ` txzone `   |No |String(5)  |Used to record the local transaction time. The default is Beijing time UTC+8 (+0800)|
-|Device ID | ` udid `    |No |String(40)  |Unique transaction device ID|
+|钱方订单流水号 | ` syssn ` |是 |String(128)  | 计划退款的原订单的 `syssn`|
+|退款外部订单号 | ` out_trade_no `  |是 |String(128)  | 外部退款订单号/商户平台退款订单号: 这个参数对于系统中同一商户账户下的每次支付和退款请求必须是唯一的|
+|退款金额 | ` txamt `   |是 |Int(11)  | 退款金额, 以分为单位 (i.e. 100 = $1) <br/> 部分退款和全部退款都需要, 有部分支付通道不支持部分退款|
+|请求交易时间 | ` txdtm `   |是 |String(20) |格式: YYYY-MM-DD hh:mm:ss|
+|子商户号 | ` mchid `  |否 |String(16)  | 商户会或不会被提供 `mchid`.  如果已经被提供 `mchid` , 除特殊情况下在呼叫接口时必须提交 `mchid`. 与之相反的是, 如果并未被提供 `mchid`, 商户无需在接口请求中传递参数 `mchid`. |
+|交易时区 | ` txzone `   |否 |String(5)  | 用于记录本地下单时间，默认为北京时间+0800|
+|设备唯一id | ` udid `    |否 |String(40)  | 唯一的交易设备ID|
 
 ### 响应参数
 
-|Parameter name|Parameter code|Parameter type|Description|
+|参数名称|参数编码|参数类型|描述|
 |-----    |----|------ |-----   |
-|Refund Transaction ID | `syssn`  |String(40)   |New transaction ID referring to the newly created refund transaction|
-|Original Transaction ID| `orig_syssn`  |String(128)   |Previous transaction ID referring to the original transaction that has been refunded|
-|Refund amount| `txamt`   |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1)|
-|System transaction time | `sysdtm`  | String(20)  |Format: YYYY-MM-DD hh&#58;mm:ss <br/> This parameter value is used as the cut-off time for settlements.|
-|Return code| `respcd` |  String(4)|  0000-Request successful.<br/>1143/1145 - merchants are required to continue to query the refund transaction result. <br/>All other return codes indicate transaction failure. Please refer to the section [payment status codes](../preparation/paycode#transaction-status-codes) for a complete list of return codes.|
-|Response message| `resperr` |  String(128)| Error message |
-| Net payment amount |`cash_fee`  | String | Actual payment amount by user = transaction amount - discounts |
-| Payment currency |`cash_fee_type` | String | Actual payment currency e.g. CNY |
-| Net refund amount | `cash_refund_fee` | String | Actual refund amount |
-| Refund currency | `cash_refund_fee_type` | String | Actual refund currency e.g. CNY |
+|退款交易唯一流水号 | `syssn`  |String(40)   | 新创建的退款交易的ID|
+|原订交易流水号| `orig_syssn`  |String(128)   | 被用于退款的原交易的交易ID|
+|订单金额| `txamt`   |Int(11)  | 退款金额, 以分为单位 (i.e. 100 = $1)|
+|请求方交易时间 | `sysdtm`  | String(20)  |格式: YYYY-MM-DD hh:mm:ss <br/>这个值被用作结算截止时间|
+|返回编码| `respcd` |  String(4)|  0000-请求成功.<br/>1143/1145 - 商户需要持续查询退款交易状态. <br/>所有其他的返回编码都是失败值. 请根据 [支付状态码](../preparation/paycode#支付状态码) 获取完整的信息.|
+|响应信息| `resperr` |  String(128)| 响应的信息|
+|净支付值 |`cash_fee`  | String | 用户实际付款金额 = 交易金额 - 优惠 |
+| 支付货币 |`cash_fee_type` | String | 实际支付货币 e.g. CNY |
+| 净退款值 | `cash_refund_fee` | String | 实际退款值 |
+| 退款货币 | `cash_refund_fee_type` | String | 实际退款货币 e.g. CNY |

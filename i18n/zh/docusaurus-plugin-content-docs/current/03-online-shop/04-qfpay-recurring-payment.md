@@ -2,7 +2,7 @@
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# QFPay订阅支付接口
+# QFPay订阅支付API
 
 <!-- <sub><sup>last modified 20230816<sup><sub> -->
 
@@ -10,17 +10,17 @@ import Link from '@docusaurus/Link';
 
 ## 周期支付运行流程
 
-### 接口运行环境
+### API运行环境
 
 | 环境名称 | 地址 |
 |--|--|
 | Sandbox | https://openapi-int.qfapi.com |
 
-### 接口资源
+### API资源
 
-如需要创建并管理一个订阅支付活动,需要如下的接口资源:
+如需要创建并管理一个订阅支付活动,需要如下的API资源:
 
-| 接口资源 |
+| API资源 |
 |---|
 |[Customer](#customer)|
 |[Payment Token](#payment-token)|
@@ -40,21 +40,21 @@ All subscription state will be pushed to merchant's backend service once trigger
 
 |参数名称| 参数类型 |描述|
 |---|---|---|
-|respcd|String|返回码, 0000 = 接口呼叫成功|
+|respcd|String|返回码, 0000 = API呼叫成功|
 |resperr|String| 呼叫结果的详情|
 |respmsg|String| 呼叫的信息详情|
-|page|Int| 查询页数,在查询接口中出现|
-|page_size|Int| 查询页大小,在查询接口中出现|
+|page|Int| 查询页数,在查询API中出现|
+|page_size|Int| 查询页大小,在查询API中出现|
 |data|Object|结果值, JSON对象或由JSON对象组成的列表|
 
 ## Customer
 
-Customer 是一个提供给商户用于存储客户信息的接口资源. 这个对象可以被应用在 PaymentToken, Subscription 接口中.
+Customer 是一个提供给商户用于存储客户信息的API资源. 这个对象可以被应用在 PaymentToken, Subscription API中.
 
 ### 创建 Customer 对象
 
 ```
-接口路径: /customer/v1/create
+API路径: /customer/v1/create
 ```
 
 请求参数列表:
@@ -79,7 +79,7 @@ Customer 是一个提供给商户用于存储客户信息的接口资源. 这个
 ### 更新 customer 对象
 
 ```
-接口路径: /customer/v1/update
+API路径: /customer/v1/update
 ```
 
 请求参数列表:
@@ -105,7 +105,7 @@ Customer 是一个提供给商户用于存储客户信息的接口资源. 这个
 ### 查询 customer 对象
 
 ```
-接口路径: /customer/v1/query
+API路径: /customer/v1/query
 ```
 
 请求参数列表:
@@ -132,7 +132,7 @@ Customer 是一个提供给商户用于存储客户信息的接口资源. 这个
 
 永久删除 customer 对象, 不能撤销. 任何与已删除的 customer 对象相关联的订阅计划将会被取消
 ```
-接口路径: /customer/v1/delete
+API路径: /customer/v1/delete
 ```
 
 请求参数列表:
@@ -143,14 +143,14 @@ Customer 是一个提供给商户用于存储客户信息的接口资源. 这个
 
 ## Product
 
-Product 是商户要提供给客户的商品和服务的模型.它定义了交易金额, 交易货币和扣款周期(如可用). 这个对象可被用于 subscription 接口
+Product 是商户要提供给客户的商品和服务的模型.它定义了交易金额, 交易货币和扣款周期(如可用). 这个对象可被用于 subscription API
 
 ### 创建 product 对象
 
 创建一个新的 product 对象
 
 ```
-接口路径: /product/v1/create
+API路径: /product/v1/create
 ```
 
 |参数名称|参数类型|是否必填|描述|
@@ -182,7 +182,7 @@ Product 是商户要提供给客户的商品和服务的模型.它定义了交�
 
 更新当前的 product 对象信息
 ```
-接口路径: /product/v1/update
+API路径: /product/v1/update
 ```
 
 请求参数列表:
@@ -210,7 +210,7 @@ Product 是商户要提供给客户的商品和服务的模型.它定义了交�
 ### 查询 product 对象
 
 ```
-接口路径: /product/v1/create
+API路径: /product/v1/create
 ```
 
 请求参数列表:
@@ -244,7 +244,7 @@ Product 是商户要提供给客户的商品和服务的模型.它定义了交�
 只能够删除不与任何  subscription 对象关联的 product 对象
 ```
 
-接口路径: /product/v1/delete
+API路径: /product/v1/delete
 
 请求参数列表:
 
@@ -259,7 +259,7 @@ QFPay 会基于产品类型和支付令牌,在每个扣款周期自动向客户�
 ### 创建 subscription 对象
 
 ```
-接口路径: /subscription/v1/create
+API路径: /subscription/v1/create
 ```
 
 请求参数列表:
@@ -293,7 +293,7 @@ products 中的参数:
 
 更新当前的 subscription 对象
 ```
-接口路径: /subscription/v1/update
+API路径: /subscription/v1/update
 ```
 
 请求参数列表:
@@ -321,7 +321,7 @@ products 中的参数:
 ### 查询 subscription 对象
 
 ```
-接口路径: /subscription/v1/query
+API路径: /subscription/v1/query
 ```
 
 请求参数列表:
@@ -354,7 +354,7 @@ products 中的参数:
 
 立即取消客户的订阅
 ```
-接口路径: /subscription/v1/cancel
+API路径: /subscription/v1/cancel
 ```
 
 请求参数列表:

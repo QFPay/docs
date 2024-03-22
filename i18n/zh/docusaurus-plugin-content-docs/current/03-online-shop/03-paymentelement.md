@@ -281,7 +281,7 @@ const intentResponse = qfpay.retrievePaymentIntent()
  *    }
  *    token: {
  *      event: "CREATE", // 表示当前行为为创建Token
- *      token_id: "xxxxxxx" // 生成调用其他接口的参数
+ *      token_id: "xxxxxxx" // 生成调用其他API的参数
  *    }
  *  若 code 非 '0000', 则具体信息参考 description字段
  * 作用：返回根据卡信息生成的token等相关信息
