@@ -4,8 +4,8 @@ import TabItem from '@theme/TabItem';
 # 交易查询
 
 test
-:::warning 
-If the `mchid` is provided, it is mandatory to submit the `mchid` when calling the API (unless otherwise specified). On the contrary, if `mchid` is not provided, merchants shall not pass the `mchid` field in the API request.
+:::warning
+ 如果已经被提供 `mchid` , 除特殊情况下在呼叫API时必须提交 `mchid`. 与之相反的是, 如果并未被提供 `mchid`, 商户无需在API请求中传递参数 `mchid`.
 :::
 
 ## 交易查询API端点
@@ -15,7 +15,7 @@ If the `mchid` is provided, it is mandatory to submit the `mchid` when calling t
 `POST ../trade/v1/query`
 
 ```plaintext
-Request Header:
+请求头部:
 
 {
   Content-Type: application/x-www-form-urlencoded;
@@ -23,12 +23,13 @@ Request Header:
   X-QF-SIGN: 6FB43AC29175B4602FF95F8332028F19
 }
 
-Request Body:
+请求本体:
 
 {
   mchid=ZaMVg*****&syssn=20191227000200020061752831&start_time=2019-12-27 00:00:00&end_time=2019-12-27 23:59:59
 }
 ```
+
 <Tabs>
 <TabItem value="python" label="Python">
 
@@ -293,13 +294,13 @@ The merchant can use the query interface to enquire transaction status of one or
 
 If merchants would like to query transactions in a month, they can provide `start_time` and `end_time` then records will be filtered according to the system transaction time `sysdtm`. The interval must be within one calendar month. Otherwise, it is recommended to include the `syssn` parameter as a query condition.
 
-When the query transaction is a refund then an additional parameter `origssn` will be returned. The `origssn` shows the QFPay transaction number of the original transaction that has been refunded.   
+When the query transaction is a refund then an additional parameter `origssn` will be returned. The `origssn` shows the QFPay transaction number of the original transaction that has been refunded.
 
 ### 请求参数
 
-|Parameter name| Parameter code|Mandatory|Parameter type|Description|
+|参数名称| 参数编码|是否必须|参数类型|描述|
 |----    |---|----- |-----   |-----   |
-|Merchant number | ` mchid ` | For Agents |String(16) | If MCHID is given, it is mandatory to provide the `mchid.`On the contrary, if ` mchid` is not provided, merchants shall not pass the `mchid` field in the API request.|
+|Merchant number | ` mchid ` | For Agents |String(16) | If MCHID is given, it is mandatory to provide the `mchid.`On the contrary, if `mchid` is not provided, merchants shall not pass the `mchid` field in the API request.|
 |QFPay transaction number | ` syssn ` |No |String(128) | Multiple entries are seperated by commas   |
 |API order number | ` out_trade_no ` |No |String(128) | External transaction number / Merchant platform transaction number, multiple entries are seperated by commas   |
 |Payment type | ` pay_type ` |No |String(6) | Multiple entries are seperated by commas   |
@@ -312,7 +313,7 @@ When the query transaction is a refund then an additional parameter `origssn` wi
 
 ### 响应参数
 
-|Parameter name|Parameter code|Parameter type|Description|
+|参数名称|参数编码|参数类型|描述|
 |----    |------|------  |------   |
 | Page number| `page`  | Int(8)  |  |
 | Request result description| `resperr` | String(128) ||
@@ -351,6 +352,6 @@ The clearing statement for a particular payment channel is downloaded regularly.
 
 ### 请求参数
 
-|Request code | Mandatory | Parameter type | Description
+|Request code | 是否必须 | 参数类型 | 描述
 |----    |---|----- |-----   |
 | `trade_date` | Yes | String(10) | Get a specific account statement for the selected date. Example: 2017-10-17

@@ -4,7 +4,7 @@ import TabItem from '@theme/TabItem';
 # 支付方式代码
 
 :::warning
-验证您的接口证书支持当前选中的`pay_type`.
+验证您的API证书支持当前选中的`pay_type`.
 :::
 
 ## 支付方式
@@ -68,7 +68,7 @@ import TabItem from '@theme/TabItem';
 
 ## 支付币种
 
-以下列出的货币是目前我们的支付网络支持的支付币种.请联系 **technical.support@qfpay.com** 来验证您的接口证书和选中的`pay_type`是否支持您期望的货币.
+以下列出的货币是目前我们的支付网络支持的支付币种.请联系 **technical.support@qfpay.com** 来验证您的API证书和选中的`pay_type`是否支持您期望的货币.
 
 编码 | 描述
 --------- | -------
@@ -86,7 +86,7 @@ USD | United States Dollar
 CAD | Canadian Dollar
 AUD | Australian Dollar
 
-## 支付接口端点
+## 支付API端点
 
 :::warning
 请谨记立即将在测试环境进行的交易退款
@@ -370,7 +370,7 @@ ob_end_flush();
 
 `POST ../trade/v1/payment`
 
-如下列出的是支付接口端点最常用的参数.请根据实际的支付场景增加额外的参数.
+如下列出的是支付API端点最常用的参数.请根据实际的支付场景增加额外的参数.
 
 ### 公共请求参数列表
 

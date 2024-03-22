@@ -4,17 +4,17 @@ import Link from '@docusaurus/Link';
 
 # 简介
 
-欢迎查阅 **钱方开放接口文档平台**. 首先, 请阅读以下[开发人员接入规范](#开发人员接入规范).
+欢迎查阅 **钱方开放API文档平台**. 首先, 请阅读以下[开发人员接入规范](#开发人员接入规范).
 
 如果您想要在<Link href="https://www.postman.com/">Postman</Link>快速测试支付功能, 我们提供了一套生成签名的预请求脚本, 您可以从[这里](paycode#api-endpoint-for-payments)下载该文件.
 
 ## 开发人员接入规范
 
 :::note
- 如果已经被提供 `mchid` , 除特殊情况下在呼叫接口时必须提交 `mchid`. 与之相反的是, 如果并未被提供 `mchid`, 商户无需在接口请求中传递参数 `mchid`.
+ 如果已经被提供 `mchid` , 除特殊情况下在呼叫API时必须提交 `mchid`. 与之相反的是, 如果并未被提供 `mchid`, 商户无需在API请求中传递参数 `mchid`.
 :::
 
-为了使用钱方公共接口, 您必须拥有已激活的接口证书, 包括一个**app_code**以及**client_key**.
+为了使用钱方公共API, 您必须拥有已激活的API证书, 包括一个**app_code**以及**client_key**.
 如遇到技术问题,请联系**technical.support@qfpay.com**.
 
 对于应用程序的测试我们提供了测试, 开发以及生产运行环境.
@@ -25,7 +25,7 @@ import Link from '@docusaurus/Link';
 
 ### 编码机制
 
-所有从接口返回的参数如无特别说明将使用 `UTF-8` 编码.
+所有从API返回的参数如无特别说明将使用 `UTF-8` 编码.
 
 ## 开发环境
 
@@ -33,7 +33,7 @@ import Link from '@docusaurus/Link';
 请谨记立即将在测试环境进行的交易退款
 :::
 
-### 接口环境
+### API环境
 
 下表描述了每个国家/地区的**基本URL**. 沙盒环境适用于所有人而国家/地区会有特定的测试环境.
 
@@ -67,7 +67,7 @@ abc=value1&bad=value3&bcd=value2Key
 MD5(abc=value1&bad=value3&bcd=value2Key)
 HASH(“SHA256”, abc=value1&bad=value3&bcd=value2Key)
 
-**步骤5:** 使用签名请求接口
+**步骤5:** 使用签名请求API
 
 将签名结果（密文）保存到http请求头部的`X-QF-SIGN`字段中；
 
@@ -278,16 +278,16 @@ ob_end_flush();
 ### 请求描述
 
 :::note
-接口将会返回JSON格式的响应内容.我们推荐开发者验证响应头部的签名以确保消息的完整性
+API将会返回JSON格式的响应内容.我们推荐开发者验证响应头部的签名以确保消息的完整性
 :::
 
 名称 | 描述
 --------- | -------
 Character | `UTF-8`  
-Method | **POST/ GET** (视实际接口功能而定)
+Method | **POST/ GET** (视实际API功能而定)
 Content-type | `application/x-www-form-urlencoded`
 
-### 在请求接口时HTTP头部所需的参数配置
+### 在请求API时HTTP头部所需的参数配置
 
 名称 | 是否必须 | 描述
 --------- | ------- | -------
