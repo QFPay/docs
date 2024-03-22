@@ -6,7 +6,7 @@ import Link from '@docusaurus/Link';
 
 欢迎使用 **QFPay 安全收银台** 本手册介绍了 QFPay 的托管结账页面，开发者可以通过该页面向其在线商店添加多种支付方式。
 
-## 结账页面設計
+## 结账页面设计
 
 <Link href="/img/shouyintai.png"> ![shouyintai](@site/static/img/shouyintai.png) </Link>
 
@@ -62,7 +62,7 @@ import Link from '@docusaurus/Link';
 
 :::info
 每笔订单都是唯一的，因此商家在重定向到托管结账页面时需要创建唯一的外部交易号“out_trade_no”。
-::: 
+:::
 
 创建新的结帐订单，必须发送带有身份验证签名的 GET 请求。 对于此签名，必须连接上述参数，然后使用 QFPay 提供的 app_key 进行哈希处理。 如需 API 凭证或技术支持，请联系 **technical.support@qfpay.com**。
 

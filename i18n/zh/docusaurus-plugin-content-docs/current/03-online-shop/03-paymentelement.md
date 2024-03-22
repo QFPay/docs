@@ -11,6 +11,7 @@
 ```
 
 #### 使用示例
+
 1. 支付模式(Payment Intent)
     1. 支持visa/master Card-form支付方式
         ```js

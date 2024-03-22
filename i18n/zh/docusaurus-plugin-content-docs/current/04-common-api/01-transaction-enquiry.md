@@ -1,7 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Transaction Enquiry
+# 交易查询
 
 test
 :::warning 
