@@ -4,14 +4,14 @@ import TabItem from '@theme/TabItem';
 # 冲正/取消
 
 :::warning
-Reversals should be used as a last resort when the transaction status cannot be determined, e.g. no payment notification is received, the response timed-out, there are network issues, etc. The query API endpoint should be used first to check the transaction status. Hong Kong PayTypes do not support transaction cancel.
+当无法确定交易状态时，例如未收到付款通知、响应超时、网络问题等，应将撤销作为最后的手段。首先应使用查询API端点检查交易状态。香港支付类型不支持交易取消。
 :::
 
-The reversal API endpoint allows the merchant to cancel/ reverse a transaction that is currently in progress. Transactions that have already been processed successfully (return code 0000 = successful) can no longer be reversed or cancelled. If you would like to revert a successful transaction please refer to the [Refund Endpoint](refunds).
+撤销 API 端点允许商家取消/撤销当前正在进行的交易。 已成功处理的交易（返回代码 0000 = 成功）无法再撤销或取消。 如果您想撤销已成功的交易，请参阅[退款端点]（退款）。
 
 ```plaintext
 
-For code instructions select Python, Java, Node.js or PHP with the tabs above.
+对于代码说明，请使用下面的选项卡选择 Python、Java、Node.js 或 PHP。
 
 ```
 
@@ -250,7 +250,7 @@ ob_end_flush();
 </TabItem>
 </Tabs>
 
-> The above command returns JSON structured like this:
+> 上面的命令返回 JSON 结构如下：
 
 ```json
 
@@ -274,46 +274,46 @@ ob_end_flush();
 ```
 
 
-### HTTP Request for Alipay CPM & MPM
+### HTTP请求 - 支付宝 CPM & MPM
 `GET ..trade/v1/reversal`
 
-### HTTP Request for WeChat Pay CPM
+### HTTP請求 - 微信支付 CPM
 `GET ..trade/v1/reversal`
 
-### HTTP Request for WeChat Pay MPM
+### HTTP请求 - 微信支付 MPM
 `GET ..trade/v1/close`
 
-### HTTP Request for other qualified Wallets*
+### HTTP请求 - 其他符合条件的电子钱包*
 `GET ..trade/v1/close`
 
-*If you would like to use this endpoint on a wallet other than Alipay & Wechat Pay please contact us for instructions.
+*如果您想在支付宝和微信支付以外的钱包上使用该接口，请联系我们获取说明。
 
-### Request Parameters
+### 请求参数
 
-Parameter | Mandatory | Type | Description  
+参数名称 | 是否必填 | 参数类型 | 描述
 --------- | ------- | --------- | ------- 
-`mchid` | No | String(16) | Merchant ID allocated by QFPay
-`syssn` | Yes* | String(40) | QFPay transaction number, returned by the system once payment is completed
-`out_trade_no` | Yes* | String(128) | External transaction number
-`txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1)
-`txdtm` | Yes | String(20) | Transaction time format: YYYY-MM-DD hh:mm:ss
-`udid` | No | String(40) | Unique transaction device ID. Is displayed on the merchant portal.
+`mchid` | No | String(16) | QFPay提供的商户标识符
+`syssn` | Yes* | String(40) | 付款完成后系统返回的 QFPay 交易编号
+`out_trade_no` | Yes* | String(128) | 外部交易编号
+`txamt` | Yes | Int(11) | 交易金额。单位为分（即 100 = 1 元）
+`txdtm` | Yes | String(20) | 交易时间格式： YYYY-MM-DD hh:mm:ss
+`udid` | No | String(40) | 唯一的交易设备 ID。显示在商家管理平台上。
 
 *Either the `syssn` or `out_trade_no` must be provided.
 
 
-### Response Parameters
+### 响应参数
 
-Parameter | Type | Description  
+参数名称 | 参数类型 | 描述  
 --------- | --------- | ------- 
-`orig_syssn` | String(40) | Refers to the original QFPay transaction number
-`syssn` | String(40) | QFPay transaction number of the cancel/ reversal
-`out_trade_no` | String(128) | External transaction number
-`txamt` | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1)
-`txcurrcd` | String(3) | Transaction currency. View the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies
-`txdtm` | String(20) | Transaction time. Format: YYYY-MM-DD hh:mm:ss
-`sysdtm` | String(20) | System transaction time. Format: YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements.
-`chnlsn` | String | Transaction number from payment channel (wallet side)
-`respcd` | String(4) | Response code <br/> 0000 = Reversal/ cancel successul <br/> 1143/1145 = Reversal/ cancel in progress <br/> others = Reversal/ cancel failed
-`resperr` | String(128) | Result description
-`respmsg` | String(128) | Information description
+`orig_syssn` | String(40) | 指原始 QFPay 交易编号
+`syssn` | String(40) | 取消/撤销的 QFPay 交易编号
+`out_trade_no` | String(128) | 外部交易编号
+`txamt` | Int(11) | 交易金额。单位为分（即 100 = 1 元）
+`txcurrcd` | String(3) | 交易货币。查看 [Currencies](../preparation/paycode#currencies) 表，了解可用货币的完整列表。
+`txdtm` | String(20) | 交易时间格式： YYYY-MM-DD hh:mm:ss
+`sysdtm` | String(20) | 系统交易时间。 格式：YYYY-MM-DD hh:mm:ss <br/> 该参数值作为清算截止时间。
+`chnlsn` | String | 支付通道交易编号（钱包方）
+`respcd` | String(4) | 响应代码 <br/> 0000 = 冲正/取消成功 <br/> 1143/1145 = 冲正/取消正在进行中 <br/> 其他 = 冲正/取消失败
+`resperr` | String(128) | 结果说明
+`respmsg` | String(128) | 信息说明

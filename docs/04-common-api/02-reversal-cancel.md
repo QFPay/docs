@@ -11,7 +11,7 @@ The reversal API endpoint allows the merchant to cancel/ reverse a transaction t
 
 ```plaintext
 
-For code instructions select Python, Java, Node.js or PHP with the tabs above.
+For code instructions select Python, Java, Node.js or PHP with the tabs below.
 
 ```
 
