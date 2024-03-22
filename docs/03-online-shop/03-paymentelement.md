@@ -320,7 +320,7 @@ payment.pay({
  *     out_trade_no: merchant order id, mandatory
  *     txamt: transaction amount, mandatory
  *     txcurrcd: transaction currency, mandatory
- *     support_pay_type: customize display of activited payment methods, optional, detail parameter values please refer to the folllwoing description
+ *     support_pay_type: customize display of activited payment methods, optional, show all activated methods if not pass this parameter, detail parameter values please refer to the folllwoing description
  *     params2, mandatory, string, payment intent value from 
  * extra special parameters in 'params1':
  *         customer_id: params1 optional parameter，QFPay generated customer Id
