@@ -41,15 +41,7 @@ The table below depicts **base URLs** for each country/ region. There is a gener
 Environment Name                           | Test URL                           | Prod. URL
 ------------------------------------------ | ---------------------------------- | -------
 Sandbox (Only for credit card simulations) | https://openapi-int.qfapi.com      |
-Live Test                                  | https://openapi-test.qfpay.com     |
-China Mainland                             | https://openapi-test.qfpay.com     | https://openapi.qfpay.com 
 Hong Kong                                  | https://test-openapi-hk.qfapi.com  | https://openapi-hk.qfapi.com
-Japan                                      |                                    | https://openapi-jp.qfapi.com
-Thailand                                   | https://test-openapi-th.qfapi.com  | https://openapi-th.qfapi.com 
-Dubai                                      | https://test-openapi-db.qfapi.com  | https://openapi-db.qfapi.com
-Singapore, Malaysia, Canada, Philippines   | https://test-openapi-sg.qfapi.com  | https://openapi-sg.qfapi.com
-Indonesia                                  | https://test-openapi-id.qfapi.com  | https://openapi-id.qfapi.com
-Europe                                     | https://test-openapi-eur.qfapi.com | https://openapi-eur.qfapi.com
 
 ## Signature Generation
 

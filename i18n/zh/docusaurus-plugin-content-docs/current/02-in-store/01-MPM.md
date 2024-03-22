@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 ## 扫码支付API请求
 
 ```plaintext
-Request Header:
+请求头部:
 
 {
   Content-Type: application/x-www-form-urlencoded; 
@@ -20,7 +20,7 @@ Request Header:
   X-QF-SIGN: 3b020a6349646684ebeeb0ec2cd3d1fb
 }
 
-Request Body:
+请求本体:
 
 {
   expired_time=10&goods_name=qfpay&limit_pay=no_credit&mchid=R1zQrTdJnn&out_trade_no=Native20190722145741431794b8d1&pay_type=800201&txamt=20&txcurrcd=HKD&txdtm=2019-07-22 14:57:42&udid=AA
@@ -288,20 +288,20 @@ ob_end_flush();
 
 `POST ../trade/v1/payment`
 
-The merchant generates a dynamic QR code based on the Alipay / WeChat Pay protocol and presents it to the customer. The user opens their Alipay / WeChat Pay wallet and scans the displayed QRC in order to complete payment. This szenario applies to offline as well as online payments, for instance on websites.
+商户根据支付宝/微信支付协议生成一个动态二维码并展示给顾客. 用户打开他们自己的支付宝/微信支付钱包并扫描展示出的动态二维码以完成付款. 这个场景适用于线下和线上付款, 例如在网站上支付.
 
 ## 请求参数
 
-|Parameter name| Parameter code|Mandatory|Parameter type|Description|
+|参数名称| 参数编码|是否必填|参数类型|描述|
 |:----    |:---|:----- |-----   |-----   |
-|Public payment parameter | —  | — | — | — |
-|Payment mark | `pay_tag`  | No |     String(16) | The default value is: ALIPAYHK<br/>Alipay Continental version: ALIPAYCN<br/>801103 - Alipay overseas online refund (QF_BUSICD_ALIPAY_ONLINE_REFUND)<br/>801104 - Alipay overseas online inquiry (QF_BUSICD_ALIPAY_ONLINE_QUERY)<br/>801110 - Alipay overseas online APP payment (QF_BUSICD_ALIPAY_ONLINE_APP)<br/>801501 - Alipay Hong Kong pc scan code<br/>801512 - Alipay Hong Kong WAP payment<br/>801510 - Alipay Hong Kong APP payment  |
-Order expiration time | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong WAP payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas WAP payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP
-|Designated payment method    |`limit_pay`|No |String   |The parameter value is specified as no_credit, and credit card payment is prohibited. This setting only applies to mainland China.  |
+|公共支付参数 | —  | — | — | — |
+|支付标记 | `pay_tag`  |否 |     String(16) | 默认值是: ALIPAYHK<br/>支付宝大陆版本: ALIPAYCN<br/>801103 - 支付宝海外线上退款 (QF_BUSICD_ALIPAY_ONLINE_REFUND)<br/>801104 - 支付宝海外线上查询 (QF_BUSICD_ALIPAY_ONLINE_QUERY)<br/>801110 - 支付宝In-App支付(海外商户) (QF_BUSICD_ALIPAY_ONLINE_APP)<br/>801501 - 支付宝香港扫码<br/>801512 - 支付宝香港Wap支付<br/>801510 -支付宝In-App支付 (香港商戶)  |
+订单过期时间 | `expired_time` | 否<br/> (仅支持扫码支付) | String(3)  | 按分钟计时的动态二维码的过期时间. 默认时长为30分钟, 最小值5分钟，最大值120分钟.<br/> 适用于: <br/>800201-微信扫码<br/>800101-支付宝扫码<br/>801512-支付宝香港Wap支付<br/>801501-支付宝香港扫码<br/>801107-支付宝海外Wap支付<br/>801101-支付宝海外扫码<br/>801010-微信香港APP<br/>801510-支付宝香港APP
+|指定支付方式  |`limit_pay`|否 |String   |该参数值指定为`no_credit`，禁止使用信用卡支付,该规则只对中国大陆生效 |
 
 ## 响应参数
 
-|Parameter code|Secondary parameter code|Parameter type|Parameter name|Description|
+|参数编码|二级参数编码|参数类型|参数名称|描述|
 |:----    |:---|:----- |-----   |-----   |
-|QR Code |  |String(512) | QR code link   | |
+|QR Code |  |String(512) | 二维码链接   | |
 |Public payment parameter | —  | — | — | — |

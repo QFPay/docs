@@ -108,7 +108,7 @@ print(signature)
 `pay_type` | 是 | String | 请根据 [支付类型编码](../preparation/paycode#支付类型编码)查看完整的交易类型.
 `sysdtm` | 是 | String | 系统的交易创建时间. 这个值被用作结算截止时间.
 `paydtm` | 是 | String | 交易的支付时间.
-`txcurrcd` | 是 | String | 交易货币. 可查看 [货币种类](../preparation/paycode#货币种类) 获取完整的支持的货币类型列表.
+`txcurrcd` | 是 | String | 交易货币. 可查看 [支付币种](../preparation/paycode#支付币种) 获取完整的支持的货币类型列表.
 `txdtm` | 是 | String | 由商户在付款请求中提供的订单创建时间.
 `txamt` | 是 | String | 以分为单位的交易金额.
 `out_trade_no` | 是 | String | 外部订单号.
