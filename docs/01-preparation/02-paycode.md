@@ -97,7 +97,7 @@ Code | Description
   2. `web_url` parameter in response contains the payment url.
 
   **(\*\*)**
-  1. Transaction amount must be greater than 1 MYR.
+  1. Transaction amount must be greater than 1 HKD.
 
   **(\*\*\*)**
   1. Payment method does not support refunds.
