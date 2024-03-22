@@ -21,7 +21,7 @@ import Link from '@docusaurus/Link';
 
 请注意在沙盒环境进行的测试交易不会被结算. 因此, 请务必使用小笔金额测试并在原始交易日当天使用退款终端或是商户APP进行退款.
 
-每个商户将会被提供一系列有或没有`mchid`的`app_code`和`client_key`, 拥有多个分支的商家通常会同时拥有`app_code`,`client_key`和`mchid`.经过哈希编码的`mchid`被用作辨别商店和网店.除此之外只有`app_code`和`client_key`会被提供.
+每个商户将会被提供一系列有或没有 `mchid` 的 `app_code` 和 `client_key` , 拥有多个分支的商家通常会同时拥有 `app_code` , `client_key` 和 `mchid`.经过哈希编码的 `mchid` 被用作辨别商店和网店.除此之外只有 `app_code` 和 `client_key` 会被提供.
 
 ### 编码机制
 

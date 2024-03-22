@@ -27,7 +27,6 @@ The data is encoded by Base64 after encryption.
 
 ## 3. Request payload format
 
-
 | Parameter name | Mandatory | Parameter type | Description |
 |---|---|---|---|
 | amt | required | Integer | Amount x 100, e.g. $10.1 => 1010 |
@@ -37,7 +36,7 @@ The data is encoded by Base64 after encryption.
 
 ### 3.1 交易
 
-::: note
+:::note
     For QR code payment, MPM/CPM mode is automatically selected base on last usage.
 
     camera_id:扫码支付的时候可以切换前后摄像头,可以不传这个字段，默认是后置摄像头
@@ -331,7 +330,7 @@ for example
 
 接收方收到报文后，会检查报文的前两个字节是否为开始字符(0x2f6e)，如果不是则响应错误报文(0x31)。否则继续遍历后续字节，直至结束字符。
 
-::: warning
+:::warning
     *0x2f6e代表ASCII编码的 `/n` 的十六进制表示*
 :::
 
