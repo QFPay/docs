@@ -306,8 +306,8 @@ When the query transaction is a refund then an additional parameter `origssn` wi
 |API order number | ` out_trade_no ` |No |String(128) | External transaction number / Merchant platform transaction number, multiple entries are seperated by commas   |
 |Payment type | ` pay_type ` |No |String(6) | Multiple entries are seperated by commas   |
 |Transaction return code | ` respcd ` |No |String(4) | Returns all orders with return code status by default   |
-|Starting time | ` start_time ` |No |String(20) | It is ignored when `syssn` or `out_trade_number` is provided. The default date time is the start of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh&#58;mm:ss   |
-|End Time | ` end_time ` |No | String(20) | It is ignored when `syssn` or `out_trade_number` is provided. The default date time is the end of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh&#58;mm:ss   |
+|Starting time | ` start_time ` |No |String(20) | It is ignored when `syssn` or `out_trade_number` is provided. The default date time is the start of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
+|End Time | ` end_time ` |No | String(20) | It is ignored when `syssn` or `out_trade_number` is provided. The default date time is the end of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
 |Time zone | ` txzone ` |No | String(5) | Used to record the local order time. The default is Beijing time UTC+8 (+0800)   |
 |Number of pages | ` page `   |No |  Int(8) | Default value is 1   |
 |Number of items displayed per page | ` page_size ` |No |  Int(8) | By default 10 transactions will be displayed. The maximum `page_size` value is 100  |
@@ -331,9 +331,9 @@ When the query transaction is a refund then an additional parameter `origssn` wi
 | Original transaction number | `origssn` | String(40) | Refers to the original QFPay transaction number. This parameter is only available when the `syssn` of a refund is queued |
 | Payment type | `pay_type` | String(6) | Please refer to the section [Payment Codes](../preparation/paycode#payment-codes) for a complete list of payment types |
 | Order type |  `order_type` |  String(16) | Payment: Payment transaction Refund: Refund transaction |
-| Request transaction time | `txdtm` | String(20) | Request transaction time provided by merchant in payment and refund request. Format: YYYY-MM-DD hh&#58;mm:ss |
+| Request transaction time | `txdtm` | String(20) | Request transaction time provided by merchant in payment and refund request. Format: YYYY-MM-DD hh:mm:ss |
 | Transaction amount | `txamt` | Int(11) |  Amount of the transaction. Unit in cents (i.e. 100 = $1) |
-| System transaction time | `sysdtm` | String(20) |  Format: YYYY-MM-DD hh&#58;mm:ss <br/> This parameter value is used as the cut-off time for settlements. |
+| System transaction time | `sysdtm` | String(20) |  Format: YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. |
 | Cancellation or refund indicator | `cancel` | String(1) |  Transaction cancel status: <br/> 0 = Not cancelled <br/> 1 = For CPM: Transaction reversed or refunded successfully <br/> 2 = For MPM: Transaction canceled successfully <br/> 3 = Transaction refunded <br/> 4 = Alipay Preauth order finished <br/> 5 = Transaction partially refunded |
 | Payment status |  `respcd` | String(4) | 0000 = transaction succeeded <br/> 1143/1145 = Please wait to evaluate the transaction status. All other response codes indicate transaction failure |
 | Payment status message | `errmsg` | String(128) | Payment result description |

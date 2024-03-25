@@ -302,8 +302,8 @@ ob_end_flush();
 |外部订单号| ` out_trade_no ` |No |String(128) | External transaction number / Merchant platform transaction number, multiple entries are seperated by commas   |
 |支付类型 | ` pay_type ` |No |String(6) | Multiple entries are seperated by commas   |
 |交易返回码| ` respcd ` |No |String(4) | Returns all orders with return code status by default   |
-|开始时间| ` start_time ` |No |String(20) | It is ignored when `syssn` or `out_trade_number` is provided. The default date time is the start of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh&#58;mm:ss   |
-|结束时间	| ` end_time ` |No | String(20) | It is ignored when `syssn` or `out_trade_number` is provided. The default date time is the end of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh&#58;mm:ss   |
+|开始时间| ` start_time ` |No |String(20) | It is ignored when `syssn` or `out_trade_number` is provided. The default date time is the start of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
+|结束时间	| ` end_time ` |No | String(20) | It is ignored when `syssn` or `out_trade_number` is provided. The default date time is the end of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
 |时区 | ` txzone ` |No | String(5) | Used to record the local order time. The default is Beijing time UTC+8 (+0800)   |
 |页数| ` page `   |No |  Int(8) | Default value is 1   |
 |每页显示数量| ` page_size ` |No |  Int(8) | By default 10 transactions will be displayed. The maximum `page_size` value is 100  |
@@ -328,7 +328,7 @@ ob_end_flush();
 | 请求交易时间 | `txdtm` | String(20) | 商户在交易和退款请求中提交的交易时间. 格式: YYYY-MM-DD hh:mm:ss |
 | 订单支付金额 | `txamt` | Int(11) |  交易金额, 以分为单位 (i.e. 100 = $1) |
 | 系统交易时间 | `sysdtm` | String(20) | 格式: YYYY-MM-DD hh:mm:ss <br/>这个值被用作结算截止时间 |
-| 撤销/退款标记 | `cancel` | String(1) | 交易撤销情况: <br/> 0 = 未能撤销 <br/> 1 = 付款码支付: 交易撤销或退款成功 <br/> 2 = 扫码支付: 交易撤销成功 <br/> 3 = 交易已退款 <br/> 4 = 支付宝预授权订单完结 <br/> 5 = 交易部分退款 |
+| 撤销/退款标记 | `cancel` | String(1) | 交易撤销情况: <br/> 0 = 未能撤销 <br/> 1 = 付款码支付: 交易撤销或退款成功 <br/> 2 = 正扫支付: 交易撤销成功 <br/> 3 = 交易已退款 <br/> 4 = 支付宝预授权订单完结 <br/> 5 = 交易部分退款 |
 | 支付结果返回码 |  `respcd` | String(4) | 0000-请求成功.<br/>1143/1145 - 商户需要持续查询退款交易状态. <br/>所有其他的返回编码都是失败值. 请根据 [交易状态码](../preparation/paycode#交易状态码) 获取完整的信息.|
 | 支付结果描述 | `errmsg` | String(128) | 支付结果描述 |
 | 货币换汇汇率 |`exchange_rate`  | String | 使用的换汇汇率 |

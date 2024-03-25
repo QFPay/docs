@@ -290,7 +290,7 @@ Merchants can use the refund interface to refund transactions. The merchant acco
 |QF Pay transaction number | ` syssn ` |Yes |String(128)  | Original transaction ID `syssn`  that is supposed to be refunded|
 |API order number | ` out_trade_no `  |Yes |String(128)  | External refund transaction number / Merchant platform refund transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.|
 |Refund amount | ` txamt `   |Yes |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1) <br/> Required for both full refund and partial refund. Some payment channel may not support partial refund.|
-|Transaction request time | ` txdtm `   |Yes |String(20) |Format: YYYY-MM-DD hh&#58;mm:ss|
+|Transaction request time | ` txdtm `   |Yes |String(20) |Format: YYYY-MM-DD hh:mm:ss|
 |Merchant ID | ` mchid `  |No |String(16)  | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID. On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. |
 |Transaction time | ` txzone `   |No |String(5)  |Used to record the local transaction time. The default is Beijing time UTC+8 (+0800)|
 |Device ID | ` udid `    |No |String(40)  |Unique transaction device ID|
@@ -304,7 +304,7 @@ Merchants can use the refund interface to refund transactions. The merchant acco
 |Refund Transaction ID | `syssn`  |String(40)   |New transaction ID referring to the newly created refund transaction|
 |Original Transaction ID| `orig_syssn`  |String(128)   |Previous transaction ID referring to the original transaction that has been refunded|
 |Refund amount| `txamt`   |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1)|
-|System transaction time | `sysdtm`  | String(20)  |Format: YYYY-MM-DD hh&#58;mm:ss <br/> This parameter value is used as the cut-off time for settlements.|
+|System transaction time | `sysdtm`  | String(20)  |Format: YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements.|
 |Return code| `respcd` |  String(4)|  0000-Request successful.<br/>1143/1145 - merchants are required to continue to query the refund transaction result. <br/>All other return codes indicate transaction failure. Please refer to the section [payment status codes](../preparation/paycode#transaction-status-codes) for a complete list of return codes.|
 |Response message| `resperr` |  String(128)| Error message |
 | Net payment amount |`cash_fee`  | String | Actual payment amount by user = transaction amount - discounts |

@@ -116,7 +116,7 @@ Request Body:
 |QF Pay transaction number    | `syssn` | No | String    | Multiple entries are separated by English commas |
 |External transaction number    | `out_trade_no` | No | String    | e.g. Developer platform order number |
 |Transaction amount    | `txamt` |No |    Int   |Whether to pass this parameter depends on the payment channel, Alipay and WeChat Pay do not need to submit this information  |
-|Transaction request time    |`txdtm`  |Yes  |String    |Format: YYYY-MM-dd hh&#58;mm:ss  |
+|Transaction request time    |`txdtm`  |Yes  |String    |Format: YYYY-MM-dd hh:mm:ss  |
 |Unique device id   |`udid` |No|String    |   |
 |Time zone    |`txzone` | No |String    |Used to record the local order time. The default is Beijing time GMT+8 (+0800)  |
 
@@ -126,9 +126,9 @@ Request Body:
 |:----    |:---|:----- |-----   |
 |`syssn` |String(40)| QF Pay transaction number |  |
 |`orig_syssn` |String(40)| External transaction number| Developer platform transaction number |
-|`txdtm`  |String(20)| Time of the transaction request| Format: YYYY-MM-dd hh&#58;mm:ss |
+|`txdtm`  |String(20)| Time of the transaction request| Format: YYYY-MM-dd hh:mm:ss |
 |`txamt`  |Int(11)| Order payment amount |  |
-|`sysdtm`   |String(20)| System trading time|  Format: YYYY-MM-dd hh&#58;mm:ss <br/> This parameter value is used as the cut-off time for settlements. |
+|`sysdtm`   |String(20)| System trading time|  Format: YYYY-MM-dd hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. |
 |`respcd`   |String(4)| Return code |  |
 |`respmsg`    | String(128)| Information description |  |
 |`resperr`    |String(128)| Description error |  |
@@ -176,7 +176,7 @@ Request Body:
 |QF Pay transaction number | `syssn`  | Yes | String   |  Fund authorization number  |
 |External transaction number    | `out_trade_no` | Yes | String    |Developer platform transaction number |
 |Transaction amount    | `txamt`  | Yes | int     |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen funds|
-|Transaction request time    | `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh&#58;mm:ss|
+|Transaction request time    | `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh:mm:ss|
 | Device ID   | `udid`   | No | String         |Must be unique|
 | Time zone | `txzone`    | No | String        |Used to record the local order time. The default is Beijing time GMT+8 (+0800)|
 | Redirect URL   | `return_url`   | No | String        | Redirect to address after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters. |
@@ -187,9 +187,9 @@ Request Body:
 |:----    |:---|:----- |-----   |
 |`syssn` |   String(40) | QF Pay Transaction number | This number is being used when freezing funds, detucting money from the frozen amount as well as unfreezing funds. |
 |`orig_syssn`    |String(40)| External transaction number | Developer platform transaction number |
-|`txdtm`     | String(20) | Transaction request time | Format: YYYY-MM-DD hh&#58;mm:ss  |
+|`txdtm`     | String(20) | Transaction request time | Format: YYYY-MM-DD hh:mm:ss  |
 |`txamt`    |Int(11)| Transaction amount | |
-|`sysdtm`     |String(20)| System transaction time |Format: YYYY-MM-DD hh&#58;mm:ss |
+|`sysdtm`     |String(20)| System transaction time |Format: YYYY-MM-DD hh:mm:ss |
 |`respcd`    |String(4)| Return code |  |
 |`respmsg`    |String(128)| Information description|  |
 |`resperr`     |String(128)| Description error |  |

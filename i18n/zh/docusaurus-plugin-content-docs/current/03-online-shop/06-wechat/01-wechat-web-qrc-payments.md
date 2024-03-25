@@ -283,7 +283,7 @@ ob_end_flush();
 支付类型 | `pay_type` | | 是| String(6) | 微信线上支付类型 `800201`
 外部订单号 | `out_trade_no` | | 是| String(128)| 外部交易代码 / 商户平台交易码: 在同一商户账户中的每笔交易和退款请求该参数值唯一
 请求交易时间 | `txdtm` | |是| String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
-交易到期时间 | `expired_time` | | 否 <br/> (仅限扫码支付) | String(3)  | 以分钟为计时的二维码过期时间,默认的过期时间是30分钟. 该参数可以被手动设置为最小5分钟,最大120分钟<br/> 该参数可用于: <br/>800201 - 微信扫码支付
+交易到期时间 | `expired_time` | | 否 <br/> (仅限正扫支付) | String(3)  | 以分钟为计时的二维码过期时间,默认的过期时间是30分钟. 该参数可以被手动设置为最小5分钟,最大120分钟<br/> 该参数可用于: <br/>800201 - 微信扫码支付
 商品名称标识 | `goods_name` | | 否  | String(64) | 商品名称 / 标识: 不能超过 20 个字母数字或包含特殊字符。 APP支付不能为空。 如果参数是汉字，则需要使用**UTF-8**编码。
 子商户号 | `mchid` | | 否  | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request.
 时区 | `txzone` | | 否  | String(5) | 用于记录本地下单时间，默认为北京时间+0800

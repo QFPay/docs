@@ -113,7 +113,7 @@ print(signature)
 `txamt` | 是 | String | 以分为单位的交易金额.
 `out_trade_no` | 是 | String | 外部订单号.
 `syssn` | 是 | String | 钱方交易流水号.
-`cancel` | 是 | String  | 交易取消状态: <br/> 0 = 没有取消 <br/> 1 = 用于付款码支付: 交易撤销或者退款成功 <br/> 2 = 扫码支付: 交易取消成功 <br/> 3 = 交易已退款 <br/> 4 = 支付宝预授权订单完成 <br/> 5 = 交易部分退款.
+`cancel` | 是 | String  | 交易取消状态: <br/> 0 = 没有取消 <br/> 1 = 用于付款码支付: 交易撤销或者退款成功 <br/> 2 = 正扫支付: 交易取消成功 <br/> 3 = 交易已退款 <br/> 4 = 支付宝预授权订单完成 <br/> 5 = 交易部分退款.
 `respcd` | 是 | String | 交易状态 - 在异步通知消息中会是 `0000`
 `notify_type` | 是 | String |通知类型: `payment` 或 `refund`
 `mchid` | 否 |  String | 唯一商户标识ID, 这个参数只返回给代理商.
