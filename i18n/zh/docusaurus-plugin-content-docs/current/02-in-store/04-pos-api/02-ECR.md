@@ -4,8 +4,6 @@ import Link from '@docusaurus/Link';
 
 # ECR integration technical specification
 
-> [!NOTE]   4.32.8  更新内容
-          1、ECR 支持设置刷卡等待超时时间
 
 ## 1. POS-KEY
 
@@ -13,9 +11,16 @@ import Link from '@docusaurus/Link';
 
 <br/>
 
-The default encrpytion is ON.
+默认加密处于打开状态。
 
-There is an option to switch on/off on merchant portal (MMS) or refresh POS-KEY. And, Haojin App refresh is required to be effective
+有一个刷新 POS-KEY 的选项。 并且Haojin App需要刷新才有效
+
+<br/>
+**刷新 POS-KEY 的步骤**
+登入 Haojin App -> 我的 选项 -> 设置 -> 设备调用秘钥 -> 重置秘钥
+
+**检查 POS-KEY 的步骤**
+登入商户管理平台-> 设置 -> 设备设置 -> POS秘钥管理
 
 ## 2. Encryption
 
@@ -23,32 +28,29 @@ There is an option to switch on/off on merchant portal (MMS) or refresh POS-KEY.
 
 <br/>
 
-The data is encoded by Base64 after encryption.
+数据经过加密后采用Base64编码。
 
-## 3. Request payload format
+## 3. 参数格式
 
-| Parameter name | Mandatory | Parameter type | Description |
+| 参数名称 | 是否必填 | 参数类型 | 描述 |
 |---|---|---|---|
-| amt | required | Integer | Amount x 100, e.g. $10.1 => 1010 |
-| func_type | required | String | Instruction code |
-| channel | required | String | Wallet name, refer to Channel list |
-| out_trade_no | optional | String | Merchant reference. <br/> if not passed, the out_trade_no won't be passed |
+| amt | 是 | Integer | 金额, e.g. $10.1 => 10.1 |
+| func_type | 是 | String | 指令代码 |
+| channel | 是 | String | 钱包名称，参见通道列表 |
+| out_trade_no | 否 | String | 商户参考。 <br/> 如果不通过，则out_trade_no不会通过 |
 
 ### 3.1 交易
 
 :::note
-    For QR code payment, MPM/CPM mode is automatically selected base on last usage.
+    对于二维码支付，根据上次使用情况自动选择 MPM/CPM 模式。
 
     camera_id:扫码支付的时候可以切换前后摄像头,可以不传这个字段，默认是后置摄像头
 
             0：CAMERA_PARAM_BACK  后置摄像头
             1：CAMERA_PARAM_FROT  前置摄像头
 
-    <!-- md:version 4.32.0 -->
 
-    wait_card_timeout :，等待刷卡超时时间，可以不设置，默认120s,
-            类型int，值大于0
-    <!-- md:version 4.32.8 -->
+    wait_card_timeout :，等待刷卡超时时间，可以不设置，默认120s, 类型int，值大于0
 :::
 
 ```json
@@ -65,18 +67,23 @@ The data is encoded by Base64 after encryption.
 }
 ```
 
-For inquiry the transaction result, please use the Inquire API: https://sdk.qfapi.com/?python#transaction-enquiry
+如需后端查询交易结果，请使用查询接口：https://sdk.qfapi.com/?python#transaction-enquiry
 
-### 3.2 退款
+### 3.2 退款/撤销
 
-Enter password to proceed, the password is the login password of POS App
+初始化退款请求时，应用程序中无需输入密码
 
-refund_amount:You can pass null or "". If it is empty or "", the default refund amount 
-               is the refundable amount of the order.
+specific parameters
+| 参数名称 | 是否必填 | 参数类型 | 描述 |
+|---|---|---|---|
+|orderId|是|String|QFPay交易编号|
+| refund_amount | 否 | String| 默认退款金额为订单可退款金额，<br/>支持部分退款 |
+|allow_modify_flag|否| Integer| 0：不允许修改退款金额（默认值）<br/> 1：允许修改退款金额 |
 
-allow_modify_flag:（这个字段可以不传，默认不允许修改）
-     0:退款的时候，不能修改金额；
-     1:退款的时候允许修改金额
+:::note
+> 对于卡支付、银联卡、运通卡，当日退款金额必须为“全额”
+:::
+
 ```json
 {
   "content": {
@@ -131,9 +138,9 @@ allow_modify_flag:（这个字段可以不传，默认不允许修改）
 content：请求的数据信息
 digest:content 数据的签名,按照字段顺序拼接成 字段=值 的形式，算签名,
 
-## Sign signature
+## 生成签名
 
-sample of sign signature
+生成签名示例
 
 ```js
 // original payload
@@ -153,9 +160,9 @@ digest=(
 
 ```
 
-if encryption is enabled, the above payload will be encrypted by AES at `content`, and the `digest` will be calculated based on the encrypted payload.
+如果启用加密，则上述有效负载将在“content”处通过 AES 进行加密，并且“digest”将根据加密的有效负载计算。
 
-for example
+示例
 
 ```json
 {
@@ -183,9 +190,9 @@ for example
     （6）、fps           FPS支付
     （7）、octopus       八达通支付
     （8）、unionpay_card     银联卡支付
-    （9）、amex_card     amex card pay
+    （9）、amex_card     美国运通卡
 
-3、amt: 交易金额, 单位为分
+3、amt: 交易金额
 
 4、orderId: 交易订单号和 `out_trade_no` 相同
 
@@ -195,6 +202,7 @@ for example
 {\"respcd\": \"6000\",\"data\": \"{"aaaaaa"}\",\"respmsg\": \"xxxxxxxxxx\",\"resperr\":\"xxxxxxxxxx\"}
 ```
 
+```plaintext
 1. respcd: response code
     （1）、"4003"，请求拒绝，pos-key 不匹配
     （2）、"4004"，请求方式不对，需要时post请求
@@ -205,6 +213,7 @@ for example
     （7）、"6000"  请求成功
     （8）、"6001"  用户取消  
     （9）、"6002"  请求错误
+
 2. respmsg：响应的信息
 3. resperr：响应的错误信息
 4. data:交易或者退款返回的数据，
@@ -224,7 +233,7 @@ for example
             syssn;流水号
             clisn;客戶端序列號
             out_trade_no；外部订单号
-            cardscheme
+            cardscheme；卡组织，例如：VISA
     （2）退款返回数据字段：
             respcd;请求响应码
             resmsg;请求信息
@@ -240,7 +249,7 @@ for example
             txamt;退款金额
             originTxamt;原订单金额
 
-        （3）查询交易信息返回字段：
+    （3）查询交易信息返回字段：
             server_time;服务器时间
             cancel;cancel状态
             clisn;客戶端序列號
@@ -261,9 +270,8 @@ for example
             respcd;响应编码
             origbusicd;原业务代码
             chnlsn;通道序列號
-            cardscheme；
-
-5. 如果配置的是加密模式，返回的数据也是 加密后的数据
+            cardscheme；卡组织，例如：VISA
+```
 
 ## 6. USB 的数据传输方式
 
