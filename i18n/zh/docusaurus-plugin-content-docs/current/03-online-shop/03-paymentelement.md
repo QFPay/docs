@@ -1,6 +1,7 @@
 ﻿# 钱方Element SDK
 
-#### 引入方式
+## 引入方式
+
 ```js
 // sanbox环境
 <script src="https://cdn-int.qfapi.com/qfpay_element/qfpay.js"></script>
@@ -10,137 +11,145 @@
 <script src="https://cdn-hk.qfapi.com/qfpay_element/qfpay.js"></script>
 ```
 
-#### 使用示例
+## 使用示例
 
-1. 支付模式(Payment Intent)
-    1. 支持visa/master Card-form支付方式
-        ```js
-        // 初始化 qfpay 对象
-        const qfpay = QFpay.config()
-        
-        // 初始化 payment 对象
-        const payment = qfpay.payment()
-        
-        // 传递支付相关参数
-        payment.pay({
-          goods_name: "goods",
-          paysource: "payment_element"
-        }, "e487a02e3e1143e482db765ccec63d58")
-        
-        // 初始化 elements 对象，并生成 card-form表单
-        const elements = qfpay.element()
-        elements.createEnhance({
-          selector: "#container"
-        })
+### 1. 支付模式(Payment Intent)
 
-        // 触发表单提交，并接受响应参数
-        const response = qfpay.confirmPayment({
-          return_url: 'https://xxx.xxx.com'
-        })
-        ```
+1. 支持visa/master Card-form支付方式
 
-    2. 完整支付功能，包括visa/master card-form、visa/master pre-auth、支付宝香港、支付宝大陆、微信、银联云闪付、Payme、转数快等。
-        ```js
-        // 初始化 qfpay 对象
-        const qfpay = QFpay.config()
-        
-        // 初始化 payment 对象
-        const payment = qfpay.payment()
-        
-        // 验证 payment intent 值是否正确并可用
-        qfpay.retrievePaymentIntent()
-       
-        // 传递支付相关参数
-        payment.walletPay({
-            lang: 'zh-cn', // zh-hk en  zh-cn为简体  zh-hk为繁体 en为英文 不传递则默认为当前浏览器语言
-            goods_info: 'goods_info',  // 商品信息
-            goods_name: "goods_name",  // 商品名字
-            paysource: "payment_element_checkout", //固定传参 
-            out_trade_no: intentParams.out_trade_no, // 外部订单号
-            txamt: intentParams.txamt, // 支付金额
-            txcurrcd: intentParams.txcurrcd, // 币种
-            support_pay_type: ['Alipay', 'WeChat', 'UnionPay', 'AlipayHK', 
-                               'FPS', 'VisaMasterCardPayment', 'ApplePay', 
-                               'VisaMasterCardPreAuth'], // 自定义显示已开通的支付方式
-            // intent_expiry: encodeURIComponent(intent_expiry), // intent过期时间
-            // customer_id: "xxxxxxx" // 如果传入 customer_id 则表示在 payment 支付模式下进行卡信息收集
-        }, intentParams.payment_intent)
-        
-        // 初始化 elements 对象，并生成 card-form表单
-        const appearance = {
-            // theme: 'dark',
-            variables: {
-                // fontFamily: 'cursive', // 字体
-                // fontWeight: '400', // 字体粗细
-                // colorText: 'black', // 字体颜色
-                // sizeFontSubTitle: 'inherit', // 字体大小
-                // colourBackground: '#fff', // 背景色
-                // colourPrimary: '#ced4da', // 输入框颜色
-                colourComponentText: 'black', // 输入框字体颜色
-                // sizeComponentText: '15px', // 输入框字体尺寸
-                // colourErrorMessage: '#da5d4a', // 错误信息的颜色
-                // sizeErrorMessage: 'inherit' // 错误信息的尺寸
-                // colorPaymentButton: '#000000',// 支付按钮的颜色
-                // colorPaymentButtonText: '#FFFFFF', // 支付按钮文字的颜色
-                colorQRCodeTopPromptContent: '#000000', // 二维码顶部提示文本颜色
-                colorQRCodeBottomPromptContent: '#000000', // 二维码底部提示文本颜色
-                fontWeightQRCodeTopPrompt: '900', // 二维码顶部提示文本字体
-                fontWeightQRCodeBottomPrompt: '300', // 二维码顶部提示文本字体
-            },
-            billingAddressDisplay: {
-                city: true, // 控制 billing address 中的 city 是否展示
-                address1: true, // 控制 billing address 中的 address 1 是否展示
-                address2: true, // 控制 billing address 中的 address 2 是否展示
-            }
-        }
-        const elements = qfpay.element(appearance)
-        elements.createWallet({
-          selector: "#container"
-        })
-        
-        // 触发表单提交，并接受响应参数
-        const response = qfpay.confirmWalletPayment({
-          return_url: 'https://xxx.xxx.com'  // 回跳合作方的url
-        })
-       if (response.code === '0000') { // 支付结果 '0000' 为支付成功
-          alert('支付成功' + JSON.stringify(res))
-       } else {
-          alert('支付失败' + JSON.stringify(res))
-       }
-        ```
+```js
+  // 初始化 qfpay 对象
+  const qfpay = QFpay.config()
+  
+  // 初始化 payment 对象
+  const payment = qfpay.payment()
+  
+  // 传递支付相关参数
+  payment.pay({
+    goods_name: "goods",
+    paysource: "payment_element"
+  }, "e487a02e3e1143e482db765ccec63d58")
+  
+  // 初始化 elements 对象，并生成 card-form表单
+  const elements = qfpay.element()
+  elements.createEnhance({
+    selector: "#container"
+  })
 
-2. 创建token模式
-    1. visa/master card-form支付
-    ```js
-    // 初始化 qfpay 对象
-    const qfpay = QFpay.config()
-    
-    // 初始化 token 对象
-    const token = qfpay.token()
-    
-    // 传递生成token相关参数
-    token.intent({
-      paysource: "payment_element"
-    },"e487a02e3e1143e482db765ccec63d58")
-    
-    // 初始化 elements 对象，并生成 card-form表单
-    const elements = qfpay.element()
-    elements.createEnhance({
-      seletor: "#container",
-      element: "token"
-    })
-    
-    // 触发表单提交，并接受响应参数
-    const response = qfpay.createToken({
-      return_url: 'https://xxx.xxx.com'
-    })
-    ```
+  // 触发表单提交，并接受响应参数
+  const response = qfpay.confirmPayment({
+    return_url: 'https://xxx.xxx.com'
+  })
+```
+
+2. 完整支付功能，包括visa/master card-form、visa/master pre-auth、支付宝香港、支付宝大陆、微信、银联云闪付、Payme、转数快等。
+
+```js
+  // 初始化 qfpay 对象
+  const qfpay = QFpay.config()
+  
+  // 初始化 payment 对象
+  const payment = qfpay.payment()
+  
+  // 验证 payment intent 值是否正确并可用
+  qfpay.retrievePaymentIntent()
+  
+  // 传递支付相关参数
+  payment.walletPay({
+      lang: 'zh-cn', // zh-hk en  zh-cn为简体  zh-hk为繁体 en为英文 不传递则默认为当前浏览器语言
+      goods_info: 'goods_info',  // 商品信息
+      goods_name: "goods_name",  // 商品名字
+      paysource: "payment_element_checkout", //固定传参 
+      out_trade_no: intentParams.out_trade_no, // 外部订单号
+      txamt: intentParams.txamt, // 支付金额
+      txcurrcd: intentParams.txcurrcd, // 币种
+      support_pay_type: ['Alipay', 'WeChat', 'UnionPay', 'AlipayHK', 
+                          'FPS', 'VisaMasterCardPayment', 'ApplePay', 
+                          'VisaMasterCardPreAuth'], // 自定义显示已开通的支付方式
+      // intent_expiry: encodeURIComponent(intent_expiry), // intent过期时间
+      // customer_id: "xxxxxxx" // 如果传入 customer_id 则表示在 payment 支付模式下进行卡信息收集
+  }, intentParams.payment_intent)
+  
+  // 初始化 elements 对象，并生成 card-form表单
+  const appearance = {
+      // theme: 'dark',
+      variables: {
+          // fontFamily: 'cursive', // 字体
+          // fontWeight: '400', // 字体粗细
+          // colorText: 'black', // 字体颜色
+          // sizeFontSubTitle: 'inherit', // 字体大小
+          // colourBackground: '#fff', // 背景色
+          // colourPrimary: '#ced4da', // 输入框颜色
+          colourComponentText: 'black', // 输入框字体颜色
+          // sizeComponentText: '15px', // 输入框字体尺寸
+          // colourErrorMessage: '#da5d4a', // 错误信息的颜色
+          // sizeErrorMessage: 'inherit' // 错误信息的尺寸
+          // colorPaymentButton: '#000000',// 支付按钮的颜色
+          // colorPaymentButtonText: '#FFFFFF', // 支付按钮文字的颜色
+          colorQRCodeTopPromptContent: '#000000', // 二维码顶部提示文本颜色
+          colorQRCodeBottomPromptContent: '#000000', // 二维码底部提示文本颜色
+          fontWeightQRCodeTopPrompt: '900', // 二维码顶部提示文本字体
+          fontWeightQRCodeBottomPrompt: '300', // 二维码顶部提示文本字体
+      },
+      billingAddressDisplay: {
+          city: true, // 控制 billing address 中的 city 是否展示
+          address1: true, // 控制 billing address 中的 address 1 是否展示
+          address2: true, // 控制 billing address 中的 address 2 是否展示
+      }
+  }
+  const elements = qfpay.element(appearance)
+  elements.createWallet({
+    selector: "#container"
+  })
+  
+  // 触发表单提交，并接受响应参数
+  const response = qfpay.confirmWalletPayment({
+    return_url: 'https://xxx.xxx.com'  // 回跳合作方的url
+  })
+  if (response.code === '0000') { // 支付结果 '0000' 为支付成功
+    alert('支付成功' + JSON.stringify(res))
+  } else {
+    alert('支付失败' + JSON.stringify(res))
+  }
+```
+
+### 2. 创建token模式
+
+1. visa/master card-form支付
+
+```js
+  // 初始化 qfpay 对象
+  const qfpay = QFpay.config()
+  
+  // 初始化 token 对象
+  const token = qfpay.token()
+  
+  // 传递生成token相关参数
+  token.intent({
+    paysource: "payment_element"
+  },"e487a02e3e1143e482db765ccec63d58")
+  
+  // 初始化 elements 对象，并生成 card-form表单
+  const elements = qfpay.element()
+  elements.createEnhance({
+    seletor: "#container",
+    element: "token"
+  })
+  
+  // 触发表单提交，并接受响应参数
+  const response = qfpay.createToken({
+    return_url: 'https://xxx.xxx.com'
+  })
+```
 
 #### 使用说明
+
 **前提条件：使用 sdk 之前必须要先引入 sdk 文件(即qfpay.js)**
 
 ##### 全局对象 QFpay 及相关 API
+
 1. QFpay.config(params)
+
 ```js
 /**
  * 参数: 非必填, Object, 默认值为 {region: 'hk', env: 'prod'},
@@ -159,7 +168,9 @@
  */
 const qfpay = QFpay.config()
 ```
+
 2. qfpay.retrievePaymentIntent()
+
 ```js
 /**
  * 参数: 不需要
@@ -170,6 +181,7 @@ const intentResponse = qfpay.retrievePaymentIntent()
 ```
 
 3. qfpay.element(appearance)
+
 ```js
 /**
  * 参数: 非必填, Object, {theme: string, variables: Object, billingAddressDisplay: Object}
@@ -204,6 +216,7 @@ const elements = qfpay.element(appearance)
 ```
 
 4. qfpay.payment()
+
 ```js
 /**
  * 参数: 不需要
@@ -214,8 +227,8 @@ const qfpay = QFpay.config()
 const payment = qfpay.payment()
 ```
 
-
 5. qfpay.confirmPayment()
+
 ```js
 /**
  * 参数：选填，Object，{return_url: 'https://xxx.xxx.xxx'}, 如果传递了 return_url 参数，支付完成后，会跳转到指定的 return_url，如果未传递 return_url 参数，支付完成后，则停留在当前页面
@@ -234,6 +247,7 @@ const paymentResponse = qfpay.confirmPayment({
 ```
 
 6. qfpay.confirmWalletPayment()
+
 ```js
 /**
  * 参数：选填，Object，{return_url: 'https://xxx.xxx.xxx'}, 如果传递了 return_url 参数，支付完成后，会跳转到指定的 return_url，如果未传递 return_url 参数，支付完成后，则停留在当前页面
@@ -248,6 +262,7 @@ const paymentResponse = qfpay.confirmPayment({
 ```
 
 7. qfpay.token()
+
 ```js
 /**
  * 参数: 不需要
@@ -259,6 +274,7 @@ const payment = qfpay.token()
 ```
 
 8. qfpay.retrieveTokenIntent()
+
 ```js
 /**
  * 参数: 不需要
@@ -269,6 +285,7 @@ const intentResponse = qfpay.retrievePaymentIntent()
 ```
 
 9. qfpay.createToken()
+
 ```js
 /**
  * 参数：选填，Object，{return_url: 'https://xxx.xxx.xxx'}, 如果传递了 return_url 参数，返回结果后，会跳转到指定的 return_url，如果未传递 return_url 参数，返回结果后，则停留在当前页面
@@ -288,13 +305,15 @@ const intentResponse = qfpay.retrievePaymentIntent()
  */
 ```
 
-
 ##### payment对象及相关 API
+
 ```js
 const qfpay = QFpay.config()
 const payment = qfpay.payment()
 ```
+
 1. payment.pay(params1, params2)
+
 ```js
 /**
  * 参数：params1，必填，Object, {goods_name: '', paysource: 'payment_element'}
@@ -315,7 +334,9 @@ payment.pay({
   paysource: 'payment_element'
 }, 'SDF8980SFFSDF890SDF')
 ```
+
 2. payment.walletPay(params1, params2)
+
 ```js
 /**
  * 参数：params1，必填，Object, { lang: 'zh-cn', goods_name: '', paysource: 'payment_element', paysource: "payment_element_checkout", out_trade_no: intentParams.out_trade_no, txamt: intentParams.txamt, txcurrcd: intentParams.txcurrcd}
@@ -362,6 +383,7 @@ payment.walletPay({
 ```
 
 3. payment.inquiry(params1, params2)
+
 ```js
 /**
  * 参数: params1, 必填， Object, {syssn: string, out_trade_no: string, pay_type: string, respcd: stirng, start_time: string, end_time: string} | {}
@@ -379,11 +401,14 @@ const inquiryResponse = payment.inquiry({}, 'SDF8980SFFSDF890SDF')
 ```
 
 ##### token对象及相关 API
+
 ```js
 const qfpay = QFpay.config()
 const token = qfpay.token()
 ```
+
 1. token.intent(params1, params2)
+
 ```js
 /**
  * 参数：params1，必填，Object, {paysource: 'payment_element'}
@@ -398,12 +423,14 @@ token.intent({
 ```
 
 ##### elements对象及相关 API
+
 ```js
 const qfpay = QFpay.config()
 const elements = qfpay.element()
 ```
 
 1. elements.create(params1, params2, params3) --- 仅支持 Visa Mastercard 卡交易
+
 ```js
 /**
  * 参数：params1, 必填, string, 存放card form 的容器
@@ -416,6 +443,7 @@ elements.create("#container")
 ```
 
 2. elements.createEnhance(params) --- elements.create() 的 enhance 版本, 支持 Visa Mastercard 卡交易、ApplePay、单纯创建 token 模式、 payment 模式下创建 token 模式
+
 ```js
 /**
  * 参数：params: Object, {selector: string, email: boolean, tab: boolean, element: string}
@@ -431,3 +459,4 @@ elements.create("#container")
 elements.createEnhance({
   selector: '#container'
 })
+```

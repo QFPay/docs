@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 
 # 线上预授权支付API
 - [线上预授权支付API](#线上预授权支付api)
-	- [公共API](#公共api)
+	- [常用API](#常用api)
 	- [Creating and capturing payments](#creating-and-capturing-payments)
 		- [Step 1: Create Pre-Authorisation Payment](#step-1-create-pre-authorisation-payment)
 		- [Step 2: Capture payment for pre-authorised transactions](#step-2-capture-payment-for-pre-authorised-transactions)
@@ -12,7 +12,7 @@ import Link from '@docusaurus/Link';
 	- [Refunding Completed (`CAPTURED`) Transactions](#refunding-completed-captured-transactions)
 	- [Notifications](#notifications)
 
-## 公共API
+## 常用API
 Instructions on general integration with the development environment is available on [https://sdk.qfapi.com/#introduction](../preparation/introduction)
 
 For instance you may find the following useful before you start the integration:
@@ -22,7 +22,7 @@ For instance you may find the following useful before you start the integration:
 - signature generation for api requests
 - Common error codes
 
-You can also find common APIs that are also applicable to pre-authorisation payments: 
+You can also find common APIs that are also applicable to pre-authorisation payments:
 
 - [Transaction Enquiry](../common-api/transaction-enquiry)
 - [Transaction Refunds](../common-api/refunds)
@@ -34,7 +34,6 @@ You can also find common APIs that are also applicable to pre-authorisation paym
 ### Step 1: Create Pre-Authorisation Payment
 
 The Pre-authorisation Step has to be achieved using the Payment Element component. For details of the integration, please refer to the respective sessions in the payment element documentation.
-
 
 ### Step 2: Capture payment for pre-authorised transactions
 
@@ -51,7 +50,7 @@ Capture the amount booked by the customer in pre-authorised transactions
 | X-QF-APPCODE | Y | app code |
 | X-QF-SIGN | Y | app key |
 
-**parameters** : 
+**parameters** :
 
 | Field          | Must | Description        |
 | -------------- | ---- | ------------------ |
@@ -64,20 +63,20 @@ Capture the amount booked by the customer in pre-authorised transactions
 
 ```json
 {
-	 "sysdtm": "2024-02-26 15:04:12",
-	 "paydtm": "2024-02-26 15:04:12",
-	 "udid": "qiantai2",
-	 "txcurrcd": "HKD",
-	 "txdtm": "2024-02-26 07:04:11",
-	 "txamt": "500",
-	 "resperr": "交易成功",
-	 "respmsg": "Capture received",
-	 "out_trade_no": "",
-	 "syssn": "20240226180500020000014116",
-	 "orig_syssn": "20240226180500020000014079",
-	 "respcd": "0000",
-	 "chnlsn": "",
-	 "cardcd": ""
+"sysdtm": "2024-02-26 15:04:12",
+"paydtm": "2024-02-26 15:04:12",
+"udid": "qiantai2",
+"txcurrcd": "HKD",
+"txdtm": "2024-02-26 07:04:11",
+"txamt": "500",
+"resperr": "交易成功",
+"respmsg": "Capture received",
+"out_trade_no": "",
+"syssn": "20240226180500020000014116",
+"orig_syssn": "20240226180500020000014079",
+"respcd": "0000",
+"chnlsn": "",
+"cardcd": ""
 }
 ```
 
@@ -96,7 +95,7 @@ Capture the amount booked by the customer in pre-authorised transactions
 | X-QF-APPCODE | Y | app code |
 | X-QF-SIGN | Y | app key |
 
-**parameters** : 
+**parameters** :
 
 | Field          | Must | Description        |
 | -------------- | ---- | ------------------ |
@@ -107,29 +106,29 @@ Capture the amount booked by the customer in pre-authorised transactions
 | mchid          | N    | mchid, merchant id |
 
 **response** :
+
 ```json
 {
-	 "sysdtm": "2024-02-26 17:17:05",
-	 "paydtm": "2024-02-26 17:17:06",
-	 "udid": "qiantai2",
-	 "txcurrcd": "HKD",
-	 "txdtm": "2024-02-26 09:17:05",
-	 "txamt": "2000",
-	 "resperr": "交易成功",
-	 "respmsg": "Void received",
-	 "out_trade_no": "",
-	 "syssn": "20240226180500020000014222",
-	 "orig_syssn": "20240226180500020000014220",
-	 "respcd": "0000",
-	 "chnlsn": "",
-	 "cardcd": ""
+"sysdtm": "2024-02-26 17:17:05",
+"paydtm": "2024-02-26 17:17:06",
+"udid": "qiantai2",
+"txcurrcd": "HKD",
+"txdtm": "2024-02-26 09:17:05",
+"txamt": "2000",
+"resperr": "交易成功",
+"respmsg": "Void received",
+"out_trade_no": "",
+"syssn": "20240226180500020000014222",
+"orig_syssn": "20240226180500020000014220",
+"respcd": "0000",
+"chnlsn": "",
+"cardcd": ""
 }
 ```
 
 ## Refunding Completed (`CAPTURED`) Transactions
 
 For integration, please refer to the "Common API" section of the documentation. Please note that the syssn used in the refund transaction should correspond to the syssn returned upon the /authtrade request.
-
 
 ## Notifications
 
@@ -141,7 +140,6 @@ Upon successful execution of the following actions, you should be able to receiv
 - unfreeze funds
 - refund
 
-
 These notifications will follow the same format as below. For different notification, the value of the field `notify_type` will differ
 
 | Action Completed | notify_type value |
@@ -149,7 +147,6 @@ These notifications will follow the same format as below. For different notifica
 | Payment Captured | payment |
 | Unfreeze funds | unfreeze |
 | Refund | refund |
-
 
 ```json
 {

@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 
 # 报关API
 
-Customs declaration API auto-sends the WeChat/Alipay payment data to the customs to simplify the clearance process and saves time for online cross-border stores.
+报关 API 自动将微信/支付宝的支付数据发送给海关以简化清关流程, 为跨境电商节省时间.
 
 ## 推送报关
 
@@ -14,40 +14,43 @@ Customs declaration API auto-sends the WeChat/Alipay payment data to the customs
 
 ### 请求参数
 
-| Parameter code| Mandatory| Parameter type|Description|
+| 参数编码| 是否必须| 参数类型|描述|
 |:---|:----- |-----   |----   |
-|`trade_type`|Y|String(8)|weixin or alipay|
-|`syssn`|Y|String(32)|QFPay transaction number|
-|`customs`|Y|String(20)|Customs for declaration. Example：SHANGHAI_ZS|
-|`mch_customs_no`|Y|String(20)|Customs registration No. of the merchant|
-|`action_type`|N|String(256)|Declaration type. Only valid when `trate_type` is "wechat". "ADD" - new appplication, "MODIFY" - modification of applied declaration|
-|`mch_customs_name`|N|String(256)|Merchant customs record name. Must be passed when `trate_type` is "alipay". Exaple: jwyhanguo_card|
-|`out_request_no`|N|String(32)|Merchant order number. Must be passed when `trate_type` is "alipay". Exaple: 15725904083420588032|
-|`amount`|N|String(20)|Declaration amount. Must be passed when `trate_type` is "alipay". Example: 2.00|
-The following fields should be passed in case splitting or modifying order: <br/>
-###
-| Parameter code| Mandatory| Parameter type|Description|
+|`trade_type`|Y|String(8)|微信或支付宝|
+|`syssn`|Y|String(32)|钱方交易码|
+|`customs`|Y|String(20)|申报的目标海关 示例：SHANGHAI_ZS|
+|`mch_customs_no`|Y|String(20)|商户的海关注册码|
+|`action_type`|N|String(256)|申报类型. 只有在 `trade_type` 是 `wechat` 时生效. "ADD" - 新申请, "MODIFY" - 编辑已申请的报关|
+|`mch_customs_name`|N|String(256)|商户在海关登记的名称. 在 `trade_type` 是 `alipay` 时必须提交 示例: jwyhanguo_card|
+|`out_request_no`|N|String(32)|商户订单号码, 在`trade_type`是 `alipay` 时必须提交. 示例: 15725904083420588032|
+|`amount`|N|String(20)|申报金额. 只有在 `trade_type` 是 `alipay` 时必须提交. 示例: 2.00|
+
+如果拆分或编辑申请, 需要修改如下字段: <br/>
+
+### 请求参数
+
+| 参数编码| 是否必须| 参数类型|描述|
 |:---|:----- |-----   |----   |
-|`sub_order_no`|C|String(64)|Merchant sub-order No. It is required if there is a split order. Example：1111960490|
-|`fee_type`|C|String(8)|Currency. Must be passed when `trate_type` is "wechat". It can only be CNY|
-|`order_fee`|C|String(8)|Sub-order amount (in 0.01 CNY). Cannot exceed the original order amount. order_fee=transport_fee+product_fee. It is required if there is a split order Example：888|
-|`product_fee`|C|String(8)|Product price (in 0.01 CNY). It is required if there is a split order. Example：888|
-|`transport_fee`|C|String(8)|Logistics fee (in 0.01 CNY). It is required if there is a split order. Example：888|
+|`sub_order_no`|C|String(64)|商户子订单号码, 如果是一个拆分请求则必须提交. 示例：1111960490|
+|`fee_type`|C|String(8)|货币. 在 `trade_type` 是 `wechat` 时必须提交, 只能是CNY|
+|`order_fee`|C|String(8)|子订单的金额 (以 0.01 CNY为单位). 不能超过原订单金额, 订单费用=运输费用 + 产品费用. 若有拆分订单则需要填写 示例: 888|
+|`product_fee`|C|String(8)|产品价格 (以 0.01 CNY为单位). 若有拆分订单则需要填写 示例: 888|
+|`transport_fee`|C|String(8)|物流费 (以 0.01 CNY为单位). 若有拆分订单则需要填写 示例: 888|
 
 ### 响应参数
 
-| Parameter code| Mandatory| Parameter type|Description|
+| 参数编码| 是否必须| 参数类型|描述|
 |:---|:----- |-----   |----   |
-|`syssn`||String(40)|QFPay transaction number|
-|`respcd`||String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|
-|`resperr`||String(128)|Response message|
-|`respmsg`||String(128)|Other message information|
-|`verify_department`|||Verification organization|
-|`verify_department_trade_id`|||Transaction number of verification organization|
+|`syssn`||String(40)|钱方交易订单号|
+|`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](#交易状态码) 获得完整返回类型列表|
+|`resperr`||String(128)|信息描述|
+|`respmsg`||String(128)|其他信息|
+|`verify_department`|||认证机构|
+|`verify_department_trade_id`|||认证机构的交易号|
 
 ## 查询报关
 
-Merchants query declaration status by QFPay transaction number.
+商户通过钱方交易订单号查询申报状态
 
 ### HTTP请求
 
@@ -55,22 +58,22 @@ Merchants query declaration status by QFPay transaction number.
 
 ### 请求参数
 
-| Parameter code| Mandatory| Parameter type|Description|
+|参数编码|是否必须|参数类型|描述|
 |:---|:----- |-----   |----   |
-|`trade_type`|Y|String(8)|weixin or alipay|
-|`customs`|Y|String(20)|Customs for declaration. Example：SHANGHAI_ZS|
-|`syssn`|Y|String(32)|QFPay transaction number|
-|`sub_order_no`|N|String(40)|Sub order number. It is required if there is a split order.|
+|`trade_type`|Y|String(8)|`weixin` 或者 `alipay`|
+|`customs`|Y|String(20)|申报的目标海关 示例：SHANGHAI_ZS|
+|`syssn`|Y|String(32)|钱方交易订单号|
+|`sub_order_no`|N|String(40)|商户子订单号码, 如果是一个拆分请求则必须提交. 示例：1111960490|
 
 ### 响应参数
 
-| Parameter code| Mandatory| Parameter type|Description|
+| 参数编码| 是否必须|参数类型|描述|
 |:---|:----- |-----   |----   |
-|`syssn`||String(40)|QFPay transaction number|
-|`respcd`||String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|
-|`resperr`||String(128)|Response message|
-|`respmsg`||String(128)|Other message information|
-|`data`|||Customs declaration details \[\{"resperr" : "", "errmsg" : null, "sub_order_no" : "15752730835729139712", "verify_department" : "OTHERS", "verify_department_trade_id" : "4200000459201911265585026208"\}\]|
+|`syssn`||String(40)|钱方交易订单号|
+|`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](#交易状态码) 获得完整返回类型列表|
+|`resperr`||String(128)|信息描述|
+|`respmsg`||String(128)|其他信息|
+|`data`|||海关申报详情 \[\{"resperr" : "", "errmsg" : null, "sub_order_no" : "15752730835729139712", "verify_department" : "OTHERS", "verify_department_trade_id" : "4200000459201911265585026208"\}\]|
 
 ## 重新报关
 
@@ -81,17 +84,20 @@ If additional order information has been submitted to the customs but is lost in
 `POST ../custom/v1/redeclare`
 
 ### 请求参数
-| Parameter code| Mandatory| Parameter type|Description|
+
+| 请求参数| 是否必须| 参数类型|描述|
 |:---|:----- |-----   |----   |
-|`trade_type`|Y|String(8)|weixin or alipay|
-|`customs`|Y|String(20)|Customs for declaration. Example：SHANGHAI_ZS|
-|`syssn`|Y|String(32)|QFPay transaction number|
-|`mch_customs_no`|Y|String(20)|Customs registration No. of the merchant. Example: 110084111|
-|`sub_order_no`|N|String(40)|Sub order number. It is required if there is a split order.|
-### Response Parameters
-| Parameter code| Mandatory| Parameter type|Description|
+|`trade_type`|Y|String(8)|`weixin` 或者 `alipay`|
+|`customs`|Y|String(20)|申报的目标海关 示例：SHANGHAI_ZS|
+|`syssn`|Y|String(32)|钱方交易订单号|
+|`mch_customs_no`|Y|String(20)|商户的海关注册码, 示例: 110084111|
+|`sub_order_no`|N|String(40)|商户子订单号码, 如果是一个拆分请求则必须提交. 示例：1111960490|
+
+### 响应参数
+
+|请求参数| 是否必须| 参数类型|描述|
 |:---|:----- |-----   |----   |
-|`syssn`||String(40)|QFPay transaction number|
-|`respcd`||String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|
-|`resperr`||String(128)|Response message|
-|`respmsg`||String(128)|Other message information|
+|`syssn`||String(40)|钱方交易订单号|
+|`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](#交易状态码) 获得完整返回类型列表|
+|`resperr`||String(128)|信息描述|
+|`respmsg`||String(128)|其他信息|

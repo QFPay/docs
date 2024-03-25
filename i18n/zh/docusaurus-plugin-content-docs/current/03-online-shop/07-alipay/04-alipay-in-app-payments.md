@@ -6,27 +6,27 @@ import Link from '@docusaurus/Link';
 
 <Link to="/img/alipay-in-app.png" target="_blank">![Alipay APP Payment process-flow](@site/static/img/alipay-in-app.png)</Link>
 
-To download Alipay Oversea SDK , please refer to this [link](https://global.alipay.com./ac/app/client_integration). <br/>
-To download Alipay HK SDK, please refer to this [link](https://global.alipay.com./ac/app_hk/download). <br/>
-To know how to trigger Alipay HK SDK , please refer to this [link](https://global.alipay.com./ac/hkapi/securitypay_pay).
+请参考该[链接](https://global.alipay.com./ac/app/client_integration)下载支付宝海外SDK. <br/>
+请参考该[链接](https://global.alipay.com./ac/app_hk/download)下载支付宝香港SDK. <br/>
+请参考该[链接](https://global.alipay.com./ac/hkapi/securitypay_pay)了解如何触发支付宝香港SDK.
 
-### HTTP请求
+## HTTP请求
 
 `POST ../trade/v1/payment` <br/>
 `PayType: 801110 Oversea Merchants` <br/>
 `PayType: 801510 Hong Kong Merchants`
 
-### 请求参数
+## 请求参数
 
 ```plaintext
 
-Request Body:
+请求本体:
 
 txamt=1&txcurrcd=HKD&pay_type=801510&out_trade_no=052711570017898&txdtm=2021-05-27+11%3A57%3A00&goods_name=goods_name&goods_info=goods_info&mchid=nDB64h9qJ1An&trade_name=trade_name&goods_detail=goods_detail&return_url=http%3A%2F%2Fwww.qfpay.com%2F&pay_tag=ALIPAYHK&seller_id=testoverseas9191%40alipay.com
 
 ```
 
-> QFPay Response:
+> 钱方平台响应:
 
 ```json
 {
@@ -70,51 +70,49 @@ txamt=1&txcurrcd=HKD&pay_type=801510&out_trade_no=052711570017898&txdtm=2021-05-
 }
 ```
 
+使用支付宝SDK发送请求：
+
+(当您在调用支付宝SDK收到 `pay_params` 后, the `orderinfo` 请求参数需要被调整成如下格式:
+将所有数组值以 `key="value"` 的格式组合起来, 请求参数需根据参数名称升序排列, 然后使用 `&` 将参数连接起来.
+`sign` 和 `sign_type` 参数需要放置在末尾.)
+
 ```plaintext
-Request using Alipay SDK：
-
-(After you receive the content of pay_params, when you call Alipay SDK, 
-the orderinfo request parameters need to be adjusted in the following format:
-Combine all the array values in the format of key="value", request parameters 
-in ascending order of parameter name, then use "&" to link the parameters, 
-"sign" and "sign_type" parameters need to be placed at the end.) 
-
 Sample:
 
 _input_charset="UTF-8"&body="goods_info"&currency="HKD"&forex_biz="FP"&it_b_pay="30m"&notify_url="https://test-o2-hk.qfapi.com/trade/alipay_hk/v1/notify"&out_trade_no="20210527154100020004180921"&partner="2088231067382451"&payment_inst="ALIPAYHK"&payment_type="1"&product_code="NEW_WAP_OVERSEAS_SELLER"&return_url="http://www.qfpay.com/"&secondary_merchant_id="1000007081"&secondary_merchant_industry="5941"&secondary_merchant_name="IFlare Hong Kong Limited (external) - online"&seller_id="2088231067382451"&service="mobile.securitypay.pay"&subject="goods_name"&total_fee="0.01"&sign="iU1yXUnsCK7rJAu0DoN61arVexbIfo3GLR5jr3QzjkZ29INSPhcA4e%2F2%2BdPrsf5huzQAkxVKP0CTfvaGPMYqNkxmhoaJWUH0ZhgYDgKugMvtweBvRqOX2W0h3A%2F%2FIdJuxeyOAuh7bHiuazSB3ZH%2BEQwRGP%2Bkk8Jpha930gHwPtw%3D"&sign_type="RSA"
 
 ```
 
-|Parameter name | Parameter code  |Mandatory | Parameter type | Description |
+|参数名称 | 参数编码  |是否必填 | 参数类型 | 描述 |
 |:----    |:---|:----- |-----   |----   |
-|Public payment parameters    |—|— |—   |—   |
-|Product description    |`goods_info`|No | String  | Must not contain special characters   |
-|Payment mark    |`pay_tag`|No | String(16)  | The default value is: ALIPAYHK<br/>Alipay Continental version: ALIPAYCN<br/>801103 - Alipay overseas online refund (QF_BUSICD_ALIPAY_ONLINE_REFUND)<br/>801104 - Alipay overseas online inquiry (QF_BUSICD_ALIPAY_ONLINE_QUERY)<br/>801110 - Alipay overseas online APP payment (QF_BUSICD_ALIPAY_ONLINE_APP)<br/>801501 - Alipay Hong Kong pc scan code<br/>801512 - Alipay Hong Kong Wap payment<br/>801510 - Alipay Hong Kong APP payment  |
-Order expiration time | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong Wap payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas Wap payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP
+|常用支付参数    |—|— |—   |—   |
+|商品描述    |`goods_info`|否 | String  | 支付宝必传 不得包含特殊字符   |
+|支付标记    |`pay_tag`|否 | String(16)  | 默认值是ALIPAYHK<br/>支付宝大陆版本传值：ALIPAYCN<br/>801501 - 支付宝线上扫码支付(香港商戶)<br/>801512 - 支付宝线上WAP支付(香港商戶)<br/>801510 - 支付宝In-App支付(海外商戶) |
+订单过期时间 | `expired_time` | 否<br/> (仅限扫码支付) | String(3)  | 以分钟为单位的过期时间. 默认的过期时间为30分钟, 最小值5分钟，最大值120分钟<br/> 支持: <br/>800201 - 微信扫码支付<br/>800101 - 支付宝跨境线下扫码支付 <br/>801512 - 支付宝线上WAP支付(香港商戶)<br/>801501 - 支付宝线上扫码支付(香港商戶)<br/>801107 -  支付宝线上上WAP支付(海外商戶)<br/>801101 - 支付宝线上上扫码支付(海外商戶)<br/>801010 - 微信香港In-App支付(适用于向微信香港申请的商戶) <br/>801510 - 支付宝In-App支付 (香港商戶)
 
-### 响应参数
+## 响应参数
 
-|Parameter code | Secondary parameter code  | Parameter name |
+|参数编码 | 二级参数编码  | 参数名称 |
 |:----    |:---|:----- |
-| `pay_params`   | `partner`         |Partner |
-|              | `seller_id`                    |  Unique Alipay user number referencing the Alipay payment account                        |
-|              | `subject`                      | Product name / transaction number / order number / order keyword, etc.                    |
-|              | `body`                         | A specific description of a transaction. If it refers to a basket of products, please accumulate the product description string in the body. |
-|              | `total_fee`                    | Total amount                                                  |
-|              | `notify_url`                   | Notification address                                       |
-|              | `service`                      | Service                                                          |
-|              | `cardcd`                       | Card number                                   |
-|              | `payment_type`                 | Payment type                                  |
-|              | `\_input_charset`              | Encoding format                                     |
-|              | `it_b_pay`                     | Custom timeout parameter                                |
-|              | `return_url`                   | Redirect URL                                   |
-|              | `payment_inst`                 | Payment institution                                    |
-|              | `currency`                     | Currency                                                       |
-|              | `product_code`                 | Product code                                             |
-|              | `sign`                         | Required or not                                                 |
-|              | `sign_type`                    | Signature type                                                   |
-|              | `secondary_merchant_id`        | Secondary merchant identification            |
-|              | `secondary_merchant_name`      | Secondary business name                         |
-|              | `secondary_merchant_industry`  | Secondary merchant industry                   |
-| `chnlsn`       |                              | Channel coding                                                    |
-| Public response parameters| —                            | —                                              |
+| `pay_params` | `partner`                      | 合作伙伴 |
+|              | `seller_id`                    | 收款支付宝账号对应的支付宝唯一用户号 |
+|              | `subject`                      | 商品的标题/交易标题/订单标题/订单关键字等 |
+|              | `body`                         | 对一笔交易的具体描述信息。如果是多种商品，请将商品描述字符串累加传给body |
+|              | `total_fee`                    | 订单总金额  |
+|              | `notify_url`                   | 通知地址 |
+|              | `service`                      | 服务 |
+|              | `cardcd`                       | 卡号  |
+|              | `payment_type`                 | 支付类型 |
+|              | `\_input_charset`              | 编码格式 |
+|              | `it_b_pay`                     | 自定义超时参数  |
+|              | `return_url`                   | 需要回跳的目标地址 |
+|              | `payment_inst`                 | 支付机构 |
+|              | `currency`                     | 币种 |
+|              | `product_code`                 | 产品码 |
+|              | `sign`                         | 是否必填 |
+|              | `sign_type`                    | 签名类型 |
+|              | `secondary_merchant_id`        | 二级商户标识 |
+|              | `secondary_merchant_name`      | 二级商户名称 |
+|              | `secondary_merchant_industry`  | 二级商户行业 |
+| `chnlsn`     |                                | 渠道编码 |
+| 常用响应参数   | —                              | — |

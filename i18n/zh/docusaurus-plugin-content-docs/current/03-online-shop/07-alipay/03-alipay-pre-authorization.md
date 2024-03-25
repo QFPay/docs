@@ -2,14 +2,14 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# 支付宝预授权
+# 支付宝预授权扣款
 
 ## 资金授权冻结
 
-At the moment only Alipay wallet funds can be used for pre-authorization, credit-cards are not supported. Authorization requests lose their validity after 15min. In case of technical or currency related integration difficulties please contact technical.support@qfpay.com for support. Merchants can, at any time, unfreeze the funds in which case the assets will be available for spending on the original wallet. In addition, merchants can initiate a transfer for a fraction or all of the frozen funds in order to collect money for open customer invoices.
+支付宝预授权目前仅支持资金授权，暂不支持信用授权；订单默认15分钟失效; 如遇币种校验问题请咨询技术人员或发邮件到*technical.support@qfpay.com*获取支持；当资金授权发生之后一段时间内，由于买家或者商家等其他原因需要要解冻资金，商家可通过【订单退款】将授权资金进行解冻，收到解冻请求并验证成功后，冻结资金按原路进行解冻. 此外, 商家可以发起本分或全部冻结资金的转账, 以便收取未结客户发票的资金.
 
 :::note
-Alipay pre-authorization currently supports the following currencies: AUD, HKD, MYR, NZD, PHP, SGD, THB and USD
+目前支付宝预授权扣款支持币种：HKD,USD,AUD,NZD,THB,PHP,MYR
 :::
 
 <Link to="/img/alipay_preauth_process.jpg" target="_blank">![Alipay Pre-Auth process-flow](@site/static/img/alipay_preauth_process.jpg)</Link>
@@ -18,10 +18,10 @@ Alipay pre-authorization currently supports the following currencies: AUD, HKD, 
 
 `POST ../trade/v1/payment` <br/>
 
-Find the correct `pay_type` for your checkout szenario from the table below.
+从如下表格中根据您的结算场景选择 `pay_type`.
 
-PayType | Description 
---------- | ------- 
+支付类型 | 描述
+--------- | -------
 801801 | Alipay Pre-Authorization in-store QRC Payment - Consumer Present Mode (CPM)
 801808 | Alipay Pre-Authorization in-store QRC Payment - Merchant Present Mode (MPM)  
 801810 | Alipay Pre-Authorization in-APP Payment
@@ -167,7 +167,7 @@ Request Body:
 |`respmsg`    |String(128)| Information description|  |
 |`resperr`     |String(128)| Description error |  |
 |`cardcd`      |String| Card number |  |
-|`txcurrcd`      |String| Currency  | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies
+|`txcurrcd`      |String| Currency  | Transaction currency. View the [Currencies](../../preparation/paycode#支付类型) table for a complete list of available currencies
 
 ```plaintext
 

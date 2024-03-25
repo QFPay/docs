@@ -81,18 +81,18 @@ const ResourcesList = [
       {title:"Alipay In-App payment SDKs", url:""},
     ]
   },
-  {
-    title: 'MCC Standards',
-    Svg:'img/homepage/mcc-standards.png',
-    description: (
-      <>
-        Merchant Category Code (MCC), a key four-digit code, organizes merchants by business type for QFPay integration. It boosts efficiency, targets marketing, and ensures compliance. 
-      </>
-    ),
-    links:[
-      {title:"Check MCC List", url:""},
-    ]
-  },
+  // {
+  //   title: 'MCC Standards',
+  //   Svg:'img/homepage/mcc-standards.png',
+  //   description: (
+  //     <>
+  //       Merchant Category Code (MCC), a key four-digit code, organizes merchants by business type for QFPay integration. It boosts efficiency, targets marketing, and ensures compliance. 
+  //     </>
+  //   ),
+  //   links:[
+  //     {title:"Check MCC List", url:""},
+  //   ]
+  // },
 ];
 
 

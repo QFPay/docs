@@ -14,7 +14,7 @@ import Link from '@docusaurus/Link';
  如果已经被提供 `mchid` , 除特殊情况下在呼叫API时必须提交 `mchid`. 与之相反的是, 如果并未被提供 `mchid`, 商户无需在API请求中传递参数 `mchid`.
 :::
 
-为了使用钱方公共API, 您必须拥有已激活的API证书, 包括一个**app_code**以及**client_key**.
+为了使用钱方常用API, 您必须拥有已激活的API证书, 包括一个**app_code**以及**client_key**.
 如遇到技术问题,请联系**technical.support@qfpay.com**.
 
 对于应用程序的测试我们提供了测试, 开发以及生产运行环境.
@@ -37,11 +37,11 @@ import Link from '@docusaurus/Link';
 
 下表描述了每个国家/地区的**基本URL**. 沙盒环境适用于所有人而国家/地区会有特定的测试环境.
 
-环境名称                           | 测试环境URL                           | 生产环境URL
------------------------------------------- | ---------------------------------- | -------
-沙盒环境 (只用于模拟信用卡) | https://openapi-int.qfapi.com      |
-线上测试环境                                  | https://openapi-test.qfpay.com     |
-中国香港                              | https://test-openapi-hk.qfapi.com  | https://openapi-hk.qfapi.com
+环境名称 | 测试环境URL | 生产环境URL
+------- | --------- | -------
+沙盒环境 (只用于模拟信用卡) | https://openapi-int.qfapi.com |
+线上测试环境 | https://openapi-test.qfpay.com |
+中国香港 | https://test-openapi-hk.qfapi.com | https://openapi-hk.qfapi.com
 
 ## 签名机制
 
