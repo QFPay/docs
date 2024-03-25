@@ -28,7 +28,7 @@
     "description": "The label for category Alipay in sidebar qfpaySidebar"
   },
   "sidebar.qfpaySidebar.category.Common API": {
-    "message": "公共API",
+    "message": "常用API",
     "description": "The label for category Common API in sidebar qfpaySidebar"
   },
   "sidebar.qfpaySidebar.doc.ECR Integration": {

@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 
 # 线上预授权支付API
 - [线上预授权支付API](#线上预授权支付api)
-	- [公共API](#公共api)
+	- [常用API](#常用api)
 	- [Creating and capturing payments](#creating-and-capturing-payments)
 		- [Step 1: Create Pre-Authorisation Payment](#step-1-create-pre-authorisation-payment)
 		- [Step 2: Capture payment for pre-authorised transactions](#step-2-capture-payment-for-pre-authorised-transactions)
@@ -12,7 +12,7 @@ import Link from '@docusaurus/Link';
 	- [Refunding Completed (`CAPTURED`) Transactions](#refunding-completed-captured-transactions)
 	- [Notifications](#notifications)
 
-## 公共API
+## 常用API
 Instructions on general integration with the development environment is available on [https://sdk.qfapi.com/#introduction](../preparation/introduction)
 
 For instance you may find the following useful before you start the integration:

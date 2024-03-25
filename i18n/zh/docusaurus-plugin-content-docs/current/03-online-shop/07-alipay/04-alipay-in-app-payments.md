@@ -10,13 +10,13 @@ import Link from '@docusaurus/Link';
 请参考该[链接](https://global.alipay.com./ac/app_hk/download)下载支付宝香港SDK. <br/>
 请参考该[链接](https://global.alipay.com./ac/hkapi/securitypay_pay)了解如何触发支付宝香港SDK.
 
-### HTTP请求
+## HTTP请求
 
 `POST ../trade/v1/payment` <br/>
 `PayType: 801110 Oversea Merchants` <br/>
 `PayType: 801510 Hong Kong Merchants`
 
-### 请求参数
+## 请求参数
 
 ```plaintext
 
@@ -85,12 +85,12 @@ _input_charset="UTF-8"&body="goods_info"&currency="HKD"&forex_biz="FP"&it_b_pay=
 
 |参数名称 | 参数编码  |是否必填 | 参数类型 | 描述 |
 |:----    |:---|:----- |-----   |----   |
-|公共支付参数    |—|— |—   |—   |
+|常用支付参数    |—|— |—   |—   |
 |商品描述    |`goods_info`|否 | String  | 支付宝必传 不得包含特殊字符   |
 |支付标记    |`pay_tag`|否 | String(16)  | 默认值是ALIPAYHK<br/>支付宝大陆版本传值：ALIPAYCN<br/>801501 - 支付宝线上扫码支付(香港商戶)<br/>801512 - 支付宝线上WAP支付(香港商戶)<br/>801510 - 支付宝In-App支付(海外商戶) |
 订单过期时间 | `expired_time` | 否<br/> (仅限扫码支付) | String(3)  | 以分钟为单位的过期时间. 默认的过期时间为30分钟, 最小值5分钟，最大值120分钟<br/> 支持: <br/>800201 - 微信扫码支付<br/>800101 - 支付宝跨境线下扫码支付 <br/>801512 - 支付宝线上WAP支付(香港商戶)<br/>801501 - 支付宝线上扫码支付(香港商戶)<br/>801107 -  支付宝线上上WAP支付(海外商戶)<br/>801101 - 支付宝线上上扫码支付(海外商戶)<br/>801010 - 微信香港In-App支付(适用于向微信香港申请的商戶) <br/>801510 - 支付宝In-App支付 (香港商戶)
 
-### 响应参数
+## 响应参数
 
 |参数编码 | 二级参数编码  | 参数名称 |
 |:----    |:---|:----- |
@@ -115,4 +115,4 @@ _input_charset="UTF-8"&body="goods_info"&currency="HKD"&forex_biz="FP"&it_b_pay=
 |              | `secondary_merchant_name`      | 二级商户名称 |
 |              | `secondary_merchant_industry`  | 二级商户行业 |
 | `chnlsn`     |                                | 渠道编码 |
-| 公共响应参数   | —                              | — |
+| 常用响应参数   | —                              | — |
