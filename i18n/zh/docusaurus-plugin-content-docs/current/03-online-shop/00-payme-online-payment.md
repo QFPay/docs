@@ -21,7 +21,7 @@ import datetime
 import string
 
 # Enter Client Credentials
-environment = 'https://openapi-test.qfpay.com'
+environment = 'https://test-openapi-hk.qfapi.com'
 app_code = 'D5589D2A1F2E42A9A60C37*********'
 client_key = '0E32A59A8B454940A2FF39**********'
 
@@ -112,7 +112,7 @@ public class TestMain {
 
 ```javascript
 // Enter Client Credentials
-const environment = 'https://openapi-test.qfpay.com'
+const environment = 'https://test-openapi-hk.qfapi.com'
 const app_code = 'D5589D2A1F2E42A9A60C37*********'
 const client_key = '0E32A59A8B454940A2FF39*********'
 
@@ -199,7 +199,7 @@ $fields = array(
     //'mchid' => urlencode($mchid),
     'pay_type' => urlencode($pay_type),
     'out_trade_no' => urlencode(GetRandStr(20)),
-    'txcurrcd' => urlencode('EUR'),
+    'txcurrcd' => urlencode('HKD'),
     'txamt' => urlencode(2200),
     'txdtm' => $now_time
 );

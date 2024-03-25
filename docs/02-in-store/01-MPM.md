@@ -66,7 +66,7 @@ def make_req_sign(data, key):
 
 # Body payload
 txamt = '1' #In USD,EUR,etc. Cent
-txcurrcd = 'EUR'
+txcurrcd = 'HKD'
 pay_type = '800101' # Alipay MPM = 800101, WeChat Pay MPM = 800201
 #auth_code = '287255838063025836' # CPM only
 out_trade_no = random_string
@@ -135,7 +135,7 @@ public class TestMain {
 
 ```javascript
 // Enter Client Credentials
-const environment = 'https://openapi-test.qfpay.com'
+const environment = 'https://test-openapi-hk.qfapi.com'
 const app_code = 'D5589D2A1F2E42A9A60C37*********'
 const client_key = '0E32A59A8B454940A2FF39*********'
 
@@ -150,7 +150,7 @@ console.log(tradenumber)
 
 var payload = {
 'txamt': '10', // In USD,EUR,etc. Cent
-'txcurrcd': 'EUR',
+'txcurrcd': 'HKD',
 'pay_type': '800101', // Alipay MPM = 800101, WeChat Pay MPM = 800201
 'out_trade_no': tradenumber,
 'txdtm': dateTime,
@@ -222,7 +222,7 @@ $fields = array(
     //'mchid' => urlencode($mchid),
     'pay_type' => urlencode($pay_type),
     'out_trade_no' => urlencode(GetRandStr(20)),
-    'txcurrcd' => urlencode('EUR'),
+    'txcurrcd' => urlencode('HKD'),
     'txamt' => urlencode(2200),
     'txdtm' => $now_time
 );

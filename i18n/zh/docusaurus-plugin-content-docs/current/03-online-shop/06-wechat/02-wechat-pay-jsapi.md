@@ -57,7 +57,7 @@ import urllib
 import urllib.parse
 
 # Enter Client Credentials
-environment = 'https://openapi-test.qfpay.com'
+environment = 'https://test-openapi-hk.qfapi.com'
 app_code = "******"
 client_key = "******"
 
