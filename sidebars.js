@@ -89,7 +89,6 @@ const sidebars = {
           items: [
             'online-shop/alipay/alipay-online-payments', 
             'online-shop/alipay/alipay-service-window-h5',
-            'online-shop/alipay/alipay-pre-authorization',
             'online-shop/alipay/alipay-in-app-payments'
           ]
         },

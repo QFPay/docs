@@ -268,32 +268,33 @@ ob_end_flush();
 
 ### 支付宝服务窗H5跨境支付(WAP)
 
-Alipay Service Window H5 Payment enables merchants to call the Alipay payment module by using the JSAPI interface to collect payments. The customer checks out on the merchant's mobile website in Alipay, confirms the total amount and makes the payment.
+支付宝服务窗口H5支付允许商户使用JSAPI接口调用支付宝支付模块进行收款.顾客可以通过支付宝在商户的手机端网站上确认总金额后付款.
 
 ### HTTP请求
 
 `POST ../trade/v1/payment` `PayType: 800107`
 
-**Step 1:** Get User ID
-For more details about how to acquire the user id please refer to the [official Alipay documentation](https://docs.open.alipay.com/289/105656).
+**Step 1:** 获取userid
+详细请参考[支付宝官方文档](https://docs.open.alipay.com/289/105656).
 
-**Step 2:** Request Payment
+**Step 2:** 请求支付
 
 ### 请求支付参数
 
-|Parameter name | Parameter code | Mandatory | Parameter type | Description |
+|参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述 |
 |:----    |:---|:----- |-----   |----   |
-|Public payment parameters |—  |— |—   |—   |
-|Alipay authorization code|`openid`   |Yes  | String(64) |The `user_id` is returned by the interface, e.g. 2088802811715388 |
-|Redirect URL | `return_url` | No | String(512) | Address for user redirect after successful payment |
-|Designated payment method |`limit_pay`  |No |String   |Only applicable for mainland China   |
+|公共支付参数 |—  |— |—   |—   |
+|支付宝授权码|`openid`   |是 | String(64) |从第一步所返回的 `user_id`, 示例: 2088802811715388 |
+|重定向URL | `return_url` | 否 | String(512) | 用户在成功支付后跳转的地址 |
+|指定支付方式 |`limit_pay`  |否 |String   | 只适用于中国大陆 |
 
 ### 响应参数
-|Parameter name | Secondary parameter code | Parameter type | Parameter name | Description |
-|:----    |:---|:----- |-----   |----   |
-|`pay_params`|`tradeNO`   |String  | Transaction number| Provide the transaction number in the call function |
-|`txcurrcd`  |  |  String(3) |   | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
-|Public response parameters |—  |— |—   |—   |
 
-**Step 3:** Payout through the cashout interface
-For more information regarding the cashout interface please refer to the [official Alipay documentation](https://docs.open.alipay.com/common/105591).
+|参数编码 | 二级参数编码 | 参数类型 | 参数名称 | 描述 |
+|:----    |:---|:----- |-----   |----   |
+|`pay_params`|`tradeNO`   |String  | 交易号|通过传入交易号唤起快捷调用方式 |
+|`txcurrcd`  |  |  String(3) |   | 交易币种, 请查看[币种](#支付币种)表以获取完整的可选用的币种 |
+|公共响应参数|—  |— |—   |—   |
+
+**Step 3:** 收银台唤起支付
+详细请参考[支付宝官方文档](https://docs.open.alipay.com/common/105591).

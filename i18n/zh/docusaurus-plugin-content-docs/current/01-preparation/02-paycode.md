@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 验证您的API证书支持当前选中的`pay_type`.
 :::
 
-## 支付方式
+## 支付类型
 
 编码 | 描述
 --------- | -------
