@@ -13,35 +13,36 @@ If you would like to quickly test the payment function in <Link href="https://ww
 ## Developer Instructions
 
 :::note
- If the `mchid` is provided, it is mandatory to submit the `mchid` when calling the API (unless otherwise specified). On the contrary, if `mchid` is not provided, merchants shall not pass in the `mchid` parameter in the API request.
+ If the `mchid` is provided, it is mandatory to submit the `mchid` when calling the API (unless otherwise specified.). In other words, if `mchid` is not provided, merchants shall not pass in the `mchid` parameter in the API request.
 :::
 
-In order to use the QF Pay open API, you must have active API credentials, including an **app_code** and **client_key**. In case of technical issues please contact **technical.support@qfpay.com**.
+To use the QF Pay open API, you must have a set of active API credentials, including the **app_code** and **client_key**. If you encounter technical issues please contact **technical.support@qfpay.com**.
 
-There are seperate environments available for application testing and development as well as production.
+There are separate environments available for application testing and development, as well as production.
 
-Please note that transactions conducted in the sandbox environment will not have settlement. Therefore, make sure to test with small amounts and process refunds using the API refund endpoint or Merchant APP on the same day as the original transaction day.
+Please note that transactions conducted in the sandbox environment will not be settled. Therefore, make sure to test with small amounts and process refunds using the API refund endpoint or Merchant APP on the same day as the original transaction.
 
-Each merchant will be provided with a set of app code and key with or without `mchid`. Merchants with multiple branches will usually be supplied with app code, key and `mchid`. The hashed `mchid` is used to identify shops and outlets. Otherwise, only app code and key will be given.
+Each merchant will be provided with a set of app code and key (with or without `mchid`). Merchants with multiple store branches will usually be supplied with app code, key and `mchid`. The hashed `mchid` is used to identify shops and outlets. Otherwise, only app code and key will be given.
 
 ### Encoding Description
 
-All return parameters from API are in `UTF-8` code unless otherwise noted.
+All return parameters from the APIs are in `UTF-8` encoding unless otherwise noted.
 
 ## Environments
 
 :::warning
-Remember to immediately refund transactions that were made in the test environment.
+Remember to immediately refund transactions that were made in testing environments.
 :::
 
 ### API Environments
 
-The table below depicts **base URLs** for each country/ region. There is a general sandbox available to everybody, and country/ region specifiy test environments.
+The table below depicts the **base URLs** for each environment.
 
-Environment Name                           | Test URL                           | Prod. URL
------------------------------------------- | ---------------------------------- | -------
+Environment Name                           | Prod. URL | 
+------------------------------------------ | ----------------------------------| 
 Sandbox (Only for credit card simulations) | https://openapi-int.qfapi.com      |
-Hong Kong                                  | https://test-openapi-hk.qfapi.com  | https://openapi-hk.qfapi.com
+Live Testing Environment                | https://test-openapi-hk.qfapi.com  | 
+Production              | https://openapi-hk.qfapi.com  |
 
 ## Signature Generation
 

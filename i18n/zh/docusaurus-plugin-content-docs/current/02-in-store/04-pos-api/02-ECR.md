@@ -1,4 +1,4 @@
-﻿import Tabs from '@theme/Tabs';
+import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
@@ -397,7 +397,8 @@ digest=(
 
 ##### 支持的USB转串口线芯片类型
 
-PL2303 HXD  支持
+[comment]: <> (這部分不太清晰，為什麼PL2303是唯一支持/ 穩定程度和價格一致但是最不被推薦？)
+PL2303HXD  支持
 CH340       未支持
 FT232       未支持
 
