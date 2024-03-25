@@ -1,15 +1,15 @@
 # 订单备注
 
 :::note
-This Endpoint is only available to merchants who do not pass in the `mchid`
+这个 API 端点仅适用于未传入 `mchid` 的商户
 :::
 
-Merchant can use this interface to add remarks to a transaction. This remarks value will be displayed in the Merchant Management System (MMS) and on the transaction report.
+商户可以使用该接口为交易添加备注. 该备注值将显示在商户管理系统(MMS)和交易报告中.
 
 ## 订单备注API端点
 
 ```plaintext
-Request Header:
+请求头部:
 
 {
   Content-Type: application/x-www-form-urlencoded;
@@ -17,14 +17,14 @@ Request Header:
   X-QF-SIGN: 6FB43AC29175B4602FF95F8332028F19
 }
 
-Request Body:
+请求本体:
 
 {
   code=A6A49A6******DFE94EA95032&note=add_note&syssn=20190722000200020081075691
 }
 ```
 
-> The above command returns JSON structured like this:
+> 上述指令会返回结构如下的JSON代码:
 
 ```json
 {
@@ -44,17 +44,17 @@ Request Body:
 
 ### 请求参数
 
-|Parameter name|Parameter code|Mandatory|Parameter type|Description|
+|参数名称|参数编码|是否必须|参数类型|描述|
 |----    |---|----- |-----   |----- |
-|Merchant app code| `code`   |Yes   |String(32)   | Provided by QF Pay |
-|Transaction number | `syssn` | Yes |String(40) | QFPay transaction number, returned by the system once payment is completed |
-|Remarks| `note`   |Yes   |String(200）   | Remarks value  |
+|商户App编码| `code`   |是   |String(32)   | 由钱方提供 |
+|订单号 | `syssn` | 是 |String(40) | 交易成功后钱方返回的订单号 |
+|备注信息| `note`   |是   |String(200）   | 备注值  |
 
 ### 响应参数
 
-|Parameter code|Parameter type | Parameter name |Description|
+|参数编码|参数类型| 参数名称 |描述|
 |----    |---|-----   |-----   |
-| `resperr`   |String(128)   |Transaction result description   |  | 
-| `respmsg`   |String(128)  |Error message   |    | 
-| `respcd`    |String(4)  |Return code   |   0000 = Interface call succeeded | 
-| `syssn`     |String(40)   |Error message   | Transaction number returned by the system when payment is completed | 
+| `resperr`   |String(128)   |下单结果描述   |  |
+| `respmsg`   |String(128)  |响应错误信息   |    |
+| `respcd`    |String(4)  |返回码   |   0000 = 接口调用成功 |
+| `syssn`     |String(40)   |订单号  | 交易成功后钱方返回的订单号 |
