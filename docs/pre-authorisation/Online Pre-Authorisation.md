@@ -1,11 +1,11 @@
 
 # Online Pre-authorisation Payment APIs
-* [Common APIs](#common-apis)
+* [General APIs](#general-apis)
 * [Create Pre-Authorisation Payment (freeze funds)](#create-pre-authorisation-payment)
 * [Complete payment for pre-authorised transactions (deduct funds)](#complete-payment-for-pre-authorised-transactions)
 * [Cancel payment for pre-authorised transactions](#cancel-payment-for-pre-authorised-transactions)
 
-## Common APIs
+## General APIs
 Instructions on general integration with the development environment is available on [https://sdk.qfapi.com/#introduction](https://sdk.qfapi.com/#introduction)
 
 For instance you may find the following useful before you start the integration:
@@ -15,7 +15,7 @@ For instance you may find the following useful before you start the integration:
 - signature generation for api requests
 - Common error codes
 
-You can also find common APIs that are also applicable to pre-authorisation payments: 
+You can also find general APIs that are also applicable to pre-authorisation payments: 
 
 - Transaction Enquiry (https://sdk.qfapi.com/?python#transaction-enquiry)
 - Transaction Refunds (https://sdk.qfapi.com/?python#refunds)
@@ -124,7 +124,7 @@ Capture the amount booked by the customer in pre-authorised transactions
 
 ## Refunding Completed (`CAPTURED`) Transactions
 
-For integration, please refer to the "Common API" section of the documentation. Please note that the syssn used in the refund transaction should correspond to the syssn returned upon the /authtrade request.
+For integration, please refer to the "General API" section of the documentation. Please note that the syssn used in the refund transaction should correspond to the syssn returned upon the /authtrade request.
 
 
 ## Notifications
