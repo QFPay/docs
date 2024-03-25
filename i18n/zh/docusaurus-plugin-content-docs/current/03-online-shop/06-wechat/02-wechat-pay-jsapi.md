@@ -7,32 +7,32 @@ import Link from '@docusaurus/Link';
 <Link href="/img/wechat_jsapi_process.jpg" target="_blank">![WeChat JSAPI process-flow](@site/static/img/wechat_jsapi_process.jpg)</Link>
 
 :::warning
-Official account payments must be initiated from the WeChat in-app browser. They cannot be initiated from another browser, such as Chrome or Safari.
+公众号支付必须从微信应用内浏览器发起。 它们无法从其他浏览器（例如 Chrome 或 Safari）启动。
 :::
 
 **JSAPI 支付类型**
 
-Note: Merchants in Canada, please refer to [this](../alipay/alipay-online-payments#alipay-online-payments) section for payment request and response parameters with `pay_type` 800207. <br/>
+Note: 加拿大地区的商户，请参阅[此](../alipay/alipay-online- payments#alipay-online- payments)部分了解支付请求和响应参数，其中“pay_type”为800207。<br/>
 
-There are two different methods how JSAPI payments can be implemented. 
+JSAPI 支付有两种不同的实现方法。
 
 <br/>
 
 **1. 拥有实名认证的公众号JSAPI支付**
 
-For this kind of integration, merchants shall register their own official account with WeChat and we will bind the official account to the merchant's QF Pay payment account. In this case merchants can create and publish their own content, access customer information and collect their own followers. When choosing this implementation method, merchants have to acquire the `oauth_code`, user `openid` and trigger WeChat Pay via the <Link href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_1">official WeChat platform</Link>. Merchants only need to refer to the QF Pay [transaction enquiry API endpoint](../../common-api/transaction-enquiry).
+对于这种集成，商户需要在微信上注册自己的公众号，我们会将公众号与商户的QF Pay支付账户绑定。 在这种情况下，商家可以创建和发布自己的内容、访问客户信息并收集自己的关注者。 选择该实现方式时，商户需要获取“oauth_code”、用户“openid”，并通过<Link href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_1">官方微信平台</Link>触发微信支付。 商户只需参考QF Pay【交易查询API接口】(../../common-api/transaction-enquiry)即可。
 
-**Step 1:** WeChat official account payments are available to developers after they completed real name authentication on the WeChat official account platform. Once authentication has been completed developers can obtain the openid parameter of the certified public account. Please refer to the official [WeChat documentation](https://developers.weixin.qq.com/doc/offiaccount/en/Getting_Started/Overview.html) for more information.
+**Step 1:** 开发者在微信公众号平台完成实名认证后，即可使用微信公众号支付。 认证完成后，开发者可以获得认证公众账号的openid参数。 请参考官方[微信文档](https://developers.weixin.qq.com/doc/offiaccount/en/Getting_Started/Overview.html)，了解更多信息。
 
-**Step 2:** Request the QFPAY order payment API `/trade/v1/payment` by providing the appointed `openid` and return the `pay_params` data, for further instructions please refer to the [API Endpoint for Payments](../../preparation/paycode#api-endpoint-for-payments). 
+**Step 2:** 通过提供指定的`openid`请求QFPAY订单支付接口`/trade/v1/ payment`并返回`pay_params`数据，具体说明请参考 [支付API端点](../../preparation/paycode#api-endpoint-for-payments). 
 
-**Step 3:** Open JSAPI Payment Authorization Directory at the time of the merchant certification application to initiate payments. For more details please refer to the [official WeChat Pay documentation](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6).
+**Step 3:** 商户认证申请时打开JSAPI支付授权目录发起支付。 更多详情请参考 [微信支付官方文档](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6).
 
 <br/>
 
 **2. 未拥有实名认证的公众号JSAPI支付**
 
-For this kind of payment, merchants can build upon QF Pay's official account. This integration is only applicable to merchants who are using the indirect settlement option (i.e. settlement is provided by QFPay). For this implementation, merchants shall use QFPay's API to get the `oauth_code`, user `openid` and trigger WeChat Pay as described below.
+对于此类支付，商户可以基于QF Pay的公众号进行。 此整合仅适用于使用间接结算选项（即由 QFPay 提供结算）的商户。 对于此实现，商户应使用 QFPay 的 API 获取“oauth_code”、用户“openid”并触发微信支付，如下所述。
 
 ## 获取微信oauth_code
 
@@ -94,16 +94,16 @@ def get_out_code():
 
 `GET ../tool/v1/get_weixin_oauth_code`
 
-Both the `app_code` and `sign` have to be submitted as parameters instead of in the http header. The URL request has to be send in the WeChat environment. Everytime a payment is initiated the WeChat `oauth_code` and `openid` have to be obtained again.
+`app_code` 和 `sign` 都必须作为参数提交，而不是在 http 标头中提交。 该URL请求必须在微信环境中发送。 每次发起支付都需要重新获取微信`oauth_code`和`openid`。
 
 ### 请求参数
 
-|Parameter name| Parameter code | Mandatory | Parameter type | Description |
+|參數名稱| 參數編碼 | 是否必填 | 參數類型 | 描述 |
 |:----    |:---|:----- |-----   |-----   |
-|Developer ID | `app_code` | Yes | String(32) | The app_code is assigned to partners by QFPay  |
-|Callback URL |`redirect_uri` | Yes |  String(512) | After the request has been successful the user will be redirected to the callback address  |
-|Merchant ID | `mchid` | No | String(16) | The `mchid` is a unique identification for every merchant assigned by QFPay  |
-| Signature| `sign`  | Yes | String | Signature obtained according to the unified framework |
+|开发者ID | `app_code` | 是 | String(32) | app_code由QFPay分配给合作伙伴  |
+|回调地址 |`redirect_uri` | 是 |  String(512) | 请求成功后，用户将被重定向到回调地址 |
+|商戶ID | `mchid` | 否 | String(16) | “mchid”是QFPay为每个商户分配的唯一标识  |
+| 簽名| `sign`  | 是 | String | 根据统一框架获得的签名 |
 
 ## 获取微信openid
 
@@ -143,7 +143,7 @@ def get_open_id(data):
 }
 ```
 
-:::note Everytime the payment interface is called a new `oauth_code` and `openid` must be obtained. In order to request the `openid` the `X-QF-APPCODE` and `X-QF-SIGN` have to be submitted in the http header.
+:::note 每次调用支付接口都必须获取新的`oauth_code`和`openid`。 为了请求“openid”，必须在 http 标头中提交“X-QF-APPCODE”和“X-QF-SIGN”。
 :::
 
 ### HTTP请求
@@ -152,21 +152,21 @@ def get_open_id(data):
 
 ### 请求参数
 
-|Parameter code|Secondary parameter code | Mandatory| Parameter type | Description |
+|参数编码|二级参数编码 | 是否必填| 参数类型 | 描述 |
 |:-----  |:-----|----- |----- |----- |
-|WeChat oauth_code|  `code` |Yes  | String | The code is returned by the [GET oauth_code request](#get-oauth_code). It is unique and can only be used once. |
-|Merchant ID|  `mchid`  |No  | String(16) | The `mchid` is a unique identification for every merchant assigned by QFPay |
+|微信 oauth_code|  `code` |是  | String | 该代码由 [GET oauth_code 请求](#get-oauth_code) 返回。 它是唯一的，只能使用一次。 |
+|商户ID|  `mchid`  |否  | String(16) | “mchid”是QFPay为每个商户分配的唯一标识 |
 
 ### 响应参数
 
-|Parameter code|Secondary parameter code | Parameter type |Parameter name | Description |
+|参数编码| 二级参数编码 | 参数类型 | 参数名字 | 描述 |
 |:-----  |:-----|----- |----- |----- |
-|`openid`|   | String(64)  | WeChat openid | Every WeChat user is assigned a unique openid |
+|`openid`|   | String(64)  | 微信 openid | 每个微信用户都会分配一个唯一的openid |
 
 ## 微信申请支付
 
 ```plaintext
-For code instructions select Python with the tabs above.
+有关代码说明，请选择带有以下选项卡的 Python。
 ```
 
 ```python
@@ -231,7 +231,7 @@ if __name__ == '__main__':
     app.run(host="127.0.0.1",port = 80)
 ```
 
-Optionally merchants can activate real-name authentication with WeChat. Currently real-name identification is only available for Mainland Chinese citizens and include a person's real name and national ID card number. In case identification is provided the payer's wallet information like a connected bank card must be identical with the data provided by merchants. If customers did not yet bind their WeChat account to a bank card the payment will go through regardless.
+商户可选择开通微信实名认证。 目前实名认证仅适用于中国大陆公民，包括真实姓名和身份证号码。 如果提供身份证明，付款人的钱包信息（例如连接的银行卡）必须与商家提供的数据相同。 如果客户尚未将微信账户绑定银行卡，仍可进行付款。
 
 ### HTTP 请求
 
@@ -239,29 +239,29 @@ Optionally merchants can activate real-name authentication with WeChat. Currentl
 
 ### 请求参数
 
-|Parameter name|  Parameter code | Mandatory| Parameter type | Description |
+|参数名字|  参数编码 | 是否必填| 参数类型 | 描述 |
 |:----    |:---|:----- |-----   |-----   |
-|Public payment parameters |—  |— |—  | Refer to the general documentation about transactions |
-|WeChat authorization code   |`sub_openid`|Yes  |String    |WeChat OpenID. Refer to the **GET openid** documentation   |
-|Designated payment method    |`limit_pay`|No|String   |Used to limit credit card transactions   |
-|Extended Customer Info    |`extend_info`|No|Object   | Real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'  |
+|公共支付参数 |—  |— |—  | 请参阅有关交易的通用文档 |
+|微信授权码   |`sub_openid`|是  |String    |微信 OpenID. 请参阅 **GET openid** 文档   |
+|指定付款方式   |`limit_pay`|否|String   |用于限制信用卡交易   |
+|扩展客户信息   |`extend_info`|否|Object   | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](../../preparation/paycode# payment-codes)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
 
 ### 响应参数
 
-|Parameter code| Secondary parameter code | Parameter type | Parameter name | Description |
+|参数编码| 二级参数编码 | 参数类型 | 参数名字 | 描述 |
 |:----    |:---|:----- |-----   |-----   |
-|`pay_params`|`appId`   |String(16)  |Public number id   | The App ID is provided by Tencent once developers register their Mini Program on the WeChat developer portal  |
-|— |`timeStamp`  |String(32) |Timestamp  | Current time |
-|— |`nonceStr`  |String(32) |Random string  | Random string with no more than 32 bits |
-|— |`package`   |String(128)|Transaction details  | The value of the `prepay_id` parameter returned by the interface has the format: prepay_id=**|
-|— |`signType`   |String(32) |Signature method  | Signature method, default is MD5|
-|— |`paySign`    |String(64) |Signature   | Signature method, default is MD5|
-|— |Public response parameters    |— |—   | —|
-|`txcurrcd`  | |  String(3) |  | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
+|`pay_params`|`appId`   |String(16)  | 公众号id  | App ID由开发者在微信开发者平台注册小程序后由腾讯提供 |
+|— |`timeStamp`  |String(32) | 时间戳  | 当前时间 |
+|— |`nonceStr`  |String(32) | 随机字符串  | 不超过32位的随机字符串 |
+|— |`package`   |String(128)| 交易明细  | 接口返回的`prepay_id`参数值格式为：prepay_id=** |
+|— |`signType`   |String(32) | 签名方法  | 签名方法, 默认：MD5|
+|— |`paySign`    |String(64) | 签名   | 签名方法, 签名：MD5|
+|— |公共响应参数    |— |—   | —|
+|`txcurrcd`  | |  String(3) |  | 交易货币。 查看[货币](../../preparation/paycode#currencies) 表以获取可用货币的完整列表 |
 
 ## 调用微信支付模块
 
-:::note Directly submit the related parameters to the interface, there is no need to define `X-QF-APPCODE` or `X-QF-SIGN` in the HTTP header during this step.
+:::note 直接向接口提交相关参数，此步骤无需在HTTP header中定义`X-QF-APPCODE`或`X-QF-SIGN`。
 :::
 
 ### HTTP 请求
@@ -270,16 +270,16 @@ Optionally merchants can activate real-name authentication with WeChat. Currentl
 
 ### 请求参数
 
-| Parameter code | Mandatory | Parameter type | Description |
+| 参数类型 | 是否必填 | 参数类型 | 描述 |
 |----------------|-----------|----------------|-------------|
-|`mchntnm` | Yes | String(128) | Custom business name. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters |
-|`txamt`  | Yes  | Int(11) | Amount |
-|`currency`   | Yes  | String(3)|  |
-|`goods_name`   | No  | String(64)|  Custom goods name. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters |
-|`redirect_url`   | Yes  | String(512)| Redirect URL after Payment is complete.  **Urlencode** handles this parameter |
-|`package`     | Yes | String(128) |Parameter return from WeChat after calling the payment API   |
-|`timeStamp`     | Yes | String(32) |Parameter return from WeChat after calling the payment API  |
-|`signType`      | Yes | String(32) |Parameter return from WeChat after calling the payment API  |
-|`paySign`       | Yes | String(64) |Parameter return from WeChat after calling the payment API  |
-|`appId`        | Yes | String(16) |Parameter return from WeChat after calling the payment API  |
-|`nonceStr`  | Yes | String(32) |Parameter return from WeChat after calling the payment API  |
+|`mchntnm` | 是 | String(128) | 自定义企业名称。 如果参数是汉字，则需要**UTF-8**编码 |
+|`txamt`  | 是  | Int(11) | 金额 |
+|`currency`   | 是  | String(3)|  |
+|`goods_name`   | 否  | String(64)|  定制商品名称。 如果参数是汉字，则需要**UTF-8**编码 |
+|`redirect_url`   | 是  | String(512)| 付款完成后重定向 URL。 **urlencode** 处理该参数 |
+|`package`     | 是 | String(128) | 微信调用支付接口后返回参数   |
+|`timeStamp`     | 是 | String(32) | 微信调用支付接口后返回参数  |
+|`signType`      | 是 | String(32) | 微信调用支付接口后返回参数 |
+|`paySign`       | 是 | String(64) | 微信调用支付接口后返回参数 |
+|`appId`        | 是 | String(16) | 微信调用支付接口后返回参数  |
+|`nonceStr`  | 是 | String(32) | 微信调用支付接口后返回参数  |
