@@ -12,10 +12,10 @@ import Link from '@docusaurus/Link';
 
 ### 请求参数
 
-|Parameter name|  Parameter code | Mandatory| Parameter type | Description |
+|参数名字 | 参数编码  | 是否必填| 参数类型 | 描述 |
 |:----    |:---|:----- |-----   |-----   |
-|Public payment parameters |—  |— |—  | Refer to the general documentation about transactions |
-|Extended Customer Info|`extend_info`|Yes|Object||
+|公共支付参数 |—  |— |—  | 请参阅有关交易的通用文档 |
+|扩展客户信息|`extend_info`|是|Object||
 
 ```plaintext
 extend_info:
@@ -31,29 +31,29 @@ extend_info:
 
 <br/> **`extend_info:`**  <br/>
 
-|Parameter code|  Parameter code | Parameter code | Mandatory| Parameter type | Description |
+|参数编码|  二级参数编码 | 三级参数编码 | 是否必填| 参数类型 | 描述 |
 |:----    |:---|:----- |-----   |-----  |-----   |
-|`scene_info`|||Yes|Object||
-||`h5_info`||Yes|Object||
-|||`type`|Yes|String|scene type **"Wap"**|
-|||`wap_url`|Yes|String|mobile website address|
-|||`wap_name`|Yes|String|mobile website name|
-|`spbill_create_ip`|||Yes|String|IP address of user|
+|`scene_info`|||是|Object||
+||`h5_info`||是|Object||
+|||`type`|是|String|场景类型 **"Wap"**|
+|||`wap_url`|是|String|手机网站地址|
+|||`wap_name`|是|String|手机网站名字|
+|`spbill_create_ip`|||是|String|客户IP地址|
 
 ### 响应参数
 
-|Parameter code| Secondary parameter code| Parameter Type| Parameter name|Description|
+|参数编码| 二级参数编码| 参数类型| 参数名字|描述|
 |:----    |:---|:----- |-----   |----   |
-|Public response parameters    |—  |— |—  | — |
-|Payment URL|`pay_url`|Yes|String||
+|公共响应参数    |—  |— |—  | — |
+|支付URL|`pay_url`|是|String||
 
 :::warning
-In normal process after payment, the user will return to the page where payment is initiated. If you want user to return to the specified page, you can insert redirect_url parameter to returned payment URL. For example, if you want user to jump to https://www.wechatpay.com.cn it can be processed as follows: <br/>
+正常流程中，支付后，用户会返回发起支付的页面。 如果您希望用户返回指定页面，可以在返回的支付URL中插入redirect_url参数。 例如，如果希望用户跳转到https://www.wechatpay.com.cn，可以按如下处理： <br/>
 :::
 **pay_url** <br/>
 
 https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx20161110163838f231619da20804912345&package=1037687096 <br/>
 
-**Payment URL after redirect_url inserted** <br/>
+**插入redirect_url后的支付URL** <br/>
 
 https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx20161110163838f231619da20804912345&package=1037687096&redirect_url=https%3A%2F%2Fwww.wechatpay.com.cn

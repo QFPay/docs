@@ -11,17 +11,18 @@ import Link from '@docusaurus/Link';
 `POST ../trade/v1/payment`
 `PayType: 800210`
 
-WeChat in-APP payments require a formal application on the WeChat Open Platform. Merchants have to register an account and the APP and then receive an `appid` to enable payments. For more information, please refer to the official [Wechat documentation](https://pay.weixin.qq.com/wiki/doc/api/wxpay/en/pay/In-AppPay/chapter6_2.shtml#menu1).
+微信应用内支付需要在微信开放平台正式申请。 商户必须注册账户和APP，然后收到“appid”才能进行支付。 更多信息请参考官方
+[Wechat documentation](https://pay.weixin.qq.com/wiki/doc/api/wxpay/en/pay/In-AppPay/chapter6_2.shtml#menu1).
 
-Optionally merchants can activate real-name authentication with WeChat. Currently real-name identification is only available for Mainland Chinese citizens and include a person's real name and national ID card number. In case identification is provided the payer's wallet information like a connected bank card must be identical with the data provided by merchants. If customers did not yet bind their WeChat account to a bank card the payment will go through regardless.
+商户可选择开通微信实名认证。 目前实名认证仅适用于中国大陆公民，包括真实姓名和身份证号码。 如果提供身份证明，付款人的钱包信息（例如连接的银行卡）必须与商家提供的数据相同。 如果客户尚未将微信账户绑定银行卡，仍可进行付款。
 
-To download Wechat SDK please refer to this [link](https://developers.weixin.qq.com/doc/oplatform/Downloads/iOS_Resource.html).
+下载微信SDK请参考这里 [链接](https://developers.weixin.qq.com/doc/oplatform/Downloads/iOS_Resource.html).
 
 ### 请求参数
 
 ```plaintext
 
-Request Body:
+请求正文：
 
 {
   goods_info=test_app&goods_name=qfpay&out_trade_no=O5DNgEgL1XpvbvQSfPhN&pay_type=800210&txamt=10&txcurrcd=HKD&txdtm=2019-09-13 04:53:03&udid=AA
@@ -29,7 +30,7 @@ Request Body:
 
 ```
 
-> The above command returns JSON structured like this:
+> 上面的命令返回 JSON 结构如下：
 
 ```json
 {
@@ -60,31 +61,31 @@ Request Body:
 }
 ```
 
-| Parameter name | Parameter code | Mandatory | Parameter type | Description |
+| 参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述 |
 |:----    |:---|:----- |-----   |----   |
-|Merchant ID    | `mchid`  | No | String  | The unique merchant ID is created by QF Pay during the merchant onboarding process. |
-|External transaction number    | `out_trade_no` | Yes | String    |Developer platform transaction number |
-|Transaction amount    | `txamt`  | Yes | String |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen funds|
-|Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the Currencies table for a complete list of available currencies|
-|RMB Tag | `rmb_tag` | No | String(1) | WeChat Pay in Hong Kong uses `rmb_tag` = Y together with `txcurrcd` = CNY to indicate that the transaction currency is RMB.|
-|Transaction request time    | `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh&#58;mm:ss|
-| Device ID   | `udid`   | No | String         |Must be unique|
-| Time zone | `txzone`    | No | String        |Used to record the local order time. The default is Beijing time GMT+8 (+0800)|
-| Redirect URL   | `return_url`   | No | String        | Redirect to address after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters.|
-|Extended Customer Info    | `extend_info`  | No | Object  | Real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
+|商户ID    | `mchid`  | 否 | String  | 唯一的商户ID是由QF Pay在商户入网过程中创建的。 |
+|外部订单编号    | `out_trade_no` | 是 | String    |开发者平台交易订单编号 |
+|交易金额    | `txamt`  | 是 | String |实际消费金额，最高抵扣金额不能超过冻结资金|
+|货币 | `txcurrcd` | 是 | String(3) | 交易货币。 查看货币表以获取可用货币的完整列表|
+|RMB 标签 | `rmb_tag` | 否 | String(1) | 香港微信支付使用“rmb_tag”=Y 和“txcurrcd”=CNY 来表示交易币种为人民币。|
+|交易请求时间    | `txdtm`   | 是 | String      | 格式: YYYY-MM-DD hh:mm:ss|
+| 设备ID   | `udid`   | 否 | String         |必须是唯一的|
+| 时区 | `txzone`    | 否 | String        |用于记录本地订单时间。 默认为北京时间GMT+8（+0800）|
+| 重定向网址   | `return_url`   | 否 | String        | 付款成功后重定向至地址。 为 GrabPay Online 提交的强制参数。 支付宝 WAP 将 `return_url` 限制为最多 200 个字符。 |
+|扩展客户信息   | `extend_info`  | 否 | Object  | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](../../preparation/paycode# payment-codes)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
 
 ### 响应参数
 
-| Parameter code | Parameter type | Parameter name | Description |
+| 参数编码 | 参数类型 | 参数名字 | 描述 |
 |:----    |:---|:----- |-----   |
-|`syssn` |   String(40) | QF Pay Transaction number | QFPay transaction number, returned by the system once payment is completed |
-|`orig_syssn`    |String(40)| External transaction number | Developer platform transaction number |
-|`txdtm`     | String(20) | Transaction request time | Format: YYYY-MM-DD hh&#58;mm:ss  |
-|`txamt`    |Int(11)| Transaction amount | |
-|`sysdtm`     |String(20)| System transaction time |Format: YYYY-MM-DD hh&#58;mm:ss <br/> This parameter value is used as the cut-off time for settlements.|
-|`respcd`    |String(4)| Return code |  |
-|`respmsg`    |String(128)| Information description|  |
-|`resperr`     |String(128)| Description error |  |
-|`cardcd`     |String| Card number |  |
-|`txcurrcd`      |String| Currency  | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
-|`pay_params`      |Object| payment data  | Payment data to call Wechat SDK |
+|`syssn` |   String(40) | QFPay 交易编号 | QFPay 交易编号, 支付完成后系统返回 |
+|`orig_syssn`    |String(40)| 外部交易编号 | 开发者平台交易编号 |
+|`txdtm`     | String(20) | 交易请求时间 | 格式: YYYY-MM-DD hh:mm:ss  |
+|`txamt`    |Int(11)| 交易金额 | |
+|`sysdtm`     |String(20)| 系统交易时间 |格式: YYYY-MM-DD hh:mm:ss <br/> 该参数值用作清算截止时间。|
+|`respcd`    |String(4)| 返回码 |  |
+|`respmsg`    |String(128)| 信息说明|  |
+|`resperr`     |String(128)| 描述错误 |  |
+|`cardcd`     |String| 卡号 |  |
+|`txcurrcd`      |String| 货币  | 交易货币。 查看[货币](../../preparation/paycode#currencies) 表以获取可用货币的完整列表 |
+|`pay_params`      |Object| 支付数据  | 调用微信SDK的支付数据 |
