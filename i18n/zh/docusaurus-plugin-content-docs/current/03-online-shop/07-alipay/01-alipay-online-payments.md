@@ -6,7 +6,7 @@ import Link from '@docusaurus/Link';
 
 ```plaintext
 
-For code instructions select Python, Java, Node.js or PHP with the tabs above.
+For code instructions select Python, Java, 否 de.js or PHP with the tabs below.
 
 ```
 
@@ -264,46 +264,49 @@ ob_end_flush();
 }
 ```
 
-:::noteAlipay Hong Kong does not support the native Alipay Checkout page. Instead developers are required to request the QR code and embed it using `iframe`:::
+:::note
+Alipay Hong Kong does not support the native Alipay Checkout page. Instead developers are required to request the QR code and embed it using `iframe`
+:::
 
 ### Web/WAP支付
-Customers make purchases on a merchant website with Alipay. The user scans the displayed QR code to pay, confimrs the total amount and makes payment. Finally the customer can be redirected to a selected page on the merchant's website using the `return_url` parameter. Alipay deducts the payment amount from the consumer's Alipay wallet in real-time in CNY and QFPay settles the payment amount to merchants in local currency.  
+
+客户使用支付宝在商户网站上购物, 用户扫描显示的二维码进行支付, 确认总金额后进行支付. 最后可以用`return_url`参数将用户重定向到一个商户网站上选中的页面. 支付宝以人民币计费实时从消费者的支付宝钱包中扣除支付金额, 钱方最终会以当地货币结算支付金额.
 
 ### HTTP请求
 
 `POST ../trade/v1/payment` <br/>
-`PayType: 801101` `Overseas Merchants Web` <br/>
-`PayType: 801107` `Overseas Merchants WAP` <br/>
-`PayType: 801501` `Hong Kong Merchants Web` <br/>
-`PayType: 801512` `Hong Kong Merchants WAP` <br/>
+`PayType: 801101` `支付宝线上上扫码支付 (海外商戶)` <br/>
+`PayType: 801107` `支付宝线上上WAP支付 (海外商戶)` <br/>
+`PayType: 801501` `支付宝线上扫码支付 (香港商戶)` <br/>
+`PayType: 801512` `支付宝线上WAP支付 (香港商戶)` <br/>
 
 ### 请求参数
 
-Parameter name | Parameter code | Mandatory | Type | Description
+参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述
 --------- | -------- | --------- | ------- | ------- 
-Payment amount | `txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1) 
-Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies
-Payment type | `pay_type` | Yes | String(6) | Alipay Web Payment = 801101
-API Order Number | `out_trade_no` | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
-Request transaction time | `txdtm` | Yes | String(20) | Transaction time format：<br/> YYYY-MM-DD hh:mm:ss 
-Order expiration time | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code
-Product name identification | `goods_name` | No | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
-QF Pay merchant number | `mchid` | No | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. 
-Time zone | `txzone` | No | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800). 
-Device ID | `udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal. 
-Redirect URL | `return_url` | No | String(512) | Address for user redirect after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters.
+订单支付金额 | `txamt` | 是 | Int(11) |当前货币最小计量单位计算，只允许整数类型 (i.e. 100 = $1)
+币种 | `txcurrcd` | 是 | String(3) | 交易币种, 请查看[币种](#支付币种)表以获取完整的可选用的币种
+支付类型 | `pay_type` | 是 | String(6) | 支付宝线上支付 = 801101
+外部订单号 | `out_trade_no` | 是 | String(128)| 开发者自定义订单号，在同一商户账户中的每笔交易和退款请求该参数值唯一
+请求交易时间 | `txdtm` | 是 | String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
+交易过期时间 | `expired_time` | 否 <br/>(仅限扫码支付) | String(3)  | 以分钟为计时的二维码过期时间,默认的过期时间是30分钟. 该参数可以被手动设置为最小5分钟,最大120分钟 <br/> 该参数可用于: <br/>800201 - WeChat scan code
+商品名称标识 | `goods_name` | 否  | String(64) | 商品名称 / 标识: 不能超过 20 个字母数字或包含特殊字符。 APP支付不能为空。 如果参数是汉字，则需要使用**UTF-8**编码。
+子商户号 | `mchid` | 否  | String(16) | 标识子商户身份，由钱方分配（渠道系统后台查看对应商户(非业务员)子商户号，被视为对应商户的交易）
+时区 | `txzone` | 否  | String(5) | 用于记录本地下单时间，默认为北京时间+0800
+设备唯一id | `udid` | 否  | String(40) |  唯一的设备ID,显示在商户管理后台上. 
+跳转地址 | `return_url` | 否  | String(512) | 支付成功后的用户跳转地址. 支付宝WAP限制了`return_url`最大为200个字符.
 
 ### 响应参数
 
-Parameter name | Parameter code | Type | Description 
---------- | -------- | --------- | ------- 
-Payment type | `pay_type` | String(6) | Alipay Web/Wap Payment = 801101/801107 |
-System transaction time | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
-Request transaction time | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  | 
-Response message | `resperr` | String(128) |  
-Payment amount | `txamt` | Int(11) |  
-Other message information | `respmsg` | String(128) |  
-External transaction number | `out_trade_no` | String(128) | External transaction number  
-QFPay transaction number | `syssn` | String(40) | 
-Return code | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](../../preparation/paycode#transaction-status-codes) for a complete list of response codes.  |
-Payment URL | `pay_url` | String(512) | 
+参数名称 | 参数编码 | 参数类型 | 描述
+--------- | -------- | --------- | -------
+支付类型 | `pay_type` | String(6) | 支付宝 Web/Wap 支付 = 801101/801107 |
+系统时间 | `sysdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss <br/> 这个参数值被用作结算截止时间 | 
+请求交易时间| `txdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss  |
+调试信息 | `resperr` | String(128) |
+订单支付金额 | `txamt` | Int(11) |  
+信息描述 | `respmsg` | String(128) |  
+外部订单号 | `out_trade_no` | String(128) | 外部订单号
+钱方订单号 | `syssn` | String(40) | 
+返回码 | `respcd` | String(4) | 0000 = 请求成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](#交易状态码) 获得完整返回类型列表 |
+支付链接 | `pay_url` | String(512) |

@@ -267,6 +267,7 @@ ob_end_flush();
 <Link to="/img/alipay_h5_process.jpg" target="_blank">![Alipay H5 process-flow](@site/static/img/alipay_h5_process.jpg)</Link>
 
 ### 支付宝服务窗H5跨境支付(WAP)
+
 Alipay Service Window H5 Payment enables merchants to call the Alipay payment module by using the JSAPI interface to collect payments. The customer checks out on the merchant's mobile website in Alipay, confirms the total amount and makes the payment.
 
 ### HTTP请求
