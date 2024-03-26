@@ -16,7 +16,7 @@ you can find the different digital wallets `pay_type` from the table below.
 PayType | Description 
 --------- | ------- 
 800212 | WeChat H5 Payment, details please refer to [WeChat Pay H5 (in mobile browser)]()
-801512 | Alipay Hong Kong WAP payment, details please refer to [# Alipay Service Window H5]()
+801512 | Alipay Hong Kong WAP payment, details please refer to [Alipay Service Window H5]()
 800712 | UNIONPAY WAP Payment
 805812 | PayMe Online WAP Payment 
 
