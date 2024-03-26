@@ -3,17 +3,18 @@ import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
 # 线上预授权支付API
-- [线上预授权支付API](#线上预授权支付api)
-	- [常用API](#常用api)
-	- [创建预授权支付訂單及扣款](#创建预授权支付及扣款)
-		- [第一步: 创建预授权支付訂單](#第一步-创建预授权支付訂單)
-		- [第二步: 预授权支付扣款](#第二步-预授权支付扣款)
-	- [预授权 （`PRE-AUTHORISED`）支付金额解冻](#unfreeze-amount-for-pre-authorised-transactions)
-	- [已扣款预授权交易 (`CAPTURED`) 退款](#refunding-completed-captured-transactions)
-	- [异步通知](#异步通知)
 
+- [线上预授权支付API](#线上预授权支付api)
+  - [常用API](#常用api)
+  - [Creating and capturing payments](#creating-and-capturing-payments)
+    - [第一步: 創建预授权支付訂單](#第一步-創建预授权支付訂單)
+    - [第二步: 预授权支付扣款](#第二步-预授权支付扣款)
+  - [预授权 （`PRE-AUTHORISED`）支付金额解冻](#预授权-pre-authorised支付金额解冻)
+  - [已扣款预授权交易 (`CAPTURED`) 退款](#已扣款预授权交易-captured-退款)
+  - [异步通知](#异步通知)
 
 ## 常用API
+
 对接开发环境的常规指引可以参考 [https://sdk.qfapi.com/#introduction](../preparation/introduction)
 
 在開始對接前，建議先參考以下內容：
@@ -133,7 +134,7 @@ import Link from '@docusaurus/Link';
 
 ## 异步通知
 
-General notification rule applies. For details, please refer to the Asynchronous Notifications section in the documentations (https://sdk.qfapi.com/?python#asynchronous-notifications)
+General notification rule applies. For details, please refer to the [Asynchronous Notifications section](../common-api/asynchronous-notification) in the documentations.
 
 Upon successful execution of the following actions, you should be able to receive a notification
 

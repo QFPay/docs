@@ -14,7 +14,7 @@ A3. 由于测试环境是生产环境的副本，您可以使用真实钱包来�
 A4. 建议持续查询交易状态。 如果合作伙伴/商户希望处理为成功状态或者失败状态，可以将交易标记为失败，并在收到交易成功异步通知后, 在后端申请退款。
 
 **Q5. 如果我想整合的支付方式没有特定的标题，应该怎么做？** <br/>
-A5. 您应该使用 [Public Payment Parameters](./preparation/paycode#api-endpoint-for-payments) 并且在[Payment Codes](./preparation/paycode#payment-codes)末尾的“注释”部分查看特殊案例。
+A5. 您应该使用 [公共支付参数](./preparation/paycode#支付API端点) 并且在[支付类型](./preparation/paycode#支付类型)末尾的“注释”部分查看特殊案例。
 
 **Q6. 我可以对 n 天前进行的交易进行退款吗？** <br/>
 A6.	只有当日交易总额等于或大于退款金额时才可以退款。

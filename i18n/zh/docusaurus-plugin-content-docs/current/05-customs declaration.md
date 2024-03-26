@@ -42,7 +42,7 @@ import Link from '@docusaurus/Link';
 | 参数编码| 是否必须| 参数类型|描述|
 |:---|:----- |-----   |----   |
 |`syssn`||String(40)|钱方交易订单号|
-|`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](#交易状态码) 获得完整返回类型列表|
+|`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](./preparation/paycode#交易状态码) 获得完整返回类型列表|
 |`resperr`||String(128)|信息描述|
 |`respmsg`||String(128)|其他信息|
 |`verify_department`|||认证机构|
@@ -70,7 +70,7 @@ import Link from '@docusaurus/Link';
 | 参数编码| 是否必须|参数类型|描述|
 |:---|:----- |-----   |----   |
 |`syssn`||String(40)|钱方交易订单号|
-|`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](#交易状态码) 获得完整返回类型列表|
+|`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](./preparation/paycode#交易状态码) 获得完整返回类型列表|
 |`resperr`||String(128)|信息描述|
 |`respmsg`||String(128)|其他信息|
 |`data`|||海关申报详情 \[\{"resperr" : "", "errmsg" : null, "sub_order_no" : "15752730835729139712", "verify_department" : "OTHERS", "verify_department_trade_id" : "4200000459201911265585026208"\}\]|
@@ -98,6 +98,6 @@ If additional order information has been submitted to the customs but is lost in
 |请求参数| 是否必须| 参数类型|描述|
 |:---|:----- |-----   |----   |
 |`syssn`||String(40)|钱方交易订单号|
-|`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](#交易状态码) 获得完整返回类型列表|
+|`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](./preparation/paycode#交易状态码) 获得完整返回类型列表|
 |`resperr`||String(128)|信息描述|
 |`respmsg`||String(128)|其他信息|

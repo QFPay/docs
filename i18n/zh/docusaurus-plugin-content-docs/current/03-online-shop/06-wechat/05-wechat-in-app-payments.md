@@ -72,7 +72,7 @@ import Link from '@docusaurus/Link';
 | 设备ID   | `udid`   | 否 | String         |必须是唯一的|
 | 时区 | `txzone`    | 否 | String        |用于记录本地订单时间。 默认为北京时间GMT+8（+0800）|
 | 重定向网址   | `return_url`   | 否 | String        | 付款成功后重定向至地址。 为 GrabPay Online 提交的强制参数。 支付宝 WAP 将 `return_url` 限制为最多 200 个字符。 |
-|扩展客户信息   | `extend_info`  | 否 | Object  | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](../../preparation/paycode# payment-codes)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
+|扩展客户信息   | `extend_info`  | 否 | Object  | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](../../preparation/paycode#支付类型)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
 
 ### 响应参数
 
@@ -87,5 +87,5 @@ import Link from '@docusaurus/Link';
 |`respmsg`    |String(128)| 信息说明|  |
 |`resperr`     |String(128)| 描述错误 |  |
 |`cardcd`     |String| 卡号 |  |
-|`txcurrcd`      |String| 货币  | 交易货币。 查看[货币](../../preparation/paycode#currencies) 表以获取可用货币的完整列表 |
+|`txcurrcd`      |String| 货币  | 交易货币。 查看[货币](../../preparation/paycode#支付币种) 表以获取可用货币的完整列表 |
 |`pay_params`      |Object| 支付数据  | 调用微信SDK的支付数据 |

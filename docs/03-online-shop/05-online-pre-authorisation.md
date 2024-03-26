@@ -3,6 +3,7 @@ import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
 # Online Pre-authorisation Payment APIs
+
 - [Online Pre-authorisation Payment APIs](#online-pre-authorisation-payment-apis)
 	- [Common APIs](#common-apis)
 	- [Creating and capturing payments](#creating-and-capturing-payments)
@@ -13,6 +14,7 @@ import Link from '@docusaurus/Link';
 	- [Notifications](#notifications)
 
 ## Common APIs
+
 Instructions on general integration with the development environment is available on [https://sdk.qfapi.com/#introduction](../preparation/introduction)
 
 For instance you may find the following useful before you start the integration:
@@ -22,7 +24,7 @@ For instance you may find the following useful before you start the integration:
 - signature generation for api requests
 - Common error codes
 
-You can also find common APIs that are also applicable to pre-authorisation payments: 
+You can also find common APIs that are also applicable to pre-authorisation payments:
 
 - [Transaction Enquiry](../common-api/transaction-enquiry)
 - [Transaction Refunds](../common-api/refunds)
@@ -34,7 +36,6 @@ You can also find common APIs that are also applicable to pre-authorisation paym
 ### Step 1: Create Pre-Authorisation Payment
 
 The Pre-authorisation Step has to be achieved using the Payment Element component. For details of the integration, please refer to the respective sessions in the payment element documentation.
-
 
 ### Step 2: Capture payment for pre-authorised transactions
 
@@ -51,7 +52,7 @@ Capture the amount booked by the customer in pre-authorised transactions
 | X-QF-APPCODE | Y | app code |
 | X-QF-SIGN | Y | app key |
 
-**parameters** : 
+**parameters** :
 
 | Field          | Must | Description        |
 | -------------- | ---- | ------------------ |
@@ -96,7 +97,7 @@ Capture the amount booked by the customer in pre-authorised transactions
 | X-QF-APPCODE | Y | app code |
 | X-QF-SIGN | Y | app key |
 
-**parameters** : 
+**parameters** :
 
 | Field          | Must | Description        |
 | -------------- | ---- | ------------------ |
@@ -130,17 +131,15 @@ Capture the amount booked by the customer in pre-authorised transactions
 
 For integration, please refer to the "Common API" section of the documentation. Please note that the syssn used in the refund transaction should correspond to the syssn returned upon the /authtrade request.
 
-
 ## Notifications
 
-General notification rule applies. For details, please refer to the Asynchronous Notifications section in the documentations (https://sdk.qfapi.com/?python#asynchronous-notifications)
+General notification rule applies. For details, please refer to the [Asynchronous Notifications section](../common-api/asynchronous-notification) in the documentations.
 
 Upon successful execution of the following actions, you should be able to receive a notification
 
 - payment completion (captured)
 - unfreeze funds
 - refund
-
 
 These notifications will follow the same format as below. For different notification, the value of the field `notify_type` will differ
 
@@ -149,7 +148,6 @@ These notifications will follow the same format as below. For different notifica
 | Payment Captured | payment |
 | Unfreeze funds | unfreeze |
 | Refund | refund |
-
 
 ```json
 {

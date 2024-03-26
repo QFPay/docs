@@ -94,7 +94,7 @@ qfPayOpenAPI: function () {
 |微信授权码 |`sub_openid`|是 |String(128)   |   |
 订单到期时间 | `expired_time` | 否 | String(3)  | QRC 过期时间（以分钟为单位）。 微信小程序默认QRC过期时间为30分钟。 该参数可手动调整，最小为 5 分钟，最大为 120 分钟。
 |Designated payment method   |`limit_pay`| 否 |String    |参数值指定为“no_credit”，禁止信用卡支付。 此设置仅对中国大陆有效。  |
-|Extended Customer Info | `extend_info` | 否 | Object | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](../../preparation/paycode# payment-codes)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'|
+|Extended Customer Info | `extend_info` | 否 | Object | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](../../preparation/paycode#支付类型)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'|
 
 ### 响应参数
 
@@ -107,7 +107,7 @@ qfPayOpenAPI: function () {
 |—    |`signType` |String(32) |签名方式  |签名类型， 默认：MD5  |
 |—    |`paySign`  |String(64) |签名  |  |
 |公共响应参数  |—  |— |—  | — |
-|`txcurrcd`    |  | |货币   | 交易货币。 查看[货币](../../preparation/paycode#currencies) 表以获取可用货币的完整列表 |
+|`txcurrcd`    |  | |货币   | 交易货币。 查看[货币](../../preparation/paycode#支付币种) 表以获取可用货币的完整列表 |
 
 **Step 4:** 唤起支付模块
 
