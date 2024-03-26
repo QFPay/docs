@@ -67,7 +67,7 @@ Request Body:
 |Transaction amount    | `txamt`  | Yes | String |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen funds|
 |Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the Currencies table for a complete list of available currencies|
 |RMB Tag | `rmb_tag` | No | String(1) | WeChat Pay in Hong Kong uses `rmb_tag` = Y together with `txcurrcd` = CNY to indicate that the transaction currency is RMB.|
-|Transaction request time    | `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh&#58;mm:ss|
+|Transaction request time    | `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh:mm:ss|
 | Device ID   | `udid`   | No | String         |Must be unique|
 | Time zone | `txzone`    | No | String        |Used to record the local order time. The default is Beijing time GMT+8 (+0800)|
 | Redirect URL   | `return_url`   | No | String        | Redirect to address after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters.|
@@ -79,9 +79,9 @@ Request Body:
 |:----    |:---|:----- |-----   |
 |`syssn` |   String(40) | QF Pay Transaction number | QFPay transaction number, returned by the system once payment is completed |
 |`orig_syssn`    |String(40)| External transaction number | Developer platform transaction number |
-|`txdtm`     | String(20) | Transaction request time | Format: YYYY-MM-DD hh&#58;mm:ss  |
+|`txdtm`     | String(20) | Transaction request time | Format: YYYY-MM-DD hh:mm:ss  |
 |`txamt`    |Int(11)| Transaction amount | |
-|`sysdtm`     |String(20)| System transaction time |Format: YYYY-MM-DD hh&#58;mm:ss <br/> This parameter value is used as the cut-off time for settlements.|
+|`sysdtm`     |String(20)| System transaction time |Format: YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements.|
 |`respcd`    |String(4)| Return code |  |
 |`respmsg`    |String(128)| Information description|  |
 |`resperr`     |String(128)| Description error |  |

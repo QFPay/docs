@@ -21,7 +21,7 @@ import datetime
 import string
 
 # Enter Client Credentials
-environment = 'https://openapi-test.qfpay.com'
+environment = 'https://test-openapi-hk.qfapi.com'
 app_code = 'D5589D2A1F2E42A9A60C37*********'
 client_key = '0E32A59A8B454940A2FF39**********'
 
@@ -46,7 +46,7 @@ def make_req_sign(data, key):
 
 # Body payload
 txamt = '10' #In USD,EUR,etc. Cent
-txcurrcd = 'EUR'
+txcurrcd = 'HKD'
 pay_type = '801101' # Alipay Web Payment = 801101
 auth_code='283854702356157409' #CPM only
 out_trade_no = '01234567890123'
@@ -115,7 +115,7 @@ public class TestMain {
 
 ```javascript
 // Enter Client Credentials
-const environment = 'https://openapi-test.qfpay.com'
+const environment = 'https://test-openapi-hk.qfapi.com'
 const app_code = 'D5589D2A1F2E42A9A60C37*********'
 const client_key = '0E32A59A8B454940A2FF39*********'
 
@@ -130,7 +130,7 @@ console.log(tradenumber)
 
 var payload = {
 'txamt': '10', // In USD,EUR,etc. Cent
-'txcurrcd': 'EUR',
+'txcurrcd': 'HKD',
 'pay_type': '801101', // Alipay Web Payment = 801101
 'out_trade_no': tradenumber,
 'txdtm': dateTime,
@@ -202,7 +202,7 @@ ob_start();
       //'mchid' => urlencode($mchid),
       'pay_type' => urlencode($pay_type),
       'out_trade_no' => urlencode(GetRandStr(20)),
-      'txcurrcd' => urlencode('EUR'),
+      'txcurrcd' => urlencode('HKD'),
       'txamt' => urlencode(2200),
       'txdtm' => $now_time
     );
@@ -289,7 +289,7 @@ ob_end_flush();
 支付类型 | `pay_type` | 是 | String(6) | 支付宝线上支付 = 801101
 外部订单号 | `out_trade_no` | 是 | String(128)| 开发者自定义订单号，在同一商户账户中的每笔交易和退款请求该参数值唯一
 请求交易时间 | `txdtm` | 是 | String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
-交易过期时间 | `expired_time` | 否 <br/>(仅限扫码支付) | String(3)  | 以分钟为计时的二维码过期时间,默认的过期时间是30分钟. 该参数可以被手动设置为最小5分钟,最大120分钟 <br/> 该参数可用于: <br/>800201 - WeChat scan code
+交易过期时间 | `expired_time` | 否 <br/>(仅限正扫支付) | String(3)  | 以分钟为计时的二维码过期时间,默认的过期时间是30分钟. 该参数可以被手动设置为最小5分钟,最大120分钟 <br/> 该参数可用于: <br/>800201 - WeChat scan code
 商品名称标识 | `goods_name` | 否  | String(64) | 商品名称 / 标识: 不能超过 20 个字母数字或包含特殊字符。 APP支付不能为空。 如果参数是汉字，则需要使用**UTF-8**编码。
 子商户号 | `mchid` | 否  | String(16) | 标识子商户身份，由钱方分配（渠道系统后台查看对应商户(非业务员)子商户号，被视为对应商户的交易）
 时区 | `txzone` | 否  | String(5) | 用于记录本地下单时间，默认为北京时间+0800

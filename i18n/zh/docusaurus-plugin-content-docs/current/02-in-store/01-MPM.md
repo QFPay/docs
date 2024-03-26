@@ -2,11 +2,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# 扫码支付
+# 正扫支付
 
 <Link href="/img/mpm_process.jpg" target="_blank">![MPM process-flow](@site/static/img/mpm_process.jpg)</Link>
 
-## 扫码支付API请求
+## 正扫支付API请求
 
 ```plaintext
 请求头部:
@@ -66,7 +66,7 @@ def make_req_sign(data, key):
 
 # Body payload
 txamt = '1' #In USD,EUR,etc. Cent
-txcurrcd = 'EUR'
+txcurrcd = 'HKD'
 pay_type = '800101' # Alipay MPM = 800101, WeChat Pay MPM = 800201
 #auth_code = '287255838063025836' # CPM only
 out_trade_no = random_string
@@ -135,7 +135,7 @@ public class TestMain {
 
 ```javascript
 // Enter Client Credentials
-const environment = 'https://openapi-test.qfpay.com'
+const environment = 'https://test-openapi-hk.qfapi.com'
 const app_code = 'D5589D2A1F2E42A9A60C37*********'
 const client_key = '0E32A59A8B454940A2FF39*********'
 
@@ -150,7 +150,7 @@ console.log(tradenumber)
 
 var payload = {
 'txamt': '10', // In USD,EUR,etc. Cent
-'txcurrcd': 'EUR',
+'txcurrcd': 'HKD',
 'pay_type': '800101', // Alipay MPM = 800101, WeChat Pay MPM = 800201
 'out_trade_no': tradenumber,
 'txdtm': dateTime,
@@ -222,7 +222,7 @@ $fields = array(
     //'mchid' => urlencode($mchid),
     'pay_type' => urlencode($pay_type),
     'out_trade_no' => urlencode(GetRandStr(20)),
-    'txcurrcd' => urlencode('EUR'),
+    'txcurrcd' => urlencode('HKD'),
     'txamt' => urlencode(2200),
     'txdtm' => $now_time
 );
@@ -296,7 +296,7 @@ ob_end_flush();
 |:----    |:---|:----- |-----   |-----   |
 |常用支付参数 | —  | — | — | — |
 |支付标记 | `pay_tag`  |否 |     String(16) | 默认值是: ALIPAYHK<br/>支付宝大陆版本: ALIPAYCN<br/>801103 - 支付宝海外线上退款 (QF_BUSICD_ALIPAY_ONLINE_REFUND)<br/>801104 - 支付宝海外线上查询 (QF_BUSICD_ALIPAY_ONLINE_QUERY)<br/>801110 - 支付宝In-App支付(海外商户) (QF_BUSICD_ALIPAY_ONLINE_APP)<br/>801501 - 支付宝香港扫码<br/>801512 - 支付宝香港Wap支付<br/>801510 -支付宝In-App支付 (香港商戶)  |
-订单过期时间 | `expired_time` | 否<br/> (仅支持扫码支付) | String(3)  | 按分钟计时的动态二维码的过期时间. 默认时长为30分钟, 最小值5分钟，最大值120分钟.<br/> 适用于: <br/>800201-微信扫码<br/>800101-支付宝扫码<br/>801512-支付宝香港Wap支付<br/>801501-支付宝香港扫码<br/>801107-支付宝海外Wap支付<br/>801101-支付宝海外扫码<br/>801010-微信香港APP<br/>801510-支付宝香港APP
+订单过期时间 | `expired_time` | 否<br/> (仅支持正扫支付) | String(3)  | 按分钟计时的动态二维码的过期时间. 默认时长为30分钟, 最小值5分钟，最大值120分钟.<br/> 适用于: <br/>800201-微信扫码<br/>800101-支付宝扫码<br/>801512-支付宝香港Wap支付<br/>801501-支付宝香港扫码<br/>801107-支付宝海外Wap支付<br/>801101-支付宝海外扫码<br/>801010-微信香港APP<br/>801510-支付宝香港APP
 |指定支付方式  |`limit_pay`|否 |String   |该参数值指定为`no_credit`，禁止使用信用卡支付,该规则只对中国大陆生效 |
 
 ## 响应参数

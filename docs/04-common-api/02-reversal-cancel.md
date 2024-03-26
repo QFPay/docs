@@ -210,7 +210,7 @@ $fields = array(
     //'mchid' => urlencode($mchid),
     'syssn' => urlencode($syssn),
     //'out_trade_no' => urlencode($out_trade_no),
-    'txcurrcd' => urlencode('EUR'),
+    'txcurrcd' => urlencode('HKD'),
     'txamt' => urlencode(2200),
     'txdtm' => date('2020-03-05 16:50:30'),
 );

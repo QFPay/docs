@@ -1,4 +1,4 @@
-﻿import Tabs from '@theme/Tabs';
+import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
@@ -44,7 +44,7 @@ import Link from '@docusaurus/Link';
 :::note
     对于二维码支付，根据上次使用情况自动选择 MPM/CPM 模式。
 
-    camera_id:扫码支付的时候可以切换前后摄像头,可以不传这个字段，默认是后置摄像头
+    camera_id:正扫支付的时候可以切换前后摄像头,可以不传这个字段，默认是后置摄像头
 
             0：CAMERA_PARAM_BACK  后置摄像头
             1：CAMERA_PARAM_FROT  前置摄像头
@@ -397,7 +397,8 @@ digest=(
 
 ##### 支持的USB转串口线芯片类型
 
-PL2303 HXD  支持
+[comment]: <> (這部分不太清晰，為什麼PL2303是唯一支持/ 穩定程度和價格一致但是最不被推薦？)
+PL2303HXD  支持
 CH340       未支持
 FT232       未支持
 
