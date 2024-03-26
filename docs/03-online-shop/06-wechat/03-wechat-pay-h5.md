@@ -17,14 +17,16 @@ import Link from '@docusaurus/Link';
 |Public payment parameters |—  |— |—  | Refer to the general documentation about transactions |
 |Extended Customer Info|`extend_info`|Yes|Object||
 
-```plaintext
+```js
 extend_info:
-{"scene_info":{
-                "h5_info": { // h5支付固定传"h5_info"
-                             "type": "Wap", //场景类型
-                              "wap_url": "https://qfpay.com/h5/pay", //WAP网站URL地址
-                              "wap_name": "qfpay" //WAP 网站名
-                            }              },
+{
+  "scene_info":{ //场景类型
+    "h5_info": { // h5支付固定传"h5_info"
+      "type": "Wap", //场景类型
+      "wap_url": "https://qfpay.com/h5/pay", //WAP网站URL地址
+      "wap_name": "qfpay" //WAP 网站名
+    }              
+  },
   "spbill_create_ip": "192.168.1.10"// 用户真实ip地址获取指引 https://pay.weixin.qq.com/wiki/doc/api/H5.php?chapter=15_5
 }
 ```
@@ -39,8 +41,6 @@ extend_info:
 |||`wap_url`|Yes|String|mobile website address|
 |||`wap_name`|Yes|String|mobile website name|
 |`spbill_create_ip`|||Yes|String|IP address of user|
-
-
 
 ### Response Parameters
 

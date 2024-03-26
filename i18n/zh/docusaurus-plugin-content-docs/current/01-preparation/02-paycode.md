@@ -63,7 +63,7 @@ import TabItem from '@theme/TabItem';
   1. 该支付方式不支持退款.
 
   **(\*\*\*\*)**
-  1. 对于支付请求和响应请参考[此](../online-shop/alipay/alipay-online-payments#alipay-online-payments)部分内容.
+  1. 对于支付请求和响应请参考[此](../online-shop/alipay/alipay-online-payments)部分内容.
 :::
 
 ## 支付币种
@@ -378,7 +378,7 @@ ob_end_flush();
 --------- | -------- | --------- | ------- | ------- 
 订单支付金额 | `txamt` | 是 | Int(11) | 以当前货币最小计量单位计算，只允许整数类型 (i.e. 100 = $1)
 币种 | `txcurrcd` | 是 | String(3) | 交易币种, 请查看[币种](#支付币种)表以获取完整的可选用的币种
-支付类型 | `pay_type` | 是 | String(6) | 请查看[支付方式代码](#支付方式)表以获取完整的可选用的支付类型
+支付类型 | `pay_type` | 是 | String(6) | 请查看[支付类型](#支付类型)表以获取完整的可选用的支付类型
 外部订单号 | `out_trade_no` | 是 | String(128)| 开发者自定义订单号，在同一商户账户中的每笔交易和退款请求该参数值唯一
 请求交易时间 | `txdtm` | 是 | String(20) | 格式：yyyy-MM-dd HH:mm:ss
 授权码 | `auth_code` | 是<br/> (仅限付款码支付) | String(128) | 指定扫描条码/二维码的授权码。 返回的`auth_code`在每个授权中都是唯一的, 且每个“auth_code”只能使用一次，并会在一天后自动过期. 为了使用支付宝和微信支付测试付款码支付，可以使用任何可扫描二维码设备提取`auth_code`，或者在条形码下方的消费者钱包中手动找到`auth_code`.
@@ -393,7 +393,7 @@ ob_end_flush();
 
 参数名称 | 参数编码 | 参数类型 | 描述
 --------- | -------- | --------- | -------
-支付类型 | `pay_type` | String(6) | 请参阅 [支付方式代码](#支付方式) 获取完整的支付类型
+支付类型 | `pay_type` | String(6) | 请参阅 [支付类型](#支付类型) 获取完整的支付类型
 系统交易时间 | `sysdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss <br/> 这个参数值被用作结算截止时间| 
 请求交易时间 | `txdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss  |
 信息描述 | `resperr` | String(128) |

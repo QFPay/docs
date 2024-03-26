@@ -5,7 +5,7 @@ import Link from '@docusaurus/Link';
 # PayMe Offline Payment
 
 ```plaintext
-For code instructions select Python, Java, Node.js or PHP with the tabs above.
+要获取代码说明，请在上方的标签中选择Python、Java、Node.js或PHP。
 ```
 
 <Tabs>
@@ -248,7 +248,7 @@ ob_end_flush();
 </TabItem>
 </Tabs>
 
-> The above command returns JSON structured like this:
+> 上述命令返回的JSON结构如下所示：
 
 ```json
 {
@@ -272,30 +272,36 @@ ob_end_flush();
 }
 ```
 
-### Offline Payment
-For MPM Mode, The merchant generates a dynamic QR code based on the Payme protocol and presents it to the customer. The user opens their PayMe wallet and scans the displayed QR Code in order to complete payment. For CPM Mode, the customer generates a dynamic QR code in their QR code wallet and presents it to the cashier for scanning. If the response codes 1143/1145 are returned, the transaction is being processed or the customer is required to input the wallet password. Merchants have to query the transaction result for a final assessment of the transaction status.
+### 线下支付
+正扫支付模式下, 商家将会根据Payme协议生成一个动态QR码并展示给顾客。顾客只需打开PayMe钱包，扫描显示的QR码即能完成支付。
 
-### HTTP Request
+反扫支付模式下，顾客在其QR码钱包中生成一个动态QR码，并展示给收银员进行扫描。
+
+如果返回响应代码为 `1143`或`1145`，表示交易正在处理中或需要顾客输入钱包密码。
+
+商家需要通过查询交易结果来进行最终的交易状态评估。
+
+### HTTP 请求
 
 `POST ../trade/v1/payment` <br/>
 `PayType: 805801` `PayMe Merchant Presented QR Code Payment in store (MPM) (HK Merchants)` <br/>
 `PayType: 805808` `PayMe Consumer Presented QR Code Payment (CPM) (HK Merchants)` <br/>
 
-### Request Parameters
+### 请求参数
 
-Parameter name | Parameter code | Mandatory | Type | Description
+参数名称 | 参数代号 | 必填 | 类别 | 描述
 --------- | -------- | --------- | ------- | ------- 
-Payment amount | `txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1) 
-Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies
-Payment type | `pay_type` | Yes | String(6) | PayMe Web Payment = 805801
-API Order Number | `out_trade_no` | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
-Request transaction time | `txdtm` | Yes | String(20) | Transaction time format：<br/> YYYY-MM-DD hh:mm:ss 
-Order expiration time | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.
-Product name identification | `goods_name` | No | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
-QF Pay merchant number | `mchid` | No | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. 
-Time zone | `txzone` | No | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800). 
-Device ID | `udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal. 
-Redirect URL | `return_url` | No | String(512) |  URL that the user will be redirected to when the payment finishes.
+支付金额 | `txamt` | 是 | Int(11) | 交易金额，单位为分（例如100表示1元）
+支付币种 | `txcurrcd` | 是 | String(3) | 交易货币类型。请参考[交易币种](../preparation/paycode#currencies)表格获取可用货币的完整列表
+支付类型 | `pay_type` | 是 | String(6) | PayMe网页支付 = 805801
+API订单号| `out_trade_no` | 是 | String(128)| 唯一商户订单号，用于每个支付和退款请求。
+交易请求时间 | `txdtm` | 是 | String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
+订单过期时间 | `expired_time` | 否<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.
+Product name identification | `goods_name` | 否 | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
+QF Pay merchant number | `mchid` | 否 | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. 
+Time zone | `txzone` | 否 | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800). 
+Device ID | `udid` | 否 | String(40) |  Unique transaction device ID. Is displayed on the merchant portal. 
+Redirect URL | `return_url` | 否 | String(512) |  URL that the user will be redirected to when the payment finishes.
 
 ### Response Parameters
 

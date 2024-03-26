@@ -2,9 +2,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# Web Payment
+# Web支付
 
-## Introduction
+## 简介
 
 Customers make purchases on a merchant website with Web Payment methods. The user scans the displayed QR code to pay, confirms the total amount and makes the payment. Finally the customer can be redirected to a selected page on the merchant's website using the `return_url` parameter. The selected wallet will deduct the payment amount from the consumer's wallet in real-time in HKD and QFPay settles the payment amount to merchants in HKD.
 

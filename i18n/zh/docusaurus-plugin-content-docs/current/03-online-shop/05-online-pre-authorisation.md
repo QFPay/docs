@@ -5,61 +5,62 @@ import Link from '@docusaurus/Link';
 # 线上预授权支付API
 - [线上预授权支付API](#线上预授权支付api)
 	- [常用API](#常用api)
-	- [Creating and capturing payments](#creating-and-capturing-payments)
-		- [Step 1: Create Pre-Authorisation Payment](#step-1-create-pre-authorisation-payment)
-		- [Step 2: Capture payment for pre-authorised transactions](#step-2-capture-payment-for-pre-authorised-transactions)
-	- [Unfreeze amount for `PRE-AUTHORISED` transactions](#unfreeze-amount-for-pre-authorised-transactions)
-	- [Refunding Completed (`CAPTURED`) Transactions](#refunding-completed-captured-transactions)
-	- [Notifications](#notifications)
+	- [创建预授权支付訂單及扣款](#创建预授权支付及扣款)
+		- [第一步: 创建预授权支付訂單](#第一步-创建预授权支付訂單)
+		- [第二步: 预授权支付扣款](#第二步-预授权支付扣款)
+	- [预授权 （`PRE-AUTHORISED`）支付金额解冻](#unfreeze-amount-for-pre-authorised-transactions)
+	- [已扣款预授权交易 (`CAPTURED`) 退款](#refunding-completed-captured-transactions)
+	- [异步通知](#异步通知)
+
 
 ## 常用API
-Instructions on general integration with the development environment is available on [https://sdk.qfapi.com/#introduction](../preparation/introduction)
+对接开发环境的常规指引可以参考 [https://sdk.qfapi.com/#introduction](../preparation/introduction)
 
-For instance you may find the following useful before you start the integration:
+在開始對接前，建議先參考以下內容：
 
-- API credentials to be used
-- testing environments
-- signature generation for api requests
-- Common error codes
+- API凭据：在對接过程中，您将需要使用相应的API凭据来进行验证和授权。
+- 测试环境：为了确保顺利的對接和开发，我们提供了测试环境，供您进行测试和调试。
+- API请求签名生成：为了确保请求的安全性和完整性，您需要生成正确的API请求签名。详细的签名生成方法将在文档中提供。
+- 常见错误代码：在对接过程中，了解常见的错误代码和对应的含义将有助于您更好地诊断和解决问题。
 
-You can also find common APIs that are also applicable to pre-authorisation payments:
+此外，我们还为预授权支付提供了以下常用API接口供您参考：
 
-- [Transaction Enquiry](../common-api/transaction-enquiry)
-- [Transaction Refunds](../common-api/refunds)
+- [交易查询](../common-api/transaction-enquiry)
+- [交易退款](../common-api/refunds)
 
 ## Creating and capturing payments
 
 ![Pre-authorisation payment flow](https://www.plantuml.com/plantuml/png/XOynJWKX441xJZ6r2HUmCDzu0HihOp61mIM1WSpE57fwTv4biJ0_eHZ8UpouxOgYLelRSYIWslKB8kr1SjVSsBq_V83tJ_0gz6owDSdV51-X2tcSUpn1m33uFzmmNx2hoIc5t-b_z8sJ48s0pN72SAnafG3MPgoEcn8KIWejhOBRhVSc2Xr5CvOhw8WZd8Qxo54xlhOExjU5AcRE_0dSs8VfpVU0M_Aw-dPKhPOV)
 
-### Step 1: Create Pre-Authorisation Payment
+### 第一步: 創建预授权支付訂單
 
-The Pre-authorisation Step has to be achieved using the Payment Element component. For details of the integration, please refer to the respective sessions in the payment element documentation.
+预授权步骤需要使用支付元素组件 (Payment Element) 来完成。有关對接的详细信息，请参考支付元素文档中相应的章节。
 
-### Step 2: Capture payment for pre-authorised transactions
+### 第二步: 预授权支付扣款
 
-Capture the amount booked by the customer in pre-authorised transactions
+扣取客户在预授权交易中授权的金额
 
-**url** :   /trade/v1/authtrade
+**URL位址** :   /trade/v1/authtrade
 
-**method** : POST
+**请求方法** : POST
 
-**header**:
+**HTTP 标头**:
 
-| Header name | Must | Description |
+| HTTP 标头 | 必填 | 描述 |
 | -------------- | ---- | ------------------ |
-| X-QF-APPCODE | Y | app code |
-| X-QF-SIGN | Y | app key |
+| X-QF-APPCODE | 是 | app code |
+| X-QF-SIGN | 是 | app key |
 
-**parameters** :
+**参数** :
 
-| Field          | Must | Description        |
+| 参数          | 必填 | 描述        |
 | -------------- | ---- | ------------------ |
-| txamt          | Y    | transaction amount |
-| txcurrcd       | N    | transaction currency |
-| mchid          | N    | mchid, merchant id |
-| syssn          | Y    | original transaction ID from pre-authorised payment |
+| txamt          | 是   | 扣款金额 |
+| txcurrcd       | 否    | 扣款币种 |
+| mchid          | 否    | 商户编号（只适用于个别渠道商户） |
+| syssn          | 是   | 预授权交易唯一订单号 |
 
-**response** :
+**回应** :
 
 ```json
 {
@@ -80,32 +81,32 @@ Capture the amount booked by the customer in pre-authorised transactions
 }
 ```
 
-## Unfreeze amount for `PRE-AUTHORISED` transactions
+## 预授权 （`PRE-AUTHORISED`）支付金额解冻
 
->Only the non-captured (`pre-authorised amount - captured amount`) amount in the transaction can be unfreezed (released back to the customer). This action can only be done ONCE.
+> 在交易中，只有未扣款的金额（预授权金额 减去 已扣款总金额）可以被解除冻结（退还给客户）。此操作只能执行一次。
 
-**url** :   /trade/v1/unfreeze
+**URL位址** :   /trade/v1/unfreeze
 
-**method** : POST
+**请求方法** : POST
 
-**header**:
+**HTTP 标头**:
 
-| Header name | Must | Description |
+| HTTP 标头 | 必填 | 描述 |
 | -------------- | ---- | ------------------ |
-| X-QF-APPCODE | Y | app code |
-| X-QF-SIGN | Y | app key |
+| X-QF-APPCODE | 是 | app code |
+| X-QF-SIGN | 是 | app key |
 
-**parameters** :
+**参数** :
 
-| Field          | Must | Description        |
+| 参数          | 必填 | 描述        |
 | -------------- | ---- | ------------------ |
-| txamt          | Y    | transaction amount      |
-| txdtm          | Y    | transaction time         |
-| syssn          | Y    | original transaction ID |
-| out_trade_no   | Y    | original merchant order id |
-| mchid          | N    | mchid, merchant id |
+| txamt          | 是    | 解冻金额      |
+| txdtm          | 是    | 解冻时间         |
+| syssn          | 是    | 预授权交易唯一订单号 |
+| out_trade_no   | 是    | 预授权交易商户订单号 |
+| mchid          | 否    | 商户编号（只适用于个别渠道商户） |
 
-**response** :
+**回应** :
 
 ```json
 {
@@ -126,27 +127,27 @@ Capture the amount booked by the customer in pre-authorised transactions
 }
 ```
 
-## Refunding Completed (`CAPTURED`) Transactions
+## 已扣款预授权交易 (`CAPTURED`) 退款
 
-For integration, please refer to the "Common API" section of the documentation. Please note that the syssn used in the refund transaction should correspond to the syssn returned upon the /authtrade request.
+有关对接请参考文档中的「常用API」部分。请注意，退款交易中使用的唯一订单号（syssn）应与/authtrade请求返回的订单号对应。
 
-## Notifications
+## 异步通知
 
-General notification rule applies. For details, please refer to the Asynchronous Notifications section in the documentations (https://sdk.qfapi.com/?python#asynchronous-notifications)
+一般通知规则适用。详细信息请参考文档中的异步通知部分 (https://sdk.qfapi.com/?python#asynchronous-notifications)
 
-Upon successful execution of the following actions, you should be able to receive a notification
+在以下操作成功执行后，您将会收到收到通知：
 
-- payment completion (captured)
-- unfreeze funds
-- refund
+- 预授权交易扣款
+- 解冻资金
+- 退款
 
-These notifications will follow the same format as below. For different notification, the value of the field `notify_type` will differ
+这些通知将采用以下相同的格式。对于不同的通知，字段 `notify_type` 的值将不同。 
 
-| Action Completed | notify_type value |
+| 操作（成功） |  `notify_type` 值 |
 | -------------- | ------------------ |
-| Payment Captured | payment |
-| Unfreeze funds | unfreeze |
-| Refund | refund |
+| 预授权交易扣款 | payment |
+| 解冻资金 | unfreeze |
+| 退款 | refund |
 
 ```json
 {

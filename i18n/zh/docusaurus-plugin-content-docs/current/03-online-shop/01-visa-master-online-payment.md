@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 
 # Visa / Mastercard 线上支付
 
-我们目前支持在[香港环境](../preparation/introduction#environments) 中使用信用卡付款。 支持所有主要信用卡发卡机构。
+我们目前支持在[香港环境](../preparation/introduction#开发环境) 中使用信用卡付款。 支持所有主要信用卡发卡机构。
 
 ## 支付整合流程
 

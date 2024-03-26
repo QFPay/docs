@@ -4,9 +4,10 @@ import Link from '@docusaurus/Link';
 
 # WAP支付
 
-## Introduction
+## 简介
+
 WAP支付或者H5支付能够让商户在Chrome等手机浏览器上的调用电子钱包模块进行收款。
- 
+
 ## HTTP请求
 
 `POST ../trade/v1/payment` <br/>
@@ -20,11 +21,10 @@ WAP支付或者H5支付能够让商户在Chrome等手机浏览器上的调用电
 800712 | 银联WAP支付
 805812 | PayMe 线上WAP支付
 
-
 ## 请求参数
 
 参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述
---------- | -------- | --------- | ------- | ------- 
+--------- | -------- | --------- | ------- | -------
 交易金额 | `txamt` | 是 | Int(11) | 交易金额。 单位为分（即 100 = 1 元）
 交易货币 | `txcurrcd` | 是 | String(3) | 交易货币。 查看[货币](../preparation/paycode#currencies) 表以获取可用货币的完整列表
 交易类型 | `pay_type` | 是 | String(6) | e.g. PayMe WAP 支付 = 805812
@@ -36,7 +36,6 @@ QF Pay 商户号码 | `mchid` | 否 | String(16) | 可能会也可能不会给�
 设备ID | `udid` | 否 | String(40) |  唯一的交易设备ID。 显示在商家管理平台上。
 重定向URL | `return_url` | 否 | String(255) |  付款完成后用户将被重定向到的 URL。
 异步通知URL | `notify_url` | 否 | String(255) | 支付完成后商家收到通知的URL。
-
 
 ### 响应参数
 

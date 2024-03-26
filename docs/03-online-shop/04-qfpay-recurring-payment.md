@@ -23,7 +23,7 @@ For build and manage subscriptions, the following API resources are required:
 | API Resources |
 |---|
 |[Customer](#customer)|
-|[Payment Token](#payment-token)
+<!-- |[Payment Token](#payment-token) -->
 |[Product](#product)|
 |[Subscription](#subscription)|
 
