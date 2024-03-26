@@ -17,14 +17,15 @@ import Link from '@docusaurus/Link';
 |公共支付参数 |—  |— |—  | 请参阅有关交易的通用文档 |
 |扩展客户信息|`extend_info`|是|Object||
 
-```plaintext
-extend_info:
-{"scene_info":{
-                "h5_info": { // h5支付固定传"h5_info"
-                             "type": "Wap", //场景类型
-                              "wap_url": "https://qfpay.com/h5/pay", //WAP网站URL地址
-                              "wap_name": "qfpay" //WAP 网站名
-                            }              },
+```js
+extend_info:{
+  "scene_info":{ //场景类型
+    "h5_info": { // h5支付固定传"h5_info"
+      "type": "Wap", //场景类型
+      "wap_url": "https://qfpay.com/h5/pay", //WAP网站URL地址
+      "wap_name": "qfpay" //WAP 网站名
+    }              
+  },
   "spbill_create_ip": "192.168.1.10"// 用户真实ip地址获取指引 https://pay.weixin.qq.com/wiki/doc/api/H5.php?chapter=15_5
 }
 ```

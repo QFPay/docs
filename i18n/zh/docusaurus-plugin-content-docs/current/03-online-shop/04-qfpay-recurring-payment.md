@@ -23,7 +23,7 @@ import Link from '@docusaurus/Link';
 | API资源 |
 |---|
 |[Customer](#customer)|
-|[Payment Token](#payment-token)|
+<!-- |[Payment Token](#payment-token)| -->
 |[Product](#product)|
 |[Subscription](#subscription)|
 

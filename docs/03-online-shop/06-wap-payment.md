@@ -15,7 +15,7 @@ WAP Payment or H5 Payment enables merchants to call up digital wallet module in 
 you can find the different digital wallets `pay_type` from the table below.
 
 PayType | Description
---------- | -------
+------- | -------
 800212 | WeChat H5 Payment, details please refer to [WeChat Pay H5 (in mobile browser)](./wechat/wechat-pay-h5)
 801512 | Alipay Hong Kong WAP payment, details please refer to [Alipay Service Window H5](./alipay/alipay-service-window-h5)
 800712 | UNIONPAY WAP Payment
@@ -43,11 +43,11 @@ Parameter name | Parameter code | Type | Description
 --------- | -------- | --------- | -------
 Payment type | `pay_type` | String(6) | e.g. PayMe Wap Payment |
 System transaction time | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
-Request transaction time | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  | 
-Response message | `resperr` | String(128) |  
-Payment amount | `txamt` | Int(11) |  
-Other message information | `respmsg` | String(128) |  
+Request transaction time | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  |
+Response message | `resperr` | String(128) |
+Payment amount | `txamt` | Int(11) |
+Other message information | `respmsg` | String(128) |
 External transaction number | `out_trade_no` | String(128) | External transaction number  
-QFPay transaction number | `syssn` | String(40) | 
+QFPay transaction number | `syssn` | String(40) |
 Return code | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](../preparation/paycode#transaction-status-codes) for a complete list of response codes.  |
 Payment URL | `pay_url` | String(512) | generate QR code in Desktop web; redirect URL in WAP
