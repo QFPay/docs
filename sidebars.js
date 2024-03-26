@@ -66,6 +66,8 @@ const sidebars = {
         'online-shop/paymentelement',
         'online-shop/qfpay-recurring-payment',
         'online-shop/visa-master-online-payment',
+        'online-shop/wap-payment',
+        'online-shop/web-payment',
         {
           type: 'category',
           label: 'Wechat',

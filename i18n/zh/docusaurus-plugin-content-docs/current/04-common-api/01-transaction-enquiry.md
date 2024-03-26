@@ -299,14 +299,14 @@ ob_end_flush();
 |----    |---|----- |-----   |-----   |
 |子商户 | ` mchid ` | For Agents |String(16) | 标识子商户身份，由钱方统一分配；支付时若`mchid`非空则查询订单时必传.|
 |钱方订单号| ` syssn ` |No |String(128) |多个以英文逗号区分开 |
-|外部订单号| ` out_trade_no ` |No |String(128) | External transaction number / Merchant platform transaction number, multiple entries are seperated by commas   |
-|支付类型 | ` pay_type ` |No |String(6) | Multiple entries are seperated by commas   |
-|交易返回码| ` respcd ` |No |String(4) | Returns all orders with return code status by default   |
-|开始时间| ` start_time ` |No |String(20) | It is ignored when `syssn` or `out_trade_number` is provided. The default date time is the start of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
-|结束时间	| ` end_time ` |No | String(20) | It is ignored when `syssn` or `out_trade_number` is provided. The default date time is the end of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
-|时区 | ` txzone ` |No | String(5) | Used to record the local order time. The default is Beijing time UTC+8 (+0800)   |
-|页数| ` page `   |No |  Int(8) | Default value is 1   |
-|每页显示数量| ` page_size ` |No |  Int(8) | By default 10 transactions will be displayed. The maximum `page_size` value is 100  |
+|外部订单号| ` out_trade_no ` |No |String(128) | 外部订单号/商户平台订单号, 多个订单号由逗号分隔  |
+|支付类型 | ` pay_type ` |No |String(6) | 多个项目由逗号分隔 |
+|交易返回码| ` respcd ` |No |String(4) | 默认返回所有返回码状态的订单  |
+|开始时间| ` start_time ` |No |String(20) | 当 `syssn` 或 `out_trade_number`存在时不需要提供, 默认本月开始日期. 跨月份查询必须提供 `start_time` 和 `end_time`. <br/> 格式：yyyy-MM-dd HH:mm:ss. |
+|结束时间	| ` end_time ` |No | String(20) | 当 `syssn` 或 `out_trade_number`存在时不需要提供, 默认本月结束日期.跨月份查询必须提供 `start_time` 和 `end_time`. <br/> 格式：yyyy-MM-dd HH:mm:ss.  |
+|时区 | ` txzone ` |No | String(5) | 用于记录本地下单时间，默认为北京时间+0800   |
+|页数| ` page `   |No |  Int(8) | 默认为1   |
+|每页显示数量| ` page_size ` |No |  Int(8) | 默认显示10笔订单,最大值100，如果超过100，则只显示100条 |
 
 ### 响应参数
 
@@ -339,7 +339,7 @@ ob_end_flush();
 
 ## 账户报表
 
-The clearing statement for a particular payment channel is downloaded regularly. Additional requests can only be made in the production environment. The system response is in form of a compressed zip file. Data is based on the selected payment channel and contains all merchants therefore the `mchid` cannot be passed in as a request parameter.
+特定支付渠道的清算报表会被定期下载, 其他的请求只能在生产环境发起. 系统会以压缩的文件包格式返回数据. 数据会基于所选的支付渠道并包含所有的商户, 因此不能将 `mchid` 作为请求参数传入.
 
 ## 账户报表API端点
 
