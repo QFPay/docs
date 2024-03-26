@@ -49,7 +49,7 @@ extend_info:{
 |支付URL|`pay_url`|是|String||
 
 :::warning
-正常流程中，支付后，用户会返回发起支付的页面。 如果您希望用户返回指定页面，可以在返回的支付URL中插入redirect_url参数。 例如，如果希望用户跳转到https://www.wechatpay.com.cn，可以按如下处理： <br/>
+正常流程中，支付后，用户会返回发起支付的页面。 如果您希望用户返回指定页面，可以在返回的支付URL中插入redirect_url参数。 例如，如果希望用户跳转到 https://www.wechatpay.com.cn ，可以按如下处理： <br/>
 :::
 **pay_url** <br/>
 
