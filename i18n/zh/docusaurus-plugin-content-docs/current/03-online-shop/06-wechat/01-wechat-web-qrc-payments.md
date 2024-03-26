@@ -12,7 +12,7 @@ import Link from '@docusaurus/Link';
 
 ```plaintext
 
-For code instructions select Python, Java, 否 de.js or PHP with the tabs above.
+对于代码说明，请选择 Python、Java、node.js 或 PHP。
 
 ```
 
@@ -285,22 +285,22 @@ ob_end_flush();
 请求交易时间 | `txdtm` | |是| String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
 交易到期时间 | `expired_time` | | 否 <br/> (仅限正扫支付) | String(3)  | 以分钟为计时的二维码过期时间,默认的过期时间是30分钟. 该参数可以被手动设置为最小5分钟,最大120分钟<br/> 该参数可用于: <br/>800201 - 微信扫码支付
 商品名称标识 | `goods_name` | | 否  | String(64) | 商品名称 / 标识: 不能超过 20 个字母数字或包含特殊字符。 APP支付不能为空。 如果参数是汉字，则需要使用**UTF-8**编码。
-子商户号 | `mchid` | | 否  | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request.
+子商户号 | `mchid` | | 否  | String(16) | 可能提供给予商户。 如果给出了MCHID，则必须提供MCHID。反之，如果没有提供MCHID，商户不得在API请求中传递MCHID字段。
 时区 | `txzone` | | 否  | String(5) | 用于记录本地下单时间，默认为北京时间+0800
 设备唯一id | `udid` | | 否  | String(40) | 唯一的设备ID,显示在商户管理后台上.
-人民币标识 | `rmb_tag` | | 否  | String(1) | WeChat Pay in Hong Kong uses `rmb_tag` = Y together with `txcurrcd` = CNY to indicate that the transaction currency is RMB.
-客户扩展信息 | `extend_info` | `user_creid` <br/> `user_truename` | 否  | Object | Real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'
+人民币标识 | `rmb_tag` | | 否  | String(1) | 香港微信支付使用“rmb_tag”=Y 和“txcurrcd”=CNY 来表示交易币种为人民币。
+客户扩展信息 | `extend_info` | `user_creid` <br/> `user_truename` | 否  | Object | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](../../preparation/paycode# payment-codes)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'
 
 ### 响应参数
 
-Parameter name | Parameter code | Type | Description 
+参数名称 | 参数编码 | 参数类型 | 描述
 --------- | -------- | --------- | ------- 
-Payment type | `pay_type` | String(6) | WeChat online payments PayType `800201`
-System transaction time | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
-Request transaction time | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  | 
-Response message | `resperr` | String(128) |  
-Payment amount | `txamt` | Int(11) |  
-Other message information | `respmsg` | String(128) |  
-External transaction number | `out_trade_no` | String(128) | External transaction number  
-QFPay transaction number | `syssn` | String(40) | 
-Return code | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](../../preparation/paycode#transaction-status-codes) for a complete list of response codes. 
+交易类型 | `pay_type` | String(6) | 微信在线支付 交易类型：`800201`
+系统交易时间 | `sysdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss <br/> 该参数值用作清算截止时间。 | 
+请求交易时间 | `txdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss  | 
+响应信息 | `resperr` | String(128) |   
+支付金额 | `txamt` | Int(11) |  
+其他留言信息 | `respmsg` | String(128) |  
+外部交易编号 | `out_trade_no` | String(128) | 外部交易号
+QFPay交易编号 | `syssn` | String(40) | 
+返回码 | `respcd` | String(4) | 0000 = 请求成功。 <br/> 1143/1145=要求商户继续查询交易结果。 <br/> 所有其他返回码均表示交易失败。 请参阅[交易状态代码](../../preparation/paycode#transaction-status-codes)页面以获取完整的响应代码列表。

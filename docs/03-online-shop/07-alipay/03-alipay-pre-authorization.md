@@ -18,7 +18,7 @@ Alipay pre-authorization currently supports the following currencies: AUD, HKD, 
 
 `POST ../trade/v1/payment` <br/>
 
-Find the correct `pay_type` for your checkout szenario from the table below.
+Find the correct `pay_type` for your checkout scenarios from the table below.
 
 PayType | Description 
 --------- | ------- 
