@@ -283,9 +283,13 @@ ob_end_flush();
 
 ### HTTP 请求
 
-`POST ../trade/v1/payment` <br/>
-`PayType: 805801` `PayMe Merchant Presented QR Code Payment in store (MPM) (HK Merchants)` <br/>
-`PayType: 805808` `PayMe Consumer Presented QR Code Payment (CPM) (HK Merchants)` <br/>
+**请求方法**：`POST` 
+
+**请求位址**: `../trade/v1/payment`
+
+**支付类型**
+- `805801`： PayMe正掃模式（商家店内出示二维码支付）（香港商户）
+- `805808`： PayMe反掃模式（顧客出示二维码支付）（香港商户）
 
 ### 请求参数
 
@@ -296,24 +300,24 @@ ob_end_flush();
 支付类型 | `pay_type` | 是 | String(6) | PayMe网页支付 = 805801
 API订单号| `out_trade_no` | 是 | String(128)| 唯一商户订单号，用于每个支付和退款请求。
 交易请求时间 | `txdtm` | 是 | String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
-订单过期时间 | `expired_time` | 否<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.
-Product name identification | `goods_name` | 否 | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
-QF Pay merchant number | `mchid` | 否 | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. 
-Time zone | `txzone` | 否 | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800). 
-Device ID | `udid` | 否 | String(40) |  Unique transaction device ID. Is displayed on the merchant portal. 
-Redirect URL | `return_url` | 否 | String(512) |  URL that the user will be redirected to when the payment finishes.
+订单过期时间 | `expired_time` | 否<br/> (只限正扫模式) | String(3)  | 二维码过期时间，以分钟为单位。默认过期时间为30分钟。该参数可以调整，最短为5分钟，最长为120分钟。
+商品名称标识 | `goods_name` | 否 | String(64) | 商品名称/标识：不能超过20个字母数字字符或包含特殊字符。对于应用支付，该参数不能为空。如果使用中文字符，需要进行`UTF-8`编码。
+QF Pay商户号 | `mchid` | 否 | String(16) | 只适用于某些渠道下的特定商户。该商户被提供了MCHID，则在API请求中必须提供MCHID。反之则无需提供。
+时区 | `txzone` | 否 | String(5) | 交易时区：记录交易的本地失去，北京时间为默认时区（UTC+8，+0800）。
+设备ID | `udid` | 否 | String(40) |  唯一的交易设备ID，在商家门户上显示。
+重定向URL | `return_url` | 否 | String(512) |  支付完成后用户将被重定向到的URL。
 
-### Response Parameters
+### 回应参数
 
-Parameter name | Parameter code | Type | Description 
---------- | -------- | --------- | ------- 
-Payment type | `pay_type` | String(6) | PayMe Web/Wap Payment |
-System transaction time | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
-Request transaction time | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  | 
-Response message | `resperr` | String(128) |  
-Payment amount | `txamt` | Int(11) |  
-Other message information | `respmsg` | String(128) |  
-External transaction number | `out_trade_no` | String(128) | External transaction number  
-QFPay transaction number | `syssn` | String(40) | 
-Return code | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](../preparation/paycode#transaction-status-codes) for a complete list of response codes.  |
-Payment URL | `pay_url` | String(512) | generate QR code in Desktop web; redirect URL in WAP
+参数名称 | 参数代码 | 类型 | 描述 |  
+--------- | -------- | --------- | --------- |  
+支付类型 | `pay_type` | String(6) | PayMe网页/手机支付 |
+系统交易时间 | `sysdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss <br/> 此参数值用作结算的截止时间。 | 
+交易请求时间 | `txdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss  | 
+响应消息 | `resperr` | String(128) |  
+支付金额 | `txamt` | Int(11) |  
+其他消息信息 | `respmsg` | String(128) |  
+外部交易号 | `out_trade_no` | String(128) | 商户订单号 
+QFPay交易号 | `syssn` | String(40) | QFPay 唯一订单号
+返回码 | `respcd` | String(4) | `0000` = 请求成功。<br/> `1143`/`1145` = 商家需要继续查询交易结果。<br/> 其他返回码表示交易失败。请参考页面[交易状态码](../preparation/paycode#transaction-status-codes) 以获取完整的返回码列表
+支付位址 | `pay_url` | String(512) | 在桌面网页中生成二维码；在手机网页中作为重定向URL。
