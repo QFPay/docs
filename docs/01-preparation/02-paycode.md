@@ -419,15 +419,15 @@ Parameter name | Parameter code | Mandatory | Type | Description
 Payment amount | `txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1)
 Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](#currencies) table for a complete list of available currencies
 Payment type | `pay_type` | Yes | String(6) | Please refer to the section [Payment Codes](#payment-codes) for a complete list of payment types
-API Order Number | `out_trade_no` | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
+Merchant Order ID | `out_trade_no` | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
 Request transaction time | `txdtm` | Yes | String(20) | Transaction time format：<br/> YYYY-MM-DD hh:mm:ss 
 Authorization Code | `auth_code` | Yes<br/> (CPM only) | String(128) | Specifies the authorization code for scanning a barcode/QR Code. The `auth_code` returned is unique in each authorization. Each `auth_code` can be used only once and will automatically expire in one day. For testing CPM with Alipay and WeChat Pay the `auth_code` can be extracted with any QRC reader or manually found in the consumer wallet below the barcode.
 Order expiration time | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong WAP payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas WAP payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP
 Product name identification | `goods_name` | No | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
 QF Pay merchant number | `mchid` | No | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass in the MCHID parameter in the API request. 
-Time zone | `txzone` | No | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800).
-Device ID | `udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal. 
-Asynchronous Notification URL | `notify_url` | No | String(256) |Asynchronous notification URL
+Time zone | `txzone` | No | String(5) | Transaction Time zone. Default time zone is Beijing time UTC+8 (+0800).
+Device ID | `udid` | No | String(40) |  Unique transaction device ID displayed on the merchant portal. 
+Asynchronous Notification URL | `notify_url` | No | String(256) | URL where asynchronous notificiations will be sent to upon payment completion.
 
 ### Public Payment Response Parameters
 
@@ -436,12 +436,12 @@ Parameter name | Parameter code | Type | Description
 Payment type | `pay_type` | String(6) | Please refer to the section [Payment Codes](#payment-codes) for a complete list of payment types 
 System transaction time | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
 Request transaction time | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  |
-Response message | `resperr` | String(128) | 
+Response description | `resperr` | String(128) | Request result description
 Payment amount | `txamt` | Int(11) |
-Other message information | `respmsg` | String(128) |  
-External transaction number | `out_trade_no` | String(128) | External transaction number  
-QFPay transaction number | `syssn` | String(40) | 
-Wallet/Channel transaction number| `chnlsn` | String | 
+Other information | `respmsg` | String(128) |  Supplementary response description
+Merchant Order ID | `out_trade_no` | String(128) | External transaction number  
+QFPay unique transaction ID | `syssn` | String(40) | QFPay internal transaction number (unique)
+Wallet/Channel transaction number| `chnlsn` | String | Wallet/Channel transaction number
 Return code | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](#transaction-status-codes) for a complete list of response codes.
 
 ## Transaction Status Codes
