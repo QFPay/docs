@@ -15,7 +15,7 @@ WAP支付或者H5支付能够让商户在Chrome等手机浏览器上的调用电
 您可以从下表中找到不同的电子钱包的“pay_type”。
 
 支付类型 | 描述
---------- | -------
+--------- | ------- 
 800212 | 微信H5支付, 详情可以参考[WeChat Pay H5 (in mobile browser)](./wechat/wechat-pay-h5)
 801512 | 支付宝香港WAP支付, 详情可以参考[# Alipay Service Window H5](./alipay/alipay-service-window-h5)
 800712 | 银联WAP支付
@@ -42,9 +42,9 @@ QF Pay 商户号码 | `mchid` | 否 | String(16) | 可能会也可能不会给�
 参数名称 | 参数编码 | 参数类型 | 描述
 --------- | -------- | --------- | ------- 
 交易类型 | `pay_type` | String(6) | e.g. PayMe WAP Payment |
-系统交易时间 | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. |
-请求交易时间 | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  | 
-回复信息 | `resperr` | String(128) |
+系统交易时间 | `sysdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss <br/> 该参数值用作清算截止时间。 | 
+请求交易时间 | `txdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss  | 
+回复信息 | `resperr` | String(128) |  
 交易金额 | `txamt` | Int(11) |  
 其他信息 | `respmsg` | String(128) |  
 外部订单号 | `out_trade_no` | String(128) | 外部交易号 

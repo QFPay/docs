@@ -134,21 +134,21 @@ import Link from '@docusaurus/Link';
 
 ## 异步通知
 
-General notification rule applies. For details, please refer to the [Asynchronous Notifications section](../common-api/asynchronous-notification) in the documentations.
+一般通知规则适用。详细信息请参考文档中的异步通知部分 (../common-api/asynchronous-notification)
 
-Upon successful execution of the following actions, you should be able to receive a notification
+在以下操作成功执行后，您将会收到收到通知：
 
-- payment completion (captured)
-- unfreeze funds
-- refund
+- 预授权交易扣款
+- 解冻资金
+- 退款
 
-These notifications will follow the same format as below. For different notification, the value of the field `notify_type` will differ
+这些通知将采用以下相同的格式。对于不同的通知，字段 `notify_type` 的值将不同。 
 
-| Action Completed | notify_type value |
+| 操作（成功） |  `notify_type` 值 |
 | -------------- | ------------------ |
-| Payment Captured | payment |
-| Unfreeze funds | unfreeze |
-| Refund | refund |
+| 预授权交易扣款 | payment |
+| 解冻资金 | unfreeze |
+| 退款 | refund |
 
 ```json
 {
