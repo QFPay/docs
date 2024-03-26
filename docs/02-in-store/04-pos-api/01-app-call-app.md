@@ -212,7 +212,7 @@ Parse the return value:
 
 <Link href="@site/static/img/android/parse__card__settle.png" target="_blank"> ![Card Settle](@site/static/img/android/parse__card__settle.png)</Link>
 
-## Appendix
+## Reference
 
 ### Transaction Information Field Description
 
