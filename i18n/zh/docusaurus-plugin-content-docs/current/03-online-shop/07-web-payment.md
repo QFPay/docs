@@ -6,45 +6,45 @@ import Link from '@docusaurus/Link';
 
 ## 简介
 
-Customers make purchases on a merchant website with Web Payment methods. The user scans the displayed QR code to pay, confirms the total amount and makes the payment. Finally the customer can be redirected to a selected page on the merchant's website using the `return_url` parameter. The selected wallet will deduct the payment amount from the consumer's wallet in real-time in HKD and QFPay settles the payment amount to merchants in HKD.
+客户使用WEB支付在商户的网站上购买物品, 用户扫描二维码支付, 确认总金额并支付。最后, `return_url` 参数将客户重定向到商户选定的页面。所选的支付钱包将从客户钱包中以HKD计价实时扣取支付的金额, 钱方将会以HKD计价向商户结算付款金额.
 
-## HTTP Request
+## HTTP 请求
 
 `POST ../trade/v1/payment` <br/>
 
-PayType | Description
+支付类型 | 描述
 --------- | -------
-801514 | Alipay Online WEB Payment (HK Merchants), details please refer to [Alipay Online Payments](./alipay/alipay-online-payments)
-800714 | UNIONPAY PC-Web Payment (HK Merchants)
-805814 | PayMe Online WEB (in browser Chrome etc.) Payment (HK Merchants)
+801514 | 支付宝线上WEB支付 (香港商戶), 详情请参阅[支付宝线上WEB支付](./alipay/alipay-online-payments)
+800714 | 银联云闪付 PC-Web Payment (香港商户)
+805814 | PayMe 线上WEB支付 (香港商戶)
 
-### Request Parameters
+### 请求参数
 
-Parameter name | Parameter code | Mandatory | Type | Description
+参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述
 --------- | -------- | --------- | ------- | -------
-Payment amount | `txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1)
-Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](../preparation/paycode#支付币种) table for a complete list of available currencies
-Payment type | `pay_type` | Yes | String(6) | e.g. PayMe Web Payment = 805814
-API Order Number | `out_trade_no` | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
-Request transaction time | `txdtm` | Yes | String(20) | Transaction time format：<br/> YYYY-MM-DD hh:mm:ss
-Order expiration time | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.
-Product name identification | `goods_name` | No | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
-QF Pay merchant number | `mchid` | No | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request.
-Time zone | `txzone` | No | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800).
-Device ID | `udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal.
-Redirect URL | `return_url` | No | String(512) |  URL that the user will be redirected to when the payment finishes.
+订单支付金额 | `txamt` | 是 | Int(11) | 以当前货币最小计量单位计算，只允许整数类型 (i.e. 100 = $1)
+币种 |`txcurrcd` | 是 | String(3) | 交易币种, 请查看[币种]../preparation/paycode#支付币种)
+Payment type | `pay_type` | 是 | String(6) | e.g.  PayMe 线上WEB支付 = 805814
+外部订单号 | `out_trade_no` | 是 | String(128)| 开发者自定义订单号，在同一商户账户中的每笔交易和退款请求该参数值唯一
+请求交易时间 | `txdtm` | 是 | String(20) | 格式：yyyy-MM-dd HH:mm:ss
+交易到期时间 | `expired_time` | No<br/> (仅限正扫支付) | String(3)  | 以分钟为计时的二维码过期时间,默认的过期时间是30分钟. 该参数可以被手动设置为最小5分钟,最大120分钟
+商品名称标识 | `goods_name` | 否| String(64) | 商品名称 / 标识: 不能超过20个字母数字或包含特殊字符。 APP支付不能为空。 如果参数是汉字，则需要使用**UTF-8**编码。
+子商户号 | `mchid` | 否| String(16) | 标识子商户身份，由钱方分配（渠道系统后台查看对应商户(非业务员)子商户号，被视为对应商户的交易）
+时区 | `txzone` | 否| String(5) | 用于记录本地下单时间，默认为北京时间+0800
+设备唯一id | `udid` | 否| String(40) |  唯一的设备ID,显示在商户管理后台上.
+重定URL | `return_url` | 否 | String(512) |  用户在支付完成后，被重定向的URL
 
-### Response Parameters
+### 响应参数
 
-Parameter name | Parameter code | Type | Description
+参数名称 | 参数编码 | 参数类型 | 描述
 --------- | -------- | --------- | -------
-Payment type | `pay_type` | String(6) | e.g. PayMe Web Payment = 805814 |
-System transaction time | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
-Request transaction time | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  | 
-Response message | `resperr` | String(128) |
-Payment amount | `txamt` | Int(11) |
-Other message information | `respmsg` | String(128) |  
-External transaction number | `out_trade_no` | String(128) | External transaction number  
-QFPay transaction number | `syssn` | String(40) | 
-Return code | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](../preparation/paycode#交易状态码) for a complete list of response codes.  |
-Payment URL | `pay_url` | String(512) | generate QR code in Desktop web
+支付类型 | `pay_type` | String(6) | e.g. PayMe 线上WEB支付 = 805814 |
+系统交易时间 | `sysdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss <br/> 这个参数值被用作结算截止时间 | 
+请求交易时间 | `txdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss  |
+信息描述 | `resperr` | String(128) |
+订单支付金额 | `txamt` | Int(11) |
+调试信息 | `respmsg` | String(128) |
+外部订单号 | `out_trade_no` | String(128) | 外部订单号  
+钱方订单号 | `syssn` | String(40) | 
+返回码 | `respcd` | String(4) | 0000 = 请求成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](../preparation/paycode#交易状态码) 获得完整返回类型列表  |
+支付URL | `pay_url` | String(512) | 在桌面页面中生成二维码 |
