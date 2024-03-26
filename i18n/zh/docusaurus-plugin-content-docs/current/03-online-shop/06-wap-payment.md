@@ -2,52 +2,53 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# WAP Payment
+# WAP支付
 
 ## Introduction
-
-WAP Payment or H5 Payment enables merchants to call up digital wallet module in mobile browser Chrome etc. to collect payment.
-
-## HTTP Request
+WAP支付或者H5支付能够让商户在Chrome等手机浏览器上的调用电子钱包模块进行收款。
+ 
+## HTTP请求
 
 `POST ../trade/v1/payment` <br/>
 
-you can find the different digital wallets `pay_type` from the table below.
+您可以从下表中找到不同的电子钱包的“pay_type”。
 
-PayType | Description
---------- | -------
-800212 | WeChat H5 Payment, details please refer to [WeChat Pay H5 (in mobile browser)](./wechat/wechat-pay-h5)
-801512 | Alipay Hong Kong WAP payment, details please refer to [Alipay Service Window H5](./alipay/alipay-service-window-h5)
-800712 | UNIONPAY WAP Payment
-805812 | PayMe Online WAP Payment
+支付类型 | 描述
+--------- | ------- 
+800212 | 微信H5支付, 详情可以参考[WeChat Pay H5 (in mobile browser)]()
+801512 | 支付宝香港WAP支付, 详情可以参考[# Alipay Service Window H5]()
+800712 | 银联WAP支付
+805812 | PayMe 线上WAP支付
 
-### Request Parameters
 
-Parameter name | Parameter code | Mandatory | Type | Description
---------- | -------- | --------- | ------- | -------
-Payment amount | `txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1)
-Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies
-Payment type | `pay_type` | Yes | String(6) | e.g. PayMe WAP Payment = 805812
-API Order Number | `out_trade_no` | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
-Request transaction time | `txdtm` | Yes | String(20) | Transaction time format：<br/> YYYY-MM-DD hh:mm:ss
-Product name identification | `goods_name` | No | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
-QF Pay merchant number | `mchid` | No | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. 
-Time zone | `txzone` | No | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800).
-Device ID | `udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal.
-Redirect URL | `return_url` | No | String(255) |  URL that the user will be redirected to when the payment finishes.
-Notification URL | `notify_url` | No | String(255) | URL that the merchant will receive notification when the payment finishes.
+## 请求参数
 
-### Response Parameters
+参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述
+--------- | -------- | --------- | ------- | ------- 
+交易金额 | `txamt` | 是 | Int(11) | 交易金额。 单位为分（即 100 = 1 元）
+交易货币 | `txcurrcd` | 是 | String(3) | 交易货币。 查看[货币](../preparation/paycode#currencies) 表以获取可用货币的完整列表
+交易类型 | `pay_type` | 是 | String(6) | e.g. PayMe WAP 支付 = 805812
+API订单号码 | `out_trade_no` | 是 | String(128)| 外部交易号/商户平台交易号：该参数对于系统中同一商户账户下的每次支付和退款请求必须是唯一的。
+请求交易时间 | `txdtm` | 是 | String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
+产品名称标识 | `goods_name` | 否 | String(64) | 商品名称 /标记：不能超过20个字母数字或包含特殊字符。 应用支付不能为空。 如果参数是汉字，则需要**UTF-8**编码。
+QF Pay 商户号码 | `mchid` | 否 | String(16) | 可能会也可能不会给予商人。 如果给出了MCHID，则必须提供MCHID。反之，如果没有提供MCHID，商户不得在API请求中传递MCHID字段。
+时区 | `txzone` | 否 | String(5) | 交易时区：以当地时间记录交易，默认时区为北京时间UTC+8（+0800）。
+设备ID | `udid` | 否 | String(40) |  唯一的交易设备ID。 显示在商家管理平台上。
+重定向URL | `return_url` | 否 | String(255) |  付款完成后用户将被重定向到的 URL。
+异步通知URL | `notify_url` | 否 | String(255) | 支付完成后商家收到通知的URL。
 
-Parameter name | Parameter code | Type | Description
---------- | -------- | --------- | -------
-Payment type | `pay_type` | String(6) | e.g. PayMe Wap Payment |
-System transaction time | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
-Request transaction time | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  | 
-Response message | `resperr` | String(128) |  
-Payment amount | `txamt` | Int(11) |  
-Other message information | `respmsg` | String(128) |  
-External transaction number | `out_trade_no` | String(128) | External transaction number  
-QFPay transaction number | `syssn` | String(40) | 
-Return code | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](../preparation/paycode#transaction-status-codes) for a complete list of response codes.  |
-Payment URL | `pay_url` | String(512) | generate QR code in Desktop web; redirect URL in WAP
+
+### 响应参数
+
+参数名称 | 参数编码 | 参数类型 | 描述
+--------- | -------- | --------- | ------- 
+交易类型 | `pay_type` | String(6) | e.g. PayMe WAP Payment |
+系统交易时间 | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
+请求交易时间 | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  | 
+回复信息 | `resperr` | String(128) |  
+交易金额 | `txamt` | Int(11) |  
+其他信息 | `respmsg` | String(128) |  
+外部订单号 | `out_trade_no` | String(128) | 外部交易号 
+QFPay交易号 | `syssn` | String(40) | 
+返回码 | `respcd` | String(4) | 0000 = 请求成功。 <br/> 1143/1145=要求商户继续查询交易结果。 <br/> 所有其他返回码均表示交易失败。 请参阅[交易状态代码](../preparation/paycode#transaction-status-codes)页面以获取完整的响应代码列表。 |
+支付URL | `pay_url` | String(512) | 在桌面网页中生成二维码； 在WAP 场景中的重定向 URL |
