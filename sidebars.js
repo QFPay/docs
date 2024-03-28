@@ -68,6 +68,7 @@ const sidebars = {
         'online-shop/visa-master-online-payment',
         'online-shop/wap-payment',
         'online-shop/web-payment',
+        'online-shop/in-app-payment',
         {
           type: 'category',
           label: 'Wechat',
@@ -108,6 +109,7 @@ const sidebars = {
         'common-api/refunds',
         'common-api/asynchronous-notification',
         'common-api/transaction-note',
+        'common-api/payment-intent',
       ]
     },
     'customs declaration',

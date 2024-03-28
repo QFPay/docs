@@ -1,4 +1,91 @@
 {
+  "homepage.introduction.title": {
+    "message": "介绍"
+  },
+  "homepage.introduction.content": {
+    "message": "QFPay 开发者中心致力于面向大中小商户，提供线上线下全面的支付系统对接方案。"
+  },
+  "homepage.features.title": {
+    "message": "选择你的收银场景，让 QFPay 支付系统为你的商业助力"
+  },
+  "homepage.resources.title": {
+    "message": "资源协助"
+  },
+  "homepage.features.in-store.title": {
+    "message": "线下门店"
+  },
+  "homepage.features.in-store.content": {
+    "message": "简单、快捷、安全的使用 QFPay 支付产品和 API 服务。接受目前主流信用卡支付，以及电子钱包。"
+  },
+  "homepage.features.in-store.MPM": {
+    "message": "Merchant Present QRCode Mode"
+  },
+  "homepage.features.in-store.CPM": {
+    "message": "Consumer Present QRCode Mode"
+  },
+  "homepage.features.in-store.pos": {
+    "message": "POS API"
+  },
+  "homepage.features.online-shop.title": {
+    "message": "线上网店"
+  },
+  "homepage.features.online-shop.content": {
+    "message": "线上对接同样简单、安全，保护隐私信息。支持多种线上对接场景，可以将 QFPay 收银台页面增加到网站收款流程，也可以将 QFPay 支付组件嵌入到网站页面中。快速、便捷、个性化的集成方式。"
+  },
+  "homepage.features.online-shop.visa": {
+    "message": "Visa/Mastercard Online Payments"
+  },
+  "homepage.features.online-shop.checkout": {
+    "message": "QFPay Checkout Services"
+  },
+  "homepage.features.online-shop.paymentelement": {
+    "message": "QFPay Component"
+  },
+  "homepage.features.online-shop.recurring": {
+    "message": "QFPay Recurring Payment"
+  },
+  "homepage.features.online-shop.online-pre-authorisation": {
+    "message": "Online Pre-authorisation Payment"
+  },
+  "homepage.features.online-shop.alipay": {
+    "message": "Alipay"
+  },
+  "homepage.features.online-shop.wechat": {
+    "message": "WeChat"
+  },
+  "homepage.features.e-commerce.title": {
+    "message": "电子商务平台插件"
+  },
+  "homepage.features.e-commerce.content": {
+    "message": "支持多种主流的电子商务平台对接, 包括Shopify, WooCommerce, OpenCart, 以及 Magento。 简单几步，插件快速安装，持续升级，服务稳定。"
+  },
+  "homepage.resources.supporting.title": {
+    "message": "技术支持"
+  },
+  "homepage.resources.supporting.content": {
+    "message": "如需要对接谘询和协助，请联系我们专业的技术支持服务部门"
+  },
+  "homepage.resources.supporting.email": {
+    "message": "联系邮箱 - technical.support@qfpay.com"
+  },
+  "homepage.resources.supporting.faq": {
+    "message": "FAQ"
+  },
+  "homepage.resources.sdks-downloads.title": {
+    "message": "SDKs 下载"
+  },
+  "homepage.resources.sdks-downloads.content": {
+    "message": "在这里快速找到你所需要的 SDK。"
+  },
+  "POS App call App SDK": {
+    "message": "POS App call App SDK"
+  },
+  "Wechat Pay In-App payment SDKs": {
+    "message": "Wechat Pay In-App payment SDKs"
+  },
+  "Alipay In-App payment SDKs": {
+    "message": "Alipay In-App payment SDKs"
+  },
   "theme.ErrorPageContent.title": {
     "message": "页面已崩溃。",
     "description": "The title of the fallback page when the page crashed"
@@ -6,6 +93,14 @@
   "theme.BackToTopButton.buttonAriaLabel": {
     "message": "回到顶部",
     "description": "The ARIA label for the back to top button"
+  },
+  "theme.blog.archive.title": {
+    "message": "历史博文",
+    "description": "The page & hero title of the blog archive page"
+  },
+  "theme.blog.archive.description": {
+    "message": "历史博文",
+    "description": "The page & hero description of the blog archive page"
   },
   "theme.blog.paginator.navAriaLabel": {
     "message": "博文列表分页导航",
@@ -18,14 +113,6 @@
   "theme.blog.paginator.olderEntries": {
     "message": "较旧的博文",
     "description": "The label used to navigate to the older blog posts page (next page)"
-  },
-  "theme.blog.archive.title": {
-    "message": "历史博文",
-    "description": "The page & hero title of the blog archive page"
-  },
-  "theme.blog.archive.description": {
-    "message": "历史博文",
-    "description": "The page & hero description of the blog archive page"
   },
   "theme.blog.post.paginator.navAriaLabel": {
     "message": "博文分页导航",
@@ -83,6 +170,14 @@
     "message": "下一页",
     "description": "The label used to navigate to the next doc"
   },
+  "theme.docs.tagDocListPageTitle.nDocsTagged": {
+    "message": "{count} 篇文档带有标签",
+    "description": "Pluralized label for \"{count} docs tagged\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.docs.tagDocListPageTitle": {
+    "message": "{nDocsTagged}「{tagName}」",
+    "description": "The title of the page for a docs tag"
+  },
   "theme.docs.versionBadge.label": {
     "message": "版本：{versionLabel}"
   },
@@ -101,14 +196,6 @@
   "theme.docs.versions.latestVersionLinkLabel": {
     "message": "最新版本",
     "description": "The label used for the latest version suggestion link label"
-  },
-  "theme.docs.tagDocListPageTitle.nDocsTagged": {
-    "message": "{count} 篇文档带有标签",
-    "description": "Pluralized label for \"{count} docs tagged\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
-  },
-  "theme.docs.tagDocListPageTitle": {
-    "message": "{nDocsTagged}「{tagName}」",
-    "description": "The title of the page for a docs tag"
   },
   "theme.common.editThisPage": {
     "message": "编辑此页",
@@ -198,13 +285,13 @@
     "message": "折叠侧边栏分类 '{label}'",
     "description": "The ARIA label to collapse the sidebar category"
   },
-  "theme.navbar.mobileLanguageDropdown.label": {
-    "message": "选择语言",
-    "description": "The label for the mobile language switcher dropdown"
-  },
   "theme.NavBar.navAriaLabel": {
     "message": "主导航",
     "description": "The ARIA label for the main navigation"
+  },
+  "theme.navbar.mobileLanguageDropdown.label": {
+    "message": "选择语言",
+    "description": "The label for the mobile language switcher dropdown"
   },
   "theme.NotFound.p1": {
     "message": "我们找不到您要找的页面。",
@@ -214,13 +301,9 @@
     "message": "请联系原始链接来源网站的所有者，并告知他们链接已损坏。",
     "description": "The 2nd paragraph of the 404 page"
   },
-  "theme.docs.breadcrumbs.home": {
-    "message": "主页面",
-    "description": "The ARIA label for the home page in the breadcrumbs"
-  },
-  "theme.blog.post.readingTime.plurals": {
-    "message": "阅读需 {readingTime} 分钟",
-    "description": "Pluralized label for \"{readingTime} min read\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  "theme.TOCCollapsible.toggleButtonLabel": {
+    "message": "本页总览",
+    "description": "The label used by the button on the collapsible TOC component"
   },
   "theme.blog.post.readMore": {
     "message": "阅读更多",
@@ -230,6 +313,14 @@
     "message": "阅读 {title} 的全文",
     "description": "The ARIA label for the link to full blog posts from excerpts"
   },
+  "theme.blog.post.readingTime.plurals": {
+    "message": "阅读需 {readingTime} 分钟",
+    "description": "Pluralized label for \"{readingTime} min read\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.docs.breadcrumbs.home": {
+    "message": "主页面",
+    "description": "The ARIA label for the home page in the breadcrumbs"
+  },
   "theme.docs.sidebar.collapseButtonTitle": {
     "message": "收起侧边栏",
     "description": "The title attribute for collapse button of doc sidebar"
@@ -237,10 +328,6 @@
   "theme.docs.sidebar.collapseButtonAriaLabel": {
     "message": "收起侧边栏",
     "description": "The title attribute for collapse button of doc sidebar"
-  },
-  "theme.TOCCollapsible.toggleButtonLabel": {
-    "message": "本页总览",
-    "description": "The label used by the button on the collapsible TOC component"
   },
   "theme.docs.sidebar.navAriaLabel": {
     "message": "文档侧边栏",
@@ -250,14 +337,6 @@
     "message": "关闭导航栏",
     "description": "The ARIA label for close button of mobile sidebar"
   },
-  "theme.docs.sidebar.expandButtonTitle": {
-    "message": "展开侧边栏",
-    "description": "The ARIA label and title attribute for expand button of doc sidebar"
-  },
-  "theme.docs.sidebar.expandButtonAriaLabel": {
-    "message": "展开侧边栏",
-    "description": "The ARIA label and title attribute for expand button of doc sidebar"
-  },
   "theme.navbar.mobileSidebarSecondaryMenu.backButtonLabel": {
     "message": "← 回到主菜单",
     "description": "The label of the back button to return to main menu, inside the mobile navbar sidebar secondary menu (notably used to display the docs sidebar)"
@@ -265,6 +344,14 @@
   "theme.docs.sidebar.toggleSidebarButtonAriaLabel": {
     "message": "切换导航栏",
     "description": "The ARIA label for hamburger menu button of mobile navigation"
+  },
+  "theme.docs.sidebar.expandButtonTitle": {
+    "message": "展开侧边栏",
+    "description": "The ARIA label and title attribute for expand button of doc sidebar"
+  },
+  "theme.docs.sidebar.expandButtonAriaLabel": {
+    "message": "展开侧边栏",
+    "description": "The ARIA label and title attribute for expand button of doc sidebar"
   },
   "theme.SearchBar.noResultsText": {
     "message": "没有找到任何文档"

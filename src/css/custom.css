@@ -184,8 +184,13 @@
 
 }
 
-/* @media screen and (max-width: 996px) {
-  .qf-cards-container{
-    grid-template-columns: 1fr;
+@media screen and (max-width: 996px) {
+  .qf-display-link{
+    position: relative; 
+    top: 0;
+    /* padding-left:0; */
   }
-} */
+  .qf-display-link{
+    padding-left: var(--ifm-menu-link-padding-horizontal);
+  }
+}

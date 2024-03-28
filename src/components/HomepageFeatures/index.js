@@ -1,48 +1,49 @@
 import styles from './styles.module.css';
 import HomeCard from '../HomepageCard';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Translate from '@docusaurus/Translate';
 
 
 const FeatureList = [
   {
-    title: 'In-Store',
+    title: <Translate id="homepage.features.in-store.title">In-Store</Translate>,
     Svg: 'img/homepage/in-store.png',
     description: (
-      <>
+      <Translate id="homepage.features.in-store.content">
         Experience swift, secure shopping with our in-store payment solution. Accepts all major cards and e-wallets. Quick, convenient, and crafted for you.
-      </>
+      </Translate>
     ),
     links:[
-      {title:"Merchant Present QRCode Mode", url:"docs/in-store/MPM"},
-      {title:"Consumer Present QRCode Mode", url:"docs/in-store/CPM"},
-      {title:"POS API", url:"docs/in-store/pos-api"}
+      {title:<Translate id="homepage.features.in-store.MPM">Merchant Present QRCode Mode</Translate>, url:"docs/in-store/MPM"},
+      {title:<Translate id="homepage.features.in-store.CPM">Consumer Present QRCode Mode</Translate>, url:"docs/in-store/CPM"},
+      {title:<Translate id="homepage.features.in-store.pos">POS API</Translate>, url:"docs/in-store/pos-api"}
     ]
   },
   {
-    title: 'Online Shop',
+    title: <Translate id="homepage.features.online-shop.title">Online Shop</Translate>,
     Svg: 'img/homepage/online-shop.png',
     description: (
-      <>
+      <Translate id="homepage.features.online-shop.content">
         Enjoy secure, instant online payments with our solution. Supports all major online scenarios and e-wallets / credit cards. Fast, flexible, and designed for your convenience.
-      </>
+      </Translate>
     ),
     links:[
-      {title:"Visa/Mastercard Online Payments", url:"docs/online-shop/visa-master-online-payment"},
-      {title:"QFPay Checkout Services", url:"docs/online-shop/checkout"},
-      {title:"QFPay Component", url:"docs/online-shop/paymentelement"},
-      {title:"QFPay Recurring Payment", url:"docs/online-shop/qfpay-recurring-payment"},
-      {title:"Online Pre-authorisation Payment", url:"docs/online-shop/online-pre-authorisation"},
-      {title:"Alipay", url:"docs/category/alipay"},
-      {title:"WeChat", url:"docs/category/wechat"},
+      {title:<Translate id="homepage.features.online-shop.visa">Visa/Mastercard Online Payments</Translate>, url:"docs/online-shop/visa-master-online-payment"},
+      {title:<Translate id="homepage.features.online-shop.checkout">QFPay Checkout Services</Translate>, url:"docs/online-shop/checkout"},
+      {title:<Translate id="homepage.features.online-shop.paymentelement">QFPay Component</Translate>, url:"docs/online-shop/paymentelement"},
+      {title:<Translate id="homepage.features.online-shop.recurring">QFPay Recurring Payment</Translate>, url:"docs/online-shop/qfpay-recurring-payment"},
+      {title:<Translate id="homepage.features.online-shop.online-pre-authorisation">Online Pre-authorisation Payment</Translate>, url:"docs/online-shop/online-pre-authorisation"},
+      {title:<Translate id="homepage.features.online-shop.alipay">Alipay</Translate>, url:"docs/category/alipay"},
+      {title:<Translate id="homepage.features.online-shop.wechat">WeChat</Translate>, url:"docs/category/wechat"},
     ]
   },
   {
-    title: 'E-Commerce',
+    title: <Translate id="homepage.features.e-commerce.title">E-Commerce</Translate>,
     Svg:'img/homepage/e-commerce.png',
     description: (
-      <>
+      <Translate id="homepage.features.e-commerce.content">
         Boost your online store payment abilities with our e-commerce plugins for Shopify, WooCommerce, OpenCart, and Magento. Easy to integrate, reliable, and designed to enhance your business.
-      </>
+      </Translate>
     ),
     links:[
       {title:"Shopify", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26Shopify-SetupGuideline.pdf"},
@@ -55,30 +56,30 @@ const FeatureList = [
 
 const ResourcesList = [
   {
-    title: 'Technical Supporting',
+    title: <Translate id="homepage.resources.supporting.title">Technical Supporting</Translate>,
     Svg: 'img/homepage/technical-supporting.png',
     description: (
-      <>
+      <Translate id="homepage.resources.supporting.content">
         Do not hesitate to ask any questions about integration business services, and more.
-      </>
+      </Translate>
     ),
     links:[
-      {title:"Email to us - technical.support@qfpay.com", url:"mailto:technical.support@qfpay.com"},
-      {title:"FAQ", url:"docs/FAQ"},
+      {title:<Translate id="homepage.resources.supporting.email">Email to us - technical.support@qfpay.com</Translate>, url:"mailto:technical.support@qfpay.com"},
+      {title:<Translate id="homepage.resources.supporting.faq">FAQ</Translate>, url:"docs/FAQ"},
     ]
   },
   {
-    title: 'SDKs Downloads',
+    title: <Translate id="homepage.resources.sdks-downloads.title">SDKs Downloads</Translate>,
     Svg: 'img/homepage/sdks-downloads.png',
     description: (
-      <>
+      <Translate id="homepage.resources.sdks-downloads.content">
         Quick way to find out our SKDs
-      </>
+      </Translate>
     ),
     links:[
-      {title:"POS App call App SDK", url:""},
-      {title:"Wechat Pay In-App payment SDKs", url:""},
-      {title:"Alipay In-App payment SDKs", url:""},
+      {title:<Translate>POS App call App SDK</Translate>, url:""},
+      {title:<Translate>Wechat Pay In-App payment SDKs</Translate>, url:""},
+      {title:<Translate>Alipay In-App payment SDKs</Translate>, url:""},
     ]
   },
   // {
