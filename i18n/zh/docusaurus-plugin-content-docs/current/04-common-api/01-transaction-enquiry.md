@@ -198,7 +198,7 @@ function GetRandStr($length){
   return $randstr;
 }
   
-$url = 'https://test-openapi-eur.qfapi.com';
+$url = 'https://test-openapi-hk.qfapi.com';
 $api_type = '/trade/v1/query';
 $syssn = '20200311066100020000977841';
 //$out_trade_no = 'zCvo0IqTg0SaQkGnHd6w';

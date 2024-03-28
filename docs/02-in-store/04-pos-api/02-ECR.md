@@ -56,7 +56,7 @@ The data is encoded by Base64 after encryption.
 
 ## 3. Request payload format
 
-| Parameter name | Mandatory | Parameter type | Description |
+| Parameter name | Mandatory | Type | Description |
 |---|---|---|---|
 | amt | required | Double | Amount e.g. $10.1 => 10.1 |
 | func_type | required | String | Instruction code |
@@ -90,7 +90,7 @@ For inquiry the transaction result, please use the Inquire API: https://sdk.qfap
 no password input is required in app when initialize refund request
 
 specific parameters
-| Parameter name | Mandatory | Parameter type | Description |
+| Parameter name | Mandatory | Type | Description |
 |---|---|---|---|
 |orderId|required|String|QFPay transaction Id
 | refund_amount | optional | String| the default refund amount is the refundable amount of the order,<br/> support partial refund |

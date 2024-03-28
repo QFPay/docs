@@ -98,7 +98,7 @@ Both the `app_code` and `sign` have to be submitted as parameters instead of in 
 
 ### Request Parameters
 
-|Parameter name| Parameter code | Mandatory | Parameter type | Description |
+|Parameter name| Attribute | Mandatory | Type | Description |
 |:----    |:---|:----- |-----   |-----   |
 |Developer ID | `app_code` | Yes | String(32) | The app_code is assigned to partners by QFPay  |
 |Callback URL |`redirect_uri` | Yes |  String(512) | After the request has been successful the user will be redirected to the callback address  |
@@ -152,7 +152,7 @@ def get_open_id(data):
 
 ### Request Parameters
 
-|Parameter code|Secondary parameter code | Mandatory| Parameter type | Description |
+|Attribute|Secondary parameter code | Mandatory| Type | Description |
 |:-----  |:-----|----- |----- |----- |
 |WeChat oauth_code|  `code` |Yes  | String | The code is returned by the [GET oauth_code request](#get-oauth_code). It is unique and can only be used once. |
 |Merchant ID|  `mchid`  |No  | String(16) | The `mchid` is a unique identification for every merchant assigned by QFPay |
@@ -160,7 +160,7 @@ def get_open_id(data):
 
 ### Response Parameters
 
-|Parameter code|Secondary parameter code | Parameter type |Parameter name | Description |
+|Attribute|Secondary parameter code | Type |Parameter name | Description |
 |:-----  |:-----|----- |----- |----- |
 |`openid`|   | String(64)  | WeChat openid | Every WeChat user is assigned a unique openid |
 
@@ -241,7 +241,7 @@ Optionally merchants can activate real-name authentication with WeChat. Currentl
 
 ### Request Parameters
 
-|Parameter name|  Parameter code | Mandatory| Parameter type | Description |
+|Parameter name|  Attribute | Mandatory| Type | Description |
 |:----    |:---|:----- |-----   |-----   |
 |Public payment parameters |—  |— |—  | Refer to the general documentation about transactions |
 |WeChat authorization code   |`sub_openid`|Yes  |String    |WeChat OpenID. Refer to the **GET openid** documentation   |
@@ -250,7 +250,7 @@ Optionally merchants can activate real-name authentication with WeChat. Currentl
 
 ### Response Parameters
 
-|Parameter code| Secondary parameter code | Parameter type | Parameter name | Description |
+|Attribute| Secondary parameter code | Type | Parameter name | Description |
 |:----    |:---|:----- |-----   |-----   |
 |`pay_params`|`appId`   |String(16)  |Public number id   | The App ID is provided by Tencent once developers register their Mini Program on the WeChat developer portal  |
 |— |`timeStamp`  |String(32) |Timestamp  | Current time |
@@ -272,7 +272,7 @@ Optionally merchants can activate real-name authentication with WeChat. Currentl
 
 ### Request Parameters
 
-| Parameter code | Mandatory | Parameter type | Description |
+| Attribute | Mandatory | Type | Description |
 |----------------|-----------|----------------|-------------|
 |`mchntnm` | Yes | String(128) | Custom business name. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters |
 |`txamt`  | Yes  | Int(11) | Amount |

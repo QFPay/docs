@@ -8,6 +8,12 @@ import Link from '@docusaurus/Link';
 
 ## CPM API Request
 
+**Endpoint** : `../trade/v1/payment`
+
+**Method** : `POST`
+
+**Description** : The customer generates a dynamic QR code in their QR code wallet and presents it to the cashier for scanning. This szenario applies to offline payments only. If the response codes `1143/1145` are returned, the transaction is being processed or the customer is required to input the wallet password. Merchants have to [query the transaction result](../common-api/transaction-enquiry) for a final assessment of the transaction status.
+
 ```plaintext
 Request Header:
 
@@ -211,7 +217,7 @@ ob_start();
   return $randstr;
   }
   
-     $url = 'https://test-openapi-eur.qfapi.com';
+     $url = 'https://test-openapi-hk.qfapi.com';
      $api_type = '/trade/v1/payment';
      $pay_type = '800108'; //Alipay CPM = 800108, WeChat Pay CPM = 800208
      $auth_code = '280438849930815813';
@@ -286,19 +292,15 @@ ob_end_flush();
 }
 ```
 
-`POST ../trade/v1/payment`
-
-The customer generates a dynamic QR code in their QR code wallet and presents it to the cashier for scanning. This szenario applies to offline payments only. If the response codes `1143/1145` are returned, the transaction is being processed or the customer is required to input the wallet password. Merchants have to [query the transaction result](../common-api/transaction-enquiry) for a final assessment of the transaction status.
-
 ## Request Parameters
 
-|Parameter name | Parameter code | Mandatory | Parameter type | Description |
-|:----    |:---|:----- |-----   |----   |
-|Public payment parameters | — | — |— |— |
-Authorization Code | `auth_code` | Yes<br/> (CPM only) | String(128) | Specifies the authorization code for scanning a barcode/QR Code. The `auth_code` returned is unique in each authorization. Each `auth_code` can only be used once and will automatically expire. For testing CPM with Alipay and WeChat Pay the `auth_code` can be extracted by any QRC reader or manually found in the consumer wallet below the barcode.
+| Attribute | Mandatory | Type | Description |
+|:---|:----- |-----   |----   |
+|Public payment parameters | — | — |— |
+|`auth_code` | Yes<br/> (CPM only) | String(128) | Specifies the authorization code for scanning a barcode/QR Code. The `auth_code` returned is unique in each authorization. Each `auth_code` can only be used once and will automatically expire. For testing CPM with Alipay and WeChat Pay the `auth_code` can be extracted by any QRC reader or manually found in the consumer wallet below the barcode.|
 
 ## Response Parameters
 
-|Parameter name | Parameter code | Mandatory | Parameter type | Description |
-|:----    |:---|:----- |-----   |----   |
-|Public payment parameters | — | — |— |— |
+| Attribute | Mandatory | Type | Description |
+|:----    |:---|:----- |-----   |
+|Public payment parameters | — | — |— |

@@ -18,10 +18,10 @@
     "message": "简单、快捷、安全的使用 QFPay 支付产品和 API 服务。接受目前主流信用卡支付，以及电子钱包。"
   },
   "homepage.features.in-store.MPM": {
-    "message": "Merchant Present QRCode Mode"
+    "message": "正扫支付"
   },
   "homepage.features.in-store.CPM": {
-    "message": "Consumer Present QRCode Mode"
+    "message": "付款码支付"
   },
   "homepage.features.in-store.pos": {
     "message": "POS API"
@@ -33,25 +33,25 @@
     "message": "线上对接同样简单、安全，保护隐私信息。支持多种线上对接场景，可以将 QFPay 收银台页面增加到网站收款流程，也可以将 QFPay 支付组件嵌入到网站页面中。快速、便捷、个性化的集成方式。"
   },
   "homepage.features.online-shop.visa": {
-    "message": "Visa/Mastercard Online Payments"
+    "message": "Visa/Mastercard 线上支付"
   },
   "homepage.features.online-shop.checkout": {
-    "message": "QFPay Checkout Services"
+    "message": "结账页面服务"
   },
   "homepage.features.online-shop.paymentelement": {
-    "message": "QFPay Component"
+    "message": "Element SDK"
   },
   "homepage.features.online-shop.recurring": {
-    "message": "QFPay Recurring Payment"
+    "message": "订阅支付 API"
   },
   "homepage.features.online-shop.online-pre-authorisation": {
-    "message": "Online Pre-authorisation Payment"
+    "message": "线上预授权支付 API"
   },
   "homepage.features.online-shop.alipay": {
-    "message": "Alipay"
+    "message": "支付宝"
   },
   "homepage.features.online-shop.wechat": {
-    "message": "WeChat"
+    "message": "微信"
   },
   "homepage.features.e-commerce.title": {
     "message": "电子商务平台插件"
@@ -81,10 +81,10 @@
     "message": "POS App call App SDK"
   },
   "Wechat Pay In-App payment SDKs": {
-    "message": "Wechat Pay In-App payment SDKs"
+    "message": "微信 In-App 支付"
   },
   "Alipay In-App payment SDKs": {
-    "message": "Alipay In-App payment SDKs"
+    "message": "支付宝 In-App 支付"
   },
   "theme.ErrorPageContent.title": {
     "message": "页面已崩溃。",

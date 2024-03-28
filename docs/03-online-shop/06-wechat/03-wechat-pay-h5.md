@@ -12,7 +12,7 @@ import Link from '@docusaurus/Link';
 
 ### Request Parameters
 
-|Parameter name|  Parameter code | Mandatory| Parameter type | Description |
+|Parameter name|  Attribute | Mandatory| Type | Description |
 |:----    |:---|:----- |-----   |-----   |
 |Public payment parameters |—  |— |—  | Refer to the general documentation about transactions |
 |Extended Customer Info|`extend_info`|Yes|Object||
@@ -33,7 +33,7 @@ extend_info:
 
 <br/> **`extend_info:`**  <br/>
 
-|Parameter code|  Parameter code | Parameter code | Mandatory| Parameter type | Description |
+|Attribute|  Attribute | Attribute | Mandatory| Type | Description |
 |:----    |:---|:----- |-----   |-----  |-----   |
 |`scene_info`|||Yes|Object||
 ||`h5_info`||Yes|Object||
@@ -44,7 +44,7 @@ extend_info:
 
 ### Response Parameters
 
-|Parameter code| Secondary parameter code| Parameter Type| Parameter name|Description|
+|Attribute| Secondary parameter code| Parameter Type| Parameter name|Description|
 |:----    |:---|:----- |-----   |----   |
 |Public response parameters    |—  |— |—  | — |
 |Payment URL|`pay_url`|Yes|String||

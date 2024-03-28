@@ -202,7 +202,7 @@ ob_start();
   return $randstr;
   }
   
-     $url = 'https://test-openapi-eur.qfapi.com';
+     $url = 'https://test-openapi-hk.qfapi.com';
      $api_type = '/trade/v1/refund';
      $syssn = '20200311066100020000977840';
      //$mchid = "MNxMp11FV35qQN"; //Only agents must provide this parameter
@@ -285,7 +285,7 @@ Merchants can use the refund interface to refund transactions. The merchant acco
 
 ### Request Parameters
 
-|Parameter name|Parameter code|Mandatory|Parameter type|Description|
+|Parameter name|Attribute|Mandatory|Type|Description|
 |----    |---|----- |-----   |-----   |
 |QF Pay transaction number | ` syssn ` |Yes |String(128)  | Original transaction ID `syssn`  that is supposed to be refunded|
 |API order number | ` out_trade_no `  |Yes |String(128)  | External refund transaction number / Merchant platform refund transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.|
@@ -299,7 +299,7 @@ Merchants can use the refund interface to refund transactions. The merchant acco
 
 ### Response Parameters
 
-|Parameter name|Parameter code|Parameter type|Description|
+|Parameter name|Attribute|Type|Description|
 |-----    |----|------ |-----   |
 |Refund Transaction ID | `syssn`  |String(40)   |New transaction ID referring to the newly created refund transaction|
 |Original Transaction ID| `orig_syssn`  |String(128)   |Previous transaction ID referring to the original transaction that has been refunded|

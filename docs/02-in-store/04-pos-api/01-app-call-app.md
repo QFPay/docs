@@ -216,31 +216,31 @@ Parse the return value:
 
 ### Transaction Information Field Description
 
-| Field Name | Type              | M/O | Description                     | 
-| ---------- | ------------------------- |-----|---------------------------------|
-| id | String  |   M   | Transaction idendity number |
-| amt | Long | M | Transaction Amount |
-| time | String | M | Transaction time yyy-MM-dd HH:mm:ss |
-| channel | String | M | Transaction channel like weixin, alipay |
-| status | Integer | M | Transaction status |
-| type | String | M | Transaction type, payment or refund |
-| originId | String | O | Original transaction id, mandatory if the transaction is refund |
-| mchntName | String | M | Sore name |
-| remarks | String | O | Transaction remarks |
-| confirmCode | String | O | Transaction confirmation code |
-| operatorAccount | String | M | Operator name |
-| appCode | String | O | Application code (swipe card) |
-| customerId | String | O | Idendity of customer wallet (pre-authorization) |
-| customerAccount | String | O | Account of customer wallet (pre-authorization)|
-| completeTransId | String | O | Newly generated transaction id when the pre-authorization transaction is completed (pre-authorization) |
-| completeTime | String | O | Complete time when the pre-authorization transaction is completed yyyy-MM-dd HH:mm:ss (pre-authorization) |
+| Attribute | Type | Mandatory | Description |
+| --------- | ---- | --------- | ----------- |
+| `id` | String  |   Yes   | Transaction idendity number |
+| `amt` | Long | Yes | Transaction Amount |
+| `time` | String | Yes | Transaction time yyy-MM-dd HH:mm:ss |
+| `channel` | String | Yes | Transaction channel like weixin, alipay |
+| `status` | Integer | Yes | Transaction status |
+| `type` | String | Yes | Transaction type, payment or refund |
+| `originId` | String | No | Original transaction id, mandatory if the transaction is refund |
+| `mchntName` | String | Yes | Sore name |
+| `remarks` | String | No | Transaction remarks |
+| `confirmCode` | String | No | Transaction confirmation code |
+| `operatorAccount` | String | Yes | Operator name |
+| `appCode` | String | No | Application code (swipe card) |
+| `customerId` | String | No | Idendity of customer wallet (pre-authorization) |
+| `customerAccount` | String | No | Account of customer wallet (pre-authorization)|
+| `completeTransId` | String | No | Newly generated transaction id when the pre-authorization transaction is completed (pre-authorization) |
+| `completeTime` | String | No | Complete time when the pre-authorization transaction is completed yyyy-MM-dd HH:mm:ss (pre-authorization) |
 
 ## Channel Information Field Description
 
-| Field Name | Type              | M/O | Description                     | 
-| ---------- | ------------------------- |-----|---------------------------------|
-| name | String | M | Channel name |
-| desc | String | M | Channel description |
+| Attribute | Type | Mandatory | Description |
+| ---------- | ---- |---------- | ----------- |
+| `name` | String | Yes | Channel name |
+| `desc` | String | Yes | Channel description |
 
 ### Transaction Status Field Description
 

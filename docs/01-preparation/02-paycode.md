@@ -1,7 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Payment Methods Code
+# Payment Methods
 
 :::warning
 Verify that your API credentials allow for the selected `pay_type`.
@@ -9,8 +9,8 @@ Verify that your API credentials allow for the selected `pay_type`.
 
 ## PayType
 
-Code | Description
---------- | -------
+Code   | Description
+------ | -------
 800008 | Consumer Present QR Code Mode (CPM) for WeChat, Alipay, UNIONPAY Quick Pass
 800101 | Alipay Merchant Presented QR Code Payment in store (MPM) (Overseas Merchants)
 800108 | Alipay Consumer Presented QR Code Payment (CPM) (Overseas & HK Merchants)
@@ -331,7 +331,7 @@ function GetRandStr($length){
     return $randstr;
 }
 
-$url = 'https://test-openapi-eur.qfapi.com';
+$url = 'https://test-openapi-hk.qfapi.com';
 $api_type = '/trade/v1/payment';
 $pay_type = '800101';
 //$mchid = "MNxMp11FV35qQN"; //Only agents must provide this parameter
@@ -414,89 +414,89 @@ Listed below are the most common parameters for the payment endpoint. Please ref
 
 ### Public Payment Request Parameters
 
-Parameter name | Parameter code | Mandatory | Type | Description
---------- | -------- | --------- | ------- | ------- 
-Payment amount | `txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1)
-Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](#currencies) table for a complete list of available currencies
-Payment type | `pay_type` | Yes | String(6) | Please refer to the section [Payment Codes](#payment-codes) for a complete list of payment types
-Merchant Order ID | `out_trade_no` | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
-Request transaction time | `txdtm` | Yes | String(20) | Transaction time format：<br/> YYYY-MM-DD hh:mm:ss 
-Authorization Code | `auth_code` | Yes<br/> (CPM only) | String(128) | Specifies the authorization code for scanning a barcode/QR Code. The `auth_code` returned is unique in each authorization. Each `auth_code` can be used only once and will automatically expire in one day. For testing CPM with Alipay and WeChat Pay the `auth_code` can be extracted with any QRC reader or manually found in the consumer wallet below the barcode.
-Order expiration time | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong WAP payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas WAP payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP
-Product name identification | `goods_name` | No | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
-QF Pay merchant number | `mchid` | No | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass in the MCHID parameter in the API request. 
-Time zone | `txzone` | No | String(5) | Transaction Time zone. Default time zone is Beijing time UTC+8 (+0800).
-Device ID | `udid` | No | String(40) |  Unique transaction device ID displayed on the merchant portal. 
-Asynchronous Notification URL | `notify_url` | No | String(256) | URL where asynchronous notificiations will be sent to upon payment completion.
+Attribute | Mandatory | Type | Description
+--------- | --------- | ------- | -------
+`txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1)
+`txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](#currencies) table for a complete list of available currencies
+`pay_type` | Yes | String(6) | Please refer to the section [Payment Codes](#paytype) for a complete list of payment types
+`out_trade_no` | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
+`txdtm` | Yes | String(20) | Transaction time format：<br/> YYYY-MM-DD hh:mm:ss 
+`auth_code` | Yes<br/> (CPM only) | String(128) | Specifies the authorization code for scanning a barcode/QR Code. The `auth_code` returned is unique in each authorization. Each `auth_code` can be used only once and will automatically expire in one day. For testing CPM with Alipay and WeChat Pay the `auth_code` can be extracted with any QRC reader or manually found in the consumer wallet below the barcode.
+`expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong WAP payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas WAP payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP
+`goods_name` | No | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
+`mchid` | No | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass in the MCHID parameter in the API request.
+`txzone` | No | String(5) | Transaction Time zone. Default time zone is Beijing time UTC+8 (+0800).
+`udid` | No | String(40) |  Unique transaction device ID displayed on the merchant portal.
+`notify_url` | No | String(256) | URL where asynchronous notificiations will be sent to upon payment completion.
 
 ### Public Payment Response Parameters
 
-Parameter name | Parameter code | Type | Description
---------- | -------- | --------- | -------
-Payment type | `pay_type` | String(6) | Please refer to the section [Payment Codes](#payment-codes) for a complete list of payment types 
-System transaction time | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
-Request transaction time | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  |
-Response description | `resperr` | String(128) | Request result description
-Payment amount | `txamt` | Int(11) |
-Other information | `respmsg` | String(128) |  Supplementary response description
-Merchant Order ID | `out_trade_no` | String(128) | External transaction number  
-QFPay unique transaction ID | `syssn` | String(40) | QFPay internal transaction number (unique)
-Wallet/Channel transaction number| `chnlsn` | String | Wallet/Channel transaction number
-Return code | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](#transaction-status-codes) for a complete list of response codes.
+Attribute | Type | Description
+ -------- | --------- | -------
+`pay_type` | String(6) | Please refer to the section [Payment Codes](#paytype) for a complete list of payment types
+`sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
+`txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  |
+`resperr` | String(128) | Request result description
+`txamt` | Int(11) |
+`respmsg` | String(128) |  Supplementary response description
+`out_trade_no` | String(128) | External transaction number  
+`syssn` | String(40) | QFPay internal transaction number (unique)
+`chnlsn` | String | Wallet/Channel transaction number
+`respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](#transaction-status-codes) for a complete list of response codes.
 
 ## Transaction Status Codes
 
-| Return code | Description                                               |
-| ---------- | ------------------------------------------------------------ |
-| 0000       | Transaction successful    |
-| 1100       | System under maintenance (1100)    |
-| 1101       | Reversal error (1101)     |
-| 1102       | Duplicate request (1102)  |
-| 1103       | Request format error (1103)  |
-| 1104       | Request parameter error (1104)  | 
-| 1105       | Device not activated (1105)  |
-| 1106       | Invalid device (1106)  |
-| 1107       | Device not allowed (1107)  |
-| 1108       | Signature error (1108)    |
-| 1125       | Transaction has been refunded already (1125)    |
-| 1136       | The transaction does not exist or is not operational (1136)    |
-| 1142       | Order already closed (1142)    |
-| 1143       | The order has not been paid for, the password is currently being entered (1143)   |
-| 1145       | Please wait while processing (1145)    |
-| 1147       | Wechat pay transaction error (1147)    |
-| 1150       | Your billing method is T0 and does not support canceling transactions. (1150)    |
-| 1155       | Refund request denied (1155)    |
-| 1181       | Order expired (1181)    |
-| 1201       | Insufficient balance, please use a different payment method (1201)   |
-| 1202       | Incorrect or expired payment code, please show the correct payment code or refresh the payment code and retry (1202)   |
-| 1203       | Merchant account error, confirm that the payment account is configured correctly (1203)  |
-| 1204       | Bank error, confirm that the payment wallet is functionable (1204)  |
-| 1205       | The transaction failed. Please try again later (1205)  |
-| 1212       | Please use the UnionPay overseas payment code (1212)  |
-| 1241       | The store does not exist or the status is incorrect. Do not conduct payments (1241)  |
-| 1242       | The store has not been configured correctly, unable to conduct payments (1242)  |
-| 1243       | The store has been disabled. Do not conduct payments, contact the owner to confirm (1243)  |
-| 1250       | The transaction is forbidden. For more information please contact QFPay Customer Service Team (1250) |
-| 1251       | The store has not been configured correctly, we are currently working to fix this problem (1251)  |
-| 1252       | System error when making the order request (1252)  |
-| 1254       | A problem occured. We are currently resolving the issue (1254)  |
-| 1260       | The order has already been paid for, please confirm the transaction result before conducting more transactions (1260) |
-| 1261       | The order has not been paid for, please confirm the transaction result before conducting more transactions (1261)  |
-| 1262       | The order has been refunded, please confirm the order status before conducting more transactions (1262)  |
-| 1263       | The order has been cancelled, please confirm the order status before conducting more transactions (1263) |
-| 1264       | The order has been closed, please confirm the order status before conducting more transactions (1264)  |
-| 1265       | The transaction cannot be refunded. Refunds for transactions between 11:30pm to 0:30am and special promotions cannot be processed. (1265)  |
-| 1266       | The transaction amount is wrong, please confirm the order status (1266)  |
-| 1267       | The order information does not match, please confirm the order status (1267) |
-| 1268       | The order does not exist, please confirm the order status (1268) |
-| 1269       | Today's unsettled transaction amount is insufficient. Refunds cannot be processed. Please confirm that the balance is sufficient (1269) |
-| 1270       | This currency does not support partial refunds (1270) |
-| 1271       | The selected transaction does not support partial refunds (1271) |
-| 1272       | The refund amount is greater than the maximum amount that can be refunded for the original transaction (1272) |
-| 1294       | The transaction may be non-compliant and has been prohibited by the bank (1294) |
-| 1295       | The connection is slow, waiting for a network response (1295) |
-| 1296       | The connection is slow, waiting for a network response. Please try again later or use other payment methods (1296) |
-| 1297       | The banking system is busy. Please try again later or use other payment methods (1297) |
-| 1298       | The connection is slow, waiting for a network response. In case you have already paid, do not repeat the payment. Please confirm the result later (1298) |
-| 2005       | The customer payment code is incorrect or has expired, please refresh and restart the transaction process (2005) |
-| 2011       | Transaction serial number repeats (2011) |
+Return code | Description                                               |
+----------- | ---------------------------------------------------------- |
+0000       | Transaction successful    |
+1100       | System under maintenance (1100)    |
+1101       | Reversal error (1101)     |
+1102       | Duplicate request (1102)  |
+1103       | Request format error (1103)  |
+1104       | Request parameter error (1104)  | 
+1105       | Device not activated (1105)  |
+1106       | Invalid device (1106)  |
+1107       | Device not allowed (1107)  |
+1108       | Signature error (1108)    |
+1125       | Transaction has been refunded already (1125)    |
+1136       | The transaction does not exist or is not operational (1136)    |
+1142       | Order already closed (1142)    |
+1143       | The order has not been paid for, the password is currently being entered (1143)   |
+1145       | Please wait while processing (1145)    |
+1147       | Wechat pay transaction error (1147)    |
+1150       | Your billing method is T0 and does not support canceling transactions. (1150)    |
+1155       | Refund request denied (1155)    |
+1181       | Order expired (1181)    |
+1201       | Insufficient balance, please use a different payment method (1201)   |
+1202       | Incorrect or expired payment code, please show the correct payment code or refresh the payment code and retry (1202)   |
+1203       | Merchant account error, confirm that the payment account is configured correctly (1203)  |
+1204       | Bank error, confirm that the payment wallet is functionable (1204)  |
+1205       | The transaction failed. Please try again later (1205)  |
+1212       | Please use the UnionPay overseas payment code (1212)  |
+1241       | The store does not exist or the status is incorrect. Do not conduct payments (1241)  |
+1242       | The store has not been configured correctly, unable to conduct payments (1242)  |
+1243       | The store has been disabled. Do not conduct payments, contact the owner to confirm (1243)  |
+1250       | The transaction is forbidden. For more information please contact QFPay Customer Service Team (1250) |
+1251       | The store has not been configured correctly, we are currently working to fix this problem (1251)  |
+1252       | System error when making the order request (1252)  |
+1254       | A problem occured. We are currently resolving the issue (1254)  |
+1260       | The order has already been paid for, please confirm the transaction result before conducting more transactions (1260) |
+1261       | The order has not been paid for, please confirm the transaction result before conducting more transactions (1261)  |
+1262       | The order has been refunded, please confirm the order status before conducting more transactions (1262)  |
+1263       | The order has been cancelled, please confirm the order status before conducting more transactions (1263) |
+1264       | The order has been closed, please confirm the order status before conducting more transactions (1264)  |
+1265       | The transaction cannot be refunded. Refunds for transactions between 11:30pm to 0:30am and special promotions cannot be processed. (1265)  |
+1266       | The transaction amount is wrong, please confirm the order status (1266)  |
+1267       | The order information does not match, please confirm the order status (1267) |
+1268       | The order does not exist, please confirm the order status (1268) |
+1269       | Today's unsettled transaction amount is insufficient. Refunds cannot be processed. Please confirm that the balance is sufficient (1269) |
+1270       | This currency does not support partial refunds (1270) |
+1271       | The selected transaction does not support partial refunds (1271) |
+1272       | The refund amount is greater than the maximum amount that can be refunded for the original transaction (1272) |
+1294       | The transaction may be non-compliant and has been prohibited by the bank (1294) |
+1295       | The connection is slow, waiting for a network response (1295) |
+1296       | The connection is slow, waiting for a network response. Please try again later or use other payment methods (1296) |
+1297       | The banking system is busy. Please try again later or use other payment methods (1297) |
+1298       | The connection is slow, waiting for a network response. In case you have already paid, do not repeat the payment. Please confirm the result later (1298) |
+2005       | The customer payment code is incorrect or has expired, please refresh and restart the transaction process (2005) |
+2011       | Transaction serial number repeats (2011) |

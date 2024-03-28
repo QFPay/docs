@@ -211,7 +211,7 @@ ob_start();
   return $randstr;
   }
   
-     $url = 'https://test-openapi-eur.qfapi.com';
+     $url = 'https://test-openapi-hk.qfapi.com';
      $api_type = '/trade/v1/payment';
      $pay_type = '800108'; //Alipay CPM = 800108, WeChat Pay CPM = 800208
      $auth_code = '280438849930815813';

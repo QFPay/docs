@@ -28,7 +28,7 @@ import string
 import random
 
 # Enter Client Credentials
-environment = 'https://test-openapi-eur.qfapi.com'
+environment = 'https://test-openapi-hk.qfapi.com'
 app_code = '3F504C39125E4886AB4741**********'
 client_key = '5744993FBC034DBBB995FA**********'
 
@@ -109,7 +109,7 @@ public class Refund {
         System.out.println("Md5 Value:\n"+md5Sum);
 
          //如果是国内钱台，网址是：https://openapi-test.qfpay.com.
-        String url="https://test-openapi-eur.qfapi.com";
+        String url="https://test-openapi-hk.qfapi.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/reversal", data, appcode,key);
         System.out.println(resp);
     }
@@ -122,7 +122,7 @@ public class Refund {
 ```javascript
 
 // Enter Client Credentials
-environment = 'https://test-openapi-eur.qfapi.com'
+environment = 'https://test-openapi-hk.qfapi.com'
 app_code = '3F504C39125E4886AB4741**********'
 client_key = '5744993FBC034DBBB995FA**********'
 
@@ -196,7 +196,7 @@ function GetRandStr($length){
     return $randstr;
 }
 
-$url = 'https://test-openapi-eur.qfapi.com';
+$url = 'https://test-openapi-hk.qfapi.com';
 $api_type = '/trade/v1/reversal';
 $syssn = '800101';
 //$out_trade_no = 'zCvo0IqTg0SaQkGnHd6w';

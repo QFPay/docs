@@ -23,7 +23,7 @@ PayType | Description
 
 ### Request Parameters
 
-Parameter name | Parameter code | Mandatory | Type | Description
+Parameter name | Attribute | Mandatory | Type | Description
 --------- | -------- | --------- | ------- | -------
 Payment amount | `txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1)
 Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies
@@ -39,7 +39,7 @@ Notification URL | `notify_url` | No | String(255) | URL that the merchant will 
 
 ### Response Parameters
 
-Parameter name | Parameter code | Type | Description
+Parameter name | Attribute | Type | Description
 --------- | -------- | --------- | -------
 Payment type | `pay_type` | String(6) | e.g. PayMe Wap Payment |
 System transaction time | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 

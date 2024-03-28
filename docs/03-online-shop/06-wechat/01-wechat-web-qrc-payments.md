@@ -6,7 +6,7 @@ import Link from '@docusaurus/Link';
 
 ```plaintext
 
-For code instructions select Python, Java, Node.js or PHP with the tabs above.
+For code instructions select Python, Java, Node.js or PHP with the tabs below.
 
 ```
 
@@ -189,7 +189,7 @@ ob_start();
   return $randstr;
   }
   
-     $url = 'https://test-openapi-eur.qfapi.com';
+     $url = 'https://test-openapi-hk.qfapi.com';
      $api_type = '/trade/v1/payment';
      $pay_type = '800201';
      //$mchid = "MNxMp11FV35qQN"; //Only agents must provide this parameter
@@ -276,7 +276,7 @@ Optionally merchants can activate real-name authentication with WeChat. Currentl
 
 ### Request Parameters
 
-Parameter name | Parameter code | Secondary parameter | Mandatory | Type | Description
+Parameter name | Attribute | Secondary parameter | Mandatory | Type | Description
 --------- | -------- | --------- | ------- | ------- | ------- 
 Payment amount | `txamt` | | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1) 
 Currency | `txcurrcd` | | Yes | String(3) | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies
@@ -293,7 +293,7 @@ Extended Customer Info | `extend_info` | `user_creid` <br/> `user_truename` | No
 
 ### Response Parameters
 
-Parameter name | Parameter code | Type | Description 
+Parameter name | Attribute | Type | Description 
 --------- | -------- | --------- | ------- 
 Payment type | `pay_type` | String(6) | WeChat online payments PayType `800201`
 System transaction time | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 

@@ -6,7 +6,7 @@ import Link from '@docusaurus/Link';
 
 ```plaintext
 
-For code instructions select Python, Java, Node.js or PHP with the tabs above.
+For code instructions select Python, Java, Node.js or PHP with the tabs below.
 
 ```
 
@@ -272,7 +272,7 @@ Customers make purchases on a merchant website with PayMe. The user scans the di
 
 ### Request Parameters
 
-Parameter name | Parameter code | Mandatory | Type | Description
+Parameter name | Attribute | Mandatory | Type | Description
 --------- | -------- | --------- | ------- | ------- 
 Payment amount | `txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1) 
 Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies
@@ -288,7 +288,7 @@ Redirect URL | `return_url` | No | String(512) |  URL that the user will be redi
 
 ### Response Parameters
 
-Parameter name | Parameter code | Type | Description 
+Parameter name | Attribute | Type | Description 
 --------- | -------- | --------- | ------- 
 Payment type | `pay_type` | String(6) | PayMe Web/Wap Payment |
 System transaction time | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 

@@ -14,7 +14,7 @@ Customs declaration API auto-sends the WeChat/Alipay payment data to the customs
 
 ### Request Parameters
 
-| Parameter code| Mandatory| Parameter type|Description|
+| Attribute| Mandatory| Type|Description|
 |:---|:----- |-----   |----   |
 |`trade_type`|Y|String(8)|weixin or alipay|
 |`syssn`|Y|String(32)|QFPay transaction number|
@@ -26,7 +26,7 @@ Customs declaration API auto-sends the WeChat/Alipay payment data to the customs
 |`amount`|N|String(20)|Declaration amount. Must be passed when `trate_type` is "alipay". Example: 2.00|
 The following fields should be passed in case splitting or modifying order: <br/>
 ###
-| Parameter code| Mandatory| Parameter type|Description|
+| Attribute| Mandatory| Type|Description|
 |:---|:----- |-----   |----   |
 |`sub_order_no`|C|String(64)|Merchant sub-order No. It is required if there is a split order. Example：1111960490|
 |`fee_type`|C|String(8)|Currency. Must be passed when `trate_type` is "wechat". It can only be CNY|
@@ -36,7 +36,7 @@ The following fields should be passed in case splitting or modifying order: <br/
 
 ### Response Parameters
 
-| Parameter code| Mandatory| Parameter type|Description|
+| Attribute| Mandatory| Type|Description|
 |:---|:----- |-----   |----   |
 |`syssn`||String(40)|QFPay transaction number|
 |`respcd`||String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|
@@ -55,7 +55,7 @@ Merchants query declaration status by QFPay transaction number.
 
 ### Request Parameters
 
-| Parameter code| Mandatory| Parameter type|Description|
+| Attribute| Mandatory| Type|Description|
 |:---|:----- |-----   |----   |
 |`trade_type`|Y|String(8)|weixin or alipay|
 |`customs`|Y|String(20)|Customs for declaration. Example：SHANGHAI_ZS|
@@ -64,7 +64,7 @@ Merchants query declaration status by QFPay transaction number.
 
 ### Response Parameters
 
-| Parameter code| Mandatory| Parameter type|Description|
+| Attribute| Mandatory| Type|Description|
 |:---|:----- |-----   |----   |
 |`syssn`||String(40)|QFPay transaction number|
 |`respcd`||String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|
@@ -81,7 +81,7 @@ If additional order information has been submitted to the customs but is lost in
 `POST ../custom/v1/redeclare`
 
 ### Request Parameters
-| Parameter code| Mandatory| Parameter type|Description|
+| Attribute| Mandatory| Type|Description|
 |:---|:----- |-----   |----   |
 |`trade_type`|Y|String(8)|weixin or alipay|
 |`customs`|Y|String(20)|Customs for declaration. Example：SHANGHAI_ZS|
@@ -89,7 +89,7 @@ If additional order information has been submitted to the customs but is lost in
 |`mch_customs_no`|Y|String(20)|Customs registration No. of the merchant. Example: 110084111|
 |`sub_order_no`|N|String(40)|Sub order number. It is required if there is a split order.|
 ### Response Parameters
-| Parameter code| Mandatory| Parameter type|Description|
+| Attribute| Mandatory| Type|Description|
 |:---|:----- |-----   |----   |
 |`syssn`||String(40)|QFPay transaction number|
 |`respcd`||String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|

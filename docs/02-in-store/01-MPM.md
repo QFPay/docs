@@ -8,6 +8,12 @@ import Link from '@docusaurus/Link';
 
 ## MPM API Request
 
+**Endpoint** : `/trade/v1/payment`
+
+**Method** : `POST`
+
+**Description** : The merchant generates a dynamic QR code based on the Alipay / WeChat Pay protocol and presents it to the customer. The user opens their Alipay / WeChat Pay wallet and scans the displayed QRC in order to complete payment. This szenario applies to offline as well as online payments, for instance on websites.
+
 ```plaintext
 Request Header:
 
@@ -209,7 +215,7 @@ function GetRandStr($length){
 return $randstr;
 }
 
-$url = 'https://test-openapi-eur.qfapi.com';
+$url = 'https://test-openapi-hk.qfapi.com';
 $api_type = '/trade/v1/payment';
 $pay_type = '800101'; //Alipay MPM = 800101, WeChat Pay MPM = 800201
 //$mchid = "MNxMp11FV35qQN"; //Only agents must provide this parameter
@@ -286,22 +292,18 @@ ob_end_flush();
 }
 ```
 
-`POST ../trade/v1/payment`
-
-The merchant generates a dynamic QR code based on the Alipay / WeChat Pay protocol and presents it to the customer. The user opens their Alipay / WeChat Pay wallet and scans the displayed QRC in order to complete payment. This szenario applies to offline as well as online payments, for instance on websites.
-
 ## Request Parameters
 
-|Parameter name| Parameter code|Mandatory|Parameter type|Description|
-|:----    |:---|:----- |-----   |-----   |
-|Public payment parameter | —  | — | — | — |
-|Payment mark | `pay_tag`  | No |     String(16) | The default value is: ALIPAYHK<br/>Alipay Continental version: ALIPAYCN<br/>801103 - Alipay overseas online refund (QF_BUSICD_ALIPAY_ONLINE_REFUND)<br/>801104 - Alipay overseas online inquiry (QF_BUSICD_ALIPAY_ONLINE_QUERY)<br/>801110 - Alipay overseas online APP payment (QF_BUSICD_ALIPAY_ONLINE_APP)<br/>801501 - Alipay Hong Kong pc scan code<br/>801512 - Alipay Hong Kong WAP payment<br/>801510 - Alipay Hong Kong APP payment  |
-Order expiration time | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong WAP payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas WAP payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP
-|Designated payment method    |`limit_pay`|No |String   |The parameter value is specified as no_credit, and credit card payment is prohibited. This setting only applies to mainland China.  |
+|Attribute|Mandatory|Type|Description|
+|:---|:----- |-----   |-----   |
+|Public payment parameter | —  | — | — |
+| `pay_tag`  | No |     String(16) | The default value is: ALIPAYHK<br/>Alipay Continental version: ALIPAYCN<br/>801103 - Alipay overseas online refund (QF_BUSICD_ALIPAY_ONLINE_REFUND)<br/>801104 - Alipay overseas online inquiry (QF_BUSICD_ALIPAY_ONLINE_QUERY)<br/>801110 - Alipay overseas online APP payment (QF_BUSICD_ALIPAY_ONLINE_APP)<br/>801501 - Alipay Hong Kong pc scan code<br/>801512 - Alipay Hong Kong WAP payment<br/>801510 - Alipay Hong Kong APP payment  |
+| `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong WAP payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas WAP payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP
+|`limit_pay`|No |String   |The parameter value is specified as no_credit, and credit card payment is prohibited. This setting only applies to mainland China.  |
 
 ## Response Parameters
 
-|Parameter code|Secondary parameter code|Parameter type|Parameter name|Description|
-|:----    |:---|:----- |-----   |-----   |
-|QR Code |  |String(512) | QR code link   | |
-|Public payment parameter | —  | — | — | — |
+|Attribute|Secondary Attribute|Type|Description|
+|:----    |:---|:----- |-----   |
+|QR Code |  |String(512) |  |
+|Public payment parameter | —  | —  | — |

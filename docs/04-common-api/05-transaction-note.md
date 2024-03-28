@@ -44,7 +44,7 @@ Request Body:
 
 ### Request Parameters
 
-|Parameter name|Parameter code|Mandatory|Parameter type|Description|
+|Parameter name|Attribute|Mandatory|Type|Description|
 |----    |---|----- |-----   |----- |
 |Merchant app code| `code`   |Yes   |String(32)   | Provided by QF Pay |
 |Transaction number | `syssn` | Yes |String(40) | QFPay transaction number, returned by the system once payment is completed |
@@ -52,7 +52,7 @@ Request Body:
 
 ### Response Parameters
 
-|Parameter code|Parameter type | Parameter name |Description|
+|Attribute|Type | Parameter name |Description|
 |----    |---|-----   |-----   |
 | `resperr`   |String(128)   |Transaction result description   |  | 
 | `respmsg`   |String(128)  |Error message   |    | 

@@ -85,7 +85,7 @@ _input_charset="UTF-8"&body="goods_info"&currency="HKD"&forex_biz="FP"&it_b_pay=
 
 ```
 
-|Parameter name | Parameter code  |Mandatory | Parameter type | Description |
+|Parameter name | Attribute  |Mandatory | Type | Description |
 |:----    |:---|:----- |-----   |----   |
 |Public payment parameters    |—|— |—   |—   |
 |Product description    |`goods_info`|No | String  | Must not contain special characters   |
@@ -94,7 +94,7 @@ Order expiration time | `expired_time` | No<br/> (MPM only) | String(3)  | QRC e
 
 ### Response Parameters
 
-|Parameter code | Secondary parameter code  | Parameter name |
+|Attribute | Secondary parameter code  | Parameter name |
 |:----    |:---|:----- |
 | `pay_params`   | `partner`         |Partner |
 |              | `seller_id`                    |  Unique Alipay user number referencing the Alipay payment account                        |

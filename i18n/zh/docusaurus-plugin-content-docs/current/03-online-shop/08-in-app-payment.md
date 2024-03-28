@@ -2,7 +2,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# App内支
+# In-App 支付
 
 ## 简介
 
@@ -10,7 +10,7 @@ App内支付让商户可以在App上集成电子钱包的支付功能。
 
 ## 交易类型
 
-您可以从下表中找到不同的电子钱包“pay_type”。
+您可以从下表中找到不同的电子钱包`pay_type`。
 
 交易类型 | 描述
 --------- | -------

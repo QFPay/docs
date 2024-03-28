@@ -202,7 +202,7 @@ ob_start();
   return $randstr;
   }
   
-     $url = 'https://test-openapi-eur.qfapi.com';
+     $url = 'https://test-openapi-hk.qfapi.com';
      $api_type = '/trade/v1/refund';
      $syssn = '20200311066100020000977840';
      //$mchid = "MNxMp11FV35qQN"; //Only agents must provide this parameter

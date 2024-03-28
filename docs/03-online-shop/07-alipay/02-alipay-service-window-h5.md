@@ -6,7 +6,7 @@ import Link from '@docusaurus/Link';
 
 ```plaintext
 
-For code instructions select Python, Java, Node.js or PHP with the tabs above.
+For code instructions select Python, Java, Node.js or PHP with the tabs below.
 
 ```
 
@@ -189,7 +189,7 @@ function GetRandStr($length){
   return $randstr;
 }
   
-$url = 'https://test-openapi-eur.qfapi.com';
+$url = 'https://test-openapi-hk.qfapi.com';
 $api_type = '/trade/v1/payment';
 $pay_type = '801107'; //Alipay Wap Payment = 801107
 //$mchid = "MNxMp11FV35qQN"; //Only agents must provide this parameter
@@ -280,7 +280,7 @@ For more details about how to acquire the user id please refer to the [official 
 
 ### Payment Parameters
 
-|Parameter name | Parameter code | Mandatory | Parameter type | Description |
+|Parameter name | Attribute | Mandatory | Type | Description |
 |:----    |:---|:----- |-----   |----   |
 |Public payment parameters |—  |— |—   |—   |
 |Alipay authorization code|`openid`   |Yes  | String(64) |The `user_id` is returned by the interface, e.g. 2088802811715388 |
@@ -289,7 +289,7 @@ For more details about how to acquire the user id please refer to the [official 
 
 ### Response Parameters
 
-|Parameter name | Secondary parameter code | Parameter type | Parameter name | Description |
+|Parameter name | Secondary parameter code | Type | Parameter name | Description |
 |:----    |:---|:----- |-----   |----   |
 |`pay_params`|`tradeNO`   |String  | Transaction number| Provide the transaction number in the call function |
 |`txcurrcd`  |  |  String(3) |   | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |

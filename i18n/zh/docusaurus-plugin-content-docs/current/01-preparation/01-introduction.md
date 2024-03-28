@@ -72,7 +72,7 @@ HASH(“SHA256”, abc=value1&bad=value3&bcd=value2Key)
 将签名结果（密文）保存到http请求头部的`X-QF-SIGN`字段中；
 
 ```plaintext
-For code instructions select Python, Java, Node.js or PHP with the tabs above.
+For code instructions select Python, Java, Node.js or PHP with the tabs below.
 ```
 
 <Tabs groupId="signature-generation">
@@ -233,7 +233,7 @@ function GetRandStr($length){
     }
     return $randstr;
 }
-$url = 'https://test-openapi-eur.qfapi.com';
+$url = 'https://test-openapi-hk.qfapi.com';
 $api_type = '/trade/v1/payment';
 $pay_type = '800101';
 //$mchid = "MNxMp11FV35qQN"; //Only agents must provide this parameter

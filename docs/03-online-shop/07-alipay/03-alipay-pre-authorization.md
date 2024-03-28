@@ -60,7 +60,7 @@ Request Body:
 }
 ```
 
-|Parameter name | Parameter code | Mandatory | Parameter type | Description |
+|Parameter name | Attribute | Mandatory | Type | Description |
 |:----    |:---|:----- |-----   |----   |
 | Public payment parameter    |—|— |—  |—   |
 | Alipay openid  |`openid`  |No | String(64)  | Corresponding to the APP authorization method.   |
@@ -68,7 +68,7 @@ Request Body:
 
 ### Response Parameters
 
-|Parameter code | Second parameter code | Parameter type | Parameter name | Description |
+|Attribute | Second parameter code | Type | Parameter name | Description |
 |:----    |:---|:----- |-----   |----   |
 |Public response parameters |—  |— |—   |—|
 
@@ -110,7 +110,7 @@ Request Body:
 }
 ```
 
-|Parameter name | Parameter code | Mandatory | Parameter type | Description |
+|Parameter name | Attribute | Mandatory | Type | Description |
 |:----    |:---|:----- |-----   |-----   |
 |Merchant ID    |`mchid` | Yes  |String   | The unique merchant ID is created by QF Pay during the merchant onboarding process.    |
 |QF Pay transaction number    | `syssn` | No | String    | Multiple entries are separated by English commas |
@@ -122,7 +122,7 @@ Request Body:
 
 **Response Parameter**
 
-|Parameter code | Parameter type | Parameter name | Description |
+|Attribute | Type | Parameter name | Description |
 |:----    |:---|:----- |-----   |
 |`syssn` |String(40)| QF Pay transaction number |  |
 |`orig_syssn` |String(40)| External transaction number| Developer platform transaction number |
@@ -170,7 +170,7 @@ Request Body:
 }
 ```
 
-| Parameter name | Parameter code | Mandatory | Parameter type | Description |
+| Parameter name | Attribute | Mandatory | Type | Description |
 |:----    |:---|:----- |-----   |----   |
 |Merchant ID    | `mchid`  | No | String  | The unique merchant ID is created by QF Pay during the merchant onboarding process. |
 |QF Pay transaction number | `syssn`  | Yes | String   |  Fund authorization number  |
@@ -183,7 +183,7 @@ Request Body:
 
 ### Response Parameters
 
-| Parameter code | Parameter type | Parameter name | Description |
+| Attribute | Type | Parameter name | Description |
 |:----    |:---|:----- |-----   |
 |`syssn` |   String(40) | QF Pay Transaction number | This number is being used when freezing funds, detucting money from the frozen amount as well as unfreezing funds. |
 |`orig_syssn`    |String(40)| External transaction number | Developer platform transaction number |

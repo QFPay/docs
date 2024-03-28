@@ -38,13 +38,39 @@ Remember to immediately refund transactions that were made in testing environmen
 
 The table below depicts the **base URLs** for each environment.
 
-Environment Name                           | Prod. URL | 
------------------------------------------- | ----------------------------------| 
+Environment Name                           | Prod. URL |
+------------------------------------------ | ---------------------------------- |
 Sandbox (Only for credit card simulations) | https://openapi-int.qfapi.com      |
-Live Testing Environment                | https://test-openapi-hk.qfapi.com  | 
-Production              | https://openapi-hk.qfapi.com  |
+Live Testing Environment                   | https://test-openapi-hk.qfapi.com  |
+Production                                 | https://openapi-hk.qfapi.com       |
 
 ## Signature Generation
+
+:::tip
+Always submit the signature in the HTTP header `X-QF-SIGN` unless noted otherwise.
+:::
+
+**Step 1:** Sort all parameters in ascending order according to parameter names
+
+Parameter list: abc=value1 bcd=value2 bad=value3
+Sort result: abc=value1 bad=value3 bcd=value2
+
+**Step 2:** Connect all parameters with ‘&’,and get the string to be signed
+
+abc=value1&bad=value3&bcd=value2
+
+**Step 3:** Combine the string with `client_key` from QFPay.
+
+abc=value1&bad=value3&bcd=value2Key
+
+**Step 4:** Sign the string from step 3 with MD5 or SHA256. We recommend to use SHA256.
+
+MD5(abc=value1&bad=value3&bcd=value2Key)
+HASH(“SHA256”, abc=value1&bad=value3&bcd=value2Key)
+
+**Step 5:** Request API with the signature
+
+Save the signature in the http header field `X-QF-SIGN` unless otherwise specified in this document.
 
 ```plaintext
 For code instructions select Python, Java, Node.js or PHP with the tabs below.
@@ -208,7 +234,7 @@ function GetRandStr($length){
     }
     return $randstr;
 }
-$url = 'https://test-openapi-eur.qfapi.com';
+$url = 'https://test-openapi-hk.qfapi.com';
 $api_type = '/trade/v1/payment';
 $pay_type = '800101';
 //$mchid = "MNxMp11FV35qQN"; //Only agents must provide this parameter
@@ -249,32 +275,6 @@ ob_end_flush();
 "B3B251B202801388BE4AC8E5537B81B1"
 }
 ```
-
-:::tip
-Always submit the signature in the HTTP header `X-QF-SIGN` unless noted otherwise.
-:::
-
-**Step 1:** Sort all parameters in ascending order according to parameter names
-
-Parameter list: abc=value1 bcd=value2 bad=value3
-Sort result: abc=value1 bad=value3 bcd=value2
-
-**Step 2:** Connect all parameters with ‘&’,and get the string to be signed
-
-abc=value1&bad=value3&bcd=value2
-
-**Step 3:** Combine the string with `client_key` from QFPay.
-
-abc=value1&bad=value3&bcd=value2Key
-
-**Step 4:** Sign the string from step 3 with MD5 or SHA256. We recommend to use SHA256.
-
-MD5(abc=value1&bad=value3&bcd=value2Key)
-HASH(“SHA256”, abc=value1&bad=value3&bcd=value2Key)
-
-**Step 5:** Request API with the signature
-
-Save the signature in the http header field `X-QF-SIGN` unless otherwise specified in this document.
 
 ### Request Description
 

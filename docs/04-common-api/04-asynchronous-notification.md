@@ -3,13 +3,11 @@ import TabItem from '@theme/TabItem';
 
 # Asynchronous Notifications
 
-
 :::note
  To configure your notification URL of choice, please send the address as well as merchant and store information via email to technical.support@qfpay.com
 :::
 
 Notifications are available for payments **"notify_type": "payment"** and refunds **"notify_type": "refund"**. The request parameters from Asynchronous Notifications may include additional parameters in future versions. Developers must ensure that their programs can support new parameters. In addition, developers can get the latest development documentation from this website. 
-
 
 ### Description
 
@@ -30,7 +28,6 @@ Upon successful payment and refund, QFPay API will send an asynchronous notifica
 6) Method: POST content-type: `application/json`
 
 ## Signature Verification
-
 
 ```plaintext
 For code instructions select Python with the tabs above.
@@ -74,7 +71,6 @@ The signature generation method for notifications is slightly different from oth
 **Step 3:** Sign the string from step 2 with MD5 algorithm
 
 **Step 4:** Compare the MD5 result with the signature from `X-QF-SIGN`, return an HTTP response with status code 200 OK and SUCCESS in the response body if the verification is successful
-
 
 ## Response Parameters of Asynchronous Notifications
 

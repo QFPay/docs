@@ -60,7 +60,7 @@ Request Body:
 }
 ```
 
-| Parameter name | Parameter code | Mandatory | Parameter type | Description |
+| Parameter name | Attribute | Mandatory | Type | Description |
 |:----    |:---|:----- |-----   |----   |
 |Merchant ID    | `mchid`  | No | String  | The unique merchant ID is created by QF Pay during the merchant onboarding process. |
 |External transaction number    | `out_trade_no` | Yes | String    |Developer platform transaction number |
@@ -75,7 +75,7 @@ Request Body:
 
 ### Response Parameters
 
-| Parameter code | Parameter type | Parameter name | Description |
+| Attribute | Type | Parameter name | Description |
 |:----    |:---|:----- |-----   |
 |`syssn` |   String(40) | QF Pay Transaction number | QFPay transaction number, returned by the system once payment is completed |
 |`orig_syssn`    |String(40)| External transaction number | Developer platform transaction number |

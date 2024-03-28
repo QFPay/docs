@@ -198,7 +198,7 @@ function GetRandStr($length){
   return $randstr;
 }
   
-$url = 'https://test-openapi-eur.qfapi.com';
+$url = 'https://test-openapi-hk.qfapi.com';
 $api_type = '/trade/v1/query';
 $syssn = '20200311066100020000977841';
 //$out_trade_no = 'zCvo0IqTg0SaQkGnHd6w';
@@ -299,7 +299,7 @@ When the query transaction is a refund then an additional parameter `origssn` wi
 
 ### Request Parameters
 
-|Parameter name| Parameter code|Mandatory|Parameter type|Description|
+|Parameter name| Attribute|Mandatory|Type|Description|
 |----    |---|----- |-----   |-----   |
 |Merchant number | ` mchid ` | For Agents |String(16) | If MCHID is given, it is mandatory to provide the `mchid.`On the contrary, if ` mchid` is not provided, merchants shall not pass the `mchid` field in the API request.|
 |QFPay transaction number | ` syssn ` |No |String(128) | Multiple entries are seperated by commas   |
@@ -316,7 +316,7 @@ When the query transaction is a refund then an additional parameter `origssn` wi
 ### Response Parameters
 
 
-|Parameter name|Parameter code|Parameter type|Description|
+|Parameter name|Attribute|Type|Description|
 |----    |------|------  |------   |
 | Page number| `page`  | Int(8)  |  |
 | Request result description| `resperr` | String(128) ||
@@ -358,7 +358,7 @@ The clearing statement for a particular payment channel is downloaded regularly.
 
 ### Request Parameter
 
-|Request code | Mandatory | Parameter type | Description
+|Request code | Mandatory | Type | Description
 |----    |---|----- |-----   |
 | `trade_date` | Yes | String(10) | Get a specific account statement for the selected date. Example: 2017-10-17
 

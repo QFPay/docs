@@ -88,7 +88,7 @@ qfPayOpenAPI: function () {
 
 ### Request Parameters 
 
-|Parameter name| Parameter code| Mandatory| Parameter type|Description|
+|Parameter name| Attribute| Mandatory| Type|Description|
 |:----    |:---|:----- |-----   |----   |
 |Public payment parameters | — | — |— |Refer to the public payment API documentation|
 |WeChat authorization code   |`sub_openid`|Yes |String(128)   |   |
@@ -98,7 +98,7 @@ Order expiration time | `expired_time` | No | String(3)  | QRC expiration time i
 
 ### Response Parameters
 
-|Parameter code| Secondary parameter code| Parameter Type| Parameter name|Description|
+|Attribute| Secondary parameter code| Parameter Type| Parameter name|Description|
 |:----    |:---|:----- |-----   |----   |
 |`pay_params`    |`appId` |String(16) |Public WMP ID   |After the developer registers the Mini Program with the WeChat, the appId can be obtained.  |
 |—   |`timeStamp` |String(32) |Timestamp    |Current time  |

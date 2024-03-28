@@ -209,7 +209,7 @@ function GetRandStr($length){
 return $randstr;
 }
 
-$url = 'https://test-openapi-eur.qfapi.com';
+$url = 'https://test-openapi-hk.qfapi.com';
 $api_type = '/trade/v1/payment';
 $pay_type = '800101'; //Alipay MPM = 800101, WeChat Pay MPM = 800201
 //$mchid = "MNxMp11FV35qQN"; //Only agents must provide this parameter

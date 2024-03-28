@@ -12,7 +12,7 @@
     "description": "The label for category In-Store in sidebar qfpaySidebar"
   },
   "sidebar.qfpaySidebar.category.POS API": {
-    "message": "POSAPI",
+    "message": "POS API",
     "description": "The label for category POS API in sidebar qfpaySidebar"
   },
   "sidebar.qfpaySidebar.category.Online Shop": {
