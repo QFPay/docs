@@ -47,7 +47,7 @@ Production              | https://openapi-hk.qfapi.com  |
 ## Signature Generation
 
 ```plaintext
-For code instructions select Python, Java, Node.js or PHP with the tabs above.
+For code instructions select Python, Java, Node.js or PHP with the tabs below.
 ```
 
 <Tabs groupId="signature-generation">
