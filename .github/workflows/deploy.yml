@@ -46,7 +46,7 @@ jobs:
       #     user_email: 41898282+github-actions[bot]@users.noreply.github.com
       
       - name: Set AWS S3 credentials
-        run: aws configure --profile qfpay \aws set aws_access_key_id ${{ secrets.ACCESS_KEY_ID}} \aws set aws_secret_access_key ${{ secrets.SECRET_ACCESS_KEY}} 
+        run: aws configure --profile qfpay \set aws_access_key_id ${{ secrets.ACCESS_KEY_ID}} \set aws_secret_access_key ${{ secrets.SECRET_ACCESS_KEY}} 
 
       - name: Deploy to AWS S3
         run: aws s3 sync ./deploy s3://sdk-test.qfapi.com/ --delete --profile qfpay --region ap-east-1
