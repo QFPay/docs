@@ -139,6 +139,10 @@
   justify-items: center;
 }
 
+.menu.thin-scrollbar{
+  scrollbar-width: none !important;
+}
+
 /* main{
   background-color: #2b2b2b14;
 } */
