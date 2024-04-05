@@ -4,7 +4,8 @@
 
 create your own checkout flows by using QFPay prebuilt UI components
 
-#### import JS library
+## import JS library
+
 ```js
 // sanbox environment
 <script src="https://cdn-int.qfapi.com/qfpay_element/qfpay.js"></script>
@@ -14,9 +15,12 @@ create your own checkout flows by using QFPay prebuilt UI components
 <script src="https://cdn-hk.qfapi.com/qfpay_element/qfpay.js"></script>
 ```
 
-#### Code examples
-1. payment mode
-1.1 credit card form (visa/mastercard)
+## Code examples
+
+### 1.payment mode
+
+#### 1.1 credit card form (visa/mastercard)
+
 ```js
 // initialize qfpay object
 const qfpay = QFpay.config()
@@ -41,7 +45,9 @@ const response = qfpay.confirmPayment({
   return_url: 'https://xxx.xxx.com'
 })
 ```
-1.2 complete payment function including credit card form, Alipay HK, Alipay CN, WechatPay, QuickPass, FPS, Payme etc
+
+#### 1.2 complete payment function including credit card form, Alipay HK, Alipay CN, WechatPay, QuickPass, FPS, Payme etc
+
 ```js
 
 // initialize qfpay object
@@ -54,32 +60,32 @@ const payment = qfpay.payment()
 qfpay.retrievePaymentIntent()
 
 // set payment parameters
-payment.walletPay({
-	lang:  'zh-cn',
-	goods_info:  'goods_info',
-	goods_name:  "goods_name",
-	paysource:  "payment_element_checkout",
-	out_trade_no: intentParams.out_trade_no,
-	txamt:  intentParams.txamt,
-	txcurrcd:  intentParams.txcurrcd,
-	support_pay_type: ['Alipay', 'WeChat', 'UnionPay', 'AlipayHK', 
-					'FPS', 'VisaMasterCardPayment', 'ApplePay', 
-					'VisaMasterCardPreAuth']
+payment.walletPay(
+{
+  lang:  'zh-cn',
+  goods_info:  'goods_info',
+  goods_name:  "goods_name",
+  paysource:  "payment_element_checkout",
+  out_trade_no: intentParams.out_trade_no,
+  txamt:  intentParams.txamt,
+  txcurrcd:  intentParams.txcurrcd,
+  support_pay_type: ['Alipay', 'WeChat', 'UnionPay', 'AlipayHK', 
+  'FPS', 'VisaMasterCardPayment', 'ApplePay', 'VisaMasterCardPreAuth']
 },intentParams.payment_intent);
 // initalize element object and create wallet list
 const  appearance = {
-	variables: {
-		colourComponentText:  'black',
-		colorQRCodeTopPromptContent:  '#000000',
-		colorQRCodeBottomPromptContent:  '#000000',
-		fontWeightQRCodeTopPrompt:  '900',
-		fontWeightQRCodeBottomPrompt:  '300'
-	},
-	billingAddressDisplay: {
-		city:  true,
-		address1:  true,
-		address2:  true,
-	}
+variables: {
+	colourComponentText:  'black',
+	colorQRCodeTopPromptContent:  '#000000',
+	colorQRCodeBottomPromptContent:  '#000000',
+	fontWeightQRCodeTopPrompt:  '900',
+	fontWeightQRCodeBottomPrompt:  '300'
+},
+billingAddressDisplay: {
+	city:  true,
+	address1:  true,
+	address2:  true,
+}
 }
 const elements = qfpay.element(appearance)
 elements.createWallet({
@@ -91,8 +97,11 @@ const response = qfpay.confirmWalletPayment({
 return_url:  'https://xxx.xxx.com'
 })
 ```
-2. payment token creation mode
-2.1 visa/master card-form
+
+### 2. payment token creation mode
+
+#### 2.1 visa/master card-form
+
 ```js
 //2.1 credit card form
 // initialize qfpay object
@@ -119,13 +128,17 @@ const response = qfpay.createToken({
 })
 ```
 
-#### Instruction Manual
-```Prerequisites:
+## Instruction Manual
+
+```plaintext
+Prerequisites:
 import SDK library (qfpay.js) according to your environment and purpose
 ```
 
-##### global object QFPay and related APIs
-1. QFpay.config(params)
+## global object QFPay and related APIs
+
+### 1. QFpay.config(params)
+
 ```js
 /**
  * parameters: optional, Object, default valie: {region: 'hk', env: 'prod'},
@@ -142,7 +155,9 @@ import SDK library (qfpay.js) according to your environment and purpose
  */
 const qfpay = QFpay.config()
 ```
-2. qfpay.retrievePaymentIntent()
+
+### 2. qfpay.retrievePaymentIntent()
+
 ```js
 /**
  * parameters: N/A
@@ -152,7 +167,8 @@ const qfpay = QFpay.config()
 const intentResponse = qfpay.retrievePaymentIntent()
 ```
 
-3. qfpay.element(appearance)
+### 3. qfpay.element(appearance)
+
 ```js
 /**
  * parameters: optional, Object, {theme: string, variables: Object, billingAddressDisplay: Object}
@@ -187,7 +203,8 @@ const intentResponse = qfpay.retrievePaymentIntent()
 const elements = qfpay.element()
 ```
 
-4. qfpay.payment()
+### 4. qfpay.payment()
+
 ```js
 /**
  * parameters: N/A
@@ -198,8 +215,8 @@ const qfpay = QFpay.config()
 const payment = qfpay.payment()
 ```
 
+### 5. qfpay.confirmPayment()
 
-5. qfpay.confirmPayment()
 ```js
 /**
  * parameters：optional, Object type, {return_url: 'https://xxx.xxx.xxx'}, the page will be redirect to specific page mentioned in return_url parameter after payment completed. Otherwise, will stay in the same page
@@ -219,7 +236,9 @@ const paymentResponse = qfpay.confirmPayment({
   return_url: 'https://www.baidu.com'
 })
 ```
-6. qfpay.confirmWalletPayment()
+
+### 6. qfpay.confirmWalletPayment()
+
 ```js
 /**
  * parameters：optional, Object type, {return_url: 'https://xxx.xxx.xxx'}, the page will be redirect to specific page mentioned in return_url parameter after payment completed. Otherwise, will stay in the same page
@@ -235,7 +254,8 @@ const paymentResponse = qfpay.confirmPayment({
 })
 ```
 
-7. qfpay.token()
+### 7. qfpay.token()
+
 ```js
 /**
  * parameters: N/A
@@ -246,7 +266,8 @@ const qfpay = QFpay.config()
 const payment = qfpay.token()
 ```
 
-8. qfpay.retrieveTokenIntent()
+### 8. qfpay.retrieveTokenIntent()
+
 ```js
 /**
  * parameters: N/A
@@ -258,7 +279,8 @@ const payment = qfpay.token()
 const intentResponse = qfpay.retrievePaymentIntent()
 ```
 
-9. qfpay.createToken()
+### 9. qfpay.createToken()
+
 ```js
 /**
  * 参数：optional，Object，{return_url: 'https://xxx.xxx.xxx'},the page will be redirect to specific page mentioned in return_url parameter after action completed. Otherwise, will stay in the same page
@@ -279,13 +301,15 @@ const intentResponse = qfpay.retrievePaymentIntent()
  */
 ```
 
+## Payment object and APIs
 
-##### payment object and APIs
 ```js
 const qfpay = QFpay.config()
 const payment = qfpay.payment()
 ```
-1. payment.pay(params1, params2)
+
+### 1. payment.pay(params1, params2)
+
 ```js
 /**
  * parameters：	
@@ -309,7 +333,9 @@ payment.pay({
   paysource: 'payment_element'
 }, 'SDF8980SFFSDF890SDF')
 ```
-2. payment.walletPay(params1, params2)
+
+### 2. payment.walletPay(params1, params2)
+
 ```js
 /**
  * parameters:
@@ -354,7 +380,8 @@ payment.walletPay({
 }, 'SDF8980SFFSDF890SDF')
 ```
 
-3. payment.inquiry(params1, params2)
+### 3. payment.inquiry(params1, params2)
+
 ```js
 /**
  * parameters: 
@@ -372,12 +399,15 @@ payment.walletPay({
 const inquiryResponse = payment.inquiry({}, 'SDF8980SFFSDF890SDF')
 ```
 
-##### token object and APIs
+## token object and APIs
+
 ```js
 const qfpay = QFpay.config()
 const token = qfpay.token()
 ```
-1. token.intent(params1, params2)
+
+### 1. token.intent(params1, params2)
+
 ```js
 /**
  * parameters：
@@ -392,13 +422,15 @@ token.intent({
 }, 'SDF8980SFFSDF890SDF')
 ```
 
-##### element object and APIs
+## Element object and APIs
+
 ```js
 const qfpay = QFpay.config()
 const elements = qfpay.element()
 ```
 
-1. elements.create(params1, params2, params3) --- support Visa/Mastercard card payment only
+### 1. elements.create(params1, params2, params3) --- support Visa/Mastercard card payment only
+
 ```js
 /**
  * parameters：
@@ -411,7 +443,8 @@ const elements = qfpay.element()
 elements.create("#container")
 ```
 
-2. elements.createEnhance(params) ---  support Visa Mastercard card payment, ApplePay payment,  token creation,  token creation in payment mode
+### 2. elements.createEnhance(params) ---  support Visa Mastercard card payment, ApplePay payment,  token creation,  token creation in payment mode
+
 ```js
 /**
  * parameters：params: Object, {selector: string, email: boolean, tab: boolean, element: string}
@@ -432,7 +465,8 @@ elements.createEnhance({
 })
 ```
 
-##### retrieve selected wallet type
+## Retrieve selected wallet type
+
 ```js
 window.addEventListener('walletType', ({detail}) => {
   /**

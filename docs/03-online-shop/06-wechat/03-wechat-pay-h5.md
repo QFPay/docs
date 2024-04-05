@@ -6,16 +6,20 @@ import Link from '@docusaurus/Link';
 
 <Link href="/img/wechat-h5.png" target="_blank">![WeChat H5 process-flow](@site/static/img/wechat-h5.png)</Link>
 
-### HTTP Request
+## HTTP Request
 
-`POST ../trade/v1/payment` `PayType: 800212`
+**Endpoint** : `/trade/v1/payment`
 
-### Request Parameters
+**Method** : `POST`
 
-|Parameter name|  Attribute | Mandatory| Type | Description |
-|:----    |:---|:----- |-----   |-----   |
-|Public payment parameters |—  |— |—  | Refer to the general documentation about transactions |
-|Extended Customer Info|`extend_info`|Yes|Object||
+**PayType** : `800212`
+
+## Request Parameters
+
+|  Attribute | Mandatory| Type | Description |
+|:---|:----- |-----   |-----   |
+|Public payment parameters |—  |—   | Refer to the general documentation about transactions |
+|`extend_info`|Yes|Object||
 
 ```js
 extend_info:
@@ -31,9 +35,9 @@ extend_info:
 }
 ```
 
-<br/> **`extend_info:`**  <br/>
+### extend_info
 
-|Attribute|  Attribute | Attribute | Mandatory| Type | Description |
+|Attribute| Secondary Attribute | Third Attribute | Mandatory| Type | Description |
 |:----    |:---|:----- |-----   |-----  |-----   |
 |`scene_info`|||Yes|Object||
 ||`h5_info`||Yes|Object||
@@ -42,20 +46,25 @@ extend_info:
 |||`wap_name`|Yes|String|mobile website name|
 |`spbill_create_ip`|||Yes|String|IP address of user|
 
-### Response Parameters
+## Response Parameters
 
-|Attribute| Secondary parameter code| Parameter Type| Parameter name|Description|
-|:----    |:---|:----- |-----   |----   |
-|Public response parameters    |—  |— |—  | — |
-|Payment URL|`pay_url`|Yes|String||
+|Attribute| Secondary Attribute| Type|Description|
+|:----    |:---|:----- |----   |
+|Public response parameters    |—  |— | — |
+|`pay_url`|Yes|String||
 
 :::warning
-In normal process after payment, the user will return to the page where payment is initiated. If you want user to return to the specified page, you can insert redirect_url parameter to returned payment URL. For example, if you want user to jump to https://www.wechatpay.com.cn it can be processed as follows: <br/>
+In normal process after payment, the user will return to the page where payment is initiated. If you want user to return to the specified page, you can insert redirect_url parameter to returned payment URL. For example, if you want user to jump to https://www.wechatpay.com.cn it can be processed as follows:
 :::
-**pay_url** <br/>
 
-https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx20161110163838f231619da20804912345&package=1037687096 <br/>
+### pay_url
 
-**Payment URL after redirect_url inserted** <br/>
+```plaintext
+https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx20161110163838f231619da20804912345&package=1037687096
+```
 
+### Payment URL after redirect_url inserted
+
+```plaintext
 https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx20161110163838f231619da20804912345&package=1037687096&redirect_url=https%3A%2F%2Fwww.wechatpay.com.cn
+```

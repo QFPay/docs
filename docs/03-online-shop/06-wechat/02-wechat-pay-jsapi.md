@@ -10,27 +10,27 @@ import Link from '@docusaurus/Link';
 Official account payments must be initiated from the WeChat in-app browser. They cannot be initiated from another browser, such as Chrome or Safari.
 :::
 
-**JSAPI Payment Types**
+## JSAPI Payment Types
 
 Note: Merchants in Canada, please refer to [this](../alipay/alipay-online-payments#alipay-online-payments) section for payment request and response parameters with `pay_type` 800207. <br/>
 
-There are two different methods how JSAPI payments can be implemented. 
+There are two different methods how JSAPI payments can be implemented.
 
 <br/>
 
-**1. JSAPI with Real Name Authenticated Official Accounts**
+### 1. JSAPI with Real Name Authenticated Official Accounts
 
 For this kind of integration, merchants shall register their own official account with WeChat and we will bind the official account to the merchant's QF Pay payment account. In this case merchants can create and publish their own content, access customer information and collect their own followers. When choosing this implementation method, merchants have to acquire the `oauth_code`, user `openid` and trigger WeChat Pay via the <Link href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_1">official WeChat platform</Link>. Merchants only need to refer to the QF Pay [transaction enquiry API endpoint](../../common-api/transaction-enquiry).
 
 **Step 1:** WeChat official account payments are available to developers after they completed real name authentication on the WeChat official account platform. Once authentication has been completed developers can obtain the openid parameter of the certified public account. Please refer to the official [WeChat documentation](https://developers.weixin.qq.com/doc/offiaccount/en/Getting_Started/Overview.html) for more information.
 
-**Step 2:** Request the QFPAY order payment API `/trade/v1/payment` by providing the appointed `openid` and return the `pay_params` data, for further instructions please refer to the [API Endpoint for Payments](../../preparation/paycode#api-endpoint-for-payments). 
+**Step 2:** Request the QFPAY order payment API `/trade/v1/payment` by providing the appointed `openid` and return the `pay_params` data, for further instructions please refer to the [API Endpoint for Payments](../../preparation/paycode#api-endpoint-for-payments).
 
 **Step 3:** Open JSAPI Payment Authorization Directory at the time of the merchant certification application to initiate payments. For more details please refer to the [official WeChat Pay documentation](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6).
 
 <br/>
 
-**2. JSAPI without a Real Name Registered Official Account**
+### 1. JSAPI without a Real Name Registered Official Account**
 
 For this kind of payment, merchants can build upon QF Pay's official account. This integration is only applicable to merchants who are using the indirect settlement option (i.e. settlement is provided by QFPay). For this implementation, merchants shall use QFPay's API to get the `oauth_code`, user `openid` and trigger WeChat Pay as described below.
 
@@ -92,18 +92,20 @@ def get_out_code():
 
 ### HTTP Request
 
-`GET ../tool/v1/get_weixin_oauth_code`
+**Endpoint** : `/tool/v1/get_weixin_oauth_code`
 
-Both the `app_code` and `sign` have to be submitted as parameters instead of in the http header. The URL request has to be send in the WeChat environment. Everytime a payment is initiated the WeChat `oauth_code` and `openid` have to be obtained again.
+**Method** : `GET`
+
+**Description** : Both the `app_code` and `sign` have to be submitted as parameters instead of in the http header. The URL request has to be send in the WeChat environment. Everytime a payment is initiated the WeChat `oauth_code` and `openid` have to be obtained again.
 
 ### Request Parameters
 
-|Parameter name| Attribute | Mandatory | Type | Description |
-|:----    |:---|:----- |-----   |-----   |
-|Developer ID | `app_code` | Yes | String(32) | The app_code is assigned to partners by QFPay  |
-|Callback URL |`redirect_uri` | Yes |  String(512) | After the request has been successful the user will be redirected to the callback address  |
-|Merchant ID | `mchid` | No | String(16) | The `mchid` is a unique identification for every merchant assigned by QFPay  |
-| Signature| `sign`  | Yes | String | Signature obtained according to the unified framework |
+|Attribute | Mandatory | Type | Description |
+|:---|:----- |-----   |-----   |
+|`app_code` | Yes | String(32) | Developer ID, the app_code is assigned to partners by QFPay  |
+|`redirect_uri` | Yes |  String(512) | Callback URL, after the request has been successful the user will be redirected to the callback address  |
+| `mchid` | No | String(16) | Merchant ID, the `mchid` is a unique identification for every merchant assigned by QFPay  |
+| `sign`  | Yes | String | Signature obtained according to the unified framework |
 
 ## GET openid
 
@@ -148,27 +150,27 @@ def get_open_id(data):
 
 ### HTTP Request
 
-`GET ../tool/v1/get_weixin_openid`
+**Endpoint** : `/tool/v1/get_weixin_openid`
+
+**Method** : `GET`
 
 ### Request Parameters
 
-|Attribute|Secondary parameter code | Mandatory| Type | Description |
-|:-----  |:-----|----- |----- |----- |
-|WeChat oauth_code|  `code` |Yes  | String | The code is returned by the [GET oauth_code request](#get-oauth_code). It is unique and can only be used once. |
-|Merchant ID|  `mchid`  |No  | String(16) | The `mchid` is a unique identification for every merchant assigned by QFPay |
-
+|Attribute| Mandatory| Type | Description |
+|:-----  |:-----|----- |----- |
+|`code` |Yes  | String |WeChat oauth_code, the code is returned by the [GET oauth_code request](#get-oauth_code). It is unique and can only be used once. |
+|`mchid`  |No  | String(16) | Merchant ID, the `mchid` is a unique identification for every merchant assigned by QFPay |
 
 ### Response Parameters
 
-|Attribute|Secondary parameter code | Type |Parameter name | Description |
-|:-----  |:-----|----- |----- |----- |
-|`openid`|   | String(64)  | WeChat openid | Every WeChat user is assigned a unique openid |
+|Attribute| Type | Description |
+|:-----  |:-----|----- |
+|`openid`|String(64)  | WeChat openid, every WeChat user is assigned a unique openid |
 
-
-## POST Payments 
+## POST Payments
 
 ```plaintext
-For code instructions select Python with the tabs above.
+For code instructions select Python with the tabs below.
 ```
 
 ```python
@@ -237,38 +239,45 @@ Optionally merchants can activate real-name authentication with WeChat. Currentl
 
 ### HTTP Request
 
-`POST ../trade/v1/payment` `PayType: 800207`
+**Endpoint** : `/trade/v1/payment`
+
+**Method** : `POST`
+
+**PayType** : `800207`
 
 ### Request Parameters
 
-|Parameter name|  Attribute | Mandatory| Type | Description |
-|:----    |:---|:----- |-----   |-----   |
-|Public payment parameters |—  |— |—  | Refer to the general documentation about transactions |
-|WeChat authorization code   |`sub_openid`|Yes  |String    |WeChat OpenID. Refer to the **GET openid** documentation   |
-|Designated payment method    |`limit_pay`|No|String   |Used to limit credit card transactions   |
-|Extended Customer Info    |`extend_info`|No|Object   | Real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'  |
+| Attribute | Mandatory| Type | Description |
+|:----  |:----- |-----   |-----   |
+|Public payment parameters |—  |—  | Refer to the general documentation about transactions |
+|`sub_openid`|Yes  |String    |WeChat authorization code. Refer to the **GET openid** documentation   |
+|`limit_pay`|No|String   |Designated payment method, used to limit credit card transactions   |
+|`extend_info`|No|Object   | Extended Customer Info, real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'  |
 
 ### Response Parameters
 
-|Attribute| Secondary parameter code | Type | Parameter name | Description |
-|:----    |:---|:----- |-----   |-----   |
-|`pay_params`|`appId`   |String(16)  |Public number id   | The App ID is provided by Tencent once developers register their Mini Program on the WeChat developer portal  |
-|— |`timeStamp`  |String(32) |Timestamp  | Current time |
-|— |`nonceStr`  |String(32) |Random string  | Random string with no more than 32 bits |
-|— |`package`   |String(128)|Transaction details  | The value of the `prepay_id` parameter returned by the interface has the format: prepay_id=**|
-|— |`signType`   |String(32) |Signature method  | Signature method, default is MD5|
-|— |`paySign`    |String(64) |Signature   | Signature method, default is MD5|
-|— |Public response parameters    |— |—   | —|
-|`txcurrcd`  | |  String(3) |  | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
+|Attribute| Secondary Attribute | Type | Description |
+|:----    |:---|:----- |-----   |
+|`pay_params`|`appId`   |String(16)| Public number id, the App ID is provided by Tencent once developers register their Mini Program on the WeChat developer portal  |
+|— |`timeStamp`  |String(32) |Current time |
+|— |`nonceStr`  |String(32) | Random string with no more than 32 bits |
+|— |`package`   |String(128)| Transaction details, the value of the `prepay_id` parameter returned by the interface has the format: prepay_id=**|
+|— |`signType`   |String(32) |Signature method, default is MD5|
+|— |`paySign`    |String(64) |Signature method, default is MD5|
+|— |Public response parameters    |— |—   |
+|`txcurrcd`  | |  String(3) |Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
 
 ## GET WeChat Pay Data
 
-:::note Directly submit the related parameters to the interface, there is no need to define `X-QF-APPCODE` or `X-QF-SIGN` in the HTTP header during this step.
+:::note
+Directly submit the related parameters to the interface, there is no need to define `X-QF-APPCODE` or `X-QF-SIGN` in the HTTP header during this step.
 :::
 
 ### HTTP Request
 
-`GET https://o2.qfpay.com/q/direct`
+**Endpoint** : `https://o2.qfpay.com/q/direct`
+
+**Method** : `GET`
 
 ### Request Parameters
 

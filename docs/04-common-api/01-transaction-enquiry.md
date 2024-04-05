@@ -3,16 +3,25 @@ import TabItem from '@theme/TabItem';
 
 # Transaction Enquiry
 
-test
-:::warning 
+:::warning
 If the `mchid` is provided, it is mandatory to submit the `mchid` when calling the API (unless otherwise specified). On the contrary, if `mchid` is not provided, merchants shall not pass the `mchid` field in the API request.
 :::
 
 ## API Endpoint for Transaction Enquiry
 
+After making a payment, refund or cancellation request, the merchant can use the query interface to obtain the transaction status.
+
+The merchant can use the query interface to enquire transaction status of one or multiple transactions. In case the interface does not return `syssn` in time, use `out_trade_no` as a condition to query the transaction status.
+
+If merchants would like to query transactions in a month, they can provide `start_time` and `end_time` then records will be filtered according to the system transaction time `sysdtm`. The interval must be within one calendar month. Otherwise, it is recommended to include the `syssn` parameter as a query condition.
+
+When the query transaction is a refund then an additional parameter `origssn` will be returned. The `origssn` shows the QFPay transaction number of the original transaction that has been refunded.
+
 ### HTTP Request
 
-`POST ../trade/v1/query`
+**Endpoint** : `/trade/v1/query`
+
+**Method** : `POST`
 
 ```plaintext
 Request Header:
@@ -28,7 +37,9 @@ Request Body:
 {
   mchid=ZaMVg*****&syssn=20191227000200020061752831&start_time=2019-12-27 00:00:00&end_time=2019-12-27 23:59:59
 }
+
 ```
+
 <Tabs>
 <TabItem value="python" label="Python">
 
@@ -287,79 +298,64 @@ ob_end_flush();
 }
 ```
 
-
-After making a payment, refund or cancellation request, the merchant can use the query interface to obtain the transaction status.
-
-The merchant can use the query interface to enquire transaction status of one or multiple transactions. In case the interface does not return `syssn` in time, use `out_trade_no` as a condition to query the transaction status.
-
-If merchants would like to query transactions in a month, they can provide `start_time` and `end_time` then records will be filtered according to the system transaction time `sysdtm`. The interval must be within one calendar month. Otherwise, it is recommended to include the `syssn` parameter as a query condition.
-
-When the query transaction is a refund then an additional parameter `origssn` will be returned. The `origssn` shows the QFPay transaction number of the original transaction that has been refunded.   
-
-
 ### Request Parameters
 
-|Parameter name| Attribute|Mandatory|Type|Description|
-|----    |---|----- |-----   |-----   |
-|Merchant number | ` mchid ` | For Agents |String(16) | If MCHID is given, it is mandatory to provide the `mchid.`On the contrary, if ` mchid` is not provided, merchants shall not pass the `mchid` field in the API request.|
-|QFPay transaction number | ` syssn ` |No |String(128) | Multiple entries are seperated by commas   |
-|API order number | ` out_trade_no ` |No |String(128) | External transaction number / Merchant platform transaction number, multiple entries are seperated by commas   |
-|Payment type | ` pay_type ` |No |String(6) | Multiple entries are seperated by commas   |
-|Transaction return code | ` respcd ` |No |String(4) | Returns all orders with return code status by default   |
-|Starting time | ` start_time ` |No |String(20) | It is ignored when `syssn` or `out_trade_number` is provided. The default date time is the start of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
-|End Time | ` end_time ` |No | String(20) | It is ignored when `syssn` or `out_trade_number` is provided. The default date time is the end of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
-|Time zone | ` txzone ` |No | String(5) | Used to record the local order time. The default is Beijing time UTC+8 (+0800)   |
-|Number of pages | ` page `   |No |  Int(8) | Default value is 1   |
-|Number of items displayed per page | ` page_size ` |No |  Int(8) | By default 10 transactions will be displayed. The maximum `page_size` value is 100  |
-
+|Attribute|Mandatory|Type|Description|
+|---- |----- |-----   |-----   |
+|` mchid ` | - |String(16) | Merchant number. If MCHID is given, it is mandatory to provide the `mchid.`On the contrary, if `mchid` is not provided, merchants shall not pass the `mchid` field in the API request.|
+| ` syssn ` |No |String(128) |QFPay transaction number. Multiple entries are seperated by commas|
+| ` out_trade_no ` |No |String(128) | API order number, external transaction number / Merchant platform transaction number, multiple entries are seperated by commas   |
+| ` pay_type ` |No |String(6) | Payment type, multiple entries are seperated by commas   |
+| ` respcd ` |No |String(4) | Transaction return code, returns all orders with return code status by default   |
+| ` start_time ` |No |String(20) | Starting time, it is ignored when `syssn` or `out_trade_number` is provided. The default date time is the start of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
+| ` end_time ` |No | String(20) | End Time, it is ignored when `syssn` or `out_trade_number` is provided. The default date time is the end of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
+|` txzone ` |No | String(5) | Time zone, used to record the local order time. The default is Beijing time UTC+8 (+0800)   |
+|` page `   |No |  Int(8) | Number of pages, default value is 1   |
+|` page_size ` |No |  Int(8) | Number of items displayed per page, by default 10 transactions will be displayed. The maximum `page_size` value is 100  |
 
 ### Response Parameters
 
+|Attribute|Type|Description|
+|------|------  |------   |
+| `page`  | Int(8)  | Page number |
+| `resperr` | String(128) |Request result description|
+| `page_size` | Int(8)  | Display number of items per page |
+| `respcd`   | String(4)  |Request result code, 0000 - Interface call succeeded  |
+| `data` | Object | Query result, in JSON format |
+| `syssn`  |String(40) | QFPay transaction number |
+| `out_trade_no` | String(128) | API order number, external transaction number / Merchant platform transaction number | 
+| `chnlsn` | String | Wallet/Channel transaction number  |
+| `goods_name` | String(64) | Product name, Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters. |
+| `txcurrcd` | String(3) | Transaction currency, view the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies |
+| `origssn` | String(40) | Original transaction number, refers to the original QFPay transaction number. This parameter is only available when the `syssn` of a refund is queued |
+| `pay_type` | String(6) | Payment type, please refer to the section [Payment Codes](../preparation/paycode#payment-codes) for a complete list of payment types |
+| `order_type` |  String(16) | Order type. Payment: Payment transaction Refund: Refund transaction |
+| `txdtm` | String(20) | Request transaction time provided by merchant in payment and refund request. Format: YYYY-MM-DD hh:mm:ss |
+| `txamt` | Int(11) |  Amount of the transaction. Unit in cents (i.e. 100 = $1) |
+| `sysdtm` | String(20) | System transaction time. Format: YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. |
+| `cancel` | String(1) | Cancellation or refund indicator. Transaction cancel status: <br/> 0 = Not cancelled <br/> 1 = For CPM: Transaction reversed or refunded successfully <br/> 2 = For MPM: Transaction canceled successfully <br/> 3 = Transaction refunded <br/> 4 = Alipay Preauth order finished <br/> 5 = Transaction partially refunded |
+| `respcd` | String(4) | Payment status, 0000 = transaction succeeded <br/> 1143/1145 = Please wait to evaluate the transaction status. All other response codes indicate transaction failure |
+| `errmsg` | String(128) | Payment status message |
+| `exchange_rate`  | String | Applied currency conversion exchange rate |
+| `cash_fee`  | String | Actual payment amount by user = transaction amount - discounts |
+| `cash_fee_type` | String | Actual payment currency e.g. CNY |
+| `cash_refund_fee` | String | Actual refund amount |
+| `cash_refund_fee_type` | String | Actual refund currency e.g. CNY |
 
-|Parameter name|Attribute|Type|Description|
-|----    |------|------  |------   |
-| Page number| `page`  | Int(8)  |  |
-| Request result description| `resperr` | String(128) ||
-| Display number of items per page| `page_size` | Int(8)  |  |
-| Request result code | `respcd`   | String(4)  |0000 - Interface call succeeded  |
-| Query result | `data` | Object | JSON format |
-| QFPay transaction number   |  `syssn`  |String(40) |  |
-| API order number | `out_trade_no` | String(128) | External transaction number / Merchant platform transaction number | 
-| Wallet/Channel transaction number | `chnlsn` | String |  | 
-| Product name | `goods_name` | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters. |
-| Transaction currency | `txcurrcd` | String(3) | View the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies |
-| Original transaction number | `origssn` | String(40) | Refers to the original QFPay transaction number. This parameter is only available when the `syssn` of a refund is queued |
-| Payment type | `pay_type` | String(6) | Please refer to the section [Payment Codes](../preparation/paycode#payment-codes) for a complete list of payment types |
-| Order type |  `order_type` |  String(16) | Payment: Payment transaction Refund: Refund transaction |
-| Request transaction time | `txdtm` | String(20) | Request transaction time provided by merchant in payment and refund request. Format: YYYY-MM-DD hh:mm:ss |
-| Transaction amount | `txamt` | Int(11) |  Amount of the transaction. Unit in cents (i.e. 100 = $1) |
-| System transaction time | `sysdtm` | String(20) |  Format: YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. |
-| Cancellation or refund indicator | `cancel` | String(1) |  Transaction cancel status: <br/> 0 = Not cancelled <br/> 1 = For CPM: Transaction reversed or refunded successfully <br/> 2 = For MPM: Transaction canceled successfully <br/> 3 = Transaction refunded <br/> 4 = Alipay Preauth order finished <br/> 5 = Transaction partially refunded |
-| Payment status |  `respcd` | String(4) | 0000 = transaction succeeded <br/> 1143/1145 = Please wait to evaluate the transaction status. All other response codes indicate transaction failure |
-| Payment status message | `errmsg` | String(128) | Payment result description |
-| Currency exchange rate |`exchange_rate`  | String | Applied currency conversion exchange rate |
-| Net payment amount |`cash_fee`  | String | Actual payment amount by user = transaction amount - discounts |
-| Payment currency |`cash_fee_type` | String | Actual payment currency e.g. CNY |
-| Net refund amount | `cash_refund_fee` | String | Actual refund amount |
-| Refund currency | `cash_refund_fee_type` | String | Actual refund currency e.g. CNY |
-
-
-
-## Account Statement 
+## Account Statement
 
 The clearing statement for a particular payment channel is downloaded regularly. Additional requests can only be made in the production environment. The system response is in form of a compressed zip file. Data is based on the selected payment channel and contains all merchants therefore the `mchid` cannot be passed in as a request parameter.
-
 
 ## API Endpoint for Account Statement
 
 ### HTTP Request
 
-`GET ../download/v1/trade_bill`
+**Endpoint** : `/download/v1/trade_bill`
+
+**Method** : `GET`
 
 ### Request Parameter
 
-|Request code | Mandatory | Type | Description
+|Attribute | Mandatory | Type | Description|
 |----    |---|----- |-----   |
-| `trade_date` | Yes | String(10) | Get a specific account statement for the selected date. Example: 2017-10-17
-
-
+| `trade_date` | Yes | String(10) | Get a specific account statement for the selected date. Example: 2017-10-17|

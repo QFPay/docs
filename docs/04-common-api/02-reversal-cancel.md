@@ -273,25 +273,24 @@ ob_end_flush();
 }
 ```
 
+## HTTP Request for Alipay CPM & MPM and WeChat Pay CPM
 
-### HTTP Request for Alipay CPM & MPM
-`GET ..trade/v1/reversal`
+**Endpoint** : `/trade/v1/reversal`
 
-### HTTP Request for WeChat Pay CPM
-`GET ..trade/v1/reversal`
+**Method** : `GET`
 
-### HTTP Request for WeChat Pay MPM
-`GET ..trade/v1/close`
+## HTTP Request for WeChat Pay MPM and other qualified Wallets
 
-### HTTP Request for other qualified Wallets*
-`GET ..trade/v1/close`
+**Endpoint** : `/trade/v1/close`
+
+**Method** : `GET`
 
 *If you would like to use this endpoint on a wallet other than Alipay & Wechat Pay please contact us for instructions.
 
 ### Request Parameters
 
-Parameter | Mandatory | Type | Description  
---------- | ------- | --------- | ------- 
+Attribute | Mandatory | Type | Description  
+--------- | ------- | --------- | -------
 `mchid` | No | String(16) | Merchant ID allocated by QFPay
 `syssn` | Yes* | String(40) | QFPay transaction number, returned by the system once payment is completed
 `out_trade_no` | Yes* | String(128) | External transaction number
@@ -301,11 +300,10 @@ Parameter | Mandatory | Type | Description
 
 *Either the `syssn` or `out_trade_no` must be provided.
 
-
 ### Response Parameters
 
-Parameter | Type | Description  
---------- | --------- | ------- 
+Attribute | Type | Description  
+--------- | --------- | -------
 `orig_syssn` | String(40) | Refers to the original QFPay transaction number
 `syssn` | String(40) | QFPay transaction number of the cancel/ reversal
 `out_trade_no` | String(128) | External transaction number

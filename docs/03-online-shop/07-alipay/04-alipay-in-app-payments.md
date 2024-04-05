@@ -10,13 +10,20 @@ To download Alipay Oversea SDK , please refer to this [link](https://global.alip
 To download Alipay HK SDK, please refer to this [link](https://global.alipay.com./ac/app_hk/download). <br/>
 To know how to trigger Alipay HK SDK , please refer to this [link](https://global.alipay.com./ac/hkapi/securitypay_pay).
 
-### HTTP Request
+## HTTP Request
 
-`POST ../trade/v1/payment` <br/>
-`PayType: 801110 Oversea Merchants` <br/>
-`PayType: 801510 Hong Kong Merchants`
+**Endpoint** : `/trade/v1/payment`
 
-### Request Parameters
+**Method** : `POST`
+
+**PayType** :
+
+```plaintext
+801110: Oversea Merchants
+801510: Hong Kong Merchants
+```
+
+## Request Parameters
 
 ```plaintext
 
@@ -85,36 +92,36 @@ _input_charset="UTF-8"&body="goods_info"&currency="HKD"&forex_biz="FP"&it_b_pay=
 
 ```
 
-|Parameter name | Attribute  |Mandatory | Type | Description |
-|:----    |:---|:----- |-----   |----   |
-|Public payment parameters    |—|— |—   |—   |
-|Product description    |`goods_info`|No | String  | Must not contain special characters   |
-|Payment mark    |`pay_tag`|No | String(16)  | The default value is: ALIPAYHK<br/>Alipay Continental version: ALIPAYCN<br/>801103 - Alipay overseas online refund (QF_BUSICD_ALIPAY_ONLINE_REFUND)<br/>801104 - Alipay overseas online inquiry (QF_BUSICD_ALIPAY_ONLINE_QUERY)<br/>801110 - Alipay overseas online APP payment (QF_BUSICD_ALIPAY_ONLINE_APP)<br/>801501 - Alipay Hong Kong pc scan code<br/>801512 - Alipay Hong Kong Wap payment<br/>801510 - Alipay Hong Kong APP payment  |
-Order expiration time | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong Wap payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas Wap payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP
+| Attribute  |Mandatory | Type | Description |
+|:---|:----- |-----   |----   |
+|Public payment parameters    |—|— |—   |
+|`goods_info`|No | String  | Product description, must not contain special characters |
+|`pay_tag`|No | String(16)  | Payment mark, the default value is: ALIPAYHK<br/>Alipay Continental version: ALIPAYCN<br/>801103 - Alipay overseas online refund (QF_BUSICD_ALIPAY_ONLINE_REFUND)<br/>801104 - Alipay overseas online inquiry (QF_BUSICD_ALIPAY_ONLINE_QUERY)<br/>801110 - Alipay overseas online APP payment (QF_BUSICD_ALIPAY_ONLINE_APP)<br/>801501 - Alipay Hong Kong pc scan code<br/>801512 - Alipay Hong Kong Wap payment<br/>801510 - Alipay Hong Kong APP payment  |
+| `expired_time` | No<br/> (MPM only) | String(3)  | Order expiration time, QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong Wap payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas Wap payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP|
 
-### Response Parameters
+## Response Parameters
 
-|Attribute | Secondary parameter code  | Parameter name |
-|:----    |:---|:----- |
-| `pay_params`   | `partner`         |Partner |
-|              | `seller_id`                    |  Unique Alipay user number referencing the Alipay payment account                        |
-|              | `subject`                      | Product name / transaction number / order number / order keyword, etc.                    |
-|              | `body`                         | A specific description of a transaction. If it refers to a basket of products, please accumulate the product description string in the body. |
-|              | `total_fee`                    | Total amount                                                  |
-|              | `notify_url`                   | Notification address                                       |
-|              | `service`                      | Service                                                          |
-|              | `cardcd`                       | Card number                                   |
-|              | `payment_type`                 | Payment type                                  |
-|              | `\_input_charset`              | Encoding format                                     |
-|              | `it_b_pay`                     | Custom timeout parameter                                |
-|              | `return_url`                   | Redirect URL                                   |
-|              | `payment_inst`                 | Payment institution                                    |
-|              | `currency`                     | Currency                                                       |
-|              | `product_code`                 | Product code                                             |
-|              | `sign`                         | Required or not                                                 |
-|              | `sign_type`                    | Signature type                                                   |
-|              | `secondary_merchant_id`        | Secondary merchant identification            |
-|              | `secondary_merchant_name`      | Secondary business name                         |
-|              | `secondary_merchant_industry`  | Secondary merchant industry                   |
-| `chnlsn`       |                              | Channel coding                                                    |
-| Public response parameters| —                            | —                                              |
+|  Attribute | Secondary Attribute            | Description |
+|:---------- |:-------------------------------|:----------- |
+|`pay_params`| `partner`                      | Partner |
+|            | `seller_id`                    | Unique Alipay user number referencing the Alipay payment account |
+|            | `subject`                      | Product name / transaction number / order number / order keyword, etc. |
+|            | `body`                         | A specific description of a transaction. If it refers to a basket of products, please accumulate the product description string in the body. |
+|            | `total_fee`                    | Total amount |
+|            | `notify_url`                   | Notification address |
+|            | `service`                      | Service |
+|            | `cardcd`                       | Card number |
+|            | `payment_type`                 | Payment type |
+|            | `\_input_charset`              | Encoding format |
+|            | `it_b_pay`                     | Custom timeout parameter |
+|            | `return_url`                   | Redirect URL |
+|            | `payment_inst`                 | Payment institution |
+|            | `currency`                     | Currency |
+|            | `product_code`                 | Product code |
+|            | `sign`                         | Required or not |
+|            | `sign_type`                    | Signature type |
+|            | `secondary_merchant_id`        | Secondary merchant identification |
+|            | `secondary_merchant_name`      | Secondary business name |
+|            | `secondary_merchant_industry`  | Secondary merchant industry |
+| `chnlsn`   |                                | Channel coding |
+| Public response parameters |     —          | — |

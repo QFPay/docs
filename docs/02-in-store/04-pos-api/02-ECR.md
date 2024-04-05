@@ -346,7 +346,7 @@ In order to avoid the situation that a data packet is split into multiple data b
 
 After the receiver receives the packet, it will check whether the first two bytes of the packet are the start character (0x2f6e). If not, an error packet (0x31) will be responded. Otherwise, continue to traverse the subsequent bytes until the end character.
 
-:::danger
+:::warning
 > 0x2f6e is the hexadecimal representation of `/n` (string, NOT the carriage return) in ASCII encoding
 :::
 

@@ -14,7 +14,7 @@ import Link from '@docusaurus/Link';
 
 ## API环境
 
-:::danger
+:::warning
 请记住立即通过商户管理系统、QFPay APP或开放API对测试交易进行退款。
 :::
 

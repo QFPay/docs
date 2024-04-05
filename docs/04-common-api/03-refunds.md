@@ -277,25 +277,23 @@ ob_end_flush();
 
 ### HTTP Request
 
-`POST ../trade/v1/refund`
+**Endpoint** : `/trade/v1/refund`
 
-Merchants can use the refund interface to refund transactions. The merchant account must have a sufficient transaction amount on the same trading day in order to refund transactions. The maximum refund amount for a transaction must not exceed to original payment amount. Unless otherwise specified, once a refund request is submitted and accepted, it is not reversible. The refund capability and the maximum time period for refund varies across payment channels. Please contact your QFPay support representative for more information.
+**Method** : `POST`
 
-
+**Description** : Merchants can use the refund interface to refund transactions. The merchant account must have a sufficient transaction amount on the same trading day in order to refund transactions. The maximum refund amount for a transaction must not exceed to original payment amount. Unless otherwise specified, once a refund request is submitted and accepted, it is not reversible. The refund capability and the maximum time period for refund varies across payment channels. Please contact your QFPay support representative for more information.
 
 ### Request Parameters
 
-|Parameter name|Attribute|Mandatory|Type|Description|
-|----    |---|----- |-----   |-----   |
-|QF Pay transaction number | ` syssn ` |Yes |String(128)  | Original transaction ID `syssn`  that is supposed to be refunded|
-|API order number | ` out_trade_no `  |Yes |String(128)  | External refund transaction number / Merchant platform refund transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.|
-|Refund amount | ` txamt `   |Yes |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1) <br/> Required for both full refund and partial refund. Some payment channel may not support partial refund.|
-|Transaction request time | ` txdtm `   |Yes |String(20) |Format: YYYY-MM-DD hh:mm:ss|
-|Merchant ID | ` mchid `  |No |String(16)  | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID. On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. |
-|Transaction time | ` txzone `   |No |String(5)  |Used to record the local transaction time. The default is Beijing time UTC+8 (+0800)|
-|Device ID | ` udid `    |No |String(40)  |Unique transaction device ID|
-
-
+|Attribute|Mandatory|Type|Description|
+|---|----- |-----   |-----   |
+| ` syssn ` |Yes |String(128)  |QF Pay transaction number. Original transaction ID `syssn`  that is supposed to be refunded|
+|` out_trade_no `  |Yes |String(128)  | API order number. External refund transaction number / Merchant platform refund transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.|
+|` txamt `   |Yes |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1) <br/> Required for both full refund and partial refund. Some payment channel may not support partial refund.|
+|` txdtm `   |Yes |String(20) |Transaction request time. Format: YYYY-MM-DD hh:mm:ss|
+|` mchid `  |No |String(16)  | Merchant ID. May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID. On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. |
+|` txzone `   |No |String(5)  |Transaction time. Used to record the local transaction time. The default is Beijing time UTC+8 (+0800)|
+|` udid `    |No |String(40)  |Unique transaction device ID|
 
 ### Response Parameters
 

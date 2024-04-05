@@ -6,7 +6,7 @@ import Link from '@docusaurus/Link';
 
 ## Freeze Funds
 
-At the moment only Alipay wallet funds can be used for pre-authorization, credit-cards are not supported. Authorization requests lose their validity after 15min. In case of technical or currency related integration difficulties please contact technical.support@qfpay.com for support. Merchants can, at any time, unfreeze the funds in which case the assets will be available for spending on the original wallet. In addition, merchants can initiate a transfer for a fraction or all of the frozen funds in order to collect money for open customer invoices.
+At the moment only Alipay wallet funds can be used for pre-authorization, credit-cards are not supported. Authorization requests lose their validity after 15min. In case of technical or currency related integration difficulties please contact `technical.support@qfpay.com` for support. Merchants can, at any time, unfreeze the funds in which case the assets will be available for spending on the original wallet. In addition, merchants can initiate a transfer for a fraction or all of the frozen funds in order to collect money for open customer invoices.
 
 :::note
 Alipay pre-authorization currently supports the following currencies: AUD, HKD, MYR, NZD, PHP, SGD, THB and USD
@@ -20,8 +20,8 @@ Alipay pre-authorization currently supports the following currencies: AUD, HKD, 
 
 Find the correct `pay_type` for your checkout scenarios from the table below.
 
-PayType | Description 
---------- | ------- 
+PayType | Description
+--------- | -------
 801801 | Alipay Pre-Authorization in-store QRC Payment - Consumer Present Mode (CPM)
 801808 | Alipay Pre-Authorization in-store QRC Payment - Merchant Present Mode (MPM)  
 801810 | Alipay Pre-Authorization in-APP Payment

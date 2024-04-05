@@ -237,9 +237,9 @@
     "message": "警告",
     "description": "The default label used for the Caution admonition (:::caution)"
   },
-  "theme.admonition.danger": {
+  "theme.admonition.warning": {
     "message": "危险",
-    "description": "The default label used for the Danger admonition (:::danger)"
+    "description": "The default label used for the Danger admonition (:::warning)"
   },
   "theme.admonition.info": {
     "message": "信息",

@@ -6,10 +6,13 @@ import Link from '@docusaurus/Link';
 
 <Link href="/img/wechat-in-app.png" target="_blank">![WeChat APP Payment process-flow](@site/static/img/wechat-in-app.png)</Link>
 
-### HTTP Request
+## HTTP Request
 
-`POST ../trade/v1/payment`
-`PayType: 800210`
+**Endpoint** : `/trade/v1/payment`
+
+**Method** : `POST`
+
+**PayType** : `800210`
 
 WeChat in-APP payments require a formal application on the WeChat Open Platform. Merchants have to register an account and the APP and then receive an `appid` to enable payments. For more information, please refer to the official [Wechat documentation](https://pay.weixin.qq.com/wiki/doc/api/wxpay/en/pay/In-AppPay/chapter6_2.shtml#menu1).
 
@@ -17,7 +20,7 @@ Optionally merchants can activate real-name authentication with WeChat. Currentl
 
 To download Wechat SDK please refer to this [link](https://developers.weixin.qq.com/doc/oplatform/Downloads/iOS_Resource.html).
 
-### Request Parameters
+## Request Parameters
 
 ```plaintext
 
@@ -60,31 +63,31 @@ Request Body:
 }
 ```
 
-| Parameter name | Attribute | Mandatory | Type | Description |
-|:----    |:---|:----- |-----   |----   |
-|Merchant ID    | `mchid`  | No | String  | The unique merchant ID is created by QF Pay during the merchant onboarding process. |
-|External transaction number    | `out_trade_no` | Yes | String    |Developer platform transaction number |
-|Transaction amount    | `txamt`  | Yes | String |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen funds|
-|Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the Currencies table for a complete list of available currencies|
-|RMB Tag | `rmb_tag` | No | String(1) | WeChat Pay in Hong Kong uses `rmb_tag` = Y together with `txcurrcd` = CNY to indicate that the transaction currency is RMB.|
-|Transaction request time    | `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh:mm:ss|
-| Device ID   | `udid`   | No | String         |Must be unique|
-| Time zone | `txzone`    | No | String        |Used to record the local order time. The default is Beijing time GMT+8 (+0800)|
-| Redirect URL   | `return_url`   | No | String        | Redirect to address after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters.|
-|Extended Customer Info    | `extend_info`  | No | Object  | Real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
+| Attribute | Mandatory | Type | Description |
+|:---|:----- |-----   |----   |
+| `mchid`  | No | String  | The unique merchant ID is created by QF Pay during the merchant onboarding process. |
+| `out_trade_no` | Yes | String    | External transaction number|
+| `txamt`  | Yes | String |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen funds|
+| `txcurrcd` | Yes | String(3) | Transaction currency. View the Currencies table for a complete list of available currencies|
+| `rmb_tag` | No | String(1) | WeChat Pay in Hong Kong uses `rmb_tag` = Y together with `txcurrcd` = CNY to indicate that the transaction currency is RMB.|
+| `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh:mm:ss|
+| `udid`   | No | String         |Device ID, must be unique|
+| `txzone`    | No | String        |Time zone, used to record the local order time. The default is Beijing time GMT+8 (+0800)|
+| `return_url`   | No | String        | Redirect URL, redirect to address after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters.|
+| `extend_info`  | No | Object  |Extended Customer Info, real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
 
-### Response Parameters
+## Response Parameters
 
-| Attribute | Type | Parameter name | Description |
-|:----    |:---|:----- |-----   |
-|`syssn` |   String(40) | QF Pay Transaction number | QFPay transaction number, returned by the system once payment is completed |
-|`orig_syssn`    |String(40)| External transaction number | Developer platform transaction number |
-|`txdtm`     | String(20) | Transaction request time | Format: YYYY-MM-DD hh:mm:ss  |
-|`txamt`    |Int(11)| Transaction amount | |
-|`sysdtm`     |String(20)| System transaction time |Format: YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements.|
-|`respcd`    |String(4)| Return code |  |
-|`respmsg`    |String(128)| Information description|  |
-|`resperr`     |String(128)| Description error |  |
-|`cardcd`     |String| Card number |  |
-|`txcurrcd`      |String| Currency  | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
-|`pay_params`      |Object| payment data  | Payment data to call Wechat SDK |
+| Attribute | Type | Description |
+|:----    |:---|-----   |
+|`syssn` |   String(40) |  QFPay transaction number, returned by the system once payment is completed |
+|`orig_syssn`    |String(40)| External transaction number |
+|`txdtm`     | String(20) | Transaction request time, format: YYYY-MM-DD hh:mm:ss  |
+|`txamt`    |Int(11)| Transaction amount |
+|`sysdtm`     |String(20)| System transaction time, format: YYYY-MM-DD hh:mm:ss  This parameter value is used as the cut-off time for settlements.|
+|`respcd`    |String(4)| Return code|
+|`respmsg`    |String(128)| Information description|
+|`resperr`     |String(128)| Description error|
+|`cardcd`     |String| Card number|
+|`txcurrcd`      |String|Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
+|`pay_params`      |Object|Payment data to call Wechat SDK |

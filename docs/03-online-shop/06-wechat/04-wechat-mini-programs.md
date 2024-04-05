@@ -3,11 +3,16 @@ import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
 # WeChat Mini Programs
+
 <Link href="https://sdk.qfapi.com/images/wechat_mp_process.jpg" target="_blank">![WeChat MiniProgram process-flow](@site/static/img/wechat_mp_process.jpg)</Link>
 
-### HTTP Request
+## HTTP Request
 
-`POST ../trade/v1/payment` `PayType: 800213`
+**Endpoint** : `/trade/v1/payment`
+
+**Method** : `POST`
+
+**PayType** : `800213`
 
 **Step 1:** WeChat real name authentification
 Before the payment function within WeChat can be used the business personnel must authenticate themselves on the official WeChat platform.
@@ -86,29 +91,28 @@ qfPayOpenAPI: function () {
    },
 ```
 
-### Request Parameters 
+## Request Parameters
 
-|Parameter name| Attribute| Mandatory| Type|Description|
-|:----    |:---|:----- |-----   |----   |
-|Public payment parameters | — | — |— |Refer to the public payment API documentation|
-|WeChat authorization code   |`sub_openid`|Yes |String(128)   |   |
-Order expiration time | `expired_time` | No | String(3)  | QRC expiration time in unit minutes. The default QRC expiration time for WeChat Mini Programs is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.
-|Designated payment method   |`limit_pay`|No |String    |The parameter value is specified as `no_credit`, and credit card payment is prohibited. This setting is only valid for mainland China.  |
-|Extended Customer Info | `extend_info` | No | Object | Real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'|
+| Attribute| Mandatory| Type|Description|
+|:---|:----- |-----   |----   |
+| — | — |— |Refer to the public payment API documentation|
+|`sub_openid`|Yes |String(128)   |   |
+| `expired_time` | No | String(3)  | QRC expiration time in unit minutes. The default QRC expiration time for WeChat Mini Programs is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.
+|`limit_pay`|No |String    |The parameter value is specified as `no_credit`, and credit card payment is prohibited. This setting is only valid for mainland China.  |
+| `extend_info` | No | Object | Real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'|
 
-### Response Parameters
+## Response Parameters
 
-|Attribute| Secondary parameter code| Parameter Type| Parameter name|Description|
-|:----    |:---|:----- |-----   |----   |
-|`pay_params`    |`appId` |String(16) |Public WMP ID   |After the developer registers the Mini Program with the WeChat, the appId can be obtained.  |
-|—   |`timeStamp` |String(32) |Timestamp    |Current time  |
-|—   |`nonceStr`  |String(32) |Random string    |Random string, no longer than 32 bits  |
-|—   |`package`   |String(128)|Order details extension string    |The value of the prepay_id parameter returned by the unified interface is in the format of prepay_id=**  |
-|—    |`signType` |String(32) |Signature method  |Signature type, default is MD5  |
-|—    |`paySign`  |String(64) |Signature  |  |
-|Public response parameters    |—  |— |—  | — |
-|`txcurrcd`    |  | |Currency   | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
-
+|Attribute| Secondary Attribute| Type|Description|
+|:----    |:---|:----- |-----   |
+|Public response parameters    |—  |— |—  |
+|`pay_params`    |`appId` |String(16) |Public WMP ID, after the developer registers the Mini Program with the WeChat, the appId can be obtained.  |
+|—   |`timeStamp` |String(32) |Current time  |
+|—   |`nonceStr`  |String(32) |Random string, no longer than 32 bits  |
+|—   |`package`   |String(128)|Order details extension string. The value of the prepay_id parameter returned by the unified interface is in the format of prepay_id=**  |
+|—    |`signType` |String(32) |Signature type, default is MD5  |
+|—    |`paySign`  |String(64) |Signature |
+|`txcurrcd`|  | |Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
 
 **Step 4:** Evoke the payment module
 
@@ -141,11 +145,10 @@ To get started quickly, download the [QF Pay WeChat Mini Program Boilerplate](@s
 
 <Link href="/img/miniprogram_boilerplate.png" target="_blank">![WeChat Mini Program Boilerplate](@site/static/img/miniprogram_boilerplate.png)</Link>
 
-<br/>
-**Setup Instructions**
+### Setup Instructions
 
-1) Sign up with QFPay and we bind your WeChat appid to your API credentials. <br/>
-2) Visit the WeChat MP portal at [https://mp.weixin.qq.com](https://mp.weixin.qq.com) and whitelist our environment for incoming server traffic: <br/>
-开发 -> 开发设置 -> 服务器域名 -> request合法域名: e.g. https://openapi-sg.qfapi.com <br/>
-1) Copy and paste the files from the zip file to your local harddrive and setup a cloudfunction environment. <br/>
-2) Obtain the user openid with the cloudfunction "getUserOpenID" and run the API calls accroding to the code. <br/>
+1) Sign up with QFPay and we bind your WeChat appid to your API credentials.
+2) Visit the WeChat MP portal at [https://mp.weixin.qq.com](https://mp.weixin.qq.com) and whitelist our environment for incoming server traffic:
+开发 -> 开发设置 -> 服务器域名 -> request合法域名: e.g. https://openapi-sg.qfapi.com
+3) Copy and paste the files from the zip file to your local harddrive and setup a cloudfunction environment.
+4) Obtain the user openid with the cloudfunction "getUserOpenID" and run the API calls accroding to the code.

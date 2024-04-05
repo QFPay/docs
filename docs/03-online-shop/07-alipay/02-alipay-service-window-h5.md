@@ -4,6 +4,8 @@ import Link from '@docusaurus/Link';
 
 # Alipay Service Window H5
 
+<Link to="/img/alipay_h5_process.jpg" target="_blank">![Alipay H5 process-flow](@site/static/img/alipay_h5_process.jpg)</Link>
+
 ```plaintext
 
 For code instructions select Python, Java, Node.js or PHP with the tabs below.
@@ -264,14 +266,17 @@ ob_end_flush();
 }
 ```
 
-<Link to="/img/alipay_h5_process.jpg" target="_blank">![Alipay H5 process-flow](@site/static/img/alipay_h5_process.jpg)</Link>
+## Alipay Service Window H5 Payment (WAP)
 
-### Alipay Service Window H5 Payment (WAP)
 Alipay Service Window H5 Payment enables merchants to call the Alipay payment module by using the JSAPI interface to collect payments. The customer checks out on the merchant's mobile website in Alipay, confirms the total amount and makes the payment.
 
 ### HTTP Request
 
-`POST ../trade/v1/payment` `PayType: 800107`
+**Endpoint** : `/trade/v1/payment`
+
+**Method** : `POST`
+
+**PayType** : `800107`
 
 **Step 1:** Get User ID
 For more details about how to acquire the user id please refer to the [official Alipay documentation](https://docs.open.alipay.com/289/105656).
@@ -280,20 +285,20 @@ For more details about how to acquire the user id please refer to the [official 
 
 ### Payment Parameters
 
-|Parameter name | Attribute | Mandatory | Type | Description |
-|:----    |:---|:----- |-----   |----   |
-|Public payment parameters |—  |— |—   |—   |
-|Alipay authorization code|`openid`   |Yes  | String(64) |The `user_id` is returned by the interface, e.g. 2088802811715388 |
-|Redirect URL | `return_url` | No | String(512) | Address for user redirect after successful payment |
-|Designated payment method |`limit_pay`  |No |String   |Only applicable for mainland China   |
+| Attribute | Mandatory | Type | Description |
+|:---|:----- |-----   |----   |
+|Public payment parameters |—  |— |—   |
+|`openid`   |Yes  | String(64) |Alipay authorization code, the `user_id` is returned by the interface, e.g. 2088802811715388 |
+| `return_url` | No | String(512) | Redirect URL, address for user redirect after successful payment |
+|`limit_pay`  |No |String   |Designated payment method, only applicable for mainland China   |
 
 ### Response Parameters
 
-|Parameter name | Secondary parameter code | Type | Parameter name | Description |
-|:----    |:---|:----- |-----   |----   |
-|`pay_params`|`tradeNO`   |String  | Transaction number| Provide the transaction number in the call function |
-|`txcurrcd`  |  |  String(3) |   | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
-|Public response parameters |—  |— |—   |—   |
+| Attribute | Secondary Attribute | Type | Description |
+|:----    |:---|:----- |----   |
+|`pay_params`|`tradeNO` |String  |Transaction number, provide the transaction number in the call function |
+|`txcurrcd`  |  |  String(3) | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
+|Public response parameters |—  |— |—   |
 
 **Step 3:** Payout through the cashout interface
 For more information regarding the cashout interface please refer to the [official Alipay documentation](https://docs.open.alipay.com/common/105591).

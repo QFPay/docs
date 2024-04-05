@@ -23,7 +23,7 @@ For build and manage subscriptions, the following API resources are required:
 | API Resources |
 |---|
 |[Customer](#customer)|
-<!-- |[Payment Token](#payment-token) -->
+|[Payment Token](../common-api/payment-intent)|
 |[Product](#product)|
 |[Subscription](#subscription)|
 
@@ -38,14 +38,14 @@ All subscription state will be pushed to merchant's backend service once trigger
 
 ## Common API response parameter
 
-|Parameter Name| Data Type |Description|
+|Attribute| Type |Description|
 |---|---|---|
-|respcd|String|Return code, 0000 = API call succeeded|
-|resperr|String| result description|
-|respmsg|String| information description|
-|page|Int| page no.,present in inquiry API|
-|page_size|Int| page size,presented in inquiry API|
-|data|Object|result, JSON object or list of JSON object|
+|`respcd`|String|Return code, 0000 = API call succeeded|
+|`resperr`|String| result description|
+|`respmsg`|String| information description|
+|`page`|Int| page no.,present in inquiry API|
+|`page_size`|Int| page size,presented in inquiry API|
+|`data`|Object|result, JSON object or list of JSON object|
 
 ## Customer
 
@@ -53,93 +53,94 @@ Customer is an API resource for merchant to store customer's information. This o
 
 ### Create customer object
 
-```
-API path: /customer/v1/create
-```
+**Endpoint** : `/customer/v1/create`
+
+**Method** : `POST`
 
 Request parameters:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|Attribute|Type|Mandatory|Description|
 |---|---|---|---|
-|name|String|No|customer name|
-|phone|String|No|customer contact no.|
-|email|String|No|customer email address|
-|billing_address|String|No|customer billing address, stringify JSON object|
+|`name`|String|No|customer name|
+|`phone`|String|No|customer contact no.|
+|`email`|String|No|customer email address|
+|`billing_address`|String|No|customer billing address, stringify JSON object|
 
 Response parameters in **data** field:
 
-|Parameter Name|Data Type|Description|
+|Attribute|Type|Description|
 |---|---|---|
-|customer_id|String|unqiue customer ID in QF system|
-|name|String|customer name|
-|phone|String|customer contact no.|
-|email|String|customer email address|
-|billing_address|JSON|customer billing address|
+|`customer_id`|String|unqiue customer ID in QF system|
+|`name`|String|customer name|
+|`phone`|String|customer contact no.|
+|`email`|String|customer email address|
+|`billing_address`|JSON|customer billing address|
 
 ### Update customer object
 
-```
-API path: /customer/v1/update
-```
+**Endpoint** : `/customer/v1/update`
+
+**Method** : `POST`
 
 Request parameters:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|Attribute|Type|Mandatory|Description|
 |---|---|---|---|
-|customer_id|String|Yes|unqiue customer ID in QF system|
-|name|String|No|customer name|
-|phone|String|No|customer contact no.|
-|email|String|No|customer email address|
-|billing_address|JSON|No|customer billing address|
+|`customer_id`|String|Yes|unqiue customer ID in QF system|
+|`name`|String|No|customer name|
+|`phone`|String|No|customer contact no.|
+|`email`|String|No|customer email address|
+|`billing_address`|JSON|No|customer billing address|
 
 Response parameters in **data** field:
 
-|Parameter Name|Data Type|Description|
+|Attribute|Type|Description|
 |---|---|---|
-|customer_id|String|unqiue customer ID in QF system|
-|name|String|customer name|
-|phone|String|customer contact no.|
-|email|String|customer email address|
-|billing_address|JSON|customer billing address|
+|`customer_id`|String|unqiue customer ID in QF system|
+|`name`|String|customer name|
+|`phone`|String|customer contact no.|
+|`email`|String|customer email address|
+|`billing_address`|JSON|customer billing address|
 
 ### Inquiry customer object
 
-```
-API path: /customer/v1/query
-```
+**Endpoint** : `/customer/v1/query`
+
+**Method** : `POST`
 
 Request parameters:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|Attribute|Type|Mandatory|Description|
 |---|---|---|---|
-|customer_id|String|No|unqiue customer Id in QF system|
-|name|String|No|customer name|
-|phone|String|No|customer contact no.|
-|email|String|No|customer email address|
-|page|Int|No|default value = 1|
-|page_size|Int|No|default value = 10, the max value is 100|
+|`customer_id`|String|No|unqiue customer Id in QF system|
+|`name`|String|No|customer name|
+|`phone`|String|No|customer contact no.|
+|`email`|String|No|customer email address|
+|`page`|Int|No|default value = 1|
+|`page_size`|Int|No|default value = 10, the max value is 100|
 
 Response parameters in **data** field:
 
-|Parameter Name|Data Type|Description|
+|Attribute|Type|Description|
 |---|---|---|
-|customer_id|String|unqiue customer ID in QF system|
-|name|String|customer name|
-|phone|String|customer contact no.|
-|email|String|customer email address|
+|`customer_id`|String|unqiue customer ID in QF system|
+|`name`|String|customer name|
+|`phone`|String|customer contact no.|
+|`email`|String|customer email address|
 
 ### Delete customer object
 
 permanently delete customer object, cannot be undo. Any subscription plan associated with the deleted customer will be cancelled.
-```
-API path: /customer/v1/delete
-```
+
+**Endpoint** : `/customer/v1/delete`
+
+**Method** : `POST`
 
 Request parameters:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|Attribute|Type|Mandatory|Description|
 |---|---|---|---|
-|customer_id|String|Yes|unique customer identifier in QF system|
+|`customer_id`|String|Yes|unique customer identifier in QF system|
 
 ## Product
 
@@ -149,108 +150,112 @@ Products are the model for goods or services that merchants will provide to the 
 
 create a new product
 
-```
-API path: /product/v1/create
-```
+**Endpoint** : `/product/v1/create`
 
-|Parameter Name|Data Type|Mandatory|Description|
+**Method** : `POST`
+
+|Attribute|Type|Mandatory|Description|
 |---|---|---|---|
-|name|String|Yes|product name that displays to the customer|
-|type|String|No|default value=onetime, possible values: onetime, recurring
-|description|String|No|product descritpion|
-|txamt|Int|Yes|transaction amount, e.g. $1=100|
-|txcurrcd|String|Yes|transaction currency, e.g. HKD|
-|interval|String|No|possible values: monthly, yearly, mandatory for recurring product|
-|interval_count|Int|No|interval between 2 charges, maximum 1 year allowed, mandatory for recurring product|
-|usage_type|String|No|default value=licensed, possible values: licensed|
+|`name`|String|Yes|product name that displays to the customer|
+|`type`|String|No|default value=onetime, possible values: onetime, recurring
+|`description`|String|No|product descritpion|
+|`txamt`|Int|Yes|transaction amount, e.g. $1=100|
+|`txcurrcd`|String|Yes|transaction currency, e.g. HKD|
+|`interval`|String|No|possible values: monthly, yearly, mandatory for recurring product|
+|`interval_count`|Int|No|interval between 2 charges, maximum 1 year allowed, mandatory for recurring product|
+|`usage_type`|String|No|default value=licensed, possible values: licensed|
 
 Response parameters in **data** field:
 
-|Parameter Name|Data Type|Description|
+|Attribute|Type|Description|
 |---|---|---|
-|product_id|String|unique identifer generated in QF system|
-|name|String|product name that displays to the customer|
-|type|String|default value=onetime, possible values: onetime, recurring
-|description|String|product descritpion|
-|txamt|Int|transaction amount, e.g. $1=100|
-|txcurrcd|String|transaction currency, e.g. HKD|
-|interval|String|possible values: monthly, yearly|
-|interval_count|Int|interval between 2 charges|
-|usage_type|String|default value=licensed, possible values: licensed|
+|`product_id`|String|unique identifer generated in QF system|
+|`name`|String|product name that displays to the customer|
+|`type`|String|default value=onetime, possible values: onetime, recurring
+|`description`|String|product descritpion|
+|`txamt`|Int|transaction amount, e.g. $1=100|
+|`txcurrcd`|String|transaction currency, e.g. HKD|
+|`interval`|String|possible values: monthly, yearly|
+|`interval_count`|Int|interval between 2 charges|
+|`usage_type`|String|default value=licensed, possible values: licensed|
 
 ### Update product object
 
 update current product information
-```
-API path: /product/v1/update
-```
+
+**Endpoint** : `/product/v1/update`
+
+**Method** : `POST`
 
 Request parameters:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|Attribute|Type|Mandatory|Description|
 |---|---|---|---|
-|product_id|String|Yes|unique identifier generated in QF system|
-|name|String|No|product name that displays to the customer|
-|description|String|No|product descritpion|
+|`product_id`|String|Yes|unique identifier generated in QF system|
+|`name`|String|No|product name that displays to the customer|
+|`description`|String|No|product descritpion|
 
 Response parameters in **data** field:
 
-|Parameter Name|Data Type|Description|
+|Attribute|Type|Description|
 |---|---|---|
-|product_id|String|unique product identifer generated in QF system|
-|name|String|product name that displays to the customer|
-|type|String|default value=onetime, possible values: onetime, recurring
-|description|String|product descritpion|
-|txamt|Int|transaction amount, e.g. $1=100|
-|txcurrcd|String|transaction currency, e.g. HKD|
-|interval|String|possible values: monthly, yearly|
-|interval_count|Int|interval between 2 charges|
-|usage_type|String|default value=licensed, possible values: licensed|
+|`product_id`|String|unique product identifer generated in QF system|
+|`name`|String|product name that displays to the customer|
+|`type`|String|default value=onetime, possible values: onetime, recurring
+|`description`|String|product descritpion|
+|`txamt`|Int|transaction amount, e.g. $1=100|
+|`txcurrcd`|String|transaction currency, e.g. HKD|
+|`interval`|String|possible values: monthly, yearly|
+|`interval_count`|Int|interval between 2 charges|
+|`usage_type`|String|default value=licensed, possible values: licensed|
 
 ### Inquiry product object
 
-```
-API path: /product/v1/create
-```
+**Endpoint** : `/product/v1/create`
+
+**Method** : `POST`
 
 Request parameters:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|Attribute|Type|Mandatory|Description|
 |---|---|---|---|
-|product_id|String|No|unique product identifier generated in QF system|
-|name|String|No|product name that displays to the customer|
-|description|String|No|product descritpion|
-|txcurrcd|String|No|transaction currency|
-|interval|String|No|possible values: monthly,yearly|
-|page|Int|No|page no., default value=1|
-|page_size|Int|No| page size, default value=10,max value=100|
+|`product_id`|String|No|unique product identifier generated in QF system|
+|`name`|String|No|product name that displays to the customer|
+|`description`|String|No|product descritpion|
+|`txcurrcd`|String|No|transaction currency|
+|`interval`|String|No|possible values: monthly,yearly|
+|`page`|Int|No|page no., default value=1|
+|`page_size`|Int|No| page size, default value=10,max value=100|
 
 Response parameters in **data** field:
 
-|product_id|String|unique identifer generated in QF system|
+|Attribute|Type|Description|
 |---|---|---|
-|name|String|product name that displays to the customer|
-|type|String|possible values: onetime, recurring
-|description|String|product descritpion|
-|txamt|Int|transaction amount, e.g. $1=100|
-|txcurrcd|String|transaction currency, e.g. HKD|
-|interval|String|possible values: monthly, yearly|
-|interval_count|Int|interval between 2 charges|
-|usage_type|String|possible values: licensed|
+|`product_id`|String|unique identifer generated in QF system|
+|`name`|String|product name that displays to the customer|
+|`type`|String|possible values: onetime, recurring
+|`description`|String|product descritpion|
+|`txamt`|Int|transaction amount, e.g. $1=100|
+|`txcurrcd`|String|transaction currency, e.g. HKD|
+|`interval`|String|possible values: monthly, yearly|
+|`interval_count`|Int|interval between 2 charges|
+|`usage_type`|String|possible values: licensed|
 
 ### Delete product object
 
-```
+:::note
 only can delete product that is not assoicated with any subscription object
-```
+:::
 
-API path: /product/v1/delete
+**Endpoint** : `/product/v1/delete`
+
+**Method** : `POST`
 
 Request parameters:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|Attribute|Type|Mandatory|Description|
 |---|---|---|---|
-|product_id|String|No|unique product identifier generated in QF system|
+|`product_id`|String|No|unique product identifier generated in QF system|
 
 ## Subscription
 
@@ -258,107 +263,109 @@ QFPay automatically charges the customers on every billing cycle based on the pr
 
 ### Create subscription object
 
-```
-API path: /subscription/v1/create
-```
+**Endpoint** : `/subscription/v1/create`
+
+**Method** : `POST`
 
 Request parameters:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|Attribute|Type|Mandatory|Description|
 |---|---|---|---|
-|customer_id|String|Yes|unique customer identifier in QF system|
-|token_id|String|Yes| unique payment token identifier in QF system|
-|products|Object|Yes| list of unique product identifier in QF system and quantity|
-|total_billing_cycles|Int|No|the total billing cycles of the subscirption, infinity if null value|
-|start_time|String|No|the time subscription will start to work, the first payment will be  |
+|`customer_id`|String|Yes|unique customer identifier in QF system|
+|`token_id`|String|Yes| unique payment token identifier in QF system|
+|`products`|Object|Yes| list of unique product identifier in QF system and quantity|
+|`total_billing_cycles`|Int|No|the total billing cycles of the subscirption, infinity if null value|
+|`start_time`|String|No|the time subscription will start to work, the first payment will be  |
 
 parameters in products:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|Attribute|Type|Mandatory|Description|
 |---|---|---|---|
-|product_id|String|Yes|unique production identifier in QF system|
-|quantity|Int|No| default value=1|
+|`product_id`|String|Yes|unique production identifier in QF system|
+|`quantity`|Int|No| default value=1|
 
 Response parameters in **data** field:
 
-|Parameter Name|Data Type|Description|
+|Attribute|Type|Description|
 |---|---|---|
-|customer_id|String|unique customer identifier in QF system|
-|token_id|String| unique payment token identifier in QF system|
-|products|Object| list of unique product identifier in QF system and quantity|
-|total_billing_cycles|Int|the total billing cycles of the subscirption, infinity cycles if null value|
-|start_time|String|No|the time subscription will start to work |
+|`customer_id`|String|unique customer identifier in QF system|
+|`token_id`|String| unique payment token identifier in QF system|
+|`products`|Object| list of unique product identifier in QF system and quantity|
+|`total_billing_cycles`|Int|the total billing cycles of the subscirption, infinity cycles if null value|
+|`start_time`|String|the time subscription will start to work |
 
 ### Update subscription object
 
 update current subscription
-```
-API path: /subscription/v1/update
-```
+
+**Endpoint** : `/subscription/v1/update`
+
+**Method** : `POST`
 
 Request parameters:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|Attribute|Type|Mandatory|Description|
 |---|---|---|---|
-|subscription_id|String|Yes|unique subscription identifier in QF system|
-|total_billing_cycles|Int|No|the total billing cycles of the subscirption, infinity if null value|
-|start_time|String|No|the time that subscription will start to work, it will be the first subscription payment time|
-|token_id|String|No| unique payment token identifier in QF system|
-|products|Object|No| list of unique product identifier in QF system and quantity|
+|`subscription_id`|String|Yes|unique subscription identifier in QF system|
+|`total_billing_cycles`|Int|No|the total billing cycles of the subscirption, infinity if null value|
+|`start_time`|String|No|the time that subscription will start to work, it will be the first subscription payment time|
+|`token_id`|String|No| unique payment token identifier in QF system|
+|`products`|Object|No| list of unique product identifier in QF system and quantity|
 
 Response parameters in **data** field:
 
-|Parameter Name|Data Type|Description|
+|Attribute|Type|Description|
 |---|---|---|
-|subscription_id|String|unique subscription identifier in QF system|
-|customer_id|String|unique customer identifier in QF system|
-|token_id|String| unique payment token identifier in QF system|
-|products|Object| list of unique product identifier in QF system and quantity|
-|total_billing_cycles|Int|the total billing cycles of the subscirption, infinity cycles if null value|
-|start_time|String|the time that subscription will start to work, it will be the first subscription payment time|
-|state|String| subscription state|
+|`subscription_id`|String|unique subscription identifier in QF system|
+|`customer_id`|String|unique customer identifier in QF system|
+|`token_id`|String| unique payment token identifier in QF system|
+|`products`|Object| list of unique product identifier in QF system and quantity|
+|`total_billing_cycles`|Int|the total billing cycles of the subscirption, infinity cycles if null value|
+|`start_time`|String|the time that subscription will start to work, it will be the first subscription payment time|
+|`state`|String| subscription state|
 
 ### Inquiry subscription object
 
-```
-API path: /subscription/v1/query
-```
+**Endpoint** : `/subscription/v1/query`
+
+**Method** : `POST`
 
 Request parameters:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|Attribute|Type|Mandatory|Description|
 |---|---|---|---|
-|page|Int|No| page no.,default value=1|
-|page_size|Int|No| page size, default value=10, max value=100|
-|subscritpion_id|String|No|unique subscription identifier in QF system|
-|customer_id|String|No|unique customer identifier in QF system|
-|token_id|String|No|unique payment otken identifier in QF system|
-|state|String|No|subscription state, e.g. incompelete, active,...|
+|`page`|Int|No| page no.,default value=1|
+|`page_size`|Int|No| page size, default value=10, max value=100|
+|`subscritpion_id`|String|No|unique subscription identifier in QF system|
+|`customer_id`|String|No|unique customer identifier in QF system|
+|`token_id`|String|No|unique payment otken identifier in QF system|
+|`state`|String|No|subscription state, e.g. incompelete, active,...|
 
 Response parameters in **data** field:
 
-|Parameter Name|Data Type|Description|
+|Attribute|Type|Description|
 |---|---|---|
-|subscription_id|String|unique subscription identifier in QF system|
-|customer_id|String|unique customer identifier in QF system|
-|token_id|String| unique payment token identifier in QF system|
-|products|Object| list of unique product identifier in QF system and quantity|
-|total_billing_cycles|Int|the total billing cycles of the subscirption, infinity cycles if null value|
-|state|String| subscription state|
-|next_billing_time|String| next fund deduct time |
-|last_billing_time|String| previous fund deduct time|
-|completed_billing_iteration|Int| how many billing cycles completed|
-|start_time|String|the time that subscription will start to work, it will be the first subscription payment time|
+|`subscription_id`|String|unique subscription identifier in QF system|
+|`customer_id`|String|unique customer identifier in QF system|
+|`token_id`|String| unique payment token identifier in QF system|
+|`products`|Object| list of unique product identifier in QF system and quantity|
+|`total_billing_cycles`|Int|the total billing cycles of the subscirption, infinity cycles if null value|
+|`state`|String| subscription state|
+|`next_billing_time`|String| next fund deduct time |
+|`last_billing_time`|String| previous fund deduct time|
+|`completed_billing_iteration`|Int| how many billing cycles completed|
+|`start_time`|String|the time that subscription will start to work, it will be the first subscription payment time|
 
 ### Cancel subscription object
 
 cancel customer's subscription immediately
-```
-API path: /subscription/v1/cancel
-```
+
+**Endpoint** : `/subscription/v1/cancel`
+
+**Method** : `POST`
 
 Request parameters:
 
-|Parameter Name|Data Type|Mandatory|Description|
+|Attribute|Type|Mandatory|Description|
 |---|---|---|---|
-|subscription_id|String|Yes|unique ID of subscription object|
+|`subscription_id`|String|Yes|unique ID of subscription object|
