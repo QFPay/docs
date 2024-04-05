@@ -95,7 +95,7 @@ qfPayOpenAPI: function () {
 
 | Attribute| Mandatory| Type|Description|
 |:---|:----- |-----   |----   |
-| Public request parameters| — |— |Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details|
+| Public request parameters| — |— |Please refer to the [Public Payment Section](../../preparation/paycode#public-payment-parameters) for more details|
 |`sub_openid`|Yes |String(128)   |   |
 | `expired_time` | No | String(3)  | QRC expiration time in unit minutes. The default QRC expiration time for WeChat Mini Programs is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.
 |`limit_pay`|No |String    |The parameter value is specified as `no_credit`, and credit card payment is prohibited. This setting is only valid for mainland China.  |
@@ -105,7 +105,7 @@ qfPayOpenAPI: function () {
 
 |Attribute| Secondary Attribute| Type|Description|
 |:----    |:---|:----- |-----   |
-|Public response parameters    |—  |— |Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details  |
+|Public response parameters    |—  |— |Please refer to the [Public Payment Section](../../preparation/paycode#public-payment-parameters) for more details  |
 |`pay_params`    |`appId` |String(16) |Public WMP ID, after the developer registers the Mini Program with the WeChat, the appId can be obtained.  |
 |—   |`timeStamp` |String(32) |Current time  |
 |—   |`nonceStr`  |String(32) |Random string, no longer than 32 bits  |

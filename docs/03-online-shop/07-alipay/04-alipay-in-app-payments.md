@@ -94,7 +94,7 @@ _input_charset="UTF-8"&body="goods_info"&currency="HKD"&forex_biz="FP"&it_b_pay=
 
 | Attribute  |Mandatory | Type | Description |
 |:---|:----- |-----   |----   |
-|Public payment parameters    |—|— |Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details |
+|Public payment parameters    |—|— |Please refer to the [Public Payment Section](../../preparation/paycode#public-payment-parameters) for more details |
 |`goods_info`|No | String  | Product description, must not contain special characters |
 |`pay_tag`|No | String(16)  | Payment mark, the default value is: ALIPAYHK<br/>Alipay Continental version: ALIPAYCN |
 | `expired_time` | No<br/> (MPM only) | String(3)  | Order expiration time, QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for WeChat and Alipay|
@@ -124,4 +124,4 @@ _input_charset="UTF-8"&body="goods_info"&currency="HKD"&forex_biz="FP"&it_b_pay=
 |            | `secondary_merchant_name`      | Secondary business name |
 |            | `secondary_merchant_industry`  | Secondary merchant industry |
 | `chnlsn`   |                                | Channel coding |
-| Public response parameters |     —          | Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details |
+| Public response parameters |     —          | Please refer to the [Public Payment Section](../../preparation/paycode#public-payment-parameters) for more details |

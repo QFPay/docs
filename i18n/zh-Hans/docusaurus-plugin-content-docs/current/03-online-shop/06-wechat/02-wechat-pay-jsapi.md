@@ -241,7 +241,7 @@ if __name__ == '__main__':
 
 |参数名字|  参数编码 | 是否必填| 参数类型 | 描述 |
 |:----    |:---|:----- |-----   |-----   |
-|公共支付参数 |—  |— |—  | 请参阅有关交易的通用文档 |
+|公共支付参数 |—  |— |—  | 请参阅有关交易的[公共支付参数](../../preparation/paycode#支付API端点) |
 |微信授权码   |`sub_openid`|是  |String    |微信 OpenID. 请参阅 **GET openid** 文档   |
 |指定付款方式   |`limit_pay`|否|String   |用于限制信用卡交易   |
 |扩展客户信息   |`extend_info`|否|Object   | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](../../preparation/paycode#支付类型)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
@@ -256,7 +256,7 @@ if __name__ == '__main__':
 |— |`package`   |String(128)| 交易明细  | 接口返回的`prepay_id`参数值格式为：prepay_id=** |
 |— |`signType`   |String(32) | 签名方法  | 签名方法, 默认：MD5|
 |— |`paySign`    |String(64) | 签名   | 签名方法, 签名：MD5|
-|— |公共响应参数    |— |—   | —|
+|— |公共响应参数    |— |—   | 请参阅有关交易的[公共支付参数](../../preparation/paycode#支付API端点)|
 |`txcurrcd`  | |  String(3) |  | 交易货币。 查看[货币](../../preparation/paycode#支付币种) 表以获取可用货币的完整列表 |
 
 ## 调用微信支付模块

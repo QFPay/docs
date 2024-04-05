@@ -90,7 +90,7 @@ qfPayOpenAPI: function () {
 
 |参数名称| 参数编码| 是否必填| 参数类型|描述|
 |:----    |:---|:----- |-----   |----   |
-|公共支付参数 | — | — |— |参考公共支付API文档|
+|公共支付参数 | — | — |— |请参阅有关交易的[公共支付参数](../../preparation/paycode#支付API端点)|
 |微信授权码 |`sub_openid`|是 |String(128)   |   |
 订单到期时间 | `expired_time` | 否 | String(3)  | QRC 过期时间（以分钟为单位）。 微信小程序默认QRC过期时间为30分钟。 该参数可手动调整，最小为 5 分钟，最大为 120 分钟。
 |Designated payment method   |`limit_pay`| 否 |String    |参数值指定为“no_credit”，禁止信用卡支付。 此设置仅对中国大陆有效。  |
@@ -106,7 +106,7 @@ qfPayOpenAPI: function () {
 |—   |`package`   |String(128)|订单详细信息扩展字符串   |统一接口返回的prepay_id参数值的格式为prepay_id=**  |
 |—    |`signType` |String(32) |签名方式  |签名类型， 默认：MD5  |
 |—    |`paySign`  |String(64) |签名  |  |
-|公共响应参数  |—  |— |—  | — |
+|公共响应参数  |—  |— |—  | 请参阅有关交易的[公共支付参数](../../preparation/paycode#支付API端点) |
 |`txcurrcd`    |  | |货币   | 交易货币。 查看[货币](../../preparation/paycode#支付币种) 表以获取可用货币的完整列表 |
 
 **Step 4:** 唤起支付模块
@@ -146,5 +146,5 @@ weChatPayment: function(res) {
 1) 注册 QFPay，我们会将您的微信 appid 绑定到您的 API 凭证。 <br/>
 2) 访问微信 MP 门户 [https://mp.weixin.qq.com](https://mp.weixin.qq.com) 并将我们的环境列入传入服务器流量的白名单：<br/>
 开发 -> 开发设置 -> 服务器域名 -> request合法域名: e.g. https://openapi-sg.qfapi.com <br/>
-1) 将 zip 文件中的文件复制并粘贴到本地硬盘并设置云函数环境。 <br/>
-2) 使用云函数“getUserOpenID”获取用户openid，并根据代码运行API调用。 <br/>
+3) 将 zip 文件中的文件复制并粘贴到本地硬盘并设置云函数环境。 <br/>
+4) 使用云函数“getUserOpenID”获取用户openid，并根据代码运行API调用。 <br/>

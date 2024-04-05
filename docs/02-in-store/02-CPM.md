@@ -12,7 +12,16 @@ import Link from '@docusaurus/Link';
 
 **Method** : `POST`
 
-**PayType** : //TODO// : 800x08
+**PayType** :
+
+PayType | Description
+------- | -------
+800008	| Consumer Present QR Code Mode (CPM) for WeChat, Alipay, UNIONPAY Quick Pass
+800108	| Alipay Consumer Presented QR Code Payment (CPM) (Overseas & HK Merchants)
+800208	| WeChat Consumer Presented QR Code Payment (CPM) (Overseas & HK Merchants)
+801008	| WeChat Pay HK Consumer Presented QR Code Payment (CPM) (Direct Settlement, HK Merchants)
+805808	| PayMe Consumer Presented QR Code Payment (CPM) (HK Merchants)
+800708	| UNIONPAY Quick Pass Consumer Presented QR Code Payment (CPM)
 
 **Description** : The customer generates a dynamic QR code in their QR code wallet and presents it to the cashier for scanning. This szenario applies to offline payments only. If the response codes `1143/1145` are returned, the transaction is being processed or the customer is required to input the wallet password. Merchants have to [query the transaction result](../common-api/transaction-enquiry) for a final assessment of the transaction status.
 

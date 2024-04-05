@@ -249,7 +249,7 @@ Optionally merchants can activate real-name authentication with WeChat. Currentl
 
 | Attribute | Mandatory| Type | Description |
 |:----  |:----- |-----   |-----   |
-|Public payment parameters |—  |—  | Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details |
+|Public payment parameters |—  |—  | Please refer to the [Public Payment Section](../../preparation/paycode#public-payment-parameters) for more details |
 |`sub_openid`|Yes  |String    |WeChat authorization code. Refer to the **GET openid** documentation   |
 |`limit_pay`|No|String   |Designated payment method, used to limit credit card transactions   |
 |`extend_info`|No|Object   | Extended Customer Info, real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'  |
@@ -264,7 +264,7 @@ Optionally merchants can activate real-name authentication with WeChat. Currentl
 |— |`package`   |String(128)| Transaction details, the value of the `prepay_id` parameter returned by the interface has the format: prepay_id=**|
 |— |`signType`   |String(32) |Signature method, default is MD5|
 |— |`paySign`    |String(64) |Signature method, default is MD5|
-|— |Public response parameters    |— |Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details   |
+|— |Public response parameters    |— |Please refer to the [Public Payment Section](../../preparation/paycode#public-payment-parameters) for more details   |
 |`txcurrcd`  | |  String(3) |Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
 
 ## GET WeChat Pay Data

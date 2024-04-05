@@ -12,7 +12,17 @@ import Link from '@docusaurus/Link';
 
 **Method** : `POST`
 
-**PayType** : //TODO// : 800x01
+**PayType** :
+
+PayType | Description
+------- | -------
+800101	| Alipay Merchant Presented QR Code Payment in store (MPM) (Overseas Merchants)
+801501  | Alipay Merchant Presented QR Code (MPM) Payment (HK Merchants)
+800201  | WeChat Merchant Presented QR Code Payment (MPM) (Overseas & HK Merchants)
+805801  | PayMe Merchant Presented QR Code Payment in store (MPM) (HK Merchants)
+800701	| UNIONPAY Quick Pass Merchant Presented QR Code Payment (MPM)
+802001	| FPS Merchant Presented QR Code Payment (MPM) (HK Merchants)
+803701	| Octopus dynamic QRC Payment - Merchant Present Mode (MPM) (HK Merchants)
 
 **Description** : The merchant generates a dynamic QR code based on the Alipay / WeChat Pay protocol and presents it to the customer. The user opens their Alipay / WeChat Pay wallet and scans the displayed QRC in order to complete payment. This szenario applies to offline as well as online payments, for instance on websites.
 
