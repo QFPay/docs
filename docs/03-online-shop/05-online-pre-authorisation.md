@@ -9,7 +9,11 @@ import Link from '@docusaurus/Link';
 	- [Creating and capturing payments](#creating-and-capturing-payments)
 		- [Step 1: Create Pre-Authorisation Payment](#step-1-create-pre-authorisation-payment)
 		- [Step 2: Capture payment for pre-authorised transactions](#step-2-capture-payment-for-pre-authorised-transactions)
+		- [Request Parameters](#request-parameters)
+		- [Response Parameters](#response-parameters)
 	- [Unfreeze amount for `PRE-AUTHORISED` transactions](#unfreeze-amount-for-pre-authorised-transactions)
+		- [Request Parameters](#request-parameters-1)
+		- [Response Parameters](#response-parameters-1)
 	- [Refunding Completed (`CAPTURED`) Transactions](#refunding-completed-captured-transactions)
 	- [Notifications](#notifications)
 
@@ -41,27 +45,27 @@ The Pre-authorisation Step has to be achieved using the Payment Element componen
 
 Capture the amount booked by the customer in pre-authorised transactions
 
-**url** :   /trade/v1/authtrade
+**Endpoint** :   `/trade/v1/authtrade`
 
-**method** : POST
+**Method** : `POST`
 
-**header**:
+**Header**:
 
-| Header name | Must | Description |
-| -------------- | ---- | ------------------ |
-| X-QF-APPCODE | Y | app code |
-| X-QF-SIGN | Y | app key |
+| Header name    | Mandatory | Description |
+| -------------- | --------- | ----------- |
+| `X-QF-APPCODE` | Yes 	     | app code    |
+| `X-QF-SIGN`    | Yes 	     | app key 	   |
 
-**parameters** :
+### Request Parameters
 
-| Field          | Must | Description        |
-| -------------- | ---- | ------------------ |
-| txamt          | Y    | transaction amount |
-| txcurrcd       | N    | transaction currency |
-| mchid          | N    | mchid, merchant id |
-| syssn          | Y    | original transaction ID from pre-authorised payment |
+| Attribute      | Mandatory | Description       								   |
+| -------------- | --------- | --------------------------------------------------- |
+| `txamt`        | Yes    	 | transaction amount 								   |
+| `txcurrcd`     | No    	 | transaction currency 							   |
+| `mchid`        | No    	 | mchid, merchant id 								   |
+| `syssn`        | Yes    	 | original transaction ID from pre-authorised payment |
 
-**response** :
+### Response Parameters
 
 ```json
 {
@@ -86,28 +90,29 @@ Capture the amount booked by the customer in pre-authorised transactions
 
 >Only the non-captured (`pre-authorised amount - captured amount`) amount in the transaction can be unfreezed (released back to the customer). This action can only be done ONCE.
 
-**url** :   /trade/v1/unfreeze
+**Endpoint** :   `/trade/v1/unfreeze`
 
-**method** : POST
+**Method** : `POST`
 
-**header**:
+**Header**:
 
-| Header name | Must | Description |
-| -------------- | ---- | ------------------ |
-| X-QF-APPCODE | Y | app code |
-| X-QF-SIGN | Y | app key |
+| Header name    | Mandatory | Description |
+| -------------- | --------- | ----------- |
+| `X-QF-APPCODE` | Yes 		 | app code    |
+| `X-QF-SIGN` 	 | Yes 		 | app key 	   |
 
-**parameters** :
+### Request Parameters
 
-| Field          | Must | Description        |
-| -------------- | ---- | ------------------ |
-| txamt          | Y    | transaction amount      |
-| txdtm          | Y    | transaction time         |
-| syssn          | Y    | original transaction ID |
-| out_trade_no   | Y    | original merchant order id |
-| mchid          | N    | mchid, merchant id |
+| Attribute      | Mandatory | Description        		  |
+| -------------- | --------- | -------------------------- |
+| `txamt`        | Yes    	 | transaction amount 		  |
+| `txdtm`        | Yes    	 | transaction time 		  |
+| `syssn`        | Yes    	 | original transaction ID 	  |
+| `out_trade_no` | Yes    	 | original merchant order id |
+| `mchid`        | No   	 | mchid, merchant id 		  |
 
-**response** :
+### Response Parameters
+
 ```json
 {
 	 "sysdtm": "2024-02-26 17:17:05",
@@ -144,10 +149,10 @@ Upon successful execution of the following actions, you should be able to receiv
 These notifications will follow the same format as below. For different notification, the value of the field `notify_type` will differ
 
 | Action Completed | notify_type value |
-| -------------- | ------------------ |
-| Payment Captured | payment |
-| Unfreeze funds | unfreeze |
-| Refund | refund |
+| ---------------- | ----------------- |
+| Payment Captured | payment 		   |
+| Unfreeze funds   | unfreeze 		   |
+| Refund 		   | refund 		   |
 
 ```json
 {

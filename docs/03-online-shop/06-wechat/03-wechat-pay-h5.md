@@ -18,7 +18,7 @@ import Link from '@docusaurus/Link';
 
 |  Attribute | Mandatory| Type | Description |
 |:---|:----- |-----   |-----   |
-|Public payment parameters |—  |—   | Refer to the general documentation about transactions |
+|Public payment parameters |—  |—   | Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details |
 |`extend_info`|Yes|Object||
 
 ```js
@@ -50,11 +50,11 @@ extend_info:
 
 |Attribute| Secondary Attribute| Type|Description|
 |:----    |:---|:----- |----   |
-|Public response parameters    |—  |— | — |
+|Public response parameters    |—  |— | Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details |
 |`pay_url`|Yes|String||
 
 :::warning
-In normal process after payment, the user will return to the page where payment is initiated. If you want user to return to the specified page, you can insert redirect_url parameter to returned payment URL. For example, if you want user to jump to https://www.wechatpay.com.cn it can be processed as follows:
+In normal process after payment, the user will return to the page where payment is initiated. If you want user to return to the specified page, you can insert redirect_url parameter to returned payment URL. For example, if you want user to jump to [https://www.wechatpay.com.cn](https://www.wechatpay.com.cn), it can be processed as follows:
 :::
 
 ### pay_url

@@ -50,7 +50,7 @@ Calling a collection request:
 
 <Link href="@site/static/img/android/invoke__collection.png" target="_blank"> ![Collection](@site/static/img/android/invoke__collection.png)</Link>
 
-### Refund 
+### Refund
 
 Calling a refund request:
 

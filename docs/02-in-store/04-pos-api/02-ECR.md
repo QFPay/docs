@@ -64,11 +64,11 @@ For inquiry the transaction result, please use the [Inquire API](../../common-ap
 no password input is required in app when initialize refund request
 
 specific parameters
-| Parameter name | Mandatory | Type | Description |
+| Attribute | Mandatory | Type | Description |
 |---|---|---|---|
-|orderId|required|String|QFPay transaction Id
-| refund_amount | optional | String| the default refund amount is the refundable amount of the order,<br/> support partial refund |
-|allow_modify_flag|optional| Integer| 0: Not allow modification of refund amount (default value) <br/> 1: allow modification of refund amount
+|`orderId`| Yes|String|QFPay transaction Id|
+| `refund_amount` | No | String| the default refund amount is the refundable amount of the order,<br/> support partial refund |
+|`allow_modify_flag`| No | Integer| 0: Not allow modification of refund amount (default value) <br/> 1: allow modification of refund amount|
 
 :::note
 > for Card payment, Unionpay Card and American Express Card,  the amount of same day refund must be `full amount`

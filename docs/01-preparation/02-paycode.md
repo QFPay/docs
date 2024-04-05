@@ -86,29 +86,30 @@ Code   | Description
 805514 | Credit Card: first_data Security Verification Payment Mode (HK Merchants)
 -->
 
-:::warning
-    Notes
-:::
-
 :::note
-  **(\*)**
+
+\*
 
   1. Differently from Public Payment Parameters, `return_url` is a mandatory request parameter.
   2. `web_url` parameter in response contains the payment url.
 
-  **(\*\*)**
+\*\*
+
   1. Transaction amount must be greater than 1 HKD.
 
-  **(\*\*\*)**
+\*\*\*
+
   1. Payment method does not support refunds.
 
-  **(\*\*\*\*)**
+\*\*\*\*
+
   1. Please refer to [this](../online-shop/alipay/alipay-online-payments#alipay-online-payments) section for payment request and response.
+
 :::
 
 ## Currencies
 
-The below listed currencies are currently available in our payment network. Please consult **technical.support@qfpay.com** to verify that your API credentials and selected `pay_type` support your desired currency.
+The below listed currencies are currently available in our payment network. Please consult `technical.support@qfpay.com` to verify that your API credentials and selected `pay_type` support your desired currency.
 
 Code | Description
 --------- | -------
@@ -420,7 +421,7 @@ Attribute | Mandatory | Type | Description
 `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](#currencies) table for a complete list of available currencies
 `pay_type` | Yes | String(6) | Please refer to the section [Payment Codes](#paytype) for a complete list of payment types
 `out_trade_no` | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
-`txdtm` | Yes | String(20) | Transaction time format：<br/> YYYY-MM-DD hh:mm:ss 
+`txdtm` | Yes | String(20) | Transaction time format：<br/> YYYY-MM-DD hh:mm:ss
 `auth_code` | Yes<br/> (CPM only) | String(128) | Specifies the authorization code for scanning a barcode/QR Code. The `auth_code` returned is unique in each authorization. Each `auth_code` can be used only once and will automatically expire in one day. For testing CPM with Alipay and WeChat Pay the `auth_code` can be extracted with any QRC reader or manually found in the consumer wallet below the barcode.
 `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong WAP payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas WAP payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP
 `goods_name` | No | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
@@ -434,10 +435,10 @@ Attribute | Mandatory | Type | Description
 Attribute | Type | Description
  -------- | --------- | -------
 `pay_type` | String(6) | Please refer to the section [Payment Codes](#paytype) for a complete list of payment types
-`sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
-`txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  |
+`sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements.
+`txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  
 `resperr` | String(128) | Request result description
-`txamt` | Int(11) |
+`txamt` | Int(11) |  Amount of the transaction
 `respmsg` | String(128) |  Supplementary response description
 `out_trade_no` | String(128) | External transaction number  
 `syssn` | String(40) | QFPay internal transaction number (unique)
@@ -453,7 +454,7 @@ Return code | Description                                               |
 1101       | Reversal error (1101)     |
 1102       | Duplicate request (1102)  |
 1103       | Request format error (1103)  |
-1104       | Request parameter error (1104)  | 
+1104       | Request parameter error (1104)  |
 1105       | Device not activated (1105)  |
 1106       | Invalid device (1106)  |
 1107       | Device not allowed (1107)  |

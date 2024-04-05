@@ -293,12 +293,12 @@ Attribute | Mandatory | Type | Description
 `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies
 `pay_type` | Yes | String(6) | Payment type, Alipay Web Payment = 801101
 `out_trade_no` | Yes | String(128)| API Order Number, external transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
-`txdtm` | Yes | String(20) | Request transaction time, format：<br/> YYYY-MM-DD hh:mm:ss 
+`txdtm` | Yes | String(20) | Request transaction time, format：<br/> YYYY-MM-DD hh:mm:ss
 `expired_time` | No<br/> (MPM only) | String(3)  | Order expiration time, QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code
 `goods_name` | No | String(64) | Product name identification, Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
-`mchid` | No | String(16) | QFPay merchant number, may or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. 
+`mchid` | No | String(16) | QFPay merchant number, may or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request.
 `txzone` | No | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800).
-`udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal. 
+`udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal.
 `return_url` | No | String(512) | Redirect URL, address for user redirect after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters.
 
 ### Response Parameters

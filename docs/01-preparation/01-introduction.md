@@ -13,10 +13,10 @@ If you would like to quickly test the payment function in <Link href="https://ww
 ## Developer Instructions
 
 :::note
- If the `mchid` is provided, it is mandatory to submit the `mchid` when calling the API (unless otherwise specified.). In other words, if `mchid` is not provided, merchants shall not pass in the `mchid` parameter in the API request.
+If the `mchid` is provided, it is mandatory to submit the `mchid` when calling the API (unless otherwise specified.). In other words, if `mchid` is not provided, merchants shall not pass in the `mchid` parameter in the API request.
 :::
 
-To use the QFPay open API, you must have a set of active API credentials, including the **app_code** and **client_key**. If you encounter technical issues please contact **technical.support@qfpay.com**.
+To use the QFPay open API, you must have a set of active API credentials, including the **app_code** and **client_key**. If you encounter technical issues please contact `technical.support@qfpay.com`.
 
 There are separate environments available for application testing and development, as well as production.
 
@@ -38,11 +38,11 @@ Remember to immediately refund transactions that were made in testing environmen
 
 The table below depicts the **base URLs** for each environment.
 
-Environment Name                           | Prod. URL |
------------------------------------------- | ---------------------------------- |
-Sandbox (Only for credit card simulations) | https://openapi-int.qfapi.com      |
-Live Testing Environment                   | https://test-openapi-hk.qfapi.com  |
-Production                                 | https://openapi-hk.qfapi.com       |
+| Environment Name                           | Prod. URL                           |
+| ------------------------------------------ | ----------------------------------- |
+| Sandbox (Only for credit card simulations) | `https://openapi-int.qfapi.com`     |
+| Live Testing Environment                   | `https://test-openapi-hk.qfapi.com` |
+| Production                                 | `https://openapi-hk.qfapi.com`      |
 
 ## Signature Generation
 
@@ -85,7 +85,7 @@ def make_req_sign(data, key):
     keys = list(data.keys())
     keys.sort()
     p = []
-    for k in keys: 
+    for k in keys:
         v = data[k]
         p.append('%s=%s'%(k,v))
     unsign_str = ('&'.join(p) + key).encode("utf-8")
@@ -100,7 +100,7 @@ pay_type = '800101' # Alipay CPM = 800108 , MPM = 800101
 auth_code='283854702356157409' #CPM only
 out_trade_no = random_string
 txdtm = current_time
-goods_name = 'test1'   
+goods_name = 'test1'
 auth_code = '280438849930815813'
 key = client_key
 mchid = 'ZaMVg*****' # ID is provided during merchant onboarding
@@ -120,8 +120,8 @@ print(make_req_sign(data, key))
 <TabItem value="java" label="Java">
 
 ```java
-/* 
-This class is the utility for QFPay Payment API. 
+/*
+This class is the utility for QFPay Payment API.
 Note:This is just an example.
 getMd5Value:
 After do the string manipulation, like:abc=value&bad=value&bcd=valueKey
@@ -130,7 +130,7 @@ getDataString:
 This method pass in with the map, and generate the string like:abc=value&bad=value&bcd=value.
 */
 public class QFPayUtils {
-    
+
     public static String getMd5Value(String input) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
@@ -144,7 +144,7 @@ public class QFPayUtils {
             return null;
         }
     }
-   
+
     public static <T> String getDataString(Map resultMap) {
         Map<String, String> map = new TreeMap<String, String>(
                 new Comparator<String>() {
@@ -177,45 +177,48 @@ public class QFPayUtils {
 
 ```javascript
 // Enter Client Credentials
-const environment = 'https://test-openapi-hk.qfapi.com'
-const app_code = 'D5589D2A1F2E42A9A60C37**********'
-const client_key = '0E32A59A8B454940A2FF39*********'
+const environment = "https://test-openapi-hk.qfapi.com";
+const app_code = "D5589D2A1F2E42A9A60C37**********";
+const client_key = "0E32A59A8B454940A2FF39*********";
 
 // Generate Timestamp
-var dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
-console.log(dateTime)
+var dateTime = new Date().toISOString().replace(/T/, " ").replace(/\..+/, "");
+console.log(dateTime);
 
 // Body Payload
-const key = client_key
-var tradenumber = String(Math.round(Math.random() * 1000000000))
-console.log(tradenumber)
+const key = client_key;
+var tradenumber = String(Math.round(Math.random() * 1000000000));
+console.log(tradenumber);
 
 var payload = {
-'txamt': '10', // In USD,EUR,etc. Cent
-'txcurrcd': 'HKD',
-'pay_type': '800101', // Alipay CPM = 800108 , MPM = 800101
-'out_trade_no': tradenumber,
-'txdtm': dateTime,
-'mchid': 'ZaMVg*****'
+  txamt: "10", // In USD,EUR,etc. Cent
+  txcurrcd: "HKD",
+  pay_type: "800101", // Alipay CPM = 800108 , MPM = 800101
+  out_trade_no: tradenumber,
+  txdtm: dateTime,
+  mchid: "ZaMVg*****",
 };
 
 // Signature Generation
 const ordered = {};
-Object.keys(payload).sort().forEach(function(key) {
-  ordered[key] = payload[key] });
-console.log(ordered)
+Object.keys(payload)
+  .sort()
+  .forEach(function (key) {
+    ordered[key] = payload[key];
+  });
+console.log(ordered);
 
 var str = [];
 for (var p in ordered)
-if (ordered.hasOwnProperty(p)) {
-str.push((p) + "=" + (ordered[p]));
-}
-var string = str.join("&")+client_key;
-console.log(string)
+  if (ordered.hasOwnProperty(p)) {
+    str.push(p + "=" + ordered[p]);
+  }
+var string = str.join("&") + client_key;
+console.log(string);
 
-const crypto = require('crypto')
-var hashed = crypto.createHash('md5').update(string).digest('hex')
-console.log(hashed)
+const crypto = require("crypto");
+var hashed = crypto.createHash("md5").update(string).digest("hex");
+console.log(hashed);
 ```
 
 </TabItem>
@@ -240,7 +243,7 @@ $pay_type = '800101';
 //$mchid = "MNxMp11FV35qQN"; //Only agents must provide this parameter
 $app_code = 'FF2FF74F2F2E42769A4A73*********'; //API credentials are provided by QFPay
 $app_key = '7BE791E0FD2E48E6926043B*********'; //API credentials are provided by QFPay
-$now_time = date("Y-m-d H:i:s"); //Get the current date-time  
+$now_time = date("Y-m-d H:i:s"); //Get the current date-time
 
 $fields_string = '';
 $fields = array(
@@ -254,7 +257,7 @@ $fields = array(
 ksort($fields); //Sort parameters in ascending order from A to Z
 print_r($fields);
 
-foreach($fields as $key=>$value) { 
+foreach($fields as $key=>$value) {
     $fields_string .= $key.'='.$value.'&' ;
 }
 $fields_string = substr($fields_string , 0 , strlen($fields_string) - 1);
@@ -282,16 +285,16 @@ ob_end_flush();
 The API will return response content in JSON format. We encourage developers to verify the signature in the response header in order to ensure message integrity.
 :::
 
-Field | Description
---------- | -------
-Character | `UTF-8`  
-Method | **POST/ GET** (Depends on individual API function)
-Content-type | `application/x-www-form-urlencoded`
+| Field        | Description                                        |
+| ------------ | -------------------------------------------------- |
+| Character    | `UTF-8`                                            |
+| Method       | **POST/ GET** (Depends on individual API function) |
+| Content-type | `application/x-www-form-urlencoded`                |
 
 ### Required Parameter Settings in HTTP Header to Request the API
 
-Field | Mandatory | Description
---------- | ------- | -------
-`X-QF-APPCODE` | Yes | App code assigned to the merchant
-`X-QF-SIGN` | Yes | Signature generated according to the signature formulation method described above
-`X-QF-SIGNTYPE` | No | Signature algorithm used to generate the signature. If SHA256 is used, the developer must pass the value as `SHA256`. The default value is `MD5` in case this field is not passed to the API.
+| Field           | Mandatory | Description                                                                                                                                                                                   |
+| --------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `X-QF-APPCODE`  | Yes       | App code assigned to the merchant                                                                                                                                                             |
+| `X-QF-SIGN`     | Yes       | Signature generated according to the signature formulation method described above                                                                                                             |
+| `X-QF-SIGNTYPE` | No        | Signature algorithm used to generate the signature. If SHA256 is used, the developer must pass the value as `SHA256`. The default value is `MD5` in case this field is not passed to the API. |

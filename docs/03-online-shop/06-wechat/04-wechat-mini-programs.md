@@ -95,7 +95,7 @@ qfPayOpenAPI: function () {
 
 | Attribute| Mandatory| Type|Description|
 |:---|:----- |-----   |----   |
-| — | — |— |Refer to the public payment API documentation|
+| Public request parameters| — |— |Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details|
 |`sub_openid`|Yes |String(128)   |   |
 | `expired_time` | No | String(3)  | QRC expiration time in unit minutes. The default QRC expiration time for WeChat Mini Programs is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.
 |`limit_pay`|No |String    |The parameter value is specified as `no_credit`, and credit card payment is prohibited. This setting is only valid for mainland China.  |
@@ -105,7 +105,7 @@ qfPayOpenAPI: function () {
 
 |Attribute| Secondary Attribute| Type|Description|
 |:----    |:---|:----- |-----   |
-|Public response parameters    |—  |— |—  |
+|Public response parameters    |—  |— |Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details  |
 |`pay_params`    |`appId` |String(16) |Public WMP ID, after the developer registers the Mini Program with the WeChat, the appId can be obtained.  |
 |—   |`timeStamp` |String(32) |Current time  |
 |—   |`nonceStr`  |String(32) |Random string, no longer than 32 bits  |
@@ -149,6 +149,6 @@ To get started quickly, download the [QFPay WeChat Mini Program Boilerplate](@si
 
 1) Sign up with QFPay and we bind your WeChat appid to your API credentials.
 2) Visit the WeChat MP portal at [https://mp.weixin.qq.com](https://mp.weixin.qq.com) and whitelist our environment for incoming server traffic:
-开发 -> 开发设置 -> 服务器域名 -> request合法域名: e.g. https://openapi-sg.qfapi.com
+开发 -> 开发设置 -> 服务器域名 -> request合法域名: e.g. `https://openapi-sg.qfapi.com`
 3) Copy and paste the files from the zip file to your local harddrive and setup a cloudfunction environment.
 4) Obtain the user openid with the cloudfunction "getUserOpenID" and run the API calls accroding to the code.

@@ -62,7 +62,7 @@ Request Body:
 
 |Parameter name | Attribute | Mandatory | Type | Description |
 |:----    |:---|:----- |-----   |----   |
-| Public payment parameter    |—|— |—  |—   |
+| Public payment parameter    |—|— |—  |Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details  |
 | Alipay openid  |`openid`  |No | String(64)  | Corresponding to the APP authorization method.   |
 | Alipay payment code   |`auth_code`|No |String(128)   | Specifies the authorization code for scanning a barcode/QR Code. The `auth_code` returned is unique in each authorization. Each `auth_code` can only be used once and will automatically expire. For testing CPM with Alipay and WeChat Pay the auth_code can be extracted by any QRC reader or manually found in the consumer wallet below the barcode. |
 
@@ -70,7 +70,7 @@ Request Body:
 
 |Attribute | Second parameter code | Type | Parameter name | Description |
 |:----    |:---|:----- |-----   |----   |
-|Public response parameters |—  |— |—   |—|
+|Public response parameters |—  |— |—   |Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details|
 
 ## Unfreeze Funds
 
@@ -120,7 +120,7 @@ Request Body:
 |Unique device id   |`udid` |No|String    |   |
 |Time zone    |`txzone` | No |String    |Used to record the local order time. The default is Beijing time GMT+8 (+0800)  |
 
-**Response Parameter**
+## Response Parameter
 
 |Attribute | Type | Parameter name | Description |
 |:----    |:---|:----- |-----   |

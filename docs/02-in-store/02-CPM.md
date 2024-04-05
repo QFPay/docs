@@ -298,11 +298,11 @@ ob_end_flush();
 
 | Attribute | Mandatory | Type | Description |
 |:---|:----- |-----   |----   |
-|Public payment parameters | — | — |— |
+|Public payment parameters | — | — |Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details |
 |`auth_code` | Yes<br/> (CPM only) | String(128) | Specifies the authorization code for scanning a barcode/QR Code. The `auth_code` returned is unique in each authorization. Each `auth_code` can only be used once and will automatically expire. For testing CPM with Alipay and WeChat Pay the `auth_code` can be extracted by any QRC reader or manually found in the consumer wallet below the barcode.|
 
 ## Response Parameters
 
 | Attribute | Mandatory | Type | Description |
 |:----    |:---|:----- |-----   |
-|Public payment parameters | — | — |— |
+|Public payment parameters | — | — |Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details |

@@ -323,7 +323,7 @@ ob_end_flush();
 | `respcd`   | String(4)  |Request result code, 0000 - Interface call succeeded  |
 | `data` | Object | Query result, in JSON format |
 | `syssn`  |String(40) | QFPay transaction number |
-| `out_trade_no` | String(128) | API order number, external transaction number / Merchant platform transaction number | 
+| `out_trade_no` | String(128) | API order number, external transaction number / Merchant platform transaction number |
 | `chnlsn` | String | Wallet/Channel transaction number  |
 | `goods_name` | String(64) | Product name, Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters. |
 | `txcurrcd` | String(3) | Transaction currency, view the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies |
