@@ -103,7 +103,7 @@ public class TestMain {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://openapi-test.qfpay.com";
+        String url="https://test-openapi-hk.qfpay.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/payment", data, appcode,key);
         System.out.println(resp);
     }
@@ -248,7 +248,7 @@ ob_end_flush();
 {
   "sysdtm": "2020-04-13 10:30:34", 
   "paydtm": "2020-04-13 10:30:34", 
-  "txcurrcd": "THB", 
+  "txcurrcd": "HKD", 
   "respmsg": "", 
   "pay_type": "801101", 
   "cardcd": "", 
@@ -265,12 +265,12 @@ ob_end_flush();
 ```
 
 :::note
-支付宝香港不支持原生支付宝结账页面, 开发人员需要请求二维码并使用`iframe`嵌入
+支付宝香港不支持原生支付宝收银台页面, 开发人员需要请求二维码并使用`iframe`嵌入
 :::
 
 ## Web/WAP支付
 
-客户使用支付宝在商户网站上购物, 用户扫描显示的二维码进行支付, 确认总金额后进行支付. 最后可以用`return_url`参数将用户重定向到一个商户网站上选中的页面. 支付宝以人民币计费实时从消费者的支付宝钱包中扣除支付金额, 钱方最终会以当地货币结算支付金额.
+客户使用支付宝在商户网站上购物, 用户扫描显示的二维码进行支付, 确认总金额后进行支付. 最后可以用`return_url`参数将用户重定向到一个商户网站上选中的页面. 支付宝以人民币计费实时从消费者的支付宝钱包中扣除支付金额, QFPay 最终会以当地货币结算支付金额.
 
 ### HTTP请求
 
@@ -291,7 +291,7 @@ ob_end_flush();
 请求交易时间 | `txdtm` | 是 | String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
 交易过期时间 | `expired_time` | 否 <br/>(仅限正扫支付) | String(3)  | 以分钟为计时的二维码过期时间,默认的过期时间是30分钟. 该参数可以被手动设置为最小5分钟,最大120分钟 <br/> 该参数可用于: <br/>800201 - WeChat scan code
 商品名称标识 | `goods_name` | 否  | String(64) | 商品名称 / 标识: 不能超过 20 个字母数字或包含特殊字符。 APP支付不能为空。 如果参数是汉字，则需要使用**UTF-8**编码。
-子商户号 | `mchid` | 否  | String(16) | 标识子商户身份，由钱方分配（渠道系统后台查看对应商户(非业务员)子商户号，被视为对应商户的交易）
+子商户号 | `mchid` | 否  | String(16) | 标识子商户身份，由QFPay 分配（渠道系统后台查看对应商户(非业务员)子商户号，被视为对应商户的交易）
 时区 | `txzone` | 否  | String(5) | 用于记录本地下单时间，默认为北京时间+0800
 设备唯一id | `udid` | 否  | String(40) |  唯一的设备ID,显示在商户管理后台上. 
 跳转地址 | `return_url` | 否  | String(512) | 支付成功后的用户跳转地址. 支付宝WAP限制了`return_url`最大为200个字符.
@@ -307,6 +307,6 @@ ob_end_flush();
 订单支付金额 | `txamt` | Int(11) |
 信息描述 | `respmsg` | String(128) |
 外部订单号 | `out_trade_no` | String(128) | 外部订单号
-钱方订单号 | `syssn` | String(40) | 
+QFPay 订单号 | `syssn` | String(40) | 
 返回码 | `respcd` | String(4) | 0000 = 请求成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](../../preparation/paycode#交易状态码) 获得完整返回类型列表 |
 支付链接 | `pay_url` | String(512) |

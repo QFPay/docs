@@ -105,7 +105,7 @@ public class TestMain {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://openapi-test.qfpay.com";
+        String url="https://test-openapi-hk.qfpay.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/payment", data, appcode,key);
         System.out.println(resp);
     }
@@ -250,7 +250,7 @@ ob_end_flush();
 {
   "sysdtm": "2020-04-13 11:32:03", 
   "paydtm": "2020-04-13 11:32:03", 
-  "txcurrcd": "THB", 
+  "txcurrcd": "HKD", 
   "respmsg": "", 
   "pay_type": "801107", 
   "cardcd": "", 

@@ -116,8 +116,8 @@ public class Refund {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-         //如果是国内钱台，网址是：https://openapi-test.qfpay.com.
-        String url="https://openapi-test.qfpay.com";
+         //如果是国内钱台，网址是：https://test-openapi-hk.qfpay.com.
+        String url="https://test-openapi-hk.qfpay.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/refund", data, appcode,key);
         System.out.println(resp);
     }
@@ -287,7 +287,7 @@ ob_end_flush();
 
 |Attribute|Mandatory|Type|Description|
 |---|----- |-----   |-----   |
-| ` syssn ` |Yes |String(128)  |QF Pay transaction number. Original transaction ID `syssn`  that is supposed to be refunded|
+| ` syssn ` |Yes |String(128)  |QFPay transaction number. Original transaction ID `syssn`  that is supposed to be refunded|
 |` out_trade_no `  |Yes |String(128)  | API order number. External refund transaction number / Merchant platform refund transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.|
 |` txamt `   |Yes |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1) <br/> Required for both full refund and partial refund. Some payment channel may not support partial refund.|
 |` txdtm `   |Yes |String(20) |Transaction request time. Format: YYYY-MM-DD hh:mm:ss|
@@ -297,15 +297,15 @@ ob_end_flush();
 
 ### Response Parameters
 
-|Parameter name|Attribute|Type|Description|
-|-----    |----|------ |-----   |
-|Refund Transaction ID | `syssn`  |String(40)   |New transaction ID referring to the newly created refund transaction|
-|Original Transaction ID| `orig_syssn`  |String(128)   |Previous transaction ID referring to the original transaction that has been refunded|
-|Refund amount| `txamt`   |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1)|
-|System transaction time | `sysdtm`  | String(20)  |Format: YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements.|
-|Return code| `respcd` |  String(4)|  0000-Request successful.<br/>1143/1145 - merchants are required to continue to query the refund transaction result. <br/>All other return codes indicate transaction failure. Please refer to the section [payment status codes](../preparation/paycode#transaction-status-codes) for a complete list of return codes.|
-|Response message| `resperr` |  String(128)| Error message |
-| Net payment amount |`cash_fee`  | String | Actual payment amount by user = transaction amount - discounts |
-| Payment currency |`cash_fee_type` | String | Actual payment currency e.g. CNY |
-| Net refund amount | `cash_refund_fee` | String | Actual refund amount |
-| Refund currency | `cash_refund_fee_type` | String | Actual refund currency e.g. CNY |
+|Attribute|Type|Description|
+|---------|----|-----------|
+|`syssn`  |String(40)   |Refund Transaction ID referring to the newly created refund transaction|
+|`orig_syssn`  |String(128)   |Original Transaction ID, previous transaction ID referring to the original transaction that has been refunded|
+|`txamt`   |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1)|
+|`sysdtm`  | String(20)  |System transaction time. Format: YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements.|
+|`respcd` |  String(4)|Return code, 0000-Request successful.<br/>1143/1145 - merchants are required to continue to query the refund transaction result. <br/>All other return codes indicate transaction failure. Please refer to the section [payment status codes](../preparation/paycode#transaction-status-codes) for a complete list of return codes.|
+|`resperr` |  String(128)| Response message|
+| `cash_fee`  | String | Actual payment amount by user = transaction amount - discounts |
+| `cash_fee_type` | String | Actual payment currency e.g. CNY |
+| `cash_refund_fee` | String | Actual refund amount |
+| `cash_refund_fee_type` | String | Actual refund currency e.g. CNY |

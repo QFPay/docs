@@ -1,4 +1,4 @@
-﻿# 钱方Element SDK
+﻿# QFPay 支付组件 SDK
 
 ## 引入方式
 
@@ -15,7 +15,7 @@
 
 ### 1. 支付模式(Payment Intent)
 
-1. 支持visa/master Card-form支付方式
+1. 支持 visa/master Card-form 支付方式
 
 ```js
   // 初始化 qfpay 对象
@@ -42,7 +42,7 @@
   })
 ```
 
-2. 完整支付功能，包括visa/master card-form、visa/master pre-auth、支付宝香港、支付宝大陆、微信、银联云闪付、Payme、转数快等。
+2. 完整支付功能，包括 visa/master card-form、visa/master pre-auth、支付宝香港、支付宝大陆、微信、银联云闪付、Payme、转数快等。
 
 ```js
   // 初始化 qfpay 对象

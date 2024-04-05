@@ -40,21 +40,23 @@ Request Body:
 
 ### HTTP Request
 
-`POST ../trade/v1/add_note`
+**Endpoint** : `/trade/v1/add_note`
+
+**Method** : `POST`
 
 ### Request Parameters
 
-|Parameter name|Attribute|Mandatory|Type|Description|
-|----    |---|----- |-----   |----- |
-|Merchant app code| `code`   |Yes   |String(32)   | Provided by QF Pay |
-|Transaction number | `syssn` | Yes |String(40) | QFPay transaction number, returned by the system once payment is completed |
-|Remarks| `note`   |Yes   |String(200）   | Remarks value  |
+|Attribute|Mandatory|Type|Description|
+|---------|---------|----|-----------|
+| `code`  |Yes   |String(32)   | Merchant app code, provided by QFPay |
+| `syssn` |Yes   |String(40) | QFPay transaction number, returned by the system once payment is completed |
+| `note`  |Yes   |String(200）   | Remarks value  |
 
 ### Response Parameters
 
-|Attribute|Type | Parameter name |Description|
-|----    |---|-----   |-----   |
-| `resperr`   |String(128)   |Transaction result description   |  | 
-| `respmsg`   |String(128)  |Error message   |    | 
-| `respcd`    |String(4)  |Return code   |   0000 = Interface call succeeded | 
-| `syssn`     |String(40)   |Error message   | Transaction number returned by the system when payment is completed | 
+|Attribute|Type |Description|
+|---------|-----|-----------|
+|`resperr`|String(128)|Transaction result description |
+|`respmsg`|String(128)|Error message   |
+|`respcd` |String(4)  |Return code, 0000 = Interface call succeeded |
+|`syssn`  |String(40) |Transaction number returned by the system when payment is completed |

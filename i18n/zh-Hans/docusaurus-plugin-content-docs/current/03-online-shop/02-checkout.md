@@ -1,12 +1,12 @@
 import Link from '@docusaurus/Link';
 
-# 钱方结账页面服务
+# QFPay 收银台服务
 
 ## 介紹
 
-欢迎使用 **QFPay 安全收银台** 本手册介绍了 QFPay 的托管结账页面，开发者可以通过该页面向其在线商店添加多种支付方式。
+欢迎使用 **QFPay 安全收银台** 本手册介绍了 QFPay 的托管收银台页面，开发者可以通过该页面向其在线商店添加多种支付方式。
 
-## 结账页面设计
+## 收银台页面设计
 
 <Link href="/img/shouyintai.png"> ![shouyintai](@site/static/img/shouyintai.png) </Link>
 
@@ -20,19 +20,20 @@ import Link from '@docusaurus/Link';
 
 下表描述了每个区域的基本 URL。
 
-| 環境 | URL              |
+| 环境 | URL              |
 | ---------- | ------------------------- |
-| 香港 | https://openapi-hk.qfapi.com/checkstand/#/? |
+| 线上测试环境 | https://test-openapi-hk.qfapi.com/checkstand/#/?|
+| 生产环境 | https://openapi-hk.qfapi.com/checkstand/#/? |
 
 ## 流程
 
 <Link href="/img/flowchart.png"> ![shouyintai](@site/static/img/flowchart.png) </Link>
 
-消费者浏览商户的网站并继续付款。 一旦他们点击支付按钮，他们将被转发到 QFPay 托管的结账页面。 在这里，消费者可以找到多种支付方式，可在桌面或移动设备上结账并完成支付。 付款成功后，用户将被重定向回商家网站以获取“付款成功通知”并继续浏览商店。
+消费者浏览商户的网站并继续付款。 一旦他们点击支付按钮，他们将被转发到 QFPay 托管的收银台页面。 在这里，消费者可以找到多种支付方式，可在桌面或移动设备上结账并完成支付。 付款成功后，用户将被重定向回商家网站以获取“付款成功通知”并继续浏览商店。
 
 ## API請求參數
 
-`GET https://openapi-hk.qfapi.com/checkstand/#/?..` <br/>
+`GET https:test-openapi-hk.qfapi.com/checkstand/#/?..` <br/>
 
 创建新的结帐请求需要以下主体参数；
 
@@ -54,14 +55,14 @@ import Link from '@docusaurus/Link';
 |txzone|String(5)|是|时区|该字段用于记录本地下单时间, 默认为北京时间 +0800.|
 |udid|String(40)|是|唯一設備ID|0001|
 |expired_time|String(3)|是|二维码过期时间|单位为分钟，最短5分钟，最长120分钟，仅微信支付、支付宝、支付宝香港支持此参数|
-|checkout_expired_time|String(3)|是|客户端过期时间|单位为5分钟， 时间到了后，结账页面会跳转至 支付失败后的重定向URL|
+|checkout_expired_time|String(3)|是|客户端过期时间|单位为5分钟， 时间到了后，收银台页面会跳转至 支付失败后的重定向URL|
 |limit_pay|String(3)|是|禁止使用信用卡|参数值指定为no_credit，即禁止使用信用卡支付，仅微信支付支持此功能。|
 |lang|String(5)|是|界面语言|可能值 <br/> zh-hk (香港繁体中文) <br/> zh-cn (简体中文) <br/> en (英文) <br/>如果结帐请求中不传递该参数，则结帐页面将使用浏览器的默认语言。 如果结帐请求中传递该参数，则生成签名时不包含该参数。|
 
 ## 创建新订单
 
 :::info
-每笔订单都是唯一的，因此商家在重定向到托管结账页面时需要创建唯一的外部交易号“out_trade_no”。
+每笔订单都是唯一的，因此商家在重定向到托管收银台页面时需要创建唯一的外部交易号“out_trade_no”。
 :::
 
 创建新的结帐订单，必须发送带有身份验证签名的 GET 请求。 对于此签名，必须连接上述参数，然后使用 QFPay 提供的 app_key 进行哈希处理。 如需 API 凭证或技术支持，请联系 **technical.support@qfpay.com**。
@@ -93,7 +94,7 @@ a{
 window.onload = function(){
   let standard = document.getElementById('standard')
 
-  let origin = 'https://openapi-hk.qfapi.com/checkstand/#/?'
+  let origin = 'https://test-openapi-hk.qfapi.com/checkstand/#/?'
    let obj = {
     appcode: "CC6FB660837E49F7A675D2**********",
     goods_name: "remotfpay_checkout_names",

@@ -106,7 +106,7 @@ public class TestMain {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://openapi-test.qfpay.com";
+        String url="https://test-openapi-hk.qfpay.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/payment", data, appcode,key);
         System.out.println(resp);
     }
@@ -193,7 +193,7 @@ function GetRandStr($length){
     return $randstr;
 }
 
-$url = 'https://openapi-test.qfapi.com';
+$url = 'https://test-openapi-hk.qfapi.com';
 $api_type = '/trade/v1/payment';
 $pay_type = '805801'; //PayMe Offline Payment = 805801
 $app_code = 'FF2FF74F2F2E42769A4A73*********'; //API credentials are provided by QFPay
@@ -292,7 +292,7 @@ API Order Number | `out_trade_no` | Yes | String(128)| External transaction numb
 Request transaction time | `txdtm` | Yes | String(20) | Transaction time format：<br/> YYYY-MM-DD hh:mm:ss 
 Order expiration time | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.
 Product name identification | `goods_name` | No | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
-QF Pay merchant number | `mchid` | No | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. 
+QFPay merchant number | `mchid` | No | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. 
 Time zone | `txzone` | No | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800). 
 Device ID | `udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal. 
 Redirect URL | `return_url` | No | String(512) |  URL that the user will be redirected to when the payment finishes.

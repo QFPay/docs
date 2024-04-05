@@ -1,12 +1,12 @@
 {
 	"info": {
 		"_postman_id": "0084c151-5d67-4936-97f8-cb4027381be6",
-		"name": "QF Pay openAPI - Main Requests",
+		"name": "QFPay openAPI - Main Requests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "QF Pay openAPI - Payment",
+			"name": "QFPay openAPI - Payment",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -151,7 +151,7 @@
 			"response": []
 		},
 		{
-			"name": "QF Pay openAPI - Transaction Query",
+			"name": "QFPay openAPI - Transaction Query",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -250,7 +250,7 @@
 			"response": []
 		},
 		{
-			"name": "QF Pay openAPI - Refund",
+			"name": "QFPay openAPI - Refund",
 			"event": [
 				{
 					"listen": "prerequest",

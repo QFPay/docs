@@ -16,7 +16,7 @@ const FeatureList = [
     links:[
       {title:<Translate id="homepage.features.in-store.MPM">Merchant Present QRCode Mode</Translate>, url:"docs/in-store/MPM"},
       {title:<Translate id="homepage.features.in-store.CPM">Consumer Present QRCode Mode</Translate>, url:"docs/in-store/CPM"},
-      {title:<Translate id="homepage.features.in-store.pos">POS API</Translate>, url:"docs/in-store/pos-api"}
+      {title:<Translate id="homepage.features.in-store.pos">POS API</Translate>, url:"docs/category/pos-api"}
     ]
   },
   {
@@ -48,8 +48,8 @@ const FeatureList = [
     links:[
       {title:"Shopify", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26Shopify-SetupGuideline.pdf"},
       {title:"Magento", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26Magento-SetupGuideline.pdf"},
-      {title:"Woocommerce", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26WooCommerce-SetupGuideline.pdf"},
-      {title:"Opencart", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26OpenCart-SetupGuideline.pdf"},
+      {title:"WooCommerce", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26WooCommerce-SetupGuideline.pdf"},
+      {title:"OpenCart", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26OpenCart-SetupGuideline.pdf"},
     ]
   },
 ];
@@ -73,13 +73,13 @@ const ResourcesList = [
     Svg: 'img/homepage/sdks-downloads.png',
     description: (
       <Translate id="homepage.resources.sdks-downloads.content">
-        Quick way to find out our SKDs
+        Quick way to find out our SDKs
       </Translate>
     ),
     links:[
       {title:<Translate>POS App call App SDK</Translate>, url:""},
-      {title:<Translate>Wechat Pay In-App payment SDKs</Translate>, url:""},
-      {title:<Translate>Alipay In-App payment SDKs</Translate>, url:""},
+      {title:<Translate>Wechat Pay In-App payment SDKs</Translate>, url:"https://developers.weixin.qq.com/doc/oplatform/Downloads/iOS_Resource.html"},
+      {title:<Translate>Alipay In-App payment SDKs</Translate>, url:"https://global.alipay.com/docs/ac/app_hk/download"},
     ]
   },
   // {

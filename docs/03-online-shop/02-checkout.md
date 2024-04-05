@@ -22,7 +22,8 @@ The table below depicts base URLs for each region.
 
 | Environment Name | URL              |
 | ---------- | ------------------------- |
-| Hong Kong | `https://openapi-hk.qfapi.com/checkstand/#/?` |
+| Living Test | `https://test-openapi-hk.qfapi.com/checkstand/#/?` |
+| Production | `https://openapi-hk.qfapi.com/checkstand/#/?` |
 
 ## Process Flow
 
@@ -32,7 +33,7 @@ Customers browse the client's website and proceed to make payment. Once they cli
 
 ## API Request Parameters
 
-**Endpoint** : `https://openapi-hk.qfapi.com/checkstand/#/?..`
+**Endpoint** : `https:test-openapi-hk.qfapi.com/checkstand/#/?..`
 
 **Method** : `GET`
 
@@ -95,7 +96,7 @@ a{
 window.onload = function(){
   let standard = document.getElementById('standard')
 
-  let origin = 'https://openapi-hk.qfapi.com/checkstand/#/?'
+  let origin = 'https:test-openapi-hk.qfapi.com/checkstand/#/?'
    let obj = {
     appcode: "CC6FB660837E49F7A675D2**********",
     goods_name: "remotfpay_checkout_names",

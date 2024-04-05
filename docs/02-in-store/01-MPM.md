@@ -12,6 +12,8 @@ import Link from '@docusaurus/Link';
 
 **Method** : `POST`
 
+**PayType** : //TODO// : 800x01
+
 **Description** : The merchant generates a dynamic QR code based on the Alipay / WeChat Pay protocol and presents it to the customer. The user opens their Alipay / WeChat Pay wallet and scans the displayed QRC in order to complete payment. This szenario applies to offline as well as online payments, for instance on websites.
 
 ```plaintext
@@ -46,7 +48,7 @@ import string
 import random
 
 # Enter Client Credentials
-environment = 'https://openapi-eur.qfapi.com'
+environment = 'https://test-openapi-hk.qfapi.com'
 app_code = 'FADB8A87E0674012979F5443AA81ECF1'
 client_key = 'F644B1389AD24C25BEFE8BE10C31C878'
 
@@ -129,7 +131,7 @@ public class TestMain {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://openapi-test.qfpay.com";
+        String url="https://test-openapi-hk.qfpay.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/payment", data, appcode,key);
         System.out.println(resp);
     }
@@ -297,8 +299,8 @@ ob_end_flush();
 |Attribute|Mandatory|Type|Description|
 |:---|:----- |-----   |-----   |
 |Public payment parameter | —  | — | — |
-| `pay_tag`  | No |     String(16) | The default value is: ALIPAYHK<br/>Alipay Continental version: ALIPAYCN<br/>801103 - Alipay overseas online refund (QF_BUSICD_ALIPAY_ONLINE_REFUND)<br/>801104 - Alipay overseas online inquiry (QF_BUSICD_ALIPAY_ONLINE_QUERY)<br/>801110 - Alipay overseas online APP payment (QF_BUSICD_ALIPAY_ONLINE_APP)<br/>801501 - Alipay Hong Kong pc scan code<br/>801512 - Alipay Hong Kong WAP payment<br/>801510 - Alipay Hong Kong APP payment  |
-| `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong WAP payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas WAP payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP
+| `pay_tag`  | No |     String(16) | The default value is: ALIPAYHK<br/>Alipay Continental version: ALIPAYCN |
+| `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for WeChat and Alipay |
 |`limit_pay`|No |String   |The parameter value is specified as no_credit, and credit card payment is prohibited. This setting only applies to mainland China.  |
 
 ## Response Parameters

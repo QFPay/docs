@@ -2,7 +2,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# 微信JSAPI支付(微信浏览器)
+# 微信 JSAPI 支付（微信公众号）
 
 <Link href="/img/wechat_jsapi_process.jpg" target="_blank">![WeChat JSAPI process-flow](@site/static/img/wechat_jsapi_process.jpg)</Link>
 
@@ -20,7 +20,7 @@ JSAPI 支付有两种不同的实现方法。
 
 **1. 拥有实名认证的公众号JSAPI支付**
 
-对于这种集成，商户需要在微信上注册自己的公众号，我们会将公众号与商户的QF Pay支付账户绑定。 在这种情况下，商家可以创建和发布自己的内容、访问客户信息并收集自己的关注者。 选择该实现方式时，商户需要获取“oauth_code”、用户“openid”，并通过<Link href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_1">官方微信平台</Link>触发微信支付。 商户只需参考QF Pay[交易查询API接口](../../common-api/transaction-enquiry)即可。
+对于这种集成，商户需要在微信上注册自己的公众号，我们会将公众号与商户的QFPay支付账户绑定。 在这种情况下，商家可以创建和发布自己的内容、访问客户信息并收集自己的关注者。 选择该实现方式时，商户需要获取“oauth_code”、用户“openid”，并通过<Link href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_1">官方微信平台</Link>触发微信支付。 商户只需参考QFPay[交易查询API接口](../../common-api/transaction-enquiry)即可。
 
 **Step 1:** 开发者在微信公众号平台完成实名认证后，即可使用微信公众号支付。 认证完成后，开发者可以获得认证公众账号的openid参数。 请参考官方[微信文档](https://developers.weixin.qq.com/doc/offiaccount/en/Getting_Started/Overview.html)，了解更多信息。
 
@@ -32,7 +32,7 @@ JSAPI 支付有两种不同的实现方法。
 
 **2. 未拥有实名认证的公众号JSAPI支付**
 
-对于此类支付，商户可以基于QF Pay的公众号进行。 此整合仅适用于使用间接结算选项（即由 QFPay 提供结算）的商户。 对于此实现，商户应使用 QFPay 的 API 获取“oauth_code”、用户“openid”并触发微信支付，如下所述。
+对于此类支付，商户可以基于QFPay的公众号进行。 此整合仅适用于使用间接结算选项（即由 QFPay 提供结算）的商户。 对于此实现，商户应使用 QFPay 的 API 获取“oauth_code”、用户“openid”并触发微信支付，如下所述。
 
 ## 获取微信oauth_code
 
@@ -40,7 +40,7 @@ JSAPI 支付有两种不同的实现方法。
 GET WeChat oauth_code request:
 
 {
-  https://openapi-test.qfpay.com/tool/v1/get_weixin_oauth_code?app_code=5D81D64E602043F7AF51CEXXXXXXXXXX&sign=F4D8FB00894F213993B33116BC1B4E10&redirect_uri=https://sdk.qfapi.com
+  https://test-openapi-hk.qfpay.com/tool/v1/get_weixin_oauth_code?app_code=5D81D64E602043F7AF51CEXXXXXXXXXX&sign=F4D8FB00894F213993B33116BC1B4E10&redirect_uri=https://sdk.qfapi.com
 }
 ```
 

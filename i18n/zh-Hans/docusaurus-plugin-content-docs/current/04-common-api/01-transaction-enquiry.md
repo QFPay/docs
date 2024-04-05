@@ -114,7 +114,7 @@ public class Enquiry {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://openapi-test.qfpay.com";
+        String url="https://test-openapi-hk.qfpay.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/query", data, appcode,key);
         System.out.println(resp);
     }
@@ -287,7 +287,7 @@ ob_end_flush();
 }
 ```
 
-发起交易后，需要调用查询接口，获取订单的状态,直到钱方返回具体的状态信息为止，根据订单的状态进行相应的处理。
+发起交易后，需要调用查询接口，获取订单的状态,直到QFPay 返回具体的状态信息为止，根据订单的状态进行相应的处理。
 
 ​默认不支持隔月订单查询，若查询隔月订单，需传入`start_time`、`end_time`（时间区间包含`sysdtm`时间，且区间不能跨月）参数，建议以`syssn`为条件进行查询。此外，如果交易接口没有返回`syssn`，使用`out_trade_no`为条件进行查询。
 
@@ -297,8 +297,8 @@ ob_end_flush();
 
 |参数名称| 参数编码|是否必须|参数类型|描述|
 |----    |---|----- |-----   |-----   |
-|子商户 | ` mchid ` | For Agents |String(16) | 标识子商户身份，由钱方统一分配；支付时若`mchid`非空则查询订单时必传.|
-|钱方订单号| ` syssn ` |No |String(128) |多个以英文逗号区分开 |
+|子商户 | ` mchid ` | For Agents |String(16) | 标识子商户身份，由QFPay 统一分配；支付时若`mchid`非空则查询订单时必传.|
+|QFPay 订单号| ` syssn ` |No |String(128) |多个以英文逗号区分开 |
 |外部订单号| ` out_trade_no ` |No |String(128) | 外部订单号/商户平台订单号, 多个订单号由逗号分隔  |
 |支付类型 | ` pay_type ` |No |String(6) | 多个项目由逗号分隔 |
 |交易返回码| ` respcd ` |No |String(4) | 默认返回所有返回码状态的订单  |
@@ -317,18 +317,18 @@ ob_end_flush();
 | 每页显示数量| `page_size` | Int(8)  |  |
 | 请求结果返回码 | `respcd`   | String(4)  |0000 - 接口呼叫成功  |
 | 查询结果 | `data` | Object | JSON 格式 |
-| 钱方订单号 |  `syssn`  |String(40) |  |
+| QFPay 订单号 |  `syssn`  |String(40) |  |
 | API 订单号| `out_trade_no` | String(128) |外部订单号或商户平台交易码 |
 | 钱包/渠道 交易码 | `chnlsn` | String |  |
 | 商品名称 | `goods_name` | String(64) | 商品名称 / 标识: 不能超过 20 个字母数字或包含特殊字符。 APP支付不能为空。 如果参数是汉字，则需要使用**UTF-8**编码。 |
 | 交易货币 | `txcurrcd` | String(3) | 交易币种, 请查看[币种](../../preparation/paycode#支付币种)表以获取完整的可选用的币种 |
-| 原始订单号 | `origssn` | String(40) | 指原钱方交易号, 此参数仅在退款的`syssn`在排队中可用 |
+| 原始订单号 | `origssn` | String(40) | 指原QFPay 交易号, 此参数仅在退款的`syssn`在排队中可用 |
 | 支付类型 | `pay_type` | String(6) | 请参考[支付类型表](../preparation/paycode#支付类型) 获取完整的支付类型 |
 | 订单类型 |  `order_type` |  String(16) | Payment: 支付交易 Refund: 退款交易 |
 | 请求交易时间 | `txdtm` | String(20) | 商户在交易和退款请求中提交的交易时间. 格式: YYYY-MM-DD hh:mm:ss |
 | 订单支付金额 | `txamt` | Int(11) |  交易金额, 以分为单位 (i.e. 100 = $1) |
 | 系统交易时间 | `sysdtm` | String(20) | 格式: YYYY-MM-DD hh:mm:ss <br/>这个值被用作结算截止时间 |
-| 撤销/退款标记 | `cancel` | String(1) | 交易撤销情况: <br/> 0 = 未能撤销 <br/> 1 = 付款码支付: 交易撤销或退款成功 <br/> 2 = 正扫支付: 交易撤销成功 <br/> 3 = 交易已退款 <br/> 4 = 支付宝预授权订单完结 <br/> 5 = 交易部分退款 |
+| 撤销/退款标记 | `cancel` | String(1) | 交易撤销情况: <br/> 0 = 未能撤销 <br/> 1 = 反扫支付: 交易撤销或退款成功 <br/> 2 = 正扫支付: 交易撤销成功 <br/> 3 = 交易已退款 <br/> 4 = 支付宝预授权订单完结 <br/> 5 = 交易部分退款 |
 | 支付结果返回码 |  `respcd` | String(4) | 0000-请求成功.<br/>1143/1145 - 商户需要持续查询退款交易状态. <br/>所有其他的返回编码都是失败值. 请根据 [交易状态码](../preparation/paycode#交易状态码) 获取完整的信息.|
 | 支付结果描述 | `errmsg` | String(128) | 支付结果描述 |
 | 货币换汇汇率 |`exchange_rate`  | String | 使用的换汇汇率 |

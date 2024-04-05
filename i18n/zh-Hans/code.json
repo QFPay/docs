@@ -21,7 +21,7 @@
     "message": "正扫支付"
   },
   "homepage.features.in-store.CPM": {
-    "message": "付款码支付"
+    "message": "反扫支付"
   },
   "homepage.features.in-store.pos": {
     "message": "POS API"
@@ -36,7 +36,7 @@
     "message": "Visa/Mastercard 线上支付"
   },
   "homepage.features.online-shop.checkout": {
-    "message": "结账页面服务"
+    "message": "收银台页面服务"
   },
   "homepage.features.online-shop.paymentelement": {
     "message": "Element SDK"

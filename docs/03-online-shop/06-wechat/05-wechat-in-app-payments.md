@@ -65,7 +65,7 @@ Request Body:
 
 | Attribute | Mandatory | Type | Description |
 |:---|:----- |-----   |----   |
-| `mchid`  | No | String  | The unique merchant ID is created by QF Pay during the merchant onboarding process. |
+| `mchid`  | No | String  | The unique merchant ID is created by QFPay during the merchant onboarding process. |
 | `out_trade_no` | Yes | String    | External transaction number|
 | `txamt`  | Yes | String |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen funds|
 | `txcurrcd` | Yes | String(3) | Transaction currency. View the Currencies table for a complete list of available currencies|

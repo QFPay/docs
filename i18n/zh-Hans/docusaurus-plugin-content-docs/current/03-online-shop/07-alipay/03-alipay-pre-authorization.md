@@ -84,8 +84,8 @@ Only calls `alipay.fund.auth.operation.cancel` when the merchant’s system enco
 
 |Parameter name | Attribute | Mandatory | Type | Description |
 |:----    |:---|:----- |-----   |-----   |
-|Merchant ID    |`mchid` | Yes  |String   | The unique merchant ID is created by QF Pay during the merchant onboarding process.    |
-|QF Pay transaction number    | `syssn` | No | String    | Multiple entries are separated by English commas |
+|Merchant ID    |`mchid` | Yes  |String   | The unique merchant ID is created by QFPay during the merchant onboarding process.    |
+|QFPay transaction number    | `syssn` | No | String    | Multiple entries are separated by English commas |
 |External transaction number    | `out_trade_no` | No | String    | e.g. Developer platform order number |
 |Transaction amount    | `txamt` |No |    Int   |Whether to pass this parameter depends on the payment channel, Alipay and WeChat Pay do not need to submit this information  |
 |Transaction request time    |`txdtm`  |Yes  |String    |Format: YYYY-MM-dd hh:mm:ss  |
@@ -96,7 +96,7 @@ Only calls `alipay.fund.auth.operation.cancel` when the merchant’s system enco
 
 |Attribute | Type | Parameter name | Description |
 |:----    |:---|:----- |-----   |
-|`syssn` |String(40)| QF Pay transaction number |  |
+|`syssn` |String(40)| QFPay transaction number |  |
 |`orig_syssn` |String(40)| External transaction number| Developer platform transaction number |
 |`txdtm`  |String(20)| Time of the transaction request| Format: YYYY-MM-dd hh:mm:ss |
 |`txamt`  |Int(11)| Order payment amount |  |
@@ -145,8 +145,8 @@ Request Body:
 
 | Parameter name | Attribute | Mandatory | Type | Description |
 |:----    |:---|:----- |-----   |----   |
-|Merchant ID    | `mchid`  | No | String  | The unique merchant ID is created by QF Pay during the merchant onboarding process. |
-|QF Pay transaction number | `syssn`  | Yes | String   |  Fund authorization number  |
+|Merchant ID    | `mchid`  | No | String  | The unique merchant ID is created by QFPay during the merchant onboarding process. |
+|QFPay transaction number | `syssn`  | Yes | String   |  Fund authorization number  |
 |External transaction number    | `out_trade_no` | Yes | String    |Developer platform transaction number |
 |Transaction amount    | `txamt`  | Yes | int     |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen funds|
 |Transaction request time    | `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh:mm:ss|
@@ -158,7 +158,7 @@ Request Body:
 
 | Attribute | Type | Parameter name | Description |
 |:----    |:---|:----- |-----   |
-|`syssn` |   String(40) | QF Pay Transaction number | This number is being used when freezing funds, detucting money from the frozen amount as well as unfreezing funds. |
+|`syssn` |   String(40) | QFPay Transaction number | This number is being used when freezing funds, detucting money from the frozen amount as well as unfreezing funds. |
 |`orig_syssn`    |String(40)| External transaction number | Developer platform transaction number |
 |`txdtm`     | String(20) | Transaction request time | Format: YYYY-MM-DD hh:mm:ss  |
 |`txamt`    |Int(11)| Transaction amount | |

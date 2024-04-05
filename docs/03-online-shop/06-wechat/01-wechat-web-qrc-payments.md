@@ -109,7 +109,7 @@ public class TestMain {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://openapi-test.qfpay.com";
+        String url="https://test-openapi-hk.qfpay.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/payment", data, appcode,key);
         System.out.println(resp);
     }
@@ -254,7 +254,7 @@ ob_end_flush();
 {
   "sysdtm": "2020-04-10 11:45:44", 
   "paydtm": "2020-04-10 11:45:44", 
-  "txcurrcd": "THB", 
+  "txcurrcd": "HKD", 
   "respmsg": "OK", 
   "qrcode": "weixin://wxpay/bizpayurl?pr=4PsXP5N", 
   "pay_type": "800201", 
@@ -289,7 +289,7 @@ Attribute | Secondary Attribute | Mandatory | Type | Description
 `txdtm` | |Yes | String(20) | Request transaction time, Transaction time format：<br/> YYYY-MM-DD hh:mm:ss
 `expired_time` | | No<br/> (MPM only) | String(3)  | Order expiration time, QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code
 `goods_name` | | No | String(64) | Product name identification, Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
-`mchid` | | No | String(16) | QF Pay merchant number, May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request.
+`mchid` | | No | String(16) | QFPay merchant number, May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request.
 `txzone` | | No | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800).
 `udid` | | No | String(40) | Unique transaction device ID. Is displayed on the merchant portal.
 `rmb_tag` | | No | String(1) | RMB Tag, WeChat Pay in Hong Kong uses `rmb_tag` = Y together with `txcurrcd` = CNY to indicate that the transaction currency is RMB.

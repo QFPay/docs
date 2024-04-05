@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 
 # 简介
 
-欢迎查阅 **钱方开放API文档平台**. 首先, 请阅读以下[开发人员接入规范](#开发人员接入规范).
+欢迎查阅 **QFPay 开放API文档平台**. 首先, 请阅读以下[开发人员接入规范](#开发人员接入规范).
 
 如果您想要在<Link href="https://www.postman.com/">Postman</Link>快速测试支付功能, 我们提供了一套生成签名的预请求脚本, 您可以从[这里](paycode#支付API端点)下载该文件.
 
@@ -14,7 +14,7 @@ import Link from '@docusaurus/Link';
  如果已经被提供 `mchid` , 除特殊情况下在呼叫API时必须提交 `mchid`. 换而言之, 如果并未被提供 `mchid`, 商户无需在API请求中传递参数 `mchid`.
 :::
 
-为了使用钱方常用API, 您必须拥有已激活的API证书, 包括一个**app_code**以及**client_key**.
+为了使用QFPay 常用API, 您必须拥有已激活的API证书, 包括一个**app_code**以及**client_key**.
 如遇到技术问题,请联系**technical.support@qfpay.com**.
 
 对于应用程序的测试，我们提供了测试, 开发以及生产运行环境.
@@ -58,7 +58,7 @@ import Link from '@docusaurus/Link';
 
 abc=value1&bad=value3&bcd=value2
 
-**步骤3:** 在字符串的末尾拼接钱方的`client_key`.
+**步骤3:** 在字符串的末尾拼接QFPay 的`client_key`.
 
 abc=value1&bad=value3&bcd=value2Key
 

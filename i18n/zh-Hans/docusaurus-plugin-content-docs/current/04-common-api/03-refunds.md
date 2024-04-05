@@ -116,8 +116,8 @@ public class Refund {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-         //如果是国内钱台，网址是：https://openapi-test.qfpay.com.
-        String url="https://openapi-test.qfpay.com";
+         //如果是国内钱台，网址是：https://test-openapi-hk.qfpay.com.
+        String url="https://test-openapi-hk.qfpay.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/refund", data, appcode,key);
         System.out.println(resp);
     }
@@ -279,13 +279,13 @@ ob_end_flush();
 
 `POST ../trade/v1/refund`
 
-商户可以使用退款API对交易进行退款。商户账户必须在同一交易日有足够的交易金额才能进行交易退款, 单笔交易的最高退款金额不得超过原始付款金额。除非另有说明，退款请求一旦提交并被接受，就不可撤销。不同支付渠道的退款限量和最长退款期限有所不同, 请联系您的钱方支援代表以获取更多信息。
+商户可以使用退款API对交易进行退款。商户账户必须在同一交易日有足够的交易金额才能进行交易退款, 单笔交易的最高退款金额不得超过原始付款金额。除非另有说明，退款请求一旦提交并被接受，就不可撤销。不同支付渠道的退款限量和最长退款期限有所不同, 请联系您的QFPay 支援代表以获取更多信息。
 
 ### 请求参数
 
 |参数名称|参数编码|是否必填|参数类型|描述|
 |----    |---|----- |-----   |-----   |
-|钱方订单流水号 | ` syssn ` |是 |String(128)  | 计划退款的原订单的 `syssn`|
+|QFPay 订单流水号 | ` syssn ` |是 |String(128)  | 计划退款的原订单的 `syssn`|
 |退款外部订单号 | ` out_trade_no `  |是 |String(128)  | 外部退款订单号/商户平台退款订单号: 这个参数对于系统中同一商户账户下的每次支付和退款请求必须是唯一的|
 |退款金额 | ` txamt `   |是 |Int(11)  | 退款金额, 以分为单位 (i.e. 100 = $1) <br/> 部分退款和全部退款都需要, 有部分支付通道不支持部分退款|
 |请求交易时间 | ` txdtm `   |是 |String(20) |格式: YYYY-MM-DD hh:mm:ss|

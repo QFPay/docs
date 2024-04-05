@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 
 # Introduction
 
-Welcome to the **official QF Pay open API documentation**. To get started, please review the [Developer Instructions](#developer-instructions) below.
+Welcome to the **official QFPay open API documentation**. To get started, please review the [Developer Instructions](#developer-instructions) below.
 
 There are language bindings available in Python, Java, Node.js and PHP! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right corner.
 
@@ -16,7 +16,7 @@ If you would like to quickly test the payment function in <Link href="https://ww
  If the `mchid` is provided, it is mandatory to submit the `mchid` when calling the API (unless otherwise specified.). In other words, if `mchid` is not provided, merchants shall not pass in the `mchid` parameter in the API request.
 :::
 
-To use the QF Pay open API, you must have a set of active API credentials, including the **app_code** and **client_key**. If you encounter technical issues please contact **technical.support@qfpay.com**.
+To use the QFPay open API, you must have a set of active API credentials, including the **app_code** and **client_key**. If you encounter technical issues please contact **technical.support@qfpay.com**.
 
 There are separate environments available for application testing and development, as well as production.
 

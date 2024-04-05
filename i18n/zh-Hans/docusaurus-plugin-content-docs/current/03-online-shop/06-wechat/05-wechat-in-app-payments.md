@@ -63,7 +63,7 @@ import Link from '@docusaurus/Link';
 
 | 参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述 |
 |:----    |:---|:----- |-----   |----   |
-|商户ID    | `mchid`  | 否 | String  | 唯一的商户ID是由QF Pay在商户入网过程中创建的。 |
+|商户ID    | `mchid`  | 否 | String  | 唯一的商户ID是由QFPay在商户入网过程中创建的。 |
 |外部订单编号    | `out_trade_no` | 是 | String    |开发者平台交易订单编号 |
 |交易金额    | `txamt`  | 是 | String |实际消费金额，最高抵扣金额不能超过冻结资金|
 |货币 | `txcurrcd` | 是 | String(3) | 交易货币。 查看货币表以获取可用货币的完整列表|

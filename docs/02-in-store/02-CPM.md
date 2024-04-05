@@ -12,6 +12,8 @@ import Link from '@docusaurus/Link';
 
 **Method** : `POST`
 
+**PayType** : //TODO// : 800x08
+
 **Description** : The customer generates a dynamic QR code in their QR code wallet and presents it to the cashier for scanning. This szenario applies to offline payments only. If the response codes `1143/1145` are returned, the transaction is being processed or the customer is required to input the wallet password. Merchants have to [query the transaction result](../common-api/transaction-enquiry) for a final assessment of the transaction status.
 
 ```plaintext
@@ -130,7 +132,7 @@ public class TestMain {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://openapi-test.qfpay.com";
+        String url="https://test-openapi-hk.qfpay.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/payment", data, appcode,key);
         System.out.println(resp);
     }

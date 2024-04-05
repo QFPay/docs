@@ -2,31 +2,32 @@
 
 ## Create payment intent API
 
-**url**     :   /payment_element/v1/create_payment_intent
+**Endpoint** : `/payment_element/v1/create_payment_intent`
 
-**method**  :   POST
+**Method** : POST
 
-**header**:
+### Header
 
-| Header name    | Must | Description        |
-| -------------- | ---- | ------------------ |
-| X-QF-APPCODE   | Y    | 商戶code |
-| X-QF-SIGN      | Y    | 商戶 key |
+| Header name    | Mandatory | Description        |
+| -------------- | --------- | ------------------ |
+| `X-QF-APPCODE` | Yes       | 商戶code |
+| `X-QF-SIGN`    | Yes       | 商戶 key |
 
-**params**  :   
+### Request Parameters
 
-| Field          | Must | Description        |
-| -------------- | ---- | ------------------ |
-| txamt          | Y    | 支付金额，单位分|
-| txcurrcd       | N    | 币种 e.g. HKD/ CNY (ISO_4217) |
-| pay_type       | Y    | 支付类型 e.g. WP credit card: 802801 |
-| out_trade_no   | Y    | 外部订单号 |
-| mchid          | N    | mchid, 渠道用 |
-| return_url     | N    | 支付成功跳转页面 |
-| failed_url     | N    | 支付失败跳转页面 |
-| notify_url     | N    | 交易通知发送地址 |
+| Attribute      | Mandatory | Description        |
+| -------------- | ----------| ------------------ |
+| `txamt`        | Yes       | 支付金额，单位分|
+| `txcurrcd`     | No        | 币种 e.g. HKD/ CNY (ISO_4217) |
+| `pay_type`     | Yes       | 支付类型 e.g. WP credit card: 802801 |
+| `out_trade_no` | Yes       | 外部订单号 |
+| `mchid`        | No        | mchid, 渠道用 |
+| `return_url`   | No        | 支付成功跳转页面 |
+| `failed_url`   | No        | 支付失败跳转页面 |
+| `notify_url`   | No        | 交易通知发送地址 |
 
-**response**:   
+### Response Parameters
+
 ```json
 {
     "respcd": "0000",
@@ -41,33 +42,32 @@
 
 *************************************************************************
 
-
-
 ## Create token intent API
 
-**url**     :   /payment_element/v1/create_token_intent
+**Endpoint**  :  `/payment_element/v1/create_token_intent`
 
-**method**  :   POST
+**Method**  :  `POST`
 
-**header**:
+### Header
 
-| Header name    | Must | Description        |
-| -------------- | ---- | ------------------ |
-| X-QF-APPCODE   | Y    | 商戶code |
-| X-QF-SIGN      | Y    | 商戶 key |
+| Header name    | Mandatory | Description        |
+| -------------- | --------- | ------------------ |
+| `X-QF-APPCODE` | Yes       | 商戶code |
+| `X-QF-SIGN`    | Yes       | 商戶 key |
 
-**params**  :   
+### Request Parameters
 
-| Field          | Must | Description        |
-| -------------- | ---- | ------------------ |
-| mchid          | N    | mchid, 渠道用  |
-| customer_id     | Y    | 顧客id |
-| token_expiry    | N    | token到期日 |
-| token_reason    | N    | token 建立原因 |
-| token_reference    | N    | token 參考 |
-| notify_url     | N    | 交易通知发送地址 |
+| Attribute      | Mandatory | Description        |
+| -------------- | --------- | ------------------ |
+| mchid          | No        | mchid, 渠道用  |
+| customer_id    | Yes       | 顧客id |
+| token_expiry   | No        | token到期日 |
+| token_reason   | No        | token 建立原因 |
+| token_reference| No        | token 參考 |
+| notify_url     | No        | 交易通知发送地址 |
 
-**response**:   
+### Response Parameters
+
 ```json
 {
     "respcd": "0000",

@@ -33,7 +33,7 @@ QFPay也会发送交易状态更新的异步支付通知
     "sysdtm": "2021-12-08 15:04:16",
     "paydtm": "2021-12-08 15:06:51",
     "goods_name": "",
-    "txcurrcd": "USD",
+    "txcurrcd": "HKD",
     "chnlsn2": "",
     "cardcd": "",
     "udid": "qiantai2",

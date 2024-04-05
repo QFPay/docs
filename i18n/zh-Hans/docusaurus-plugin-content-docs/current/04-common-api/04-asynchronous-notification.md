@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 ### 描述
 
-支付和退款成功后，钱方 API 将向商户定义的URL地址发送异步通知消息. 商户可以开发一个端点来接收此通知消息并相应地更新交易状态. 我们建议商户使用API的查询功能结合异步通知端点来获取支付状态. 由于安全要求，异步通知仅适用于端口 80 和 443.
+支付和退款成功后，QFPay  API 将向商户定义的URL地址发送异步通知消息. 商户可以开发一个端点来接收此通知消息并相应地更新交易状态. 我们建议商户使用API的查询功能结合异步通知端点来获取支付状态. 由于安全要求，异步通知仅适用于端口 80 和 443.
 
 ## 异步通知规则
 
@@ -44,7 +44,7 @@ import json
 client_key = "3ABB1BFFE2E0497BB9270978B0BXXXXX"
 
 # Raw Content Data
-data = {"status": "1", "pay_type": "800101", "sysdtm": "2020-06-15 10:32:58", "paydtm": "2020-06-15 10:33:35", "goods_name": "", "txcurrcd": "THB", "txdtm": "2020-06-15 10:32:58", "mchid": "O37MRh6Qq5", "txamt": "10", "exchange_rate": "", "chnlsn2": "", "out_trade_no": "9G3ZIWTG1R3IVSC2AH2O5EGKJQ7I72QO", "syssn": "20200615000200020000641807", "cash_fee_type": "", "cancel": "0", "respcd": "0000", "goods_info": "", "cash_fee": "0", "notify_type": "payment", "chnlsn": "2020061522001453561406303428", "cardcd": "2088032341453564"}
+data = {"status": "1", "pay_type": "800101", "sysdtm": "2020-06-15 10:32:58", "paydtm": "2020-06-15 10:33:35", "goods_name": "", "txcurrcd": "HKD", "txdtm": "2020-06-15 10:32:58", "mchid": "O37MRh6Qq5", "txamt": "10", "exchange_rate": "", "chnlsn2": "", "out_trade_no": "9G3ZIWTG1R3IVSC2AH2O5EGKJQ7I72QO", "syssn": "20200615000200020000641807", "cash_fee_type": "", "cancel": "0", "respcd": "0000", "goods_info": "", "cash_fee": "0", "notify_type": "payment", "chnlsn": "2020061522001453561406303428", "cardcd": "2088032341453564"}
 
 combine_str = (json.dumps(data)+client_key).encode()
 
@@ -83,7 +83,7 @@ print(signature)
   "sysdtm": "2020-05-14 12:32:56",
   "paydtm": "2020-05-14 12:33:56",
   "goods_name": "",
-  "txcurrcd": "THB",
+  "txcurrcd": "HKD",
   "txdtm": "2020-05-14 12:32:56",
   "mchid": "lkbqahlRYj",
   "txamt": "10",
@@ -112,8 +112,8 @@ print(signature)
 `txdtm` | 是 | String | 由商户在付款请求中提供的订单创建时间.
 `txamt` | 是 | String | 以分为单位的交易金额.
 `out_trade_no` | 是 | String | 外部订单号.
-`syssn` | 是 | String | 钱方交易流水号.
-`cancel` | 是 | String  | 交易取消状态: <br/> 0 = 没有取消 <br/> 1 = 用于付款码支付: 交易撤销或者退款成功 <br/> 2 = 正扫支付: 交易取消成功 <br/> 3 = 交易已退款 <br/> 4 = 支付宝预授权订单完成 <br/> 5 = 交易部分退款.
+`syssn` | 是 | String | QFPay 交易流水号.
+`cancel` | 是 | String  | 交易取消状态: <br/> 0 = 没有取消 <br/> 1 = 用于反扫支付: 交易撤销或者退款成功 <br/> 2 = 正扫支付: 交易取消成功 <br/> 3 = 交易已退款 <br/> 4 = 支付宝预授权订单完成 <br/> 5 = 交易部分退款.
 `respcd` | 是 | String | 交易状态 - 在异步通知消息中会是 `0000`
 `notify_type` | 是 | String |通知类型: `payment` 或 `refund`
 `mchid` | 否 |  String | 唯一商户标识ID, 这个参数只返回给代理商.

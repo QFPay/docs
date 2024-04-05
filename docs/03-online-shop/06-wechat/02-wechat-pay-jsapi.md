@@ -20,7 +20,7 @@ There are two different methods how JSAPI payments can be implemented.
 
 ### 1. JSAPI with Real Name Authenticated Official Accounts
 
-For this kind of integration, merchants shall register their own official account with WeChat and we will bind the official account to the merchant's QF Pay payment account. In this case merchants can create and publish their own content, access customer information and collect their own followers. When choosing this implementation method, merchants have to acquire the `oauth_code`, user `openid` and trigger WeChat Pay via the <Link href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_1">official WeChat platform</Link>. Merchants only need to refer to the QF Pay [transaction enquiry API endpoint](../../common-api/transaction-enquiry).
+For this kind of integration, merchants shall register their own official account with WeChat and we will bind the official account to the merchant's QFPay payment account. In this case merchants can create and publish their own content, access customer information and collect their own followers. When choosing this implementation method, merchants have to acquire the `oauth_code`, user `openid` and trigger WeChat Pay via the <Link href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_1">official WeChat platform</Link>. Merchants only need to refer to the QFPay [transaction enquiry API endpoint](../../common-api/transaction-enquiry).
 
 **Step 1:** WeChat official account payments are available to developers after they completed real name authentication on the WeChat official account platform. Once authentication has been completed developers can obtain the openid parameter of the certified public account. Please refer to the official [WeChat documentation](https://developers.weixin.qq.com/doc/offiaccount/en/Getting_Started/Overview.html) for more information.
 
@@ -32,7 +32,7 @@ For this kind of integration, merchants shall register their own official accoun
 
 ### 1. JSAPI without a Real Name Registered Official Account**
 
-For this kind of payment, merchants can build upon QF Pay's official account. This integration is only applicable to merchants who are using the indirect settlement option (i.e. settlement is provided by QFPay). For this implementation, merchants shall use QFPay's API to get the `oauth_code`, user `openid` and trigger WeChat Pay as described below.
+For this kind of payment, merchants can build upon QFPay's official account. This integration is only applicable to merchants who are using the indirect settlement option (i.e. settlement is provided by QFPay). For this implementation, merchants shall use QFPay's API to get the `oauth_code`, user `openid` and trigger WeChat Pay as described below.
 
 ## GET oauth_code
 
@@ -40,7 +40,7 @@ For this kind of payment, merchants can build upon QF Pay's official account. Th
 GET WeChat oauth_code request:
 
 {
-  https://openapi-test.qfpay.com/tool/v1/get_weixin_oauth_code?app_code=5D81D64E602043F7AF51CEXXXXXXXXXX&sign=F4D8FB00894F213993B33116BC1B4E10&redirect_uri=https://sdk.qfapi.com
+  https://test-openapi-hk.qfpay.com/tool/v1/get_weixin_oauth_code?app_code=5D81D64E602043F7AF51CEXXXXXXXXXX&sign=F4D8FB00894F213993B33116BC1B4E10&redirect_uri=https://sdk.qfapi.com
 }
 ```
 

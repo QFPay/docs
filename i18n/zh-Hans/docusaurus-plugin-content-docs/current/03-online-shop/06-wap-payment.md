@@ -31,7 +31,7 @@ WAP支付或者H5支付能够让商户在Chrome等手机浏览器上的调用电
 API订单号码 | `out_trade_no` | 是 | String(128)| 外部交易号/商户平台交易号：该参数对于系统中同一商户账户下的每次支付和退款请求必须是唯一的。
 请求交易时间 | `txdtm` | 是 | String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
 产品名称标识 | `goods_name` | 否 | String(64) | 商品名称 /标记：不能超过20个字母数字或包含特殊字符。 应用支付不能为空。 如果参数是汉字，则需要**UTF-8**编码。
-QF Pay 商户号码 | `mchid` | 否 | String(16) | 可能会也可能不会给予商人。 如果给出了MCHID，则必须提供MCHID。反之，如果没有提供MCHID，商户不得在API请求中传递MCHID字段。
+QFPay 商户号码 | `mchid` | 否 | String(16) | 可能会也可能不会给予商人。 如果给出了MCHID，则必须提供MCHID。反之，如果没有提供MCHID，商户不得在API请求中传递MCHID字段。
 时区 | `txzone` | 否 | String(5) | 交易时区：以当地时间记录交易，默认时区为北京时间UTC+8（+0800）。
 设备ID | `udid` | 否 | String(40) |  唯一的交易设备ID。 显示在商家管理平台上。
 重定向URL | `return_url` | 否 | String(255) |  付款完成后用户将被重定向到的 URL。

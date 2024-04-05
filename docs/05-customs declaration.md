@@ -10,22 +10,25 @@ Customs declaration API auto-sends the WeChat/Alipay payment data to the customs
 
 ### HTTP Request
 
-`POST ../custom/v1/declare`
+**Endpoint** : `/custom/v1/declare`
+
+**Method** : `POST`
 
 ### Request Parameters
 
 | Attribute| Mandatory| Type|Description|
 |:---|:----- |-----   |----   |
-|`trade_type`|Y|String(8)|weixin or alipay|
-|`syssn`|Y|String(32)|QFPay transaction number|
-|`customs`|Y|String(20)|Customs for declaration. Example：SHANGHAI_ZS|
-|`mch_customs_no`|Y|String(20)|Customs registration No. of the merchant|
-|`action_type`|N|String(256)|Declaration type. Only valid when `trate_type` is "wechat". "ADD" - new appplication, "MODIFY" - modification of applied declaration|
-|`mch_customs_name`|N|String(256)|Merchant customs record name. Must be passed when `trate_type` is "alipay". Exaple: jwyhanguo_card|
-|`out_request_no`|N|String(32)|Merchant order number. Must be passed when `trate_type` is "alipay". Exaple: 15725904083420588032|
-|`amount`|N|String(20)|Declaration amount. Must be passed when `trate_type` is "alipay". Example: 2.00|
-The following fields should be passed in case splitting or modifying order: <br/>
-###
+|`trade_type`|Yes|String(8)|weixin or alipay|
+|`syssn`|Yes|String(32)|QFPay transaction number|
+|`customs`|Yes|String(20)|Customs for declaration. Example：SHANGHAI_ZS|
+|`mch_customs_no`|Yes|String(20)|Customs registration No. of the merchant|
+|`action_type`|No|String(256)|Declaration type. Only valid when `trate_type` is "wechat". "ADD" - new appplication, "MODIFY" - modification of applied declaration|
+|`mch_customs_name`|No|String(256)|Merchant customs record name. Must be passed when `trate_type` is "alipay". Exaple: jwyhanguo_card|
+|`out_request_no`|No|String(32)|Merchant order number. Must be passed when `trate_type` is "alipay". Exaple: 15725904083420588032|
+|`amount`|No|String(20)|Declaration amount. Must be passed when `trate_type` is "alipay". Example: 2.00|
+
+### The following fields should be passed in case splitting or modifying order
+
 | Attribute| Mandatory| Type|Description|
 |:---|:----- |-----   |----   |
 |`sub_order_no`|C|String(64)|Merchant sub-order No. It is required if there is a split order. Example：1111960490|
@@ -36,14 +39,14 @@ The following fields should be passed in case splitting or modifying order: <br/
 
 ### Response Parameters
 
-| Attribute| Mandatory| Type|Description|
-|:---|:----- |-----   |----   |
-|`syssn`||String(40)|QFPay transaction number|
-|`respcd`||String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|
-|`resperr`||String(128)|Response message|
-|`respmsg`||String(128)|Other message information|
-|`verify_department`|||Verification organization|
-|`verify_department_trade_id`|||Transaction number of verification organization|
+| Attribute|Type|Description|
+|:---|-----   |----   |
+|`syssn`|String(40)|QFPay transaction number|
+|`respcd`|String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|
+|`resperr`|String(128)|Response message|
+|`respmsg`|String(128)|Other message information|
+|`verify_department`||Verification organization|
+|`verify_department_trade_id`||Transaction number of verification organization|
 
 ## Query Customs Declaration
 
@@ -51,26 +54,28 @@ Merchants query declaration status by QFPay transaction number.
 
 ### HTTP Request
 
-`POST/GET ../custom/v1/query`
+**Endpoint** : `/custom/v1/query`
+
+**Method** : `POST` / `GET`
 
 ### Request Parameters
 
 | Attribute| Mandatory| Type|Description|
 |:---|:----- |-----   |----   |
-|`trade_type`|Y|String(8)|weixin or alipay|
-|`customs`|Y|String(20)|Customs for declaration. Example：SHANGHAI_ZS|
-|`syssn`|Y|String(32)|QFPay transaction number|
-|`sub_order_no`|N|String(40)|Sub order number. It is required if there is a split order.|
+|`trade_type`|Yes|String(8)|weixin or alipay|
+|`customs`|Yes|String(20)|Customs for declaration. Example：SHANGHAI_ZS|
+|`syssn`|Yes|String(32)|QFPay transaction number|
+|`sub_order_no`|No|String(40)|Sub order number. It is required if there is a split order.|
 
 ### Response Parameters
 
-| Attribute| Mandatory| Type|Description|
-|:---|:----- |-----   |----   |
-|`syssn`||String(40)|QFPay transaction number|
-|`respcd`||String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|
-|`resperr`||String(128)|Response message|
-|`respmsg`||String(128)|Other message information|
-|`data`|||Customs declaration details \[\{"resperr" : "", "errmsg" : null, "sub_order_no" : "15752730835729139712", "verify_department" : "OTHERS", "verify_department_trade_id" : "4200000459201911265585026208"\}\]|
+| Attribute|Type|Description|
+|:---|-----   |----   |
+|`syssn`|String(40)|QFPay transaction number|
+|`respcd`|String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|
+|`resperr`|String(128)|Response message|
+|`respmsg`|String(128)|Other message information|
+|`data`||Customs declaration details \[\{"resperr" : "", "errmsg" : null, "sub_order_no" : "15752730835729139712", "verify_department" : "OTHERS", "verify_department_trade_id" : "4200000459201911265585026208"\}\]|
 
 ## Repush Customs Declaration
 
@@ -78,20 +83,25 @@ If additional order information has been submitted to the customs but is lost in
 
 ### HTTP Request
 
-`POST ../custom/v1/redeclare`
+**Endpoint** : `/custom/v1/redeclare`
+
+**Method** : `POST`
 
 ### Request Parameters
+
 | Attribute| Mandatory| Type|Description|
 |:---|:----- |-----   |----   |
-|`trade_type`|Y|String(8)|weixin or alipay|
-|`customs`|Y|String(20)|Customs for declaration. Example：SHANGHAI_ZS|
-|`syssn`|Y|String(32)|QFPay transaction number|
-|`mch_customs_no`|Y|String(20)|Customs registration No. of the merchant. Example: 110084111|
-|`sub_order_no`|N|String(40)|Sub order number. It is required if there is a split order.|
+|`trade_type`|Yes|String(8)|weixin or alipay|
+|`customs`|Yes|String(20)|Customs for declaration. Example：SHANGHAI_ZS|
+|`syssn`|Yes|String(32)|QFPay transaction number|
+|`mch_customs_no`|Yes|String(20)|Customs registration No. of the merchant. Example: 110084111|
+|`sub_order_no`|No|String(40)|Sub order number. It is required if there is a split order.|
+
 ### Response Parameters
-| Attribute| Mandatory| Type|Description|
-|:---|:----- |-----   |----   |
-|`syssn`||String(40)|QFPay transaction number|
-|`respcd`||String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|
-|`resperr`||String(128)|Response message|
-|`respmsg`||String(128)|Other message information|
+
+| Attribute|Type|Description|
+|:--- |-----   |----   |
+|`syssn`|String(40)|QFPay transaction number|
+|`respcd`|String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|
+|`resperr`|String(128)|Response message|
+|`respmsg`|String(128)|Other message information|

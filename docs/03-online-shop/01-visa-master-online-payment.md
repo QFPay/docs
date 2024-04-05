@@ -33,7 +33,7 @@ QFPay will also send the asynchronous payment notification for the transaction s
     "sysdtm": "2021-12-08 15:04:16",
     "paydtm": "2021-12-08 15:06:51",
     "goods_name": "",
-    "txcurrcd": "USD",
+    "txcurrcd": "HKD",
     "chnlsn2": "",
     "cardcd": "",
     "udid": "qiantai2",

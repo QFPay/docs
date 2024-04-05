@@ -141,7 +141,7 @@ Obtain the `pay_params` parameter, and then provide payment details accordingly.
 
 ## WeChat Mini Program Boilerplate
 
-To get started quickly, download the [QF Pay WeChat Mini Program Boilerplate](@site/static/files/qfpay_mini_program_payments_boilerplate.zip) and get access to the MD5 hash algorithm.
+To get started quickly, download the [QFPay WeChat Mini Program Boilerplate](@site/static/files/qfpay_mini_program_payments_boilerplate.zip) and get access to the MD5 hash algorithm.
 
 <Link href="/img/miniprogram_boilerplate.png" target="_blank">![WeChat Mini Program Boilerplate](@site/static/img/miniprogram_boilerplate.png)</Link>
 

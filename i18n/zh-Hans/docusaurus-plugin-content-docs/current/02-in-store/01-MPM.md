@@ -40,7 +40,7 @@ import string
 import random
 
 # Enter Client Credentials
-environment = 'https://openapi-eur.qfapi.com'
+environment = 'https://test-openapi-hk.qfapi.com'
 app_code = 'FADB8A87E0674012979F5443AA81ECF1'
 client_key = 'F644B1389AD24C25BEFE8BE10C31C878'
 
@@ -123,7 +123,7 @@ public class TestMain {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://openapi-test.qfpay.com";
+        String url="https://test-openapi-hk.qfpay.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/payment", data, appcode,key);
         System.out.println(resp);
     }
@@ -295,8 +295,8 @@ ob_end_flush();
 |参数名称| 参数编码|是否必填|参数类型|描述|
 |:----    |:---|:----- |-----   |-----   |
 |常用支付参数 | —  | — | — | — |
-|支付标记 | `pay_tag`  |否 |     String(16) | 默认值是: ALIPAYHK<br/>支付宝大陆版本: ALIPAYCN<br/>801103 - 支付宝海外线上退款 (QF_BUSICD_ALIPAY_ONLINE_REFUND)<br/>801104 - 支付宝海外线上查询 (QF_BUSICD_ALIPAY_ONLINE_QUERY)<br/>801110 - 支付宝In-App支付(海外商户) (QF_BUSICD_ALIPAY_ONLINE_APP)<br/>801501 - 支付宝香港扫码<br/>801512 - 支付宝香港Wap支付<br/>801510 -支付宝In-App支付 (香港商戶)  |
-订单过期时间 | `expired_time` | 否<br/> (仅支持正扫支付) | String(3)  | 按分钟计时的动态二维码的过期时间. 默认时长为30分钟, 最小值5分钟，最大值120分钟.<br/> 适用于: <br/>800201-微信扫码<br/>800101-支付宝扫码<br/>801512-支付宝香港Wap支付<br/>801501-支付宝香港扫码<br/>801107-支付宝海外Wap支付<br/>801101-支付宝海外扫码<br/>801010-微信香港APP<br/>801510-支付宝香港APP
+|支付标记 | `pay_tag`  |否 |     String(16) | 默认值是: ALIPAYHK<br/>支付宝大陆版本: ALIPAYCN |
+订单过期时间 | `expired_time` | 否<br/> (仅支持正扫支付) | String(3)  | 按分钟计时的动态二维码的过期时间. 默认时长为30分钟, 最小值5分钟，最大值120分钟.<br/> 适用于微信和支付宝|
 |指定支付方式  |`limit_pay`|否 |String   |该参数值指定为`no_credit`，禁止使用信用卡支付,该规则只对中国大陆生效 |
 
 ## 响应参数

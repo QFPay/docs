@@ -6,9 +6,9 @@ import Link from '@docusaurus/Link';
 
 <Link to="/img/alipay-in-app.png" target="_blank">![Alipay APP Payment process-flow](@site/static/img/alipay-in-app.png)</Link>
 
-To download Alipay Oversea SDK , please refer to this [link](https://global.alipay.com./ac/app/client_integration). <br/>
-To download Alipay HK SDK, please refer to this [link](https://global.alipay.com./ac/app_hk/download). <br/>
-To know how to trigger Alipay HK SDK , please refer to this [link](https://global.alipay.com./ac/hkapi/securitypay_pay).
+To download Alipay Oversea SDK , please refer to this [link](https://global.alipay.com/docs/ac/app/client_integration). <br/>
+To download Alipay HK SDK, please refer to this [link](https://global.alipay.com/docs/ac/app_hk/download). <br/>
+To know how to trigger Alipay HK SDK , please refer to this [link](https://global.alipay.com/docs/ac/hkapi/securitypay_pay).
 
 ## HTTP Request
 
@@ -18,10 +18,10 @@ To know how to trigger Alipay HK SDK , please refer to this [link](https://globa
 
 **PayType** :
 
-```plaintext
-801110: Oversea Merchants
-801510: Hong Kong Merchants
-```
+PayType | Description
+------- | -------
+801110 | Oversea Merchants
+801510 | Hong Kong Merchants
 
 ## Request Parameters
 
@@ -96,8 +96,8 @@ _input_charset="UTF-8"&body="goods_info"&currency="HKD"&forex_biz="FP"&it_b_pay=
 |:---|:----- |-----   |----   |
 |Public payment parameters    |—|— |—   |
 |`goods_info`|No | String  | Product description, must not contain special characters |
-|`pay_tag`|No | String(16)  | Payment mark, the default value is: ALIPAYHK<br/>Alipay Continental version: ALIPAYCN<br/>801103 - Alipay overseas online refund (QF_BUSICD_ALIPAY_ONLINE_REFUND)<br/>801104 - Alipay overseas online inquiry (QF_BUSICD_ALIPAY_ONLINE_QUERY)<br/>801110 - Alipay overseas online APP payment (QF_BUSICD_ALIPAY_ONLINE_APP)<br/>801501 - Alipay Hong Kong pc scan code<br/>801512 - Alipay Hong Kong Wap payment<br/>801510 - Alipay Hong Kong APP payment  |
-| `expired_time` | No<br/> (MPM only) | String(3)  | Order expiration time, QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong Wap payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas Wap payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP|
+|`pay_tag`|No | String(16)  | Payment mark, the default value is: ALIPAYHK<br/>Alipay Continental version: ALIPAYCN |
+| `expired_time` | No<br/> (MPM only) | String(3)  | Order expiration time, QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for WeChat and Alipay|
 
 ## Response Parameters
 

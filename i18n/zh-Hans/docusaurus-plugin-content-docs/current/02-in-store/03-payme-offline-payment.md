@@ -106,7 +106,7 @@ public class TestMain {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://openapi-test.qfpay.com";
+        String url="https://test-openapi-hk.qfpay.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/payment", data, appcode,key);
         System.out.println(resp);
     }
@@ -193,7 +193,7 @@ function GetRandStr($length){
     return $randstr;
 }
 
-$url = 'https://openapi-test.qfapi.com';
+$url = 'https://test-openapi-hk.qfapi.com';
 $api_type = '/trade/v1/payment';
 $pay_type = '805801'; //PayMe Offline Payment = 805801
 $app_code = 'FF2FF74F2F2E42769A4A73*********'; //API credentials are provided by QFPay
@@ -302,7 +302,7 @@ API订单号| `out_trade_no` | 是 | String(128)| 唯一商户订单号，用于
 交易请求时间 | `txdtm` | 是 | String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
 订单过期时间 | `expired_time` | 否<br/> (只限正扫模式) | String(3)  | 二维码过期时间，以分钟为单位。默认过期时间为30分钟。该参数可以调整，最短为5分钟，最长为120分钟。
 商品名称标识 | `goods_name` | 否 | String(64) | 商品名称/标识：不能超过20个字母数字字符或包含特殊字符。对于应用支付，该参数不能为空。如果使用中文字符，需要进行`UTF-8`编码。
-QF Pay商户号 | `mchid` | 否 | String(16) | 只适用于某些渠道下的特定商户。该商户被提供了MCHID，则在API请求中必须提供MCHID。反之则无需提供。
+QFPay商户号 | `mchid` | 否 | String(16) | 只适用于某些渠道下的特定商户。该商户被提供了MCHID，则在API请求中必须提供MCHID。反之则无需提供。
 时区 | `txzone` | 否 | String(5) | 交易时区：记录交易的本地失去，北京时间为默认时区（UTC+8，+0800）。
 设备ID | `udid` | 否 | String(40) |  唯一的交易设备ID，在商家门户上显示。
 重定向URL | `return_url` | 否 | String(512) |  支付完成后用户将被重定向到的URL。

@@ -17,7 +17,7 @@ import Link from '@docusaurus/Link';
 | 参数编码| 是否必须| 参数类型|描述|
 |:---|:----- |-----   |----   |
 |`trade_type`|Y|String(8)|微信或支付宝|
-|`syssn`|Y|String(32)|钱方交易码|
+|`syssn`|Y|String(32)|QFPay 交易码|
 |`customs`|Y|String(20)|申报的目标海关 示例：SHANGHAI_ZS|
 |`mch_customs_no`|Y|String(20)|商户的海关注册码|
 |`action_type`|N|String(256)|申报类型. 只有在 `trade_type` 是 `wechat` 时生效. "ADD" - 新申请, "MODIFY" - 编辑已申请的报关|
@@ -41,7 +41,7 @@ import Link from '@docusaurus/Link';
 
 | 参数编码| 是否必须| 参数类型|描述|
 |:---|:----- |-----   |----   |
-|`syssn`||String(40)|钱方交易订单号|
+|`syssn`||String(40)|QFPay 交易订单号|
 |`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](./preparation/paycode#交易状态码) 获得完整返回类型列表|
 |`resperr`||String(128)|信息描述|
 |`respmsg`||String(128)|其他信息|
@@ -50,7 +50,7 @@ import Link from '@docusaurus/Link';
 
 ## 查询报关
 
-商户通过钱方交易订单号查询申报状态
+商户通过QFPay 交易订单号查询申报状态
 
 ### HTTP请求
 
@@ -62,14 +62,14 @@ import Link from '@docusaurus/Link';
 |:---|:----- |-----   |----   |
 |`trade_type`|Y|String(8)|`weixin` 或者 `alipay`|
 |`customs`|Y|String(20)|申报的目标海关 示例：SHANGHAI_ZS|
-|`syssn`|Y|String(32)|钱方交易订单号|
+|`syssn`|Y|String(32)|QFPay 交易订单号|
 |`sub_order_no`|N|String(40)|商户子订单号码, 如果是一个拆分请求则必须提交. 示例：1111960490|
 
 ### 响应参数
 
 | 参数编码| 是否必须|参数类型|描述|
 |:---|:----- |-----   |----   |
-|`syssn`||String(40)|钱方交易订单号|
+|`syssn`||String(40)|QFPay 交易订单号|
 |`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](./preparation/paycode#交易状态码) 获得完整返回类型列表|
 |`resperr`||String(128)|信息描述|
 |`respmsg`||String(128)|其他信息|
@@ -89,7 +89,7 @@ If additional order information has been submitted to the customs but is lost in
 |:---|:----- |-----   |----   |
 |`trade_type`|Y|String(8)|`weixin` 或者 `alipay`|
 |`customs`|Y|String(20)|申报的目标海关 示例：SHANGHAI_ZS|
-|`syssn`|Y|String(32)|钱方交易订单号|
+|`syssn`|Y|String(32)|QFPay 交易订单号|
 |`mch_customs_no`|Y|String(20)|商户的海关注册码, 示例: 110084111|
 |`sub_order_no`|N|String(40)|商户子订单号码, 如果是一个拆分请求则必须提交. 示例：1111960490|
 
@@ -97,7 +97,7 @@ If additional order information has been submitted to the customs but is lost in
 
 |请求参数| 是否必须| 参数类型|描述|
 |:---|:----- |-----   |----   |
-|`syssn`||String(40)|钱方交易订单号|
+|`syssn`||String(40)|QFPay 交易订单号|
 |`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](./preparation/paycode#交易状态码) 获得完整返回类型列表|
 |`resperr`||String(128)|信息描述|
 |`respmsg`||String(128)|其他信息|
