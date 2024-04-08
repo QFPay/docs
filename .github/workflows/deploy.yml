@@ -30,28 +30,33 @@ jobs:
 
       # Popular action to deploy to GitHub Pages:
       # Docs: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-docusaurus
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Build output to publish to the `gh-pages` branch:
-          publish_dir: ./deploy
-          keep_files: true
-          # The following lines assign commit authorship to the official
-          # GH-Actions bot for deploys to `gh-pages` branch:
-          # https://github.com/actions/checkout/issues/13#issuecomment-724415212
-          # The GH actions bot is used by default if you didn't specify the two fields.
-          # You can swap them out with your own user credentials.
-          user_name: github-actions[bot]
-          user_email: 41898282+github-actions[bot]@users.noreply.github.com
-      
-      # - name: Set AWS S3 credentials
-      #   uses: jakejarvis/s3-sync-action@master
+      # - name: Deploy to GitHub Pages
+      #   uses: peaceiris/actions-gh-pages@v3
       #   with:
-      #     args: --acl public-read --follow-symlinks --delete
-      #   env:
-      #     AWS_S3_BUCKET: sdk-test.qfapi.com
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
-      #     AWS_REGION: 'ap-east-1'
-      #     SOURCE_DIR: './deploy'
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     # Build output to publish to the `gh-pages` branch:
+      #     publish_dir: ./deploy
+      #     keep_files: true
+      #     # The following lines assign commit authorship to the official
+      #     # GH-Actions bot for deploys to `gh-pages` branch:
+      #     # https://github.com/actions/checkout/issues/13#issuecomment-724415212
+      #     # The GH actions bot is used by default if you didn't specify the two fields.
+      #     # You can swap them out with your own user credentials.
+      #     user_name: github-actions[bot]
+      #     user_email: 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Restore the orignal files
+        run: | 
+          datetime = $(date +%Y%m%d%H%M%S)
+          aws s3 cp s3://sdk.qfapi.com/latest s3://sdk.qfapi.com/$datetime --recursive
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'ap-east-1'
+
+      - name: Upload to AWS S3
+        run: aws s3 cp ./deploy s3://sdk.qfapi.com/latest --recursive
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'ap-east-1'
