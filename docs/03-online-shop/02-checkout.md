@@ -8,7 +8,7 @@ Welcome to the **QFPay Online Checkout documentation.** This manual introduces Q
 
 ## Checkout Page Design
 
-<Link href="/img/shouyintai.png"> ![shouyintai](@site/static/img/shouyintai.png) </Link>
+<Link href="/img/shouyintai.png" target="_blank"> ![shouyintai](@site/static/img/shouyintai.png) </Link>
 
 The checkout page is fully responsive and automatically adjust to all screen sizes. The UI currently supports English as well as simplified and traditional Chinese languages. Available eWallets as well as the design and descriptions can be configured based on merchant demand. If you have explicit requirements please send an email to `technical.support@qfpay.com` for assistance.
 
@@ -27,7 +27,7 @@ The table below depicts base URLs for each region.
 
 ## Process Flow
 
-<Link href="/img/flowchart.png"> ![shouyintai](@site/static/img/flowchart.png) </Link>
+<Link href="/img/flowchart.png" target="_blank"> ![shouyintai](@site/static/img/flowchart.png) </Link>
 
 Customers browse the client's website and proceed to make payment. Once they click the pay button they will be forwarded to the QFPay hosted checkout page. Here consumers can find a variety of payment methods available for checkout and complete payment on desktop or mobile devices. Once payment has been conducted successfully the user is redirected back to the merchant website for a "payment successful notification" and to continue to browse the shop.
 

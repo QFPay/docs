@@ -8,7 +8,7 @@ import Link from '@docusaurus/Link';
 
 ## 收银台页面设计
 
-<Link href="/img/shouyintai.png"> ![shouyintai](@site/static/img/shouyintai.png) </Link>
+<Link href="/img/shouyintai.png" target="_blank"> ![shouyintai](@site/static/img/shouyintai.png) </Link>
 
 结帐页面具有完全响应能力，能自动调整以适应所有屏幕尺寸。 介面目前支持英语，简体中文以及繁体中文。 另外结帐页面可以根据商家的需求，例如可用的电子钱包以及设计和描述，进行配置 。 如果您有相關明确要求，请发送电子邮件至 **technical.support@qfpay.com** 寻求協助。
 
@@ -27,7 +27,7 @@ import Link from '@docusaurus/Link';
 
 ## 流程
 
-<Link href="/img/flowchart.png"> ![shouyintai](@site/static/img/flowchart.png) </Link>
+<Link href="/img/flowchart.png" target="_blank"> ![shouyintai](@site/static/img/flowchart.png) </Link>
 
 消费者浏览商户的网站并继续付款。 一旦他们点击支付按钮，他们将被转发到 QFPay 托管的收银台页面。 在这里，消费者可以找到多种支付方式，可在桌面或移动设备上结账并完成支付。 付款成功后，用户将被重定向回商家网站以获取“付款成功通知”并继续浏览商店。
 
