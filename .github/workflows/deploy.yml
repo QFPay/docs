@@ -46,9 +46,9 @@ jobs:
       #     user_email: 41898282+github-actions[bot]@users.noreply.github.com
 
       - name: Restore the orignal files
-        run: aws s3 cp s3://sdk.qfapi.com/latest s3://sdk.qfapi.com/$(date +%Y%m%d%H%M%S) --recursive
+        run: aws s3 cp s3://sdk.qfapi.com/ s3://sdk.qfapi.com/backup_$(date +%Y%m%d%H%M%S) --recursive --exclude "backup_*"
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }} 
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: 'ap-east-1'
 
