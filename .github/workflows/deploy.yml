@@ -53,7 +53,7 @@ jobs:
           AWS_DEFAULT_REGION: 'ap-east-1'
 
       - name: Upload to AWS S3
-        run: aws s3 cp ./deploy s3://sdk.qfapi.com/ --recursive
+        run: aws s3 cp ./deploy s3://sdk.qfapi.com/ --recursive --force
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}

@@ -20,7 +20,7 @@ import Link from '@docusaurus/Link';
 
 下表描述了每个区域的基本 URL。
 
-| 环境 | URL              |
+| 环境 | URL |
 | ---------- | ------------------------- |
 | 线上测试环境 | https://test-openapi-hk.qfapi.com/checkstand/#/?|
 | 生产环境 | https://openapi-hk.qfapi.com/checkstand/#/? |
