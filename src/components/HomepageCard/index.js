@@ -65,7 +65,7 @@ export default function HomepageCard(props) {
             if(item["url"].startsWith("http") || item["url"].startsWith("mailto:")){
               return <li style={{textAlign: "left", listStyleType:"none"}} key={index}><Link href={item["url"]} target="_self">{item["title"]}</Link></li>
             }else{
-              return <li style={{textAlign: "left", listStyleType:"none"}} key={index}><Link href={props.baseUrl + item["url"]} target="_self">{item["title"]}</Link></li>
+              return <li style={{textAlign: "left", listStyleType:"none"}} key={index}><Link href={props.baseUrl + item["url"] + "/index.html"} target="_self">{item["title"]}</Link></li>
             }
           })}
           </ul>
