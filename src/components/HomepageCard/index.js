@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import clsx from 'clsx';
 import styles from './styles.module.css';
-
+import Link from '@docusaurus/Link';
 // interface ExpandMoreProps extends IconButtonProps {
 //   expand: boolean;
 // }
@@ -63,9 +63,9 @@ export default function HomepageCard(props) {
           <ul style={{display:"flex", flexDirection:"column", gap:"12px", padding: 0, margin: 0}}>
           {props.links.map((item,index) => {
             if(item["url"].startsWith("http") || item["url"].startsWith("mailto:")){
-              return <li style={{textAlign: "left", listStyleType:"none"}} key={index}><a href={item["url"]} target="_self">{item["title"]}</a></li>
+              return <li style={{textAlign: "left", listStyleType:"none"}} key={index}><Link href={item["url"]} target="_self">{item["title"]}</Link></li>
             }else{
-              return <li style={{textAlign: "left", listStyleType:"none"}} key={index}><a href={props.baseUrl + item["url"]} target="_self">{item["title"]}</a></li>
+              return <li style={{textAlign: "left", listStyleType:"none"}} key={index}><Link href={props.baseUrl + item["url"]} target="_self">{item["title"]}</Link></li>
             }
           })}
           </ul>
