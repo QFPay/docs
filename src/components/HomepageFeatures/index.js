@@ -99,7 +99,7 @@ const ResourcesList = [
 
 export default function HomepageFeatures(props) {
   const {siteConfig} = useDocusaurusContext();
-  const {baseUrl} = siteConfig;
+  const {url, baseUrl} = siteConfig;
   if(props.type == "resource"){
     return (
       <section className={styles.features}>
@@ -108,7 +108,7 @@ export default function HomepageFeatures(props) {
   
           }}>
             {ResourcesList.map((props, idx) => (
-              <HomeCard key={idx} url={`${baseUrl}` + props.Svg} title={props.title} description={props.description} links={props.links} baseUrl = {baseUrl}/>
+              <HomeCard key={idx} url={`${baseUrl}` + props.Svg} title={props.title} description={props.description} links={props.links} baseUrl = {url + baseUrl}/>
             ))}
           </div>
         </div>
@@ -122,7 +122,7 @@ export default function HomepageFeatures(props) {
   
           }}>
             {FeatureList.map((props, idx) => (
-              <HomeCard key={idx} url={`${baseUrl}` + props.Svg} title={props.title} description={props.description} links={props.links} baseUrl = {baseUrl}/>
+              <HomeCard key={idx} url={`${baseUrl}` + props.Svg} title={props.title} description={props.description} links={props.links} baseUrl = {url + baseUrl}/>
             ))}
           </div>
         </div>
