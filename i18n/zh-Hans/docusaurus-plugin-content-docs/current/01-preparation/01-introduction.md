@@ -6,7 +6,7 @@ import Link from '@docusaurus/Link';
 
 欢迎查阅 **QFPay 开放API文档平台**. 首先, 请阅读以下[开发人员接入规范](#开发人员接入规范).
 
-如果您想要在<Link href="https://www.postman.com/">Postman</Link>快速测试支付功能, 我们提供了一套生成签名的预请求脚本, 您可以从[这里](paycode#支付API端点)下载该文件.
+如果您想要在<Link href="https://www.postman.com/">Postman</Link>快速测试支付功能, 我们提供了一套生成签名的预请求脚本, 您可以从[这里](/docs/preparation/paycode#支付API端点)下载该文件.
 
 ## 开发人员接入规范
 

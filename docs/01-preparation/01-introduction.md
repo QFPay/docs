@@ -8,7 +8,7 @@ Welcome to the **official QFPay open API documentation**. To get started, please
 
 There are language bindings available in Python, Java, Node.js and PHP! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right corner.
 
-If you would like to quickly test the payment function in <Link href="https://www.postman.com/">Postman</Link> we provide a collection that includes a pre-request script to generate the signature, download the file from [here](paycode#api-endpoint-for-payments).
+If you would like to quickly test the payment function in <Link href="https://www.postman.com/">Postman</Link> we provide a collection that includes a pre-request script to generate the signature, download the file from [here](/docs/preparation/paycode#api-endpoint-for-payments).
 
 ## Developer Instructions
 
