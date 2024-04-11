@@ -275,7 +275,7 @@ Customers make purchases on a merchant website with PayMe. The user scans the di
 Parameter name | Attribute | Mandatory | Type | Description
 --------- | -------- | --------- | ------- | ------- 
 Payment amount | `txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1) 
-Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies
+Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies
 Payment type | `pay_type` | Yes | String(6) | PayMe Web Payment = 805814
 API Order Number | `out_trade_no` | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
 Request transaction time | `txdtm` | Yes | String(20) | Transaction time format：<br/> YYYY-MM-DD hh:mm:ss 
@@ -298,5 +298,5 @@ Payment amount | `txamt` | Int(11) |
 Other message information | `respmsg` | String(128) |  
 External transaction number | `out_trade_no` | String(128) | External transaction number  
 QFPay transaction number | `syssn` | String(40) | 
-Return code | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](../preparation/paycode#transaction-status-codes) for a complete list of response codes.  |
+Return code | `respcd` | String(4) | 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of response codes.  |
 Payment URL | `pay_url` | String(512) | generate QR code in Desktop web; redirect URL in WAP

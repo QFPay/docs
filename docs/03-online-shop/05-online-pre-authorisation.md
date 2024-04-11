@@ -19,7 +19,7 @@ import Link from '@docusaurus/Link';
 
 ## Common APIs
 
-Instructions on general integration with the development environment is available on [https://sdk.qfapi.com/#introduction](../preparation/introduction)
+Instructions on general integration with the development environment is available on [https://sdk.qfapi.com/#introduction](/docs/preparation/introduction)
 
 For instance you may find the following useful before you start the integration:
 
@@ -30,8 +30,8 @@ For instance you may find the following useful before you start the integration:
 
 You can also find common APIs that are also applicable to pre-authorisation payments:
 
-- [Transaction Enquiry](../common-api/transaction-enquiry)
-- [Transaction Refunds](../common-api/refunds)
+- [Transaction Enquiry](/docs/common-api/transaction-enquiry)
+- [Transaction Refunds](/docs/common-api/refunds)
 
 ## Creating and capturing payments
 
@@ -138,7 +138,7 @@ For integration, please refer to the "Common API" section of the documentation. 
 
 ## Notifications
 
-General notification rule applies. For details, please refer to the [Asynchronous Notifications section](../common-api/asynchronous-notification) in the documentations.
+General notification rule applies. For details, please refer to the [Asynchronous Notifications section](/docs/common-api/asynchronous-notification) in the documentations.
 
 Upon successful execution of the following actions, you should be able to receive a notification
 

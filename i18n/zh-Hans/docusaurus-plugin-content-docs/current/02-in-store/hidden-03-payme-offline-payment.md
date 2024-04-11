@@ -296,7 +296,7 @@ ob_end_flush();
 参数名称 | 参数代号 | 必填 | 类别 | 描述
 --------- | -------- | --------- | ------- | ------- 
 支付金额 | `txamt` | 是 | Int(11) | 交易金额，单位为分（例如100表示1元）
-支付币种 | `txcurrcd` | 是 | String(3) | 交易货币类型。请参考[交易币种](../preparation/paycode#currencies)表格获取可用货币的完整列表
+支付币种 | `txcurrcd` | 是 | String(3) | 交易货币类型。请参考[交易币种](/docs/preparation/paycode#currencies)表格获取可用货币的完整列表
 支付类型 | `pay_type` | 是 | String(6) | PayMe网页支付 = 805801
 API订单号| `out_trade_no` | 是 | String(128)| 唯一商户订单号，用于每个支付和退款请求。
 交易请求时间 | `txdtm` | 是 | String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
@@ -319,5 +319,5 @@ QFPay商户号 | `mchid` | 否 | String(16) | 只适用于某些渠道下的特�
 其他消息信息 | `respmsg` | String(128) |  
 外部交易号 | `out_trade_no` | String(128) | 商户订单号 
 QFPay交易号 | `syssn` | String(40) | QFPay 唯一订单号
-返回码 | `respcd` | String(4) | `0000` = 请求成功。<br/> `1143`/`1145` = 商家需要继续查询交易结果。<br/> 其他返回码表示交易失败。请参考页面[交易状态码](../preparation/paycode#transaction-status-codes) 以获取完整的返回码列表
+返回码 | `respcd` | String(4) | `0000` = 请求成功。<br/> `1143`/`1145` = 商家需要继续查询交易结果。<br/> 其他返回码表示交易失败。请参考页面[交易状态码](/docs/preparation/paycode#transaction-status-codes) 以获取完整的返回码列表
 支付位址 | `pay_url` | String(512) | 在桌面网页中生成二维码；在手机网页中作为重定向URL。

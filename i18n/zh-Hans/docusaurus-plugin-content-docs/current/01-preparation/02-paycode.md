@@ -63,7 +63,7 @@ import TabItem from '@theme/TabItem';
   1. 该支付方式不支持退款.
 
   **(\*\*\*\*)**
-  1. 对于支付请求和响应请参考[此](../online-shop/alipay/alipay-online-payments)部分内容.
+  1. 对于支付请求和响应请参考[此](/docs/online-shop/alipay/alipay-online-payments)部分内容.
 :::
 
 ## 支付币种

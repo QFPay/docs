@@ -105,10 +105,10 @@ print(signature)
 Attribute | Mandatory | Type | Description  
 --------- | ------- | --------- | -------
 `status`  | Yes | String | 1 = payment success
-`pay_type` | Yes | String | Please refer to the section [Payment Codes](../preparation/paycode#payment-codes) for a complete list of payment types.
+`pay_type` | Yes | String | Please refer to the section [Payment Codes](/docs/preparation/paycode#payment-codes) for a complete list of payment types.
 `sysdtm` | Yes | String | Transaction creation time in the system. This parameter value is used as the cut-off time for settlements.
 `paydtm` | Yes | String | Payment time of the transaction.
-`txcurrcd` | Yes | String | Transaction currency. View the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies.
+`txcurrcd` | Yes | String | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies.
 `txdtm` | Yes | String | Order creation time provided by the merchant in the payment request.
 `txamt` | Yes | String | Transaction amount in Cents.
 `out_trade_no` | Yes | String | External transaction number.

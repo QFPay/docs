@@ -57,7 +57,7 @@ The data is encoded by Base64 after encryption.
 }
 ```
 
-For inquiry the transaction result, please use the [Inquire API](../../common-api/transaction-enquiry)
+For inquiry the transaction result, please use the [Inquire API](/docs/common-api/transaction-enquiry)
 
 ### 2.2 Refund / Void
 

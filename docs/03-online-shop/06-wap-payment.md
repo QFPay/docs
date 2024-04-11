@@ -18,8 +18,8 @@ WAP Payment or H5 Payment enables merchants to call up digital wallet module in 
 
 PayType | Description
 ------- | -------
-800212 | WeChat H5 Payment, details please refer to [WeChat Pay H5 (in mobile browser)](./wechat/wechat-pay-h5)
-801512 | Alipay Hong Kong WAP payment, details please refer to [Alipay Service Window H5](./alipay/alipay-service-window-h5)
+800212 | WeChat H5 Payment, details please refer to [WeChat Pay H5 (in mobile browser)](/docs/online-shop/wechat/wechat-pay-h5)
+801512 | Alipay Hong Kong WAP payment, details please refer to [Alipay Service Window H5](/docs/online-shop/alipay/alipay-service-window-h5)
 800712 | UNIONPAY WAP Payment
 805812 | PayMe Online WAP Payment
 
@@ -28,7 +28,7 @@ PayType | Description
 Attribute | Mandatory | Type | Description
 -------- | --------- | ------- | -------
 `txamt` | Yes | Int(11) | Payment amount of the transaction. Unit in cents (i.e. 100 = $1)
-`txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies
+`txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies
 `pay_type` | Yes | String(6) | Payment type e.g. PayMe WAP Payment = 805812
 `out_trade_no` | Yes | String(128)| API Order Number, external transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
 `txdtm` | Yes | String(20) | Request transaction time format：<br/> YYYY-MM-DD hh:mm:ss
@@ -51,5 +51,5 @@ Attribute | Type | Description
 `respmsg` | String(128) | Other message information
 `out_trade_no` | String(128) | External transaction number  
 `syssn` | String(40) |QFPay transaction number
-`respcd` | String(4) | Return code, 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](../preparation/paycode#transaction-status-codes) for a complete list of response codes.  
+`respcd` | String(4) | Return code, 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of response codes.  
 `pay_url` | String(512) | Payment URL, generate QR code in Desktop web; redirect URL in WAP

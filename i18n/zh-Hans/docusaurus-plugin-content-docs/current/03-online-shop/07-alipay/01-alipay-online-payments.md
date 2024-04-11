@@ -285,7 +285,7 @@ ob_end_flush();
 参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述
 --------- | -------- | --------- | ------- | -------
 订单支付金额 | `txamt` | 是 | Int(11) |当前货币最小计量单位计算，只允许整数类型 (i.e. 100 = $1)
-币种 | `txcurrcd` | 是 | String(3) | 交易币种, 请查看[币种](../../preparation/paycode#支付币种)表以获取完整的可选用的币种
+币种 | `txcurrcd` | 是 | String(3) | 交易币种, 请查看[币种](/docs/preparation/paycode#支付币种)表以获取完整的可选用的币种
 支付类型 | `pay_type` | 是 | String(6) | 支付宝线上支付 = 801101
 外部订单号 | `out_trade_no` | 是 | String(128)| 开发者自定义订单号，在同一商户账户中的每笔交易和退款请求该参数值唯一
 请求交易时间 | `txdtm` | 是 | String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
@@ -308,5 +308,5 @@ ob_end_flush();
 信息描述 | `respmsg` | String(128) |
 外部订单号 | `out_trade_no` | String(128) | 外部订单号
 QFPay 订单号 | `syssn` | String(40) | 
-返回码 | `respcd` | String(4) | 0000 = 请求成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](../../preparation/paycode#交易状态码) 获得完整返回类型列表 |
+返回码 | `respcd` | String(4) | 0000 = 请求成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](/docs/preparation/paycode#交易状态码) 获得完整返回类型列表 |
 支付链接 | `pay_url` | String(512) |

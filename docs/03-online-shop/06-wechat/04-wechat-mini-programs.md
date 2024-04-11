@@ -95,24 +95,24 @@ qfPayOpenAPI: function () {
 
 | Attribute| Mandatory| Type|Description|
 |:---|:----- |-----   |----   |
-| Public request parameters| — |— |Please refer to the [Public Payment Section](../../preparation/paycode#public-payment-parameters) for more details|
+| Public request parameters| — |— |Please refer to the [Public Payment Section](/docs/preparation/paycode#public-payment-parameters) for more details|
 |`sub_openid`|Yes |String(128)   |   |
 | `expired_time` | No | String(3)  | QRC expiration time in unit minutes. The default QRC expiration time for WeChat Mini Programs is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.
 |`limit_pay`|No |String    |The parameter value is specified as `no_credit`, and credit card payment is prohibited. This setting is only valid for mainland China.  |
-| `extend_info` | No | Object | Real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'|
+| `extend_info` | No | Object | Real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](/docs/preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'|
 
 ## Response Parameters
 
 |Attribute| Secondary Attribute| Type|Description|
 |:----    |:---|:----- |-----   |
-|Public response parameters    |—  |— |Please refer to the [Public Payment Section](../../preparation/paycode#public-payment-parameters) for more details  |
+|Public response parameters    |—  |— |Please refer to the [Public Payment Section](/docs/preparation/paycode#public-payment-parameters) for more details  |
 |`pay_params`    |`appId` |String(16) |Public WMP ID, after the developer registers the Mini Program with the WeChat, the appId can be obtained.  |
 |—   |`timeStamp` |String(32) |Current time  |
 |—   |`nonceStr`  |String(32) |Random string, no longer than 32 bits  |
 |—   |`package`   |String(128)|Order details extension string. The value of the prepay_id parameter returned by the unified interface is in the format of prepay_id=**  |
 |—    |`signType` |String(32) |Signature type, default is MD5  |
 |—    |`paySign`  |String(64) |Signature |
-|`txcurrcd`|  | |Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
+|`txcurrcd`|  | |Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies |
 
 **Step 4:** Evoke the payment module
 

@@ -303,7 +303,7 @@ ob_end_flush();
 |`orig_syssn`  |String(128)   |Original Transaction ID, previous transaction ID referring to the original transaction that has been refunded|
 |`txamt`   |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1)|
 |`sysdtm`  | String(20)  |System transaction time. Format: YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements.|
-|`respcd` |  String(4)|Return code, 0000-Request successful.<br/>1143/1145 - merchants are required to continue to query the refund transaction result. <br/>All other return codes indicate transaction failure. Please refer to the section [payment status codes](../preparation/paycode#transaction-status-codes) for a complete list of return codes.|
+|`respcd` |  String(4)|Return code, 0000-Request successful.<br/>1143/1145 - merchants are required to continue to query the refund transaction result. <br/>All other return codes indicate transaction failure. Please refer to the section [payment status codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of return codes.|
 |`resperr` |  String(128)| Response message|
 | `cash_fee`  | String | Actual payment amount by user = transaction amount - discounts |
 | `cash_fee_type` | String | Actual payment currency e.g. CNY |

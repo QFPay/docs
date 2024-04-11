@@ -103,7 +103,7 @@ Code   | Description
 
 \*\*\*\*
 
-  1. Please refer to [this](../online-shop/alipay/alipay-online-payments#alipay-online-payments) section for payment request and response.
+  1. Please refer to [this](/docs/online-shop/alipay/alipay-online-payments#alipay-online-payments) section for payment request and response.
 
 :::
 

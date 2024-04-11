@@ -18,7 +18,7 @@ import Link from '@docusaurus/Link';
 
 |  Attribute | Mandatory| Type | Description |
 |:---|:----- |-----   |-----   |
-|Public payment parameters |—  |—   | Please refer to the [Public Payment Section](../../preparation/paycode#public-payment-parameters) for more details |
+|Public payment parameters |—  |—   | Please refer to the [Public Payment Section](/docs/preparation/paycode#public-payment-parameters) for more details |
 |`extend_info`|Yes|Object||
 
 ```js
@@ -50,7 +50,7 @@ extend_info:
 
 |Attribute| Secondary Attribute| Type|Description|
 |:----    |:---|:----- |----   |
-|Public response parameters    |—  |— | Please refer to the [Public Payment Section](../../preparation/paycode#public-payment-parameters) for more details |
+|Public response parameters    |—  |— | Please refer to the [Public Payment Section](/docs/preparation/paycode#public-payment-parameters) for more details |
 |`pay_url`|Yes|String||
 
 :::warning

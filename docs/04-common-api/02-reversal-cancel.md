@@ -308,7 +308,7 @@ Attribute | Type | Description
 `syssn` | String(40) | QFPay transaction number of the cancel/ reversal
 `out_trade_no` | String(128) | External transaction number
 `txamt` | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1)
-`txcurrcd` | String(3) | Transaction currency. View the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies
+`txcurrcd` | String(3) | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies
 `txdtm` | String(20) | Transaction time. Format: YYYY-MM-DD hh:mm:ss
 `sysdtm` | String(20) | System transaction time. Format: YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements.
 `chnlsn` | String | Transaction number from payment channel (wallet side)

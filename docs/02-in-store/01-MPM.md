@@ -308,7 +308,7 @@ ob_end_flush();
 
 |Attribute|Mandatory|Type|Description|
 |:---|:----- |-----   |-----   |
-|Public payment parameter | —  | — | Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details |
+|Public payment parameter | —  | — | Please refer to the [Public Payment Section](/docs/preparation/paycode#public-payment-parameters) for more details |
 | `pay_tag`  | No |     String(16) | The default value is: ALIPAYHK<br/>Alipay Continental version: ALIPAYCN |
 | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for WeChat and Alipay |
 |`limit_pay`|No |String   |The parameter value is specified as no_credit, and credit card payment is prohibited. This setting only applies to mainland China.  |
@@ -318,4 +318,4 @@ ob_end_flush();
 |Attribute|Secondary Attribute|Type|Description|
 |:----    |:---|:----- |-----   |
 |QR Code |  |String(512) |  |
-|Public payment parameter | —  | —  | Please refer to the [Public Payment Section](../preparation/paycode#public-payment-parameters) for more details |
+|Public payment parameter | —  | —  | Please refer to the [Public Payment Section](/docs/preparation/paycode#public-payment-parameters) for more details |

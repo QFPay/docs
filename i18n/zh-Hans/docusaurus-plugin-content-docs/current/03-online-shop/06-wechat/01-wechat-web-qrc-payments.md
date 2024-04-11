@@ -279,7 +279,7 @@ ob_end_flush();
 参数名称 | 参数编码 | 二级参数 | 是否必填 | 参数类型 | 描述
 --------- | -------- | --------- | ------- | ------- | -------
 订单支付金额 | `txamt` | | 是| Int(11) | 以当前货币最小计量单位计算，只允许整数类型 (i.e. 100 = $1)
-币种 | `txcurrcd` | | 是| String(3) | 交易币种, 请查看[币种](../../preparation/paycode#支付币种)表以获取完整的可选用的币种
+币种 | `txcurrcd` | | 是| String(3) | 交易币种, 请查看[币种](/docs/preparation/paycode#支付币种)表以获取完整的可选用的币种
 支付类型 | `pay_type` | | 是| String(6) | 微信线上支付类型 `800201`
 外部订单号 | `out_trade_no` | | 是| String(128)| 外部交易代码 / 商户平台交易码: 在同一商户账户中的每笔交易和退款请求该参数值唯一
 请求交易时间 | `txdtm` | |是| String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
@@ -289,7 +289,7 @@ ob_end_flush();
 时区 | `txzone` | | 否  | String(5) | 用于记录本地下单时间，默认为北京时间+0800
 设备唯一id | `udid` | | 否  | String(40) | 唯一的设备ID,显示在商户管理后台上.
 人民币标识 | `rmb_tag` | | 否  | String(1) | 香港微信支付使用“rmb_tag”=Y 和“txcurrcd”=CNY 来表示交易币种为人民币。
-客户扩展信息 | `extend_info` | `user_creid` <br/> `user_truename` | 否  | Object | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](../../preparation/paycode#支付类型)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'
+客户扩展信息 | `extend_info` | `user_creid` <br/> `user_truename` | 否  | Object | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](/docs/preparation/paycode#支付类型)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'
 
 ### 响应参数
 
@@ -303,4 +303,4 @@ ob_end_flush();
 其他留言信息 | `respmsg` | String(128) |  
 外部交易编号 | `out_trade_no` | String(128) | 外部交易号
 QFPay交易编号 | `syssn` | String(40) | 
-返回码 | `respcd` | String(4) | 0000 = 请求成功。 <br/> 1143/1145=要求商户继续查询交易结果。 <br/> 所有其他返回码均表示交易失败。 请参阅[交易状态代码](../../preparation/paycode#交易状态码)页面以获取完整的响应代码列表。
+返回码 | `respcd` | String(4) | 0000 = 请求成功。 <br/> 1143/1145=要求商户继续查询交易结果。 <br/> 所有其他返回码均表示交易失败。 请参阅[交易状态代码](/docs/preparation/paycode#交易状态码)页面以获取完整的响应代码列表。

@@ -14,8 +14,8 @@ Customers make purchases on a merchant website with Web Payment methods. The use
 
 PayType | Description
 --------- | -------
-800201 | Wechat Online WEB Payment (HK Merchants), details please refer to [Wechat WEB QRC Payments](./wechat/wechat-web-qrc-payments)
-801514 | Alipay Online WEB Payment (HK Merchants), details please refer to [Alipay Online Payments](./alipay/alipay-online-payments)
+800201 | Wechat Online WEB Payment (HK Merchants), details please refer to [Wechat WEB QRC Payments](/docs/online-shop/wechat/wechat-web-qrc-payments)
+801514 | Alipay Online WEB Payment (HK Merchants), details please refer to [Alipay Online Payments](/docs/online-shop/alipay/alipay-online-payments)
 800714 | UNIONPAY PC-Web Payment (HK Merchants)
 805814 | PayMe Online WEB (in browser Chrome etc.) Payment (HK Merchants)
 
@@ -24,7 +24,7 @@ PayType | Description
 Attribute | Mandatory | Type | Description
 -------- | --------- | ------- | -------
 `txamt` | Yes | Int(11) | Payment amount  of the transaction. Unit in cents (i.e. 100 = $1)
-`txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies
+`txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies
 `pay_type` | Yes | String(6) | Payment type e.g. PayMe Web Payment = 805814
 `out_trade_no` | Yes | String(128)| API Order Number, external transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
 `txdtm` | Yes | String(20) | Request transaction time format：<br/> YYYY-MM-DD hh:mm:ss
@@ -47,5 +47,5 @@ Attribute | Type | Description
 `respmsg` | String(128) | Other message information
 `out_trade_no` | String(128) | External transaction number  
 `syssn` | String(40) | QFPay transaction number
-`respcd` | String(4) | Return code, 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](../preparation/paycode#transaction-status-codes) for a complete list of response codes.
+`respcd` | String(4) | Return code, 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of response codes.
 `pay_url` | String(512) | Payment URL, generate QR code in Desktop web
