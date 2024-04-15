@@ -40,7 +40,7 @@ JSAPI 支付有两种不同的实现方法。
 GET WeChat oauth_code request:
 
 {
-  https://test-openapi-hk.qfpay.com/tool/v1/get_weixin_oauth_code?app_code=5D81D64E602043F7AF51CEXXXXXXXXXX&sign=F4D8FB00894F213993B33116BC1B4E10&redirect_uri=https://sdk.qfapi.com
+  https://test-openapi-hk.qfapi.com/tool/v1/get_weixin_oauth_code?app_code=5D81D64E602043F7AF51CEXXXXXXXXXX&sign=F4D8FB00894F213993B33116BC1B4E10&redirect_uri=https://sdk.qfapi.com
 }
 ```
 

@@ -40,8 +40,8 @@ import Link from '@docusaurus/Link';
 环境名称 | 环境对应URL | 
 ------- | --------- |
 沙盒环境 (只用于模拟信用卡) | https://openapi-int.qfapi.com |
-线上测试环境 | https://test-openapi-hk.qfpay.com |
-生产环境 |  https://openapi-hk.qfapi.com | 
+线上测试环境 | https://test-openapi-hk.qfapi.com |
+生产环境 |  https://openapi-hk.qfapi.com |
 
 ## 签名机制
 
