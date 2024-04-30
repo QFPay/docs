@@ -4,14 +4,14 @@ import Link from '@docusaurus/Link';
 
 # Visa / Mastercard 线上支付
 
-我们目前支持在[香港环境](../preparation/introduction#开发环境) 中使用信用卡付款。 支持所有主要信用卡发卡机构。
+我们目前支持在[香港环境](/docs/preparation/introduction#开发环境) 中使用信用卡付款。 支持所有主要信用卡发卡机构。
 
 ## 支付整合流程
 
 对于信用卡在线支付集成，商户可以选择以下集成方式之一
 
-1. [QFPay Checkout Services](./checkout)
-2. [QFPay Element SDK](./paymentelement)
+1. [QFPay Checkout Services](/docs/online-shop/checkout)
+2. [QFPay Element SDK](/docs/online-shop/paymentelement)
 
 ## 异步通知
 

@@ -12,7 +12,7 @@ import Link from '@docusaurus/Link';
 
 **JSAPI 支付类型**
 
-Note: 加拿大地区的商户，请参阅[此](../alipay/alipay-online-payments)部分了解支付请求和响应参数，其中“pay_type”为800207。<br/>
+Note: 加拿大地区的商户，请参阅[此](/docs/online-shop/alipay/alipay-online-payments)部分了解支付请求和响应参数，其中“pay_type”为800207。<br/>
 
 JSAPI 支付有两种不同的实现方法。
 
@@ -20,11 +20,11 @@ JSAPI 支付有两种不同的实现方法。
 
 **1. 拥有实名认证的公众号JSAPI支付**
 
-对于这种集成，商户需要在微信上注册自己的公众号，我们会将公众号与商户的QFPay支付账户绑定。 在这种情况下，商家可以创建和发布自己的内容、访问客户信息并收集自己的关注者。 选择该实现方式时，商户需要获取“oauth_code”、用户“openid”，并通过<Link href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_1">官方微信平台</Link>触发微信支付。 商户只需参考QFPay[交易查询API接口](../../common-api/transaction-enquiry)即可。
+对于这种集成，商户需要在微信上注册自己的公众号，我们会将公众号与商户的QFPay支付账户绑定。 在这种情况下，商家可以创建和发布自己的内容、访问客户信息并收集自己的关注者。 选择该实现方式时，商户需要获取“oauth_code”、用户“openid”，并通过<Link href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_1">官方微信平台</Link>触发微信支付。 商户只需参考QFPay[交易查询API接口](/docs/common-api/transaction-enquiry)即可。
 
 **Step 1:** 开发者在微信公众号平台完成实名认证后，即可使用微信公众号支付。 认证完成后，开发者可以获得认证公众账号的openid参数。 请参考官方[微信文档](https://developers.weixin.qq.com/doc/offiaccount/en/Getting_Started/Overview.html)，了解更多信息。
 
-**Step 2:** 通过提供指定的`openid`请求QFPAY订单支付接口`/trade/v1/ payment`并返回`pay_params`数据，具体说明请参考 [支付API端点](../../preparation/paycode#支付API端点).
+**Step 2:** 通过提供指定的`openid`请求QFPAY订单支付接口`/trade/v1/ payment`并返回`pay_params`数据，具体说明请参考 [支付API端点](/docs/preparation/paycode#支付API端点).
 
 **Step 3:** 商户认证申请时打开JSAPI支付授权目录发起支付。 更多详情请参考 [微信支付官方文档](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6).
 
@@ -40,7 +40,7 @@ JSAPI 支付有两种不同的实现方法。
 GET WeChat oauth_code request:
 
 {
-  https://test-openapi-hk.qfpay.com/tool/v1/get_weixin_oauth_code?app_code=5D81D64E602043F7AF51CEXXXXXXXXXX&sign=F4D8FB00894F213993B33116BC1B4E10&redirect_uri=https://sdk.qfapi.com
+  https://test-openapi-hk.qfapi.com/tool/v1/get_weixin_oauth_code?app_code=5D81D64E602043F7AF51CEXXXXXXXXXX&sign=F4D8FB00894F213993B33116BC1B4E10&redirect_uri=https://sdk.qfapi.com
 }
 ```
 
@@ -241,10 +241,10 @@ if __name__ == '__main__':
 
 |参数名字|  参数编码 | 是否必填| 参数类型 | 描述 |
 |:----    |:---|:----- |-----   |-----   |
-|公共支付参数 |—  |— |—  | 请参阅有关交易的[公共支付参数](../../preparation/paycode#支付API端点) |
+|公共支付参数 |—  |— |—  | 请参阅有关交易的[公共支付参数](/docs/preparation/paycode#支付API端点) |
 |微信授权码   |`sub_openid`|是  |String    |微信 OpenID. 请参阅 **GET openid** 文档   |
 |指定付款方式   |`limit_pay`|否|String   |用于限制信用卡交易   |
-|扩展客户信息   |`extend_info`|否|Object   | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](../../preparation/paycode#支付类型)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
+|扩展客户信息   |`extend_info`|否|Object   | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](/docs/preparation/paycode#支付类型)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
 
 ### 响应参数
 
@@ -256,8 +256,8 @@ if __name__ == '__main__':
 |— |`package`   |String(128)| 交易明细  | 接口返回的`prepay_id`参数值格式为：prepay_id=** |
 |— |`signType`   |String(32) | 签名方法  | 签名方法, 默认：MD5|
 |— |`paySign`    |String(64) | 签名   | 签名方法, 签名：MD5|
-|— |公共响应参数    |— |—   | 请参阅有关交易的[公共支付参数](../../preparation/paycode#支付API端点)|
-|`txcurrcd`  | |  String(3) |  | 交易货币。 查看[货币](../../preparation/paycode#支付币种) 表以获取可用货币的完整列表 |
+|— |公共响应参数    |— |—   | 请参阅有关交易的[公共支付参数](/docs/preparation/paycode#支付API端点)|
+|`txcurrcd`  | |  String(3) |  | 交易货币。 查看[货币](/docs/preparation/paycode#支付币种) 表以获取可用货币的完整列表 |
 
 ## 调用微信支付模块
 

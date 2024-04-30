@@ -125,7 +125,7 @@ public class Enquiry {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://test-openapi-hk.qfpay.com";
+        String url="https://test-openapi-hk.qfapi.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/query", data, appcode,key);
         System.out.println(resp);
     }
@@ -326,9 +326,9 @@ ob_end_flush();
 | `out_trade_no` | String(128) | API order number, external transaction number / Merchant platform transaction number |
 | `chnlsn` | String | Wallet/Channel transaction number  |
 | `goods_name` | String(64) | Product name, Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters. |
-| `txcurrcd` | String(3) | Transaction currency, view the [Currencies](../preparation/paycode#currencies) table for a complete list of available currencies |
+| `txcurrcd` | String(3) | Transaction currency, view the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies |
 | `origssn` | String(40) | Original transaction number, refers to the original QFPay transaction number. This parameter is only available when the `syssn` of a refund is queued |
-| `pay_type` | String(6) | Payment type, please refer to the section [Payment Codes](../preparation/paycode#payment-codes) for a complete list of payment types |
+| `pay_type` | String(6) | Payment type, please refer to the section [Payment Codes](/docs/preparation/paycode#payment-codes) for a complete list of payment types |
 | `order_type` |  String(16) | Order type. Payment: Payment transaction Refund: Refund transaction |
 | `txdtm` | String(20) | Request transaction time provided by merchant in payment and refund request. Format: YYYY-MM-DD hh:mm:ss |
 | `txamt` | Int(11) |  Amount of the transaction. Unit in cents (i.e. 100 = $1) |

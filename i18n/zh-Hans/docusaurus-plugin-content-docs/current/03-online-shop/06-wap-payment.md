@@ -16,8 +16,8 @@ WAP支付或者H5支付能够让商户在Chrome等手机浏览器上的调用电
 
 支付类型 | 描述
 --------- | ------- 
-800212 | 微信H5支付, 详情可以参考[WeChat Pay H5 (in mobile browser)](./wechat/wechat-pay-h5)
-801512 | 支付宝香港WAP支付, 详情可以参考[# Alipay Service Window H5](./alipay/alipay-service-window-h5)
+800212 | 微信H5支付, 详情可以参考[WeChat Pay H5 (in mobile browser)](/docs/online-shop/wechat/wechat-pay-h5)
+801512 | 支付宝香港WAP支付, 详情可以参考[# Alipay Service Window H5](/docs/online-shop/alipay/alipay-service-window-h5)
 800712 | 银联WAP支付
 805812 | PayMe 线上WAP支付
 
@@ -26,7 +26,7 @@ WAP支付或者H5支付能够让商户在Chrome等手机浏览器上的调用电
 参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述
 --------- | -------- | --------- | ------- | -------
 交易金额 | `txamt` | 是 | Int(11) | 交易金额。 单位为分（即 100 = 1 元）
-交易货币 | `txcurrcd` | 是 | String(3) | 交易货币。 查看[货币](../preparation/paycode#支付币种) 表以获取可用货币的完整列表
+交易货币 | `txcurrcd` | 是 | String(3) | 交易货币。 查看[货币](/docs/preparation/paycode#支付币种) 表以获取可用货币的完整列表
 交易类型 | `pay_type` | 是 | String(6) | e.g. PayMe WAP 支付 = 805812
 API订单号码 | `out_trade_no` | 是 | String(128)| 外部交易号/商户平台交易号：该参数对于系统中同一商户账户下的每次支付和退款请求必须是唯一的。
 请求交易时间 | `txdtm` | 是 | String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
@@ -49,5 +49,5 @@ QFPay 商户号码 | `mchid` | 否 | String(16) | 可能会也可能不会给予
 其他信息 | `respmsg` | String(128) |  
 外部订单号 | `out_trade_no` | String(128) | 外部交易号 
 QFPay交易号 | `syssn` | String(40) | 
-返回码 | `respcd` | String(4) | 0000 = 请求成功。 <br/> 1143/1145=要求商户继续查询交易结果。 <br/> 所有其他返回码均表示交易失败。 请参阅[交易状态代码](../preparation/paycode#交易状态码)页面以获取完整的响应代码列表。 |
+返回码 | `respcd` | String(4) | 0000 = 请求成功。 <br/> 1143/1145=要求商户继续查询交易结果。 <br/> 所有其他返回码均表示交易失败。 请参阅[交易状态代码](/docs/preparation/paycode#交易状态码)页面以获取完整的响应代码列表。 |
 支付URL | `pay_url` | String(512) | 在桌面网页中生成二维码； 在WAP 场景中的重定向 URL |

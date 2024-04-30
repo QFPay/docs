@@ -67,7 +67,7 @@ import Link from '@docusaurus/Link';
 
 创建新的结帐订单，必须发送带有身份验证签名的 GET 请求。 对于此签名，必须连接上述参数，然后使用 QFPay 提供的 app_key 进行哈希处理。 如需 API 凭证或技术支持，请联系 **technical.support@qfpay.com**。
 
-右侧的示例说明了签名生成算法。 您还可以下载 [QFPay Online Checkout Boilerplate](@site/static/files/qfpay_online_checkout.html download) 并在默认浏览器中打开 HTML。
+右侧的示例说明了签名生成算法。 您还可以下载 [QFPay Online Checkout Boilerplate](@site/static/files/qfpay_online_checkout.html) 并在默认浏览器中打开 HTML。
 
 ```html
 <!DOCTYPE html>

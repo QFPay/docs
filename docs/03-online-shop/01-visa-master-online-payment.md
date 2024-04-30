@@ -4,14 +4,14 @@ import Link from '@docusaurus/Link';
 
 # Visa / Mastercard Online Payments
 
-We currently support credit card payments in the [Hong Kong environment](../preparation/introduction#environments). All major credit card issuers are supported.
+We currently support credit card payments in the [Hong Kong environment](/docs/preparation/introduction#environments). All major credit card issuers are supported.
 
 ## Payment Steps
 
 For credit card online payment integration, merchant can select one the the following integration methods
 
-1. [QFPay Checkout Services](./checkout)
-2. [QFPay Element SDK](./paymentelement)
+1. [QFPay Checkout Services](/docs/online-shop/checkout)
+2. [QFPay Element SDK](/docs/online-shop/paymentelement)
 
 ## Asynchronous Notification
 

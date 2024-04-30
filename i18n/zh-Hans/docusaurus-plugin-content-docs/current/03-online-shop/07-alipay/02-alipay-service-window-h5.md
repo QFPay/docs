@@ -103,7 +103,7 @@ public class TestMain {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://test-openapi-hk.qfpay.com";
+        String url="https://test-openapi-hk.qfapi.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/payment", data, appcode,key);
         System.out.println(resp);
     }
@@ -293,7 +293,7 @@ ob_end_flush();
 |参数编码 | 二级参数编码 | 参数类型 | 参数名称 | 描述 |
 |:----    |:---|:----- |-----   |----   |
 |`pay_params`|`tradeNO`   |String  | 交易号|通过传入交易号唤起快捷调用方式 |
-|`txcurrcd`  |  |  String(3) |   | 交易币种, 请查看[币种](../../preparation/paycode#支付币种)表以获取完整的可选用的币种 |
+|`txcurrcd`  |  |  String(3) |   | 交易币种, 请查看[币种](/docs/preparation/paycode#支付币种)表以获取完整的可选用的币种 |
 |常用响应参数|—  |— |—   |—   |
 
 **Step 3:** 收银台唤起支付

@@ -23,6 +23,7 @@ For build and manage subscriptions, the following API resources are required:
 | API Resources                                 |
 | --------------------------------------------- |
 | [Customer](#customer)                         |
+| [Payment Token](/docs/online-shop/payment-intent) |
 | [Payment Token ../common-api/payment-intent.md](../common-api/payment-intent.md) |
 | [Payment Token ../common-api/payment-intent](../common-api/payment-intent) |
 | [Payment Token /common-api/payment-intent.md](/common-api/payment-intent.md) |

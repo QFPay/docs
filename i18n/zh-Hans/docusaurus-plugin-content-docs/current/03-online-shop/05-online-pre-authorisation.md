@@ -15,7 +15,7 @@ import Link from '@docusaurus/Link';
 
 ## 常用API
 
-对接开发环境的常规指引可以参考 [https://sdk.qfapi.com/#introduction](../preparation/introduction)
+对接开发环境的常规指引可以参考 [https://sdk.qfapi.com/#introduction](/docs/preparation/introduction)
 
 在開始對接前，建議先參考以下內容：
 
@@ -26,8 +26,8 @@ import Link from '@docusaurus/Link';
 
 此外，我们还为预授权支付提供了以下常用API接口供您参考：
 
-- [交易查询](../common-api/transaction-enquiry)
-- [交易退款](../common-api/refunds)
+- [交易查询](/docs/common-api/transaction-enquiry)
+- [交易退款](/docs/common-api/refunds)
 
 ## Creating and capturing payments
 

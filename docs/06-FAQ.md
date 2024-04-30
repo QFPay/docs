@@ -14,7 +14,7 @@
 >A4. It's advised to keep querying transaction status. If partner/merchant wants to process as binary status (success/fail), can mark the transaction as failed and upon a successful asynchronous notifications can apply for refund at backend.
 
 **Q5. There is no specific title for the payment method I want to integrate, what should I do?**
->A5. You should use [Public Payment Parameters](./preparation/paycode#api-endpoint-for-payments) and check the special cases in Notes section at the end of the [Payment Codes](./preparation/paycode#payment-codes).
+>A5. You should use [Public Payment Parameters](/docs/preparation/paycode#api-endpoint-for-payments) and check the special cases in Notes section at the end of the [Payment Codes](/docs/preparation/paycode#payment-codes).
 
 **Q6. Can I refund a transaction made n day(s) ago?**
 >A6.	Only if the total transaction of the day is equal or greater than the refund amount you can refund.

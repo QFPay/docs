@@ -116,8 +116,8 @@ public class Refund {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-         //如果是国内钱台，网址是：https://test-openapi-hk.qfpay.com.
-        String url="https://test-openapi-hk.qfpay.com";
+         //如果是国内钱台，网址是：https://test-openapi-hk.qfapi.com.
+        String url="https://test-openapi-hk.qfapi.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/refund", data, appcode,key);
         System.out.println(resp);
     }
@@ -301,7 +301,7 @@ ob_end_flush();
 |原订交易流水号| `orig_syssn`  |String(128)   | 被用于退款的原交易的交易ID|
 |订单金额| `txamt`   |Int(11)  | 退款金额, 以分为单位 (i.e. 100 = $1)|
 |系统交易时间 | `sysdtm`  | String(20)  |格式: YYYY-MM-DD hh:mm:ss <br/>这个值被用作结算截止时间|
-|返回编码| `respcd` |  String(4)|  0000-请求成功.<br/>1143/1145 - 商户需要持续查询退款交易状态. <br/>所有其他的返回编码都是失败值. 请根据 [交易状态码](../preparation/paycode#交易状态码) 获取完整的信息.|
+|返回编码| `respcd` |  String(4)|  0000-请求成功.<br/>1143/1145 - 商户需要持续查询退款交易状态. <br/>所有其他的返回编码都是失败值. 请根据 [交易状态码](/docs/preparation/paycode#交易状态码) 获取完整的信息.|
 |响应信息| `resperr` |  String(128)| 响应的信息|
 |净支付金额 |`cash_fee`  | String | 用户实际付款金额 = 交易金额 - 优惠 |
 | 支付货币 |`cash_fee_type` | String | 实际支付货币 e.g. CNY |

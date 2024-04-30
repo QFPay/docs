@@ -69,7 +69,7 @@ Each checkout order is unique so merchants are requested to create a unique exte
 
 In order to create a new checkout order, a GET request with authentication signature must be send. For this signature the above parameters have to be concatenated and then hashed with the app_key which is provided by QFPay. For API credentials or technical support please contact `technical.support@qfpay.com`.
 
-The example to the right illustrates the signature generation algorithm. You can also download the [QFPay Online Checkout Boilerplate](@site/static/files/qfpay_online_checkout.html download) and open the HTML in your default browser.
+The example to the right illustrates the signature generation algorithm. You can also download the [QFPay Online Checkout Boilerplate](@site/static/files/qfpay_online_checkout.html) and open the HTML in your default browser.
 
 ```html
 <!DOCTYPE html>

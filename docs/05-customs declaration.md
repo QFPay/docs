@@ -42,7 +42,7 @@ Customs declaration API auto-sends the WeChat/Alipay payment data to the customs
 | Attribute|Type|Description|
 |:---|-----   |----   |
 |`syssn`|String(40)|QFPay transaction number|
-|`respcd`|String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|
+|`respcd`|String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of response codes.|
 |`resperr`|String(128)|Response message|
 |`respmsg`|String(128)|Other message information|
 |`verify_department`||Verification organization|
@@ -72,7 +72,7 @@ Merchants query declaration status by QFPay transaction number.
 | Attribute|Type|Description|
 |:---|-----   |----   |
 |`syssn`|String(40)|QFPay transaction number|
-|`respcd`|String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|
+|`respcd`|String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of response codes.|
 |`resperr`|String(128)|Response message|
 |`respmsg`|String(128)|Other message information|
 |`data`||Customs declaration details \[\{"resperr" : "", "errmsg" : null, "sub_order_no" : "15752730835729139712", "verify_department" : "OTHERS", "verify_department_trade_id" : "4200000459201911265585026208"\}\]|
@@ -102,6 +102,6 @@ If additional order information has been submitted to the customs but is lost in
 | Attribute|Type|Description|
 |:--- |-----   |----   |
 |`syssn`|String(40)|QFPay transaction number|
-|`respcd`|String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](./preparation/paycode#transaction-status-codes) for a complete list of response codes.|
+|`respcd`|String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of response codes.|
 |`resperr`|String(128)|Response message|
 |`respmsg`|String(128)|Other message information|

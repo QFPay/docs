@@ -63,7 +63,7 @@ import TabItem from '@theme/TabItem';
   1. 该支付方式不支持退款.
 
   **(\*\*\*\*)**
-  1. 对于支付请求和响应请参考[此](../online-shop/alipay/alipay-online-payments)部分内容.
+  1. 对于支付请求和响应请参考[此](/docs/online-shop/alipay/alipay-online-payments)部分内容.
 :::
 
 ## 支付币种
@@ -205,7 +205,7 @@ public class TestMain {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://test-openapi-hk.qfpay.com";
+        String url="https://test-openapi-hk.qfapi.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/payment", data, appcode,key);
         System.out.println(resp);
     }

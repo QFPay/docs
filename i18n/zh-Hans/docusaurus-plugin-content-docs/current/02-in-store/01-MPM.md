@@ -123,7 +123,7 @@ public class TestMain {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://test-openapi-hk.qfpay.com";
+        String url="https://test-openapi-hk.qfapi.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/payment", data, appcode,key);
         System.out.println(resp);
     }
@@ -314,4 +314,4 @@ ob_end_flush();
 |参数编码|二级参数编码|参数类型|参数名称|描述|
 |:----    |:---|:----- |-----   |-----   |
 |QR Code |  |String(512) | 二维码链接   | |
-|公共响应参数 | —  | — | — | 请参阅有关交易的[公共支付参数](../preparation/paycode#支付API端点) |
+|公共响应参数 | —  | — | — | 请参阅有关交易的[公共支付参数](/docs/preparation/paycode#支付API端点) |

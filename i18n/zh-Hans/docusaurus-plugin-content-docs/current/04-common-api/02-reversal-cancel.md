@@ -108,7 +108,7 @@ public class Refund {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-         //如果是国内钱台，网址是：https://test-openapi-hk.qfpay.com.
+         //如果是国内钱台，网址是：https://test-openapi-hk.qfapi.com.
         String url="https://test-openapi-hk.qfapi.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/reversal", data, appcode,key);
         System.out.println(resp);
@@ -310,7 +310,7 @@ ob_end_flush();
 `syssn` | String(40) | 取消/撤销的 QFPay 交易编号
 `out_trade_no` | String(128) | 外部交易编号
 `txamt` | Int(11) | 交易金额。单位为分（即 100 = 1 元）
-`txcurrcd` | String(3) | 交易货币。查看 [支付币种](../preparation/paycode#支付币种) 表，了解可用货币的完整列表。
+`txcurrcd` | String(3) | 交易货币。查看 [支付币种](/docs/preparation/paycode#支付币种) 表，了解可用货币的完整列表。
 `txdtm` | String(20) | 交易时间格式： YYYY-MM-DD hh:mm:ss
 `sysdtm` | String(20) | 系统交易时间。 格式：YYYY-MM-DD hh:mm:ss <br/> 该参数值作为清算截止时间。
 `chnlsn` | String | 支付通道交易编号（钱包方）

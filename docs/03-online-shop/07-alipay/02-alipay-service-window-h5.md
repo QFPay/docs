@@ -105,7 +105,7 @@ public class TestMain {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://test-openapi-hk.qfpay.com";
+        String url="https://test-openapi-hk.qfapi.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/payment", data, appcode,key);
         System.out.println(resp);
     }
@@ -287,7 +287,7 @@ For more details about how to acquire the user id please refer to the [official 
 
 | Attribute | Mandatory | Type | Description |
 |:---|:----- |-----   |----   |
-|Public request parameters |—  |— |Please refer to the [Public Payment Section](../../preparation/paycode#public-payment-parameters) for more details   |
+|Public request parameters |—  |— |Please refer to the [Public Payment Section](/docs/preparation/paycode#public-payment-parameters) for more details   |
 |`openid`   |Yes  | String(64) |Alipay authorization code, the `user_id` is returned by the interface, e.g. 2088802811715388 |
 | `return_url` | No | String(512) | Redirect URL, address for user redirect after successful payment |
 |`limit_pay`  |No |String   |Designated payment method, only applicable for mainland China   |
@@ -297,8 +297,8 @@ For more details about how to acquire the user id please refer to the [official 
 | Attribute | Secondary Attribute | Type | Description |
 |:----    |:---|:----- |----   |
 |`pay_params`|`tradeNO` |String  |Transaction number, provide the transaction number in the call function |
-|`txcurrcd`  |  |  String(3) | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
-|Public response parameters |—  |— |Please refer to the [Public Payment Section](../../preparation/paycode#public-payment-parameters) for more details   |
+|`txcurrcd`  |  |  String(3) | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies |
+|Public response parameters |—  |— |Please refer to the [Public Payment Section](/docs/preparation/paycode#public-payment-parameters) for more details   |
 
 **Step 3:** Payout through the cashout interface
 For more information regarding the cashout interface please refer to the [official Alipay documentation](https://docs.open.alipay.com/common/105591).

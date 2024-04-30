@@ -105,7 +105,7 @@ public class TestMain {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://test-openapi-hk.qfpay.com";
+        String url="https://test-openapi-hk.qfapi.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/payment", data, appcode,key);
         System.out.println(resp);
     }
@@ -290,7 +290,7 @@ PayType | Description
 Attribute | Mandatory | Type | Description
 -------- | --------- | ------- | -------
 `txamt` | Yes | Int(11) | Payment amount, amount of the transaction. Unit in cents (i.e. 100 = $1)
-`txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies
+`txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies
 `pay_type` | Yes | String(6) | Payment type, Alipay Web Payment = 801101
 `out_trade_no` | Yes | String(128)| API Order Number, external transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
 `txdtm` | Yes | String(20) | Request transaction time, format：<br/> YYYY-MM-DD hh:mm:ss
@@ -313,5 +313,5 @@ Attribute | Type | Description
 `respmsg` | String(128) | Other message information
 `out_trade_no` | String(128) | External transaction number  
 `syssn` | String(40) | QFPay transaction number
-`respcd` | String(4) | Return code, 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](../../preparation/paycode#transaction-status-codes) for a complete list of response codes.
+`respcd` | String(4) | Return code, 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of response codes.
 `pay_url` | String(512)|Payment URL

@@ -105,7 +105,7 @@ Only calls `alipay.fund.auth.operation.cancel` when the merchant’s system enco
 |`respmsg`    | String(128)| Information description |  |
 |`resperr`    |String(128)| Description error |  |
 |`cardcd`     |String| Card number |  |
-|`txcurrcd`   |String(3)| Currency  | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies |
+|`txcurrcd`   |String(3)| Currency  | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies |
 
 ```plaintext
 
@@ -167,7 +167,7 @@ Request Body:
 |`respmsg`    |String(128)| Information description|  |
 |`resperr`     |String(128)| Description error |  |
 |`cardcd`      |String| Card number |  |
-|`txcurrcd`      |String| Currency  | Transaction currency. View the [Currencies](../../preparation/paycode#支付类型) table for a complete list of available currencies
+|`txcurrcd`      |String| Currency  | Transaction currency. View the [Currencies](/docs/preparation/paycode#支付类型) table for a complete list of available currencies
 
 ```plaintext
 

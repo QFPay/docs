@@ -109,7 +109,7 @@ public class TestMain {
         String md5Sum=QFPayUtils.getMd5Value(data+key);
         System.out.println("Md5 Value:\n"+md5Sum);
 
-        String url="https://test-openapi-hk.qfpay.com";
+        String url="https://test-openapi-hk.qfapi.com";
         String resp= Requests.sendPostRequest(url+"/trade/v1/payment", data, appcode,key);
         System.out.println(resp);
     }
@@ -283,7 +283,7 @@ ob_end_flush();
 Attribute | Secondary Attribute | Mandatory | Type | Description
 -------- | --------- | ------- | ------- | -------
 `txamt` | | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1)
-`txcurrcd` | | Yes | String(3) | Transaction currency. View the [Currencies](../../preparation/paycode#currencies) table for a complete list of available currencies
+`txcurrcd` | | Yes | String(3) | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies
 `pay_type` | | Yes | String(6) | Payment type, WeChat online payments PayType `800201`
 `out_trade_no` | | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
 `txdtm` | |Yes | String(20) | Request transaction time, Transaction time format：<br/> YYYY-MM-DD hh:mm:ss
@@ -293,7 +293,7 @@ Attribute | Secondary Attribute | Mandatory | Type | Description
 `txzone` | | No | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800).
 `udid` | | No | String(40) | Unique transaction device ID. Is displayed on the merchant portal.
 `rmb_tag` | | No | String(1) | RMB Tag, WeChat Pay in Hong Kong uses `rmb_tag` = Y together with `txcurrcd` = CNY to indicate that the transaction currency is RMB.
-`extend_info` | `user_creid` <br/> `user_truename` | No | Object | Extended Customer Info, Real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](../../preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'
+`extend_info` | `user_creid` <br/> `user_truename` | No | Object | Extended Customer Info, Real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](/docs/preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'
 
 ## Response Parameters
 
@@ -307,4 +307,4 @@ Attribute | Secondary Attribute | Mandatory | Type | Description
  `respmsg` | String(128) | Other message information
  `out_trade_no` | String(128) | External transaction number
  `syssn` | String(40) | QFPay transaction number
- `respcd` | String(4) | Return code, 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](../../preparation/paycode#transaction-status-codes) for a complete list of response codes.
+ `respcd` | String(4) | Return code, 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of response codes.
