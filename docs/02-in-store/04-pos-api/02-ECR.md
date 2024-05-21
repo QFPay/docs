@@ -37,7 +37,7 @@ The data is encoded by Base64 after encryption.
 | `channel` | Yes | String | Wallet name, refer to Channel list |
 | `out_trade_no` | No | String | Merchant reference. <br/> if not passed, the out_trade_no won't be passed |
 | `camera_id`|No|Integer|can select using front camera or back camera in QR code payment CPM mode <br/> 0: back camera (default), <br/> 1: front camera |
-| `wait_card_timeout` | No | Integer | can set waiting time in credit card payment page, default 120 seconds |
+| `wait_card_timeout` | No | Integer | can set waiting time, default 120 seconds, trigger timeout exception. |
 
 ### 3.1 Payment
 
@@ -46,7 +46,7 @@ The data is encoded by Base64 after encryption.
 >
 > Front camera or back camera can be selected  to use by parameter `camera_id`
 >
-> Time to wait for credit card payment in payment page can be set by parameter `wait_card_timeout`
+> Time to wait for payment in payment page can be set by parameter `wait_card_timeout`
 :::
 
 ```json

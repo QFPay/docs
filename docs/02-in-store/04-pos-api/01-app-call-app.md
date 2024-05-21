@@ -2,6 +2,92 @@ import Link from '@docusaurus/Link';
 
 # App call App Android SDK
 
+## Latest Update
+
+:::note
+version 2.3.4.jar
+
+1. sdk support specify MPM or CPM payment
+
+        `CollectionReq.SCAN_TYPE_SCAN`: MPM payment
+        `CollectionReq.SCAN_TYPE_QRCODE`：CPM payment
+
+Setting Method：
+
+```
+    CollectionReq req = new CollectionReq(Long.parseLong(money));
+    req.setScan_type(scan_type);//set scan type，
+    CollectionReq.SCAN_TYPE_SCAN/CollectionReq.SCAN_TYPE_QRCODE
+```
+
+:::
+
+:::note
+version 2.3.3.jar
+
+1. Transaction add `getOut_trade_no` and getCardscheme method
+
+:::
+
+:::note
+version 2.3.2.jar
+Update：
+
+1. Transaction related
+    1.1 Transaction support passing in `out_trade_no` :
+    1.2 Support setting card payment（card_payment/unionpay_card/amex_card）wait timeout time `wait_card_timeout`（optional）,If `wait_card_timeout` is not set,
+    Default timeout time is 120s, the parameter must be greater than 0, if it is passed in a value less than or equal to 0, the default timeout time is 120s
+    Setting method：
+
+    ```
+        CollectionReq req = new CollectionReq(Long.parseLong(money));
+        req.setWait_card_timeout(wait_card_timeout);//设置刷卡超时时间
+        req.setOut_trade_no(out_trade_no);//设置外部订单号
+    ```
+
+2. Query
+    2.1 Support using `out_trade_no` to query transaction information,
+        `order_id` and `out_trade_no` must be passed in at least one, or both
+    Setting method：
+
+    ```
+        GetTransReq req = new GetTransReq(order_id);
+        req.setOut_trade_no(out_trade_no);
+    ```
+:::
+
+:::note
+version 2.3.1.jar
+
+1、app call app sdk support specify payment method when make payment
+Using `CollectionReq setPay_method` to set specific payment method，if not set specific payment method, or account has not opened specific payment method it will pop up payment method selection box to let self choose
+
+`pay_method` field type `String`, reference value as follows：
+        pay_method            desc
+        （1）、card_payment        Card payment(master/visa)
+        （2）、wx                  WeChat Pay
+        （3）、alipay              Alipay
+        （4）、payme               PayMe
+        （5）、union               UnionPay
+        （6）、fps                 FPS
+        （7）、octopus             Octopus
+        （8）、unionpay_card       union card pay
+        （9）、amex_card           amex card pay
+
+2、sdk support set front and back camera
+Using `CollectionReq setCamera_id` to set front and back camera(optional), default is back camera
+    `camera_id` field  type `Int` , reference value as follows：
+    0：CAMERA_PARAM_BACK  back camera
+    1：CAMERA_PARAM_FROT  front camera
+
+e.g.
+```
+    CollectionReq req = new CollectionReq(Long.parseLong(money));
+    req.setPay_method(current_paymethod);
+    req.setCamera_id(current_camera);
+```
+:::
+
 ## Introduction
 
 HaoJin is a mobile phone software that provides aggregate collection services for merchants. This document describes the interface calls that HaoJin is open to, and third-party applications can implements the collection function through these interfaces.

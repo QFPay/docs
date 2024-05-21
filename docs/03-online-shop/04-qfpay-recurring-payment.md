@@ -379,3 +379,156 @@ cancel customer's subscription immediately
 | Attribute         | Type   | Mandatory | Description                      |
 | ----------------- | ------ | --------- | -------------------------------- |
 | `subscription_id` | String | Yes       | unique ID of subscription object |
+
+### Manaul charge a subscription transaction
+
+Use API to charge a subscription immediately and the behavior is same as an auto recurrent payment.
+
+Endpoint : /subscription/v1/charge
+
+Method : POST
+
+#### Request parameters
+
+| Attribute         | Type   | Mandatory | Description                      |
+| ----------------- | ------ | --------- | -------------------------------- |
+| subscription_id | String | Yes     | unique ID of subscription object |
+| billing_time    | String | No      | the merchant set new billing time in the remaining iterations, default is the manual charge date. |
+
+### List subscription orders
+
+List all subscription orders for a specific subscription in a specific time range
+
+Endpoint : /subscription/v1/list
+
+Method : POST
+
+#### Request parameters
+
+| Attribute         | Type   | Mandatory | Description                      |
+| ----------------- | ------ | --------- | -------------------------------- |
+| page            | Int    | No        | page no.,default value=1         |
+| page_size       | Int    | No        | page size, default value=10, max value=100       |
+| subscritpion_id | String | No        | unique subscription identifier in QF system      |
+| start_time     | String | No        | the start time of the subscription orders query interval          |
+| end_time       | String | No        | the end time of the subscription orders query interval          |
+
+TODO: Finish behavior part
+
+## Recurring payment Behavior
+
+### State transitions
+
+For each subscription of the recurring payment system, there are states: incomplete, active, complete.
+
+### Automatic retry
+
+The QFPay system will automatically perform the recurring payment accroding to the scheduled subscription plan everyday. If the recurring payment fails, the system will mark
+
+### Ansynchronous notification
+
+Notifications are available for both payment token and subscription events and states
+
+Upon successful payment token creation or subscription activation, QFPay API will send an asynchronous notification message to the URL that defined by the merchant
+
+::: note
+To configure notification address, please send the address as well as merchant and store information via email to technical.support@qfpay.com
+:::
+
+Format: JSON
+
+#### Payment Token
+
+|Attribute| Descritpion |
+|--|--|
+|userid | SID  |
+|notify_type| notification type, payment_token |
+|event| token event|
+|tokenid| payment token id |
+|token_expiry_date| toekn expiry date|
+|cardcd| card no.|
+|card_scheme| card scheme, e.g. VISA|
+|respcd | response code, e.g. success=0000|
+|respmsg| response message, e.g. success|
+|sysdtm| event trigger system time|
+|customer_id| customer id if available|
+|token_reason| tokenization reason|
+|token_reference| tokenization reference in system|
+
+example:
+
+{
+    "respmsg": "",
+    "card_scheme": "ECMC_DEBIT",
+    "cardcd": "5200****1096",
+    "tokenid": "tk_6a699aae75094caeb066f****988daa32de",
+    "respcd": "0000",
+    "token_expiry_date": "2024-04-30 00:00:00",
+    "sysdtm": "2024-04-29 15:37:17",
+    "notify_type": "payment_token",
+    "event": "CONFLICT"
+}
+
+#### Subscription state change
+
+Available when a subscription state is changed
+
+|Attribute| Descritpion |
+|--|--|
+| userid | SID  |
+|notify_type| notification type，subscription |
+|subscription_id | unique subscription identifier|
+|state| subscription state|
+|sysdtm| system time of state change|
+
+example:
+
+{
+  "state": "COMPLETED",
+  "sysdtm": "2024-04-24 15:19:39",
+  "notify_type": "subscription",
+  "subscription_id": "sub_e51bb914919*****f6b0fe36d"
+}
+
+#### Subscription payment result
+
+Available when a subscription order payment result is received
+
+|Attribute| Descritpion |
+|--|--|
+|userid | SID  |
+|notify_type| notification type, subscription_payment |
+|subscription_id| unique subscription identifier|
+|subscription_order_id| unique subscription order identifier|
+|respcd | response code, e.g. success=0000|
+|respmsg| response message, e.g. success|
+|syssn| transcation number|
+|txdtm| transcation time|
+|txamt| transcation amount|
+|txcurrcd| transcation currency|
+|customer_id| unique customer identifier|
+|product_id| unique product identifier for all products, separated by comma|
+|cardcd| card no.|
+|card_scheme| only available for 0000, card scheme, e.g. VISA|
+
+example:
+
+{
+  "txcurrcd": "HKD",
+  "reason": "AUTHORISED",
+  "cardcd": "",
+  "subscription_order_id": "sub_ord_a360f06eb*****ad6aff24c3a",
+  "product_id": "prod_8c838c17ddb043b9***11f1a85c30",
+  "txdtm": "2024-04-24 15:19:37",
+  "txamt": "300",
+  "card_scheme": "VISA_DEBIT-SSL",
+  "syssn": "20240424180500020000015704",
+  "respcd": "0000",
+  "subscription_id": "sub_e51bb914919***31d800f6b0fe36d",
+  "customer_id": "cust_a9c0bcf2717f4***786a10e5f8f2",
+  "notify_type": "subscription_payment"
+}
+
+### Reactive Subscription
+
+### Product Binding

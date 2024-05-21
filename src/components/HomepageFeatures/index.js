@@ -77,7 +77,7 @@ const ResourcesList = [
       </Translate>
     ),
     links:[
-      {title:<Translate>POS App call App SDK</Translate>, url:"files/qfpay_haojin_api_2.2.0.jar"},
+      {title:<Translate>POS App call App SDK</Translate>, url:"files/qfpay_haojin_api_2.3.4.jar"},
       {title:<Translate>Wechat Pay In-App payment SDKs</Translate>, url:"https://developers.weixin.qq.com/doc/oplatform/Downloads/iOS_Resource.html"},
       {title:<Translate>Alipay In-App payment SDKs</Translate>, url:"https://global.alipay.com/docs/ac/app_hk/download"},
     ]
