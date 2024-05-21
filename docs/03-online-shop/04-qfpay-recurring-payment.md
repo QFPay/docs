@@ -457,6 +457,7 @@ Format: JSON
 
 example:
 
+```json
 {
     "respmsg": "",
     "card_scheme": "ECMC_DEBIT",
@@ -468,6 +469,7 @@ example:
     "notify_type": "payment_token",
     "event": "CONFLICT"
 }
+```
 
 #### Subscription state change
 
@@ -481,6 +483,7 @@ Available when a subscription state is changed
 |state| subscription state|
 |sysdtm| system time of state change|
 
+```json
 example:
 
 {
@@ -489,6 +492,7 @@ example:
   "notify_type": "subscription",
   "subscription_id": "sub_e51bb914919*****f6b0fe36d"
 }
+```
 
 #### Subscription payment result
 
@@ -513,6 +517,7 @@ Available when a subscription order payment result is received
 
 example:
 
+```json
 {
   "txcurrcd": "HKD",
   "reason": "AUTHORISED",
@@ -528,6 +533,7 @@ example:
   "customer_id": "cust_a9c0bcf2717f4***786a10e5f8f2",
   "notify_type": "subscription_payment"
 }
+```
 
 ### Reactive Subscription
 
