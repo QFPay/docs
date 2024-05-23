@@ -4,6 +4,13 @@ import Link from '@docusaurus/Link';
 
 # ECR integration technical specification
 
+:::note
+支持的终端型号:
+
+联迪 A8 & A8S, 支持所有支付方式。
+PAX A920, 仅支持二维码支付。
+:::
+
 ## 1. POS-KEY
 
 在haojin app 设置中，有个设置调用秘钥选项。点击进入可以重新生成秘钥。默认秘钥是： `f46b1f08bec1f39104792cc79ec9aacd`

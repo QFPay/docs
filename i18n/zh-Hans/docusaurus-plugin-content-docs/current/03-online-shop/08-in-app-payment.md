@@ -16,4 +16,3 @@ App内支付让商户可以在App上集成电子钱包的支付功能。
 --------- | -------
 800210 | 微信APP内支付, 详情请参考[WeChat in-APP Payment](/docs/online-shop/wechat/wechat-in-app-payments)
 801510 | 支付宝香港APP内支付, 详情请参考 [Alipay Hong Kong In-APP payment](/docs/online-shop/alipay/alipay-in-app-payments)
-800710 | 银联APP内支付, 可以参考[WAP支付部分](/docs/online-shop/wap-payment)
