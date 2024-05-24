@@ -70,6 +70,8 @@
 
 .qf-search-bar{
   margin: auto;
+  position:relative;
+  left: 5%;
 }
 
 .qf-display-link-blue{
@@ -175,6 +177,8 @@
 
   .qf-search-bar{
     right: 0 !important;
+    position:absolute;
+    left: auto;
   }
 }
 

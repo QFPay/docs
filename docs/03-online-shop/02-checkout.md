@@ -57,7 +57,7 @@ The following body parameters are necessary to create a new checkout request;
 |`txzone`|String(5) |No |Timezone This field is used to record the local order time, the default is Beijing time +0800.|
 |`udid`|String(40 |No |Unique device ID e.g. 0001|
 |`expired_time`|String(3) |No |QRC expiration time. Unit in minutes, minimum 5 minutes, maximum 120 minutes, only WeChat Pay, Alipay and Alipay_hk support this parameter|
-|`checkout_expired_time`|String(3) |No |client side expiration time , unit in minutes, the checkout page will be redirect to fail url when time is up|
+|`checkout_expired_time`|String(3) |No |client side expiration time , unit in millisecond e.g. 1715686118000, the checkout page will be redirect to fail url when time is up|
 |`limit_pay`|String(3) |No |Prohibit credit card use, the parameter value is specified as no_credit, which prohibits the use of credit card payments, only WeChat Pay supports this feature.|
 |`lang`|String(5)|No|UI Language, possible values: <br/> zh-hk (Hong Kong Traditional Chinese) <br/> zh-cn (Simplified Chinese) <br/> en (English) <br/> The checkout page will use default language of browser if do not pass this parameter in checkout request. If pass this parameter in checkout request, do not include this parameter in generating signature.|
 

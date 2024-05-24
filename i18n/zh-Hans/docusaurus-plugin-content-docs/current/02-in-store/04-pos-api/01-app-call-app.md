@@ -2,6 +2,82 @@ import Link from '@docusaurus/Link';
 
 # App call App Android SDK
 
+## 最近更新
+
+```note
+version 2.3.4.jar
+    1、sdk 支持指定正扫或者反扫支付
+         CollectionReq.SCAN_TYPE_SCAN:扫码支付
+         CollectionReq.SCAN_TYPE_QRCODE：QR_CODE 支付
+
+   
+    设置方法：
+         CollectionReq req = new CollectionReq(Long.parseLong(money));
+            req.setScan_type(scan_type);//设置扫码方式， CollectionReq.SCAN_TYPE_SCAN/CollectionReq.SCAN_TYPE_QRCODE
+```
+
+```note
+version 2.3.3.jar
+	1、Transaction 添加getOut_trade_no 和getCardscheme 方法
+```
+
+```note
+version 2.3.2.jar
+    更新内容：
+    一、交易相关
+        1、交易支持传入外部订单号 out_trade_no :
+        2、支持设置设置刷卡（card_payment/unionpay_card/amex_card）等待超时时间wait_card_timeout（可以不设置）,wait_card_timeout如果不设置，
+        默认超时120s，该参数必须大于0，如果传小于等于0的值，则超时时间默认120s
+           
+        设置方法：
+            CollectionReq req = new CollectionReq(Long.parseLong(money));
+            req.setWait_card_timeout(wait_card_timeout);//设置刷卡超时时间
+            req.setOut_trade_no(out_trade_no);//设置外部订单号
+
+        
+    二、查询、
+        1、支持使用out_trade_no 查询交易信息,
+            order_id 和 out_trade_no 至少传一个，或者两个都传
+        
+        设置方法：
+            GetTransReq req = new GetTransReq(order_id);
+            req.setOut_trade_no(out_trade_no);
+```
+
+```note
+version 2.3.1.jar
+
+    1、app call app  sdk 支付时支持具体的支付方式
+    通过 CollectionReq setPay_method 设置具体的支付方式：，如果不设置具体的支付方式，
+        或者账号没有开通相应的支付方式，则会弹出支付方式选择框，自己选择
+
+    pay_method 字段  类型 String ，参考值如下：
+               pay_method            desc
+         （1）、card_payment        Card payment(master/visa)
+         （2）、wx                  WeChat Pay
+         （3）、alipay              Alipay
+         （4）、payme               PayMe
+         （5）、union               UnionPay
+         （6）、fps                 FPS
+         （7）、octopus             Octopus
+         （8）、unionpay_card       union card pay
+         （9）、amex_card           amex card pay
+
+
+    
+    2、sdk 支持设置前后置摄像头
+    通过 CollectionReq setCamera_id 设置 前后置摄像头 可以不设置，默认后置：
+        camera_id:扫码支付的时候可以切换前后摄像头,可以不传这个字段，默认是后置摄像头
+        camera_id 字段  类型 Int ，参考值如下：
+        0：CAMERA_PARAM_BACK  后置摄像头
+        1：CAMERA_PARAM_FROT  前置摄像头
+        
+例如：
+       CollectionReq req = new CollectionReq(Long.parseLong(money));
+        req.setPay_method(current_paymethod);
+        req.setCamera_id(current_camera);
+```
+
 ## 简介
 
 HaoJin是一款为商户提供聚合收款服务的手机软件。 本文档描述了HaoJin开放的接口调用，第三方应用程序可以通过这些接口实现收单功能。

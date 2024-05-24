@@ -55,7 +55,7 @@ import Link from '@docusaurus/Link';
 |txzone|String(5)|是|时区|该字段用于记录本地下单时间, 默认为北京时间 +0800.|
 |udid|String(40)|是|唯一設備ID|0001|
 |expired_time|String(3)|是|二维码过期时间|单位为分钟，最短5分钟，最长120分钟，仅微信支付、支付宝、支付宝香港支持此参数|
-|checkout_expired_time|String(3)|是|客户端过期时间|单位为5分钟， 时间到了后，收银台页面会跳转至 支付失败后的重定向URL|
+|checkout_expired_time|String(3)|是|客户端过期时间|单位为毫秒, e.g. 1715686118000，时间到了后，收银台页面会跳转至 支付失败后的重定向URL|
 |limit_pay|String(3)|是|禁止使用信用卡|参数值指定为no_credit，即禁止使用信用卡支付，仅微信支付支持此功能。|
 |lang|String(5)|是|界面语言|可能值 <br/> zh-hk (香港繁体中文) <br/> zh-cn (简体中文) <br/> en (英文) <br/>如果结帐请求中不传递该参数，则结帐页面将使用浏览器的默认语言。 如果结帐请求中传递该参数，则生成签名时不包含该参数。|
 

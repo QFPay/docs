@@ -98,36 +98,6 @@ return_url:  'https://xxx.xxx.com'
 })
 ```
 
-### 2. payment token creation mode
-
-#### 2.1 visa/master card-form
-
-```js
-//2.1 credit card form
-// initialize qfpay object
-const qfpay = QFpay.config()
-
-// initialize token object
-const token = qfpay.token()
-
-// set token cereation parameters
-token.intent({
-  paysource: "payment_element"
-},"e487a02e3e1143e482db765ccec63d58")
-
-// initialize element object,and generate card-form 
-const elements = qfpay.element()
-elements.createEnhance({
-  seletor: "#container",
-  element: "token"
-})
-
-// trigger form submission and receive response
-const response = qfpay.createToken({
-  return_url: 'https://xxx.xxx.com'
-})
-```
-
 ## Instruction Manual
 
 ```plaintext
@@ -254,53 +224,6 @@ const paymentResponse = qfpay.confirmPayment({
 })
 ```
 
-### 7. qfpay.token()
-
-```js
-/**
- * parameters: N/A
- * return：token object
- * purpose: generate token object
- */
-const qfpay = QFpay.config()
-const payment = qfpay.token()
-```
-
-### 8. qfpay.retrieveTokenIntent()
-
-```js
-/**
- * parameters: N/A
- * return: code
- *     code value: '0000', token is available for use
- *     otherwise token is not available for use
- * purpose: validate token intent is correct and available for use
- */
-const intentResponse = qfpay.retrievePaymentIntent()
-```
-
-### 9. qfpay.createToken()
-
-```js
-/**
- * 参数：optional，Object，{return_url: 'https://xxx.xxx.xxx'},the page will be redirect to specific page mentioned in return_url parameter after action completed. Otherwise, will stay in the same page
- * 
- * return：code,description,customer_id, card info,token info
- *     code value '0000', action success
- *     customer_id: QFPay generated customer Id
- *     card: {
- *         brand: "xxxx", // card scheme, e.g. VISA
- *         suffix: "xxxx" // card number last 4 digits, e.g. 1000
- *     }
- *     token: {
- *         event: "CREATE", // create token action
- *         token_id: "xxxxxxx" // generated payment token id
- *     }
- *     other code value, please refer to descirption value for fail reason
- * purpose：return token related info.
- */
-```
-
 ## Payment object and APIs
 
 ```js
@@ -399,29 +322,6 @@ payment.walletPay({
 const inquiryResponse = payment.inquiry({}, 'SDF8980SFFSDF890SDF')
 ```
 
-## token object and APIs
-
-```js
-const qfpay = QFpay.config()
-const token = qfpay.token()
-```
-
-### 1. token.intent(params1, params2)
-
-```js
-/**
- * parameters：
- *      params1, mandatory，Object, {paysource: 'payment_element'}
- *               paysource: fixed, value: payment_element，mandatory
- *      params2, mandatory, string, payment intent from API
- * return: N/A
- * purpose：set token intent parameters
- */
-token.intent({
-  paysource: 'payment_element'
-}, 'SDF8980SFFSDF890SDF')
-```
-
 ## Element object and APIs
 
 ```js
@@ -464,6 +364,11 @@ elements.createEnhance({
   selector: '#container'
 })
 ```
+
+:::note
+In QA environment, default expiry time is 7 days.
+In Production/Living Test environment, default expiry time is 2 years.
+:::
 
 ## Retrieve selected wallet type
 
