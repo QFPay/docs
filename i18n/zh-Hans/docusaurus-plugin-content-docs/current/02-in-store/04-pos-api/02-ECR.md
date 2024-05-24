@@ -4,6 +4,13 @@ import Link from '@docusaurus/Link';
 
 # ECR integration technical specification
 
+:::note
+支持的终端型号:
+
+联迪 A8 & A8S, 支持所有支付方式。
+PAX A920, 仅支持二维码支付。
+:::
+
 ## 1. POS-KEY
 
 在haojin app 设置中，有个设置调用秘钥选项。点击进入可以重新生成秘钥。默认秘钥是： `f46b1f08bec1f39104792cc79ec9aacd`
@@ -37,6 +44,8 @@ import Link from '@docusaurus/Link';
 | func_type | 是 | String | 指令代码 |
 | channel | 是 | String | 钱包名称，参见通道列表 |
 | out_trade_no | 否 | String | 商户参考。 <br/> 如果不通过，则out_trade_no不会通过 |
+| camera_id|否|Integer| 在反扫支付中可以选择使用前置摄像头或者后置摄像头<br/> 0: 后置摄像头 (默认), <br/> 1: 前置摄像头 |
+| wait_card_timeout | 否 | Integer | 可以设置等待超时时间，单位为秒，默认120s |
 
 ### 3.1 交易
 
@@ -49,7 +58,7 @@ import Link from '@docusaurus/Link';
             1：CAMERA_PARAM_FROT  前置摄像头
 
 
-    wait_card_timeout :，等待刷卡超时时间，可以不设置，默认120s, 类型int，值大于0
+    wait_card_timeout :等待超时时间，可以不设置，默认120s, 类型int，值大于0
 :::
 
 ```json
