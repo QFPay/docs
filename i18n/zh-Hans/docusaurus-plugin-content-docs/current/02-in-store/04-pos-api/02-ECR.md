@@ -40,7 +40,7 @@ PAX A920, 仅支持二维码支付。
 
 | 参数名称 | 是否必填 | 参数类型 | 描述 |
 |---|---|---|---|
-| amt | 是 | Integer | 金额, e.g. $10.1 => 10.1 |
+| amt | 是 | Double | 金额, e.g. $10.1 => 10.1 |
 | func_type | 是 | String | 指令代码 |
 | channel | 是 | String | 钱包名称，参见通道列表 |
 | out_trade_no | 否 | String | 商户参考。 <br/> 如果不通过，则out_trade_no不会通过 |

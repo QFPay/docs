@@ -37,9 +37,9 @@ import Link from '@docusaurus/Link';
 
 创建新的结帐请求需要以下主体参数；
 
- | 参数名称 | 参数类型 | 是否必填 | 描述 | 范例 |
+| 参数名称 | 参数类型 | 是否必填 | 描述 | 范例 |
 | ---------- | ----------- | ----------- | ----------- | ----------- |
- | appcode | String(64) | 是 |QFPay 提供的API凭证|A6A49A******************5032|
+| appcode | String(64) | 是 |QFPay 提供的API凭证|A6A49A******************5032|
 |sign_type | String(256)|是|SHA256 or MD5, 建议SHA256|sha256|
 |sign | String(128)|是|请求签名以进行认证 |3b020a6349646684ebeeb0ec2cd3d1fb|
 |paysource | String(12)|是|结尾必须是 _checkout|remotepay_checkout|

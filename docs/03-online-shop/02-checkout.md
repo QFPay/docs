@@ -55,11 +55,12 @@ The following body parameters are necessary to create a new checkout request;
 |`mchntid`|String(16)| No|QFPay Merchant Identifier for Agents e.g. PAKjVHJmQe|
 |`goods_name`|String(64)| No |No special characters, no more than 20 letters or Chinese characters (app payment parameters must be passed). If you want to display the merchant name on the clearing file, this parameter must be empty.|
 |`txzone`|String(5) |No |Timezone This field is used to record the local order time, the default is Beijing time +0800.|
-|`udid`|String(40 |No |Unique device ID e.g. 0001|
+|`udid`|String(40) |No |Unique device ID e.g. 0001|
 |`expired_time`|String(3) |No |QRC expiration time. Unit in minutes, minimum 5 minutes, maximum 120 minutes, only WeChat Pay, Alipay and Alipay_hk support this parameter|
 |`checkout_expired_time`|String(3) |No |client side expiration time , unit in millisecond e.g. 1715686118000, the checkout page will be redirect to fail url when time is up|
 |`limit_pay`|String(3) |No |Prohibit credit card use, the parameter value is specified as no_credit, which prohibits the use of credit card payments, only WeChat Pay supports this feature.|
-|`lang`|String(5)|No|UI Language, possible values: <br/> zh-hk (Hong Kong Traditional Chinese) <br/> zh-cn (Simplified Chinese) <br/> en (English) <br/> The checkout page will use default language of browser if do not pass this parameter in checkout request. If pass this parameter in checkout request, do not include this parameter in generating signature.|
+|`lang`|String(5)|No|UI Language, possible values: <br/> zh-hk (Hong Kong Traditional Chinese) <br/> zh-cn (Simplified Chinese) <br/> en (English) <br/> The checkout page will use default language of browser if do not pass this parameter in checkout request. If pass this parameter in checkout request, **do not include this parameter in generating signature.**|
+|`paytype`|Array|No|paytype should be an array with the following options `"Alipay","WeChat","UnionPay","AlipayHK","FPS","VisaMasterCardPayment","PayMe","ApplePay","VisaMasterCardPreAuth"`, and paytype must be inside the merchant's opened payment types, otherwise the checkout page will be invalid and jump to fail page. If no paytype is passed, the element page will display all merchant's opened payment types. e.g. ['Alipay','VisaMasterCardPayment']|
 
 ## Create a New Checkout Order
 
@@ -95,7 +96,8 @@ a{
 <script> 
 window.onload = function(){
   let standard = document.getElementById('standard')
-
+  let now = new Date();
+  let unixTimestamp = Math.floor(now.getTime());
   let origin = 'https:test-openapi-hk.qfapi.com/checkstand/#/?'
    let obj = {
     appcode: "CC6FB660837E49F7A675D2**********",
@@ -108,13 +110,18 @@ window.onload = function(){
     sign_type: "sha256",
     txamt: "1",
     txcurrcd: "HKD",
-    txdtm: "2020-06-28 18:33:20"
+    txdtm: "2020-06-28 18:33:20",
+    paytype: ['Alipay','VisaMasterCardPayment'],
+    checkout_expired_time: unixTimestamp
    }
 
    let api_key = "B3D4CCFD4AB049DCA82C25**********";
    let params = paramStringify(obj) 
    let sign = sha256(`${params}${api_key}`)
-    standard.setAttribute('href', `${origin}${paramStringify(obj,true)}&sign=${sign}`)
+   let lang = 'zh-hk'
+   // note that lang will not be included in sign process
+   obj['lang'] = lang
+   standard.setAttribute('href', `${origin}${paramStringify(obj,true)}&sign=${sign}`)
 
 }   
 

@@ -70,6 +70,7 @@ const sidebars = {
         'online-shop/web-payment',
         'online-shop/in-app-payment',
         'online-shop/payment-intent',
+        'online-shop/ecr-cloud',
         {
           type: 'category',
           label: 'Wechat',
