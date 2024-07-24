@@ -190,7 +190,7 @@ digest=(
     （6）5001 取消交易或者退款请求
 
 2、channel: payment method
-    （1）、card_payment  刷卡交易
+    （1）、card_payment  刷卡交易, Visa/Mastercard
     （2）、wx            微信支付
     （3）、alipay        支付宝支付
     （4）、payme         payme支付
@@ -263,7 +263,7 @@ digest=(
             clisn;客戶端序列號
             opuid; 操作员id
             prepay_amt;支付金额
-            syssn;系统流水号
+            syssn;QF系统流水号
             tradetp;交易方式
             sysdtm;系统时间
             txcurrcd;貨幣
@@ -278,8 +278,9 @@ digest=(
             respcd;响应编码
             origbusicd;原业务代码
             chnlsn;通道序列號
-            cardscheme；卡组织，例如：VISA
+            cardscheme；卡组织，例如：VISA, MASTERCARD, UNIONPAY, AMEX
             cardno; 卡号, 例如： 520000******1096
+            cardtype; 卡类型， 例如：CREDIT, DEBIT
             batchno; 批次号
             refno; 参考号
 ```

@@ -78,7 +78,7 @@ specific parameters
 |`allow_modify_flag`| No | Integer| 0: Not allow modification of refund amount (default value) <br/> 1: allow modification of refund amount|
 
 :::note
-> for Card payment, Unionpay Card and American Express Card,  the amount of same day refund must be `full amount`
+> for Visa/Mastercard, Unionpay Card and American Express Card,  the amount of same day refund must be `full amount`
 :::
 
 ```json
@@ -171,11 +171,11 @@ for example
     (6) 5001 Cancel trade/refund request
 
 2、channel: payment method
-    (1) 、card_payment  Card payment
+    (1) 、card_payment  Visa/Mastercard
     (2) 、wx            WeChat Pay
     (3) 、alipay        Alipay
     (4) 、payme         PayMe
-    (5) 、union         UnionPay
+    (5) 、union         UnionPay QuickPass
     (6) 、fps           FPS
     (7) 、octopus       Octopus
     (8) 、unionpay_card Unionpay Card
@@ -213,57 +213,57 @@ for example
             resmsg;response message
             reserr;response error message
             mchntnm;merchant name
-            sysdtm;system time
+            sysdtm;QF system time
             userid;store Id
             busicd;business code
             txamt;transaction amount
             txcurrcd;transaction currency
             chnlsn;channel serial number
-            paydtm;payment time
+            paydtm;wallet payment time
             udid;user id
-            syssn;system serial number
+            syssn;QF Order Id
             clisn;client serial number
             out_trade_no；merchant order Id
-            cardscheme;card scheme, e.g. VISA
+            cardscheme;card scheme, e.g. VISA, MASTERCARD, UNIONPAY, AMEX
     (2) data field in refund response：
             respcd;response code
             resmsg;response message
             reserr;response error message
-            sysdtm;system time
-            paydtm;payment time
+            sysdtm;QF system time
+            paydtm;wallet payment time
             txcurrcd;transaction currency
             txdtm;trsnaction time
-            orig_syssn;original system serial number
+            orig_syssn;original QF order Id
             out_trade_no;merchant order Id
-            syssn;system serial number
+            syssn;QF order Id
             chnlsn;channel serial number
             txamt;transaction amount
             originTxamt;original transaction amount
     (3) data field in transaction inquiry response:
-            server_time;server time
+            server_time;QF server time
             cancel;cancel status
             clisn;client serial number
             opuid;operator id
-            prepay_amt;payment amount
-            syssn;QF system serial number
-            tradetp;payment type
+            syssn;QF Order ID
+            tradetp;trade type, e.g. payment, refund
             sysdtm;QF system time
             txcurrcd;transaction currency
-            origssn;original system serial number
-            customer_source;customer source
-            opuser;operator
-            nickname;user name
-            allow_refund_amt;refundable amount
+            origssn;original QF Order Id
+            customer_source;customer source, e.g. HK, INT
+            opuser;operator name
+            nickname;store name
+            allow_refund_amt; refundable amount
             desc;description
             txamt;transaction amount
-            busicd;business code
+            busicd;paytype code
             respcd;response code
-            origbusicd;original business code
-            chnlsn;channel serial number
-            cardscheme;card scheme, e.g. VISA
-            cardno; masked card number, e.g. 520000******1096
-            batchno; batch number
-            refno; reference number
+            origbusicd;original transaction paytype code
+            chnlsn;wallet order Id
+            cardscheme;card scheme, e.g. VISA, MASTERCARD, UNIONPAY, AMEX
+            cardno;masked card number, e.g. 520000******1096
+            cardtype;card type, e.g. CREDIT, DEBIT
+            batchno;QF batch number
+            refno;QF reference number
 ```
 
 ## 6. USB data transmission method
