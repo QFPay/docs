@@ -261,6 +261,9 @@ for example
             origbusicd;original business code
             chnlsn;channel serial number
             cardscheme;card scheme, e.g. VISA
+            cardno; masked card number, e.g. 520000******1096
+            batchno; batch number
+            refno; reference number
 ```
 
 ## 6. USB data transmission method

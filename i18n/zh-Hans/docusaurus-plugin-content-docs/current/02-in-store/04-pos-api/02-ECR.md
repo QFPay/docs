@@ -279,6 +279,9 @@ digest=(
             origbusicd;原业务代码
             chnlsn;通道序列號
             cardscheme；卡组织，例如：VISA
+            cardno; 卡号, 例如： 520000******1096
+            batchno; 批次号码
+            refno; 参考号
 ```
 
 ## 6. USB 的数据传输方式
