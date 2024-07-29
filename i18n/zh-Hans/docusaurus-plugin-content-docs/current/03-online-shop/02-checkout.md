@@ -39,25 +39,26 @@ import Link from '@docusaurus/Link';
 
 | 参数名称 | 参数类型 | 是否必填 | 描述 | 范例 |
 | ---------- | ----------- | ----------- | ----------- | ----------- |
-| appcode | String(64) | 是 |QFPay 提供的API凭证|A6A49A******************5032|
-|sign_type | String(256)|是|SHA256 or MD5, 建议SHA256|sha256|
-|sign | String(128)|是|请求签名以进行认证 |3b020a6349646684ebeeb0ec2cd3d1fb|
-|paysource | String(12)|是|结尾必须是 _checkout|remotepay_checkout|
-|txamt | Int(11)|是|付款金额（单位：分）|1099|
-|txcurrcd |String(3)|是|货币代码|HKD|
-|out_trade_no|String(128)|是|唯一的外部交易号|202005270001|
-|txdtm|String(32)|是|下单时间|2020-06-24 20:04:37, Format: YYYY-MM-DD hh:mm:ss|
-|return_url|String(256)|是|支付成功后的重定向URL|https://xxx.com/return/success|
-|failed_url|String(256)|是|支付失敗后的重定向URL|https://xxx.com/return/failed|
-|notify_url|String(256)|是|异步通知URL|https://xxx.com/notify/success|
-|mchntid|String(16)|否 |QFPay 代理商商户标识符|PAKjVHJmQe|
-|goods_name|String(64)|是|不能有特殊字符，不超过20个字母或汉字（需传入app支付参数）。 如果要在清算文件中显示商户名称，则该参数必须为空。| |
-|txzone|String(5)|是|时区|该字段用于记录本地下单时间, 默认为北京时间 +0800.|
-|udid|String(40)|是|唯一設備ID|0001|
-|expired_time|String(3)|是|二维码过期时间|单位为分钟，最短5分钟，最长120分钟，仅微信支付、支付宝、支付宝香港支持此参数|
-|checkout_expired_time|String(3)|是|客户端过期时间|单位为毫秒, e.g. 1715686118000，时间到了后，收银台页面会跳转至 支付失败后的重定向URL|
-|limit_pay|String(3)|是|禁止使用信用卡|参数值指定为no_credit，即禁止使用信用卡支付，仅微信支付支持此功能。|
-|lang|String(5)|是|界面语言|可能值 <br/> zh-hk (香港繁体中文) <br/> zh-cn (简体中文) <br/> en (英文) <br/>如果结帐请求中不传递该参数，则结帐页面将使用浏览器的默认语言。 如果结帐请求中传递该参数，则生成签名时不包含该参数。|
+| `appcode` | String(64) | 是 |QFPay 提供的API凭证|A6A49A******************5032|
+|`sign_type` | String(256)|是|SHA256 or MD5, 建议SHA256|sha256|
+|`sign` | String(128)|是|请求签名以进行认证 |3b020a6349646684ebeeb0ec2cd3d1fb|
+|`paysource` | String(12)|是|结尾必须是 _checkout|remotepay_checkout|
+|`txamt` | Int(11)|是|付款金额（单位：分）|1099|
+|`txcurrcd` |String(3)|是|货币代码|HKD|
+|`out_trade_no`|String(128)|是|唯一的外部交易号|202005270001|
+|`txdtm`|String(32)|是|下单时间|2020-06-24 20:04:37, Format: YYYY-MM-DD hh:mm:ss|
+|`return_url`|String(256)|是|支付成功后的重定向URL|https://xxx.com/return/success|
+|`failed_url`|String(256)|是|支付失敗后的重定向URL|https://xxx.com/return/failed|
+|`notify_url`|String(256)|是|异步通知URL|https://xxx.com/notify/success|
+|`mchntid`|String(16)|否 |QFPay 代理商商户标识符|PAKjVHJmQe|
+|`goods_name`|String(64)|否|不能有特殊字符，不超过20个字母或汉字（需传入app支付参数）。 如果要在清算文件中显示商户名称，则该参数必须为空。| |
+|`txzone`|String(5)|否|时区|该字段用于记录本地下单时间, 默认为北京时间 +0800.|
+|`udid`|String(40)|否|唯一設備ID|0001|
+|`expired_time`|String(3)|否|二维码过期时间|单位为分钟，最短5分钟，最长120分钟，仅微信支付、支付宝、支付宝香港支持此参数|
+|`checkout_expired_time`|String(3)|否|客户端过期时间|单位为毫秒, e.g. 1715686118000，时间到了后，收银台页面会跳转至 支付失败后的重定向URL|
+|`limit_pay`|String(3)|否|禁止使用信用卡|参数值指定为no_credit，即禁止使用信用卡支付，仅微信支付支持此功能。|
+|`lang`|String(5)|否|界面语言|可能值 <br/> zh-hk (香港繁体中文) <br/> zh-cn (简体中文) <br/> en (英文) <br/>如果结帐请求中不传递该参数，则结帐页面将使用浏览器的默认语言。 如果结帐请求中传递该参数，则生成签名时不包含该参数。|
+|`support_pay_type`|String|否|support_pay_type 允许商户控制可以显示在 收银台页面的支付方式 <br/>可选值: <br/>`Alipay`<br/>`WeChatPay`<br/>`UnionPay`<br/>`AlipayHK`<br/>`FPS`<br/>`VisaMasterCardPayment`<br/>`Payme`<br/>`ApplePay`<br/>`VisaMasterCardPreAuth`<br/> 商户所提供的值必须包含在商户开通的支付方式内。如果没有提供此参数，收银台页面会显示所有已开通的支付方式。请使用逗号分隔多个支付方式，例如：support_pay_type=Alipay,WeChatPay|
 
 ## 创建新订单
 
@@ -93,7 +94,8 @@ a{
 <script> 
 window.onload = function(){
   let standard = document.getElementById('standard')
-
+  let now = new Date();
+  let unixTimestamp = Math.floor(now.getTime());
   let origin = 'https://test-openapi-hk.qfapi.com/checkstand/#/?'
    let obj = {
     appcode: "CC6FB660837E49F7A675D2**********",
@@ -106,12 +108,17 @@ window.onload = function(){
     sign_type: "sha256",
     txamt: "1",
     txcurrcd: "HKD",
-    txdtm: "2020-06-28 18:33:20"
+    txdtm: "2020-06-28 18:33:20"，
+    support_pay_type: "Alipay,VisaMasterCardPayment",
+    checkout_expired_time: unixTimestamp
    }
 
    let api_key = "B3D4CCFD4AB049DCA82C25**********";
    let params = paramStringify(obj) 
    let sign = sha256(`${params}${api_key}`)
+   let lang = 'zh-hk'
+   // 注意： 如果结帐请求中传递了 lang 参数，则生成签名时不包含该参数。
+   obj['lang'] = lang
     standard.setAttribute('href', `${origin}${paramStringify(obj,true)}&sign=${sign}`)
 
 }   
