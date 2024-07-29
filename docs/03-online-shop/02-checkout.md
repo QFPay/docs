@@ -60,7 +60,7 @@ The following body parameters are necessary to create a new checkout request;
 |`checkout_expired_time`|String(3) |No |client side expiration time , unit in millisecond e.g. 1715686118000, the checkout page will be redirect to fail url when time is up|
 |`limit_pay`|String(3) |No |Prohibit credit card use, the parameter value is specified as no_credit, which prohibits the use of credit card payments, only WeChat Pay supports this feature.|
 |`lang`|String(5)|No|UI Language, possible values: <br/> zh-hk (Hong Kong Traditional Chinese) <br/> zh-cn (Simplified Chinese) <br/> en (English) <br/> The checkout page will use default language of browser if do not pass this parameter in checkout request. If pass this parameter in checkout request, **do not include this parameter in generating signature.**|
-|`paytype`|Array|No|paytype should be an array with the following options `"Alipay","WeChat","UnionPay","AlipayHK","FPS","VisaMasterCardPayment","PayMe","ApplePay","VisaMasterCardPreAuth"`, and paytype must be inside the merchant's opened payment types, otherwise the checkout page will be invalid and jump to fail page. If no paytype is passed, the element page will display all merchant's opened payment types. e.g. ['Alipay','VisaMasterCardPayment']|
+|`support_pay_type`|String|No|support_pay_type parameter allows merchants to control the display of payment methods on the checkout page. <br/>Possible values: <br/>`Alipay`<br/>`WeChatPay`<br/>`UnionPay`<br/>`AlipayHK`<br/>`FPS`<br/>`VisaMasterCardPayment`<br/>`Payme`<br/>`ApplePay`<br/>`VisaMasterCardPreAuth`<br/>The values provided must be within the merchant's activated payment methods. If no values provided, the checkout page will diplay all activated payment methods.Please use comma separator to separate mutliple values, e.g. support_pay_type=Alipay,WeChatPay|
 
 ## Create a New Checkout Order
 
@@ -111,7 +111,7 @@ window.onload = function(){
     txamt: "1",
     txcurrcd: "HKD",
     txdtm: "2020-06-28 18:33:20",
-    paytype: ['Alipay','VisaMasterCardPayment'],
+    support_pay_type: "Alipay,VisaMasterCardPayment",
     checkout_expired_time: unixTimestamp
    }
 
