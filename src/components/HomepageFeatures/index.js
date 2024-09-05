@@ -46,10 +46,10 @@ const FeatureList = [
       </Translate>
     ),
     links:[
-      {title:"Shopify", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26Shopify-SetupGuideline.pdf"},
-      {title:"Magento", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26Magento-SetupGuideline.pdf"},
-      {title:"WooCommerce", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26WooCommerce-SetupGuideline.pdf"},
-      {title:"OpenCart", url:"https://cdn-hk.qfapi.com/pubfiles/QFPay%26OpenCart-SetupGuideline.pdf"},
+      {title:"Shopify", url:"https://drive.google.com/file/d/1kabWle1Qa7qdNIlg6c4kkcCAgZnFPUHi/view"},
+      {title:"Magento", url:"https://drive.google.com/file/d/1U_dUrzF7W2si4As5asNo8IUDwVQpNc5b/view"},
+      {title:"WooCommerce", url:"https://drive.google.com/file/d/1ahym3Yrl8fI9gzBgdsvKE9XghI5e4Mdd/view"},
+      {title:"OpenCart", url:"https://drive.google.com/file/d/1Kcsm21ApcmfTOlQA1ku4YkOreLxiTDmv/view"},
     ]
   },
 ];
