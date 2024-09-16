@@ -5,6 +5,14 @@ import Link from '@docusaurus/Link';
 # ECR integration technical specification
 
 :::note
+4.33.24 update
+  1、After transaction and refund finished add `moveToBack` to move to Home Page, type int  defult 0
+      `moveToBack`:
+        0:no need to Home Page
+        1:need back to Home Page
+:::
+
+:::note
 Support Terminal Model:
 
 Landi A8 & A8S, All Payment Methods Supported.
@@ -49,17 +57,38 @@ The data is encoded by Base64 after encryption.
 ### 3.1 Payment
 
 :::note
-> For QR code payment, MPM/CPM mode is automatically selected base on last usage.
->
-> Front camera or back camera can be selected  to use by parameter `camera_id`
->
-> Time to wait for payment in payment page can be set by parameter `wait_card_timeout`
+For QR code payment, MPM/CPM mode is automatically selected base on last usage.
+
+Front camera or back camera can be selected  to use by parameter `camera_id`
+
+Time to wait for payment in payment page can be set by parameter `wait_card_timeout`
+
+payment_timeout : 
+        （1）、When set payment_timeout in card payment ，this time is the max time waiting for using card
+        （2）、For other payment payment_timeout，this field is the max time for that transaction
+    type int，value greater than 0
+
+scan_type:specific scan method
+        QRCODE_PAY
+        SCAN_PAY
+
+moveToBack:After the payment and refund process, it will support back to Home Page.This field is not necessary, default not back to Home Page.
+        0: No need back to Home Page
+        1:need back to Home Page
 :::
 
 ```json
 {
-    "content": {"amt": 100, "camera_id":0, "channel": "card_payment","func_type": 1001, "out_trade_no": "456799999999",
-    "wait_card_timeout":120},
+    "content": {
+        "amt": 100, 
+        "camera_id":0, 
+        "channel": "card_payment",
+        "func_type": 1001, 
+        "moveToBack": 1,
+        "out_trade_no": "456799999999",
+        "wait_card_timeout":120,
+        "scan_type": "SCAN_PAY"
+    },
     "digest":"76b9186077cdc2bc5d78ae921309811d"
 }
 ```
@@ -83,7 +112,13 @@ specific parameters
 
 ```json
 {
-     "content": {"allow_modify_flag":1, "func_type": 1002,"orderId": "order_id","refund_amount": "0.05"},
+     "content": {
+        "allow_modify_flag":1, 
+        "func_type": 1002,
+        "orderId": "order_id",
+        "refund_amount": "0.05",
+        "moveToBack": 1
+    },
      "digest": "9C8E9FB05C7C24B6CA04EBFA1263EF41"
 }
 

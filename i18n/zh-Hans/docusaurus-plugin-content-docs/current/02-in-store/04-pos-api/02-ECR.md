@@ -5,6 +5,14 @@ import Link from '@docusaurus/Link';
 # ECR integration technical specification
 
 :::note
+4.33.24  更新内容
+  1、交易和退款 完成后添加 退到Home 页 字段：`moveToBack`  类型 int  defult 0
+      `moveToBack`:
+        0:不需要退到Home 页面
+        1:需要退到Home 页面
+:::
+
+:::note
 支持的终端型号:
 
 联迪 A8 & A8S, 支持所有支付方式。
@@ -59,6 +67,19 @@ PAX A920, 仅支持二维码支付。
 
 
     wait_card_timeout :等待超时时间，可以不设置，默认120s, 类型int，值大于0
+
+    payment_timeout : 
+          （1）、刷卡交易的时候设置payment_timeout ，该超时时间设置的是 等待刷卡 的超时时间
+          （2）、其他交易设置payment_timeout，该字段的设置的是交易超时的时间
+        类型int，值大于0
+
+    scan_type:指定具体的正反扫方式
+            QRCODE_PAY:二维码支付
+            SCAN_PAY:扫码支付
+
+    moveToBack:交易和退款 完成后支持退到Home 页,可以不传这个字段，默认是不退回到Home 页
+            0:不需要退到Home 页面
+            1:需要退到Home 页面
 :::
 
 ```json
@@ -68,8 +89,10 @@ PAX A920, 仅支持二维码支付。
     "camera_id": 0,
     "channel": "card_payment",
     "func_type": 1001,
+    "moveToBack": 1,
     "out_trade_no": "456799999999",
-    "wait_card_timeout": 120
+    "wait_card_timeout": 120,
+    "scan_type": "SCAN_PAY"
   },
   "digest": "76b9186077cdc2bc5d78ae921309811d"
 }
@@ -97,6 +120,7 @@ specific parameters
   "content": {
     "allow_modify_flag": 1,
     "func_type": 1002,
+    "moveToBack": 1,
     "orderId": "order_id",
     "refund_amount": "0.05"
   },
