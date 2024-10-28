@@ -366,10 +366,10 @@ products 中的参数:
 
 | 参数名称                     | 参数类型   | 描述                                                         |
 | ----------------------------- | ------ | ----------------------------------------------------------- |
-| `subscription_order_id`       | String | subscription order 标识ID, 格式: `sub_ord_` + 所属的 subscription_id 的 id 值 + 4 位数标识该订单是所属的 subscription 的第几次扣款 e.g. `sub_ord_a360f06exxxxxxx4c3a_0001` 表示 subscription `sub_a360f06exxxxxxx4c3a` 的第一次扣款订单|
-| `subscription_id`             | String | QFPay 系统中的唯一 subscription 对象ID, 格式: `sub_xxxxxxxx` e.g. `sub_a360f06exxxxxxx4c3a` |
+| `subscription_order_id`       | String | 扣款订单的标识ID, 格式: `sub_ord_` + 所属 subscription 对象的 id 值 + 4 位标识该订单为第几次扣款。例如：`sub_ord_a360f06exxxxxxx4c3a_0001` 表示 subscription `sub_a360f06exxxxxxx4c3a` 的第一次扣款订单|
+| `subscription_id`             | String | QFPay 系统中的唯一 subscription 对象ID, 格式: `sub_xxxxxxxx` 例如： `sub_a360f06exxxxxxx4c3a` |
 | `trigger_by`                  | String | 谁触发此次订单扣款, QFPay 系统是 `auto`, 手动扣款是 `manual`         |
-| `sequence_no`                 | Int    | 该订单是所属的 subscription 的第几次扣款, e.g. 2   |    
+| `sequence_no`                 | Int    | 该订单是所属的 subscription 的第几次扣款, 例如：2   |    
 
 ### 对订阅手动扣款
 
@@ -464,7 +464,7 @@ products 中的参数:
 | ---------------------- | ------------------------------------------------------------------- |
 | notify_type            | 通知类型，`subscription_payment`                                    |
 | subscription_id        | 唯一的 subscription 对象标识符，格式：`sub_xxxxxxxx` 例如 `sub_a360f06exxxxxxx4c3a` |
-| subscription_order_id  | 订阅的订单号，格式：`sub_ord_` + 订阅 ID + 4 位订单序列号（此订阅的迭代次数）例如：`sub_ord_a360f06exxxxxxx4c3a_0001` |
+| subscription_order_id  | 扣款订单的标识ID, 格式: `sub_ord_` + 所属 subscription 对象的 id 值 + 4 位标识该订单为第几次扣款。例如：`sub_ord_a360f06exxxxxxx4c3a_0001` 表示 subscription `sub_a360f06exxxxxxx4c3a` 的第一次扣款订单 |
 | respcd                 | 响应码，例如 0000（成功情况）                                       |
 | respmsg                | 响应消息，例如 success                                              |
 | syssn                  | 交易流水号                                                              |
