@@ -386,6 +386,8 @@ products 中的参数:
 | subscription_id | String | 是     | QFPay 系统中的唯一 subscription 对象ID |
 | billing_time    | String | 否     | 商户设定后续订单新的自动扣款时间，默认为触发手动扣款的时间|
 
+## 订阅支付行为
+
 ### 异步通知
 
 通知适用于支付令牌的创建和订阅相关的事件和状态变化。

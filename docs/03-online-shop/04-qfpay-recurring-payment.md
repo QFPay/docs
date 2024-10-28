@@ -415,7 +415,7 @@ Array of subscription order object containing the following attributes:
 
 Use API to charge a subscription immediately and the behavior is same as an auto recurrent payment.
 
-**Endpoint** : /subscription/v1/charge
+**Endpoint** : `/subscription/v1/charge`
 
 **Method** : POST
 
@@ -426,15 +426,7 @@ Use API to charge a subscription immediately and the behavior is same as an auto
 | subscription_id | String | Yes     | unique ID of subscription object |
 | billing_time    | String | No      | the merchant set new billing time in the remaining iterations, default is the manual charge date. |
 
-## Recurring payment Behavior
-
-### State transitions
-
-For each subscription of the recurring payment system, there are states: incomplete, active, complete.
-
-### Automatic retry
-
-The QFPay system will automatically perform the recurring payment accroding to the scheduled subscription plan everyday. If the recurring payment fails, the system will mark
+## Recurring payment actions
 
 ### Ansynchronous notification
 
