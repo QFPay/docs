@@ -394,8 +394,10 @@ products 中的参数:
 
 在成功创建支付令牌或激活订阅后，QFPay API 将向商户定义的 URL 发送异步通知消息。
 
-::: note
+:::note
+
 要配置通知地址，请通过电子邮件将地址以及商户和门店信息发送至 technical.support@qfpay.com
+
 :::
 
 格式：JSON

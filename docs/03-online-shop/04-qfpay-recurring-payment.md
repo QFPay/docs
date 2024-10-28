@@ -434,8 +434,10 @@ Notifications are available for both payment token and subscription events and s
 
 Upon successful payment token creation or subscription activation, QFPay API will send an asynchronous notification message to the URL that defined by the merchant
 
-::: note
+:::note
+
 To configure notification address, please send the address as well as merchant and store information via email to technical.support@qfpay.com
+
 :::
 
 Format: JSON
