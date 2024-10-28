@@ -37,7 +37,7 @@ For build and manage subscriptions, the following API resources are required:
 
 ### Create subscription steps
 
-![enter image description here](http://www.plantuml.com/plantuml/png/hLHBRrCz4DtxLuow-hu5aNYmwGAr892weWXO8OGczYGn-8xTyRZX_dlk8t5wRsbI13jhvipZd3FoHLOKBKqmQ3KAs98rDYI0kRvtgUvbDyZQfUhRc8IYtlhK9vflkSrz-gnYku1ISpQ1tQmIjWFimxjhR7-BsQO1qAKROeKrAcsnFJDcBR4aUBgubkYALOD58vTcIMBgq2UlnbNEmGgX4gGTU8ZswM65UHhYyZjP1Q6RGbaDHoKGlzweKK7EQDL71cnYuMd85X5YsnfY1tsP6JaU5X7I8bmdUTT3zsoUBTvKgHz3fnepvpFB7o5K8OmDcIOkVI133VfWkcVml0PqJYZdavnggocfvukzUP_Y3sBuyZaJl0qqX3mhhGK7yTuBN5vVmTKXzFMk3BNzOR3dL1GiYkkUgxXuI0ST1XyH0SLjOd0x6M0807SDwMVoqeBhkym50JDbVCBnKOHnbvb4BnOVop9RyQbdVO9q7g5BWfp8-fMt-slA3_4VIeRcnrG8FYl4rPtR16G7DmLPlROJjdCsLHlRsa0P4Wesf2IdpoOVg0-THaamjsmt4ZcM37HBhFVgKycRQVL8r-tmn1EHNovUJtUyg_C8MNd92dig_rrQzRV3_MneCkX_Wq6XBszGlSKGMj1En3K9B5iOVhF3kjjq3eu6ILU5NPL-cmvEZPaHHJqabw26GgPzOt9Tw_hVpfsU3vXv2_SDcyjURVhxlMTEFKIE_z3hMPl77WNsBjBi9aAC2Ggh3p2vNEXbY08MsL88vFwf72V8rEqkY5rfmYy0)
+![enter image description here](http:////www.plantuml.com/plantuml/png/fLJDZYCr4BxxAKfp9n8iS9W3MYq8YTkYvRPQeOfTdPXnbpqkUqBpzCJT7NSxz92ivkPqVLN-VifvBmbZohrJg9EFeBCatrC4b7gUI-UJFY8dGAbdfGB6PBKDfT3_AOEKyaF5oY29-eS6zjm574ROxxz-n64JSmeZu5pkYHCSCD49XnPZHJB54VVRTFo0_FIWr27w7E3RtSVeJTP9OKwUSx-dg2gnRtwQw3w2ZeI98CpWyMifZpIlo-3tVv5E4EavaoJ5FX54UpWcbIAoe4xMCs3lCxUVT8wHM0-As41fKvCF2v58AKUkDrbJe1Srt-r-hd7S8wU6jwsdrlz7K8KmzgHwlxUE5FLedJeVdUK3e36HH6vgggDQKUzsbu3_y4_4yDbsPGmCb6QUvijQRXspN60vv3COem7BdT-zfZUD5xHYuMJJ4S94eL6EqHozCxDs63y0dwVJty760KmPUUq2g4RchPXdvHCnM-WNlEsinh8mQv--tttAUz7HXbAvuOXCq3s11D9b7WI7_8en4tmQlBK4pae2twss4f0DF6VaPDFGIBwMDEQ98JYhSU_eIpLC3zgHGC28FIMAjnT85lrbykmBoi3w63txB40l9SNh_f3bs7RFYpNZYPkD_67NsIW9Bam_B_hO9elE_aFGGcRLRrxKvOAjbHopHBVox55Tcs8JnMbtgfsB7wVmU9bRSqQNuDqldyRVDf81ZKBg52ghwdz1wICwHtoW1Hz9WcUvZktkjkh1nR3IQMmaNRRegZtWWHfdhKWkBTfpsSqMhgRgmgaEHZPhVki_QMl-4yiBHTiDA-iak-fWOsyBhPYAtVAr7RjbumQAd11qqOwS7OcqkRrzFXlrbI-iosp0K8c1pDrFiRZ-GjilySVTX_RVOls-dFS1CYVhOBz6GLby7q4ZQtAEJ1lGH70YkvbA8-DkfPNwUsAJU_Sl)
 
 ### Subscription state
 
@@ -51,8 +51,6 @@ All subscription state will be pushed to merchant's backend service once trigger
 | `respcd`    | String | Return code, 0000 = API call succeeded     |
 | `resperr`   | String | result description                         |
 | `respmsg`   | String | information description                    |
-| `page`      | Int    | page no.,present in inquiry API            |
-| `page_size` | Int    | page size,presented in inquiry API         |
 | `data`      | Object | result, JSON object or list of JSON object |
 
 ## Customer
@@ -128,6 +126,8 @@ Response parameters in **data** field:
 | `page_size`   | Int    | No        | default value = 10, the max value is 100 |
 
 #### Response parameters in **data** field
+
+Array of customer objects contianing the following attributes
 
 | Attribute     | Type   | Description                     |
 | ------------- | ------ | ------------------------------- |
@@ -238,6 +238,8 @@ update current product information
 | `page_size`   | Int    | No        | page size, default value=10,max value=100        |
 
 #### Response parameters in **data** field
+
+Array of product objects containing the following attributes:
 
 | Attribute        | Type   | Description                                |
 | ---------------- | ------ | ------------------------------------------ |
@@ -353,6 +355,8 @@ update current subscription
 
 #### Response parameters in **data** field
 
+Array of subscription object containing the following attributes:
+
 | Attribute                     | Type   | Description                                                                                   |
 | ----------------------------- | ------ | --------------------------------------------------------------------------------------------- |
 | `subscription_id`             | String | unique subscription identifier in QF system                                                   |
@@ -380,13 +384,40 @@ cancel customer's subscription immediately
 | ----------------- | ------ | --------- | -------------------------------- |
 | `subscription_id` | String | Yes       | unique ID of subscription object |
 
+### Query subscription orders
+
+query target subscription's orders
+
+**Endpoint** : `/subscription/billing_order/v1/list`
+
+**Method** : `POST`
+
+#### Request parameters
+
+| Attribute         | Type   | Mandatory | Description                                      |
+| ----------------- | ------ | --------- | ------------------------------------------------ |
+| `subscription_id` | String | Yes       | unique ID of subscription object                 |
+| `page`            | Int    | No        | page no.,default value=1                         |
+| `page_size`       | Int    | No        | page size, default value=10, max value=100       |
+
+#### Response parameters in **data** field
+
+Array of subscription order object containing the following attributes:
+
+| Attribute                     | Type   | Description                                                                                   |
+| ----------------------------- | ------ | --------------------------------------------------------------------------------------------- |
+| `subscription_order_id`       | String | subscription order identifier, format: `sub_ord_` + id value of subscription_id + 4 digit order sequence number (iteration of this subscription) e.g. `sub_ord_a360f06exxxxxxx4c3a_0001` stands for the first payment order for subscription `sub_a360f06exxxxxxx4c3a` |
+| `subscription_id`             | String | unique subscription identifier in QF system, format: `sub_xxxxxxxx` e.g. `sub_a360f06exxxxxxx4c3a` |
+| `trigger_by`                  | String | who triggered this order payment, QF system is `auto`, Manual charge is `manual`                   |
+| `sequence_no`                 | Int    | the iteration of this order in the subscription plan, e.g. 2                                       |
+
 ### Manaul charge a subscription transaction
 
 Use API to charge a subscription immediately and the behavior is same as an auto recurrent payment.
 
-Endpoint : /subscription/v1/charge
+**Endpoint** : /subscription/v1/charge
 
-Method : POST
+**Method** : POST
 
 #### Request parameters
 
@@ -394,26 +425,6 @@ Method : POST
 | ----------------- | ------ | --------- | -------------------------------- |
 | subscription_id | String | Yes     | unique ID of subscription object |
 | billing_time    | String | No      | the merchant set new billing time in the remaining iterations, default is the manual charge date. |
-
-### List subscription orders
-
-List all subscription orders for a specific subscription in a specific time range
-
-Endpoint : /subscription/v1/list
-
-Method : POST
-
-#### Request parameters
-
-| Attribute         | Type   | Mandatory | Description                      |
-| ----------------- | ------ | --------- | -------------------------------- |
-| page            | Int    | No        | page no.,default value=1         |
-| page_size       | Int    | No        | page size, default value=10, max value=100       |
-| subscritpion_id | String | No        | unique subscription identifier in QF system      |
-| start_time     | String | No        | the start time of the subscription orders query interval          |
-| end_time       | String | No        | the end time of the subscription orders query interval          |
-
-TODO: Finish behavior part
 
 ## Recurring payment Behavior
 
@@ -427,7 +438,7 @@ The QFPay system will automatically perform the recurring payment accroding to t
 
 ### Ansynchronous notification
 
-Notifications are available for both payment token and subscription events and states
+Notifications are available for both payment token and subscription events and states change
 
 Upon successful payment token creation or subscription activation, QFPay API will send an asynchronous notification message to the URL that defined by the merchant
 
@@ -445,10 +456,10 @@ Format: JSON
 |notify_type| notification type, payment_token |
 |event| token event|
 |tokenid| payment token id |
-|token_expiry_date| toekn expiry date|
+|token_expiry_date| token expiry date|
 |cardcd| card no.|
 |card_scheme| card scheme, e.g. VISA|
-|respcd | response code, e.g. success=0000|
+|respcd | response code, e.g. 0000 (success case)|
 |respmsg| response message, e.g. success|
 |sysdtm| event trigger system time|
 |customer_id| customer id if available|
@@ -475,17 +486,16 @@ example:
 
 Available when a subscription state is changed
 
-|Attribute| Descritpion |
-|--|--|
-| userid | SID  |
-|notify_type| notification type，subscription |
-|subscription_id | unique subscription identifier|
-|state| subscription state|
-|sysdtm| system time of state change|
+| Attribute        | Descritpion                                                                        |
+| ---------------- | ---------------------------------------------------------------------------------- |
+| notify_type      | notification type，subscription                                               |
+| subscription_id  | unique subscription identifier, format: `sub_xxxxxxxx` |
+| state            | subscription state, e.g. COMPLETED, ACTIVE                                         |
+| sysdtm           | system time of state change                                                        |
 
-```json
 example:
 
+```json 
 {
   "state": "COMPLETED",
   "sysdtm": "2024-04-24 15:19:39",
@@ -498,26 +508,26 @@ example:
 
 Available when a subscription order payment result is received
 
-|Attribute| Descritpion |
-|--|--|
-|userid | SID  |
-|notify_type| notification type, subscription_payment |
-|subscription_id| unique subscription identifier|
-|subscription_order_id| unique subscription order identifier|
-|respcd | response code, e.g. success=0000|
-|respmsg| response message, e.g. success|
-|syssn| transcation number|
-|txdtm| transcation time|
-|txamt| transcation amount|
-|txcurrcd| transcation currency|
-|customer_id| unique customer identifier|
-|product_id| unique product identifier for all products, separated by comma|
-|cardcd| card no.|
-|card_scheme| only available for 0000, card scheme, e.g. VISA|
+| Attribute             | Descritpion                                                       |
+| --------------------- | ----------------------------------------------------------------- |
+| notify_type           | notification type, `subscription_payment`                         |
+| subscription_id       | unique subscription identifier, format: `sub_xxxxxxxx` e.g. `sub_a360f06exxxxxxx4c3a`|
+| subscription_order_id | subscription order identifier, format: `sub_ord_` + id value of subscription_id + 4 digit order sequence number (iteration of this subscription) e.g. `sub_ord_a360f06exxxxxxx4c3a_0001` |
+| respcd                | response code, e.g. 0000 (success case)                           |
+| respmsg               | response message, e.g. success                                    |
+| syssn                 | transcation number                                                |
+| txdtm                 | transcation time                                                  |
+| txamt                 | transcation amount                                                |
+| txcurrcd              | transcation currency                                              |
+| customer_id           | unique customer identifier, format:`cust_xxxxxx`|
+| product_id            | unique product identifier for all products, separated by comma, e.g.: `prod_xxxxxa23f30,prod_xxxxxbe342ac` |
+| cardcd                | card no.                                                          |
+| card_scheme           | only available for 0000, card scheme, e.g. VISA                   |
+| current_iteration     | current iteration of this subscription, e.g. 1                    |
 
 example:
 
-```json
+```json 
 {
   "txcurrcd": "HKD",
   "reason": "AUTHORISED",
@@ -531,10 +541,8 @@ example:
   "respcd": "0000",
   "subscription_id": "sub_e51bb914919***31d800f6b0fe36d",
   "customer_id": "cust_a9c0bcf2717f4***786a10e5f8f2",
-  "notify_type": "subscription_payment"
+  "notify_type": "subscription_payment",
+  "current_iteration": "1",
 }
 ```
 
-### Reactive Subscription
-
-### Product Binding
