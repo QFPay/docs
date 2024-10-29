@@ -384,6 +384,11 @@ products 中的参数:
 | 参数名称         | 类型   | 是否必填 | 描述                      |
 | ----------------- | ------ | --------- | -------------------------------- |
 | subscription_id | String | 是     | QFPay 系统中的唯一 subscription 对象ID |
+| subscription_order_id | String | 否     | 扣款订单的标识ID, 格式: `sub_ord_` + 所属 subscription 对象的 id 值 + 4 位标识该订单为第几次扣款。例如：`sub_ord_a360f06exxxxxxx4c3a_0001` 表示 subscription `sub_a360f06exxxxxxx4c3a` 的第一次扣款订单 |
+
+::: Note
+  该 API 只适用于有失败订单的订阅计划，该订阅计划应有如下之一的状态 `UNPAID`, `INCOMPLETE`, 或 `PAST_DUE`。 手动扣款成功后，如果扣款日期在订阅计划的下次计划扣款日期前，那么订阅计划将以状态`ACTIVE`正常运行；如果扣款在订阅计划的下次计划扣款日期之后, 订阅计划将被取消，客户需要重新订阅计划。如果扣款失败，订阅计划将保持原来的状态。
+:::
 
 ## 订阅支付行为
 
@@ -405,9 +410,9 @@ products 中的参数:
 
 |参数名称| 描述 |
 |--|--|
-|userid | SID  |
+|userid | QFPay Store ID|
 |notify_type| 通知类型，payment_token |
-|event| 令牌事件 |
+|event| 令牌事件, 可以是 NEW, MATCH(该卡之前已经创建了 token)，CONFLICT(该卡之前已经创建了 token，但新提交的资料与上次不符) |
 |tokenid| 支付令牌 ID |
 |token_expiry_date| 令牌过期日期 |
 |cardcd| 卡号 |
@@ -443,7 +448,7 @@ products 中的参数:
 | ------------ | --------------------------------------------------------------------------- |
 | notify_type   | 通知类型 subscription                                                  |
 | subscription_id | 唯一的 subscription 对象标识符，格式：`sub_xxxxxxxx`                 |
-| state         | 订阅状态，例如 COMPLETED, ACTIVE                                            |
+| state         | 订阅状态，例如 COMPLETED, ACTIVE, 完整的状态可参考[状态](#订阅支付的状态)  |
 | sysdtm        | 状态变更的系统时间                                                          |
 
 示例：

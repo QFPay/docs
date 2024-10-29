@@ -413,7 +413,7 @@ Array of subscription order object containing the following attributes:
 
 ### Manaul charge a subscription transaction
 
-Use API to charge a subscription immediately and the behavior is same as an auto recurrent payment.
+Use API to charge a subscription immediately for a failed order.
 
 **Endpoint** : `/subscription/v1/charge`
 
@@ -421,9 +421,14 @@ Use API to charge a subscription immediately and the behavior is same as an auto
 
 #### Request parameters
 
-| Attribute         | Type   | Mandatory | Description                      |
-| ----------------- | ------ | --------- | -------------------------------- |
-| subscription_id | String | Yes     | unique ID of subscription object |
+| Attribute             | Type   | Mandatory | Description                            |
+| --------------------- | ------ | --------- | -------------------------------------- |
+| subscription_id       | String | Yes       | unique ID of subscription object       |
+| subscription_order_id | String | No        | unique ID of subscription order object |
+
+::: Note
+  This API only applied for a subscription that having a failed order and in the state `UNPAID`, `INCOMPLETE`, or `PAST_DUE`. For the case that the payment is successed, if manual charge date is before scheduled next billing date, the subscription plan will continue to work with state `ACTIVE`, if the manual charge date is after next billing date, the subscription plan will be cancelled. If the payment is failed, the subscription plan will keep the original state.
+:::
 
 ## Recurring payment actions
 
@@ -445,9 +450,9 @@ Format: JSON
 
 |Attribute| Descritpion |
 |--|--|
-|userid | SID  |
+|userid | QFPay Store ID |
 |notify_type| notification type, payment_token |
-|event| token event|
+|event| token event when created, possible value: NEW, MATCH(existing token for this card), CONFLICT(card information is different from existing token for this card)|
 |tokenid| payment token id |
 |token_expiry_date| token expiry date|
 |cardcd| card no.|
@@ -483,7 +488,7 @@ Available when a subscription state is changed
 | ---------------- | ---------------------------------------------------------------------------------- |
 | notify_type      | notification type，subscription                                               |
 | subscription_id  | unique subscription identifier, format: `sub_xxxxxxxx` |
-| state            | subscription state, e.g. COMPLETED, ACTIVE                                         |
+| state            | subscription state, e.g. COMPLETED, ACTIVE, for the full list of states please reference [State](#subscription-state)|
 | sysdtm           | system time of state change                                                        |
 
 example:
