@@ -69,7 +69,6 @@ const sidebars = {
         'online-shop/wap-payment',
         'online-shop/web-payment',
         'online-shop/in-app-payment',
-        'online-shop/payment-intent',
         {
           type: 'category',
           label: 'Wechat',
