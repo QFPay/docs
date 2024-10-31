@@ -8,6 +8,10 @@ import Link from '@docusaurus/Link';
 
 WAP支付或者H5支付能够让商户在Chrome等手机浏览器上的调用电子钱包模块进行收款。
 
+::: note
+WAP/H5 支付，建議商戶平台引導用戶使用手機瀏覽器 Chrome/Safari/Edge 等打開。 因為 Whatsapp/Facebook massager/WeChat app 等不可控的限制，QFPay 無法保證社交 App 能夠自動調用其他錢包 App .  比如在 WeChat App 中無法自動打開 Alipay App，這些都是非瀏覽器的不可控限制
+:::
+
 ## HTTP请求
 
 `POST ../trade/v1/payment` <br/>

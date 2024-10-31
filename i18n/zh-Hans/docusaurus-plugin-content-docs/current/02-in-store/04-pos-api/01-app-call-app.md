@@ -103,7 +103,7 @@ HaoJin支持以下第三方功能：
 
 ### 添加 Jar Package Dependency
 
-将qfpay_haojin_api_xxx.jar文件集成到第三方应用中。
+将[qfpay_haojin_api_xxx.jar](@site/static/files/qfpay_haojin_api_2.3.6.zip)文件集成到第三方应用中。
 
 <Link href="/img/android/package__dependency.png" target="_blank"> ![Add Jar Package Dependency](@site/static/img/android/package__dependency.png)</Link>
 

@@ -8,6 +8,9 @@ import Link from '@docusaurus/Link';
 
 WAP Payment or H5 Payment enables merchants to call up digital wallet module in mobile browser Chrome etc. to collect payment.
 
+::: note
+For WAP/H5 payments, it is recommended that merchants guide users to open the link using mobile browsers such as Chrome, Safari, or Edge. Due to the uncontrollable limitations of social apps like WhatsApp, Facebook Messenger, and WeChat, QFPay cannot guarantee that these apps can automatically invoke other wallet apps. For example, the WeChat app cannot automatically open the Alipay app. These are limitations of non-browser environments that are beyond our control.
+:::
 ## HTTP Request
 
 **Endpoint** : `/trade/v1/payment`

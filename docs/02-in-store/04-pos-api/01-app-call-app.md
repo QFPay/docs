@@ -114,7 +114,7 @@ application first.
 
 ### Add Jar Package Dependency
 
-Integrated the qfpay_haojin_api_xxx.jar file in the third party application.
+Integrated the [qfpay_haojin_api_xxx.jar](@site/static/files/qfpay_haojin_api_2.3.6.zip) file in the third party application.
 
 <Link href="/img/android/package__dependency.png" target="_blank"> ![Add Jar Package Dependency](@site/static/img/android/package__dependency.png)</Link>
 
