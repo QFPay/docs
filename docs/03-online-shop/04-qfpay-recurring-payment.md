@@ -31,7 +31,7 @@ For build and manage subscriptions, the following API resources are required:
 
 ![enter image description here](http:////www.plantuml.com/plantuml/png/fLJDZYCr4BxxAKfp9n8iS9W3MYq8YTkYvRPQeOfTdPXnbpqkUqBpzCJT7NSxz92ivkPqVLN-VifvBmbZohrJg9EFeBCatrC4b7gUI-UJFY8dGAbdfGB6PBKDfT3_AOEKyaF5oY29-eS6zjm574ROxxz-n64JSmeZu5pkYHCSCD49XnPZHJB54VVRTFo0_FIWr27w7E3RtSVeJTP9OKwUSx-dg2gnRtwQw3w2ZeI98CpWyMifZpIlo-3tVv5E4EavaoJ5FX54UpWcbIAoe4xMCs3lCxUVT8wHM0-As41fKvCF2v58AKUkDrbJe1Srt-r-hd7S8wU6jwsdrlz7K8KmzgHwlxUE5FLedJeVdUK3e36HH6vgggDQKUzsbu3_y4_4yDbsPGmCb6QUvijQRXspN60vv3COem7BdT-zfZUD5xHYuMJJ4S94eL6EqHozCxDs63y0dwVJty760KmPUUq2g4RchPXdvHCnM-WNlEsinh8mQv--tttAUz7HXbAvuOXCq3s11D9b7WI7_8en4tmQlBK4pae2twss4f0DF6VaPDFGIBwMDEQ98JYhSU_eIpLC3zgHGC28FIMAjnT85lrbykmBoi3w63txB40l9SNh_f3bs7RFYpNZYPkD_67NsIW9Bam_B_hO9elE_aFGGcRLRrxKvOAjbHopHBVox55Tcs8JnMbtgfsB7wVmU9bRSqQNuDqldyRVDf81ZKBg52ghwdz1wICwHtoW1Hz9WcUvZktkjkh1nR3IQMmaNRRegZtWWHfdhKWkBTfpsSqMhgRgmgaEHZPhVki_QMl-4yiBHTiDA-iak-fWOsyBhPYAtVAr7RjbumQAd11qqOwS7OcqkRrzFXlrbI-iosp0K8c1pDrFiRZ-GjilySVTX_RVOls-dFS1CYVhOBz6GLby7q4ZQtAEJ1lGH70YkvbA8-DkfPNwUsAJU_Sl)
 
-::: info
+:::info
 Current flow of subscription creation
 1. [Config your notification address](/docs/04-common-api/04-asynchronous-notification.md), you will receive notification to get token_id and track the state change of subscription.
 2. [Create customer object](#create-customer-object) and get customer_id
@@ -456,7 +456,7 @@ Use API to charge a subscription immediately for a failed order.
 | subscription_id       | String | Yes       | unique ID of subscription object       |
 | subscription_order_id | String | No        | unique ID of subscription order object |
 
-::: Note
+:::Note
   This API only applied for a subscription that having a failed order and in the state `UNPAID`, `INCOMPLETE`, or `PAST_DUE`. For the case that the payment is successed, if manual charge date is before scheduled next billing date, the subscription plan will continue to work with state `ACTIVE`, if the manual charge date is after next billing date, the subscription plan will be cancelled. If the payment is failed, the subscription plan will keep the original state.
 :::
 

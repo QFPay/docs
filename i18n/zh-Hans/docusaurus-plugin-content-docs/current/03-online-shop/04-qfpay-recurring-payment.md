@@ -31,7 +31,7 @@ import Link from '@docusaurus/Link';
 
 ![enter image description here](http:////www.plantuml.com/plantuml/png/fLJDZYCr4BxxAKfp9n8iS9W3MYq8YTkYvRPQeOfTdPXnbpqkUqBpzCJT7NSxz92ivkPqVLN-VifvBmbZohrJg9EFeBCatrC4b7gUI-UJFY8dGAbdfGB6PBKDfT3_AOEKyaF5oY29-eS6zjm574ROxxz-n64JSmeZu5pkYHCSCD49XnPZHJB54VVRTFo0_FIWr27w7E3RtSVeJTP9OKwUSx-dg2gnRtwQw3w2ZeI98CpWyMifZpIlo-3tVv5E4EavaoJ5FX54UpWcbIAoe4xMCs3lCxUVT8wHM0-As41fKvCF2v58AKUkDrbJe1Srt-r-hd7S8wU6jwsdrlz7K8KmzgHwlxUE5FLedJeVdUK3e36HH6vgggDQKUzsbu3_y4_4yDbsPGmCb6QUvijQRXspN60vv3COem7BdT-zfZUD5xHYuMJJ4S94eL6EqHozCxDs63y0dwVJty760KmPUUq2g4RchPXdvHCnM-WNlEsinh8mQv--tttAUz7HXbAvuOXCq3s11D9b7WI7_8en4tmQlBK4pae2twss4f0DF6VaPDFGIBwMDEQ98JYhSU_eIpLC3zgHGC28FIMAjnT85lrbykmBoi3w63txB40l9SNh_f3bs7RFYpNZYPkD_67NsIW9Bam_B_hO9elE_aFGGcRLRrxKvOAjbHopHBVox55Tcs8JnMbtgfsB7wVmU9bRSqQNuDqldyRVDf81ZKBg52ghwdz1wICwHtoW1Hz9WcUvZktkjkh1nR3IQMmaNRRegZtWWHfdhKWkBTfpsSqMhgRgmgaEHZPhVki_QMl-4yiBHTiDA-iak-fWOsyBhPYAtVAr7RjbumQAd11qqOwS7OcqkRrzFXlrbI-iosp0K8c1pDrFiRZ-GjilySVTX_RVOls-dFS1CYVhOBz6GLby7q4ZQtAEJ1lGH70YkvbA8-DkfPNwUsAJU_Sl)
 
-::: info
+:::info
 当前 subscription 的创建流程如下:
 1. [配置你的异步通知地址](/docs/04-common-api/04-asynchronous-notification.md)，你可以通过通知获取 token_id 并且跟进订阅支付的状态。
 2. [创建 customer 对象](#create-customer-object)并获得 customer_id。
@@ -424,7 +424,7 @@ products 中的参数:
 | subscription_id | String | 是     | QFPay 系统中的唯一 subscription 对象ID |
 | subscription_order_id | String | 否     | 扣款订单的标识ID, 格式: `sub_ord_` + 所属 subscription 对象的 id 值 + 4 位标识该订单为第几次扣款。例如：`sub_ord_a360f06exxxxxxx4c3a_0001` 表示 subscription `sub_a360f06exxxxxxx4c3a` 的第一次扣款订单 |
 
-::: Note
+:::Note
   该 API 只适用于有失败订单的订阅计划，该订阅计划应有如下之一的状态 `UNPAID`, `INCOMPLETE`, 或 `PAST_DUE`。 手动扣款成功后，如果扣款日期在订阅计划的下次计划扣款日期前，那么订阅计划将以状态`ACTIVE`正常运行；如果扣款在订阅计划的下次计划扣款日期之后, 订阅计划将被取消，客户需要重新订阅计划。如果扣款失败，订阅计划将保持原来的状态。
 :::
 
