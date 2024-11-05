@@ -23,13 +23,22 @@ For build and manage subscriptions, the following API resources are required:
 | API Resources                                 |
 | --------------------------------------------- |
 | [Customer](#customer)                         |
-| [Payment Token](/docs/online-shop/payment-intent) |
+| [Payment Token](/docs/03-online-shop/06-payment-intent.md) |
 | [Product](#product)                           |
 | [Subscription](#subscription)                 |
 
 ### Create subscription steps
 
 ![enter image description here](http:////www.plantuml.com/plantuml/png/fLJDZYCr4BxxAKfp9n8iS9W3MYq8YTkYvRPQeOfTdPXnbpqkUqBpzCJT7NSxz92ivkPqVLN-VifvBmbZohrJg9EFeBCatrC4b7gUI-UJFY8dGAbdfGB6PBKDfT3_AOEKyaF5oY29-eS6zjm574ROxxz-n64JSmeZu5pkYHCSCD49XnPZHJB54VVRTFo0_FIWr27w7E3RtSVeJTP9OKwUSx-dg2gnRtwQw3w2ZeI98CpWyMifZpIlo-3tVv5E4EavaoJ5FX54UpWcbIAoe4xMCs3lCxUVT8wHM0-As41fKvCF2v58AKUkDrbJe1Srt-r-hd7S8wU6jwsdrlz7K8KmzgHwlxUE5FLedJeVdUK3e36HH6vgggDQKUzsbu3_y4_4yDbsPGmCb6QUvijQRXspN60vv3COem7BdT-zfZUD5xHYuMJJ4S94eL6EqHozCxDs63y0dwVJty760KmPUUq2g4RchPXdvHCnM-WNlEsinh8mQv--tttAUz7HXbAvuOXCq3s11D9b7WI7_8en4tmQlBK4pae2twss4f0DF6VaPDFGIBwMDEQ98JYhSU_eIpLC3zgHGC28FIMAjnT85lrbykmBoi3w63txB40l9SNh_f3bs7RFYpNZYPkD_67NsIW9Bam_B_hO9elE_aFGGcRLRrxKvOAjbHopHBVox55Tcs8JnMbtgfsB7wVmU9bRSqQNuDqldyRVDf81ZKBg52ghwdz1wICwHtoW1Hz9WcUvZktkjkh1nR3IQMmaNRRegZtWWHfdhKWkBTfpsSqMhgRgmgaEHZPhVki_QMl-4yiBHTiDA-iak-fWOsyBhPYAtVAr7RjbumQAd11qqOwS7OcqkRrzFXlrbI-iosp0K8c1pDrFiRZ-GjilySVTX_RVOls-dFS1CYVhOBz6GLby7q4ZQtAEJ1lGH70YkvbA8-DkfPNwUsAJU_Sl)
+
+::: info
+Current flow of subscription creation
+1. [Config your notification address](/docs/04-common-api/04-asynchronous-notification.md), you will receive notification to get token_id and track the state change of subscription.
+2. [Create customer object](#create-customer-object) and get customer_id
+3. Using customer_id and card information to [create token intent](/docs/03-online-shop/06-payment-intent.md#create-token-intent-api) and get token_id
+4. [Create product object](#create-product-object) and get product_id, your subscription transaction amount for each billing cycle and the interval between two billing cycles will be defined in product object.
+5. [Create subscription object](#create-subscription-object) using customer_id, product_id and token_id, your subscription start time and total billing cycles will be defined in subscription object.
+:::
 
 ### Subscription state
 
@@ -288,6 +297,22 @@ parameters in products:
 | `product_id` | String | Yes       | unique production identifier in QF system |
 | `quantity`   | Int    | No        | default value=1                           |
 
+example request format:
+```json
+{
+  "products": [
+      {
+          "product_id": "prod_54c3772d******9a54b236e09ec74f",
+          "quantity": 1
+      }
+  ],
+  "customer_id": "cust_aaf6aae94******982c54c9cae5ba32",
+  "token_id": "tk_a99892fd*********d3417d168a18bb",
+  "total_billing_cycles": 2,
+  "start_time": "2020-05-14 12:32:56"
+}
+```
+
 #### Response parameters in **data** field
 
 | Attribute              | Type   | Description                                                                 |
@@ -297,6 +322,19 @@ parameters in products:
 | `products`             | Object | list of unique product identifier in QF system and quantity                 |
 | `total_billing_cycles` | Int    | the total billing cycles of the subscirption, infinity cycles if null value |
 | `start_time`           | String | the time subscription will start to work                                    |
+
+example response format:
+```json
+{
+    "resperr": "success",
+    "respcd": "0000",
+    "respmsg": "success",
+    "data": {
+        "state": "ACTIVE",
+        "subscription_id": "sub_ce65d6feb8******d1b2e5fc90b1ef"
+    }
+}
+```
 
 ### Update subscription object
 

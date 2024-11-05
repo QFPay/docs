@@ -31,6 +31,15 @@ import Link from '@docusaurus/Link';
 
 ![enter image description here](http:////www.plantuml.com/plantuml/png/fLJDZYCr4BxxAKfp9n8iS9W3MYq8YTkYvRPQeOfTdPXnbpqkUqBpzCJT7NSxz92ivkPqVLN-VifvBmbZohrJg9EFeBCatrC4b7gUI-UJFY8dGAbdfGB6PBKDfT3_AOEKyaF5oY29-eS6zjm574ROxxz-n64JSmeZu5pkYHCSCD49XnPZHJB54VVRTFo0_FIWr27w7E3RtSVeJTP9OKwUSx-dg2gnRtwQw3w2ZeI98CpWyMifZpIlo-3tVv5E4EavaoJ5FX54UpWcbIAoe4xMCs3lCxUVT8wHM0-As41fKvCF2v58AKUkDrbJe1Srt-r-hd7S8wU6jwsdrlz7K8KmzgHwlxUE5FLedJeVdUK3e36HH6vgggDQKUzsbu3_y4_4yDbsPGmCb6QUvijQRXspN60vv3COem7BdT-zfZUD5xHYuMJJ4S94eL6EqHozCxDs63y0dwVJty760KmPUUq2g4RchPXdvHCnM-WNlEsinh8mQv--tttAUz7HXbAvuOXCq3s11D9b7WI7_8en4tmQlBK4pae2twss4f0DF6VaPDFGIBwMDEQ98JYhSU_eIpLC3zgHGC28FIMAjnT85lrbykmBoi3w63txB40l9SNh_f3bs7RFYpNZYPkD_67NsIW9Bam_B_hO9elE_aFGGcRLRrxKvOAjbHopHBVox55Tcs8JnMbtgfsB7wVmU9bRSqQNuDqldyRVDf81ZKBg52ghwdz1wICwHtoW1Hz9WcUvZktkjkh1nR3IQMmaNRRegZtWWHfdhKWkBTfpsSqMhgRgmgaEHZPhVki_QMl-4yiBHTiDA-iak-fWOsyBhPYAtVAr7RjbumQAd11qqOwS7OcqkRrzFXlrbI-iosp0K8c1pDrFiRZ-GjilySVTX_RVOls-dFS1CYVhOBz6GLby7q4ZQtAEJ1lGH70YkvbA8-DkfPNwUsAJU_Sl)
 
+::: info
+当前 subscription 的创建流程如下:
+1. [配置你的异步通知地址](/docs/04-common-api/04-asynchronous-notification.md)，你可以通过通知获取 token_id 并且跟进订阅支付的状态。
+2. [创建 customer 对象](#create-customer-object)并获得 customer_id。
+3. 使用 customer_id 和卡信息来[创建 token intent](/docs/03-online-shop/06-payment-intent.md#create-token-intent-api)并获得 token_id。
+4. [创建 product 对象](#create-product-object)并获得 product_id，你可以在 product 对象定义订阅支付的每个扣款周期的交易金额和两次扣款周期的间隔。
+5. 使用 customer_id, product_id 和 token_id [创建 subscription 对象](#create-subscription-object)，订阅支付的开始时间和总的扣款周期将在 subscription 对象定义。
+:::
+
 ### 订阅支付的状态
 
 [state diagram](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Recurring_payment.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1lF7BlkofpmO4m5SIszd2KBXV5256UrwR%26export%3Ddownload)
@@ -265,6 +274,22 @@ products 中的参数:
 |product_id|String|是|QFPay 系统生成的唯一 product 对象的ID值|
 |quantity|Int|否|默认值=1|
 
+示例:
+```json
+{
+  "products": [
+      {
+          "product_id": "prod_54c3772d******9a54b236e09ec74f",
+          "quantity": 1
+      }
+  ],
+  "customer_id": "cust_aaf6aae94******982c54c9cae5ba32",
+  "token_id": "tk_a99892fd*********d3417d168a18bb",
+  "total_billing_cycles": 2,
+  "start_time": "2020-05-14 12:32:56"
+}
+```
+
 #### 在**data**部分的响应参数列表
 
 |参数名称|参数类型|描述|
@@ -274,6 +299,19 @@ products 中的参数:
 |products|Object| QFPay 系统生成的唯一 product 对象的ID值和相应数量的列表|
 |total_billing_cycles|Int|订阅支付总的扣款周期, 若为null值则为无限|
 |start_time|String|否|订阅开始时间|
+
+示例:
+```json
+{
+    "resperr": "success",
+    "respcd": "0000",
+    "respmsg": "success",
+    "data": {
+        "state": "ACTIVE",
+        "subscription_id": "sub_ce65d6feb8******d1b2e5fc90b1ef"
+    }
+}
+```
 
 ### 更新 subscription 对象
 
