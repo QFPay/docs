@@ -33,11 +33,11 @@ import Link from '@docusaurus/Link';
 
 :::info
 当前 subscription 的创建流程如下:
-1. [配置你的异步通知地址](/docs/04-common-api/04-asynchronous-notification.md)，你可以通过通知获取 token_id 并且跟进订阅支付的状态。
-2. [创建 customer 对象](#create-customer-object)并获得 customer_id。
-3. 使用 customer_id 和卡信息来[创建 token intent](/docs/03-online-shop/06-payment-intent.md#create-token-intent-api)并获得 token_id。
-4. [创建 product 对象](#create-product-object)并获得 product_id，你可以在 product 对象定义订阅支付的每个扣款周期的交易金额和两次扣款周期的间隔。
-5. 使用 customer_id, product_id 和 token_id [创建 subscription 对象](#create-subscription-object)，订阅支付的开始时间和总的扣款周期将在 subscription 对象定义。
+1. [配置你的异步通知地址](/docs/04-common-api/04-asynchronous-notification.md)，你可以通过通知获取 `token_id` 并且跟进订阅支付的状态。
+2. [创建 customer 对象](#create-customer-object)并获得 `customer_id`。
+3. 使用 `customer_id` 和卡信息来[创建 token intent](/docs/03-online-shop/09-payment-intent.md#create-token-intent-api)并获得 `token_id`。
+4. [创建 product 对象](#create-product-object)并获得 `product_id`，你可以在 product 对象定义订阅支付的每个扣款周期的交易金额和两次扣款周期的间隔。
+5. 使用 `customer_id`, `product_id` 和 `token_id` [创建 subscription 对象](#create-subscription-object)，订阅支付的开始时间和总的扣款周期将在 subscription 对象定义。
 :::
 
 ### 订阅支付的状态
