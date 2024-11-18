@@ -187,7 +187,7 @@ def make_req_sign(data, key):
 
 
 # Body payload
-txamt = '10' #In USD,EUR,etc. Cent
+txamt = '10' #In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control.
 txcurrcd = 'HKD'
 pay_type = '800101' # Alipay CPM = 800108 , MPM = 800101
 auth_code='283854702356157409' #CPM only
@@ -272,7 +272,7 @@ var tradenumber = String(Math.round(Math.random() * 1000000000))
 console.log(tradenumber)
 
 var payload = {
-'txamt': '10', // In USD,EUR,etc. Cent
+'txamt': '10', // In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control.
 'txcurrcd': 'HKD',
 'pay_type': '800101', // Alipay CPM = 800108 , MPM = 800101
 'out_trade_no': tradenumber,
@@ -417,7 +417,7 @@ Listed below are the most common parameters for the payment endpoint. Please ref
 
 Attribute | Mandatory | Type | Description
 --------- | --------- | ------- | -------
-`txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1)
+`txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1). Suggest value > 200 to avoid risk control.
 `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](#currencies) table for a complete list of available currencies
 `pay_type` | Yes | String(6) | Please refer to the section [Payment Codes](#paytype) for a complete list of payment types
 `out_trade_no` | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
@@ -438,7 +438,7 @@ Attribute | Type | Description
 `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements.
 `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  
 `resperr` | String(128) | Request result description
-`txamt` | Int(11) |  Amount of the transaction
+`txamt` | Int(11) |  Amount of the transaction.
 `respmsg` | String(128) |  Supplementary response description
 `out_trade_no` | String(128) | External transaction number  
 `syssn` | String(40) | QFPay internal transaction number (unique)

@@ -79,7 +79,7 @@ def make_req_sign(data, key):
 
 
 # Body payload
-txamt = '10' #In USD,EUR,etc. Cent
+txamt = '10' #In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control.
 txcurrcd = 'HKD'
 pay_type = '800108' # Alipay CPM = 800108 , WeChat Pay CPM = 800208
 auth_code = '280438849930815813' # Mandatory for CPM
@@ -167,7 +167,7 @@ var tradenumber = String(Math.round(Math.random() * 1000000000))
 console.log(tradenumber)
 
 var payload = {
-'txamt': '10', // In USD,EUR,etc. Cent
+'txamt': '10', // In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control.
 'txcurrcd': 'HKD',
 'pay_type': '800108', // Alipay CPM = 800108, WeChat Pay CPM = 800208
 'auth_code': '280438849930815813',

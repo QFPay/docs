@@ -146,7 +146,7 @@ def make_req_sign(data, key):
 
 
 # Body payload
-txamt = '10' #In USD,EUR,etc. Cent
+txamt = '10' #In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control
 txcurrcd = 'HKD'
 pay_type = '800101' # 支付宝 CPM = 800108 , MPM = 800101
 auth_code='283854702356157409' #CPM only
@@ -231,7 +231,7 @@ var tradenumber = String(Math.round(Math.random() * 1000000000))
 console.log(tradenumber)
 
 var payload = {
-'txamt': '10', // In USD,EUR,etc. Cent
+'txamt': '10', // In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control
 'txcurrcd': 'HKD',
 'pay_type': '800101', // 支付宝 CPM = 800108 , MPM = 800101
 'out_trade_no': tradenumber,
@@ -376,7 +376,7 @@ ob_end_flush();
 
 参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述
 --------- | -------- | --------- | ------- | ------- 
-订单支付金额 | `txamt` | 是 | Int(11) | 以当前货币最小计量单位计算，只允许整数类型 (i.e. 100 = $1)
+订单支付金额 | `txamt` | 是 | Int(11) | 以当前货币最小计量单位计算，只允许整数类型 (i.e. 100 = $1). 建议数值大于200，避免因支付金额过低而被交易风控.
 币种 | `txcurrcd` | 是 | String(3) | 交易币种, 请查看[币种](#支付币种)表以获取完整的可选用的币种
 支付类型 | `pay_type` | 是 | String(6) | 请查看[支付类型](#支付类型)表以获取完整的可选用的支付类型
 外部订单号 | `out_trade_no` | 是 | String(128)| 开发者自定义订单号，在同一商户账户中的每笔交易和退款请求该参数值唯一

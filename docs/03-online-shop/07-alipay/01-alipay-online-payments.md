@@ -47,7 +47,7 @@ def make_req_sign(data, key):
 
 
 # Body payload
-txamt = '10' #In USD,EUR,etc. Cent
+txamt = '10' #In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control.
 txcurrcd = 'HKD'
 pay_type = '801101' # Alipay Web Payment = 801101
 auth_code='283854702356157409' #CPM only
@@ -131,7 +131,7 @@ var tradenumber = String(Math.round(Math.random() * 1000000000))
 console.log(tradenumber)
 
 var payload = {
-'txamt': '10', // In USD,EUR,etc. Cent
+'txamt': '10', // In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control.
 'txcurrcd': 'HKD',
 'pay_type': '801101', // Alipay Web Payment = 801101
 'out_trade_no': tradenumber,
@@ -289,7 +289,7 @@ PayType | Description
 
 Attribute | Mandatory | Type | Description
 -------- | --------- | ------- | -------
-`txamt` | Yes | Int(11) | Payment amount, amount of the transaction. Unit in cents (i.e. 100 = $1)
+`txamt` | Yes | Int(11) | Payment amount, amount of the transaction. Unit in cents (i.e. 100 = $1).Suggest value > 200 to avoid risk control
 `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies
 `pay_type` | Yes | String(6) | Payment type, Alipay Web Payment = 801101
 `out_trade_no` | Yes | String(128)| API Order Number, external transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.

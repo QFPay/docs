@@ -267,7 +267,7 @@ payment.pay({
  *     goodsname: goods name, optional,
  *     paysource: fix value, payment_element_checkout,mandatory
  *     out_trade_no: merchant order id, mandatory
- *     txamt: transaction amount, mandatory
+ *     txamt: transaction amount in cents, mandatory. Suggest value > 200 to avoid risk control
  *     txcurrcd: transaction currency, mandatory
  *     support_pay_type: customize display of activited payment methods, optional, show all activated methods if not pass this parameter, detail parameter values please refer to the folllwoing description
  *     params2, mandatory, string, payment intent value from 
@@ -391,21 +391,21 @@ window.addEventListener('walletType', ({detail}) => {
 
 | Header name    | Mandatory | Description        |
 | -------------- | --------- | ------------------ |
-| `X-QF-APPCODE` | Yes       | 商戶code |
-| `X-QF-SIGN`    | Yes       | 商戶 key |
+| `X-QF-APPCODE` | Yes       | Merchant code |
+| `X-QF-SIGN`    | Yes       | Merchant key |
 
 ### Request Parameters
 
 | Attribute      | Mandatory | Description        |
 | -------------- | ----------| ------------------ |
-| `txamt`        | Yes       | 支付金额，单位分|
-| `txcurrcd`     | No        | 币种 e.g. HKD/ CNY (ISO_4217) |
-| `pay_type`     | Yes       | 支付类型 e.g. WP credit card: 802801 |
-| `out_trade_no` | Yes       | 外部订单号 |
-| `mchid`        | No        | mchid, 渠道用 |
-| `return_url`   | No        | 支付成功跳转页面 |
-| `failed_url`   | No        | 支付失败跳转页面 |
-| `notify_url`   | No        | 交易通知发送地址 |
+| `txamt`        | Yes       | Payment amount，unit in cents. Suggest value > 200 to avoid risk control|
+| `txcurrcd`     | No        | Currency e.g. HKD/ CNY (ISO_4217) |
+| `pay_type`     | Yes       | Payment type e.g. WP credit card: 802801 |
+| `out_trade_no` | Yes       | out trade no of merchant |
+| `mchid`        | No        | mchid, for channel use |
+| `return_url`   | No        | payment success redirect url |
+| `failed_url`   | No        | payment fail redirect url |
+| `notify_url`   | No        | url for transaction notification |
 
 ### Response Parameters
 
@@ -433,19 +433,19 @@ window.addEventListener('walletType', ({detail}) => {
 
 | Header name    | Mandatory | Description        |
 | -------------- | --------- | ------------------ |
-| `X-QF-APPCODE` | Yes       | 商戶code |
-| `X-QF-SIGN`    | Yes       | 商戶 key |
+| `X-QF-APPCODE` | Yes       | Merchant code |
+| `X-QF-SIGN`    | Yes       | Merchant key |
 
 ### Request Parameters
 
 | Attribute      | Mandatory | Description        |
 | -------------- | --------- | ------------------ |
-| mchid          | No        | mchid, 渠道用  |
-| customer_id    | Yes       | 顧客id |
-| token_expiry   | No        | token到期日 |
-| token_reason   | No        | token 建立原因 |
-| token_reference| No        | token 參考 |
-| notify_url     | No        | 交易通知发送地址 |
+| mchid          | No        | mchid, for channel use |
+| customer_id    | Yes       | customer id |
+| token_expiry   | No        | token expiry date |
+| token_reason   | No        | token creation reason |
+| token_reference| No        | token reference |
+| notify_url     | No        | url for transaction notification |
 
 ### Response Parameters
 

@@ -110,7 +110,7 @@ Attribute | Mandatory | Type | Description
 `paydtm` | Yes | String | Payment time of the transaction.
 `txcurrcd` | Yes | String | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies.
 `txdtm` | Yes | String | Order creation time provided by the merchant in the payment request.
-`txamt` | Yes | String | Transaction amount in Cents.
+`txamt` | Yes | String | Transaction amount in Cents. Suggest value > 200 to avoid risk control.
 `out_trade_no` | Yes | String | External transaction number.
 `syssn` | Yes | String | QFPay transaction number.
 `cancel` | Yes | String  | Transaction cancel status: <br/> 0 = Not cancelled <br/> 1 = For CPM: Transaction reversed or refunded successfully <br/> 2 = For MPM: Transaction canceled successfully <br/> 3 = Transaction refunded <br/> 4 = Alipay Preauth order finished <br/> 5 = Transaction partially refunded.

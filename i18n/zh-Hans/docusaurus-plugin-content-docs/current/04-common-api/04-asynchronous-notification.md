@@ -110,7 +110,7 @@ print(signature)
 `paydtm` | 是 | String | 交易的支付时间.
 `txcurrcd` | 是 | String | 交易货币. 可查看 [支付币种](/docs/preparation/paycode#支付币种) 获取完整的支持的货币类型列表.
 `txdtm` | 是 | String | 由商户在付款请求中提供的订单创建时间.
-`txamt` | 是 | String | 以分为单位的交易金额.
+`txamt` | 是 | String | 以分为单位的交易金额. 建议数值大于200，避免因支付金额过低而被交易风控。
 `out_trade_no` | 是 | String | 外部订单号.
 `syssn` | 是 | String | QFPay 交易流水号.
 `cancel` | 是 | String  | 交易取消状态: <br/> 0 = 没有取消 <br/> 1 = 用于反扫支付: 交易撤销或者退款成功 <br/> 2 = 正扫支付: 交易取消成功 <br/> 3 = 交易已退款 <br/> 4 = 支付宝预授权订单完成 <br/> 5 = 交易部分退款.

@@ -43,7 +43,7 @@ def make_req_sign(data, key):
 
 
 # Body payload
-txamt = '200' # In cents
+txamt = '200' # In cents, Suggest value > 200 to avoid risk control
 txcurrcd = 'HKD'
 pay_type = '805801' # PayMe Offline Payment = 805801
 out_trade_no = '16565588217444950016'
@@ -130,9 +130,9 @@ console.log(dateTime)
 const key = client_key
 
 var payload = {
-'txamt' : '200' # In cents
+'txamt' : '200' // In cents Suggest value > 200 to avoid risk control
 'txcurrcd' : 'HKD'
-'pay_type' : '805801' # PayMe Offline Payment = 805801
+'pay_type' : '805801' // PayMe Offline Payment = 805801
 'out_trade_no' : '16565588217444950016'
 'txdtm' = dateTime
 'goods_name' : 'qfpay_payme'   
@@ -285,7 +285,7 @@ For MPM Mode, The merchant generates a dynamic QR code based on the Payme protoc
 
 Parameter name | Attribute | Mandatory | Type | Description
 --------- | -------- | --------- | ------- | ------- 
-Payment amount | `txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1) 
+Payment amount | `txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1). Suggest value > 200 to avoid risk control
 Currency | `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies
 Payment type | `pay_type` | Yes | String(6) | PayMe Web Payment = 805801
 API Order Number | `out_trade_no` | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
@@ -305,7 +305,7 @@ Payment type | `pay_type` | String(6) | PayMe Web/Wap Payment |
 System transaction time | `sysdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. | 
 Request transaction time | `txdtm` | String(20) | Format：YYYY-MM-DD hh:mm:ss  | 
 Response message | `resperr` | String(128) |  
-Payment amount | `txamt` | Int(11) |  
+Payment amount | `txamt` | Int(11) |  Amount of the transaction. Unit in cents (i.e. 100 = $1). |
 Other message information | `respmsg` | String(128) |  
 External transaction number | `out_trade_no` | String(128) | External transaction number  
 QFPay transaction number | `syssn` | String(40) | 

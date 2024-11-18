@@ -115,7 +115,7 @@ Request Body:
 |Merchant ID    |`mchid` | Yes  |String   | The unique merchant ID is created by QFPay during the merchant onboarding process.    |
 |QFPay transaction number    | `syssn` | No | String    | Multiple entries are separated by English commas |
 |External transaction number    | `out_trade_no` | No | String    | e.g. Developer platform order number |
-|Transaction amount    | `txamt` |No |    Int   |Whether to pass this parameter depends on the payment channel, Alipay and WeChat Pay do not need to submit this information  |
+|Transaction amount    | `txamt` |No |    Int   |Whether to pass this parameter depends on the payment channel, Alipay and WeChat Pay do not need to submit this information. Suggest value > 200 to avoid risk control.  |
 |Transaction request time    |`txdtm`  |Yes  |String    |Format: YYYY-MM-dd hh:mm:ss  |
 |Unique device id   |`udid` |No|String    |   |
 |Time zone    |`txzone` | No |String    |Used to record the local order time. The default is Beijing time GMT+8 (+0800)  |
@@ -175,7 +175,7 @@ Request Body:
 |Merchant ID    | `mchid`  | No | String  | The unique merchant ID is created by QFPay during the merchant onboarding process. |
 |QFPay transaction number | `syssn`  | Yes | String   |  Fund authorization number  |
 |External transaction number    | `out_trade_no` | Yes | String    |Developer platform transaction number |
-|Transaction amount    | `txamt`  | Yes | int     |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen funds|
+|Transaction amount    | `txamt`  | Yes | int     |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen fund. Suggest value > 200 to avoid risk control.|
 |Transaction request time    | `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh:mm:ss|
 | Device ID   | `udid`   | No | String         |Must be unique|
 | Time zone | `txzone`    | No | String        |Used to record the local order time. The default is Beijing time GMT+8 (+0800)|

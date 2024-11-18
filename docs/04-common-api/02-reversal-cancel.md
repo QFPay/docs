@@ -55,7 +55,7 @@ def make_req_sign(data, key):
 
 
 # Body payload
-txamt = '2500' #In USD,EUR,etc. Cent
+txamt = '2500' #In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control
 out_trade_no = '4MDGEJ7L496LAAU1V1HBY9HMOGWZWLXQ'
 syssn = '20200305066100020000977812' 
 txdtm = '2020-03-05 16:50:30' 
@@ -294,7 +294,7 @@ Attribute | Mandatory | Type | Description
 `mchid` | No | String(16) | Merchant ID allocated by QFPay
 `syssn` | Yes* | String(40) | QFPay transaction number, returned by the system once payment is completed
 `out_trade_no` | Yes* | String(128) | External transaction number
-`txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1)
+`txamt` | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1). Suggest value > 200 to avoid risk control.
 `txdtm` | Yes | String(20) | Transaction time format: YYYY-MM-DD hh:mm:ss
 `udid` | No | String(40) | Unique transaction device ID. Is displayed on the merchant portal.
 

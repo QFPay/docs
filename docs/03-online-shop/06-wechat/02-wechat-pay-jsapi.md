@@ -178,7 +178,7 @@ def payment(openid):
     # Create parameter values for data payload
     current_time = datetime.datetime.now().replace(microsecond=0)                                
     # Body payload
-    txamt = '1' #In USD,EUR,etc. Cent
+    txamt = '1' #In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control.
     txcurrcd = 'THB'
     pay_type = '800207' 
     letters = string.digits   
@@ -284,7 +284,7 @@ Directly submit the related parameters to the interface, there is no need to def
 | Attribute | Mandatory | Type | Description |
 |----------------|-----------|----------------|-------------|
 |`mchntnm` | Yes | String(128) | Custom business name. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters |
-|`txamt`  | Yes  | Int(11) | Amount |
+|`txamt`  | Yes  | Int(11) | Amount. Suggest value > 200 to avoid risk control |
 |`currency`   | Yes  | String(3)|  |
 |`goods_name`   | No  | String(64)|  Custom goods name. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters |
 |`redirect_url`   | Yes  | String(512)| Redirect URL after Payment is complete.  **Urlencode** handles this parameter |

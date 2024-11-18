@@ -326,7 +326,7 @@ ob_end_flush();
 | 支付类型 | `pay_type` | String(6) | 请参考[支付类型表](/docs/preparation/paycode#支付类型) 获取完整的支付类型 |
 | 订单类型 |  `order_type` |  String(16) | Payment: 支付交易 Refund: 退款交易 |
 | 请求交易时间 | `txdtm` | String(20) | 商户在交易和退款请求中提交的交易时间. 格式: YYYY-MM-DD hh:mm:ss |
-| 订单支付金额 | `txamt` | Int(11) |  交易金额, 以分为单位 (i.e. 100 = $1) |
+| 订单支付金额 | `txamt` | Int(11) |  交易金额, 以分为单位 (i.e. 100 = $1)，建议数值大于200，避免因支付金额过低而被交易风控。 |
 | 系统交易时间 | `sysdtm` | String(20) | 格式: YYYY-MM-DD hh:mm:ss <br/>这个值被用作结算截止时间 |
 | 撤销/退款标记 | `cancel` | String(1) | 交易撤销情况: <br/> 0 = 未能撤销 <br/> 1 = 反扫支付: 交易撤销或退款成功 <br/> 2 = 正扫支付: 交易撤销成功 <br/> 3 = 交易已退款 <br/> 4 = 支付宝预授权订单完结 <br/> 5 = 交易部分退款 |
 | 支付结果返回码 |  `respcd` | String(4) | 0000-请求成功.<br/>1143/1145 - 商户需要持续查询退款交易状态. <br/>所有其他的返回编码都是失败值. 请根据 [交易状态码](/docs/preparation/paycode#交易状态码) 获取完整的信息.|

@@ -67,7 +67,7 @@ Request Body:
 |:---|:----- |-----   |----   |
 | `mchid`  | No | String  | The unique merchant ID is created by QFPay during the merchant onboarding process. |
 | `out_trade_no` | Yes | String    | External transaction number|
-| `txamt`  | Yes | String |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen funds|
+| `txamt`  | Yes | String |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen funds. Suggest value > 200 to avoid risk control|
 | `txcurrcd` | Yes | String(3) | Transaction currency. View the Currencies table for a complete list of available currencies|
 | `rmb_tag` | No | String(1) | WeChat Pay in Hong Kong uses `rmb_tag` = Y together with `txcurrcd` = CNY to indicate that the transaction currency is RMB.|
 | `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh:mm:ss|

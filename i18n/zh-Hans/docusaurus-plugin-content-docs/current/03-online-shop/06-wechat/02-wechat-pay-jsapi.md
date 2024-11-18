@@ -174,7 +174,7 @@ def payment(openid):
     # Create parameter values for data payload
     current_time = datetime.datetime.now().replace(microsecond=0)                                
     # Body payload
-    txamt = '1' #In USD,EUR,etc. Cent
+    txamt = '1' #In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control
     txcurrcd = 'THB'
     pay_type = '800207' 
     letters = string.digits   
@@ -273,7 +273,7 @@ if __name__ == '__main__':
 | 参数类型 | 是否必填 | 参数类型 | 描述 |
 |----------------|-----------|----------------|-------------|
 |`mchntnm` | 是 | String(128) | 自定义企业名称。 如果参数是汉字，则需要**UTF-8**编码 |
-|`txamt`  | 是  | Int(11) | 金额 |
+|`txamt`  | 是  | Int(11) | 金额（100 = $1），建议数值大于200，避免因支付金额过低而被交易风控。|
 |`currency`   | 是  | String(3)|  |
 |`goods_name`   | 否  | String(64)|  定制商品名称。 如果参数是汉字，则需要**UTF-8**编码 |
 |`redirect_url`   | 是  | String(512)| 付款完成后重定向 URL。 **urlencode** 处理该参数 |

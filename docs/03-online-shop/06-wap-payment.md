@@ -30,7 +30,7 @@ PayType | Description
 
 Attribute | Mandatory | Type | Description
 -------- | --------- | ------- | -------
-`txamt` | Yes | Int(11) | Payment amount of the transaction. Unit in cents (i.e. 100 = $1)
+`txamt` | Yes | Int(11) | Payment amount of the transaction. Unit in cents (i.e. 100 = $1). Suggest value > 200 to avoid risk control
 `txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies
 `pay_type` | Yes | String(6) | Payment type e.g. PayMe WAP Payment = 805812
 `out_trade_no` | Yes | String(128)| API Order Number, external transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
@@ -50,7 +50,7 @@ Attribute | Type | Description
 `sysdtm` | String(20) | System transaction time, format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements.
 `txdtm` | String(20) | Request transaction time, format：YYYY-MM-DD hh:mm:ss
 `resperr` | String(128) | Response message
-`txamt` | Int(11) | Payment amount
+`txamt` | Int(11) | Payment amount. 
 `respmsg` | String(128) | Other message information
 `out_trade_no` | String(128) | External transaction number  
 `syssn` | String(40) |QFPay transaction number

@@ -65,7 +65,7 @@ import Link from '@docusaurus/Link';
 |:----    |:---|:----- |-----   |----   |
 |商户ID    | `mchid`  | 否 | String  | 唯一的商户ID是由QFPay在商户入网过程中创建的。 |
 |外部订单编号    | `out_trade_no` | 是 | String    |开发者平台交易订单编号 |
-|交易金额    | `txamt`  | 是 | String |实际消费金额，最高抵扣金额不能超过冻结资金|
+|交易金额    | `txamt`  | 是 | String |实际消费金额，最高抵扣金额不能超过冻结资金。建议数值大于200，避免因支付金额过低而被交易风控。|
 |货币 | `txcurrcd` | 是 | String(3) | 交易货币。 查看货币表以获取可用货币的完整列表|
 |RMB 标签 | `rmb_tag` | 否 | String(1) | 香港微信支付使用“rmb_tag”=Y 和“txcurrcd”=CNY 来表示交易币种为人民币。|
 |交易请求时间    | `txdtm`   | 是 | String      | 格式: YYYY-MM-DD hh:mm:ss|

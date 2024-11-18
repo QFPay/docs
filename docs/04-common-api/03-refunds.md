@@ -289,7 +289,7 @@ ob_end_flush();
 |---|----- |-----   |-----   |
 | ` syssn ` |Yes |String(128)  |QFPay transaction number. Original transaction ID `syssn`  that is supposed to be refunded|
 |` out_trade_no `  |Yes |String(128)  | API order number. External refund transaction number / Merchant platform refund transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.|
-|` txamt `   |Yes |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1) <br/> Required for both full refund and partial refund. Some payment channel may not support partial refund.|
+|` txamt `   |Yes |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1) <br/> Required for both full refund and partial refund. Some payment channel may not support partial refund. Suggest value > 200 to avoid risk control.|
 |` txdtm `   |Yes |String(20) |Transaction request time. Format: YYYY-MM-DD hh:mm:ss|
 |` mchid `  |No |String(16)  | Merchant ID. May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID. On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. |
 |` txzone `   |No |String(5)  |Transaction time. Used to record the local transaction time. The default is Beijing time UTC+8 (+0800)|

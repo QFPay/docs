@@ -43,7 +43,7 @@ import Link from '@docusaurus/Link';
 |sign_type | String(256)|是|SHA256 or MD5, 建议SHA256|sha256|
 |sign | String(128)|是|请求签名以进行认证 |3b020a6349646684ebeeb0ec2cd3d1fb|
 |paysource | String(12)|是|结尾必须是 _checkout|remotepay_checkout|
-|txamt | Int(11)|是|付款金额（单位：分）|1099|
+|txamt | Int(11)|是|付款金额（单位：分）建议数值大于200，避免因支付金额过低而被交易风控。|1099|
 |txcurrcd |String(3)|是|货币代码|HKD|
 |out_trade_no|String(128)|是|唯一的外部交易号|202005270001|
 |txdtm|String(32)|是|下单时间|2020-06-24 20:04:37, Format: YYYY-MM-DD hh:mm:ss|

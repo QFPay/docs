@@ -60,7 +60,7 @@ Capture the amount booked by the customer in pre-authorised transactions
 
 | Attribute      | Mandatory | Description       								   |
 | -------------- | --------- | --------------------------------------------------- |
-| `txamt`        | Yes    	 | transaction amount 								   |
+| `txamt`        | Yes    	 | transaction amount. Suggest value > 200 to avoid risk control								   |
 | `txcurrcd`     | No    	 | transaction currency 							   |
 | `mchid`        | No    	 | mchid, merchant id 								   |
 | `syssn`        | Yes    	 | original transaction ID from pre-authorised payment |
@@ -105,7 +105,7 @@ Capture the amount booked by the customer in pre-authorised transactions
 
 | Attribute      | Mandatory | Description        		  |
 | -------------- | --------- | -------------------------- |
-| `txamt`        | Yes    	 | transaction amount 		  |
+| `txamt`        | Yes    	 | transaction amount. Suggest value > 200 to avoid risk control 		  |
 | `txdtm`        | Yes    	 | transaction time 		  |
 | `syssn`        | Yes    	 | original transaction ID 	  |
 | `out_trade_no` | Yes    	 | original merchant order id |

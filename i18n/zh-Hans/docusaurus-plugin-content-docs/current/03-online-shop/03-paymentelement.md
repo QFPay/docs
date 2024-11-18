@@ -478,7 +478,7 @@ elements.createEnhance({
 
 | Field          | Must | Description        |
 | -------------- | ---- | ------------------ |
-| txamt          | Y    | 支付金额，单位分|
+| txamt          | Y    | 支付金额，单位分。建议数值大于200，避免因支付金额过低而被交易风控。|
 | txcurrcd       | N    | 币种 e.g. HKD/ CNY (ISO_4217) |
 | pay_type       | Y    | 支付类型 e.g. WP credit card: 802801 |
 | out_trade_no   | Y    | 外部订单号 |

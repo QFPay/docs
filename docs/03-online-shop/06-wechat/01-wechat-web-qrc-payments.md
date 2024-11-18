@@ -51,7 +51,7 @@ def make_req_sign(data, key):
 
 
 # Body payload
-txamt = '10' #In USD,EUR,etc. Cent
+txamt = '10' #In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control.
 txcurrcd = 'HKD'
 pay_type = '800201'
 auth_code='283854702356157409' #CPM only
@@ -135,7 +135,7 @@ var tradenumber = String(Math.round(Math.random() * 1000000000))
 console.log(tradenumber)
 
 var payload = {
-'txamt': '10', // In USD,EUR,etc. Cent
+'txamt': '10', // In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control.
 'txcurrcd': 'HKD',
 'pay_type': '800201',
 'out_trade_no': tradenumber,
@@ -282,7 +282,7 @@ ob_end_flush();
 
 Attribute | Secondary Attribute | Mandatory | Type | Description
 -------- | --------- | ------- | ------- | -------
-`txamt` | | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1)
+`txamt` | | Yes | Int(11) | Amount of the transaction. Unit in cents (i.e. 100 = $1). Suggest value > 200 to avoid risk control
 `txcurrcd` | | Yes | String(3) | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies
 `pay_type` | | Yes | String(6) | Payment type, WeChat online payments PayType `800201`
 `out_trade_no` | | Yes | String(128)| External transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
@@ -303,7 +303,7 @@ Attribute | Secondary Attribute | Mandatory | Type | Description
  `sysdtm` | String(20) |System transaction time. Format：YYYY-MM-DD hh:mm:ss.  This parameter value is used as the cut-off time for settlements.
  `txdtm` | String(20) |Request transaction time. Format：YYYY-MM-DD hh:mm:ss
  `resperr` | String(128) | Response message
- `txamt` | Int(11) | Payment amount
+ `txamt` | Int(11) | Payment amount.
  `respmsg` | String(128) | Other message information
  `out_trade_no` | String(128) | External transaction number
  `syssn` | String(40) | QFPay transaction number

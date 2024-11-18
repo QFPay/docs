@@ -55,7 +55,7 @@ def make_req_sign(data, key):
 
 
 # Body payload
-txamt = '2500' #In USD,EUR,etc. Cent
+txamt = '2500' #In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control
 out_trade_no = '4MDGEJ7L496LAAU1V1HBY9HMOGWZWLXQ'
 syssn = '20200305066100020000977812' 
 txdtm = '2020-03-05 16:50:30' 
@@ -295,7 +295,7 @@ ob_end_flush();
 `mchid` | No | String(16) | QFPay提供的商户标识符
 `syssn` | Yes* | String(40) | 付款完成后系统返回的 QFPay 交易编号
 `out_trade_no` | Yes* | String(128) | 外部交易编号
-`txamt` | Yes | Int(11) | 交易金额。单位为分（即 100 = 1 元）
+`txamt` | Yes | Int(11) | 交易金额。单位为分（即 100 = 1 元）。建议数值大于200，避免因支付金额过低而被交易风控。
 `txdtm` | Yes | String(20) | 交易时间格式： YYYY-MM-DD hh:mm:ss
 `udid` | No | String(40) | 唯一的交易设备 ID。显示在商家管理平台上。
 

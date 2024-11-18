@@ -45,7 +45,7 @@ The following body parameters are necessary to create a new checkout request;
 |`sign_type` | String(256)|Yes|SHA256 or MD5, SHA256 is recommended, e.g. sha256|
 |`sign` | String(128)|Yes|Request signature for authentication e.g. 3b020a6349646684ebeeb0ec2cd3d1fb|
 |`paysource` | String(12)|Yes|Must end in _checkout e.g. remotepay_checkout|
-|`txamt` | Int(11)|Yes|Payment amount in unit cents e.g. 1099|
+|`txamt` | Int(11)|Yes|Payment amount in unit cents e.g. 1099. Suggest value > 200 to avoid risk control|
 |`txcurrcd` |String(3)| Yes |Currency code e.g. HKD|
 |`out_trade_no` | String(128)| Yes| Unique external transaction number e.g. 202005270001|
 |`txdtm` |String(32) |Yes| Order time e.g. 2020-06-24 20:04:37, Format: YYYY-MM-DD hh:mm:ss|
