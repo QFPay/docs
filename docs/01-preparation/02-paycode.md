@@ -40,6 +40,8 @@ Code   | Description
 800714 | UNIONPAY PC-Web Payment (HK Merchants)
 802001 | FPS Merchant Presented QR Code Payment (MPM) (HK Merchants)***
 803701 | Octopus dynamic QRC Payment - Merchant Present Mode (MPM) (HK Merchants)
+803712 | Octopus dynamic QRC Payment - Consumer Present Mode (CPM) (HK Merchants)
+803714 | Octopus PC WEB Payment (HK Merchants)
 802801 | Visa / Mastercard Online Payments
 802808 | Visa / Mastercard Offline Payments
 806527 | ApplePay Online Payments
