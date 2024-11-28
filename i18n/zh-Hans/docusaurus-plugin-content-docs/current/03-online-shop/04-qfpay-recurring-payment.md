@@ -52,9 +52,37 @@ import Link from '@docusaurus/Link';
 |respcd|String|返回码, 0000 = API呼叫成功|
 |resperr|String| 呼叫结果的详情|
 |respmsg|String| 呼叫的信息详情|
-|page|Int| 查询页数,在查询API中出现|
-|page_size|Int| 查询页大小,在查询API中出现|
 |data|Object|结果值, JSON对象或由JSON对象组成的列表|
+
+**返回数据示例**
+
+当呼叫 subscription/v1/query 之后
+```json
+{
+  "resperr": "success",
+  "respcd": "0000",
+  "respmsg": "success",
+  "data": [
+    {
+      "total_billing_cycles": 3,
+      "last_billing_time": "2024-11-21T11:12:06Z",
+      "is_available": 1,
+      "userid": 2510351,
+      "last_billing_status": "SUCCESS",
+      "state": "ACTIVE",
+      "products": [
+        { "product_id": "prod_8efecd0bd******b9aa1ec5ec01", "quantity": 1 }
+      ],
+      "retry_attempts": 0,
+      "completed_iteration": 1,
+      "token_id": "tk_9ac510017*******69b614e8f7ee",
+      "subscription_id": "sub_e120378de*******da066f690da75",
+      "customer_id": "cust_5ba1539f*******c9bda11d12c854e36",
+      "next_billing_time": "2024-11-21T11:13:06Z"
+    }
+  ]
+}
+```
 
 ## Customer
 
@@ -78,10 +106,6 @@ Customer 是一个提供给商户用于存储客户信息的API资源. 这个对
 |参数名称|参数类型|描述|
 |---|---|---|
 |customer_id|String|QFPay 系统生成的唯一 customer 对象ID值|
-|name|String|客户姓名|
-|phone|String|客户联系方式|
-|email|String|客户邮箱|
-|billing_address|JSON|客户账单地址|
 
 ### 更新 customer 对象
 
@@ -102,10 +126,7 @@ Customer 是一个提供给商户用于存储客户信息的API资源. 这个对
 |参数名称|参数类型|描述|
 |---|---|---|
 |customer_id|String|QFPay 系统生成的唯一 customer 对象ID值|
-|name|String|客户姓名|
-|phone|String|客户联系方式|
-|email|String|客户邮箱|
-|billing_address|JSON|客户账单地址|
+|rowAffected|Int|更新的记录数量|
 
 ### 查询 customer 对象
 
@@ -144,6 +165,13 @@ Customer 是一个提供给商户用于存储客户信息的API资源. 这个对
 |---|---|---|---|
 |customer_id|String|是|QFPay 系统生成的唯一 customer 对象ID值|
 
+#### 在**data**部分的响应参数列表
+
+|参数名称|参数类型|描述|
+|---|---|---|
+|customer_id|String|QFPay 系统生成的唯一 customer 对象ID值|
+|rowDeleted|Int|删除的记录数量|
+
 ## Product
 
 Product 是商户要提供给客户的商品和服务的模型.它定义了交易金额, 交易货币和扣款周期(如可用). 这个对象可被用于 subscription API
@@ -170,14 +198,6 @@ Product 是商户要提供给客户的商品和服务的模型.它定义了交�
 |参数名称|参数类型|描述|
 |---|---|---|
 |product_id|String|QFPay 系统生成的唯一 product 对象的ID值|
-|name|String|展示给客户的产品名称|
-|type|String|默认值=onetime, 可用值: onetime, recurring
-|description|String|产品描述|
-|txamt|Int|交易金额, e.g. $1=100。建议数值大于200，避免因支付金额过低而被交易风控。|
-|txcurrcd|String|交易货币, e.g. HKD|
-|interval|String|可用值: monthly, yearly|
-|interval_count|Int|两次扣款的间隔|
-|usage_type|String|默认值=licensed, 可用值: licensed|
 
 ### 更新 product 对象
 
@@ -197,18 +217,11 @@ Product 是商户要提供给客户的商品和服务的模型.它定义了交�
 |参数名称|参数类型|描述|
 |---|---|---|
 |product_id|String|QFPay 系统生成的唯一 product 对象的ID值|
-|name|String|展示给客户的产品名称|
-|type|String|默认值=onetime, 可用值: onetime, recurring
-|description|String|产品描述|
-|txamt|Int|交易金额, e.g. $1=100。建议数值大于200，避免因支付金额过低而被交易风控。|
-|txcurrcd|String|交易货币, e.g. HKD|
-|interval|String|可用值: monthly, yearly|
-|interval_count|Int|两次扣款的间隔|
-|usage_type|String|默认值=licensed, 可用值: licensed|
+|rowAffected|Int|更新的记录数量|
 
 ### 查询 product 对象
 
-**API 路径** : `/product/v1/create`
+**API 路径** : `/product/v1/query`
 
 #### 请求参数列表
 
@@ -248,6 +261,13 @@ Product 是商户要提供给客户的商品和服务的模型.它定义了交�
 |参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
 |product_id|String|否|QFPay 系统生成的唯一 product 对象的ID值|
+
+#### 在**data**部分的响应参数列表
+
+|参数名称|参数类型|描述|
+|---|---|---|
+|product_id|String|QFPay 系统生成的唯一 product 对象的ID值|
+|rowDeleted|Int|删除的记录数量|
 
 ## Subscription
 
@@ -294,24 +314,8 @@ products 中的参数:
 
 |参数名称|参数类型|描述|
 |---|---|---|
-|customer_id|String|QFPay 系统生成的唯一 customer 对象ID值|
-|token_id|String|  QFPay 系统生成的唯一 payment token 对象的ID值|
-|products|Object| QFPay 系统生成的唯一 product 对象的ID值和相应数量的列表|
-|total_billing_cycles|Int|订阅支付总的扣款周期, 若为null值则为无限|
-|start_time|String|否|订阅开始时间|
-
-示例:
-```json
-{
-    "resperr": "success",
-    "respcd": "0000",
-    "respmsg": "success",
-    "data": {
-        "state": "ACTIVE",
-        "subscription_id": "sub_ce65d6feb8******d1b2e5fc90b1ef"
-    }
-}
-```
+|subscription_id|String|QFPay 系统生成的唯一 subscription 对象ID值|
+|state|String|  第一次创建后 subscription 的状态，包含：ACTIVE, INCOMPLETE, COMPLETED|
 
 ### 更新 subscription 对象
 
@@ -333,12 +337,7 @@ products 中的参数:
 |参数名称|参数类型|描述|
 |---|---|---|
 |subscription_id|String|QFPay 系统生成的唯一 subscription 对象的ID值|
-|customer_id|String|QFPay 系统生成的唯一 customer 对象ID值|
-|token_id|String| QFPay 系统生成的唯一 payment token 对象的ID值|
-|products|Object| QFPay 系统生成的唯一 product 对象的ID值和相应数量的列表|
-|total_billing_cycles|Int|订阅支付总的扣款周期, 若为null值则为无限|
-|start_time|String|订阅开始时间,订阅将开始首次扣款|
-|state|String| 订阅的状态|
+|rowAffected|Int|更新的记录数量|
 
 ### 查询 subscription 对象
 
@@ -383,6 +382,13 @@ products 中的参数:
 |参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
 |subscription_id|String|是|QFPay 系统中的唯一 subscription 对象ID|
+
+#### 在**data**部分的响应参数列表
+
+|参数名称|参数类型|描述|
+|---|---|---|
+|subscription_id|String|QFPay 系统中的唯一 subscription 对象ID|
+|rowDeleted|Int|删除的记录数量|
 
 ### 查询指定 subscription 订阅下的订单
 

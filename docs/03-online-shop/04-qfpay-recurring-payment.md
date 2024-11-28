@@ -54,6 +54,35 @@ All subscription state will be pushed to merchant's backend service once trigger
 | `respmsg`   | String | information description                    |
 | `data`      | Object | result, JSON object or list of JSON object |
 
+**Sample response format**:
+When calling subscription/v1/query
+```json
+{
+  "resperr": "success",
+  "respcd": "0000",
+  "respmsg": "success",
+  "data": [
+    {
+      "total_billing_cycles": 3,
+      "last_billing_time": "2024-11-21T11:12:06Z",
+      "is_available": 1,
+      "userid": 2510351,
+      "last_billing_status": "SUCCESS",
+      "state": "ACTIVE",
+      "products": [
+        { "product_id": "prod_8efecd0bd******b9aa1ec5ec01", "quantity": 1 }
+      ],
+      "retry_attempts": 0,
+      "completed_iteration": 1,
+      "token_id": "tk_9ac510017*******69b614e8f7ee",
+      "subscription_id": "sub_e120378de*******da066f690da75",
+      "customer_id": "cust_5ba1539f*******c9bda11d12c854e36",
+      "next_billing_time": "2024-11-21T11:13:06Z"
+    }
+  ]
+}
+```
+
 ## Customer
 
 Customer is an API resource for merchant to store customer's information. This object can be used in PaymentToken, Subscription APIs
@@ -78,10 +107,6 @@ Customer is an API resource for merchant to store customer's information. This o
 | Attribute         | Type   | Description                     |
 | ----------------- | ------ | ------------------------------- |
 | `customer_id`     | String | unqiue customer ID in QF system |
-| `name`            | String | customer name                   |
-| `phone`           | String | customer contact no.            |
-| `email`           | String | customer email address          |
-| `billing_address` | JSON   | customer billing address        |
 
 ### Update customer object
 
@@ -104,10 +129,7 @@ Response parameters in **data** field:
 | Attribute         | Type   | Description                     |
 | ----------------- | ------ | ------------------------------- |
 | `customer_id`     | String | unqiue customer ID in QF system |
-| `name`            | String | customer name                   |
-| `phone`           | String | customer contact no.            |
-| `email`           | String | customer email address          |
-| `billing_address` | JSON   | customer billing address        |
+| `rowAffected`     | Int    | number of records updated       |
 
 ### Inquiry customer object
 
@@ -136,6 +158,7 @@ Array of customer objects contianing the following attributes
 | `name`        | String | customer name                   |
 | `phone`       | String | customer contact no.            |
 | `email`       | String | customer email address          |
+| `billing_address` | JSON   | customer billing address    |
 
 ### Delete customer object
 
@@ -150,6 +173,13 @@ permanently delete customer object, cannot be undo. Any subscription plan associ
 | Attribute     | Type   | Mandatory | Description                             |
 | ------------- | ------ | --------- | --------------------------------------- |
 | `customer_id` | String | Yes       | unique customer identifier in QF system |
+
+#### Response parameters in **data** field
+
+| Attribute     | Type   | Description                     |
+| ------------- | ------ | ------------------------------- |
+| `customer_id` | String | unqiue customer ID in QF system |
+| `rowDeleted` | Int    | number of records deleted        |
 
 ## Product
 
@@ -181,14 +211,6 @@ create a new product
 | Attribute        | Type   | Description                                                |
 | ---------------- | ------ | ---------------------------------------------------------- |
 | `product_id`     | String | unique identifer generated in QF system                    |
-| `name`           | String | product name that displays to the customer                 |
-| `type`           | String | default value=onetime, possible values: onetime, recurring |
-| `description`    | String | product descritpion                                        |
-| `txamt`          | Int    | transaction amount, e.g. $1=100.                           |
-| `txcurrcd`       | String | transaction currency, e.g. HKD                             |
-| `interval`       | String | possible values: monthly, yearly                           |
-| `interval_count` | Int    | interval between 2 charges                                 |
-| `usage_type`     | String | default value=licensed, possible values: licensed          |
 
 ### Update product object
 
@@ -211,18 +233,11 @@ update current product information
 | Attribute        | Type   | Description                                                |
 | ---------------- | ------ | ---------------------------------------------------------- |
 | `product_id`     | String | unique product identifer generated in QF system            |
-| `name`           | String | product name that displays to the customer                 |
-| `type`           | String | default value=onetime, possible values: onetime, recurring |
-| `description`    | String | product descritpion                                        |
-| `txamt`          | Int    | transaction amount, e.g. $1=100.                           |
-| `txcurrcd`       | String | transaction currency, e.g. HKD                             |
-| `interval`       | String | possible values: monthly, yearly                           |
-| `interval_count` | Int    | interval between 2 charges                                 |
-| `usage_type`     | String | default value=licensed, possible values: licensed          |
+| `rowAffected`|Int|number of records updated|
 
 ### Inquiry product object
 
-**Endpoint** : `/product/v1/create`
+**Endpoint** : `/product/v1/query`
 
 **Method** : `POST`
 
@@ -269,6 +284,13 @@ only can delete product that is not assoicated with any subscription object
 | Attribute    | Type   | Mandatory | Description                                      |
 | ------------ | ------ | --------- | ------------------------------------------------ |
 | `product_id` | String | No        | unique product identifier generated in QF system |
+
+#### Response parameters in **data** field
+
+| Attribute              | Type   | Description                                                                 |
+| ----- | --- | ------ |
+| `product_id`   | String | unique product identifier generated in QF system |
+| `rowDeleted`|Int|number of records deleted| 
 
 ## Subscription
 
@@ -317,24 +339,9 @@ example request format:
 
 | Attribute              | Type   | Description                                                                 |
 | ---------------------- | ------ | --------------------------------------------------------------------------- |
-| `customer_id`          | String | unique customer identifier in QF system                                     |
-| `token_id`             | String | unique payment token identifier in QF system                                |
-| `products`             | Object | list of unique product identifier in QF system and quantity                 |
-| `total_billing_cycles` | Int    | the total billing cycles of the subscirption, infinity cycles if null value |
-| `start_time`           | String | the time subscription will start to work                                    |
+| `subscription_id`          | String | unique subscription identifier in QF system, e.g. sub_xxxxxxx                                    |
+| `state` | String | subscription state after first created, possible values: ACTIVE, INCOMPLETE, COMPLETED|
 
-example response format:
-```json
-{
-    "resperr": "success",
-    "respcd": "0000",
-    "respmsg": "success",
-    "data": {
-        "state": "ACTIVE",
-        "subscription_id": "sub_ce65d6feb8******d1b2e5fc90b1ef"
-    }
-}
-```
 
 ### Update subscription object
 
@@ -359,12 +366,7 @@ update current subscription
 | Attribute              | Type   | Description                                                                                   |
 | ---------------------- | ------ | --------------------------------------------------------------------------------------------- |
 | `subscription_id`      | String | unique subscription identifier in QF system                                                   |
-| `customer_id`          | String | unique customer identifier in QF system                                                       |
-| `token_id`             | String | unique payment token identifier in QF system                                                  |
-| `products`             | Object | list of unique product identifier in QF system and quantity                                   |
-| `total_billing_cycles` | Int    | the total billing cycles of the subscirption, infinity cycles if null value                   |
-| `start_time`           | String | the time that subscription will start to work, it will be the first subscription payment time |
-| `state`                | String | subscription state                                                                            |
+| `rowAffected`          | Int | number of records that being updated                                                       |
 
 ### Inquiry subscription object
 
@@ -380,7 +382,6 @@ update current subscription
 | `page_size`       | Int    | No        | page size, default value=10, max value=100       |
 | `subscritpion_id` | String | No        | unique subscription identifier in QF system      |
 | `customer_id`     | String | No        | unique customer identifier in QF system          |
-| `token_id`        | String | No        | unique payment otken identifier in QF system     |
 | `state`           | String | No        | subscription state, e.g. incompelete, active,... |
 
 #### Response parameters in **data** field
