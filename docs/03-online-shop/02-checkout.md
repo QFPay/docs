@@ -60,6 +60,7 @@ The following body parameters are necessary to create a new checkout request;
 |`checkout_expired_time`|String(3) |No |client side expiration time , unit in millisecond e.g. 1715686118000, the checkout page will be redirect to fail url when time is up|
 |`limit_pay`|String(3) |No |Prohibit credit card use, the parameter value is specified as no_credit, which prohibits the use of credit card payments, only WeChat Pay supports this feature.|
 |`lang`|String(5)|No|UI Language, possible values: <br/> zh-hk (Hong Kong Traditional Chinese) <br/> zh-cn (Simplified Chinese) <br/> en (English) <br/> The checkout page will use default language of browser if do not pass this parameter in checkout request. If pass this parameter in checkout request, do not include this parameter in generating signature.|
+|`cancel_url`|String(256)| No | Redirect URL after clicking "Back to XXX Store" button in checkout page e.g. `https://xxx.com/return/checkout`|
 
 ## Create a New Checkout Order
 

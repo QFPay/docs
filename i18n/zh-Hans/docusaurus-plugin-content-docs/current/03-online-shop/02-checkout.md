@@ -58,6 +58,7 @@ import Link from '@docusaurus/Link';
 |checkout_expired_time|String(3)|是|客户端过期时间|单位为毫秒, e.g. 1715686118000，时间到了后，收银台页面会跳转至 支付失败后的重定向URL|
 |limit_pay|String(3)|是|禁止使用信用卡|参数值指定为no_credit，即禁止使用信用卡支付，仅微信支付支持此功能。|
 |lang|String(5)|是|界面语言|可能值 <br/> zh-hk (香港繁体中文) <br/> zh-cn (简体中文) <br/> en (英文) <br/>如果结帐请求中不传递该参数，则结帐页面将使用浏览器的默认语言。 如果结帐请求中传递该参数，则生成签名时不包含该参数。|
+|cancel_url|String(256)| 否 | 按"返回到店铺"按钮的重定向URL |https://xxx.com/return/checkout|
 
 ## 创建新订单
 
