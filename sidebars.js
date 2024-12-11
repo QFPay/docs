@@ -25,7 +25,11 @@ const sidebars = {
       link: {
         type: 'generated-index'
       },
-      items: ['preparation/introduction', 'preparation/paycode'],
+      items: [
+        'preparation/introduction', 
+        'preparation/paycode',
+        'preparation/api-limitation',
+      ],
     },
     {
       type: 'category',
