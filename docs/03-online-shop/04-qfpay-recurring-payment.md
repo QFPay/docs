@@ -202,7 +202,7 @@ create a new product
 | `description`    | String | No        | product descritpion                                                                 |
 | `txamt`          | Int    | Yes       | transaction amount, e.g. $1=100. Suggest value > 200 to avoid risk control                                                    |
 | `txcurrcd`       | String | Yes       | transaction currency, e.g. HKD                                                      |
-| `interval`       | String | No        | possible values: monthly, yearly, mandatory for recurring product                   |
+| `interval`       | String | No        | possible values: monthly, yearly, mandatory for recurring product (For sandbox environment, you can use minutes or hours for testing)                   |
 | `interval_count` | Int    | No        | interval between 2 charges, maximum 1 year allowed, mandatory for recurring product |
 | `usage_type`     | String | No        | default value=licensed, possible values: licensed                                   |
 
