@@ -367,7 +367,7 @@ elements.createEnhance({
 
 :::note
 In QA environment, default expiry time is 7 days.
-In Production/Living Test environment, default expiry time is 2 years.
+In Production/Live Test environment, default expiry time is 2 years.
 :::
 
 ## Retrieve selected wallet type

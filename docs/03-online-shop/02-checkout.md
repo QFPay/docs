@@ -22,7 +22,7 @@ The table below depicts base URLs for each region.
 
 | Environment Name | URL              |
 | ---------- | ------------------------- |
-| Living Test | `https://test-openapi-hk.qfapi.com/checkstand/#/?` |
+| Live Test | `https://test-openapi-hk.qfapi.com/checkstand/#/?` |
 | Production | `https://openapi-hk.qfapi.com/checkstand/#/?` |
 
 ## Process Flow
