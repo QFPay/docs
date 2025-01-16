@@ -23,7 +23,7 @@ For build and manage subscriptions, the following API resources are required:
 | API Resources                                 |
 | --------------------------------------------- |
 | [Customer](#customer)                         |
-| [Payment Token](/docs/03-online-shop/09-payment-intent.md) |
+| [Payment Token](/docs/03-online-shop/03-paymentelement.md) |
 | [Product](#product)                           |
 | [Subscription](#subscription)                 |
 
@@ -35,7 +35,7 @@ For build and manage subscriptions, the following API resources are required:
 Current flow of subscription creation
 1. [**Config your notification address**](/docs/04-common-api/04-asynchronous-notification.md), you will receive notification to get token_id and track the state change of subscription.
 2. [**Create customer object**](#create-customer-object) and get `customer_id`
-3. Using `customer_id` and card information to [**create token intent**](/docs/03-online-shop/09-payment-intent.md#create-token-intent-api) and get `token_id`
+3. [**Integrate with our element service**](/docs/03-online-shop/03-paymentelement.md) and use elements.createEnhance() and payment.pay() for token creation page. Then use `customer_id` and card information to create token and get `token_id`
 4. [**Create product object**](#create-product-object) and get `product_id`, your subscription transaction amount for each billing cycle and the interval between two billing cycles will be defined in product object.
 5. [**Create subscription object**](#create-subscription-object) using `customer_id`, `product_id` and `token_id`, your subscription start time and total billing cycles will be defined in subscription object.
 :::
