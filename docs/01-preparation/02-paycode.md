@@ -11,7 +11,7 @@ Verify that your API credentials allow for the selected `pay_type`.
 
 Code   | Description
 ------ | -------
-800008 | Consumer Present QR Code Mode (CPM) for WeChat, Alipay, UNIONPAY Quick Pass
+800008 | Consumer Present QR Code Mode (CPM) for WeChat, Alipay, UNIONPAY Quick Pass, PayMe
 800101 | Alipay Merchant Presented QR Code Payment in store (MPM) (Overseas Merchants)
 800108 | Alipay Consumer Presented QR Code Payment (CPM) (Overseas & HK Merchants)
 801101 | Alipay Online WEB (in browser Chrome etc.) Payment (Overseas Merchants) **
