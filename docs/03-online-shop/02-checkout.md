@@ -54,7 +54,6 @@ The following body parameters are necessary to create a new checkout request;
 |`notify_url`|String(256)| Yes |Asynchronous notification URL e.g. `https://xxx.com/notify/success`|
 |`mchntid`|String(16)| No|QFPay Merchant Identifier for Agents e.g. PAKjVHJmQe|
 |`goods_name`|String(64)| No |No special characters, no more than 20 letters or Chinese characters (app payment parameters must be passed). If you want to display the merchant name on the clearing file, this parameter must be empty.|
-|`txzone`|String(5) |No |Timezone This field is used to record the local order time, the default is Beijing time +0800.|
 |`udid`|String(40 |No |Unique device ID e.g. 0001|
 |`expired_time`|String(3) |No |QRC expiration time. Unit in minutes, minimum 5 minutes, maximum 120 minutes, only WeChat Pay, Alipay and Alipay_hk support this parameter|
 |`checkout_expired_time`|String(3) |No |client side expiration time , unit in millisecond e.g. 1715686118000, the checkout page will be redirect to fail url when time is up|

@@ -52,7 +52,6 @@ import Link from '@docusaurus/Link';
 |notify_url|String(256)|是|异步通知URL|https://xxx.com/notify/success|
 |mchntid|String(16)|否 |QFPay 代理商商户标识符|PAKjVHJmQe|
 |goods_name|String(64)|是|不能有特殊字符，不超过20个字母或汉字（需传入app支付参数）。 如果要在清算文件中显示商户名称，则该参数必须为空。| |
-|txzone|String(5)|是|时区|该字段用于记录本地下单时间, 默认为北京时间 +0800.|
 |udid|String(40)|是|唯一設備ID|0001|
 |expired_time|String(3)|是|二维码过期时间|单位为分钟，最短5分钟，最长120分钟，仅微信支付、支付宝、支付宝香港支持此参数|
 |checkout_expired_time|String(3)|是|客户端过期时间|单位为毫秒, e.g. 1715686118000，时间到了后，收银台页面会跳转至 支付失败后的重定向URL|
