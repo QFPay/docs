@@ -205,28 +205,55 @@ digest=(
 
 ## 4. 字段描述
 
-1、 func_type : :业务类型
-    （1）1001 交易
-    （2）1002 退款
-    （3）3001 打印小票
-    （4）3002 打印交易汇总
-    （5）4001 查询交易信息
-    （6）5001 取消交易或者退款请求
+1、
 
-2、channel: payment method
-    （1）、card_payment  刷卡交易, Visa/Mastercard
-    （2）、wx            微信支付
-    （3）、alipay        支付宝支付
-    （4）、payme         payme支付
-    （5）、union         银联支付
-    （6）、fps           FPS支付
-    （7）、octopus       八达通支付
-    （8）、unionpay_card     银联卡支付
-    （9）、amex_card     美国运通卡
+字段名称: `func_type`
 
-3、amt: 交易金额
+字段描述: 业务类型
 
-4、orderId: 交易订单号和 `out_trade_no` 相同
+|值 | 描述|
+|--|--|
+|1001 | 交易 |
+|1002 | 退款 |
+|3001 | 打印小票 |
+|3002 | 打印交易汇总 |
+|4001 | 查询交易信息 |
+|5001 |取消交易或者退款请求|
+
+2、
+
+字段名称: `channel`
+
+字段描述: 支付方法
+
+```
+MPM 正扫支付
+CPM 反扫支付
+```
+|值| 描述 | 支付类型映射 |
+|--|--|--|
+| card_payment |Visa/Mastercard刷卡交易| 802808 |
+| wx | 微信支付 | 800208 (CPM)/800201 (MPM) |
+| alipay| 支付宝支付 | 800108 (CPM)/800101 (MPM)|
+| payme| PayMe支付 | 805808 (CPM)/805801 (MPM)|
+| union| 银联支付 | 800708 (CPM)/800701 (MPM)cl
+| fps | FPS支付 | 802001 (MPM)|
+| octopus| 八达通支付 | 803708 | 
+| unionpay_card| 银联卡支付 | 806708 |
+| amex_card|  美国运通卡支付 | 806808 |
+
+3、
+
+字段名称: `amt`
+
+字段描述: 交易金额
+
+4、
+
+字段名称: `orderId`
+
+字段描述: 交易订单号和 `out_trade_no` 相同
+
 
 ## 5. Response format
 

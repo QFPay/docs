@@ -196,31 +196,57 @@ for example
 
 ## 4. Fields explanation
 
-```plaintext
-1、 func_type : business type
-    (1) 1001 Trade
-    (2) 1002 Refund
-    (3) 3001 Print receipt
-    (4) 3002 Print transaction summary
-    (5) 4001 Transaction inquiry
-    (6) 5001 Cancel trade/refund request
+1、
 
-2、channel: payment method
-    (1) 、card_payment  Visa/Mastercard
-    (2) 、wx            WeChat Pay
-    (3) 、alipay        Alipay
-    (4) 、payme         PayMe
-    (5) 、union         UnionPay QuickPass
-    (6) 、fps           FPS
-    (7) 、octopus       Octopus
-    (8) 、unionpay_card Unionpay Card
-    (9) `amex_card`     American Express Card
+field name: `func_type`
 
-3、amt: Transaction amount
+field description: business type
 
-4、orderId: Transaction reference number, the same as out_trade_no
+|value | description|
+|--|--|
+|1001 | Trade |
+|1002 | Refund |
+|3001 | Print receipt |
+|3002 |Print transaction summary|
+|4001 |Transaction inquiry|
+|5001 |Cancel trade/refund request|
+
+2、
+
+field name: `channel`
+
+field description: payment method
 
 ```
+CPM refer to Consumer Present QR Code Mode
+MPM refer to Mercahnt Present QR Code Mode
+```
+
+|value| description | busicd mapping|
+|--|--|--|
+| card_payment |Visa/Mastercard| 802808 |
+| wx | WeChat Pay | 800208 (CPM)/800201 (MPM) |
+| alipay| Alipay | 800108 (CPM)/800101 (MPM)|
+| payme| PayMe | 805808 (CPM)/805801 (MPM)|
+| union| UnionPay QuickPass | 800708 (CPM)/800701 (MPM)
+| fps | FPS | 802001 (MPM)|
+| octopus| Octopus | 803708 | 
+| unionpay_card| Unionpay Card | 806708 |
+| amex_card| American Express Card | 806808 |
+
+3、
+
+
+field name: `amt`
+
+field description: transaction amount
+
+4、
+
+field name: `orderId`
+
+field description: transaction reference number, the same as out_trade_no
+
 
 ## 5. Response format
 
