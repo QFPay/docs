@@ -113,42 +113,13 @@
   }
 ```
 
-### 2. 创建token模式
-
-1. visa/master card-form支付
-
-```js
-  // 初始化 qfpay 对象
-  const qfpay = QFpay.config()
-  
-  // 初始化 token 对象
-  const token = qfpay.token()
-  
-  // 传递生成token相关参数
-  token.intent({
-    paysource: "payment_element"
-  },"e487a02e3e1143e482db765ccec63d58")
-  
-  // 初始化 elements 对象，并生成 card-form表单
-  const elements = qfpay.element()
-  elements.createEnhance({
-    seletor: "#container",
-    element: "token"
-  })
-  
-  // 触发表单提交，并接受响应参数
-  const response = qfpay.createToken({
-    return_url: 'https://xxx.xxx.com'
-  })
-```
-
-#### 使用说明
+## 使用说明
 
 **前提条件：使用 sdk 之前必须要先引入 sdk 文件(即qfpay.js)**
 
-##### 全局对象 QFpay 及相关 API
+## 全局对象 QFpay 及相关 API
 
-1. QFpay.config(params)
+### 1. QFpay.config(params)
 
 ```js
 /**
@@ -169,7 +140,7 @@
 const qfpay = QFpay.config()
 ```
 
-2. qfpay.retrievePaymentIntent()
+### 2. qfpay.retrievePaymentIntent()
 
 ```js
 /**
@@ -180,7 +151,7 @@ const qfpay = QFpay.config()
 const intentResponse = qfpay.retrievePaymentIntent()
 ```
 
-3. qfpay.element(appearance)
+### 3. qfpay.element(appearance)
 
 ```js
 /**
@@ -215,7 +186,7 @@ const intentResponse = qfpay.retrievePaymentIntent()
 const elements = qfpay.element(appearance)
 ```
 
-4. qfpay.payment()
+### 4. qfpay.payment()
 
 ```js
 /**
@@ -227,7 +198,7 @@ const qfpay = QFpay.config()
 const payment = qfpay.payment()
 ```
 
-5. qfpay.confirmPayment()
+### 5. qfpay.confirmPayment()
 
 ```js
 /**
@@ -246,7 +217,7 @@ const paymentResponse = qfpay.confirmPayment({
 })
 ```
 
-6. qfpay.confirmWalletPayment()
+### 6. qfpay.confirmWalletPayment()
 
 ```js
 /**
@@ -261,58 +232,14 @@ const paymentResponse = qfpay.confirmPayment({
 })
 ```
 
-7. qfpay.token()
-
-```js
-/**
- * 参数: 不需要
- * 返回值：生成的 token 对象
- * 作用: 生成 token 对象
- */
-const qfpay = QFpay.config()
-const payment = qfpay.token()
-```
-
-8. qfpay.retrieveTokenIntent()
-
-```js
-/**
- * 参数: 不需要
- * 返回值: 相关code，如果为 '0000'，则代表 token intent 可用，否则不可用
- * 作用: 验证 token intent 值是否正确并可用
- */
-const intentResponse = qfpay.retrievePaymentIntent()
-```
-
-9. qfpay.createToken()
-
-```js
-/**
- * 参数：选填，Object，{return_url: 'https://xxx.xxx.xxx'}, 如果传递了 return_url 参数，返回结果后，会跳转到指定的 return_url，如果未传递 return_url 参数，返回结果后，则停留在当前页面
- * 返回值为：code、description、customer_id、card相关信息、token相关信息
- *  若 code 为 '0000', 则表示成功提交信息, 返回值为 customer_id、card相关信息、token相关信息
- *    customer_id: 消费者在QF系统中的唯一标识
- *    card: {
- *      brand: "xxxx", // 卡标识, 例如 VISA
- *      suffix: "xxxx" // 卡号后4位, 例如 1000
- *    }
- *    token: {
- *      event: "CREATE", // 表示当前行为为创建Token
- *      token_id: "xxxxxxx" // 生成调用其他API的参数
- *    }
- *  若 code 非 '0000', 则具体信息参考 description字段
- * 作用：返回根据卡信息生成的token等相关信息
- */
-```
-
-##### payment对象及相关 API
+## payment对象及相关 API
 
 ```js
 const qfpay = QFpay.config()
 const payment = qfpay.payment()
 ```
 
-1. payment.pay(params1, params2)
+### 1. payment.pay(params1, params2)
 
 ```js
 /**
@@ -335,7 +262,7 @@ payment.pay({
 }, 'SDF8980SFFSDF890SDF')
 ```
 
-2. payment.walletPay(params1, params2)
+### 2. payment.walletPay(params1, params2)
 
 ```js
 /**
@@ -382,7 +309,7 @@ payment.walletPay({
 }, 'SDF8980SFFSDF890SDF')
 ```
 
-3. payment.inquiry(params1, params2)
+### 3. payment.inquiry(params1, params2)
 
 ```js
 /**
@@ -400,36 +327,15 @@ payment.walletPay({
 const inquiryResponse = payment.inquiry({}, 'SDF8980SFFSDF890SDF')
 ```
 
-##### token对象及相关 API
 
-```js
-const qfpay = QFpay.config()
-const token = qfpay.token()
-```
-
-1. token.intent(params1, params2)
-
-```js
-/**
- * 参数：params1，必填，Object, {paysource: 'payment_element'}
- *               paysource: 固定值, 目前为 payment_element，必填
- *      params2, 必填, string, 值为根据商户 code&key 生成的 token intent 字符串
- * 返回值: 无
- * 作用：传递token intent相关参数
- */
-token.intent({
-  paysource: 'payment_element'
-}, 'SDF8980SFFSDF890SDF')
-```
-
-##### elements对象及相关 API
+## elements对象及相关 API
 
 ```js
 const qfpay = QFpay.config()
 const elements = qfpay.element()
 ```
 
-1. elements.create(params1, params2, params3) --- 仅支持 Visa Mastercard 卡交易
+### 1. elements.create(params1, params2, params3) --- 仅支持 Visa Mastercard 卡交易
 
 ```js
 /**
@@ -442,7 +348,7 @@ const elements = qfpay.element()
 elements.create("#container")
 ```
 
-2. elements.createEnhance(params) --- elements.create() 的 enhance 版本, 支持 Visa Mastercard 卡交易、ApplePay、单纯创建 token 模式、 payment 模式下创建 token 模式
+### 2. elements.createEnhance(params) --- elements.create() 的 enhance 版本, 支持 Visa Mastercard 卡交易、ApplePay、payment 模式下创建 token 模式
 
 ```js
 /**
@@ -450,7 +356,7 @@ elements.create("#container")
  *      selector: 必填, string, 存放 element wallet 的容器
  *      email: 非必填, boolean, 默认值为 true, 若为 true 则 card form 中包含 email输入框, 为false, 则 card form 中, 不包含email 输入框
  *      tab: 非必填, boolean, 默认值为 false, 若为 true 则 element wallet list 切换方式为 Tab切换; 若为 false 则 element wallet list 切换方式为 纵向列表切换
- *      element: 非必填, string, 默认值为 payment, 表示当前为 普通支付模式; 可选值为 token, 表示当前为 创建 token 模式
+ *      element: 非必填, string, 默认值为 payment, 表示当前为 普通支付模式;
  * 
  * 返回值: 无
  * 作用: 生成 element wallet
