@@ -343,7 +343,7 @@ const elements = qfpay.element()
 elements.create("#container")
 ```
 
-### 2. elements.createEnhance(params) ---  support Visa Mastercard card payment, ApplePay payment,  token creation,  token creation in payment mode
+### 2. elements.createEnhance(params) ---  support Visa Mastercard card payment, ApplePay payment, token creation in payment mode
 
 ```js
 /**
@@ -355,7 +355,6 @@ elements.create("#container")
  *           false: wallet list switch way is vertical list
  *      element: optional, string, default value:payment, 
  *           payment: normal payment mode
- *           token: token creation mode  
  * return: N/A
  * purpose: generate element wallet
  * NOTICE：tab parameter only effecitve in payment mode
