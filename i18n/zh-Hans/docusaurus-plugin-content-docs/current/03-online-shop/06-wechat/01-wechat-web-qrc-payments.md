@@ -286,7 +286,6 @@ ob_end_flush();
 交易到期时间 | `expired_time` | | 否 <br/> (仅限正扫支付) | String(3)  | 以分钟为计时的二维码过期时间,默认的过期时间是30分钟. 该参数可以被手动设置为最小5分钟,最大120分钟<br/> 该参数可用于: <br/>800201 - 微信扫码支付
 商品名称标识 | `goods_name` | | 否  | String(64) | 商品名称 / 标识: 不能超过 20 个字母数字或包含特殊字符。 APP支付不能为空。 如果参数是汉字，则需要使用**UTF-8**编码。
 子商户号 | `mchid` | | 否  | String(16) | 可能提供给予商户。 如果给出了MCHID，则必须提供MCHID。反之，如果没有提供MCHID，商户不得在API请求中传递MCHID字段。
-时区 | `txzone` | | 否  | String(5) | 用于记录本地下单时间，默认为北京时间+0800
 设备唯一id | `udid` | | 否  | String(40) | 唯一的设备ID,显示在商户管理后台上.
 人民币标识 | `rmb_tag` | | 否  | String(1) | 香港微信支付使用“rmb_tag”=Y 和“txcurrcd”=CNY 来表示交易币种为人民币。
 客户扩展信息 | `extend_info` | `user_creid` <br/> `user_truename` | 否  | Object | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](/docs/preparation/paycode#支付类型)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}'

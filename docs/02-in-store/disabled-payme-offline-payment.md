@@ -49,13 +49,12 @@ pay_type = '805801' # PayMe Offline Payment = 805801
 out_trade_no = '16565588217444950016'
 txdtm = current_time
 goods_name = 'qfpay_payme'
-return_url = 'http://www.qfpay.com'
-txzone = '+0800'
+return_url = 'https://www.qfpay.global'
 udid = 'my_udid'
 
 key = client_key
 
-data ={'txamt': txamt, 'txcurrcd': txcurrcd, 'pay_type': pay_type, 'out_trade_no': out_trade_no, 'txdtm': txdtm, 'udid': udid, 'return_url': return_url, 'txzone': txzone}
+data ={'txamt': txamt, 'txcurrcd': txcurrcd, 'pay_type': pay_type, 'out_trade_no': out_trade_no, 'txdtm': txdtm, 'udid': udid, 'return_url': return_url}
 
 r = requests.post(environment+"/trade/v1/payment",data=data,headers={'X-QF-APPCODE':app_code,'X-QF-SIGN':make_req_sign(data, key)})
 
@@ -83,11 +82,10 @@ public class TestMain {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date=df.format(new Date());
         String txdtm=date;
-        String txzone="+0800";
         String txamt="200";
         String txcurrcd="HKD";
         String usid="myudid";
-        String return_url="http://www.qfpay.com";
+        String return_url="https://www.qfpay.global";
         String goods_name="qfpay_payme";
 
         Map<String, String> unsortMap = new HashMap<>();
@@ -95,7 +93,6 @@ public class TestMain {
         unsortMap.put("pay_type", pay_type);
         unsortMap.put("out_trade_no", out_trade_no);
         unsortMap.put("txdtm", txdtm);
-        unsortMap.put("txzone", txzone);
         unsortMap.put("txamt", txamt);
         unsortMap.put("txcurrcd", txcurrcd);
         unsortMap.put("return_url", return_url);
@@ -136,8 +133,7 @@ var payload = {
 'out_trade_no' : '16565588217444950016'
 'txdtm' = dateTime
 'goods_name' : 'qfpay_payme'   
-'return_url' : 'http://www.qfpay.com'
-'txzone' : '+0800'
+'return_url' : 'https://www.qfpay.global'
 'udid' : 'my_udid'
 };
 
@@ -206,10 +202,9 @@ $fields = array(
     'out_trade_no' => urlencode(16565588217444950016),
     'txcurrcd' => urlencode('HKD'),
     'txamt' => urlencode(200),
-    'txzone' => urlencode('+0800'),
     'txdtm' => $now_time,
     'goods_name' => urlencode('qfpay_payme'),
-    'return_url' => urlencode('http://www.qfpay.com'),
+    'return_url' => urlencode('https://www.qfpay.global'),
     'udid' => urlencode($myudid),
 );
 ksort($fields); //字典排序A-Z升序方式
@@ -293,7 +288,6 @@ Request transaction time | `txdtm` | Yes | String(20) | Transaction time format�
 Order expiration time | `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.
 Product name identification | `goods_name` | No | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
 QFPay merchant number | `mchid` | No | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. 
-Time zone | `txzone` | No | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800). 
 Device ID | `udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal. 
 Redirect URL | `return_url` | No | String(512) |  URL that the user will be redirected to when the payment finishes.
 

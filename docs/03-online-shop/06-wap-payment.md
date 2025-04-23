@@ -37,7 +37,6 @@ Attribute | Mandatory | Type | Description
 `txdtm` | Yes | String(20) | Request transaction time format：<br/> YYYY-MM-DD hh:mm:ss
 `goods_name` | No | String(64) | Product name identification, Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
 `mchid` | No | String(16) | QFPay merchant number. May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request.
-`txzone` | No | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800).
 `udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal.
 `return_url` | No | String(255) | Redirect URL that the user will be redirected to when the payment finishes.
 `notify_url` | No | String(255) | Notification URL that the merchant will receive notification when the payment finishes.

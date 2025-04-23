@@ -309,7 +309,6 @@ ob_end_flush();
 | ` respcd ` |No |String(4) | Transaction return code, returns all orders with return code status by default   |
 | ` start_time ` |No |String(20) | Starting time, it is ignored when `syssn` or `out_trade_number` is provided. The default date time is the start of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
 | ` end_time ` |No | String(20) | End Time, it is ignored when `syssn` or `out_trade_number` is provided. The default date time is the end of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
-|` txzone ` |No | String(5) | Time zone, used to record the local order time. The default is Beijing time UTC+8 (+0800)   |
 |` page `   |No |  Int(8) | Number of pages, default value is 1   |
 |` page_size ` |No |  Int(8) | Number of items displayed per page, by default 10 transactions will be displayed. The maximum `page_size` value is 100  |
 

@@ -31,7 +31,6 @@ Attribute | Mandatory | Type | Description
 `expired_time` | No<br/> (MPM only) | String(3)  | Order expiration time, QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.
 `goods_name` | No | String(64) | Product name identification, Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
 `mchid` | No | String(16) | QFPay merchant number. May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request.
-`txzone` | No | String(5) | Transaction Time zone: Record of the transaction in local time, default time zone is Beijing time UTC+8 (+0800).
 `udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal.
 `return_url` | No | String(512) | Redirect URL that the user will be redirected to when the payment finishes.
 

@@ -70,7 +70,6 @@ import Link from '@docusaurus/Link';
 |RMB 标签 | `rmb_tag` | 否 | String(1) | 香港微信支付使用“rmb_tag”=Y 和“txcurrcd”=CNY 来表示交易币种为人民币。|
 |交易请求时间    | `txdtm`   | 是 | String      | 格式: YYYY-MM-DD hh:mm:ss|
 | 设备ID   | `udid`   | 否 | String         |必须是唯一的|
-| 时区 | `txzone`    | 否 | String        |用于记录本地订单时间。 默认为北京时间GMT+8（+0800）|
 | 重定向网址   | `return_url`   | 否 | String        | 付款成功后重定向至地址。 为 GrabPay Online 提交的强制参数。 支付宝 WAP 将 `return_url` 限制为最多 200 个字符。 |
 |扩展客户信息   | `extend_info`  | 否 | Object  | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](/docs/preparation/paycode#支付类型)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
 

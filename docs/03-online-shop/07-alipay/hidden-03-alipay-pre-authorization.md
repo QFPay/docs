@@ -34,7 +34,7 @@ PayType | Description
 Request Body:
 
 {
-  goods_name=goodcode1&mchid=R1zQrTdJnn&out_trade_no=alipay201909261129164551bcdd40&pay_type=801802&txamt=1&txcurrcd=USD&txdtm=2019-09-26 11:29:16&txzone=+0800
+  goods_name=goodcode1&mchid=R1zQrTdJnn&out_trade_no=alipay201909261129164551bcdd40&pay_type=801802&txamt=1&txcurrcd=USD&txdtm=2019-09-26 11:29:16
 }
 
 ```
@@ -118,7 +118,6 @@ Request Body:
 |Transaction amount    | `txamt` |No |    Int   |Whether to pass this parameter depends on the payment channel, Alipay and WeChat Pay do not need to submit this information. Suggest value > 200 to avoid risk control.  |
 |Transaction request time    |`txdtm`  |Yes  |String    |Format: YYYY-MM-dd hh:mm:ss  |
 |Unique device id   |`udid` |No|String    |   |
-|Time zone    |`txzone` | No |String    |Used to record the local order time. The default is Beijing time GMT+8 (+0800)  |
 
 ## Response Parameter
 
@@ -148,7 +147,7 @@ Request Body:
 Request Body:
 
 {
-  mchid=R1zQrTd***&syssn=20190722000300020081074842&out_trade_no=alipay201909271528139576015cbf&txamt=1&txdtm=2019-09-27 15:28:13&txzone=+0800
+  mchid=R1zQrTd***&syssn=20190722000300020081074842&out_trade_no=alipay201909271528139576015cbf&txamt=1&txdtm=2019-09-27 15:28:13
 }
 
 ```
@@ -178,7 +177,6 @@ Request Body:
 |Transaction amount    | `txamt`  | Yes | int     |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen fund. Suggest value > 200 to avoid risk control.|
 |Transaction request time    | `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh:mm:ss|
 | Device ID   | `udid`   | No | String         |Must be unique|
-| Time zone | `txzone`    | No | String        |Used to record the local order time. The default is Beijing time GMT+8 (+0800)|
 | Redirect URL   | `return_url`   | No | String        | Redirect to address after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters. |
 
 ### Response Parameters

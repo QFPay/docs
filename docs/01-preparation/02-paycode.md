@@ -428,7 +428,6 @@ Attribute | Mandatory | Type | Description
 `expired_time` | No<br/> (MPM only) | String(3)  | QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code<br/>800101 - Alipay scan code <br/>801512 - Alipay Hong Kong WAP payment<br/>801501 - Alipay Hong Kong scan code<br/>801107 - Alipay overseas WAP payment<br/>801101 - Alipay overseas scan code<br/>801010 - WeChat Hong Kong APP<br/>801510 - Alipay Hong Kong APP
 `goods_name` | No | String(64) | Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
 `mchid` | No | String(16) | May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass in the MCHID parameter in the API request.
-`txzone` | No | String(5) | Transaction Time zone. Default time zone is Beijing time UTC+8 (+0800).
 `udid` | No | String(40) |  Unique transaction device ID displayed on the merchant portal.
 `notify_url` | No | String(256) | URL where asynchronous notificiations will be sent to upon payment completion.
 

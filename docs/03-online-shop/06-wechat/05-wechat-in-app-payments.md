@@ -72,7 +72,6 @@ Request Body:
 | `rmb_tag` | No | String(1) | WeChat Pay in Hong Kong uses `rmb_tag` = Y together with `txcurrcd` = CNY to indicate that the transaction currency is RMB.|
 | `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh:mm:ss|
 | `udid`   | No | String         |Device ID, must be unique|
-| `txzone`    | No | String        |Time zone, used to record the local order time. The default is Beijing time GMT+8 (+0800)|
 | `return_url`   | No | String        | Redirect URL, redirect to address after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters.|
 | `extend_info`  | No | Object  |Extended Customer Info, real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](/docs/preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
 

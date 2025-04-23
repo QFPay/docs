@@ -22,7 +22,7 @@ import Link from '@docusaurus/Link';
 
 请求本体:
 
-txamt=1&txcurrcd=HKD&pay_type=801510&out_trade_no=052711570017898&txdtm=2021-05-27+11%3A57%3A00&goods_name=goods_name&goods_info=goods_info&mchid=nDB64h9qJ1An&trade_name=trade_name&goods_detail=goods_detail&return_url=http%3A%2F%2Fwww.qfpay.com%2F&pay_tag=ALIPAYHK&seller_id=testoverseas9191%40alipay.com
+txamt=1&txcurrcd=HKD&pay_type=801510&out_trade_no=052711570017898&txdtm=2021-05-27+11%3A57%3A00&goods_name=goods_name&goods_info=goods_info&mchid=nDB64h9qJ1An&trade_name=trade_name&goods_detail=goods_detail&return_url=http%3A%2F%2Fwww.qfpay.global%2F&pay_tag=ALIPAYHK&seller_id=testoverseas9191%40alipay.com
 
 ```
 
@@ -61,7 +61,7 @@ txamt=1&txcurrcd=HKD&pay_type=801510&out_trade_no=052711570017898&txdtm=2021-05-
     "partner": "2088231067382451",
     "secondary_merchant_industry": "5941",
     "product_code": "NEW_WAP_OVERSEAS_SELLER",
-    "return_url": "http://www.qfpay.com/",
+    "return_url": "https://www.qfpay.global",
     "subject": "goods_name"
   },
   "respcd": "0000",
@@ -79,7 +79,7 @@ txamt=1&txcurrcd=HKD&pay_type=801510&out_trade_no=052711570017898&txdtm=2021-05-
 ```plaintext
 Sample:
 
-_input_charset="UTF-8"&body="goods_info"&currency="HKD"&forex_biz="FP"&it_b_pay="30m"&notify_url="https://test-o2-hk.qfapi.com/trade/alipay_hk/v1/notify"&out_trade_no="20210527154100020004180921"&partner="2088231067382451"&payment_inst="ALIPAYHK"&payment_type="1"&product_code="NEW_WAP_OVERSEAS_SELLER"&return_url="http://www.qfpay.com/"&secondary_merchant_id="1000007081"&secondary_merchant_industry="5941"&secondary_merchant_name="IFlare Hong Kong Limited (external) - online"&seller_id="2088231067382451"&service="mobile.securitypay.pay"&subject="goods_name"&total_fee="0.01"&sign="iU1yXUnsCK7rJAu0DoN61arVexbIfo3GLR5jr3QzjkZ29INSPhcA4e%2F2%2BdPrsf5huzQAkxVKP0CTfvaGPMYqNkxmhoaJWUH0ZhgYDgKugMvtweBvRqOX2W0h3A%2F%2FIdJuxeyOAuh7bHiuazSB3ZH%2BEQwRGP%2Bkk8Jpha930gHwPtw%3D"&sign_type="RSA"
+_input_charset="UTF-8"&body="goods_info"&currency="HKD"&forex_biz="FP"&it_b_pay="30m"&notify_url="https://test-o2-hk.qfapi.com/trade/alipay_hk/v1/notify"&out_trade_no="20210527154100020004180921"&partner="2088231067382451"&payment_inst="ALIPAYHK"&payment_type="1"&product_code="NEW_WAP_OVERSEAS_SELLER"&return_url="https://www.qfpay.global/"&secondary_merchant_id="1000007081"&secondary_merchant_industry="5941"&secondary_merchant_name="IFlare Hong Kong Limited (external) - online"&seller_id="2088231067382451"&service="mobile.securitypay.pay"&subject="goods_name"&total_fee="0.01"&sign="iU1yXUnsCK7rJAu0DoN61arVexbIfo3GLR5jr3QzjkZ29INSPhcA4e%2F2%2BdPrsf5huzQAkxVKP0CTfvaGPMYqNkxmhoaJWUH0ZhgYDgKugMvtweBvRqOX2W0h3A%2F%2FIdJuxeyOAuh7bHiuazSB3ZH%2BEQwRGP%2Bkk8Jpha930gHwPtw%3D"&sign_type="RSA"
 
 ```
 

@@ -112,7 +112,7 @@ def get_out_code():
 HTTP Request:
 
 {
-  https://openapi.qfpay.com/tool/v1/get_weixin_openid?code=011QipnO1yMIla1VJdoO1FUrnO1Qipnv
+  https://openapi-hk.qfapi.com/tool/v1/get_weixin_openid?code=011QipnO1yMIla1VJdoO1FUrnO1Qipnv
 }
 
 ```
@@ -266,7 +266,7 @@ if __name__ == '__main__':
 
 ### HTTP 请求
 
-`GET https://o2.qfpay.com/q/direct`
+`GET https://o2-hk.qfapi.com/q/direct`
 
 ### 请求参数
 

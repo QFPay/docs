@@ -275,7 +275,7 @@ Directly submit the related parameters to the interface, there is no need to def
 
 ### HTTP Request
 
-**Endpoint** : `https://o2.qfpay.com/q/direct`
+**Endpoint** : `https://o2-hk.qfapi.com/q/direct`
 
 **Method** : `GET`
 

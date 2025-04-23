@@ -292,7 +292,6 @@ ob_end_flush();
 |` txamt `   |Yes |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1) <br/> Required for both full refund and partial refund. Some payment channel may not support partial refund. Suggest value > 200 to avoid risk control.|
 |` txdtm `   |Yes |String(20) |Transaction request time. Format: YYYY-MM-DD hh:mm:ss|
 |` mchid `  |No |String(16)  | Merchant ID. May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID. On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. |
-|` txzone `   |No |String(5)  |Transaction time. Used to record the local transaction time. The default is Beijing time UTC+8 (+0800)|
 |` udid `    |No |String(40)  |Unique transaction device ID|
 
 ### Response Parameters

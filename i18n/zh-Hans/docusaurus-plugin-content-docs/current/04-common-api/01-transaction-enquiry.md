@@ -304,7 +304,6 @@ ob_end_flush();
 |交易返回码| ` respcd ` |No |String(4) | 默认返回所有返回码状态的订单  |
 |开始时间| ` start_time ` |No |String(20) | 当 `syssn` 或 `out_trade_number`存在时不需要提供, 默认本月开始日期. 跨月份查询必须提供 `start_time` 和 `end_time`. <br/> 格式：yyyy-MM-dd HH:mm:ss. |
 |结束时间	| ` end_time ` |No | String(20) | 当 `syssn` 或 `out_trade_number`存在时不需要提供, 默认本月结束日期.跨月份查询必须提供 `start_time` 和 `end_time`. <br/> 格式：yyyy-MM-dd HH:mm:ss.  |
-|时区 | ` txzone ` |No | String(5) | 用于记录本地下单时间，默认为北京时间+0800   |
 |页数| ` page `   |No |  Int(8) | 默认为1   |
 |每页显示数量| ` page_size ` |No |  Int(8) | 默认显示10笔订单,最大值100，如果超过100，则只显示100条 |
 

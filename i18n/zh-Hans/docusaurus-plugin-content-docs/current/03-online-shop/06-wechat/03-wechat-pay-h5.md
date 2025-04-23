@@ -22,7 +22,7 @@ extend_info:{
   "scene_info":{ //场景类型
     "h5_info": { // h5支付固定传"h5_info"
       "type": "Wap", //场景类型
-      "wap_url": "https://qfpay.com/h5/pay", //WAP网站URL地址
+      "wap_url": "https://qfpay.global/h5/pay", //WAP网站URL地址
       "wap_name": "qfpay" //WAP 网站名
     }              
   },

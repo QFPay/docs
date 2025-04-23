@@ -259,7 +259,7 @@ ob_end_flush();
   "out_trade_no": "4K35N374II7UJJ8RGIAE45O2CVHGHFF0", 
   "syssn": "20200413000300020087033882", 
   "respcd": "0000", 
-  "pay_url": "https://globalmapi.alipay.com/gateway.do?total_fee=3.0&secondary_merchant_name=###merchant_name###&out_trade_no=20200413000300020087033882&secondary_merchant_industry=7011&service=create_forex_trade&_input_charset=UTF-8&sign=02beb99974ce6167666280b9727c4444&currency=THB&notify_url=https%3A%2F%2Fo2.qfpay.com%2Fonline-test%2Ftrade%2Falipay%2Fv1%2Fonline_notify&order_valid_time=1800&secondary_merchant_id=2565075&sign_type=MD5&partner=2088631377368888&product_code=NEW_OVERSEAS_SELLER&order_gmt_create=2020-04-13+10%3A30%3A34&return_url=&subject=###merchant_name###", 
+  "pay_url": "https://globalmapi.alipay.com/gateway.do?total_fee=3.0&secondary_merchant_name=###merchant_name###&out_trade_no=20200413000300020087033882&secondary_merchant_industry=7011&service=create_forex_trade&_input_charset=UTF-8&sign=02beb99974ce6167666280b9727c4444&currency=THB&notify_url=https%3A%2F%2Fo2-hk.qfapi.com%2Fonline-test%2Ftrade%2Falipay%2Fv1%2Fonline_notify&order_valid_time=1800&secondary_merchant_id=2565075&sign_type=MD5&partner=2088631377368888&product_code=NEW_OVERSEAS_SELLER&order_gmt_create=2020-04-13+10%3A30%3A34&return_url=&subject=###merchant_name###", 
   "chnlsn": ""
 }
 ```
@@ -292,7 +292,6 @@ ob_end_flush();
 交易过期时间 | `expired_time` | 否 <br/>(仅限正扫支付) | String(3)  | 以分钟为计时的二维码过期时间,默认的过期时间是30分钟. 该参数可以被手动设置为最小5分钟,最大120分钟 <br/> 该参数可用于: <br/>800201 - WeChat scan code
 商品名称标识 | `goods_name` | 否  | String(64) | 商品名称 / 标识: 不能超过 20 个字母数字或包含特殊字符。 APP支付不能为空。 如果参数是汉字，则需要使用**UTF-8**编码。
 子商户号 | `mchid` | 否  | String(16) | 标识子商户身份，由QFPay 分配（渠道系统后台查看对应商户(非业务员)子商户号，被视为对应商户的交易）
-时区 | `txzone` | 否  | String(5) | 用于记录本地下单时间，默认为北京时间+0800
 设备唯一id | `udid` | 否  | String(40) |  唯一的设备ID,显示在商户管理后台上. 
 跳转地址 | `return_url` | 否  | String(512) | 支付成功后的用户跳转地址. 支付宝WAP限制了`return_url`最大为200个字符.
 

@@ -233,7 +233,7 @@
 					]
 				},
 				"url": {
-					"raw": "https://openapi-test.qfpay.com/trade/v1/query",
+					"raw": "https://test-openapi-hk.qfapi.com/trade/v1/query",
 					"protocol": "https",
 					"host": [
 						"openapi-test",
