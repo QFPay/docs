@@ -114,7 +114,7 @@ def get_out_code():
 HTTP Request:
 
 {
-  https://openapi.qfpay.com/tool/v1/get_weixin_openid?code=011QipnO1yMIla1VJdoO1FUrnO1Qipnv
+  https://test-openapi-hk.qfapi.com/tool/v1/get_weixin_openid?code=011QipnO1yMIla1VJdoO1FUrnO1Qipnv
 }
 
 ```
