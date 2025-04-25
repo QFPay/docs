@@ -28,7 +28,7 @@ import Link from '@docusaurus/Link';
 qfPayOpenAPI: function () {
     let app_code = 'A2BE4E015A8A4B0A8E9D88**********';
     let client_key = '498717301B0846D1992B6F**********';
-    let environment = 'https://openapi-sg.qfapi.com/trade/v1/payment';
+    let environment = 'https://test-openapi-hk.qfapi.com/trade/v1/payment';
     let openid = this.data.openid;
     let amount = this.data.amount * 100;
     let random_number = String(Math.round(Math.random() * 1000000000));
@@ -145,6 +145,6 @@ weChatPayment: function(res) {
 
 1) 注册 QFPay，我们会将您的微信 appid 绑定到您的 API 凭证。 <br/>
 2) 访问微信 MP 门户 [https://mp.weixin.qq.com](https://mp.weixin.qq.com) 并将我们的环境列入传入服务器流量的白名单：<br/>
-开发 -> 开发设置 -> 服务器域名 -> request合法域名: e.g. https://openapi-sg.qfapi.com <br/>
+开发 -> 开发设置 -> 服务器域名 -> request合法域名: e.g. https://test-openapi-hk.qfapi.com <br/>
 3) 将 zip 文件中的文件复制并粘贴到本地硬盘并设置云函数环境。 <br/>
 4) 使用云函数“getUserOpenID”获取用户openid，并根据代码运行API调用。 <br/>

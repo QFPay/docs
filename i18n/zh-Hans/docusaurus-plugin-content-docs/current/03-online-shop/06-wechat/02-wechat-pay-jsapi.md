@@ -222,7 +222,7 @@ def api_get_code():
         param["txamt"]="1"
         param["currency"]="THB"
         param["redirect_url"]="www.example.com"
-        return redirect("https://o2-th.qfapi.com/q/direct?"+urllib.parse.urlencode(param), code=302)             # direct user"""
+        return redirect("https://o2-hk.qfapi.com/q/direct?"+urllib.parse.urlencode(param), code=302)             # direct user"""
     else:
         print("unable to obtain code")
         return     

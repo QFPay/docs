@@ -33,7 +33,7 @@ For code instructions select Node.js with the tabs above.
 qfPayOpenAPI: function () {
     let app_code = 'A2BE4E015A8A4B0A8E9D88**********';
     let client_key = '498717301B0846D1992B6F**********';
-    let environment = 'https://openapi-sg.qfapi.com/trade/v1/payment';
+    let environment = 'https://test-openapi-hk.qfapi.com/trade/v1/payment';
     let openid = this.data.openid;
     let amount = this.data.amount * 100;
     let random_number = String(Math.round(Math.random() * 1000000000));
@@ -149,6 +149,6 @@ To get started quickly, download the [QFPay WeChat Mini Program Boilerplate](@si
 
 1) Sign up with QFPay and we bind your WeChat appid to your API credentials.
 2) Visit the WeChat MP portal at [https://mp.weixin.qq.com](https://mp.weixin.qq.com) and whitelist our environment for incoming server traffic:
-开发 -> 开发设置 -> 服务器域名 -> request合法域名: e.g. `https://openapi-sg.qfapi.com`
+开发 -> 开发设置 -> 服务器域名 -> request合法域名: e.g. `https://test-openapi-hk.qfapi.com`
 3) Copy and paste the files from the zip file to your local harddrive and setup a cloudfunction environment.
 4) Obtain the user openid with the cloudfunction "getUserOpenID" and run the API calls accroding to the code.
