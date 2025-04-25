@@ -29,7 +29,7 @@ PayType | Description
 
 Request Body:
 
-txamt=1&txcurrcd=HKD&pay_type=801510&out_trade_no=052711570017898&txdtm=2021-05-27+11%3A57%3A00&goods_name=goods_name&goods_info=goods_info&mchid=nDB64h9qJ1An&trade_name=trade_name&goods_detail=goods_detail&return_url=http%3A%2F%2Fwww.qfpay.com%2F&pay_tag=ALIPAYHK&seller_id=testoverseas9191%40alipay.com
+txamt=1&txcurrcd=HKD&pay_type=801510&out_trade_no=052711570017898&txdtm=2021-05-27+11%3A57%3A00&goods_name=goods_name&goods_info=goods_info&mchid=nDB64h9qJ1An&trade_name=trade_name&goods_detail=goods_detail&return_url=https%3A%2F%2Fwww.qfpay.global%2F&pay_tag=ALIPAYHK&seller_id=testoverseas9191%40alipay.com
 
 ```
 
