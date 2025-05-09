@@ -307,8 +307,8 @@ ob_end_flush();
 | ` out_trade_no ` |No |String(128) | API order number, external transaction number / Merchant platform transaction number, multiple entries are seperated by commas   |
 | ` pay_type ` |No |String(6) | Payment type, multiple entries are seperated by commas   |
 | ` respcd ` |No |String(4) | Transaction return code, returns all orders with return code status by default   |
-| ` start_time ` |No |String(20) | Starting time, it is ignored when `syssn` or `out_trade_number` is provided. The default date time is the start of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
-| ` end_time ` |No | String(20) | End Time, it is ignored when `syssn` or `out_trade_number` is provided. The default date time is the end of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
+| ` start_time ` |No |String(20) | Starting time, it is ignored when `syssn` is provided. The default date time is the start of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
+| ` end_time ` |No | String(20) | End Time, it is ignored when `syssn` is provided. The default date time is the end of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
 |` page `   |No |  Int(8) | Number of pages, default value is 1   |
 |` page_size ` |No |  Int(8) | Number of items displayed per page, by default 10 transactions will be displayed. The maximum `page_size` value is 100  |
 
