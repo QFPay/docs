@@ -324,12 +324,16 @@ const inquiryResponse = payment.inquiry({}, 'SDF8980SFFSDF890SDF')
 
 ## Element object and APIs
 
+:::warning
+  When using Element, the outer container must not be nested inside a `<form/>` tag, otherwise the Element component will not render properly.
+:::
+
 ```js
 const qfpay = QFpay.config()
 const elements = qfpay.element()
 ```
 
-### 1. elements.create(params1, params2, params3) --- support Visa/Mastercard card payment only
+### 1. elements.create(params1, params2, params3, params4) --- support Visa/Mastercard card payment only
 
 ```js
 /**
@@ -337,6 +341,7 @@ const elements = qfpay.element()
  *      params1, mandatory, string, card form id
  *      params2, optional, boolean, default value is:true, card form will show email address input if true value
  *      params3, optional, string, default value:payment, generate card form
+ *      params4, optional, string, language setting of card form, default follow browser setting, support zh-hk, zh-cn, en
  * return: N/A
  * purpose: generate card form
  */
@@ -355,6 +360,8 @@ elements.create("#container")
  *           false: wallet list switch way is vertical list
  *      element: optional, string, default value:payment, 
  *           payment: normal payment mode
+ *      lang: optional, string, default value is browser setting
+ *           support zh-hk, zh-cn, en
  * return: N/A
  * purpose: generate element wallet
  * NOTICE：tab parameter only effecitve in payment mode

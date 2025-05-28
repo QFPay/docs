@@ -330,18 +330,23 @@ const inquiryResponse = payment.inquiry({}, 'SDF8980SFFSDF890SDF')
 
 ## elements对象及相关 API
 
+:::warning
+  在使用 element 的容器外层不能有 `<form/>` 标签嵌套，否则会无法正常渲染 element 组件
+:::
+
 ```js
 const qfpay = QFpay.config()
 const elements = qfpay.element()
 ```
 
-### 1. elements.create(params1, params2, params3) --- 仅支持 Visa Mastercard 卡交易
+### 1. elements.create(params1, params2, params3, params4) --- 仅支持 Visa Mastercard 卡交易
 
 ```js
 /**
  * 参数：params1, 必填, string, 存放card form 的容器
  *      params2, 非必填, boolean, 默认值为 true, 若为 true 则 card form 中包含 email输入框, 为false, 则 card form 中, 不包含email 输入框
  *      params3, 非必填, string, 默认值为 payment, 生成 card form 表单
+ *      params4, 非必填, string, 默认为浏览器设定语言，可选 'zh-hk', 'zh-cn', 'en'
  * 返回值: 无
  * 作用: 生成 card form 表单
  */
@@ -357,6 +362,7 @@ elements.create("#container")
  *      email: 非必填, boolean, 默认值为 true, 若为 true 则 card form 中包含 email输入框, 为false, 则 card form 中, 不包含email 输入框
  *      tab: 非必填, boolean, 默认值为 false, 若为 true 则 element wallet list 切换方式为 Tab切换; 若为 false 则 element wallet list 切换方式为 纵向列表切换
  *      element: 非必填, string, 默认值为 payment, 表示当前为 普通支付模式;
+ *      lang, 非必填, string, 默认为浏览器设定语言，可选 'zh-hk', 'zh-cn', 'en'
  * 
  * 返回值: 无
  * 作用: 生成 element wallet
