@@ -256,7 +256,7 @@ field description: transaction reference number, the same as out_trade_no
 
 ```plaintext
 1、respcd: response code
-    （1）、"4003"，POS-KEY is invalid
+    （1）、"4003"，Request Denied
     （2）、"5001"，Decryption failed
     （3）、"4004"，Request method is incorrect, may use POST request
     （4）、"4005"，Other errors
