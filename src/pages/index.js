@@ -12,6 +12,7 @@ export default function Home() {
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
       <main class="qf-main">
+        <meta http-equiv="refresh" content="0; url=https://sdk.qfapi.com/" />
         <div className="container">
           <Heading as="h3" style={{marginTop: "52px"}}><Translate id="homepage.introduction.title">Introduction</Translate></Heading>
           <p><Translate id="homepage.introduction.content">QFPay API is a comprehensive payment solution that offers various payment methods to meet the needs of different businesses. This API documents the process of integrating with QFPay and the requirements for developing a successful integration.</Translate></p>
