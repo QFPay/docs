@@ -109,7 +109,7 @@ const config = {
         style: 'dark',
         links: [
         ],
-        copyright: `QFPay Haojin Fintech Limited / iFlare Hong Kong Limited / Q Square Company Limited © ${new Date().getFullYear()}  |  Unit A, 27/F, West Gate Tower, 7 Wing Hong Street, Lai Chi Kok, Kowloon, Hong Kong |  All Rights Reserved`,
+        copyright: `QFPay Haojin Fintech Limited / QFPay Haojin Services Limited / iFlare Hong Kong Limited © ${new Date().getFullYear()}  |  Unit A, 27/F, West Gate Tower, 7 Wing Hong Street, Lai Chi Kok, Kowloon, Hong Kong |  All Rights Reserved`,
       },
       prism: {
         theme: prismThemes.github,

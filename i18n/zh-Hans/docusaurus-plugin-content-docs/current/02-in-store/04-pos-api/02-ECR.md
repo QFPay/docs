@@ -21,7 +21,7 @@ PAX A920, 仅支持二维码支付。
 
 ## 1. POS-KEY
 
-在haojin app 设置中，有个设置调用秘钥选项。点击进入可以重新生成秘钥。默认秘钥是： `f46b1f08bec1f39104792cc79ec9aacd`
+在haojin app 设置中，有个设置调用秘钥选项。点击进入可以重新生成秘钥。
 
 <br/>
 
@@ -186,7 +186,7 @@ format_content={amt=100,channel='card_payment',func_type=1001,out_trade_no='4567
 digest=md5(format_content + pos_key)
 digest=(
   md5(
-    {amt=100,channel='card_payment',func_type=1001,out_trade_no='456799999999'}f46b1f08bec1f39104792cc79ec9aacd
+    {amt=100,channel='card_payment',func_type=1001,out_trade_no='456799999999'}f46b1f****aacd
   ) 
 )
 
