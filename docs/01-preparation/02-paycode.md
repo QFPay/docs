@@ -198,7 +198,7 @@ txdtm = current_time
 goods_name = 'test1'   
 auth_code = '280438849930815813'
 mchid = 'ZaMVg*****'
-notify_url = 'https://xxx.com/notify/success'
+notify_url = 'https://example.com/notify/success'
 key = client_key
 
 

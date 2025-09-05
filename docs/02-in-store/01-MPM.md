@@ -92,7 +92,7 @@ txdtm = current_time
 goods_name = 'Food'   
 mchid = 'lkbqahlRYj' #Hashids("qfpay").encode(2546286, 2532824) #(Agent ID, Merchant ID)
 key = client_key
-notify_url = 'https://xxx.com/notify/success'
+notify_url = 'https://example.com/notify/success'
 
 #data = {'txamt': txamt, 'txcurrcd': txcurrcd, 'auth_code': auth_code, 'pay_type': pay_type, 'out_trade_no': out_trade_no, 'txdtm': txdtm, 'goods_name': goods_name, 'udid': udid, 'mchid': mchid}
 data = {'txamt': txamt, 'txcurrcd': txcurrcd, 'pay_type': pay_type, 'out_trade_no': out_trade_no, 'txdtm': txdtm}

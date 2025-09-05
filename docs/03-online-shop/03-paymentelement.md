@@ -42,7 +42,7 @@ elements.createEnhance({
 
 // trigger card form submission and receive payment response
 const response = qfpay.confirmPayment({
-  return_url: 'https://xxx.xxx.com'
+  return_url: 'https://example.com'
 })
 ```
 
@@ -94,7 +94,7 @@ elements.createWallet({
 
 //trigger submission and retrieve payment response
 const response = qfpay.confirmWalletPayment({
-return_url:  'https://xxx.xxx.com'
+return_url:  'https://example.com'
 })
 ```
 
@@ -189,7 +189,7 @@ const payment = qfpay.payment()
 
 ```js
 /**
- * parameters：optional, Object type, {return_url: 'https://xxx.xxx.xxx'}, the page will be redirect to specific page mentioned in return_url parameter after payment completed. Otherwise, will stay in the same page
+ * parameters：optional, Object type, {return_url: 'https://example.com'}, the page will be redirect to specific page mentioned in return_url parameter after payment completed. Otherwise, will stay in the same page
  * return：
  *   1. card payment
  *      return value：code, description, out_trade_no, syssn
@@ -211,7 +211,7 @@ const paymentResponse = qfpay.confirmPayment({
 
 ```js
 /**
- * parameters：optional, Object type, {return_url: 'https://xxx.xxx.xxx'}, the page will be redirect to specific page mentioned in return_url parameter after payment completed. Otherwise, will stay in the same page
+ * parameters：optional, Object type, {return_url: 'https://example.com'}, the page will be redirect to specific page mentioned in return_url parameter after payment completed. Otherwise, will stay in the same page
  * return：
  *   1. card payment
  *      return value：code, description, out_trade_no, syssn

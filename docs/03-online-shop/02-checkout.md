@@ -49,9 +49,9 @@ The following body parameters are necessary to create a new checkout request;
 |`txcurrcd` |String(3)| Yes |Currency code e.g. HKD|
 |`out_trade_no` | String(128)| Yes| Unique external transaction number e.g. 202005270001|
 |`txdtm` |String(32) |Yes| Order time e.g. 2020-06-24 20:04:37, Format: YYYY-MM-DD hh:mm:ss|
-|`return_url`| String(256)| Yes |Redirect URL after payment has been successful e.g. `https://xxx.com/return/success`|
-|`failed_url`|String(256)| Yes |Redirect URL after payment has failed e.g. `https://xxx.com/return/failed`|
-|`notify_url`|String(256)| Yes |Asynchronous notification URL e.g. `https://xxx.com/notify/success`|
+|`return_url`| String(256)| Yes |Redirect URL after payment has been successful e.g. `https://example.com/return/success`|
+|`failed_url`|String(256)| Yes |Redirect URL after payment has failed e.g. `https://example.com/return/failed`|
+|`notify_url`|String(256)| Yes |Asynchronous notification URL e.g. `https://example.com/notify/success`|
 |`mchntid`|String(16)| No|QFPay Merchant Identifier for Agents e.g. PAKjVHJmQe|
 |`goods_name`|String(64)| No |No special characters, no more than 20 letters or Chinese characters (app payment parameters must be passed). If you want to display the merchant name on the clearing file, this parameter must be empty.|
 |`udid`|String(40 |No |Unique device ID e.g. 0001|
@@ -59,7 +59,7 @@ The following body parameters are necessary to create a new checkout request;
 |`checkout_expired_time`|String(3) |No |client side expiration time , unit in millisecond e.g. 1715686118000, the checkout page will be redirect to fail url when time is up|
 |`limit_pay`|String(3) |No |Prohibit credit card use, the parameter value is specified as no_credit, which prohibits the use of credit card payments, only WeChat Pay supports this feature.|
 |`lang`|String(5)|No|UI Language, possible values: <br/> zh-hk (Hong Kong Traditional Chinese) <br/> zh-cn (Simplified Chinese) <br/> en (English) <br/> The checkout page will use default language of browser if do not pass this parameter in checkout request. If pass this parameter in checkout request, do not include this parameter in generating signature.|
-|`cancel_url`|String(256)| No | Redirect URL after clicking "Back to XXX Store" button in checkout page e.g. `https://xxx.com/return/checkout`|
+|`cancel_url`|String(256)| No | Redirect URL after clicking "Back to XXX Store" button in checkout page e.g. `https://example.com/return/checkout`|
 
 ## Create a New Checkout Order
 

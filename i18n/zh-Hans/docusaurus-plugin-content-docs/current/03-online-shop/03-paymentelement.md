@@ -38,7 +38,7 @@
 
   // 触发表单提交，并接受响应参数
   const response = qfpay.confirmPayment({
-    return_url: 'https://xxx.xxx.com'
+    return_url: 'https://example.com'
   })
 ```
 
@@ -104,7 +104,7 @@
   
   // 触发表单提交，并接受响应参数
   const response = qfpay.confirmWalletPayment({
-    return_url: 'https://xxx.xxx.com'  // 回跳合作方的url
+    return_url: 'https://example.com'  // 回跳合作方的url
   })
   if (response.code === '0000') { // 支付结果 '0000' 为支付成功
     alert('支付成功' + JSON.stringify(res))
@@ -202,7 +202,7 @@ const payment = qfpay.payment()
 
 ```js
 /**
- * 参数：选填，Object，{return_url: 'https://xxx.xxx.xxx'}, 如果传递了 return_url 参数，支付完成后，会跳转到指定的 return_url，如果未传递 return_url 参数，支付完成后，则停留在当前页面
+ * 参数：选填，Object，{return_url: 'https://example.com'}, 如果传递了 return_url 参数，支付完成后，会跳转到指定的 return_url，如果未传递 return_url 参数，支付完成后，则停留在当前页面
  * 返回值：
  *   1. 卡交易相关
  *      返回值为：相关code、描述、out_trade_no、syssn, 如果 code 为 '0000', 则表示为成功，若非 '0000', 则具体参见返回值中的 description字段
@@ -221,7 +221,7 @@ const paymentResponse = qfpay.confirmPayment({
 
 ```js
 /**
- * 参数：选填，Object，{return_url: 'https://xxx.xxx.xxx'}, 如果传递了 return_url 参数，支付完成后，会跳转到指定的 return_url，如果未传递 return_url 参数，支付完成后，则停留在当前页面
+ * 参数：选填，Object，{return_url: 'https://example.com'}, 如果传递了 return_url 参数，支付完成后，会跳转到指定的 return_url，如果未传递 return_url 参数，支付完成后，则停留在当前页面
  * 返回值：
  *   1. 卡交易相关
  *      返回值为：相关code、描述、out_trade_no、syssn, 如果 code 为 '0000', 则表示为成功，若非 '0000', 则具体参见返回值中的 description字段
