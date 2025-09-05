@@ -47,9 +47,9 @@ import Link from '@docusaurus/Link';
 |txcurrcd |String(3)|是|货币代码|HKD|
 |out_trade_no|String(128)|是|唯一的外部交易号|202005270001|
 |txdtm|String(32)|是|下单时间|2020-06-24 20:04:37, Format: YYYY-MM-DD hh:mm:ss|
-|return_url|String(256)|是|支付成功后的重定向URL|https://example.com/return/success|
-|failed_url|String(256)|是|支付失敗后的重定向URL|https://example.com/return/failed|
-|notify_url|String(256)|是|异步通知URL|https://example.com/notify/success|
+|return_url|String(256)|是|支付成功后的重定向URL|`https://example.com/return/success`|
+|failed_url|String(256)|是|支付失敗后的重定向URL|`https://example.com/return/failed`|
+|notify_url|String(256)|是|异步通知URL|`https://example.com/notify/success`|
 |mchntid|String(16)|否 |QFPay 代理商商户标识符|PAKjVHJmQe|
 |goods_name|String(64)|是|不能有特殊字符，不超过20个字母或汉字（需传入app支付参数）。 如果要在清算文件中显示商户名称，则该参数必须为空。| |
 |udid|String(40)|是|唯一設備ID|0001|
