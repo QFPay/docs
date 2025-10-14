@@ -50,8 +50,8 @@ The data is encoded by Base64 after encryption.
 | `func_type` | Yes | String | Instruction code |
 | `channel` | Yes | String | Wallet name, refer to Channel list |
 | `out_trade_no` | No | String | Merchant reference. <br/> if not passed, the out_trade_no won't be passed |
-| `camera_id`|No|Integer|can select using front camera or back camera in QR code payment CPM mode <br/> 0: back camera (default), <br/> 1: front camera |
-| `wait_card_timeout` | No | Integer | can set waiting time, default 120 seconds, trigger timeout exception. |
+| `camera_id`|No|Integer|Can select using front camera or back camera in QR code payment CPM mode <br/> 0: back camera (default), <br/> 1: front camera |
+| `wait_card_timeout` | No | Integer | Can configure waiting time, default 120 seconds, trigger timeout exception. |
 
 ### 3.1 Payment
 
@@ -65,6 +65,7 @@ Time to wait for payment in payment page can be set by parameter `wait_card_time
 payment_timeout : 
         （1）、When set payment_timeout in card payment ，this time is the max time waiting for using card
         （2）、For other payment payment_timeout，this field is the max time for that transaction
+        （3）、For PayMe, the payment_timeout value cannot be greater than 120 seconds
     type int，value greater than 0
 
 scan_type:specific scan method
@@ -269,7 +270,7 @@ field description: transaction reference number, the same as out_trade_no
 3、resperr：Error message
 4、data:response data from trade or refund request
     (1) data fields in trade response：
-            respcd;response code
+            respcd;transaction status code, details please refer to [Transaction Status Code]https://sdk.qfapi.com/docs/preparation/paycode#transaction-status-codes
             resmsg;response message
             reserr;response error message
             mchntnm;merchant name
@@ -286,7 +287,7 @@ field description: transaction reference number, the same as out_trade_no
             out_trade_no；merchant order Id
             cardscheme;card scheme, e.g. VISA, MASTERCARD, UNIONPAY, AMEX
     (2) data field in refund response：
-            respcd;response code
+            respcd;transaction status code, details please refer to [Transaction Status Code]https://sdk.qfapi.com/docs/preparation/paycode#transaction-status-codes
             resmsg;response message
             reserr;response error message
             sysdtm;QF system time
@@ -316,7 +317,7 @@ field description: transaction reference number, the same as out_trade_no
             desc;description
             txamt;transaction amount
             busicd;paytype code
-            respcd;response code
+            respcd;transaction status code, details please refer to [Transaction Status Code]https://sdk.qfapi.com/docs/preparation/paycode#transaction-status-codes
             origbusicd;original transaction paytype code
             chnlsn;wallet order Id
             cardscheme;card scheme, e.g. VISA, MASTERCARD, UNIONPAY, AMEX
@@ -382,7 +383,7 @@ USB is more stable than Wifi, secure, and easy to deploy.
 | data segment |   | data segment, utf-8 encoding| non static |
 | End indicator | 0x2f6e | indicate end of the payload | 2 Bytes|
 
-### 9.4 detail explanation
+### 9.4 Detail explanation
 
 #### Start indicator and end indicator
 
