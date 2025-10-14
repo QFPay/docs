@@ -53,7 +53,8 @@ PAX A920, 仅支持二维码支付。
 | channel | 是 | String | 钱包名称，参见通道列表 |
 | out_trade_no | 否 | String | 商户参考。 <br/> 如果不通过，则out_trade_no不会通过 |
 | camera_id|否|Integer| 在反扫支付中可以选择使用前置摄像头或者后置摄像头<br/> 0: 后置摄像头 (默认), <br/> 1: 前置摄像头 |
-| wait_card_timeout | 否 | Integer | 可以设置等待超时时间，单位为秒，默认120s |
+| payment_timeout|否|Integer| 交易超時時間, 設置值必须大于0 |
+| wait_card_timeout | 否 | Integer | 可以设置等待超时时间，单位为秒，默认120s (不建议使用)|
 
 ### 3.1 交易
 
@@ -72,7 +73,6 @@ PAX A920, 仅支持二维码支付。
           （1）、刷卡交易的时候设置payment_timeout ，该超时时间设置的是 等待刷卡 的超时时间
           （2）、其他交易设置payment_timeout，该字段的设置的是交易超时的时间
            (3)、PayMe钱包，最大设置时间为120秒
-        类型int，值大于0
 
     scan_type:指定具体的正反扫方式
             QRCODE_PAY:二维码支付

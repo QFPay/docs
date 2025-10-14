@@ -51,7 +51,8 @@ The data is encoded by Base64 after encryption.
 | `channel` | Yes | String | Wallet name, refer to Channel list |
 | `out_trade_no` | No | String | Merchant reference. <br/> if not passed, the out_trade_no won't be passed |
 | `camera_id`|No|Integer|Can select using front camera or back camera in QR code payment CPM mode <br/> 0: back camera (default), <br/> 1: front camera |
-| `wait_card_timeout` | No | Integer | Can configure waiting time, default 120 seconds, trigger timeout exception. |
+| `payment_timeout` | No | Integer | payment timeout value, value must be greater than 0 |
+| `wait_card_timeout` | No | Integer | Can configure waiting time, default 120 seconds, trigger timeout exception. ( not recommended to use) |
 
 ### 3.1 Payment
 
@@ -66,7 +67,6 @@ payment_timeout :
         （1）、When set payment_timeout in card payment ，this time is the max time waiting for using card
         （2）、For other payment payment_timeout，this field is the max time for that transaction
         （3）、For PayMe, the payment_timeout value cannot be greater than 120 seconds
-    type int，value greater than 0
 
 scan_type:specific scan method
         QRCODE_PAY
