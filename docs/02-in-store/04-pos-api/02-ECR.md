@@ -270,7 +270,7 @@ field description: transaction reference number, the same as out_trade_no
 3、resperr：Error message
 4、data:response data from trade or refund request
     (1) data fields in trade response：
-            respcd;transaction status code, details please refer to [Transaction Status Code]https://sdk.qfapi.com/docs/preparation/paycode#transaction-status-codes
+            respcd;transaction status code, details please refer to https://sdk.qfapi.com/docs/preparation/paycode#transaction-status-codes
             resmsg;response message
             reserr;response error message
             mchntnm;merchant name
@@ -287,7 +287,7 @@ field description: transaction reference number, the same as out_trade_no
             out_trade_no；merchant order Id
             cardscheme;card scheme, e.g. VISA, MASTERCARD, UNIONPAY, AMEX
     (2) data field in refund response：
-            respcd;transaction status code, details please refer to [Transaction Status Code]https://sdk.qfapi.com/docs/preparation/paycode#transaction-status-codes
+            respcd;transaction status code, details please refer to https://sdk.qfapi.com/docs/preparation/paycode#transaction-status-codes
             resmsg;response message
             reserr;response error message
             sysdtm;QF system time
@@ -317,7 +317,7 @@ field description: transaction reference number, the same as out_trade_no
             desc;description
             txamt;transaction amount
             busicd;paytype code
-            respcd;transaction status code, details please refer to [Transaction Status Code]https://sdk.qfapi.com/docs/preparation/paycode#transaction-status-codes
+            respcd;transaction status code, details please refer to https://sdk.qfapi.com/docs/preparation/paycode#transaction-status-codes
             origbusicd;original transaction paytype code
             chnlsn;wallet order Id
             cardscheme;card scheme, e.g. VISA, MASTERCARD, UNIONPAY, AMEX

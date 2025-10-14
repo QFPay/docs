@@ -278,7 +278,7 @@ CPM 反扫支付
 3. resperr：响应的错误信息
 4. data:交易或者退款返回的数据，
     （1）交易返回数据字段：
-            respcd;交易状态码, 详情请参考 [交易状态码]https://sdk.qfapi.com/docs/preparation/paycode/#transaction-status-codes
+            respcd;交易状态码, 详情请参考 https://sdk.qfapi.com/docs/preparation/paycode/#transaction-status-codes
             resmsg;请求信息
             reserr;错误信息
             mchntnm;商户名称
@@ -295,7 +295,7 @@ CPM 反扫支付
             out_trade_no；外部订单号
             cardscheme；卡组织，例如：VISA
     （2）退款返回数据字段：
-            respcd;交易状态码, 详情请参考 [交易状态码]https://sdk.qfapi.com/docs/preparation/paycode/#transaction-status-codes
+            respcd;交易状态码, 详情请参考 https://sdk.qfapi.com/docs/preparation/paycode/#transaction-status-codes
             resmsg;请求信息
             reserr;错误信息
             sysdtm;系统时间
@@ -327,7 +327,7 @@ CPM 反扫支付
             desc;描述信息
             txamt;交易金额
             busicd;业务代码
-            respcd;交易状态码, 详情请参考 [交易状态码]https://sdk.qfapi.com/docs/preparation/paycode/#transaction-status-codes
+            respcd;交易状态码, 详情请参考 https://sdk.qfapi.com/docs/preparation/paycode/#transaction-status-codes
             origbusicd;原业务代码
             chnlsn;通道序列號
             cardscheme；卡组织，例如：VISA, MASTERCARD, UNIONPAY, AMEX
