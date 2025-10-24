@@ -185,13 +185,13 @@ Product 是商户要提供给客户的商品和服务的模型.它定义了交�
 |参数名称|参数类型|是否必填|描述|
 |---|---|---|---|
 |name|String|是|展示给客户的产品名称|
-|type|String|否|默认值=onetime, 可用值: onetime, recurring
+|type|String|是| 可用值: recurring |
 |description|String|否|产品描述|
 |txamt|Int|是|交易金额, e.g. $1=100。建议数值大于200，避免因支付金额过低而被交易风控。|
 |txcurrcd|String|是|交易货币, e.g. HKD|
-|interval|String|否|可用值: monthly, yearly, 周期扣款产品必传（在 sandbox 环境中可以使用 minutes 和 hours 用于测试）|
-|interval_count|Int|否|两次扣款的间隔, 最高允许1年, 周期扣款产品必传|
-|usage_type|String|否|默认值=licensed, 可用值: licensed|
+|interval|String|是|可用值: monthly, yearly, 周期扣款产品必传（在 sandbox 环境中可以使用 minutes 和 hours 用于测试）|
+|interval_count|Int|是|两次扣款的间隔, 最高允许1年, 周期扣款产品必传|
+|usage_type|String|是|可用值: licensed|
 
 #### 在**data**部分的响应参数列表
 
