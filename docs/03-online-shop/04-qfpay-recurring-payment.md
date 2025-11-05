@@ -442,7 +442,7 @@ Array of subscription order object containing the following attributes:
 | `trigger_by`                  | String | who triggered this order payment, QF system is `auto`, Manual charge is `manual`                   |
 | `sequence_no`                 | Int    | the iteration of this order in the subscription plan, e.g. 2                                       |
 
-### Manaul charge a subscription transaction
+### Manual charge a subscription transaction
 
 Use API to charge a subscription immediately for a failed order.
 
