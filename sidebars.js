@@ -21,27 +21,29 @@ const sidebars = {
   qfpaySidebar: [
     {
       type: 'category',
-      label: 'Preparation',
+      label: 'Getting Started',
       link: {
         type: 'generated-index'
       },
       items: [
         'preparation/introduction', 
-        {
-          type: 'category',
-          label: 'API Reference',
-          link: { type: 'generated-index' },
-          items: [
-            'preparation/api-reference/paytypes',
-            'preparation/api-reference/currencies',
-            'preparation/api-reference/environments',
-            'preparation/api-reference/request-format',
-            'preparation/api-reference/response-format',
-            'preparation/api-reference/status-codes',
-          ]
-        },        
-        'preparation/api-usage-guidelines',
-      ],
+        'preparation/environments',
+      ]
+    },        
+    {
+      type: 'category',
+      label: 'API Reference',
+      link: { type: 'generated-index' },
+      items: [
+        'api-reference/request-format',
+        'api-reference/response-format',
+        'api-reference/signature-generation',            
+        'api-reference/paytypes',
+        'api-reference/currencies',
+        'api-reference/status-codes',
+        'api-reference/api-usage-guidelines',
+
+      ]
     },
     {
       type: 'category',
@@ -49,26 +51,29 @@ const sidebars = {
       link: {
         type: 'generated-index'
       },
-      items: ['in-store/MPM', 'in-store/CPM',
-      {
-        type: 'category',
-        label: 'POS API',
-        link: {
-          type: 'generated-index'
+      items: [
+        'in-store/MPM', 
+        'in-store/CPM',
+        {
+          type: 'category',
+          label: 'POS API',
+          link: {
+            type: 'generated-index'
+          },
+          items: [
+            {
+              type: 'doc',
+              label: 'ECR Integration',
+              id:'in-store/pos-api/ECR'
+            },
+            {
+              type: 'doc',
+              label: 'App call App',
+              id:'in-store/pos-api/app-call-app'
+            },
+          ]
         },
-        items: [
-          {
-            type: 'doc',
-            label: 'ECR Integration',
-            id:'in-store/pos-api/ECR'
-          },
-          {
-            type: 'doc',
-            label: 'App call App',
-            id:'in-store/pos-api/app-call-app'
-          },
-        ]
-      },],
+      ],
     },
     {
       type: 'category',
