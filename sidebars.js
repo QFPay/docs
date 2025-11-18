@@ -27,7 +27,19 @@ const sidebars = {
       },
       items: [
         'preparation/introduction', 
-        'preparation/paycode',
+        {
+          type: 'category',
+          label: 'API Reference',
+          link: { type: 'generated-index' },
+          items: [
+            'preparation/api-reference/paytypes',
+            'preparation/api-reference/currencies',
+            'preparation/api-reference/environments',
+            'preparation/api-reference/request-params',
+            'preparation/api-reference/response-params',
+            'preparation/api-reference/status-codes',
+          ]
+        },        
         'preparation/api-limitation',
       ],
     },
