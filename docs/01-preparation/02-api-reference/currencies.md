@@ -1,4 +1,3 @@
-
 ---
 id: currencies
 title: Currencies

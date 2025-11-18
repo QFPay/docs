@@ -1,3 +1,9 @@
+---
+id: api-usage-guidelines
+title: API Usage Guidelines
+sidebar_label: API Usage
+---
+
 ## Overview
 
 To ensure fair usage and maintain optimal performance of our platform, we have implemented an API rate limit policy. This policy outlines the limits on API requests and the appropriate handling of any rate limit violations.

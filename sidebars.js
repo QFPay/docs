@@ -40,7 +40,7 @@ const sidebars = {
             'preparation/api-reference/status-codes',
           ]
         },        
-        'preparation/api-limitation',
+        'preparation/api-usage-guidelines',
       ],
     },
     {
