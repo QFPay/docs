@@ -33,13 +33,14 @@ const config = {
     defaultLocale: 'en',
     locales: ['en', 'zh-Hans'],
     localeConfigs: {
-    en: {
-      label: 'English',
-    },
-    'zh-Hant': {
-      label: '中文',
-      direction: 'ltr',
-    },
+      en: {
+        label: 'English',
+      },
+      'zh-Hant': {
+        label: '中文',
+        direction: 'ltr',
+      }
+    }
   },
 
   themes: [

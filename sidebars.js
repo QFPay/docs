@@ -47,7 +47,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'In-Store',
+      label: 'In-Store Payments',
       link: {
         type: 'generated-index'
       },
@@ -63,7 +63,7 @@ const sidebars = {
           items: [
             {
               type: 'doc',
-              label: 'ECR Integration',
+              label: 'ECR',
               id:'in-store/pos-api/ECR'
             },
             {
@@ -77,7 +77,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Online Shop',
+      label: 'Online Payments',
       link: {
         type: 'generated-index'
       },
@@ -121,7 +121,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Common API',
+      label: 'Shared Endpoints',
       link: {
         type: 'generated-index'
       },
@@ -130,7 +130,7 @@ const sidebars = {
         'common-api/reversal-cancel',
         'common-api/refunds',
         'common-api/asynchronous-notification',
-        'common-api/transaction-note',
+        'common-api/transaction-note'
       ]
     },
     'customs declaration',
