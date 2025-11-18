@@ -1,5 +1,5 @@
 ---
-id: preparation/api-reference/response
+id: response-format
 title: Response Format
 sidebar_label: Response Format
 ---

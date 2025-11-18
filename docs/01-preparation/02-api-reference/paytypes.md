@@ -2,7 +2,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 ---
-id: preparation/api-reference/paytypes
+id: paytypes
 title: Payment Types
 sidebar_label: Payment Types
 ---

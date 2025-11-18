@@ -35,8 +35,8 @@ const sidebars = {
             'preparation/api-reference/paytypes',
             'preparation/api-reference/currencies',
             'preparation/api-reference/environments',
-            'preparation/api-reference/request-params',
-            'preparation/api-reference/response-params',
+            'preparation/api-reference/request-format',
+            'preparation/api-reference/response-format',
             'preparation/api-reference/status-codes',
           ]
         },        

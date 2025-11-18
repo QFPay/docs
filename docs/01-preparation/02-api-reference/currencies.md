@@ -1,6 +1,6 @@
 
 ---
-id: preparation/api-reference/currencies
+id: currencies
 title: Currencies
 sidebar_label: Currencies
 ---

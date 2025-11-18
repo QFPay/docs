@@ -1,5 +1,5 @@
 ---
-id: preparation/api-reference/environments
+id: environments
 title: Environments
 sidebar_label: Environments
 ---

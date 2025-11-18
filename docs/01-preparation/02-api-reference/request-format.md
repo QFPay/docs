@@ -1,7 +1,7 @@
 ---
-id: request-params
-title: Request Parameters
-sidebar_label: Request Parameters
+id: request-format
+title: Request Format
+sidebar_label: Request Format
 ---
 
 import Tabs from '@theme/Tabs';
