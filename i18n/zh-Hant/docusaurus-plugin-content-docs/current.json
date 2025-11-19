@@ -54,5 +54,5 @@
   "sidebar.qfpaySidebar.doc.FAQs": {
     "message": "常見問題",
     "description": "The label for the doc item FAQs in sidebar qfpaySidebar, linking to the doc in-store/pos-api/app-call-app"
-  },
+  }
 }
