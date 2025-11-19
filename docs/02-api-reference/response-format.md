@@ -57,4 +57,4 @@ The response may also include the `X-QF-SIGN` and `X-QF-SIGNTYPE` headers, which
 3. Appending the client key.
 4. Generating the MD5 hash and comparing it to the received signature.
 
-For the full logic to generate and verify the signature, refer to [Signature Generation](./signature.md).
+For the full logic to generate and verify the signature, refer to [Signature Generation](./signature-generation.md).

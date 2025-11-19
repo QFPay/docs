@@ -35,7 +35,7 @@ import Link from '@docusaurus/Link';
 ---
 
 ### 簽名要求
-如需產生有效簽名的說明，請參考 [簽名生成方式](./signature.md)。
+如需產生有效簽名的說明，請參考 [簽名生成方式](./signature-generation.md)。
 
 
 ### 請求說明

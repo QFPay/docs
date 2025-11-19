@@ -57,4 +57,4 @@ sidebar_label: 回應格式
 3.	尾端附加商戶的 client_key。
 4.	使用 MD5 進行雜湊處理並與回應中的簽名進行比對。
 
-完整的簽名產生與驗證邏輯，請參考 [簽名生成方式](./signature.md)。
+完整的簽名產生與驗證邏輯，請參考 [簽名生成方式](./signature-generation.md)。

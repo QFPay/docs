@@ -32,7 +32,7 @@ Listed below are the most common parameters for the payment endpoint. Please ref
 
 ### Signature Requirement
 
-For instructions on how to generate a valid signature, refer to [Signature Generation](./signature.md).
+For instructions on how to generate a valid signature, refer to [Signature Generation](./signature-generation.md).
 
 ### Request Description
 
