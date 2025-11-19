@@ -1,26 +1,27 @@
 # FAQs
 
-**Q1. In provided test account credentials which one is the partner or the merchant identifier?**
->A1. If you're an agent which provides payment services for merchants; X-QF-APPCODE and ClientKey are the partner while MCHID is the merchant identifier.
->If you're a merchant then X-QF-APPCODE and ClientKey are merchant identifier and MCHID is not provided.
+**Q1. In the provided test account credentials, which field identifies the partner and which identifies the merchant?**  
+>A1. If you are an agent providing payment services to merchants, `X-QF-APPCODE` and `ClientKey` identify the **partner**, while `MCHID` identifies the **merchant**.  
+>If you are a direct merchant, then `X-QF-APPCODE` and `ClientKey` identify the **merchant**, and `MCHID` is typically not provided.
 
-**Q2. Can I use given (Test/Production) account in another country?**
->A2. No. An (Test/Production) account is country specific.
+**Q2. Can I use the given test or production account in a different country?**  
+>A2. No. Both test and production accounts are **country-specific** and cannot be used outside their designated region.
 
-**Q3. How can I test a transaction?**
->A3. Since test environment is a replica of production you can use production wallets to test transactions. If you need any assistance please contact tech support.
+**Q3. How do I test a transaction?**  
+>A3. You can use a real wallet (e.g., Alipay or WeChat Pay) to test transactions in the test environment, which simulates the production setup. Contact our technical support if you need assistance.
 
-**Q4. I receive a <code>1143/1145</code> response code, what should I do next?**
->A4. It's advised to keep querying transaction status. If partner/merchant wants to process as binary status (success/fail), can mark the transaction as failed and upon a successful asynchronous notifications can apply for refund at backend.
+**Q4. I received response code `1143` or `1145`. What should I do?**  
+>A4. Continue polling the transaction status using the enquiry API.  
+>If your business process requires binary logic (success/failure), you may treat the transaction as **failed**, and later issue a refund if a successful asynchronous notification is received.
 
-**Q5. There is no specific title for the payment method I want to integrate, what should I do?**
->A5. You should use [Public Payment Parameters](/docs/preparation/paycode#api-endpoint-for-payments) and check the special cases in Notes section at the end of the [Payment Codes](/docs/preparation/paycode#payment-codes).
+**Q5. The payment method I want to integrate is not listed in the documentation. What should I do?**  
+>A5. Use the [Public Payment Parameters](/docs/api-reference/request-format) and refer to the **Notes** section at the end of the [Payment Types](/docs/api-reference/paycode#payment-codes) page for any special instructions.
 
-**Q6. Can I refund a transaction made n day(s) ago?**
->A6.	Only if the total transaction of the day is equal or greater than the refund amount you can refund.
+**Q6. Can I refund a transaction made a few days ago?**  
+>A6. Refunds are only allowed if the **same-day unsettled transaction amount** is **equal to or greater** than the refund amount.
 
-**Q7. Do you transfer funds to our bank account when we test transactions in the sandbox environment?**
->A7. There are no settlements possible in the sandbox environment. Please make sure that you refund test transactions immediately after testing.
+**Q7. Will funds be transferred to my bank account when testing in the sandbox environment?**  
+>A7. No. Transactions in the sandbox environment are **not settled**. Please remember to **immediately refund** test transactions after they are created.
 
-**Q8. Can I use my overseas Alipay wallet to pay?**
->A8. No, currently only real-name identified Alipay wallets which belong to Mainland Chinese citizens can be used to conduct cross-border transactions.  
+**Q8. Can I use my overseas Alipay wallet to make a payment?**  
+>A8. No. Only Alipay wallets that are **real-name verified Mainland China accounts** can be used for cross-border transactions.
