@@ -3,11 +3,23 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.qfpaySidebar.category.Preparation": {
-    "message": "接入准备",
-    "description": "The label for category Preparation in sidebar qfpaySidebar"
+  "sidebar.qfpaySidebar.category.Getting Started": {
+    "message": "整合指南",
+    "description": "The label for category Getting Started in sidebar qfpaySidebar"
   },
-  "sidebar.qfpaySidebar.category.In-Store": {
+  "sidebar.qfpaySidebar.category.API Reference": {
+    "message": "API 參考文件",
+    "description": "The label for category API Reference in sidebar qfpaySidebar"
+  },
+  "sidebar.qfpaySidebar.category.Payment Types": {
+    "message": "支付方式",
+    "description": "The label for category Payment Types in sidebar qfpaySidebar"
+  },
+  "sidebar.qfpaySidebar.category.Currencies": {
+    "message": "貨幣種類",
+    "description": "The label for category Currencies in sidebar qfpaySidebar"
+  },
+  "sidebar.qfpaySidebar.category.In-Store Payments": {
     "message": "线下支付",
     "description": "The label for category In-Store in sidebar qfpaySidebar"
   },
@@ -15,7 +27,7 @@
     "message": "POS API",
     "description": "The label for category POS API in sidebar qfpaySidebar"
   },
-  "sidebar.qfpaySidebar.category.Online Shop": {
+  "sidebar.qfpaySidebar.category.Online Payments": {
     "message": "线上支付",
     "description": "The label for category Online Shop in sidebar qfpaySidebar"
   },
@@ -27,8 +39,8 @@
     "message": "支付宝",
     "description": "The label for category Alipay in sidebar qfpaySidebar"
   },
-  "sidebar.qfpaySidebar.category.Common API": {
-    "message": "常用API",
+  "sidebar.qfpaySidebar.category.Shared Endpoints": {
+    "message": "共用端點",
     "description": "The label for category Common API in sidebar qfpaySidebar"
   },
   "sidebar.qfpaySidebar.doc.ECR Integration": {
@@ -38,5 +50,9 @@
   "sidebar.qfpaySidebar.doc.App call App": {
     "message": "App call App",
     "description": "The label for the doc item App call App in sidebar qfpaySidebar, linking to the doc in-store/pos-api/app-call-app"
-  }
+  },
+  "sidebar.qfpaySidebar.doc.FAQs": {
+    "message": "常見問題",
+    "description": "The label for the doc item FAQs in sidebar qfpaySidebar, linking to the doc in-store/pos-api/app-call-app"
+  },
 }
