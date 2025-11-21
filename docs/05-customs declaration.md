@@ -4,104 +4,108 @@ import Link from '@docusaurus/Link';
 
 # Customs Declaration
 
-Customs declaration API auto-sends the WeChat/Alipay payment data to the customs to simplify the clearance process and saves time for online cross-border stores.
+Customs Declaration APIs allow merchants to automatically submit required payment information to customs authorities for cross-border eCommerce transactions. This simplifies the clearance process and saves time for both merchants and consumers.
 
-## Push Customs Declaration
+---
 
-### HTTP Request
+## 1. Push Customs Declaration
 
-**Endpoint** : `/custom/v1/declare`
+### Endpoint
 
-**Method** : `POST`
-
-### Request Parameters
-
-| Attribute| Mandatory| Type|Description|
-|:---|:----- |-----   |----   |
-|`trade_type`|Yes|String(8)|weixin or alipay|
-|`syssn`|Yes|String(32)|QFPay transaction number|
-|`customs`|Yes|String(20)|Customs for declaration. Example：SHANGHAI_ZS|
-|`mch_customs_no`|Yes|String(20)|Customs registration No. of the merchant|
-|`action_type`|No|String(256)|Declaration type. Only valid when `trate_type` is "wechat". "ADD" - new appplication, "MODIFY" - modification of applied declaration|
-|`mch_customs_name`|No|String(256)|Merchant customs record name. Must be passed when `trate_type` is "alipay". Exaple: jwyhanguo_card|
-|`out_request_no`|No|String(32)|Merchant order number. Must be passed when `trate_type` is "alipay". Exaple: 15725904083420588032|
-|`amount`|No|String(20)|Declaration amount. Must be passed when `trate_type` is "alipay". Example: 2.00|
-
-### The following fields should be passed in case splitting or modifying order
-
-| Attribute| Mandatory| Type|Description|
-|:---|:----- |-----   |----   |
-|`sub_order_no`|C|String(64)|Merchant sub-order No. It is required if there is a split order. Example：1111960490|
-|`fee_type`|C|String(8)|Currency. Must be passed when `trate_type` is "wechat". It can only be CNY|
-|`order_fee`|C|String(8)|Sub-order amount (in 0.01 CNY). Cannot exceed the original order amount. order_fee=transport_fee+product_fee. It is required if there is a split order Example：888|
-|`product_fee`|C|String(8)|Product price (in 0.01 CNY). It is required if there is a split order. Example：888|
-|`transport_fee`|C|String(8)|Logistics fee (in 0.01 CNY). It is required if there is a split order. Example：888|
-
-### Response Parameters
-
-| Attribute|Type|Description|
-|:---|-----   |----   |
-|`syssn`|String(40)|QFPay transaction number|
-|`respcd`|String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of response codes.|
-|`resperr`|String(128)|Response message|
-|`respmsg`|String(128)|Other message information|
-|`verify_department`||Verification organization|
-|`verify_department_trade_id`||Transaction number of verification organization|
-
-## Query Customs Declaration
-
-Merchants query declaration status by QFPay transaction number.
-
-### HTTP Request
-
-**Endpoint** : `/custom/v1/query`
-
-**Method** : `POST` / `GET`
+```
+POST /custom/v1/declare
+```
 
 ### Request Parameters
 
-| Attribute| Mandatory| Type|Description|
-|:---|:----- |-----   |----   |
-|`trade_type`|Yes|String(8)|weixin or alipay|
-|`customs`|Yes|String(20)|Customs for declaration. Example：SHANGHAI_ZS|
-|`syssn`|Yes|String(32)|QFPay transaction number|
-|`sub_order_no`|No|String(40)|Sub order number. It is required if there is a split order.|
+| Field | Required | Type | Description |
+|-------|----------|------|-------------|
+| `trade_type` | Yes | String(8) | `weixin` or `alipay` |
+| `syssn` | Yes | String(32) | QFPay transaction ID |
+| `customs` | Yes | String(20) | Customs authority code, e.g. `SHANGHAI_ZS` |
+| `mch_customs_no` | Yes | String(20) | Merchant’s customs registration number |
+| `action_type` | No | String(256) | Declaration type (WeChat only): `"ADD"` for new, `"MODIFY"` for changes |
+| `mch_customs_name` | No | String(256) | Merchant record name for Alipay, e.g. `jwyhanguo_card` |
+| `out_request_no` | No | String(32) | Merchant order number (Alipay only) |
+| `amount` | No | String(20) | Declaration amount (Alipay only), e.g. `2.00` |
 
-### Response Parameters
+### Sub-Order Fields (For Split or Modified Orders)
 
-| Attribute|Type|Description|
-|:---|-----   |----   |
-|`syssn`|String(40)|QFPay transaction number|
-|`respcd`|String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of response codes.|
-|`resperr`|String(128)|Response message|
-|`respmsg`|String(128)|Other message information|
-|`data`||Customs declaration details \[\{"resperr" : "", "errmsg" : null, "sub_order_no" : "15752730835729139712", "verify_department" : "OTHERS", "verify_department_trade_id" : "4200000459201911265585026208"\}\]|
+| Field | Conditional | Type | Description |
+|-------|-------------|------|-------------|
+| `sub_order_no` | C | String(64) | Required if the order is split |
+| `fee_type` | C | String(8) | Currency (WeChat only, must be `CNY`) |
+| `order_fee` | C | String(8) | Sub-order amount in CNY cents. Must equal `transport_fee + product_fee` |
+| `product_fee` | C | String(8) | Product amount in CNY cents |
+| `transport_fee` | C | String(8) | Shipping fee in CNY cents |
 
-## Repush Customs Declaration
+### Response
 
-If additional order information has been submitted to the customs but is lost in the electronic port, the customs declaration re-push API can be used to push the information to the customs again.
+| Field | Type | Description |
+|-------|------|-------------|
+| `syssn` | String(40) | QFPay transaction number |
+| `respcd` | String(4) | `0000` = Success, `1143/1145` = Query again, others = Failure. See [Transaction Status Codes](/docs/api-reference/status-codes) |
+| `resperr` | String(128) | Error message |
+| `respmsg` | String(128) | Additional message |
+| `verify_department` | String | Verifying organisation |
+| `verify_department_trade_id` | String | Trade ID assigned by customs |
 
-### HTTP Request
+---
 
-**Endpoint** : `/custom/v1/redeclare`
+## 2. Query Customs Declaration
 
-**Method** : `POST`
+### Endpoint
+
+```
+POST /custom/v1/query
+GET /custom/v1/query
+```
 
 ### Request Parameters
 
-| Attribute| Mandatory| Type|Description|
-|:---|:----- |-----   |----   |
-|`trade_type`|Yes|String(8)|weixin or alipay|
-|`customs`|Yes|String(20)|Customs for declaration. Example：SHANGHAI_ZS|
-|`syssn`|Yes|String(32)|QFPay transaction number|
-|`mch_customs_no`|Yes|String(20)|Customs registration No. of the merchant. Example: 110084111|
-|`sub_order_no`|No|String(40)|Sub order number. It is required if there is a split order.|
+| Field | Required | Type | Description |
+|-------|----------|------|-------------|
+| `trade_type` | Yes | String(8) | `weixin` or `alipay` |
+| `customs` | Yes | String(20) | Customs code, e.g. `SHANGHAI_ZS` |
+| `syssn` | Yes | String(32) | QFPay transaction number |
+| `sub_order_no` | No | String(40) | Required for split orders |
 
-### Response Parameters
+### Response
 
-| Attribute|Type|Description|
-|:--- |-----   |----   |
-|`syssn`|String(40)|QFPay transaction number|
-|`respcd`|String(4)|0000 = Declaration successful. <br/> 1143/1145 = merchants are required to continue to query the declaration result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of response codes.|
-|`resperr`|String(128)|Response message|
-|`respmsg`|String(128)|Other message information|
+| Field | Type | Description |
+|-------|------|-------------|
+| `syssn` | String(40) | QFPay transaction number |
+| `respcd` | String(4) | Response code |
+| `resperr` | String(128) | Error message |
+| `respmsg` | String(128) | Additional message |
+| `data` | Array | Array of declaration results: includes `resperr`, `errmsg`, `sub_order_no`, `verify_department`, `verify_department_trade_id` |
+
+---
+
+## 3. Repush Customs Declaration
+
+Use this when a declaration was lost on the customs end.
+
+### Endpoint
+
+```
+POST /custom/v1/redeclare
+```
+
+### Request Parameters
+
+| Field | Required | Type | Description |
+|-------|----------|------|-------------|
+| `trade_type` | Yes | String(8) | `weixin` or `alipay` |
+| `customs` | Yes | String(20) | Customs code |
+| `syssn` | Yes | String(32) | QFPay transaction number |
+| `mch_customs_no` | Yes | String(20) | Merchant’s customs registration number |
+| `sub_order_no` | No | String(40) | Required for split orders |
+
+### Response
+
+Same format as push declaration above.
+
+---
+
+For a complete list of return codes, see [Transaction Status Codes](/docs/api-reference/status-codes).

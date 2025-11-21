@@ -39,7 +39,7 @@ Request Body:
 
 ```
 
-> The above command returns JSON structured like this:
+> 上述指令會回傳如下結構的 JSON：
 
 ```json
 {
@@ -116,7 +116,7 @@ Request Body:
 
 ```
 
-> The above command returns JSON structured like this:
+> 上述指令會回傳如下結構的 JSON：
 
 ```json
 {
@@ -177,7 +177,7 @@ Request Body:
 
 ```
 
-> The above command returns JSON structured like this:
+> 上述指令會回傳如下結構的 JSON：
 
 ```json
 {
