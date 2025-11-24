@@ -20,7 +20,7 @@
     "description": "The label for category Currencies in sidebar qfpaySidebar"
   },
   "sidebar.qfpaySidebar.category.In-Store Payments": {
-    "message": "线下支付",
+    "message": "實體店支付",
     "description": "The label for category In-Store in sidebar qfpaySidebar"
   },
   "sidebar.qfpaySidebar.category.POS API": {

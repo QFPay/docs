@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 
 # Merchant Present Mode (MPM)
 
-<Link href="/img/mpm_process.jpg" target="_blank">![MPM process-flow](@site/static/img/mpm_process.jpg)</Link>
+<Link href="/img/mpm_flow_en.jpeg" target="_blank">![MPM process-flow](@site/static/img/mpm_flow_en.jpeg)</Link>
 
 ## MPM API Request
 

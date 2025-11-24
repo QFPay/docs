@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 
 # 商戶展示模式 (MPM)
 
-<Link href="/img/mpm_process.jpg" target="_blank">![MPM process-flow](@site/static/img/mpm_process.jpg)</Link>
+<Link href="/img/mpm_flow_chin.jpeg" target="_blank">![MPM process-flow](@site/static/img/mpm_flow_chin.jpeg)</Link>
 
 ## MPM API 請求
 
@@ -13,7 +13,7 @@ import Link from '@docusaurus/Link';
 
 ### 支持的支付类型
 
-| 編碼 | 描述 |
+| 編碼 | 說明 |
 | ------- | ----------- |
 | 800101  | 支付寶跨境線下掃碼支付|
 | 801501  | 支付寶線上掃碼支付 (香港商戶)  |

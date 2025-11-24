@@ -1,7 +1,7 @@
 ---
 id: introduction
 title: Introduction
-sidebar_label: Getting Started
+sidebar_label: Introduction
 description: How to set up credentials, environments and generate request signatures.
 ---
 
