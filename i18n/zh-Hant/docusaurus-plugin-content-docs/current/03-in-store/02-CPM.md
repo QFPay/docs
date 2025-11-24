@@ -2,7 +2,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# 消費者出示碼模式（CPM）
+# 消費者出示碼模式（反掃）（CPM）
 
 <Link href="/img/cpm_flow_chin.jpeg" target="_blank">![CPM process-flow](@site/static/img/cpm_flow_chin.jpeg)</Link>
 
