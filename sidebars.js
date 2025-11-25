@@ -82,39 +82,57 @@ const sidebars = {
         type: 'generated-index'
       },
       items: [
-        'online-shop/checkout',
-        'online-shop/online-pre-authorisation',
-        'online-shop/paymentelement',
-        'online-shop/qfpay-recurring-payment',
-        'online-shop/visa-master-online-payment',
-        'online-shop/wap-payment',
-        'online-shop/web-payment',
-        'online-shop/in-app-payment',
-        'online-shop/applepay',
         {
           type: 'category',
-          label: 'Wechat',
+          label: 'Checkout Integration',
           link: {
             type: 'generated-index'
           },
           items: [
-            'online-shop/wechat/wechat-web-qrc-payments',
-            'online-shop/wechat/wechat-pay-jsapi',
-            'online-shop/wechat/wechat-pay-h5',
-            'online-shop/wechat/wechat-mini-programs',
-            'online-shop/wechat/wechat-in-app-payments',
+            "online-shop/checkout-integration/checkout",
+            "online-shop/checkout-integration/paymentelement"
           ]
         },
         {
           type: 'category',
-          label: 'Alipay',
+          label: 'Integration by Payment Types',
           link: {
             type: 'generated-index'
           },
           items: [
-            'online-shop/alipay/alipay-online-payments', 
-            'online-shop/alipay/alipay-service-window-h5',
-            'online-shop/alipay/alipay-in-app-payments'
+            'online-shop/integration-by-payment-types/online-pre-authorisation',
+            'online-shop/integration-by-payment-types/qfpay-recurring-payment',
+            'online-shop/integration-by-payment-types/visa-master-online-payment',
+            'online-shop/integration-by-payment-types/wap-payment',
+            'online-shop/integration-by-payment-types/web-payment',
+            'online-shop/integration-by-payment-types/in-app-payment',
+            'online-shop/integration-by-payment-types/applepay',
+            {
+              type: 'category',
+              label: 'Wechat',
+              link: {
+                type: 'generated-index'
+              },
+              items: [
+                'online-shop/integration-by-payment-types/wechat/wechat-web-qrc-payments',
+                'online-shop/integration-by-payment-types/wechat/wechat-pay-jsapi',
+                'online-shop/integration-by-payment-types/wechat/wechat-pay-h5',
+                'online-shop/integration-by-payment-types/wechat/wechat-mini-programs',
+                'online-shop/integration-by-payment-types/wechat/wechat-in-app-payments',
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Alipay',
+              link: {
+                type: 'generated-index'
+              },
+              items: [
+                'online-shop/integration-by-payment-types/alipay/alipay-online-payments', 
+                'online-shop/integration-by-payment-types/alipay/alipay-service-window-h5',
+                'online-shop/integration-by-payment-types/alipay/alipay-in-app-payments'
+              ]
+            },
           ]
         },
       ],

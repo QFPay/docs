@@ -4,7 +4,7 @@
 This Endpoint is only available to merchants who do not pass in the `mchid`
 :::
 
-Merchant can use this interface to add remarks to a transaction. This remarks value will be displayed in the Merchant Management System (MMS) and on the transaction report.
+Merchant can use this interface to add remarks to a transaction. This remarks value will be displayed in the Merchant Portal and on the transaction report.
 
 ## API Endpoint for Transaction Notes
 

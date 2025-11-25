@@ -2,7 +2,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# 商戶出示碼模式(正掃) (MPM)
+# 商戶出示碼模式（正掃）(MPM)
 
 <Link href="/img/mpm_flow_chin.jpeg" target="_blank">![MPM process-flow](@site/static/img/mpm_flow_chin.jpeg)</Link>
 
