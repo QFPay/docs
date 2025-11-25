@@ -30,7 +30,7 @@ const FeatureList = [
     links:[
       {title:<Translate id="homepage.features.online-shop.visa">Visa/Mastercard Online Payments</Translate>, url:"docs/online-shop/visa-master-online-payment"},
       {title:<Translate id="homepage.features.online-shop.checkout">QFPay Checkout Services</Translate>, url:"docs/online-shop/checkout"},
-      {title:<Translate id="homepage.features.online-shop.paymentelement">QFPay Component</Translate>, url:"docs/online-shop/paymentelement"},
+      {title:<Translate id="homepage.features.online-shop.payment-element">QFPay Component</Translate>, url:"docs/online-shop/payment-element"},
       {title:<Translate id="homepage.features.online-shop.recurring">QFPay Recurring Payment</Translate>, url:"docs/online-shop/qfpay-recurring-payment"},
       {title:<Translate id="homepage.features.online-shop.online-pre-authorisation">Online Pre-authorisation Payment</Translate>, url:"docs/online-shop/online-pre-authorisation"},
       {title:<Translate id="homepage.features.online-shop.alipay">Alipay</Translate>, url:"docs/category/alipay"},

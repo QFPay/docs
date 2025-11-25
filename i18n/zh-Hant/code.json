@@ -38,7 +38,7 @@
   "homepage.features.online-shop.checkout": {
     "message": "收银台页面服务"
   },
-  "homepage.features.online-shop.paymentelement": {
+  "homepage.features.online-shop.payment-element": {
     "message": "Element SDK"
   },
   "homepage.features.online-shop.recurring": {

@@ -90,7 +90,7 @@ const sidebars = {
           },
           items: [
             "online-shop/checkout-integration/checkout",
-            "online-shop/checkout-integration/paymentelement"
+            "online-shop/checkout-integration/payment-element"
           ]
         },
         {
