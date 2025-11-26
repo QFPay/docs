@@ -41,16 +41,16 @@
   "homepage.features.online-shop.checkout-integration.payment-element": {
     "message": "支付組件 (Element) SDK"
   },
-  "homepage.features.online-shop.recurring": {
+  "homepage.features.online-shop.integration-by-use-case.recurring": {
     "message": "订阅支付 API"
   },
-  "homepage.features.online-shop.preauth": {
+  "homepage.features.online-shop.integration-by-use-case.preauth": {
     "message": "线上预授权支付 API"
   },
-  "homepage.features.online-shop.alipay": {
+  "homepage.features.online-shop.integration-by-payment-type.alipay": {
     "message": "支付宝"
   },
-  "homepage.features.online-shop.wechat": {
+  "homepage.features.online-shop.integration-by-payment-type.wechat": {
     "message": "微信"
   },
   "homepage.features.e-commerce.title": {

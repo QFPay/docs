@@ -39,6 +39,10 @@
     "message": "按支付方式整合",
     "description": "The label for category Integration by Payment Types in sidebar qfpaySidebar"
   },
+  "sidebar.qfpaySidebar.category.Integration by Use Case": {
+    "message": "按支付場景整合",
+    "description": "The label for category Integration by Use Case in sidebar qfpaySidebar"
+  },
   "sidebar.qfpaySidebar.category.Wechat": {
     "message": "微信",
     "description": "The label for category Wechat in sidebar qfpaySidebar"

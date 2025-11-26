@@ -100,12 +100,7 @@ const sidebars = {
             type: 'generated-index'
           },
           items: [
-            'online-shop/integration-by-payment-types/preauth',
-            'online-shop/integration-by-payment-types/qfpay-recurring-payment',
             'online-shop/integration-by-payment-types/visa-master-online-payment',
-            'online-shop/integration-by-payment-types/wap-payment',
-            'online-shop/integration-by-payment-types/web-payment',
-            'online-shop/integration-by-payment-types/in-app-payment',
             'online-shop/integration-by-payment-types/applepay',
             {
               type: 'category',
@@ -133,6 +128,20 @@ const sidebars = {
                 'online-shop/integration-by-payment-types/alipay/alipay-in-app-payments'
               ]
             },
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Integration by Use Case',
+          link: {
+            type: 'generated-index'
+          },
+          items: [
+            'online-shop/integration-by-use-case/wap-payment',
+            'online-shop/integration-by-use-case/web-payment',
+            'online-shop/integration-by-use-case/in-app-payment',
+            'online-shop/integration-by-use-case/preauth',
+            'online-shop/integration-by-use-case/qfpay-recurring-payment'
           ]
         },
       ],

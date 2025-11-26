@@ -28,13 +28,13 @@ const FeatureList = [
       </Translate>
     ),
     links:[
-      {title:<Translate id="homepage.features.online-shop.visa">Visa/Mastercard Online Payments</Translate>, url:"docs/online-shop/visa-master-online-payment"},
-      {title:<Translate id="homepage.features.online-shop.checkout">QFPay Checkout Services</Translate>, url:"docs/online-shop/checkout"},
-      {title:<Translate id="homepage.features.online-shop.payment-element">QFPay Component</Translate>, url:"docs/online-shop/payment-element"},
-      {title:<Translate id="homepage.features.online-shop.recurring">QFPay Recurring Payment</Translate>, url:"docs/online-shop/qfpay-recurring-payment"},
-      {title:<Translate id="homepage.features.online-shop.preauth">Online Pre-authorisation Payment</Translate>, url:"docs/online-shop/preauth"},
-      {title:<Translate id="homepage.features.online-shop.alipay">Alipay</Translate>, url:"docs/category/alipay"},
-      {title:<Translate id="homepage.features.online-shop.wechat">WeChat</Translate>, url:"docs/category/wechat"},
+      {title:<Translate id="homepage.features.online-shop.integration-by-payment-type.visa">Visa/Mastercard Online Payments</Translate>, url:"docs/online-shop/integration-by-payment-type/visa-master-online-payment"},
+      {title:<Translate id="homepage.features.online-shop.checkout-integration.checkout">QFPay Checkout Services</Translate>, url:"docs/online-shop/checkout-integration/checkout"},
+      {title:<Translate id="homepage.features.online-shop.checkout-integration.payment-element">QFPay Component</Translate>, url:"docs/online-shop/checkout-integration/payment-element"},
+      {title:<Translate id="homepage.features.online-shop.integration-by-use-case.recurring">QFPay Recurring Payment</Translate>, url:"docs/online-shop/integration-by-use-case/qfpay-recurring-payment"},
+      {title:<Translate id="homepage.features.online-shop.integration-by-use-case.preauth">Online Pre-authorisation Payment</Translate>, url:"docs/online-shop/integration-by-use-case/preauth"},
+      {title:<Translate id="homepage.features.online-shop.integration-by-payment-type.alipay">Alipay</Translate>, url:"docs/category/integration-by-payment-type/alipay"},
+      {title:<Translate id="homepage.features.online-shop.integration-by-payment-type.wechat">WeChat</Translate>, url:"docs/category/integration-by-payment-type/wechat"},
     ]
   },
   {
