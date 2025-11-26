@@ -44,7 +44,7 @@
   "homepage.features.online-shop.recurring": {
     "message": "订阅支付 API"
   },
-  "homepage.features.online-shop.online-pre-authorisation": {
+  "homepage.features.online-shop.preauth": {
     "message": "线上预授权支付 API"
   },
   "homepage.features.online-shop.alipay": {

@@ -100,7 +100,7 @@ const sidebars = {
             type: 'generated-index'
           },
           items: [
-            'online-shop/integration-by-payment-types/online-pre-authorisation',
+            'online-shop/integration-by-payment-types/preauth',
             'online-shop/integration-by-payment-types/qfpay-recurring-payment',
             'online-shop/integration-by-payment-types/visa-master-online-payment',
             'online-shop/integration-by-payment-types/wap-payment',

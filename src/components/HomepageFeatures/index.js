@@ -32,7 +32,7 @@ const FeatureList = [
       {title:<Translate id="homepage.features.online-shop.checkout">QFPay Checkout Services</Translate>, url:"docs/online-shop/checkout"},
       {title:<Translate id="homepage.features.online-shop.payment-element">QFPay Component</Translate>, url:"docs/online-shop/payment-element"},
       {title:<Translate id="homepage.features.online-shop.recurring">QFPay Recurring Payment</Translate>, url:"docs/online-shop/qfpay-recurring-payment"},
-      {title:<Translate id="homepage.features.online-shop.online-pre-authorisation">Online Pre-authorisation Payment</Translate>, url:"docs/online-shop/online-pre-authorisation"},
+      {title:<Translate id="homepage.features.online-shop.preauth">Online Pre-authorisation Payment</Translate>, url:"docs/online-shop/preauth"},
       {title:<Translate id="homepage.features.online-shop.alipay">Alipay</Translate>, url:"docs/category/alipay"},
       {title:<Translate id="homepage.features.online-shop.wechat">WeChat</Translate>, url:"docs/category/wechat"},
     ]
