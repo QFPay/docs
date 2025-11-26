@@ -10,8 +10,8 @@ import Link from '@docusaurus/Link';
 
 对于信用卡在线支付集成，商户可以选择以下集成方式之一
 
-1. [QFPay Checkout Services](/docs/online-shop/checkout)
-2. [QFPay Element SDK](/docs/online-shop/payment-element)
+1. [QFPay Checkout Services](/docs/online-shop/checkout-integration/checkout)
+2. [QFPay Element SDK](/docs/online-shop/checkout-integration/payment-element)
 
 ## 异步通知
 

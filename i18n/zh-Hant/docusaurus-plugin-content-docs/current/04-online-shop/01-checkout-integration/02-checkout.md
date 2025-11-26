@@ -1,3 +1,10 @@
+---
+id: checkout
+title: 託管結帳頁面（收銀台）
+sidebar_label: 託管結帳頁面（收銀台）
+description: 透過 QFPay 託管的結帳頁面整合多種支付方式，快速啟用線上付款能力，無需自行開發前端 UI。
+---
+
 import Link from '@docusaurus/Link';
 
 # 託管結帳頁面（收銀台）

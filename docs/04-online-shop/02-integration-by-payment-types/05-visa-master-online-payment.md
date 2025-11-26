@@ -10,8 +10,8 @@ We currently support credit card payments in the [Hong Kong environment](/docs/p
 
 For credit card online payment integration, merchant can select one the the following integration methods
 
-1. [QFPay Checkout Services](/docs/online-shop/checkout)
-2. [QFPay Element SDK](/docs/online-shop/payment-element)
+1. [QFPay Checkout Services](/docs/online-shop/checkout-integration/checkout)
+2. [QFPay Element SDK](/docs/online-shop/checkout-integration/payment-element)
 
 ## Asynchronous Notification
 

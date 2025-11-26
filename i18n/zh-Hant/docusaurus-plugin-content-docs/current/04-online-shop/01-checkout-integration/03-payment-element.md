@@ -1,4 +1,10 @@
-﻿# 支付組件 (Element) SDK
+﻿---
+id: payment-element
+title: 支付組件 (Element) SDK
+sidebar_label: 支付組件 (Element) SDK
+description: 使用 QFPay 的 Element SDK，在您的網站中嵌入卡支付或多錢包 UI，保留靈活度的同時確保安全性。
+---
+# 支付組件 (Element) SDK
 
 QFPay 的 **支付組件 SDK** 讓您能夠使用 QFPay 提供的預建 UI 元件，自行建立結帳流程。這是一種靈活的前端整合方式，適合希望在保留安全託管邏輯的同時，擁有更多自訂體驗的商戶。
 
