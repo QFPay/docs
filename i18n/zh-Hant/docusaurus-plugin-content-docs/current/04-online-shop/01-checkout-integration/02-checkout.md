@@ -1,6 +1,6 @@
 import Link from '@docusaurus/Link';
 
-# 託管結帳頁面
+# 託管結帳頁面（收銀台）
 
 ## 簡介
 

@@ -28,8 +28,16 @@
     "description": "The label for category POS API in sidebar qfpaySidebar"
   },
   "sidebar.qfpaySidebar.category.Online Payments": {
-    "message": "线上支付",
+    "message": "線上支付",
     "description": "The label for category Online Shop in sidebar qfpaySidebar"
+  },
+  "sidebar.qfpaySidebar.category.Checkout Integration": {
+    "message": "結帳方式（收銀台）整合",
+    "description": "The label for category Checkout Integration in sidebar qfpaySidebar"
+  },
+  "sidebar.qfpaySidebar.category.Integration by Payment Types": {
+    "message": "按支付方式整合",
+    "description": "The label for category Integration by Payment Types in sidebar qfpaySidebar"
   },
   "sidebar.qfpaySidebar.category.Wechat": {
     "message": "微信",

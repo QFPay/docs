@@ -36,10 +36,10 @@
     "message": "Visa/Mastercard 线上支付"
   },
   "homepage.features.online-shop.checkout": {
-    "message": "收银台页面服务"
+    "message": "託管結帳頁面（收銀台）"
   },
   "homepage.features.online-shop.payment-element": {
-    "message": "Element SDK"
+    "message": "支付組件 (Element) SDK"
   },
   "homepage.features.online-shop.recurring": {
     "message": "订阅支付 API"
