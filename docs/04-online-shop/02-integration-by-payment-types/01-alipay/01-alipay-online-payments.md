@@ -1,15 +1,83 @@
+---
+id: alipay-online-payments
+title: Alipay Online Payments
+sidebar_label: Alipay Online
+description: Integration guide for Alipay Web and WAP payments (HK + Overseas)
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
 # Alipay Online Payments
 
+This document outlines the integration steps for **Alipay Web and WAP Payments** for both Hong Kong and overseas merchants.
+
 :::note
-Alipay Hong Kong does not support the native Alipay Checkout page. Instead developers are required to request the QR code and embed it using `iframe`
+Alipay Hong Kong does **not** support the native Alipay checkout page. Developers must request a QR code and embed it using an `iframe`.
 :::
 
+## Overview
+
+Alipay online payments allow customers to complete purchases on a merchant website by scanning a QR code. Once the customer confirms the amount, Alipay deducts funds from the customer’s wallet in real-time. The customer is then redirected back to the merchant website (if `return_url` is provided).
+
+- Settlement for **Mainland China** users is in CNY; QFPay settles to merchants in local currency.
+- Settlement for **Hong Kong** users is in HKD.
+
+## HTTP Request
+
+**Endpoint**:  
+`POST /trade/v1/payment`
+
+## Supported Pay Types
+
+| PayType  | Description                        |
+|----------|------------------------------------|
+| 801101   | Alipay Web Payment (Overseas)      |
+| 801107   | Alipay WAP Payment (Overseas)      |
+| 801514   | Alipay Web Payment (Hong Kong)     |
+| 801512   | Alipay WAP Payment (Hong Kong)     |
+
+---
+
+## Request Parameters
+
+| Field         | Type       | Required | Description                                                                 |
+|---------------|------------|----------|-----------------------------------------------------------------------------|
+| `txamt`       | Int(11)    | Yes      | Transaction amount in cents. Suggest > 200 to avoid risk control.          |
+| `txcurrcd`    | String(3)  | Yes      | Transaction currency (e.g. `HKD`, `CNY`). See [Currencies](/docs/preparation/paycode#currencies). |
+| `pay_type`    | String(6)  | Yes      | Payment method (see above PayType list).                                   |
+| `out_trade_no`| String(128)| Yes      | Unique transaction number per merchant per request.                        |
+| `txdtm`       | String(20) | Yes      | Transaction datetime: `YYYY-MM-DD hh:mm:ss`.                               |
+| `expired_time`| String(3)  | No       | QR code expiration in minutes. 5–120 allowed. (MPM only)                   |
+| `goods_name`  | String(64) | No       | Product name. Max 20 chars; UTF-8 encoded if Chinese.                      |
+| `mchid`       | String(16) | No       | Required if merchant has sub-Merchant ID assigned.                         |
+| `udid`        | String(40) | No       | Unique device ID (for reporting).                                          |
+| `return_url`  | String(512)| No       | Redirect URL after successful payment. Max 200 chars (for WAP only).       |
+
+---
+
+## Response Parameters
+
+| Field         | Type       | Description                                                                 |
+|---------------|------------|-----------------------------------------------------------------------------|
+| `respcd`      | String(4)  | Return code. `0000` = success, `1143/1145` = retry needed, others = failed. |
+| `resperr`     | String(128)| Additional info or error message.                                           |
+| `respmsg`     | String(128)| General response description.                                               |
+| `syssn`       | String(40) | QFPay transaction ID.                                                       |
+| `out_trade_no`| String(128)| Original order ID.                                                          |
+| `txamt`       | Int(11)    | Transaction amount in cents.                                                |
+| `txdtm`       | String(20) | Request datetime.                                                           |
+| `sysdtm`      | String(20) | Server datetime. Used for cutoff in settlements.                           |
+| `pay_type`    | String(6)  | Payment method used.                                                        |
+| `pay_url`     | String(512)| Payment page URL. Embed as QR code or `iframe`.                            |
+
+---
+
+## Code Examples
+
 ```plaintext
-For code instructions select Python, Java, Node.js or PHP with the tabs below.
+Use the tabs below to view implementation in Python, Java, JavaScript, or PHP.
 ```
 
 <Tabs>
@@ -244,7 +312,9 @@ ob_end_flush();
 </TabItem>
 </Tabs>
 
-> The above command returns JSON structured like this:
+---
+
+## Sample JSON Response
 
 ```json
 {
@@ -266,51 +336,16 @@ ob_end_flush();
 }
 ```
 
-## Web/WAP Payment
+## Notes
 
-Customers make purchases on a merchant website with Alipay. The user scans the displayed QR code to pay, confimrs the total amount and makes payment. Finally the customer can be redirected to a selected page on the merchant's website using the `return_url` parameter. Alipay deducts the payment amount from the consumer's Alipay wallet in real-time in CNY and QFPay settles the payment amount to merchants in local currency.  
+:::tip
+The QR code or `iframe` should point to the `pay_url` in the response.
+:::
 
-### HTTP Request
+:::warning
+Do not reuse `out_trade_no` across payments or refunds.
+:::
 
-**Endpoint** : `/trade/v1/payment`
-
-**Method** : `POST`
-
-**PayType** :
-
-PayType | Description
-------- | -------
-801101| Overseas Merchants Web
-801107| Overseas Merchants WAP
-801514| Hong Kong Merchants Web
-801512| Hong Kong Merchants WAP
-
-### Request Parameters
-
-Attribute | Mandatory | Type | Description
--------- | --------- | ------- | -------
-`txamt` | Yes | Int(11) | Payment amount, amount of the transaction. Unit in cents (i.e. 100 = $1).Suggest value > 200 to avoid risk control
-`txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies
-`pay_type` | Yes | String(6) | Payment type, Alipay Web Payment = 801101
-`out_trade_no` | Yes | String(128)| API Order Number, external transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
-`txdtm` | Yes | String(20) | Request transaction time, format：<br/> YYYY-MM-DD hh:mm:ss
-`expired_time` | No<br/> (MPM only) | String(3)  | Order expiration time, QRC expiration time in unit minutes. The default expiration time is 30 minutes. The parameter can manually be adjusted to a minimum of 5 minutes, and up to a maximum of 120 minutes.<br/> Available for: <br/>800201 - WeChat scan code
-`goods_name` | No | String(64) | Product name identification, Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
-`mchid` | No | String(16) | QFPay merchant number, may or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request.
-`udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal.
-`return_url` | No | String(512) | Redirect URL, address for user redirect after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters.
-
-### Response Parameters
-
-Attribute | Type | Description
--------- | --------- | -------
-`pay_type` | String(6) | Payment type, Alipay Web/Wap Payment = 801101/801107
-`sysdtm` | String(20) | System transaction time, format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements.
-`txdtm` | String(20) | Request transaction time, format：YYYY-MM-DD hh:mm:ss
-`resperr` | String(128) | Response message
-`txamt` | Int(11) | Payment amount
-`respmsg` | String(128) | Other message information
-`out_trade_no` | String(128) | External transaction number  
-`syssn` | String(40) | QFPay transaction number
-`respcd` | String(4) | Return code, 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of response codes.
-`pay_url` | String(512)|Payment URL
+:::info
+You can use `/trade/v1/query` to check payment result if `respcd` = `1143`/`1145`.
+:::

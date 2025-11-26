@@ -32,7 +32,7 @@
     "description": "The label for category Online Shop in sidebar qfpaySidebar"
   },
   "sidebar.qfpaySidebar.category.Checkout Integration": {
-    "message": "結帳方式（收銀台）整合",
+    "message": "結帳方式整合",
     "description": "The label for category Checkout Integration in sidebar qfpaySidebar"
   },
   "sidebar.qfpaySidebar.category.Integration by Payment Types": {
@@ -48,7 +48,7 @@
     "description": "The label for category Wechat in sidebar qfpaySidebar"
   },
   "sidebar.qfpaySidebar.category.Alipay": {
-    "message": "支付宝",
+    "message": "支付寶",
     "description": "The label for category Alipay in sidebar qfpaySidebar"
   },
   "sidebar.qfpaySidebar.category.Shared Endpoints": {

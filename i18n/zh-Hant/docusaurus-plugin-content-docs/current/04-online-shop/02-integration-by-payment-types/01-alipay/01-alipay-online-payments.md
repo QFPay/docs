@@ -1,13 +1,71 @@
+---
+id: alipay-online-payments
+title: 支付寶線上支付
+sidebar_label: 支付寶線上
+description: 支付寶 Web 及 WAP 支付（香港與海外）整合指南
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# 支付宝线上上扫码支付
+# 支付寶線上支付（Web/WAP）
+
+客戶可在商戶網站上使用支付寶完成交易。使用者掃描顯示的二維碼確認金額並付款。付款完成後，系統可透過 `return_url` 參數將使用者導回商戶指定頁面。支付寶以人民幣即時從用戶錢包扣除金額，QFPay 則以港幣或本地貨幣結算給商戶。
+
+### HTTP 請求
+**端口**:  
+`POST ../trade/v1/payment`
+
+## PayType 對應類型:
+
+| 編碼   | 描述                                  |
+|-----------|---------------------------------------|
+| 801101    | 支付寶線上掃碼支付（海外商戶）        |
+| 801107    | 支付寶線上 WAP 支付（海外商戶）       |
+| 801501    | 支付寶線上掃碼支付（香港商戶）        |
+| 801512    | 支付寶線上 WAP 支付（香港商戶）       |
+
+---
+
+## 請求參數（Request Parameters）
+
+| 參數名稱       | 參數代碼       | 必填 | 資料型別     | 描述 |
+|----------------|----------------|------|--------------|------|
+| 訂單金額       | `txamt`        | 是   | Int(11)      | 以最小單位（如 100 = $1）計算。建議大於 200 以避免風控。 |
+| 幣種           | `txcurrcd`     | 是   | String(3)    | 請參閱[幣種列表](/docs/preparation/paycode#支付幣種)。 |
+| 支付方式       | `pay_type`     | 是   | String(6)    | 支付寶 Web 支付：801101。 |
+| 外部訂單編號   | `out_trade_no` | 是   | String(128)  | 商戶自訂交易編號，於同一商戶帳戶中必須唯一。 |
+| 交易時間       | `txdtm`        | 是   | String(20)   | 時間格式：`YYYY-MM-DD hh:mm:ss` |
+| 過期時間       | `expired_time` | 否（正掃限定） | String(3) | 單位分鐘，預設 30 分鐘，允許範圍為 5–120 分鐘。<br/>適用於：800201（微信掃碼） |
+| 商品名稱       | `goods_name`   | 否   | String(64)   | 最多 20 個字元（含中英文及數字）。若為中文需使用 UTF-8 編碼。 |
+| 子商戶編號     | `mchid`        | 否   | String(16)   | 若提供則為必填，否則請勿傳入。由 QFPay 分配。 |
+| 設備唯一 ID    | `udid`         | 否   | String(40)   | 裝置代碼，將顯示於商戶後台。 |
+| 成功跳轉網址   | `return_url`   | 否   | String(512)  | 支付完成後導向的 URL。WAP 限制為 200 字元內。 |
+
+---
+
+## 回應參數（Response Parameters）
+
+| 參數名稱       | 參數代碼       | 資料型別   | 描述 |
+|----------------|----------------|------------|------|
+| 支付方式       | `pay_type`     | String(6)  | 回傳支付方式，例如：801101 表示 Web 支付。 |
+| 系統時間       | `sysdtm`       | String(20) | 格式：`YYYY-MM-DD hh:mm:ss`，作為結算截止依據。 |
+| 交易時間       | `txdtm`        | String(20) | 發送請求時的時間。 |
+| 錯誤訊息       | `resperr`      | String(128) | 如有錯誤則此欄回傳描述。 |
+| 交易金額       | `txamt`        | Int(11)    | 付款金額（單位為最小單位）。 |
+| 附加訊息       | `respmsg`      | String(128) | 其他訊息（可用於除錯）。 |
+| 外部訂單編號   | `out_trade_no` | String(128) | 商戶自訂交易編號。 |
+| QFPay 訂單號   | `syssn`        | String(40) | QFPay 系統交易編號。 |
+| 回應碼         | `respcd`       | String(4)  | `0000` 表成功；<br/>`1143` 或 `1145` 表示仍處理中；<br/>其他為失敗。詳見[交易狀態碼](/docs/preparation/paycode#交易狀態碼)。 |
+| 支付連結       | `pay_url`      | String(512) | 用戶端用於生成 QR Code 的支付連結。 |
+
+---
+
+## 程式碼範例
 
 ```plaintext
-
-For code instructions select Python, Java, Node.js or PHP with the tabs below.
-
+請從下方選擇語言查看示例程式碼：Python、Java、Node.js 或 PHP。
 ```
 
 <Tabs>
@@ -20,18 +78,18 @@ import requests
 import datetime
 import string
 
-# Enter Client Credentials
+# API 憑證
 environment = 'https://test-openapi-hk.qfapi.com'
 app_code = 'D5589D2A1F2E42A9A60C37*********'
 client_key = '0E32A59A8B454940A2FF39**********'
 
 
-# Create parameter values for data payload
+# 當前時間
 current_time = datetime.datetime.now().replace(microsecond=0)                                
 
 print(current_time)
 
-# Create signature
+# 建立簽名函數
 def make_req_sign(data, key):
     keys = list(data.keys())
     keys.sort()
@@ -44,10 +102,10 @@ def make_req_sign(data, key):
     return s.upper()
 
 
-# Body payload
-txamt = '10' #In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control
+# 請求參數
+txamt = '10'
 txcurrcd = 'HKD'
-pay_type = '801101' # Alipay Web Payment = 801101
+pay_type = '801101'
 auth_code='283854702356157409' #CPM only
 out_trade_no = '01234567890123'
 txdtm = current_time
@@ -59,6 +117,7 @@ key = client_key
 #data ={'txamt': txamt, 'txcurrcd': txcurrcd, 'pay_type': pay_type, 'out_trade_no': out_trade_no, 'txdtm': txdtm, 'goods_name': goods_name, 'mchid': mchid}
 data ={'txamt': txamt, 'txcurrcd': txcurrcd, 'pay_type': pay_type, 'out_trade_no': out_trade_no, 'txdtm': txdtm, 'mchid': mchid}
 
+# 發送 POST 請求
 r = requests.post(environment+"/trade/v1/payment",data=data,headers={'X-QF-APPCODE':app_code,'X-QF-SIGN':make_req_sign(data, key)})
 
 print(r.json())
@@ -114,30 +173,30 @@ public class TestMain {
 <TabItem value="javascript" label="Javascript">
 
 ```javascript
-// Enter Client Credentials
+// API 憑證
 const environment = 'https://test-openapi-hk.qfapi.com'
 const app_code = 'D5589D2A1F2E42A9A60C37*********'
 const client_key = '0E32A59A8B454940A2FF39*********'
 
-// Generate Timestamp
+// 當前時間
 var dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
 console.log(dateTime)
 
-// Body Payload
+// 請求參數
 const key = client_key
 var tradenumber = String(Math.round(Math.random() * 1000000000))
 console.log(tradenumber)
 
 var payload = {
-'txamt': '10', // In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control
+'txamt': '10', 
 'txcurrcd': 'HKD',
-'pay_type': '801101', // Alipay Web Payment = 801101
+'pay_type': '801101',
 'out_trade_no': tradenumber,
 'txdtm': dateTime,
 'mchid': 'ZaMVg*****'
 };
 
-// Signature Generation
+// 建立簽名
 const ordered = {};
 Object.keys(payload).sort().forEach(function(key) {
   ordered[key] = payload[key] });
@@ -156,7 +215,7 @@ var hashed = crypto.createHash('md5').update(string).digest('hex')
 console.log(hashed)
 
 
-// API Request
+// 發送 POST 請求
 var request = require("request");
 request({
   uri: environment+"/trade/v1/payment",
@@ -191,11 +250,11 @@ ob_start();
   
      $url = 'https://test-openapi-hk.qfapi.com';
      $api_type = '/trade/v1/payment';
-     $pay_type = '801101'; //Alipay Web Payment = 801101
-     //$mchid = "MNxMp11FV35qQN"; //Only agents must provide this parameter
-     $app_code = 'FF2FF74F2F2E42769A4A73*********'; //API credentials are provided by QFPay
-     $app_key = '7BE791E0FD2E48E6926043B*********'; //API credentials are provided by QFPay
-     $now_time = date("Y-m-d H:i:s"); //Get current date-time
+     $pay_type = '801101';
+     //$mchid = "MNxMp11FV35qQN"; 
+     $app_code = 'FF2FF74F2F2E42769A4A73*********'; 
+     $app_key = '7BE791E0FD2E48E6926043B*********';
+     $now_time = date("Y-m-d H:i:s");
      
      $fields_string = '';
      $fields = array(
@@ -206,7 +265,7 @@ ob_start();
       'txamt' => urlencode(2200),
       'txdtm' => $now_time
     );
-    ksort($fields); //字典排序A-Z升序方式
+    ksort($fields);
     print_r($fields);
     
     foreach($fields as $key=>$value) { 
@@ -216,12 +275,10 @@ ob_start();
   
   $sign = strtoupper(md5($fields_string . $app_key));
   
-  //// Header ////
   $header = array();
   $header[] = 'X-QF-APPCODE: ' . $app_code;
   $header[] = 'X-QF-SIGN: ' . $sign;
   
-  //Post Data
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, $url . $api_type);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -242,7 +299,9 @@ ob_end_flush();
 </TabItem>
 </Tabs>
 
-> 上述指令會回傳如下結構的 JSON：
+---
+
+## JSON 回應範例
 
 ```json
 {
@@ -264,48 +323,14 @@ ob_end_flush();
 }
 ```
 
-:::note
-支付宝香港不支持原生支付宝收银台页面, 开发人员需要请求二维码并使用`iframe`嵌入
+## 備註
+
+:::tip
+請將 QR Code 或 `iframe` 指向回應中的 `pay_url`。:::
+
+:::warning
+請勿重複使用 `out_trade_no`。:::
+
+:::info
+若回傳 `respcd` = `1143`/`1145`，請使用 `/trade/v1/query` API 查詢最終交易結果。
 :::
-
-## Web/WAP支付
-
-客户使用支付宝在商户网站上购物, 用户扫描显示的二维码进行支付, 确认总金额后进行支付. 最后可以用`return_url`参数将用户重定向到一个商户网站上选中的页面. 支付宝以人民币计费实时从消费者的支付宝钱包中扣除支付金额, QFPay 最终会以当地货币结算支付金额.
-
-### HTTP请求
-
-`POST ../trade/v1/payment` <br/>
-`PayType: 801101` `支付宝线上上扫码支付 (海外商戶)` <br/>
-`PayType: 801107` `支付宝线上上WAP支付 (海外商戶)` <br/>
-`PayType: 801501` `支付宝线上扫码支付 (香港商戶)` <br/>
-`PayType: 801512` `支付宝线上WAP支付 (香港商戶)` <br/>
-
-### 请求参数
-
-参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述
---------- | -------- | --------- | ------- | -------
-订单支付金额 | `txamt` | 是 | Int(11) |当前货币最小计量单位计算，只允许整数类型 (i.e. 100 = $1)，建议数值大于200，避免因支付金额过低而被交易风控。
-币种 | `txcurrcd` | 是 | String(3) | 交易币种, 请查看[币种](/docs/preparation/paycode#支付币种)表以获取完整的可选用的币种
-支付类型 | `pay_type` | 是 | String(6) | 支付宝线上支付 = 801101
-外部订单号 | `out_trade_no` | 是 | String(128)| 开发者自定义订单号，在同一商户账户中的每笔交易和退款请求该参数值唯一
-请求交易时间 | `txdtm` | 是 | String(20) | 交易时间格式：<br/> YYYY-MM-DD hh:mm:ss
-交易过期时间 | `expired_time` | 否 <br/>(仅限正扫支付) | String(3)  | 以分钟为计时的二维码过期时间,默认的过期时间是30分钟. 该参数可以被手动设置为最小5分钟,最大120分钟 <br/> 该参数可用于: <br/>800201 - WeChat scan code
-商品名称标识 | `goods_name` | 否  | String(64) | 商品名称 / 标识: 不能超过 20 个字母数字或包含特殊字符。 APP支付不能为空。 如果参数是汉字，则需要使用**UTF-8**编码。
-子商户号 | `mchid` | 否  | String(16) | 标识子商户身份，由QFPay 分配（渠道系统后台查看对应商户(非业务员)子商户号，被视为对应商户的交易）
-设备唯一id | `udid` | 否  | String(40) |  唯一的设备ID,显示在商户管理后台上. 
-跳转地址 | `return_url` | 否  | String(512) | 支付成功后的用户跳转地址. 支付宝WAP限制了`return_url`最大为200个字符.
-
-### 响应参数
-
-参数名称 | 参数编码 | 参数类型 | 描述
---------- | -------- | --------- | -------
-支付类型 | `pay_type` | String(6) | 支付宝 Web/Wap 支付 = 801101/801107 |
-系统时间 | `sysdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss <br/> 这个参数值被用作结算截止时间 | 
-请求交易时间| `txdtm` | String(20) | 格式：YYYY-MM-DD hh:mm:ss  |
-调试信息 | `resperr` | String(128) |
-订单支付金额 | `txamt` | Int(11) |
-信息描述 | `respmsg` | String(128) |
-外部订单号 | `out_trade_no` | String(128) | 外部订单号
-QFPay 订单号 | `syssn` | String(40) | 
-返回码 | `respcd` | String(4) | 0000 = 请求成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](/docs/preparation/paycode#交易状态码) 获得完整返回类型列表 |
-支付链接 | `pay_url` | String(512) |
