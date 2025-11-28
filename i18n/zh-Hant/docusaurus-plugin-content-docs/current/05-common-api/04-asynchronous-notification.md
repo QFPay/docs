@@ -127,3 +127,10 @@ print(signature)
 `cash_fee_type` | 否 | String | 实际支付货币 e.g. CNY
 `cash_refund_fee` | 否 | String | 实际退款金额
 `cash_refund_fee_type` | 否 | String | 实际退款货币 e.g. CNY
+
+
+# 异步通知请求的来源 IP 地址
+QFPay 的异步通知请求将会来自以下的 IP 地址:
+- 13.228.112.115
+- 18.138.115.47
+- 18.166.202.92
