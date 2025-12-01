@@ -22,7 +22,7 @@ For WAP/H5 payments, it is recommended that merchants guide users to open the li
 PayType | Description
 ------- | -------
 800212 | WeChat H5 Payment, details please refer to [WeChat Pay H5 (in mobile browser)](/docs/online-shop/wechat/wechat-pay-h5)
-801512 | Alipay Hong Kong WAP payment, details please refer to [Alipay Service Window H5](/docs/online-shop/alipay/alipay-service-window-h5)
+801512 | Alipay Hong Kong WAP payment, details please refer to [Alipay Service Window H5](/docs/online-shop/alipay/alipay-wap-h5-payments)
 800712 | UNIONPAY WAP Payment
 805812 | PayMe Online WAP Payment
 

@@ -21,7 +21,7 @@ WAP/H5 支付，建議商戶平台引導用戶使用手機瀏覽器 Chrome/Safar
 支付类型 | 描述
 --------- | ------- 
 800212 | 微信H5支付, 详情可以参考[WeChat Pay H5 (in mobile browser)](/docs/online-shop/wechat/wechat-pay-h5)
-801512 | 支付宝香港WAP支付, 详情可以参考[# Alipay Service Window H5](/docs/online-shop/alipay/alipay-service-window-h5)
+801512 | 支付宝香港WAP支付, 详情可以参考[# Alipay Service Window H5](/docs/online-shop/alipay/alipay-wap-h5-payments)
 800712 | 银联WAP支付
 805812 | PayMe 线上WAP支付
 

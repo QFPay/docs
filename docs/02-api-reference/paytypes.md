@@ -117,4 +117,4 @@ Code   | Description
 
 - **802001**:  This payment method **does not support refunds**.
 
-<!-- - ****:  For complete request and response details, please refer to the [API Reference section](https://sdk.qfapi.com/docs/online-shop/alipay/alipay-online-payments#alipay-online-payments).-->
+<!-- - ****:  For complete request and response details, please refer to the [API Reference section](https://sdk.qfapi.com/docs/online-shop/alipay/alipay-web-payments#alipay-web-payments).-->

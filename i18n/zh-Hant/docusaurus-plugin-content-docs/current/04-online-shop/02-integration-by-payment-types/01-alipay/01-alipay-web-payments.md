@@ -1,15 +1,15 @@
 ---
-id: alipay-online-payments
-title: 支付寶線上支付
-sidebar_label: 支付寶線上
-description: 支付寶 Web 及 WAP 支付（香港與海外）整合指南
+id: alipay-web-payments
+title: 支付寶 Web 支付
+sidebar_label: 支付寶 Web 支付
+description: 支付寶 Web 支付（香港與海外）整合指南
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# 支付寶線上支付（Web/WAP）
+# 支付寶線上支付（Web）
 
 客戶可在商戶網站上使用支付寶完成交易。使用者掃描顯示的二維碼確認金額並付款。付款完成後，系統可透過 `return_url` 參數將使用者導回商戶指定頁面。支付寶以人民幣即時從用戶錢包扣除金額，QFPay 則以港幣或本地貨幣結算給商戶。
 
@@ -22,9 +22,7 @@ import Link from '@docusaurus/Link';
 | 編碼   | 描述                                  |
 |-----------|---------------------------------------|
 | 801101    | 支付寶線上掃碼支付（海外商戶）        |
-| 801107    | 支付寶線上 WAP 支付（海外商戶）       |
 | 801501    | 支付寶線上掃碼支付（香港商戶）        |
-| 801512    | 支付寶線上 WAP 支付（香港商戶）       |
 
 ---
 
@@ -41,7 +39,7 @@ import Link from '@docusaurus/Link';
 | 商品名稱       | `goods_name`   | 否   | String(64)   | 最多 20 個字元（含中英文及數字）。若為中文需使用 UTF-8 編碼。 |
 | 子商戶編號     | `mchid`        | 否   | String(16)   | 若提供則為必填，否則請勿傳入。由 QFPay 分配。 |
 | 設備唯一 ID    | `udid`         | 否   | String(40)   | 裝置代碼，將顯示於商戶後台。 |
-| 成功跳轉網址   | `return_url`   | 否   | String(512)  | 支付完成後導向的 URL。WAP 限制為 200 字元內。 |
+| 成功跳轉網址   | `return_url`   | 否   | String(512)  | 支付完成後導向的 URL。 |
 
 ---
 
@@ -326,10 +324,12 @@ ob_end_flush();
 ## 備註
 
 :::tip
-請將 QR Code 或 `iframe` 指向回應中的 `pay_url`。:::
+請將 QR Code 或 `iframe` 指向回應中的 `pay_url`。
+:::
 
 :::warning
-請勿重複使用 `out_trade_no`。:::
+請勿重複使用 `out_trade_no`。
+:::
 
 :::info
 若回傳 `respcd` = `1143`/`1145`，請使用 `/trade/v1/query` API 查詢最終交易結果。

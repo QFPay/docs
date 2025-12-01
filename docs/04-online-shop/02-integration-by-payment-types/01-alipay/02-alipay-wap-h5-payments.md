@@ -1,16 +1,66 @@
+---
+id: alipay-wap-h5-payments
+title: Alipay WAP / H5 Payments
+description: This guide covers integration for Alipay Cross-Border (801107), AlipayHK (801512), and Alipay Service Window H5 (800107) payment types.
+sidebar_label: Alipay WAP / H5 Payments
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# Alipay Service Window H5
+# Alipay WAP / H5 Payments
 
-<Link to="/img/alipay_h5_process.jpg" target="_blank">![Alipay H5 process-flow](@site/static/img/alipay_h5_process.jpg)</Link>
+## Use Cases
 
-```plaintext
+- Payment initiated via **mobile browsers** (not inside apps)
+- Suitable for mobile websites, WebApps, or cases where merchants guide users to open links in mobile browsers
+- Supported wallets:
+  - Alipay Cross-Border (`801107`)
+  - AlipayHK (`801512`)
+  - Alipay Service Window H5 (`800107`)
 
-For code instructions select Python, Java, Node.js or PHP with the tabs below.
+:::note
+Social apps like WeChat or Facebook Messenger often block redirection to external wallet apps. It's recommended to guide users to open payment links in Chrome, Safari, or other mobile browsers.
+:::
 
-```
+---
+
+## HTTP Request
+
+- **Endpoint**: `/trade/v1/payment`
+- **Method**: `POST`
+- **PayType Reference Table**:
+
+| PayType   | Wallet Name         | Description                       |
+|-----------|---------------------|-----------------------------------|
+| `801107`  | Alipay Cross-Border | Web or WAP international payment  |
+| `801512`  | AlipayHK            | Alipay Hong Kong WAP payments     |
+| `800107`  | Alipay H5 (JSAPI)   | Requires user authorization code  |
+
+---
+
+## Request Parameters
+
+For the full list of shared request parameters, see [Public Request Parameters](/docs/api-reference/request-format). Below are fields specific to Alipay WAP / H5 payments:
+
+| Parameter       | Required | Description                                          |
+|-----------------|----------|------------------------------------------------------|
+| `txamt`         | Yes      | Transaction amount in cents (e.g. 100 = $1). Recommended to be > 200 |
+| `txcurrcd`      | Yes      | Currency code (e.g., HKD)                            |
+| `pay_type`      | Yes      | See PayType table above                              |
+| `out_trade_no`  | Yes      | Unique transaction ID from merchant system           |
+| `txdtm`         | Yes      | Transaction timestamp in `YYYY-MM-DD hh:mm:ss` format |
+| `return_url`    | Yes      | URL to redirect users after successful payment       |
+| `notify_url`    | Yes      | Endpoint to receive asynchronous payment result      |
+| `goods_name`    | Yes      | Product name (required by some wallets)              |
+| `mchid`         | Yes      | QFPay merchant ID (required if assigned)             |
+| `openid`        | Conditional | Only required for `800107` (Alipay H5 / Service Window) |
+| `limit_pay`     | No       | Required only for Mainland China restrictions        |
+
+---
+
+## Sample Request  
 
 <Tabs>
 <TabItem value="python" label="Python">
@@ -244,7 +294,11 @@ ob_end_flush();
 </TabItem>
 </Tabs>
 
-> The above command returns JSON structured like this:
+## Response Parameters
+
+Refer to [Public Response Parameters](/docs/api-reference/response-format) for shared fields. Below are additional fields related to Alipay.
+
+## Sample Response  
 
 ```json
 {
@@ -265,40 +319,36 @@ ob_end_flush();
   "chnlsn": ""
 }
 ```
+---
 
-## Alipay Service Window H5 Payment (WAP)
+## Sequence Diagram  
 
-Alipay Service Window H5 Payment enables merchants to call the Alipay payment module by using the JSAPI interface to collect payments. The customer checks out on the merchant's mobile website in Alipay, confirms the total amount and makes the payment.
+<Link to="/img/alipay_h5_process.jpg" target="_blank">![Alipay H5 process-flow](@site/static/img/alipay_h5_process.jpg)</Link>
 
-### HTTP Request
+---
 
-**Endpoint** : `/trade/v1/payment`
+## Asynchronous Notification
 
-**Method** : `POST`
+After payment is completed, QFPay will notify your backend via the `notify_url`.
 
-**PayType** : `800107`
+- See format and signature verification in [Asynchronous Notification](/docs/common-api/asynchronous-notification)
+- Use [Transaction Enquiry](/docs/common-api/transaction-enquiry) API to verify final status
 
-**Step 1:** Get User ID
-For more details about how to acquire the user id please refer to the [official Alipay documentation](https://docs.open.alipay.com/289/105656).
+:::warning
+Never rely solely on frontend redirection. Always validate with backend notification and signature verification.
+:::
 
-**Step 2:** Request Payment
+---
 
-### Payment Parameters
+## Security Considerations
 
-| Attribute | Mandatory | Type | Description |
-|:---|:----- |-----   |----   |
-|Public request parameters |—  |— |Please refer to the [Public Payment Section](/docs/preparation/paycode#public-payment-parameters) for more details   |
-|`openid`   |Yes  | String(64) |Alipay authorization code, the `user_id` is returned by the interface, e.g. 2088802811715388 |
-| `return_url` | No | String(512) | Redirect URL, address for user redirect after successful payment |
-|`limit_pay`  |No |String   |Designated payment method, only applicable for mainland China   |
+- Signatures must follow [Signature Verification Rules](/docs/api-reference/response-format#signature-verification)
+- Never expose credentials or secret keys in frontend code
+- For error codes, refer to [Transaction Response Codes](/docs/api-reference/status-codes)
 
-### Response Parameters
+---
 
-| Attribute | Secondary Attribute | Type | Description |
-|:----    |:---|:----- |----   |
-|`pay_params`|`tradeNO` |String  |Transaction number, provide the transaction number in the call function |
-|`txcurrcd`  |  |  String(3) | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies |
-|Public response parameters |—  |— |Please refer to the [Public Payment Section](/docs/preparation/paycode#public-payment-parameters) for more details   |
+## Additional References
 
-**Step 3:** Payout through the cashout interface
-For more information regarding the cashout interface please refer to the [official Alipay documentation](https://docs.open.alipay.com/common/105591).
+- [Alipay H5 Authorization Flow (Official)](https://docs.open.alipay.com/289/105656)
+- [Alipay Cashier Documentation (Official)](https://docs.open.alipay.com/common/105591)

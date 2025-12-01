@@ -12,7 +12,7 @@ import Link from '@docusaurus/Link';
 
 **JSAPI 支付类型**
 
-Note: 加拿大地区的商户，请参阅[此](/docs/online-shop/alipay/alipay-online-payments)部分了解支付请求和响应参数，其中“pay_type”为800207。<br/>
+Note: 加拿大地区的商户，请参阅[此](/docs/online-shop/alipay/alipay-web-payments)部分了解支付请求和响应参数，其中“pay_type”为800207。<br/>
 
 JSAPI 支付有两种不同的实现方法。
 

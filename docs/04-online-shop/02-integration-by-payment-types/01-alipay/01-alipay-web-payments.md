@@ -1,8 +1,8 @@
 ---
-id: alipay-online-payments
-title: Alipay Online Payments
-sidebar_label: Alipay Online
-description: Integration guide for Alipay Web and WAP payments (HK + Overseas)
+id: alipay-web-payments
+title: Alipay Web Payments
+sidebar_label: Alipay Web Payments
+description: Integration guide for Alipay Web payments (HK + Overseas)
 ---
 
 import Tabs from '@theme/Tabs';
@@ -11,7 +11,7 @@ import Link from '@docusaurus/Link';
 
 # Alipay Online Payments
 
-This document outlines the integration steps for **Alipay Web and WAP Payments** for both Hong Kong and overseas merchants.
+This document outlines the integration steps for **Alipay Web Payments** for both Hong Kong and overseas merchants.
 
 :::note
 Alipay Hong Kong does **not** support the native Alipay checkout page. Developers must request a QR code and embed it using an `iframe`.
@@ -34,9 +34,7 @@ Alipay online payments allow customers to complete purchases on a merchant websi
 | PayType  | Description                        |
 |----------|------------------------------------|
 | 801101   | Alipay Web Payment (Overseas)      |
-| 801107   | Alipay WAP Payment (Overseas)      |
 | 801514   | Alipay Web Payment (Hong Kong)     |
-| 801512   | Alipay WAP Payment (Hong Kong)     |
 
 ---
 
@@ -53,7 +51,7 @@ Alipay online payments allow customers to complete purchases on a merchant websi
 | `goods_name`  | String(64) | No       | Product name. Max 20 chars; UTF-8 encoded if Chinese.                      |
 | `mchid`       | String(16) | No       | Required if merchant has sub-Merchant ID assigned.                         |
 | `udid`        | String(40) | No       | Unique device ID (for reporting).                                          |
-| `return_url`  | String(512)| No       | Redirect URL after successful payment. Max 200 chars (for WAP only).       |
+| `return_url`  | String(512)| No       | Redirect URL after successful payment.       |
 
 ---
 

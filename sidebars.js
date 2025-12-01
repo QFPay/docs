@@ -100,8 +100,18 @@ const sidebars = {
             type: 'generated-index'
           },
           items: [
-            'online-shop/integration-by-payment-types/visa-master-online-payment',
-            'online-shop/integration-by-payment-types/applepay',
+            {
+              type: 'category',
+              label: 'Alipay',
+              link: {
+                type: 'generated-index'
+              },
+              items: [
+                'online-shop/integration-by-payment-types/alipay/alipay-web-payments', 
+                'online-shop/integration-by-payment-types/alipay/alipay-wap-h5-payments',
+                'online-shop/integration-by-payment-types/alipay/alipay-in-app-payments'
+              ]
+            },
             {
               type: 'category',
               label: 'Wechat',
@@ -118,16 +128,17 @@ const sidebars = {
             },
             {
               type: 'category',
-              label: 'Alipay',
+              label: 'FPS',
               link: {
                 type: 'generated-index'
               },
               items: [
-                'online-shop/integration-by-payment-types/alipay/alipay-online-payments', 
-                'online-shop/integration-by-payment-types/alipay/alipay-service-window-h5',
-                'online-shop/integration-by-payment-types/alipay/alipay-in-app-payments'
+                //'online-shop/integration-by-payment-types/fps/fps-app-call-app',
+                //'online-shop/integration-by-payment-types/fps/fps-ecert-setup',
               ]
             },
+            'online-shop/integration-by-payment-types/visa-master-online-payment',
+            'online-shop/integration-by-payment-types/applepay'
           ]
         },
         {

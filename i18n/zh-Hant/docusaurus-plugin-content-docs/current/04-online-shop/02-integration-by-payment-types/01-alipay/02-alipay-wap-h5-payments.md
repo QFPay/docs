@@ -1,14 +1,67 @@
+---
+id: alipay-wap-h5-payments
+title: 支付寶 WAP / H5 支付
+description: 本文檔涵蓋支付寶海外（801107）、支付寶香港（801512）、以及服務窗 H5（800107）的整合方式。
+sidebar_label: 支付寶 WAP / H5 支付
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# 支付宝服务窗H5跨境支付
+# 支付寶 WAP / H5 支付
 
-```plaintext
+## 適用場景
 
-For code instructions select Python, Java, Node.js or PHP with the tabs below.
+- 使用 **手機瀏覽器**（非 App）進行付款
+- 適用於商戶的 Mobile Web、WebApp、或引導用戶於瀏覽器開啟付款連結
+- 支援錢包包括：
+  - 支付寶海外（`801107`）
+  - 支付寶香港（`801512`）
+  - 支付寶服務窗 H5（`800107`）
 
-```
+:::note
+社交 App（如 WeChat、Facebook Messenger）常常無法跳轉至其他錢包 App，建議引導用戶在手機瀏覽器中開啟付款連結。
+:::
+
+---
+
+## HTTP 請求
+
+- **API 端點**：`/trade/v1/payment`
+- **請求方法**：`POST`
+- **支付編碼對應表**：
+
+| 編碼   | 錢包名稱           | 描述                      |
+|-----------|--------------------|---------------------------|
+| `801107`  | 支付寶海外         | Web 或 WAP 跨境支付       |
+| `801512`  | 支付寶香港         | 香港用戶 WAP 支付         |
+| `800107`  | 支付寶服務窗 H5    | JSAPI + 授權碼機制支付    |
+
+---
+
+## 請求參數
+
+請求參數格式請參考[公共支付請求參數](/docs/api-reference/request-format)，以下僅列出與支付寶 WAP / H5 相關的部分參數：
+
+
+| 參數名稱       | 是否必填 | 描述                                       |
+|----------------|----------|--------------------------------------------|
+| `txamt`        | 是       | 交易金額（單位為分），建議大於 200        |
+| `txcurrcd`     | 是       | 貨幣代碼，例如 HKD                         |
+| `pay_type`     | 是       | 請參考上述 PayType 表                      |
+| `out_trade_no` | 是       | 商戶自訂訂單編號，需唯一                   |
+| `txdtm`        | 是       | 交易時間，格式：YYYY-MM-DD hh:mm:ss       |
+| `return_url`   | 是       | 成功付款後跳轉用戶的頁面                  |
+| `notify_url`   | 是       | 異步通知商戶後端付款結果的接收端點        |
+| `goods_name`   | 是       | 商品名稱（僅部分錢包強制）                 |
+| `mchid`        | 是       | 商戶號，如由 QFPay 分配則為必填           |
+| `openid`       | 視情況    | 僅適用於 `800107`，即服務窗 H5 授權碼     |
+| `limit_pay`    | 否       | 僅適用於中國大陸支付場景                   |
+
+---
+
+## 請求範例
 
 <Tabs>
 <TabItem value="python" label="Python">
@@ -242,7 +295,10 @@ ob_end_flush();
 </TabItem>
 </Tabs>
 
-> 上述指令會回傳如下結構的 JSON：
+## 響應參數
+回應格式請參考 [ 公共支付響應參數](/docs/api-reference/response-format)。
+
+## 響應範例
 
 ```json
 {
@@ -264,37 +320,28 @@ ob_end_flush();
 }
 ```
 
+## 流程圖
+
 <Link to="/img/alipay_h5_process.jpg" target="_blank">![Alipay H5 process-flow](@site/static/img/alipay_h5_process.jpg)</Link>
 
-## 支付宝服务窗H5跨境支付(WAP)
+## 異步通知說明
 
-支付宝服务窗口H5支付允许商户使用JSAPI接口调用支付宝支付模块进行收款.顾客可以通过支付宝在商户的手机端网站上确认总金额后付款.
+支付完成後，QFPay 將透過異步通知（`notify_url`）發送交易結果。
 
-### HTTP请求
+- 通知格式請參考：[異步通知 API 文檔](/docs/common-api/asynchronous-notification)
+- 建議使用 [交易查詢 API](/docs/common-api/transaction-enquiry) 進行最終結果確認
 
-`POST ../trade/v1/payment` `PayType: 800107`
+:::warning
+請勿僅依賴前端跳轉結果，應以後端通知為準，並驗證簽名。
+:::
 
-**Step 1:** 获取userid
-详细请参考[支付宝官方文档](https://docs.open.alipay.com/289/105656).
+## 安全注意事項
 
-**Step 2:** 请求支付
+- 簽名計算請依照 [公共參數規則](/docs/api-reference/response-format#%E5%9B%9E%E6%87%89%E7%B0%BD%E5%90%8D%E9%A9%97%E8%AD%89)
+- 請勿將密鑰寫死於前端代碼中
+- 錯誤代碼請參考：[交易返回碼](/docs/api-reference/status-codes)
 
-### 请求支付参数
+## 延伸參考
 
-|参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述 |
-|:----    |:---|:----- |-----   |----   |
-|常用支付参数 |—  |— |—   |—   |
-|支付宝授权码|`openid`   |是 | String(64) |从第一步所返回的 `user_id`, 示例: 2088802811715388 |
-|重定向URL | `return_url` | 否 | String(512) | 用户在成功支付后跳转的地址 |
-|指定支付方式 |`limit_pay`  |否 |String   | 只适用于中国大陆 |
-
-### 响应参数
-
-|参数编码 | 二级参数编码 | 参数类型 | 参数名称 | 描述 |
-|:----    |:---|:----- |-----   |----   |
-|`pay_params`|`tradeNO`   |String  | 交易号|通过传入交易号唤起快捷调用方式 |
-|`txcurrcd`  |  |  String(3) |   | 交易币种, 请查看[币种](/docs/preparation/paycode#支付币种)表以获取完整的可选用的币种 |
-|常用响应参数|—  |— |—   |—   |
-
-**Step 3:** 收银台唤起支付
-详细请参考[支付宝官方文档](https://docs.open.alipay.com/common/105591).
+- [支付寶 H5 授權流程](https://docs.open.alipay.com/289/105656)
+- [支付寶官方收銀台文檔](https://docs.open.alipay.com/common/105591)

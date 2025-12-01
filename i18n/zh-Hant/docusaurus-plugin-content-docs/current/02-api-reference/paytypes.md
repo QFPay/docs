@@ -31,9 +31,8 @@ import TabItem from '@theme/TabItem';
 非所有商戶都開通所有 pay_type。請參考你的開通資料，或聯繫 technical.support@qfpay.com 確認。
 :::
 
-## Supported Payment Types
 
-## 支付类型
+## 支付類型
 
 | 編碼    | 描述 |
 |---------|------|

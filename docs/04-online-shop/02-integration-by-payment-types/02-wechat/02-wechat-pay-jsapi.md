@@ -12,7 +12,7 @@ Official account payments must be initiated from the WeChat in-app browser. They
 
 ## JSAPI Payment Types
 
-Note: Merchants in Canada, please refer to [this](/docs/online-shop/alipay/alipay-online-payments#alipay-online-payments) section for payment request and response parameters with `pay_type` 800207. <br/>
+Note: Merchants in Canada, please refer to [this](/docs/online-shop/alipay/alipay-web-payments#alipay-web-payments) section for payment request and response parameters with `pay_type` 800207. <br/>
 
 There are two different methods how JSAPI payments can be implemented.
 

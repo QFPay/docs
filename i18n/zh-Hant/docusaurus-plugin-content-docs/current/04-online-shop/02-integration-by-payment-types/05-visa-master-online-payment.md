@@ -2,7 +2,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# Visa / Mastercard 線上支付整合指南
+# Visa / Mastercard 線上支付
 
 本頁提供使用 Visa 與 Mastercard 進行線上信用卡支付的整合說明。我們目前於 [香港環境](/docs/preparation/environments) 支援所有主要發卡機構的信用卡交易。
 
@@ -12,10 +12,10 @@ import Link from '@docusaurus/Link';
 
 商戶可根據需求選擇以下其中一種整合方式：
 
-1. **[QFPay Checkout Services](/docs/online-shop/checkout-integration/checkout)**  
+1. **[託管結帳頁面（收銀台）](/docs/online-shop/checkout-integration/checkout)**  
    託管式支付頁方案，適合希望降低 PCI 負擔並快速上線的商戶。
 
-2. **[QFPay Payment Element SDK](/docs/online-shop/checkout-integration/payment-element)**  
+2. **[支付組件 (Element) SDK](/docs/online-shop/checkout-integration/payment-element)**  
    客戶端嵌入式 SDK，將輸入欄位直接嵌入商戶網頁中，提供完全的 UX 控制與 3DS 支援。
 
 ---
