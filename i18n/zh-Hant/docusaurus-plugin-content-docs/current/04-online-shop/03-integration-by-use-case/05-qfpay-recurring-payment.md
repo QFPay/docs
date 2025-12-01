@@ -33,7 +33,7 @@ import Link from '@docusaurus/Link';
 
 :::info
 当前 subscription 的创建流程如下:
-1. [配置你的异步通知地址](/docs/common-api/asynchronous-notification#描述)，你可以通过通知获取 `token_id` 并且跟进订阅支付的状态。
+1. [配置你的异步通知地址](/docs/common-api/asynchronous-notification)，你可以通过通知获取 `token_id` 并且跟进订阅支付的状态。
 2. [创建 customer 对象](#创建-customer-对象)并获得 `customer_id`。
 3. [对接我们的 element 服务](/docs/online-shop/checkout-integration/payment-element#引入方式) 并使用 elements.createEnhance() 和 payment.pay() 来构建 token 创建页面. 然后使用 `customer_id` 和卡信息来创建 token 并获得 `token_id`。
 4. [创建 product 对象](#创建-product-对象)并获得 `product_id`，你可以在 product 对象定义订阅支付的每个扣款周期的交易金额和两次扣款周期的间隔。

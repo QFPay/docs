@@ -5,7 +5,8 @@ description: 使用 QFPay 提供的查詢接口以獲取交易（付款、退款
 sidebar_label: 交易查詢
 -------------------
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs'; 
+import TabItem from '@theme/TabItem';
 
 # 交易查詢
 
