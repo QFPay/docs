@@ -73,18 +73,18 @@ import requests
 import datetime
 import string
 
-# Enter Client Credentials
+# 輸入用戶端憑證
 environment = 'https://test-openapi-hk.qfapi.com'
 app_code = 'D5589D2A1F2E42A9A60C37*********'
 client_key = '0E32A59A8B454940A2FF39**********'
 
 
-# Create parameter values for data payload
+# 建立資料請求所需的參數值
 current_time = datetime.datetime.now().replace(microsecond=0)                                
 
 print(current_time)
 
-# Create signature
+# 產生簽名
 def make_req_sign(data, key):
     keys = list(data.keys())
     keys.sort()
@@ -97,11 +97,11 @@ def make_req_sign(data, key):
     return s.upper()
 
 
-# Body payload
-txamt = '10' #In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control
+# 請求內容主體
+txamt = '10' # 以分為單位，建議金額大於 200 以避免風控攔截
 txcurrcd = 'HKD'
-pay_type = '801107' # Alipay Wap Payment = 801107
-auth_code='283854702356157409' #CPM only
+pay_type = '801107' 
+auth_code='283854702356157409'
 out_trade_no = '01234567890123'
 txdtm = current_time
 goods_name = 'test1'   
@@ -167,30 +167,31 @@ public class TestMain {
 <TabItem value="javascript" label="Javascript">
 
 ```javascript
-// Enter Client Credentials
+// 輸入用戶端憑證
 const environment = 'https://test-openapi-hk.qfapi.com'
 const app_code = 'D5589D2A1F2E42A9A60C37*********'
 const client_key = '0E32A59A8B454940A2FF39*********'
 
-// Generate Timestamp
+// 生成當前時間
 var dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
 console.log(dateTime)
 
-// Body Payload
+// 建立資料請求所需的參數值
 const key = client_key
 var tradenumber = String(Math.round(Math.random() * 1000000000))
 console.log(tradenumber)
 
+// 請求內容主體
 var payload = {
-'txamt': '10', // In USD,EUR,etc. Cent. Suggest value > 200 to avoid risk control
+'txamt': '10', // 以分為單位，建議金額大於 200 以避免風控攔截
 'txcurrcd': 'HKD',
-'pay_type': '801107', // Alipay Wap Payment = 801107
+'pay_type': '801107',
 'out_trade_no': tradenumber,
 'txdtm': dateTime,
 'mchid': 'ZaMVg*****'
 };
 
-// Signature Generation
+// 產生簽名
 const ordered = {};
 Object.keys(payload).sort().forEach(function(key) {
   ordered[key] = payload[key] });
@@ -209,7 +210,7 @@ var hashed = crypto.createHash('md5').update(string).digest('hex')
 console.log(hashed)
 
 
-// API Request
+// API 請求
 var request = require("request");
 request({
   uri: environment+"/trade/v1/payment",
@@ -244,11 +245,11 @@ function GetRandStr($length){
   
 $url = 'https://test-openapi-hk.qfapi.com';
 $api_type = '/trade/v1/payment';
-$pay_type = '801107'; //Alipay Wap Payment = 801107
-//$mchid = "MNxMp11FV35qQN"; //Only agents must provide this parameter
-$app_code = 'FF2FF74F2F2E42769A4A73*********'; //API credentials are provided by QFPay
-$app_key = '7BE791E0FD2E48E6926043B*********'; //API credentials are provided by QFPay
-$now_time = date("Y-m-d H:i:s"); //Get current date-time
+$pay_type = '801107'; 
+//$mchid = "MNxMp11FV35qQN"; // 只有渠道商需要提供
+$app_code = 'FF2FF74F2F2E42769A4A73*********'; 
+$app_key = '7BE791E0FD2E48E6926043B*********'; 
+$now_time = date("Y-m-d H:i:s"); // 獲取當前時間
 
 $fields_string = '';
 $fields = array(
@@ -269,12 +270,11 @@ $fields_string = substr($fields_string , 0 , strlen($fields_string) - 1);
 
 $sign = strtoupper(md5($fields_string . $app_key));
 
-//// Header ////
 $header = array();
 $header[] = 'X-QF-APPCODE: ' . $app_code;
 $header[] = 'X-QF-SIGN: ' . $sign;
 
-//Post Data
+//POST 數據
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url . $api_type);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

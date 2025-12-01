@@ -1,43 +1,62 @@
+---
+
+title: Transaction Enquiry
+description: Query the status of payments, refunds, and cancellations via QFPay's transaction enquiry API.
+sidebar_label: Transaction Enquiry
+----------------------------------
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # Transaction Enquiry
 
-:::warning
-If the `mchid` is provided, it is mandatory to submit the `mchid` when calling the API (unless otherwise specified). On the contrary, if `mchid` is not provided, merchants shall not pass the `mchid` field in the API request.
-:::
-
 ## API Endpoint for Transaction Enquiry
 
-After making a payment, refund or cancellation request, the merchant can use the query interface to obtain the transaction status.
+After making a payment, refund or cancellation request, merchants can use the enquiry interface to obtain the transaction status.
 
-The merchant can use the query interface to enquire transaction status of one or multiple transactions. In case the interface does not return `syssn` in time, use `out_trade_no` as a condition to query the transaction status.
+This API allows querying by:
 
-If merchants would like to query transactions in a month, they can provide `start_time` and `end_time` then records will be filtered according to the system transaction time `sysdtm`. The interval must be within one calendar month. Otherwise, it is recommended to include the `syssn` parameter as a query condition.
+* `syssn` (QFPay transaction number)
+* `out_trade_no` (merchant-side order number)
+* Or with `start_time` / `end_time` for time-based filtering
 
-When the query transaction is a refund then an additional parameter `origssn` will be returned. The `origssn` shows the QFPay transaction number of the original transaction that has been refunded.
+If querying a refund transaction, the response will also return `origssn`, which refers to the original transaction's `syssn`.
 
-### HTTP Request
+## HTTP Request
 
-**Endpoint** : `/trade/v1/query`
+* **Endpoint** : `/trade/v1/query`
+* **Method** : `POST`
 
-**Method** : `POST`
+Request Headers:
 
-```plaintext
-Request Header:
+```http
+Content-Type: application/x-www-form-urlencoded
+X-QF-APPCODE: <your-app-code>
+X-QF-SIGN: <signature>
+```
 
-{
-  Content-Type: application/x-www-form-urlencoded;
-  X-QF-APPCODE: D5589D2A1F2E42A9A60C37**********
-  X-QF-SIGN: 6FB43AC29175B4602FF95F8332028F19
-}
+## Request Parameters
+
+Full details are documented in [Common API Request Format](/docs/api-reference/request-format), but key parameters for transaction enquiry include:
+
+| Parameter      | Type        | Required    | Description                                                      |
+| -------------- | ----------- | ----------- | ---------------------------------------------------------------- |
+| `mchid`        | String(16)  | Conditional | Required if assigned to the merchant. See warning above.         |
+| `syssn`        | String(128) | No          | QFPay transaction number(s), comma-separated.                    |
+| `out_trade_no` | String(128) | No          | Merchant platform transaction number(s), comma-separated.        |
+| `pay_type`     | String(6)   | No          | Payment type(s), comma-separated.                                |
+| `respcd`       | String(4)   | No          | Filter by specific return code (e.g. `0000`).                    |
+| `start_time`   | String(20)  | No          | Format: `YYYY-MM-DD hh:mm:ss`. Required for cross-month queries. |
+| `end_time`     | String(20)  | No          | Format: `YYYY-MM-DD hh:mm:ss`. Required for cross-month queries. |
+| `page`         | Integer     | No          | Defaults to 1.                                                   |
+| `page_size`    | Integer     | No          | Defaults to 10. Max is 100.                                      |
+
+---
 
 Request Body:
 
-{
-  mchid=ZaMVg*****&syssn=20191227000200020061752831&start_time=2019-12-27 00:00:00&end_time=2019-12-27 23:59:59
-}
-
+```http
+mchid=<merchant-id>&syssn=<qfpay-tx-id>&start_time=2022-12-01 00:00:00&end_time=2022-12-01 23:59:59
 ```
 
 <Tabs>
@@ -262,99 +281,71 @@ ob_end_flush();
 </TabItem>
 </Tabs>
 
-> The above command returns JSON structured like this:
+## Response Parameters
+
+These fields are explained in [Common API Response Format](/docs/api-reference/response-format). The most relevant response fields for transaction enquiry include:
+
+| Field                  | Type    | Description                                                                                         |
+| ---------------------- | ------- | --------------------------------------------------------------------------------------------------- |
+| `syssn`                | String  | QFPay transaction ID                                                                                |
+| `out_trade_no`         | String  | Merchant order ID                                                                                   |
+| `txamt`                | Integer | Transaction amount (in cents)                                                                       |
+| `txcurrcd`             | String  | Currency code (e.g. HKD)                                                                            |
+| `respcd`               | String  | Transaction result code. See [Status Codes](/docs/api-reference/status-codes).                      |
+| `errmsg`               | String  | Result message                                                                                      |
+| `order_type`           | String  | `payment` or `refund`                                                                               |
+| `pay_type`             | String  | Payment channel used                                                                                |
+| `cancel`               | String  | Cancellation/refund flag (0–5). See [Refund Guide](/docs/online-shop/refunds) for full explanation. |
+| `cash_fee`             | String  | Actual paid amount (after discount)                                                                 |
+| `cash_fee_type`        | String  | Actual payment currency (e.g. CNY)                                                                  |
+| `cash_refund_fee`      | String  | Actual refund amount (if applicable)                                                                |
+| `cash_refund_fee_type` | String  | Refund currency                                                                                     |
+| `exchange_rate`        | String  | Applied exchange rate (if cross-currency)                                                           |
+| `sysdtm`               | String  | QFPay system transaction time                                                                       |
+| `txdtm`                | String  | Merchant transaction time                                                                           |
+| `chnlsn`               | String  | Wallet-side transaction number                                                                      |
+| `origssn`              | String  | Original transaction ID (for refunds only)                                                          |
+
+---
 
 ```json
 {
-"respmsg": "", 
-"resperr": "请求成功", 
-"respcd": 0000, 
-"data": 
-[{
-"cardtp": "5", 
-"cancel": "0", 
-"pay_type": "800101", 
-"order_type": "payment", 
-"clisn": "038424", 
-"txdtm": "2019-12-27 10:39:39", 
-"goods_detail": "", 
-"out_trade_no": "CHZ7D61JN1ANJF2R2K1I7TXP2JTCEWBL", 
-"syssn": "20191227000200020061752831", 
-"sysdtm": "2019-12-27 10:40:24", 
-"paydtm": "2019-12-27 10:42:18", 
-"goods_name": "", 
-"txcurrcd": "EUR", 
-"chnlsn2": "", 
-"udid": "qiantai2", 
-"userid": "2605489", 
-"txamt": "10", 
-"chnlsn": "2019122722001411461404119764", 
-"respcd": "0000", 
-"goods_info": "", 
-"errmsg": "success"
-}], 
-"page": "1", 
-"page_size": "10"
+  "respcd": "0000",
+  "resperr": "Request successful",
+  "data": [
+    {
+      "syssn": "20230423000200020088888888",
+      "out_trade_no": "YOUR_ORDER_001",
+      "txamt": "100",
+      "txcurrcd": "HKD",
+      "respcd": "0000",
+      "errmsg": "success",
+      "pay_type": "801107",
+      "order_type": "payment",
+      "txdtm": "2023-04-23 12:00:00",
+      "sysdtm": "2023-04-23 12:00:03",
+      "cancel": "0",
+      "cash_fee": "100",
+      "cash_fee_type": "HKD"
+    }
+  ]
 }
 ```
 
-### Request Parameters
+---
 
-|Attribute|Mandatory|Type|Description|
-|---- |----- |-----   |-----   |
-|` mchid ` | - |String(16) | Merchant number. If MCHID is given, it is mandatory to provide the `mchid.`On the contrary, if `mchid` is not provided, merchants shall not pass the `mchid` field in the API request.|
-| ` syssn ` |No |String(128) |QFPay transaction number. Multiple entries are seperated by commas|
-| ` out_trade_no ` |No |String(128) | API order number, external transaction number / Merchant platform transaction number, multiple entries are seperated by commas   |
-| ` pay_type ` |No |String(6) | Payment type, multiple entries are seperated by commas   |
-| ` respcd ` |No |String(4) | Transaction return code, returns all orders with return code status by default   |
-| ` start_time ` |No |String(20) | Starting time, it is ignored when `syssn` is provided. The default date time is the start of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
-| ` end_time ` |No | String(20) | End Time, it is ignored when `syssn` is provided. The default date time is the end of current month. Cross-month queries must add the time query parameters `start_time` and `end_time`. <br/>Format: YYYY-MM-DD hh:mm:ss   |
-|` page `   |No |  Int(8) | Number of pages, default value is 1   |
-|` page_size ` |No |  Int(8) | Number of items displayed per page, by default 10 transactions will be displayed. The maximum `page_size` value is 100  |
-
-### Response Parameters
-
-|Attribute|Type|Description|
-|------|------  |------   |
-| `page`  | Int(8)  | Page number |
-| `resperr` | String(128) |Request result description|
-| `page_size` | Int(8)  | Display number of items per page |
-| `respcd`   | String(4)  |Request result code, 0000 - Interface call succeeded  |
-| `data` | Object | Query result, in JSON format |
-| `syssn`  |String(40) | QFPay transaction number |
-| `out_trade_no` | String(128) | API order number, external transaction number / Merchant platform transaction number |
-| `chnlsn` | String | Wallet/Channel transaction number  |
-| `goods_name` | String(64) | Product name, Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters. |
-| `txcurrcd` | String(3) | Transaction currency, view the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies |
-| `origssn` | String(40) | Original transaction number, refers to the original QFPay transaction number. This parameter is only available when the `syssn` of a refund is queued |
-| `pay_type` | String(6) | Payment type, please refer to the section [Payment Codes](/docs/preparation/paycode#payment-codes) for a complete list of payment types |
-| `order_type` |  String(16) | Order type. Payment: Payment transaction Refund: Refund transaction |
-| `txdtm` | String(20) | Request transaction time provided by merchant in payment and refund request. Format: YYYY-MM-DD hh:mm:ss |
-| `txamt` | Int(11) |  Amount of the transaction. Unit in cents (i.e. 100 = $1) |
-| `sysdtm` | String(20) | System transaction time. Format: YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements. |
-| `cancel` | String(1) | Cancellation or refund indicator. Transaction cancel status: <br/> 0 = Not cancelled <br/> 1 = For CPM: Transaction reversed or refunded successfully <br/> 2 = For MPM: Transaction canceled successfully <br/> 3 = Transaction refunded <br/> 4 = Alipay Preauth order finished <br/> 5 = Transaction partially refunded |
-| `respcd` | String(4) | Payment status, 0000 = transaction succeeded <br/> 1143/1145 = Please wait to evaluate the transaction status. All other response codes indicate transaction failure |
-| `errmsg` | String(128) | Payment status message |
-| `exchange_rate`  | String | Applied currency conversion exchange rate |
-| `cash_fee`  | String | Actual payment amount by user = transaction amount - discounts |
-| `cash_fee_type` | String | Actual payment currency e.g. CNY |
-| `cash_refund_fee` | String | Actual refund amount |
-| `cash_refund_fee_type` | String | Actual refund currency e.g. CNY |
 
 ## Account Statement
 
-The clearing statement for a particular payment channel is downloaded regularly. Additional requests can only be made in the production environment. The system response is in form of a compressed zip file. Data is based on the selected payment channel and contains all merchants therefore the `mchid` cannot be passed in as a request parameter.
+Clearing statements are periodically generated per payment channel. Requests for historical reports are only supported in **production environment**.
 
-## API Endpoint for Account Statement
+### API Endpoint for Statement Download
 
-### HTTP Request
-
-**Endpoint** : `/download/v1/trade_bill`
-
-**Method** : `GET`
+* **Endpoint** : `/download/v1/trade_bill`
+* **Method** : `GET`
 
 ### Request Parameter
 
-|Attribute | Mandatory | Type | Description|
-|----    |---|----- |-----   |
-| `trade_date` | Yes | String(10) | Get a specific account statement for the selected date. Example: 2017-10-17|
+| Parameter    | Type       | Required | Description                             |
+| ------------ | ---------- | -------- | --------------------------------------- |
+| `trade_date` | String(10) | Yes      | Format: `YYYY-MM-DD`. E.g. `2023-04-01` |

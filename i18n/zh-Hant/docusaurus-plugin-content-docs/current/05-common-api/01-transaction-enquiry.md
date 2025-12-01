@@ -1,33 +1,56 @@
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+---
+id: transaction-enquiry
+title: 交易查詢
+description: 使用 QFPay 提供的查詢接口以獲取交易（付款、退款、取消）的處理狀態
+sidebar_label: 交易查詢
+-------------------
 
-# 交易查询
+import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
 
-:::warning
- 如果已经被提供 `mchid` , 除特殊情况下在呼叫API时必须提交 `mchid`. 与之相反的是, 如果并未被提供 `mchid`, 商户无需在API请求中传递参数 `mchid`.
-:::
+# 交易查詢
 
-## 交易查询API端点
+## 查詢接口端點
 
-### HTTP请求
+當商戶發起付款、退款或取消交易後，可使用本查詢接口獲取該交易的處理狀態。
 
-`POST ../trade/v1/query`
+支援的查詢方式：
 
-```plaintext
-请求头部:
+* 透過 QFPay 訂單號 `syssn`
+* 透過商戶自訂訂單號 `out_trade_no`
+* 或者以時間區間 `start_time` / `end_time` 查詢
 
-{
-  Content-Type: application/x-www-form-urlencoded;
-  X-QF-APPCODE: D5589D2A1F2E42A9A60C37**********
-  X-QF-SIGN: 6FB43AC29175B4602FF95F8332028F19
-}
+若查詢的是退款交易，回應中會額外返回欄位 `origssn`，對應原始交易的 `syssn`。
 
-请求本体:
+## HTTP 請求
 
-{
-  mchid=ZaMVg*****&syssn=20191227000200020061752831&start_time=2019-12-27 00:00:00&end_time=2019-12-27 23:59:59
-}
+* **端點**：`/trade/v1/query`
+* **方法**：`POST`
+
+Header：
+
+```http
+Content-Type: application/x-www-form-urlencoded
+X-QF-APPCODE: <your-app-code>
+X-QF-SIGN: <signature>
 ```
+
+## 請求參數
+
+完整格式請參見 [通用 API 請求格式](/docs/api-reference/request-format)，以下為交易查詢相關的主要欄位：
+
+| 參數             | 類型          | 是否必填 | 說明                                  |
+| -------------- | ----------- | ---- | ----------------------------------- |
+| `mchid`        | String(16)  | 視情況  | 若系統有配置商戶編號則必填，否則不可填寫                |
+| `syssn`        | String(128) | 否    | QFPay 訂單號，可為多筆，以逗號分隔                |
+| `out_trade_no` | String(128) | 否    | 商戶訂單號，可為多筆，以逗號分隔                    |
+| `pay_type`     | String(6)   | 否    | 支付類型，可多筆，用逗號分隔                      |
+| `respcd`       | String(4)   | 否    | 指定回傳狀態碼（如：0000）                     |
+| `start_time`   | String(20)  | 否    | 開始時間。格式：YYYY-MM-DD hh:mm:ss。跨月份查詢必填 |
+| `end_time`     | String(20)  | 否    | 結束時間。格式：YYYY-MM-DD hh:mm:ss。跨月份查詢必填 |
+| `page`         | Integer     | 否    | 預設為 1                               |
+| `page_size`    | Integer     | 否    | 預設為 10，最大值為 100                     |
+
+
 
 <Tabs>
 <TabItem value="python" label="Python">
@@ -40,17 +63,17 @@ import datetime
 import string
 import random
 
-# Enter Client Credentials
+# 輸入用戶端憑證
 environment = 'https://test-openapi-hk.qfapi.com'
 app_code = 'D5589D2A1F2E42A9A60C37**********'
 client_key = '0E32A59A8B454940A2FF39**********'
 
-# Create parameter values for data payload
+# 建立資料請求所需的參數值
 current_time = datetime.datetime.now().replace(microsecond=0)         
 random_string = ''.join(random.choices(string.ascii_uppercase + string.digits, k=32))                       
 
 
-# Create signature
+# 產生簽名
 def make_req_sign(data, key):
     keys = list(data.keys())
     keys.sort()
@@ -63,10 +86,10 @@ def make_req_sign(data, key):
     return s.upper()
 
 
-# Body payload
-mchid = 'ZaMVg*****' #(Agent ID, Merchant ID)
-syssn = '20191227000200020061752831' #Search by transaction number only
-out_trade_no = '2019122722001411461404119764' #Search by out_trade_no only
+# 請求內容主體
+mchid = 'ZaMVg*****' # 只適用於渠道商
+syssn = '20191227000200020061752831' # 使用QFPay內部訂單號查詢
+out_trade_no = '2019122722001411461404119764' # 使用商戶訂單號查詢
 start_time = '2019-12-27 00:00:00'
 end_time = '2019-12-27 23:59:59'
 key = client_key
@@ -95,7 +118,7 @@ public class Enquiry {
     public static void main(String args[]){
         String appcode="D5589D2A1F2E42A9A60C37**********";
         String key="0E32A59A8B454940A2FF39*********";
-        String mchid="ZaMVg*****"; // Only Agents must provide the mchid
+        String mchid="ZaMVg*****"; // 只適用於渠道商
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date=df.format(new Date());
@@ -125,16 +148,16 @@ public class Enquiry {
 <TabItem value="javascript" label="Javascript">
 
 ```javascript
-// Enter Client Credentials
+// 輸入用戶端憑證
 const environment = 'https://test-openapi-hk.qfapi.com'
 const app_code = 'D5589D2A1F2E42A9A60C37**********'
 const client_key = '0E32A59A8B454940A2FF39**********'
 
-// Generate Timestamp
+// 生成當前時間
 var dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
 console.log(dateTime)
 
-// Body Payload
+// 請求內容主體
 const key = client_key
 var tradenumber = String(Math.round(Math.random() * 1000000000))
 console.log(tradenumber)
@@ -146,7 +169,7 @@ var payload = {
 'mchid': 'ZaMVg*****'
 };
 
-// Signature Generation
+// 產生簽名
 const ordered = {};
 Object.keys(payload).sort().forEach(function(key) {
   ordered[key] = payload[key] });
@@ -165,7 +188,7 @@ var hashed = crypto.createHash('md5').update(string).digest('hex')
 console.log(hashed)
 
 
-// API Request
+// API 請求
 var request = require("request");
 request({
   uri: environment+"/trade/v1/query",
@@ -202,10 +225,10 @@ $url = 'https://test-openapi-hk.qfapi.com';
 $api_type = '/trade/v1/query';
 $syssn = '20200311066100020000977841';
 //$out_trade_no = 'zCvo0IqTg0SaQkGnHd6w';
-//$mchid = "MNxMp11FV35qQN"; //Only agents must provide this parameter
-$app_code = 'FF2FF74F2F2E42769A4A73*********'; //API credentials provided by QFPay
-$app_key = '7BE791E0FD2E48E6926043B*********'; //API credentials provided by QFPay
-$now_time = date("Y-m-d H:i:s"); //Get the current date-time  
+//$mchid = "MNxMp11FV35qQN"; // 只適用於渠道商
+$app_code = 'FF2FF74F2F2E42769A4A73*********'; 
+$app_key = '7BE791E0FD2E48E6926043B*********'; 
+$now_time = date("Y-m-d H:i:s"); // 獲取目前時間
 
 $fields_string = '';
 $fields = array(
@@ -215,7 +238,7 @@ $fields = array(
 //'start_time' = '2020-03-01 00:00:00',
 //'end_time' = '2020-03-04 23:59:59'
 );
-ksort($fields); //Sort parameters in ascending order from A to Z
+ksort($fields);
 print_r($fields);
 
 foreach($fields as $key=>$value) { 
@@ -225,12 +248,10 @@ $fields_string = substr($fields_string , 0 , strlen($fields_string) - 1);
 
 $sign = strtoupper(md5($fields_string . $app_key));
 
-//// Header ////
 $header = array();
 $header[] = 'X-QF-APPCODE: ' . $app_code;
 $header[] = 'X-QF-SIGN: ' . $sign;
 
-//Post Data
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url . $api_type);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -251,103 +272,68 @@ ob_end_flush();
 </TabItem>
 </Tabs>
 
-> 上述指令會回傳如下結構的 JSON：
+## 回應參數
+
+詳細欄位請見 [通用 API 回應格式](/docs/api-reference/response-format)，以下為交易查詢常見欄位：
+
+| 欄位                     | 類型      | 說明                                                        |
+| ---------------------- | ------- | --------------------------------------------------------- |
+| `syssn`                | String  | QFPay 訂單號                                                 |
+| `out_trade_no`         | String  | 商戶訂單號                                                     |
+| `txamt`                | Integer | 訂單金額（單位為分）                                                |
+| `txcurrcd`             | String  | 幣種代碼，如 HKD，詳見 [幣別表](/docs/preparation/paycode#currencies) |
+| `respcd`               | String  | 交易結果代碼，詳見 [狀態碼](/docs/api-reference/status-codes)         |
+| `errmsg`               | String  | 交易結果說明                                                    |
+| `order_type`           | String  | 訂單類型：`payment` 或 `refund`                                 |
+| `pay_type`             | String  | 支付通道代碼                                                    |
+| `cancel`               | String  | 撤銷/退款標記。詳見 [退款說明](/docs/online-shop/refunds)              |
+| `cash_fee`             | String  | 使用者實際付款金額（扣除折扣後）                                          |
+| `cash_fee_type`        | String  | 實際支付幣別，如 CNY                                              |
+| `cash_refund_fee`      | String  | 實際退款金額                                                    |
+| `cash_refund_fee_type` | String  | 退款幣別                                                      |
+| `exchange_rate`        | String  | 若為跨幣種交易，返回匯率                                              |
+| `sysdtm`               | String  | QFPay 系統交易時間                                              |
+| `txdtm`                | String  | 商戶請求交易時間                                                  |
+| `chnlsn`               | String  | 錢包/通道交易號                                                  |
+| `origssn`              | String  | 原始交易號（僅退款時提供）                                             |
 
 ```json
 {
-"respmsg": "", 
-"resperr": "请求成功", 
-"respcd": 0000, 
-"data": 
-[{
-"cardtp": "5", 
-"cancel": "0", 
-"pay_type": "800101", 
-"order_type": "payment", 
-"clisn": "038424", 
-"txdtm": "2019-12-27 10:39:39", 
-"goods_detail": "", 
-"out_trade_no": "CHZ7D61JN1ANJF2R2K1I7TXP2JTCEWBL", 
-"syssn": "20191227000200020061752831", 
-"sysdtm": "2019-12-27 10:40:24", 
-"paydtm": "2019-12-27 10:42:18", 
-"goods_name": "", 
-"txcurrcd": "EUR", 
-"chnlsn2": "", 
-"udid": "qiantai2", 
-"userid": "2605489", 
-"txamt": "10", 
-"chnlsn": "2019122722001411461404119764", 
-"respcd": "0000", 
-"goods_info": "", 
-"errmsg": "success"
-}], 
-"page": "1", 
-"page_size": "10"
+  "respcd": "0000",
+  "resperr": "Request successful",
+  "data": [
+    {
+      "syssn": "20230423000200020088888888",
+      "out_trade_no": "YOUR_ORDER_001",
+      "txamt": "100",
+      "txcurrcd": "HKD",
+      "respcd": "0000",
+      "errmsg": "success",
+      "pay_type": "801107",
+      "order_type": "payment",
+      "txdtm": "2023-04-23 12:00:00",
+      "sysdtm": "2023-04-23 12:00:03",
+      "cancel": "0",
+      "cash_fee": "100",
+      "cash_fee_type": "HKD"
+    }
+  ]
 }
 ```
 
-发起交易后，需要调用查询接口，获取订单的状态,直到QFPay 返回具体的状态信息为止，根据订单的状态进行相应的处理。
+---
 
-​默认不支持隔月订单查询，若查询隔月订单，需传入`start_time`、`end_time`（时间区间包含`sysdtm`时间，且区间不能跨月）参数，建议以`syssn`为条件进行查询。此外，如果交易接口没有返回`syssn`，使用`out_trade_no`为条件进行查询。
+## 對帳報表下載
 
-如果查询的交易是退款,那会返回额外的参数 `origssn`. `origssn` 代表着退款交易的原本订单号.
+各支付通道的清算對帳報表會定期生成，僅支援在 **正式環境** 呼叫，並返回壓縮檔案（ZIP）。
 
-### 请求参数
+### HTTP 請求
 
-|参数名称| 参数编码|是否必须|参数类型|描述|
-|----    |---|----- |-----   |-----   |
-|子商户 | ` mchid ` | For Agents |String(16) | 标识子商户身份，由QFPay 统一分配；支付时若`mchid`非空则查询订单时必传.|
-|QFPay 订单号| ` syssn ` |No |String(128) |多个以英文逗号区分开 |
-|外部订单号| ` out_trade_no ` |No |String(128) | 外部订单号/商户平台订单号, 多个订单号由逗号分隔  |
-|支付类型 | ` pay_type ` |No |String(6) | 多个项目由逗号分隔 |
-|交易返回码| ` respcd ` |No |String(4) | 默认返回所有返回码状态的订单  |
-|开始时间| ` start_time ` |No |String(20) | 当 `syssn` 存在时不需要提供, 默认本月开始日期. 跨月份查询必须提供 `start_time` 和 `end_time`. <br/> 格式：yyyy-MM-dd HH:mm:ss. |
-|结束时间	| ` end_time ` |No | String(20) | 当 `syssn` 存在时不需要提供, 默认本月结束日期.跨月份查询必须提供 `start_time` 和 `end_time`. <br/> 格式：yyyy-MM-dd HH:mm:ss.  |
-|页数| ` page `   |No |  Int(8) | 默认为1   |
-|每页显示数量| ` page_size ` |No |  Int(8) | 默认显示10笔订单,最大值100，如果超过100，则只显示100条 |
+* **端點**：`/download/v1/trade_bill`
+* **方法**：`GET`
 
-### 响应参数
+### 請求參數
 
-|参数名称|参数编码|参数类型|描述|
-|----    |------|------  |------   |
-| 页数| `page`  | Int(8)  |  |
-| 请求结果描述| `resperr` | String(128) ||
-| 每页显示数量| `page_size` | Int(8)  |  |
-| 请求结果返回码 | `respcd`   | String(4)  |0000 - 接口呼叫成功  |
-| 查询结果 | `data` | Object | JSON 格式 |
-| QFPay 订单号 |  `syssn`  |String(40) |  |
-| API 订单号| `out_trade_no` | String(128) |外部订单号或商户平台交易码 |
-| 钱包/渠道 交易码 | `chnlsn` | String |  |
-| 商品名称 | `goods_name` | String(64) | 商品名称 / 标识: 不能超过 20 个字母数字或包含特殊字符。 APP支付不能为空。 如果参数是汉字，则需要使用**UTF-8**编码。 |
-| 交易货币 | `txcurrcd` | String(3) | 交易币种, 请查看[币种](/docs/preparation/paycode#支付币种)表以获取完整的可选用的币种 |
-| 原始订单号 | `origssn` | String(40) | 指原QFPay 交易号, 此参数仅在退款的`syssn`在排队中可用 |
-| 支付类型 | `pay_type` | String(6) | 请参考[支付类型表](/docs/preparation/paycode#支付类型) 获取完整的支付类型 |
-| 订单类型 |  `order_type` |  String(16) | Payment: 支付交易 Refund: 退款交易 |
-| 请求交易时间 | `txdtm` | String(20) | 商户在交易和退款请求中提交的交易时间. 格式: YYYY-MM-DD hh:mm:ss |
-| 订单支付金额 | `txamt` | Int(11) |  交易金额, 以分为单位 (i.e. 100 = $1)，建议数值大于200，避免因支付金额过低而被交易风控。 |
-| 系统交易时间 | `sysdtm` | String(20) | 格式: YYYY-MM-DD hh:mm:ss <br/>这个值被用作结算截止时间 |
-| 撤销/退款标记 | `cancel` | String(1) | 交易撤销情况: <br/> 0 = 未能撤销 <br/> 1 = 反扫支付: 交易撤销或退款成功 <br/> 2 = 正扫支付: 交易撤销成功 <br/> 3 = 交易已退款 <br/> 4 = 支付宝预授权订单完结 <br/> 5 = 交易部分退款 |
-| 支付结果返回码 |  `respcd` | String(4) | 0000-请求成功.<br/>1143/1145 - 商户需要持续查询退款交易状态. <br/>所有其他的返回编码都是失败值. 请根据 [交易状态码](/docs/preparation/paycode#交易状态码) 获取完整的信息.|
-| 支付结果描述 | `errmsg` | String(128) | 支付结果描述 |
-| 货币换汇汇率 |`exchange_rate`  | String | 使用的换汇汇率 |
-| 净付款金额 |`cash_fee`  | String | 用户实际付款金额 = 交易金额 - 优惠 |
-| 支付货币 |`cash_fee_type` | String | 实际支付货币 e.g. CNY |
-| 净退款金额 | `cash_refund_fee` | String | 实际退款金额 |
-| 退款货币 | `cash_refund_fee_type` | String | 实际退款值 e.g. CNY |
-
-## 账户报表
-
-特定支付渠道的清算报表会被定期下载, 其他的请求只能在生产环境发起. 系统会以压缩的文件包格式返回数据. 数据会基于所选的支付渠道并包含所有的商户, 因此不能将 `mchid` 作为请求参数传入.
-
-## 账户报表API端点
-
-### HTTP请求
-
-`GET ../download/v1/trade_bill`
-
-### 请求参数
-
-|请求编码 | 是否必须 | 参数类型 | 描述
-|----    |---|----- |-----   |
-| `trade_date` | 是 | String(10) | 获取所选日期的特定账户对账单 示例: 2017-10-17|
+| 參數           | 類型         | 是否必填 | 說明                                |
+| ------------ | ---------- | ---- | --------------------------------- |
+| `trade_date` | String(10) | 是    | 報表日期。格式：YYYY-MM-DD，如 `2023-04-01` |

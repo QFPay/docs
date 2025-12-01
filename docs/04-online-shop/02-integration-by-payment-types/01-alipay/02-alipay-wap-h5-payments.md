@@ -296,7 +296,7 @@ ob_end_flush();
 
 ## Response Parameters
 
-Refer to [Public Response Parameters](/docs/api-reference/response-format) for shared fields. Below are additional fields related to Alipay.
+Refer to [Public Response Parameters](/docs/api-reference/response-format) for shared fields.
 
 ## Sample Response  
 
