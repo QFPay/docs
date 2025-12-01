@@ -4,59 +4,81 @@ import Link from '@docusaurus/Link';
 
 # Visa / Mastercard Online Payments
 
-We currently support credit card payments in the [Hong Kong environment](/docs/preparation/introduction#environments). All major credit card issuers are supported.
+This page provides integration guidance for online credit card payments using Visa and Mastercard. Our solution currently supports credit card payments in the [Hong Kong environment](/docs/preparation/environments), covering all major card issuers.
 
-## Payment Steps
+---
 
-For credit card online payment integration, merchant can select one the the following integration methods
+## Integration Methods
 
-1. [QFPay Checkout Services](/docs/online-shop/checkout-integration/checkout)
-2. [QFPay Element SDK](/docs/online-shop/checkout-integration/payment-element)
+Merchants can choose from two integration options:
+
+1. **[QFPay Checkout Services](/docs/online-shop/checkout-integration/checkout)**  
+   A hosted payment page solution—ideal for merchants who prefer minimal PCI scope and faster setup.
+
+2. **[QFPay Payment Element SDK](/docs/online-shop/checkout-integration/payment-element)**  
+   A client-side SDK that embeds payment input fields directly into your website, offering full UX control and 3DS support.
+
+---
 
 ## Asynchronous Notification
 
-QFPay will also send the asynchronous payment notification for the transaction status update
+:::info
+QFPay will send an asynchronous notification to your backend to confirm the transaction result.
+:::
 
-> Sample notification payload
+Refer to [Asynchronous Notification](/docs/common-api/asynchronous-notification) for details on the notification format and signature verification.
+
+> Example Notification Payload:
 
 ```json
 {
-    "cardtp": "5",
-    "cancel": "0",
-    "pay_type": "802801",
-    "order_type": "payment",
-    "clisn": "054256",
-    "txdtm": "2021-12-08 07:04:15",
-    "goods_detail": "",
-    "out_trade_no": "354267281",
-    "syssn": "20211208180500020000001637",
-    "sysdtm": "2021-12-08 15:04:16",
-    "paydtm": "2021-12-08 15:06:51",
-    "goods_name": "",
-    "txcurrcd": "HKD",
-    "chnlsn2": "",
-    "cardcd": "",
-    "udid": "qiantai2",
-    "userid": "1130000355",
-    "txamt": "1",
-    "chnlsn": "",
-    "respcd": "0000",
-    "goods_info": "",
-    "errmsg": "success"
+  "cardtp": "5",
+  "cancel": "0",
+  "pay_type": "802801",
+  "order_type": "payment",
+  "clisn": "054256",
+  "txdtm": "2021-12-08 07:04:15",
+  "out_trade_no": "354267281",
+  "syssn": "20211208180500020000001637",
+  "sysdtm": "2021-12-08 15:04:16",
+  "paydtm": "2021-12-08 15:06:51",
+  "txcurrcd": "HKD",
+  "udid": "qiantai2",
+  "userid": "1130000355",
+  "txamt": "1",
+  "respcd": "0000",
+  "errmsg": "success"
 }
 ```
 
-## Test cards
+:::warning
+Always validate the notification using the provided signature, and never trust the notification result blindly.
+:::
 
-Test cards are available for the Sandbox environment for result simulation.
+:::tip
+You can use [**Transaction Enquiry**](/docs/common-api/transaction-enquiry) API as a fallback to confirm transaction status when:
+- Callback is delayed
+- Signature verification fails
+- Merchant server missed the notification
+:::
 
-Field             | Value            | Expected Result
-------------------| ---------------- | ---------------
-card - MasterCard | 5200000000001096 | valid
-card - Visa       | 4000000000001091 | valid
-card - MasterCard | 5200000000001005 | valid (3DS frictionless)
-card - Visa       | 4000000000001000 | valid (3DS frictionless)
-card - MasterCard | 5200000000001120 | failed (at verification)
-card - Visa       | 4000000000001125 | failed (at verification)
-card - MasterCard | 5200000000001013 | failed (at  3DS frictionless)
-card - Visa       | 4000000000001018 | failed (at  3DS frictionless)
+---
+
+## Test Cards
+
+The following test cards are available in the **Sandbox** environment. Use them to simulate different transaction results, including 3D Secure (3DS) flows.
+
+| Card Brand     | Card Number        | Simulation Result                 |
+|----------------|--------------------|-----------------------------------|
+| Mastercard     | 5200 0000 0000 1096 | Successful payment                |
+| Visa           | 4000 0000 0000 1091 | Successful payment                |
+| Mastercard     | 5200 0000 0000 1005 | Successful (3DS frictionless)     |
+| Visa           | 4000 0000 0000 1000 | Successful (3DS frictionless)     |
+| Mastercard     | 5200 0000 0000 1120 | Failed (during verification)      |
+| Visa           | 4000 0000 0000 1125 | Failed (during verification)      |
+| Mastercard     | 5200 0000 0000 1013 | Failed (3DS frictionless failure) |
+| Visa           | 4000 0000 0000 1018 | Failed (3DS frictionless failure) |
+
+:::tip
+If you're unsure which integration method fits your use case (Checkout vs Element SDK), refer to your onboarding document or contact QFPay support.
+:::

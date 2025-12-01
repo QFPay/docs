@@ -2,61 +2,83 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# Visa / Mastercard 线上支付
+# Visa / Mastercard 線上支付整合指南
 
-我们目前支持在[香港环境](/docs/preparation/introduction#开发环境) 中使用信用卡付款。 支持所有主要信用卡发卡机构。
+本頁提供使用 Visa 與 Mastercard 進行線上信用卡支付的整合說明。我們目前於 [香港環境](/docs/preparation/environments) 支援所有主要發卡機構的信用卡交易。
 
-## 支付整合流程
+---
 
-对于信用卡在线支付集成，商户可以选择以下集成方式之一
+## 整合方式選擇
 
-1. [QFPay Checkout Services](/docs/online-shop/checkout-integration/checkout)
-2. [QFPay Element SDK](/docs/online-shop/checkout-integration/payment-element)
+商戶可根據需求選擇以下其中一種整合方式：
 
-## 异步通知
+1. **[QFPay Checkout Services](/docs/online-shop/checkout-integration/checkout)**  
+   託管式支付頁方案，適合希望降低 PCI 負擔並快速上線的商戶。
 
-QFPay也会发送交易状态更新的异步支付通知
+2. **[QFPay Payment Element SDK](/docs/online-shop/checkout-integration/payment-element)**  
+   客戶端嵌入式 SDK，將輸入欄位直接嵌入商戶網頁中，提供完全的 UX 控制與 3DS 支援。
 
-> 通知范例
+---
+
+## 非同步通知機制
+
+:::info
+QFPay 將透過非同步通知方式將交易結果傳送至商戶後台。
+:::
+
+詳情請參閱 [非同步通知說明文件](/docs/common-api/asynchronous-notification)，了解通知格式與簽名驗證方式。
+
+> 範例通知資料：
 
 ```json
 {
-    "cardtp": "5",
-    "cancel": "0",
-    "pay_type": "802801",
-    "order_type": "payment",
-    "clisn": "054256",
-    "txdtm": "2021-12-08 07:04:15",
-    "goods_detail": "",
-    "out_trade_no": "354267281",
-    "syssn": "20211208180500020000001637",
-    "sysdtm": "2021-12-08 15:04:16",
-    "paydtm": "2021-12-08 15:06:51",
-    "goods_name": "",
-    "txcurrcd": "HKD",
-    "chnlsn2": "",
-    "cardcd": "",
-    "udid": "qiantai2",
-    "userid": "1130000355",
-    "txamt": "1",
-    "chnlsn": "",
-    "respcd": "0000",
-    "goods_info": "",
-    "errmsg": "success"
+  "cardtp": "5",
+  "cancel": "0",
+  "pay_type": "802801",
+  "order_type": "payment",
+  "clisn": "054256",
+  "txdtm": "2021-12-08 07:04:15",
+  "out_trade_no": "354267281",
+  "syssn": "20211208180500020000001637",
+  "sysdtm": "2021-12-08 15:04:16",
+  "paydtm": "2021-12-08 15:06:51",
+  "txcurrcd": "HKD",
+  "udid": "qiantai2",
+  "userid": "1130000355",
+  "txamt": "1",
+  "respcd": "0000",
+  "errmsg": "success"
 }
 ```
 
-## 测试卡号
+:::warning
+請務必驗證通知簽名，避免依賴未驗證的交易結果進行業務處理。
+:::
 
-测试卡号可用于沙盒环境以进行结果模拟。
+:::tip
+如出現以下情況，建議使用 [**交易查詢**](/docs/common-api/transaction-enquiry) API 作為補充確認手段：
+- 未收到回調通知
+- 通知延遲
+- 簽名驗證失敗
+:::
 
-卡类型             | 卡号            | 预期结果
-------------------| ---------------- | ---------------
-card - MasterCard | 5200000000001096 | 成功
-card - Visa       | 4000000000001091 | 成功
-card - MasterCard | 5200000000001005 | 成功 (无摩擦认证流程)
-card - Visa       | 4000000000001000 | 成功 (无摩擦认证流程)
-card - MasterCard | 5200000000001120 | 失败 (认证流程)
-card - Visa       | 4000000000001125 | 失败 (认证流程)
-card - MasterCard | 5200000000001013 | 失败 (无摩擦认证流程)
-card - Visa       | 4000000000001018 | 失败 (无摩擦认证流程)
+---
+
+## 測試卡資訊
+
+以下測試卡號可於 **Sandbox 測試環境** 中使用，模擬各類交易結果（包括 3D Secure 驗證流程）：
+
+| Card Brand     | Card Number        | Simulation Result                 |
+|----------------|--------------------|-----------------------------------|
+| Mastercard     | 5200 0000 0000 1096 | 成功付款               |
+| Visa           | 4000 0000 0000 1091 | 成功付款                |
+| Mastercard     | 5200 0000 0000 1005 | 成功（3DS 無干預流程）    |
+| Visa           | 4000 0000 0000 1000 | 成功（3DS 無干預流程）    |
+| Mastercard     | 5200 0000 0000 1120 | 驗證階段失敗      |
+| Visa           | 4000 0000 0000 1125 | 驗證階段失敗     |
+| Mastercard     | 5200 0000 0000 1013 | 3DS 無干預流程中失敗 |
+| Visa           | 4000 0000 0000 1018 | 3DS 無干預流程中失敗 |
+
+:::tip
+若不確定應採用 Checkout 或 Element SDK 整合方式，請參閱您的上線文件，或聯繫 QFPay 支援團隊協助評估。
+:::

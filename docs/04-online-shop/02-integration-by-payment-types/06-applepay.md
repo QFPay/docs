@@ -4,18 +4,29 @@ import Link from '@docusaurus/Link';
 
 ## Introduction
 
-Currently, QFPay Checkout and Element support an embedded Apple Pay method for customer payments. Merchants must first enable this payment option within the QFPay system before customers can select it on compatible devices. Utilizing Apple Pay can significantly enhance the authorization rate for transactions.
+QFPay Checkout and Payment Element SDK both support Apple Pay as an embedded payment option. Merchants must first enable this payment method in the QFPay backend before customers can use it. Apple Pay helps improve authorisation rates and streamlines the checkout experience on Apple-supported devices.
 
-## Support Device
+---
 
-With Apple Pay, customer can easily and securely shop on your iPhone, iPad, Mac, Windows devices, and other platforms using third-party browsers. Please note that Apple Pay is not supported on Android phone, the payment button will be hidden if customer select apple pay on Android phone.
+## Supported Devices
 
-## QRCode Payment
+Apple Pay is available on:
 
-For devices that do not natively support Apple Pay, such as Windows devices, a payment QR code will automatically be displayed. Customers can use their iPhone or iPad to scan the QR code for payment, provided their iOS version is greater than 18.
+- iPhone, iPad, and Mac (via Safari)
+- Third-party browsers on Windows and other platforms (via QR Code)
 
-:::warning
-Currently, this function is unavailable if your language or Apple Store region is set to mainland China.
+:::info
+Apple Pay is **not supported on Android devices**. If a customer selects Apple Pay on an unsupported device, the Apple Pay button will be hidden automatically.
 :::
 
-<Link href="https://sdk.qfapi.com/images/applepay_qrcode.png" target="_blank">![Apple Pay QRcode Flow](@site/static/img/applepay_qrcode.png)</Link>
+---
+
+## QR Code Payment Mode
+
+If the customer is using a device that doesn't support Apple Pay natively—such as a Windows desktop—a **QR code** will be displayed automatically. The customer can then scan this code using a supported iPhone or iPad (iOS version ≥ 18) to complete the payment securely.
+
+:::warning
+This feature is **not available** if the customer's Apple Store region or device language is set to mainland China.
+:::
+
+<Link href="https://sdk.qfapi.com/images/applepay_qrcode.png" target="_blank">![Apple Pay QR Code Usage](@site/static/img/applepay_qrcode.png)</Link>
