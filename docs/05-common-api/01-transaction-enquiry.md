@@ -1,5 +1,5 @@
 ---
-
+id: transaction-enquiry
 title: Transaction Enquiry
 description: Query the status of payments, refunds, and cancellations via QFPay's transaction enquiry API.
 sidebar_label: Transaction Enquiry

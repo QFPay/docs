@@ -1,13 +1,124 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Reversal/ Cancel
+---
 
-:::warning
-Reversals should be used as a last resort when the transaction status cannot be determined, e.g. no payment notification is received, the response timed-out, there are network issues, etc. The query API endpoint should be used first to check the transaction status. Hong Kong PayTypes do not support transaction cancel.
-:::
+# Reversal API Guide
 
-The reversal API endpoint allows the merchant to cancel/ reverse a transaction that is currently in progress. Transactions that have already been processed successfully (return code 0000 = successful) can no longer be reversed or cancelled. If you would like to revert a successful transaction please refer to the [Refund Endpoint](refunds).
+This page provides guidance on using the reversal API to void an **in-progress** transaction. A reversal is not a refund. It is only possible if the original transaction has **not been completed successfully**.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+---
+
+## API Endpoint
+
+* **Endpoint**: `/trade/v1/reversal`
+* **Method**: `POST`
+
+A successful reversal will return `respcd=0000`.
+
+If the transaction has already completed successfully (`respcd=0000` in payment), then it **cannot** be reversed. Instead, refer to the [Refund API](/docs/online-shop/refunds).
+
+---
+
+## Request Parameters
+
+| Parameter      | Type        | Required | Description                                                       |
+| -------------- | ----------- | -------- | ----------------------------------------------------------------- |
+| `mchid`        | String(16)  | No       | QFPay Merchant ID. Required only for agents.                      |
+| `syssn`        | String(40)  | Yes*     | QFPay transaction number                                          |
+| `out_trade_no` | String(128) | Yes*     | Merchant transaction number                                       |
+| `txamt`        | Int(11)     | Yes      | Transaction amount in cents (e.g. 100 = $1). Suggest value > 200. |
+| `txdtm`        | String(20)  | Yes      | Original transaction time. Format: `YYYY-MM-DD hh:mm:ss`          |
+| `udid`         | String(40)  | No       | Unique terminal ID (used for traceability)                        |
+
+> *Either `syssn` or `out_trade_no` must be provided.
+
+---
+
+## Response Parameters
+
+| Parameter    | Type      | Description                                                           |
+| ------------ | --------- | --------------------------------------------------------------------- |
+| `syssn`      | String    | New QFPay transaction number for the reversal                         |
+| `orig_syssn` | String    | QFPay transaction number of the original (to-be-reversed) transaction |
+| `txamt`      | Int       | Reversed amount (in cents)                                            |
+| `txcurrcd`   | String(3) | Currency code, e.g. HKD                                               |
+| `txdtm`      | String    | Transaction time                                                      |
+| `sysdtm`     | String    | QFPay system time of the reversal                                     |
+| `chnlsn`     | String    | Payment channel transaction number (may be empty if not processed)    |
+| `respcd`     | String(4) | Response code (`0000` = success, others = failure or in progress)     |
+| `resperr`    | String    | Result message                                                        |
+| `respmsg`    | String    | Additional description (if any)                                       |
+
+---
+
+## Code Examples
+
+<Tabs>
+<TabItem value="python" label="Python">
+
+```python
+# Full implementation: see [Sample Signing Guide](/docs/api-reference/sample-signing)
+```
+
+</TabItem>
+<TabItem value="java" label="Java">
+
+```java
+// Full implementation: see [Sample Signing Guide](/docs/api-reference/sample-signing)
+```
+
+</TabItem>
+<TabItem value="javascript" label="JavaScript">
+
+```javascript
+// Full implementation: see [Sample Signing Guide](/docs/api-reference/sample-signing)
+```
+
+</TabItem>
+<TabItem value="php" label="PHP">
+
+```php
+// Full implementation: see [Sample Signing Guide](/docs/api-reference/sample-signing)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+## Sample Response
+
+```json
+{
+  "orig_syssn": "20200305066100020000977813",
+  "syssn": "20200305066100020000977814",
+  "txamt": "2500",
+  "txcurrcd": "EUR",
+  "txdtm": "2020-03-05 16:50:30",
+  "sysdtm": "2020-03-05 16:54:38",
+  "chnlsn": "",
+  "respcd": "0000",
+  "resperr": "success",
+  "respmsg": ""
+}
+```
+
+---
+
+## Additional Notes
+
+* A reversal **does not guarantee** that the user has not been charged. Always verify using [Transaction Enquiry](/docs/common-api/transaction-enquiry).
+* Reversal is intended for **real-time failures** only. Do not use it to refund successful transactions.
+* If `respcd=1143` or `1145`, the reversal is in progress. You should poll the [Transaction Enquiry](/docs/common-api/transaction-enquiry) endpoint until the status is confirmed.
+
+---
+
+
+
 
 ```plaintext
 
