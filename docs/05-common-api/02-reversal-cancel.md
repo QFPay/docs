@@ -7,9 +7,6 @@ import TabItem from '@theme/TabItem';
 
 This page provides guidance on using the reversal API to void an **in-progress** transaction. A reversal is not a refund. It is only possible if the original transaction has **not been completed successfully**.
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 ---
 
 ## API Endpoint
