@@ -57,7 +57,7 @@ This is required to:
 - Enable secure callbacks via Universal Links (iOS) or HTTPS redirects (Android)
 - Complete certification with HSBC and pass production onboarding
 
-📄 See [FPS e-Cert Setup Guide](/docs/online-shop/integration-by-payment-types/fps/fps-ecert-setup) for application steps, CSR command, and document checklist.
+📄 See [FPS e-Cert Setup Guide](/docs/online-shop/integration-by-payment-type/fps/fps-ecert-setup) for application steps, CSR command, and document checklist.
 
 :::
 

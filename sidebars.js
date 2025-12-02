@@ -107,9 +107,9 @@ const sidebars = {
                 type: 'generated-index'
               },
               items: [
-                'online-shop/integration-by-payment-types/alipay/alipay-web-payments', 
-                'online-shop/integration-by-payment-types/alipay/alipay-wap-h5-payments',
-                'online-shop/integration-by-payment-types/alipay/alipay-in-app-payments'
+                'online-shop/integration-by-payment-type/alipay/alipay-web-payments', 
+                'online-shop/integration-by-payment-type/alipay/alipay-wap-h5-payments',
+                'online-shop/integration-by-payment-type/alipay/alipay-in-app-payments'
               ]
             },
             {
@@ -119,11 +119,11 @@ const sidebars = {
                 type: 'generated-index'
               },
               items: [
-                'online-shop/integration-by-payment-types/wechat/wechat-web-qrc-payments',
-                'online-shop/integration-by-payment-types/wechat/wechat-pay-jsapi',
-                'online-shop/integration-by-payment-types/wechat/wechat-pay-h5',
-                'online-shop/integration-by-payment-types/wechat/wechat-mini-programs',
-                'online-shop/integration-by-payment-types/wechat/wechat-in-app-payments',
+                'online-shop/integration-by-payment-type/wechat/wechat-web-qrc-payments',
+                'online-shop/integration-by-payment-type/wechat/wechat-pay-jsapi',
+                'online-shop/integration-by-payment-type/wechat/wechat-pay-h5',
+                'online-shop/integration-by-payment-type/wechat/wechat-mini-programs',
+                'online-shop/integration-by-payment-type/wechat/wechat-in-app-payments',
               ]
             },
             {
@@ -133,12 +133,12 @@ const sidebars = {
                 type: 'generated-index'
               },
               items: [
-                //'online-shop/integration-by-payment-types/fps/fps-app-call-app',
-                //'online-shop/integration-by-payment-types/fps/fps-ecert-setup',
+                //'online-shop//fps/fps-app-call-app',
+                //'online-shop/integration-by-payment-type/fps/fps-ecert-setup',
               ]
             },
-            'online-shop/integration-by-payment-types/visa-master-online-payment',
-            'online-shop/integration-by-payment-types/applepay'
+            'online-shop/integration-by-payment-type/visa-master-online-payment',
+            'online-shop/integration-by-payment-type/applepay'
           ]
         },
         {

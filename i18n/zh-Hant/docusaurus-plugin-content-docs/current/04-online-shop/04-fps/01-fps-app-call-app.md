@@ -36,7 +36,7 @@ import Link from '@docusaurus/Link';
 - HSBC 生產環境上線及安全審核
 
 📄 詳細申請流程、CSR 產生方式及所需文件，請參閱：
-[FPS e-Cert 申請說明文件](/docs/online-shop/integration-by-payment-types/fps/fps-ecert-setup)
+[FPS e-Cert 申請說明文件](/docs/online-shop/integration-by-payment-type/fps/fps-ecert-setup)
 
 :::
 
