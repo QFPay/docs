@@ -61,75 +61,6 @@ If the transaction has already completed successfully (`respcd=0000` in payment)
 <TabItem value="python" label="Python">
 
 ```python
-# Full implementation: see [Sample Signing Guide](/docs/api-reference/sample-signing)
-```
-
-</TabItem>
-<TabItem value="java" label="Java">
-
-```java
-// Full implementation: see [Sample Signing Guide](/docs/api-reference/sample-signing)
-```
-
-</TabItem>
-<TabItem value="javascript" label="JavaScript">
-
-```javascript
-// Full implementation: see [Sample Signing Guide](/docs/api-reference/sample-signing)
-```
-
-</TabItem>
-<TabItem value="php" label="PHP">
-
-```php
-// Full implementation: see [Sample Signing Guide](/docs/api-reference/sample-signing)
-```
-
-</TabItem>
-</Tabs>
-
----
-
-## Sample Response
-
-```json
-{
-  "orig_syssn": "20200305066100020000977813",
-  "syssn": "20200305066100020000977814",
-  "txamt": "2500",
-  "txcurrcd": "EUR",
-  "txdtm": "2020-03-05 16:50:30",
-  "sysdtm": "2020-03-05 16:54:38",
-  "chnlsn": "",
-  "respcd": "0000",
-  "resperr": "success",
-  "respmsg": ""
-}
-```
-
----
-
-## Additional Notes
-
-* A reversal **does not guarantee** that the user has not been charged. Always verify using [Transaction Enquiry](/docs/common-api/transaction-enquiry).
-* Reversal is intended for **real-time failures** only. Do not use it to refund successful transactions.
-* If `respcd=1143` or `1145`, the reversal is in progress. You should poll the [Transaction Enquiry](/docs/common-api/transaction-enquiry) endpoint until the status is confirmed.
-
----
-
-
-
-
-```plaintext
-
-For code instructions select Python, Java, Node.js or PHP with the tabs below.
-
-```
-
-<Tabs>
-<TabItem value="python" label="Python">
-
-```python
 
 import urllib.request, urllib.parse, urllib.error, urllib.request, urllib.error, urllib.parse, hashlib
 import requests
@@ -226,9 +157,8 @@ public class Refund {
     }
 }
 ```
-
 </TabItem>
-<TabItem value="javascript" label="Javascript">
+<TabItem value="javascript" label="JavaScript">
 
 ```javascript
 
@@ -289,9 +219,8 @@ request({
 });
 
 ```
-
 </TabItem>
-<TabItem value="php" label="Php">
+<TabItem value="php" label="PHP">
 
 ```php
 <?php
@@ -361,6 +290,36 @@ ob_end_flush();
 </TabItem>
 </Tabs>
 
+---
+
+## Sample Response
+
+```json
+{
+  "orig_syssn": "20200305066100020000977813",
+  "syssn": "20200305066100020000977814",
+  "txamt": "2500",
+  "txcurrcd": "EUR",
+  "txdtm": "2020-03-05 16:50:30",
+  "sysdtm": "2020-03-05 16:54:38",
+  "chnlsn": "",
+  "respcd": "0000",
+  "resperr": "success",
+  "respmsg": ""
+}
+```
+
+---
+
+## Additional Notes
+
+* A reversal **does not guarantee** that the user has not been charged. Always verify using [Transaction Enquiry](/docs/common-api/transaction-enquiry).
+* Reversal is intended for **real-time failures** only. Do not use it to refund successful transactions.
+* If `respcd=1143` or `1145`, the reversal is in progress. You should poll the [Transaction Enquiry](/docs/common-api/transaction-enquiry) endpoint until the status is confirmed.
+
+---
+
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -384,15 +343,11 @@ ob_end_flush();
 }
 ```
 
-## HTTP Request for Alipay CPM & MPM and WeChat Pay CPM
+## Reversal vs Close
 
-**Endpoint** : `/trade/v1/reversal`
+Some wallets (e.g. WeChat Pay MPM) support a close API endpoint instead of reversal.
 
-**Method** : `GET`
-
-## HTTP Request for WeChat Pay MPM and other qualified Wallets
-
-**Endpoint** : `/trade/v1/close`
+- WeChat MPM & others: `/trade/v1/close`
 
 **Method** : `GET`
 
