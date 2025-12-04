@@ -126,19 +126,19 @@ const sidebars = {
                 'online-shop/integration-by-payment-type/wechat/wechat-in-app-payments',
               ]
             },
-            {
-              type: 'category',
-              label: 'FPS',
-              link: {
-                type: 'generated-index'
-              },
-              items: [
-                //'online-shop//fps/fps-app-call-app',
-                //'online-shop/integration-by-payment-type/fps/fps-ecert-setup',
-              ]
-            },
             'online-shop/integration-by-payment-type/visa-master-online-payment',
-            'online-shop/integration-by-payment-type/applepay'
+            'online-shop/integration-by-payment-type/applepay',
+            // {
+            //   type: 'category',
+            //   label: 'FPS',
+            //   link: {
+            //     type: 'generated-index'
+            //   },
+            //   items: [
+            //     'online-shop/integration-by-payment-type/fps/fps-app-call-app',
+            //     'online-shop/integration-by-payment-type/fps/fps-ecert-setup',
+            //   ]
+            // },
           ]
         },
         {
