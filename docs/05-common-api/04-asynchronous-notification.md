@@ -128,7 +128,7 @@ Attribute | Mandatory | Type | Description
 `cash_refund_fee` | No | String | Actual refund amount
 `cash_refund_fee_type` | No | String | Actual refund currency e.g. CNY
 
-# Notification server IP addresses
+## Notification server IP addresses
 The asynchronous notification requests are sent from the following IP addresses:
 - 13.228.112.115
 - 18.138.115.47
