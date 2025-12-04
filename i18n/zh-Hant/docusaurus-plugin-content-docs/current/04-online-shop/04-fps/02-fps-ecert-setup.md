@@ -31,9 +31,7 @@ import Link from '@docusaurus/Link';
 
 雖然 **憑證的網域名稱（CN 欄位）無需與組織名稱一致**，但該網域會由 QFPay 根據整合情境指派與設定，商戶無法自行決定。
 
-為降低成本與管理負擔，建議共用一個主網域，並以路徑區分環境（例如 `/prod`、`/int`、`/gray` 等）。
-
-若使用多個子網域（如 `fps.openapi-hk.qfapi.com`），每個網域都需單獨申請 e-Cert，將產生額外費用與等待時間。
+若使用多個子網域（如 `fps.payment.example-shop.com`），每個網域都需單獨申請 e-Cert，將產生額外費用與等待時間。
 
 ---
 

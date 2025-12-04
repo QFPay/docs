@@ -33,9 +33,7 @@ This requirement comes from FPS Technical Specification 6.9.2.
 
 The **certificate domain name** is assigned and configured by QFPay based on the integration context. Merchants do not select this domain themselves.
 
-For cost and management efficiency, a shared domain (e.g. with environment-specific paths like `/prod`, `/int`, `/gray`) may be used across different stages.
-
-Each **distinct domain** requires a **separate e-Cert application**, which incurs additional application cost and processing time.
+Each **distinct domain** requires a **separate e-Cert application** (e.g. `fps.payment.example-shop.com`), which incurs additional application cost and processing time.
 :::
 
 ---
