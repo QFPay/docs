@@ -27,7 +27,7 @@ import Link from '@docusaurus/Link';
 此外，我们还为预授权支付提供了以下常用API接口供您参考：
 
 - [交易查询](/docs/common-api/transaction-enquiry)
-- [交易退款](/docs/common-api/refunds)
+- [交易退款](/docs/common-api/refund)
 
 ## Creating and capturing payments
 

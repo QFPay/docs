@@ -1,30 +1,78 @@
+---
+id: refund
+title: Refund API Guide
+description: API guide for processing refunds through QFPay's system.
+sidebar_label: Refund API
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Refunds
+# Refund API Guide
 
 :::tip
-Only transactions with the return code 0000 (transaction successful) can be refunded.
+Only transactions with the return code `0000` (transaction successful) can be refunded.
 :::
 
-## API Endpoint for Refunds
+:::note
+For credit card payments, QFPay performs **automatic capture**. If a refund is submitted on the **same day**, it will be treated as a **void** and handled by this same refund API.
+:::
 
-```plaintext
-Request Header:
+## API Endpoint
 
-{
-  Content-Type: application/x-www-form-urlencoded;
-  X-QF-APPCODE: D5589D2A1F2E42A9A60C37**********
-  X-QF-SIGN: 6FB43AC29175B4602FF95F8332028F19
-}
+**Endpoint** : `/trade/v1/refund`
 
-Request Body:
+**Method** : `POST`
 
-{
-  txamt=10&syssn=20191227000200020061752831&out_trade_no=12345678&txdtm=2019-12-27 10:39:39&key=0E32A59A8B454940A2FF39**********&mchid=ZaMVg*****
-}
+### Request Headers
 
+```http
+Content-Type: application/x-www-form-urlencoded
+X-QF-APPCODE: <your-app-code>
+X-QF-SIGN: <signature>
 ```
+
+---
+
+## Request Parameters
+
+| Parameter         | Mandatory | Type        | Description |
+|------------------|-----------|-------------|-------------|
+| `syssn`          | Yes       | String(128) | QFPay transaction number of the **original** transaction to be refunded |
+| `out_trade_no`   | Yes       | String(128) | Unique refund transaction ID (must not repeat across refund requests) |
+| `txamt`          | Yes       | Int(11)     | Refund amount in cents (e.g. 100 = $1). Suggest > 200 to avoid risk control. |
+| `txdtm`          | Yes       | String(20)  | Refund request time. Format: `YYYY-MM-DD hh:mm:ss` |
+| `mchid`          | Conditional | String(16) | Merchant ID. Required only if one is issued. |
+| `udid`           | No        | String(40)  | Unique transaction device ID |
+
+---
+
+## Response Parameters
+
+| Parameter             | Type         | Description |
+|-----------------------|--------------|-------------|
+| `syssn`               | String(40)   | New refund transaction ID |
+| `orig_syssn`          | String(128)  | Original transaction ID |
+| `txamt`               | Int(11)      | Refunded amount in cents |
+| `sysdtm`              | String(20)   | Refund system time (`YYYY-MM-DD hh:mm:ss`) |
+| `respcd`              | String(4)    | Response code: <br/> `0000` = success <br/> `1143`, `1145` = processing <br/> other = failed |
+| `resperr`             | String(128)  | Response message |
+| `cash_fee`            | String       | Actual amount paid by user (after discounts) |
+| `cash_fee_type`       | String       | Payment currency (e.g. CNY) |
+| `cash_refund_fee`     | String       | Actual refunded amount |
+| `cash_refund_fee_type`| String       | Refund currency (e.g. CNY) |
+
+---
+
+## Sample HTTP Body
+
+```http
+txamt=10&syssn=20191227000200020061752831&out_trade_no=12345678&txdtm=2019-12-27 10:39:39&mchid=ZaMVg*****
+```
+
+---
+
+## SDK Code Examples
 
 <Tabs>
 <TabItem value="python" label="Python">
@@ -254,7 +302,9 @@ ob_end_flush();
 </TabItem>
 </Tabs>
 
-> The above command returns JSON structured like this:
+---
+
+## Sample JSON Response
 
 ```json
 {
@@ -275,36 +325,11 @@ ob_end_flush();
 }
 ```
 
-### HTTP Request
+---
 
-**Endpoint** : `/trade/v1/refund`
+## Notes
 
-**Method** : `POST`
-
-**Description** : Merchants can use the refund interface to refund transactions. The merchant account must have a sufficient transaction amount on the same trading day in order to refund transactions. The maximum refund amount for a transaction must not exceed to original payment amount. Unless otherwise specified, once a refund request is submitted and accepted, it is not reversible. The refund capability and the maximum time period for refund varies across payment channels. Please contact your QFPay support representative for more information.
-
-### Request Parameters
-
-|Attribute|Mandatory|Type|Description|
-|---|----- |-----   |-----   |
-| ` syssn ` |Yes |String(128)  |QFPay transaction number. Original transaction ID `syssn`  that is supposed to be refunded|
-|` out_trade_no `  |Yes |String(128)  | API order number. External refund transaction number / Merchant platform refund transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.|
-|` txamt `   |Yes |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1) <br/> Required for both full refund and partial refund. Some payment channel may not support partial refund. Suggest value > 200 to avoid risk control.|
-|` txdtm `   |Yes |String(20) |Transaction request time. Format: YYYY-MM-DD hh:mm:ss|
-|` mchid `  |No |String(16)  | Merchant ID. May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID. On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request. |
-|` udid `    |No |String(40)  |Unique transaction device ID|
-
-### Response Parameters
-
-|Attribute|Type|Description|
-|---------|----|-----------|
-|`syssn`  |String(40)   |Refund Transaction ID referring to the newly created refund transaction|
-|`orig_syssn`  |String(128)   |Original Transaction ID, previous transaction ID referring to the original transaction that has been refunded|
-|`txamt`   |Int(11)  | Amount of the refund. Unit in cents (i.e. 100 = $1)|
-|`sysdtm`  | String(20)  |System transaction time. Format: YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements.|
-|`respcd` |  String(4)|Return code, 0000-Request successful.<br/>1143/1145 - merchants are required to continue to query the refund transaction result. <br/>All other return codes indicate transaction failure. Please refer to the section [payment status codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of return codes.|
-|`resperr` |  String(128)| Response message|
-| `cash_fee`  | String | Actual payment amount by user = transaction amount - discounts |
-| `cash_fee_type` | String | Actual payment currency e.g. CNY |
-| `cash_refund_fee` | String | Actual refund amount |
-| `cash_refund_fee_type` | String | Actual refund currency e.g. CNY |
+- Ensure refund amount does not exceed the original transaction value.
+- Some wallets may not support partial refunds.
+- Refund time limits vary by channel. Contact QFPay support for details.
+- For failed refunds (`respcd` not `0000`), retry logic or query via [Transaction Enquiry](/docs/common-api/transaction-enquiry) is advised.

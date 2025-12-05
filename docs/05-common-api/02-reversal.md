@@ -43,7 +43,7 @@ Alipay CPM (Consumer Presented Mode)
 
 A successful reversal will return `respcd=0000`.
 
-If the transaction has already completed successfully (`respcd=0000` in payment), then it **cannot** be reversed. Instead, refer to the [Refund API](/docs/online-shop/refunds).
+If the transaction has already completed successfully (`respcd=0000` in payment), then it **cannot** be reversed. Instead, refer to the [Refund API](/docs/common-api/refund).
 
 ---
 

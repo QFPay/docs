@@ -1,30 +1,68 @@
+---
+id: refund
+title: 退款 API 指南
+description: 使用退款 API 處理成功交易的全額或部分退款。
+sidebar_label: 退款 API
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 退款
+# 退款 API 指南
 
 :::tip
-只有返回码为0000(交易成功)的交易可以被退款
+僅當交易返回碼為 `0000`（交易成功）時，才能進行退款操作。
 :::
 
-## 退款API端点
+:::note
+若為信用卡交易，由於系統會自動進行捕獲（Capture），同日退款申請將視為 void 並自動處理，無需商戶另外判斷。
+:::
+
+:::note
+不同錢包的退款規則（如可退款時間上限、是否支持部分退款）可能有所不同，請聯繫 QFPay 支援確認。
+:::
+
+## API Endpoint
 
 ```plaintext
-请求头部:
-
-{
-  Content-Type: application/x-www-form-urlencoded;
-  X-QF-APPCODE: D5589D2A1F2E42A9A60C37**********
-  X-QF-SIGN: 6FB43AC29175B4602FF95F8332028F19
-}
-
-请求正文:
-
-{
-  txamt=10&syssn=20191227000200020061752831&out_trade_no=12345678&txdtm=2019-12-27 10:39:39&key=0E32A59A8B454940A2FF39**********&mchid=ZaMVg*****
-}
-
+Endpoint: /trade/v1/refund
+Method: POST
 ```
+
+### HTTP 請求說明
+
+- Content-Type: `application/x-www-form-urlencoded`
+- Headers:
+  - `X-QF-APPCODE`: 你的 App Code
+  - `X-QF-SIGN`: 使用簽名函式生成的簽名值
+
+## 請求參數
+
+| 參數            | 必填 | 類型         | 說明                                                                 |
+|-----------------|------|--------------|----------------------------------------------------------------------|
+| `syssn`         | 是   | String(128)  | 欲退款的原始交易 ID                                                 |
+| `out_trade_no`  | 是   | String(128)  | 外部退款訂單號（不可與原訂單號重複）                                |
+| `txamt`         | 是   | Int(11)      | 退款金額（單位為分）。部分錢包不支持部分退款，建議金額大於 200    |
+| `txdtm`         | 是   | String(20)   | 請求時間，格式為：YYYY-MM-DD hh:mm:ss                              |
+| `mchid`         | 否   | String(16)   | 商戶號，如系統已分配給商戶，則為必填                               |
+| `udid`          | 否   | String(40)   | 裝置 ID，用於識別交易設備                                           |
+
+## 回應參數
+
+| 參數                 | 類型         | 說明                                                                           |
+|----------------------|--------------|----------------------------------------------------------------------------------|
+| `syssn`              | String(40)   | 此次退款交易所對應的交易號                                                     |
+| `orig_syssn`         | String(128)  | 原始交易號                                                                      |
+| `txamt`              | Int(11)      | 退款金額（單位為分）                                                           |
+| `sysdtm`             | String(20)   | 系統退款時間，格式：YYYY-MM-DD hh:mm:ss，用作結算分界時間                     |
+| `respcd`             | String(4)    | 返回碼：`0000` 成功，`1143/1145` 處理中，其它為失敗。請參考狀態碼說明文件     |
+| `resperr`            | String(128)  | 返回訊息                                                                       |
+| `cash_fee`           | String       | 實際支付金額（交易金額 - 折扣）                                               |
+| `cash_fee_type`      | String       | 實際支付幣種，如 CNY                                                           |
+| `cash_refund_fee`    | String       | 實際退款金額                                                                   |
+| `cash_refund_fee_type` | String     | 實際退款幣種，如 CNY                                                           |
+
+## 範例程式碼
 
 <Tabs>
 <TabItem value="python" label="Python">
@@ -254,55 +292,32 @@ ob_end_flush();
 </TabItem>
 </Tabs>
 
-> 上述指令會回傳如下結構的 JSON：
+## 回應示例
 
 ```json
 {
-"orig_syssn": "20191227000200020061752831", 
-"sysdtm": "2019-12-27 11:11:23", 
-"paydtm": "2019-12-27 11:11:26", 
-"txdtm": "2019-12-27 11:10:38", 
-"udid": "qiantai2", 
-"txcurrcd": "EUR", 
-"txamt": "10", 
-"resperr": "success", 
-"respmsg": "", 
-"out_trade_no": "RGNOEIVU9JZLNP9GGYXWXCW7OEMI720F", 
-"syssn": "20191227000300020061652643", 
-"respcd": "0000", 
-"chnlsn": "2019122722001411461404119764", 
-"cardcd": ""
+  "orig_syssn": "20191227000200020061752831", 
+  "sysdtm": "2019-12-27 11:11:23", 
+  "paydtm": "2019-12-27 11:11:26", 
+  "txdtm": "2019-12-27 11:10:38", 
+  "udid": "qiantai2", 
+  "txcurrcd": "EUR", 
+  "txamt": "10", 
+  "resperr": "success", 
+  "respmsg": "", 
+  "out_trade_no": "RGNOEIVU9JZLNP9GGYXWXCW7OEMI720F", 
+  "syssn": "20191227000300020061652643", 
+  "respcd": "0000", 
+  "chnlsn": "2019122722001411461404119764", 
+  "cardcd": ""
 }
 ```
 
-### HTTP请求
+## 注意事項
 
-`POST ../trade/v1/refund`
-
-商户可以使用退款API对交易进行退款。商户账户必须在同一交易日有足够的交易金额才能进行交易退款, 单笔交易的最高退款金额不得超过原始付款金额。除非另有说明，退款请求一旦提交并被接受，就不可撤销。不同支付渠道的退款限量和最长退款期限有所不同, 请联系您的QFPay 支援代表以获取更多信息。
-
-### 请求参数
-
-|参数名称|参数编码|是否必填|参数类型|描述|
-|----    |---|----- |-----   |-----   |
-|QFPay 订单流水号 | ` syssn ` |是 |String(128)  | 计划退款的原订单的 `syssn`|
-|退款外部订单号 | ` out_trade_no `  |是 |String(128)  | 外部退款订单号/商户平台退款订单号: 这个参数对于系统中同一商户账户下的每次支付和退款请求必须是唯一的|
-|退款金额 | ` txamt `   |是 |Int(11)  | 退款金额, 以分为单位 (i.e. 100 = $1) <br/> 部分退款和全部退款都需要, 有部分支付通道不支持部分退款|
-|请求交易时间 | ` txdtm `   |是 |String(20) |格式: YYYY-MM-DD hh:mm:ss|
-|子商户号 | ` mchid `  |否 |String(16)  | 商户会或不会被提供 `mchid`.  如果已经被提供 `mchid` , 除特殊情况下在呼叫API时必须提交 `mchid`. 与之相反的是, 如果并未被提供 `mchid`, 商户无需在API请求中传递参数 `mchid`. |
-|设备唯一id | ` udid `    |否 |String(40)  | 唯一的交易设备ID|
-
-### 响应参数
-
-|参数名称|参数编码|参数类型|描述|
-|-----    |----|------ |-----   |
-|退款交易唯一流水号 | `syssn`  |String(40)   | 新创建的退款交易的ID|
-|原订交易流水号| `orig_syssn`  |String(128)   | 被用于退款的原交易的交易ID|
-|订单金额| `txamt`   |Int(11)  | 退款金额, 以分为单位 (i.e. 100 = $1)|
-|系统交易时间 | `sysdtm`  | String(20)  |格式: YYYY-MM-DD hh:mm:ss <br/>这个值被用作结算截止时间|
-|返回编码| `respcd` |  String(4)|  0000-请求成功.<br/>1143/1145 - 商户需要持续查询退款交易状态. <br/>所有其他的返回编码都是失败值. 请根据 [交易状态码](/docs/preparation/paycode#交易状态码) 获取完整的信息.|
-|响应信息| `resperr` |  String(128)| 响应的信息|
-|净支付金额 |`cash_fee`  | String | 用户实际付款金额 = 交易金额 - 优惠 |
-| 支付货币 |`cash_fee_type` | String | 实际支付货币 e.g. CNY |
-| 净退款金额 | `cash_refund_fee` | String | 实际退款金额 |
-| 退款货币 | `cash_refund_fee_type` | String | 实际退款货币 e.g. CNY |
+:::note
+- 請確保退款金額不超過原始交易金額。
+- 部分錢包不支援部分退款，請先確認。
+- 各支付通道的退款有效期限不同，請聯絡 QFPay 支援團隊以取得更多資訊。
+- 若退款結果為失敗（`respcd` 非 `0000`），建議實作重試邏輯，或透過 [交易查詢 API](/docs/common-api/transaction-enquiry) 驗證退款狀態。
+:::

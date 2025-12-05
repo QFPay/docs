@@ -47,7 +47,7 @@ import TabItem from '@theme/TabItem';
 
 若沖正成功，回應會包含 `respcd=0000`。
 
-若原始交易已成功完成（即付款回應中為 `respcd=0000`），則**無法沖正**，請改用 [退款 API](/docs/common-api/refunds)。
+若原始交易已成功完成（即付款回應中為 `respcd=0000`），則**無法沖正**，請改用 [退款 API](/docs/common-api/refund)。
 
 ---
 

@@ -31,7 +31,7 @@ For instance you may find the following useful before you start the integration:
 You can also find common APIs that are also applicable to pre-authorisation payments:
 
 - [Transaction Enquiry](/docs/common-api/transaction-enquiry)
-- [Transaction Refunds](/docs/common-api/refunds)
+- [Transaction Refund](/docs/common-api/refund)
 
 ## Creating and capturing payments
 

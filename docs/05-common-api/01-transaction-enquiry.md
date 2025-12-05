@@ -295,7 +295,7 @@ These fields are explained in [Common API Response Format](/docs/api-reference/r
 | `errmsg`               | String  | Result message                                                                                      |
 | `order_type`           | String  | `payment` or `refund`                                                                               |
 | `pay_type`             | String  | Payment channel used                                                                                |
-| `cancel`               | String  | Cancellation/refund flag (0–5). See [Refund Guide](/docs/online-shop/refunds) for full explanation. |
+| `cancel`               | String  | Cancellation/refund flag (0–5). See [Refund Guide](/docs/common-api/refund) for full explanation. |
 | `cash_fee`             | String  | Actual paid amount (after discount)                                                                 |
 | `cash_fee_type`        | String  | Actual payment currency (e.g. CNY)                                                                  |
 | `cash_refund_fee`      | String  | Actual refund amount (if applicable)                                                                |

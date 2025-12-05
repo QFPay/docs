@@ -287,7 +287,7 @@ ob_end_flush();
 | `errmsg`               | String  | 交易結果說明                                                    |
 | `order_type`           | String  | 訂單類型：`payment` 或 `refund`                                 |
 | `pay_type`             | String  | 支付通道代碼                                                    |
-| `cancel`               | String  | 撤銷/退款標記。詳見 [退款說明](/docs/online-shop/refunds)              |
+| `cancel`               | String  | 撤銷/退款標記。詳見 [退款說明](/docs/common-api/refund)              |
 | `cash_fee`             | String  | 使用者實際付款金額（扣除折扣後）                                          |
 | `cash_fee_type`        | String  | 實際支付幣別，如 CNY                                              |
 | `cash_refund_fee`      | String  | 實際退款金額                                                    |
