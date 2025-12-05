@@ -185,7 +185,7 @@ elements.createEnhance({
 
 #### Render Credit Card Form Only via `elements.create()`
 
-Use for Visa/Mastercard card form.
+Use for Visa / Mastercard card form.
 
 ```js
 elements.create("#container")

@@ -1,19 +1,89 @@
+---
+id: reversal
+title: 沖正 API 指南
+description: 使用沖正 API 撤回尚未完成的交易。若交易已成功，請改用退款 API。
+sidebar_label: 沖正 API
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 冲正/取消
+# 沖正 API 指南
+
+本頁面說明如何使用「沖正 API」來撤銷一筆**尚未成功完成**的交易。請注意，沖正並非退款。
 
 :::warning
-当无法确定交易状态时，例如未收到付款通知、响应超时、网络问题等，应将撤销作为最后的手段。首先应使用查询API端点检查交易状态。香港支付类型不支持交易取消。
+沖正（reversal）不是退款。只有當原始交易尚未成功完成時，才能發起沖正。
 :::
 
-撤销 API 端点允许商家取消/撤销当前正在进行的交易。 已成功处理的交易（返回代码 0000 = 成功）无法再撤销或取消。 如果您想撤销已成功的交易，请参阅[退款端点]（退款）。
+---
 
-```plaintext
+## 支援場景
 
-对于代码说明，请使用下面的选项卡选择 Python、Java、Node.js 或 PHP。
+:::note
+目前僅以下場景支援 `/trade/v1/reversal` 沖正 API，適用於交易處於非完成狀態（例如掃碼後未付款）。
+:::
 
-```
+### 支援的支付場景及 PayType
+
+支付寶正掃
+- `800101`：支付寶跨境線下掃碼支付
+- `801501`：支付寶線上掃碼支付 (香港商戶)
+
+微信支付正掃
+- `800201`：微信掃碼支付
+
+支付寶反掃
+- `800108`：支付寶跨境反掃支付
+
+> 若您欲對其他錢包進行交易取消，請參考 [Close API](#reversal-vs-close) 或聯絡 QFPay 支持團隊取得整合建議。
+
+---
+
+## API 端點
+
+* **Endpoint**：`/trade/v1/reversal`
+* **方法**：`POST`
+
+若沖正成功，回應會包含 `respcd=0000`。
+
+若原始交易已成功完成（即付款回應中為 `respcd=0000`），則**無法沖正**，請改用 [退款 API](/docs/common-api/refunds)。
+
+---
+
+## 請求參數
+
+| 參數名稱           | 類型          | 必填 | 說明                             |
+| -------------- | ----------- | -- | ------------------------------ |
+| `mchid`        | String(16)  | 否  | QFPay 商戶號，僅代理商需填寫。             |
+| `syssn`        | String(40)  | 是* | QFPay 交易號                      |
+| `out_trade_no` | String(128) | 是* | 商戶端交易單號                        |
+| `txamt`        | Int(11)     | 是  | 交易金額（單位：分），建議金額大於 200 以避免風控    |
+| `txdtm`        | String(20)  | 是  | 原交易時間，格式：`YYYY-MM-DD hh:mm:ss` |
+| `udid`         | String(40)  | 否  | 裝置唯一 ID（用於追蹤交易設備）              |
+
+> * `syssn` 與 `out_trade_no` 至少擇一提供。
+
+---
+
+## 回應參數
+
+| 參數名稱         | 類型        | 說明                            |
+| ------------ | --------- | ----------------------------- |
+| `syssn`      | String    | 此次沖正動作的 QFPay 交易號             |
+| `orig_syssn` | String    | 原始（被沖正）交易的 QFPay 交易號          |
+| `txamt`      | Int       | 沖正金額（單位：分）                    |
+| `txcurrcd`   | String(3) | 幣別代碼（例如 HKD）                  |
+| `txdtm`      | String    | 原始交易時間                        |
+| `sysdtm`     | String    | QFPay 系統處理時間                  |
+| `chnlsn`     | String    | 錢包端交易號（若未執行則可能為空）             |
+| `respcd`     | String(4) | 回應代碼（`0000` = 成功，其它 = 失敗或處理中） |
+| `resperr`    | String    | 結果訊息                          |
+| `respmsg`    | String    | 額外補充說明（如有）                    |
+
+---
+
+## 程式碼範例
 
 <Tabs>
 <TabItem value="python" label="Python">
@@ -250,10 +320,11 @@ ob_end_flush();
 </TabItem>
 </Tabs>
 
-> 上面的命令返回 JSON 结构如下：
+---
+
+## 回應範例
 
 ```json
-
 {
     "surcharge_fee": "0", 
     "resperr": "success", 
@@ -273,47 +344,57 @@ ob_end_flush();
 }
 ```
 
+---
 
-### HTTP请求 - 支付宝 CPM & MPM
-`GET ..trade/v1/reversal`
+## 補充說明
 
-### HTTP請求 - 微信支付 CPM
-`GET ..trade/v1/reversal`
+* **沖正無法保證使用者未被扣款**，建議搭配使用 [交易查詢 API](/docs/common-api/transaction-enquiry) 驗證結果。
+* 沖正僅適用於**即時失敗的交易**，請勿用於已成功的訂單退款處理。
+* 若回應為 `respcd=1143` 或 `1145`，表示沖正處理中，應持續查詢其狀態直至確認結果。
 
-### HTTP请求 - 微信支付 MPM
-`GET ..trade/v1/close`
+---
 
-### HTTP请求 - 其他符合条件的电子钱包*
-`GET ..trade/v1/close`
+## Reversal(沖正) vs Close（關閉訂單）
 
-*如果您想在支付宝和微信支付以外的钱包上使用该API，请联系我们获取说明。
+部分錢包採用關閉訂單接口 `/trade/v1/close` 取代沖正。
 
-### 请求参数
+### 支援的支付場景及 PayType
 
-参数名称 | 是否必填 | 参数类型 | 描述
---------- | ------- | --------- | ------- 
-`mchid` | No | String(16) | QFPay提供的商户标识符
-`syssn` | Yes* | String(40) | 付款完成后系统返回的 QFPay 交易编号
-`out_trade_no` | Yes* | String(128) | 外部交易编号
-`txamt` | Yes | Int(11) | 交易金额。单位为分（即 100 = 1 元）。建议数值大于200，避免因支付金额过低而被交易风控。
-`txdtm` | Yes | String(20) | 交易时间格式： YYYY-MM-DD hh:mm:ss
-`udid` | No | String(40) | 唯一的交易设备 ID。显示在商家管理平台上。
-
-*Either the `syssn` or `out_trade_no` must be provided.
+微信支付反掃
+- `800008`：微信反掃
+- `800208`：微信反掃支付
+- `801008`：微信香港反掃支付（適用於向微信香港申請的商戶）
 
 
-### 响应参数
+**方法**：`GET`
 
-参数名称 | 参数类型 | 描述  
---------- | --------- | ------- 
-`orig_syssn` | String(40) | 指原始 QFPay 交易编号
-`syssn` | String(40) | 取消/撤销的 QFPay 交易编号
-`out_trade_no` | String(128) | 外部交易编号
-`txamt` | Int(11) | 交易金额。单位为分（即 100 = 1 元）
-`txcurrcd` | String(3) | 交易货币。查看 [支付币种](/docs/preparation/paycode#支付币种) 表，了解可用货币的完整列表。
-`txdtm` | String(20) | 交易时间格式： YYYY-MM-DD hh:mm:ss
-`sysdtm` | String(20) | 系统交易时间。 格式：YYYY-MM-DD hh:mm:ss <br/> 该参数值作为清算截止时间。
-`chnlsn` | String | 支付通道交易编号（钱包方）
-`respcd` | String(4) | 响应代码 <br/> 0000 = 冲正/取消成功 <br/> 1143/1145 = 冲正/取消正在进行中 <br/> 其他 = 冲正/取消失败
-`resperr` | String(128) | 结果说明
-`respmsg` | String(128) | 信息说明
+如需於非支付寶／微信錢包上使用此接口，請與我們聯繫確認。
+
+### 請求參數
+
+| 參數名稱           | 必填 | 類型          | 說明                            |
+| -------------- | -- | ----------- | ----------------------------- |
+| `mchid`        | 否  | String(16)  | QFPay 配發的商戶號碼                 |
+| `syssn`        | 是* | String(40)  | 系統回傳的 QFPay 交易號               |
+| `out_trade_no` | 是* | String(128) | 商戶自訂訂單編號                      |
+| `txamt`        | 是  | Int(11)     | 交易金額（分為單位）。建議金額 > 200。        |
+| `txdtm`        | 是  | String(20)  | 交易時間，格式：`YYYY-MM-DD hh:mm:ss` |
+| `udid`         | 否  | String(40)  | 裝置識別碼，將於商戶後台顯示                |
+
+> * `syssn` 與 `out_trade_no` 至少擇一提供。
+
+### 回應參數
+
+| 參數名稱           | 類型          | 說明                                                    |
+| -------------- | ----------- | ----------------------------------------------------- |
+| `orig_syssn`   | String(40)  | 原始 QFPay 交易號                                          |
+| `syssn`        | String(40)  | 關單交易的 QFPay 交易號                                       |
+| `out_trade_no` | String(128) | 商戶訂單編號                                                |
+| `txamt`        | Int(11)     | 交易金額（單位：分）                                            |
+| `txcurrcd`     | String(3)   | 幣別代碼，詳見 [交易貨幣](/docs/api-reference/currencies) |
+| `txdtm`        | String(20)  | 原始交易時間                                                |
+| `sysdtm`       | String(20)  | 系統處理時間。此值將用作結算截止時間。                                   |
+| `chnlsn`       | String      | 錢包端交易號                                                |
+| `respcd`       | String(4)   | 回應代碼：`0000` = 成功，`1143/1145` = 處理中，其餘 = 失敗            |
+| `resperr`      | String(128) | 結果描述                                                  |
+| `respmsg`      | String(128) | 補充資訊                                                  |

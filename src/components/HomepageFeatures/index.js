@@ -14,8 +14,8 @@ const FeatureList = [
       </Translate>
     ),
     links:[
-      {title:<Translate id="homepage.features.in-store.MPM">Merchant Present QRCode Mode</Translate>, url:"docs/in-store/MPM"},
-      {title:<Translate id="homepage.features.in-store.CPM">Consumer Present QRCode Mode</Translate>, url:"docs/in-store/CPM"},
+      {title:<Translate id="homepage.features.in-store.MPM">Merchant Present QR Code Mode</Translate>, url:"docs/in-store/MPM"},
+      {title:<Translate id="homepage.features.in-store.CPM">Consumer Present QR Code Mode</Translate>, url:"docs/in-store/CPM"},
       {title:<Translate id="homepage.features.in-store.pos">POS API</Translate>, url:"docs/category/pos-api"}
     ]
   },
@@ -28,10 +28,10 @@ const FeatureList = [
       </Translate>
     ),
     links:[
-      {title:<Translate id="homepage.features.online-shop.integration-by-payment-type.visa-master-online-payment">Visa/Mastercard Online Payments</Translate>, url:"/docs/online-shop/integration-by-payment-type/visa-master-online-payment"},
-      {title:<Translate id="homepage.features.online-shop.checkout-integration.checkout">QFPay Checkout Services</Translate>, url:"docs/online-shop/checkout-integration/checkout"},
-      {title:<Translate id="homepage.features.online-shop.checkout-integration.payment-element">QFPay Component</Translate>, url:"docs/online-shop/checkout-integration/payment-element"},
-      {title:<Translate id="homepage.features.online-shop.integration-by-use-case.recurring">QFPay Recurring Payment</Translate>, url:"docs/online-shop/integration-by-use-case/qfpay-recurring-payment"},
+      {title:<Translate id="homepage.features.online-shop.integration-by-payment-type.visa-master-online-payment">Visa / Mastercard Online Payments</Translate>, url:"/docs/online-shop/integration-by-payment-type/visa-master-online-payment"},
+      {title:<Translate id="homepage.features.online-shop.checkout-integration.checkout">Hosted Checkout Page</Translate>, url:"docs/online-shop/checkout-integration/checkout"},
+      {title:<Translate id="homepage.features.online-shop.checkout-integration.payment-element">Element SDK</Translate>, url:"docs/online-shop/checkout-integration/payment-element"},
+      {title:<Translate id="homepage.features.online-shop.integration-by-use-case.recurring">Recurring Payment</Translate>, url:"docs/online-shop/integration-by-use-case/qfpay-recurring-payment"},
       {title:<Translate id="homepage.features.online-shop.integration-by-use-case.preauth">Online Pre-authorisation Payment</Translate>, url:"docs/online-shop/integration-by-use-case/preauth"},
       {title:<Translate id="homepage.features.online-shop.integration-by-payment-type.alipay">Alipay</Translate>, url:"docs/category/integration-by-payment-type/alipay"},
       {title:<Translate id="homepage.features.online-shop.integration-by-payment-type.wechat">WeChat</Translate>, url:"docs/category/integration-by-payment-type/wechat"},

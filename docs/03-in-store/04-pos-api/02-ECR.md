@@ -107,7 +107,7 @@ specific parameters
 |`allow_modify_flag`| No | Integer| 0: Not allow modification of refund amount (default value) <br/> 1: allow modification of refund amount|
 
 :::note
-> for Visa/Mastercard, Unionpay Card and American Express Card,  the amount of same day refund must be `full amount`
+> for Visa / Mastercard, Unionpay Card and American Express Card,  the amount of same day refund must be `full amount`
 :::
 
 ```json
@@ -224,7 +224,7 @@ MPM refer to Mercahnt Present QR Code Mode
 
 |value| description | busicd mapping|
 |--|--|--|
-| card_payment |Visa/Mastercard| 802808 |
+| card_payment |Visa / Mastercard| 802808 |
 | wx | WeChat Pay | 800208 (CPM)/800201 (MPM) |
 | alipay| Alipay | 800108 (CPM)/800101 (MPM)|
 | payme| PayMe | 805808 (CPM)/805801 (MPM)|

@@ -1,13 +1,40 @@
+---
+id: reversal
+title: Reversal API Guide
+description: Use the Reversal API to void a transaction that has not yet been completed. If the transaction has already succeeded, please use the Refund API instead.
+sidebar_label: Reversal API
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
----
-
 # Reversal API Guide
 
-This page provides guidance on using the reversal API to void an **in-progress** transaction. A reversal is not a refund. It is only possible if the original transaction has **not been completed successfully**.
+This page explains how to use the **Reversal API** to cancel a transaction that has **not yet been successfully completed**. Please note that a reversal is **not** a refund.
 
----
+:::warning
+A **reversal** is not a **refund**. It can only be initiated if the **original transaction has not been completed successfully**.
+:::
+
+## Supported Scenarios
+
+:::note
+The `/trade/v1/reversal` API is currently only supported in the following scenarios. It applies to transactions in a non-completed state (e.g. scanned but not paid).
+:::
+
+### Supported payment flows and PayTypes
+
+Alipay MPM (Merchant Presented Mode)
+- `800101`：Alipay Merchant Presented QR Code Payment in store (MPM) (Overseas Merchants)
+- `801501`：Alipay Merchant Presented QR Code (MPM) Payment (HK Merchants)
+
+WeChat Pay MPM (Merchant Presented Mode)
+- `800201`：WeChat Merchant Presented QR Code Payment (MPM) (Overseas & HK Merchants)
+
+Alipay CPM (Consumer Presented Mode)
+- `800108`：Alipay Consumer Presented QR Code Payment (CPM) (Overseas & HK Merchants)
+
+> For cancellations involving other wallets, please refer to the [Close API](#reversal-vs-close) or contact QFPay Support for integration guidance.
 
 ## API Endpoint
 
@@ -342,9 +369,14 @@ ob_end_flush();
 
 ## Reversal vs Close
 
-Some wallets (e.g. WeChat Pay MPM) support a close API endpoint instead of reversal.
+Some wallets (e.g. WeChat Pay MPM) support the `/trade/v1/close` endpoint instead of reversal.
 
-- WeChat MPM & others: `/trade/v1/close`
+### Supported payment flows and PayTypes
+
+WeChat Pay CPM (Consumer Presented Mode)
+- `800008`：Consumer Present QR Code Mode (CPM) for WeChat
+- `800208`：WeChat Consumer Presented QR Code Payment (CPM) (Overseas & HK Merchants)
+- `801008`：WeChat Pay HK Consumer Presented QR Code Payment (CPM) (Direct Settlement, HK Merchants)
 
 **Method** : `GET`
 

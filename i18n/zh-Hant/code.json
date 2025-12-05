@@ -33,7 +33,7 @@
     "message": "线上对接同样简单、安全，保护隐私信息。支持多种线上对接场景，可以将 QFPay 收银台页面增加到网站收款流程，也可以将 QFPay 支付组件嵌入到网站页面中。快速、便捷、个性化的集成方式。"
   },
   "homepage.features.online-shop.visa": {
-    "message": "Visa/Mastercard 线上支付"
+    "message": "Visa / Mastercard 线上支付"
   },
   "homepage.features.online-shop.checkout-integration.checkout": {
     "message": "託管結帳頁面（收銀台）"

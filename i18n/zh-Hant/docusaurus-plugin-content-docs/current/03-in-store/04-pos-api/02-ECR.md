@@ -233,7 +233,7 @@ CPM 反扫支付
 ```
 |值| 描述 | 支付类型映射 |
 |--|--|--|
-| card_payment |Visa/Mastercard刷卡交易| 802808 |
+| card_payment |Visa / Mastercard刷卡交易| 802808 |
 | wx | 微信支付 | 800208 (CPM)/800201 (MPM) |
 | alipay| 支付宝支付 | 800108 (CPM)/800101 (MPM)|
 | payme| PayMe支付 | 805808 (CPM)/805801 (MPM)|
