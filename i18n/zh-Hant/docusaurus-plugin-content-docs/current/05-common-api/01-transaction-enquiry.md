@@ -3,7 +3,7 @@ id: transaction-enquiry
 title: 交易查詢
 description: 使用 QFPay 提供的查詢接口以獲取交易（付款、退款、取消）的處理狀態
 sidebar_label: 交易查詢
--------------------
+---
 
 import Tabs from '@theme/Tabs'; 
 import TabItem from '@theme/TabItem';
