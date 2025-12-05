@@ -165,7 +165,7 @@ const sidebars = {
       },
       items: [
         'common-api/transaction-enquiry',
-        'common-api/reversal-cancel',
+        'common-api/reversal',
         'common-api/refunds',
         'common-api/asynchronous-notification',
         'common-api/transaction-note'
