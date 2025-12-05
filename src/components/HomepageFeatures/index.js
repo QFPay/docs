@@ -28,13 +28,9 @@ const FeatureList = [
       </Translate>
     ),
     links:[
-      {title:<Translate id="homepage.features.online-shop.integration-by-payment-type.visa-master-online-payment">Visa / Mastercard Online Payments</Translate>, url:"/docs/online-shop/integration-by-payment-type/visa-master-online-payment"},
-      {title:<Translate id="homepage.features.online-shop.checkout-integration.checkout">Hosted Checkout Page</Translate>, url:"docs/online-shop/checkout-integration/checkout"},
-      {title:<Translate id="homepage.features.online-shop.checkout-integration.payment-element">Element SDK</Translate>, url:"docs/online-shop/checkout-integration/payment-element"},
-      {title:<Translate id="homepage.features.online-shop.integration-by-use-case.recurring">Recurring Payment</Translate>, url:"docs/online-shop/integration-by-use-case/qfpay-recurring-payment"},
-      {title:<Translate id="homepage.features.online-shop.integration-by-use-case.preauth">Online Pre-authorisation Payment</Translate>, url:"docs/online-shop/integration-by-use-case/preauth"},
-      {title:<Translate id="homepage.features.online-shop.integration-by-payment-type.alipay">Alipay</Translate>, url:"docs/category/integration-by-payment-type/alipay"},
-      {title:<Translate id="homepage.features.online-shop.integration-by-payment-type.wechat">WeChat</Translate>, url:"docs/category/integration-by-payment-type/wechat"},
+      {title:<Translate id="homepage.features.online-shop.checkout-integration">Checkout Integration</Translate>, url:"docs/category/checkout-integration"},
+      {title:<Translate id="homepage.features.online-shop.integration-by-payment-type">Integration by Payment Type</Translate>, url:"/docs/category/integration-by-payment-type"},
+      {title:<Translate id="homepage.features.online-shop.integration-by-use-case">Integration by Use Case</Translate>, url:"docs/category/integration-by-use-case"},
     ]
   },
   {
