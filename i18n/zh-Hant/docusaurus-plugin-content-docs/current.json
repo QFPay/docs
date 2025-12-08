@@ -57,7 +57,7 @@
   },
   "sidebar.qfpaySidebar.doc.ECR Integration": {
     "message": "ECR 整合",
-    "description": "The label for the doc item ECR Integration in sidebar qfpaySidebar, linking to the doc in-store/pos-api/ECR"
+    "description": "The label for the doc item ECR Integration in sidebar qfpaySidebar, linking to the doc in-store/pos-api/ecr"
   },
   "sidebar.qfpaySidebar.doc.App call App": {
     "message": "App call App",

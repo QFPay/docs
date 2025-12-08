@@ -63,8 +63,8 @@ const sidebars = {
           items: [
             {
               type: 'doc',
-              label: 'ECR',
-              id:'in-store/pos-api/ECR'
+              label: 'ECR Integration',
+              id:'in-store/pos-api/ecr'
             },
             {
               type: 'doc',
