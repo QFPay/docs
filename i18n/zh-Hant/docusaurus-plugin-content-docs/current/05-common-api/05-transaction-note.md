@@ -1,5 +1,5 @@
 ---
-id: transaction-notes
+id: transaction-note
 title: 交易備註 API 指南
 description: 商戶可透過本接口為交易添加備註，便於後續查詢與報表顯示。
 sidebar_label: 交易備註 API

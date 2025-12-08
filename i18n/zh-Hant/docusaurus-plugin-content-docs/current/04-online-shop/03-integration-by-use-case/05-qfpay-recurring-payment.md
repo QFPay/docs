@@ -430,7 +430,7 @@ products 中的参数:
 | subscription_id | String | 是     | QFPay 系统中的唯一 subscription 对象ID |
 | subscription_order_id | String | 否     | 扣款订单的标识ID, 格式: `sub_ord_` + 所属 subscription 对象的 id 值 + 4 位标识该订单为第几次扣款。例如：`sub_ord_a360f06exxxxxxx4c3a_0001` 表示 subscription `sub_a360f06exxxxxxx4c3a` 的第一次扣款订单 |
 
-:::Note
+:::note
   该 API 只适用于有失败订单的订阅计划，该订阅计划应有如下之一的状态 `UNPAID`, `INCOMPLETE`, 或 `PAST_DUE`。 手动扣款成功后，如果扣款日期在订阅计划的下次计划扣款日期前，那么订阅计划将以状态`ACTIVE`正常运行；如果扣款在订阅计划的下次计划扣款日期之后, 订阅计划将被取消，客户需要重新订阅计划。如果扣款失败，订阅计划将保持原来的状态。
 :::
 

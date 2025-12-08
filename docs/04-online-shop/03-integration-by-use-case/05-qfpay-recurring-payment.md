@@ -457,7 +457,7 @@ Use API to charge a subscription immediately for a failed order.
 | subscription_id       | String | Yes       | unique ID of subscription object       |
 | subscription_order_id | String | No        | unique ID of subscription order object |
 
-:::Note
+:::note
   This API only applied for a subscription that having a failed order and in the state `UNPAID`, `INCOMPLETE`, or `PAST_DUE`. For the case that the payment is successed, if manual charge date is before scheduled next billing date, the subscription plan will continue to work with state `ACTIVE`, if the manual charge date is after next billing date, the subscription plan will be cancelled. If the payment is failed, the subscription plan will keep the original state.
 :::
 
