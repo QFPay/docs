@@ -18,10 +18,10 @@
     "message": "簡單、快捷、安全的使用 QFPay 支付產品和 API 服務。接受目前主流信用卡支付，以及電子錢包。"
   },
   "homepage.features.in-store.MPM": {
-    "message": "正掃支付"
+    "message": "商戶出示碼模式（正掃）(MPM) 支付"
   },
   "homepage.features.in-store.CPM": {
-    "message": "反掃支付"
+    "message": "消費者出示碼模式（反掃）（CPM）"
   },
   "homepage.features.in-store.pos": {
     "message": "POS API"
@@ -32,26 +32,14 @@
   "homepage.features.online-shop.content": {
     "message": "線上對接同樣簡單、安全，保護隱私信息。支持多種線上對接場景，可以將 QFPay 收銀台頁面增加到網站收款流程，也可以將 QFPay 支付组件嵌入到網站頁面中。快速、便捷、個性化的集成方式。"
   },
-  "homepage.features.online-shop.visa": {
-    "message": "Visa / Mastercard 線上支付"
-  },
-  "homepage.features.online-shop.checkout-integration.checkout": {
-    "message": "託管結帳頁面（收銀台）"
-  },
-  "homepage.features.online-shop.checkout-integration.payment-element": {
-    "message": "支付組件 (Element) SDK"
+  "homepage.features.online-shop.checkout-integration": {
+    "message": "結帳方式整合"
   },
   "homepage.features.online-shop.integration-by-use-case.recurring": {
-    "message": "訂閱支付 API"
+    "message": "按支付場景整合"
   },
-  "homepage.features.online-shop.integration-by-use-case.preauth": {
-    "message": "線上預授權支付 API"
-  },
-  "homepage.features.online-shop.integration-by-payment-type.alipay": {
-    "message": "支付寶"
-  },
-  "homepage.features.online-shop.integration-by-payment-type.wechat": {
-    "message": "微信"
+  "homepage.features.online-shop.integration-by-payment-type": {
+    "message": "按支付方式整合"
   },
   "homepage.features.e-commerce.title": {
     "message": "電子商務平台插件"
@@ -182,11 +170,11 @@
     "message": "版本：{versionLabel}"
   },
   "theme.docs.versions.unreleasedVersionLabel": {
-    "message": "此为 {siteTitle} {versionLabel} 版尚未发行的文档。",
+    "message": "此為 {siteTitle} {versionLabel} 版尚未發行的文檔。",
     "description": "The label used to tell the user that he's browsing an unreleased doc version"
   },
   "theme.docs.versions.unmaintainedVersionLabel": {
-    "message": "此为 {siteTitle} {versionLabel} 版的文档，现已不再积极维护。",
+    "message": "此為 {siteTitle} {versionLabel} 版的文檔，現已不再積極維護。",
     "description": "The label used to tell the user that he's browsing an unmaintained doc version"
   },
   "theme.docs.versions.latestVersionSuggestionLabel": {

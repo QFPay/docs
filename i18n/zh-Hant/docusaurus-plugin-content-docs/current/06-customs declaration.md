@@ -1,103 +1,124 @@
+---
+id: customs-declaration
+title: 報關 API 指南
+description: 提交跨境電商交易資訊至支付寶或微信的報關系統。
+sidebar_label: 報關 API
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# 报关API
+# 報關 API 指南
 
-报关 API 自动将微信/支付宝的支付数据发送给海关以简化清关流程, 为跨境电商节省时间.
+透過報關 API，商戶可將跨境交易資訊自動提交至支付寶或微信對應的海關系統，協助完成合規要求，加快清關速度，並提升用戶體驗。
 
-## 推送报关
+---
 
-### HTTP请求
+## 1. 發起報關申請
+
+此接口用於支付成功後提交報關資訊。
+
+### HTTP 請求
 
 `POST ../custom/v1/declare`
 
-### 请求参数
+### 請求參數
 
-| 参数编码| 是否必须| 参数类型|描述|
-|:---|:----- |-----   |----   |
-|`trade_type`|Y|String(8)|微信或支付宝|
-|`syssn`|Y|String(32)|QFPay 交易码|
-|`customs`|Y|String(20)|申报的目标海关 示例：SHANGHAI_ZS|
-|`mch_customs_no`|Y|String(20)|商户的海关注册码|
-|`action_type`|N|String(256)|申报类型. 只有在 `trade_type` 是 `wechat` 时生效. "ADD" - 新申请, "MODIFY" - 编辑已申请的报关|
-|`mch_customs_name`|N|String(256)|商户在海关登记的名称. 在 `trade_type` 是 `alipay` 时必须提交 示例: jwyhanguo_card|
-|`out_request_no`|N|String(32)|商户订单号码, 在`trade_type`是 `alipay` 时必须提交. 示例: 15725904083420588032|
-|`amount`|N|String(20)|申报金额. 只有在 `trade_type` 是 `alipay` 时必须提交. 示例: 2.00|
+| 參數名稱 | 必填 | 類型 | 說明 |
+|----------|------|------|------|
+| `trade_type` | 是 | String(8) | 支付平台類型，取值：`weixin` 或 `alipay` |
+| `syssn` | 是 | String(32) | QFPay 交易流水號 |
+| `customs` | 是 | String(20) | 報關地海關代碼，例如：`SHANGHAI_ZS` |
+| `mch_customs_no` | 是 | String(20) | 商戶海關登記編號 |
+| `action_type` | 否 | String(256) | 報關動作（僅適用於微信）：`"ADD"` 新增，`"MODIFY"` 修改 |
+| `mch_customs_name` | 否 | String(256) | 支付寶報關登記商戶名稱，例如：`jwyhanguo_card` |
+| `out_request_no` | 否 | String(32) | 商戶端報關請求流水號（支付寶專用） |
+| `amount` | 否 | String(20) | 報關金額（支付寶專用），例如 `2.00` |
 
-如果拆分或编辑申请, 需要修改如下字段: <br/>
+### 子訂單參數（拆單或修改報關時使用）
 
-### 请求参数
+| 參數名稱 | 條件必填 | 類型 | 說明 |
+|----------|----------|------|------|
+| `sub_order_no` | 條件 | String(64) | 若為子訂單，需填寫子訂單編號 |
+| `fee_type` | 條件 | String(8) | 幣別（微信僅支持 `CNY`） |
+| `order_fee` | 條件 | String(8) | 子訂單總金額（單位為分）= `transport_fee` + `product_fee` |
+| `product_fee` | 條件 | String(8) | 商品金額（分） |
+| `transport_fee` | 條件 | String(8) | 運費金額（分） |
 
-| 参数编码| 是否必须| 参数类型|描述|
-|:---|:----- |-----   |----   |
-|`sub_order_no`|C|String(64)|商户子订单号码, 如果是一个拆分请求则必须提交. 示例：1111960490|
-|`fee_type`|C|String(8)|货币. 在 `trade_type` 是 `wechat` 时必须提交, 只能是CNY|
-|`order_fee`|C|String(8)|子订单的金额 (以 0.01 CNY为单位). 不能超过原订单金额, 订单费用=运输费用 + 产品费用. 若有拆分订单则需要填写 示例: 888|
-|`product_fee`|C|String(8)|产品价格 (以 0.01 CNY为单位). 若有拆分订单则需要填写 示例: 888|
-|`transport_fee`|C|String(8)|物流费 (以 0.01 CNY为单位). 若有拆分订单则需要填写 示例: 888|
+### 回應參數
 
-### 响应参数
+| 參數名稱 | 類型 | 說明 |
+|----------|------|------|
+| `syssn` | String(40) | QFPay 交易流水號 |
+| `respcd` | String(4) | 回應碼：`0000` 成功；`1143/1145` 需重查；其他表示失敗 |
+| `resperr` | String(128) | 錯誤描述 |
+| `respmsg` | String(128) | 附加訊息 |
+| `verify_department` | String | 海關受理部門 |
+| `verify_department_trade_id` | String | 海關返回的交易編號 |
 
-| 参数编码| 是否必须| 参数类型|描述|
-|:---|:----- |-----   |----   |
-|`syssn`||String(40)|QFPay 交易订单号|
-|`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](/docs/preparation/paycode#交易状态码) 获得完整返回类型列表|
-|`resperr`||String(128)|信息描述|
-|`respmsg`||String(128)|其他信息|
-|`verify_department`|||认证机构|
-|`verify_department_trade_id`|||认证机构的交易号|
+---
 
-## 查询报关
+## 2. 查詢報關結果
 
-商户通过QFPay 交易订单号查询申报状态
+可查詢報關是否成功處理，是否被海關受理等狀態。
 
-### HTTP请求
+### HTTP 請求
 
 `POST/GET ../custom/v1/query`
 
-### 请求参数
+### 請求參數
 
-|参数编码|是否必须|参数类型|描述|
-|:---|:----- |-----   |----   |
-|`trade_type`|Y|String(8)|`weixin` 或者 `alipay`|
-|`customs`|Y|String(20)|申报的目标海关 示例：SHANGHAI_ZS|
-|`syssn`|Y|String(32)|QFPay 交易订单号|
-|`sub_order_no`|N|String(40)|商户子订单号码, 如果是一个拆分请求则必须提交. 示例：1111960490|
+| 參數名稱 | 必填 | 類型 | 說明 |
+|----------|------|------|------|
+| `trade_type` | 是 | String(8) | 支付平台類型，取值：`weixin` 或 `alipay` |
+| `customs` | 是 | String(20) | 海關代碼，例如：`SHANGHAI_ZS` |
+| `syssn` | 是 | String(32) | QFPay 交易流水號 |
+| `sub_order_no` | 否 | String(40) | 若為子訂單，需提供子訂單編號 |
 
-### 响应参数
+### 回應參數
 
-| 参数编码| 是否必须|参数类型|描述|
-|:---|:----- |-----   |----   |
-|`syssn`||String(40)|QFPay 交易订单号|
-|`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](/docs/preparation/paycode#交易状态码) 获得完整返回类型列表|
-|`resperr`||String(128)|信息描述|
-|`respmsg`||String(128)|其他信息|
-|`data`|||海关申报详情 \[\{"resperr" : "", "errmsg" : null, "sub_order_no" : "15752730835729139712", "verify_department" : "OTHERS", "verify_department_trade_id" : "4200000459201911265585026208"\}\]|
+| 參數名稱 | 類型 | 說明 |
+|----------|------|------|
+| `syssn` | String(40) | QFPay 交易流水號 |
+| `respcd` | String(4) | 回應碼 |
+| `resperr` | String(128) | 錯誤訊息 |
+| `respmsg` | String(128) | 附加訊息 |
+| `data` | Array | 報關資料陣列，包含：`resperr`、`errmsg`、`sub_order_no`、`verify_department`、`verify_department_trade_id` 等欄位 |
 
-## 重新报关
+---
 
-If additional order information has been submitted to the customs but is lost in the electronic port, the customs declaration re-push API can be used to push the information to the customs again.
+## 3. 重新發送報關資料
 
-### HTTP请求
+若海關端未收到報關資訊，可使用此接口重新推送。
+
+### HTTP 請求
 
 `POST ../custom/v1/redeclare`
 
-### 请求参数
+### 請求參數
 
-| 请求参数| 是否必须| 参数类型|描述|
-|:---|:----- |-----   |----   |
-|`trade_type`|Y|String(8)|`weixin` 或者 `alipay`|
-|`customs`|Y|String(20)|申报的目标海关 示例：SHANGHAI_ZS|
-|`syssn`|Y|String(32)|QFPay 交易订单号|
-|`mch_customs_no`|Y|String(20)|商户的海关注册码, 示例: 110084111|
-|`sub_order_no`|N|String(40)|商户子订单号码, 如果是一个拆分请求则必须提交. 示例：1111960490|
+| 參數名稱 | 必填 | 類型 | 說明 |
+|----------|------|------|------|
+| `trade_type` | 是 | String(8) | 支付平台類型，取值：`weixin` 或 `alipay` |
+| `customs` | 是 | String(20) | 海關代碼 |
+| `syssn` | 是 | String(32) | QFPay 交易流水號 |
+| `mch_customs_no` | 是 | String(20) | 商戶海關登記編號 |
+| `sub_order_no` | 否 | String(40) | 拆單時需提供子訂單編號 |
 
-### 响应参数
+### 回應格式
 
-|请求参数| 是否必须| 参数类型|描述|
-|:---|:----- |-----   |----   |
-|`syssn`||String(40)|QFPay 交易订单号|
-|`respcd`||String(4)|0000 = 申报成功. <br/> 1143/1145 = 商户需要持续查询交易结果 <br/> 所有其他的返回码表明交易失败.请参阅 [支付状态码](/docs/preparation/paycode#交易状态码) 获得完整返回类型列表|
-|`resperr`||String(128)|信息描述|
-|`respmsg`||String(128)|其他信息|
+與 [發起報關申請](#1-發起報關申請) 相同。
+
+---
+
+## 注意事項
+
+:::tip
+- 僅可對已完成的成功交易（`respcd`=`0000`）進行報關。
+- 支付寶報關需確認「報關商戶名稱」與「報關編號」準確無誤。
+- 微信支付若需拆單，應提供正確的商品金額與運費欄位。
+- 各地區報關合規要求不同，請依所在地法規準備報關資料。
+:::
+
+完整回應碼請參考：[交易狀態碼](/docs/api-reference/status-codes)
