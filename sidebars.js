@@ -109,7 +109,7 @@ const sidebars = {
               items: [
                 'online-shop/integration-by-payment-type/alipay/alipay-web-payments', 
                 'online-shop/integration-by-payment-type/alipay/alipay-wap-h5-payments',
-                'online-shop/integration-by-payment-type/alipay/alipay-in-app-payments'
+                'online-shop/integration-by-payment-type/alipay/alipay-in-app'
               ]
             },
             {
@@ -171,7 +171,7 @@ const sidebars = {
         'common-api/transaction-note'
       ]
     },
-    'customs declaration',
+    'customs-declaration',
     'FAQ',
   ],
    
