@@ -110,23 +110,30 @@ Add the following code to the AndroidManifest.xml file.
 Note: In order to ensure that you can get permission, please install the haojin
 application first.
 
-<Link href="/img/android/add__permission.png" target="_blank"> ![Add Permissions](@site/static/img/android/add__permission.png)</Link>
-
+```xml
+<uses-permission android:name="com.qfpay.haojin.permission.OPEN_API"/>
+```
 ### Add Jar Package Dependency
 
 Integrated the [qfpay_haojin_api_xxx.jar](@site/static/files/qfpay_haojin_api_2.3.6.zip) file in the third party application.
 
-<Link href="/img/android/package__dependency.png" target="_blank"> ![Add Jar Package Dependency](@site/static/img/android/package__dependency.png)</Link>
+place jar file under /libs
 
 ### Config Target Application Id
 
-<Link href="/img/android/config__appid.png" target="_blank"> ![Config Target Application Id](@site/static/img/android/config__appid.png)</Link>
+```java
+Config.setTargetAppId("in.haojin.nearbymerchant.oversea");
+```
 
 ### Add Proguard Rule
 
 Add follow code to the proguard-rules.pro file.
 
-<Link href="/img/android/proguard__rule.png" target="_blank"> ![Add Proguard Rule](@site/static/img/android/proguard__rule.png)</Link>
+```proguard
+-dontnote com.qfpay.haojin.model.**
+
+-keep class com.qfpay.haojin.model.** {*;}
+```
 
 ## Third-party Interface Invoke Sample
 
@@ -134,23 +141,88 @@ Add follow code to the proguard-rules.pro file.
 
 Calling a collection request:
 
-<Link href="@site/static/img/android/invoke__collection.png" target="_blank"> ![Collection](@site/static/img/android/invoke__collection.png)</Link>
+```java
+ITradeAPI mTradeApi = TradeApiFactory.createTradeApi(XXXActivity, this);
+
+CollectionReq collectionReq = new CollectionReq(100);
+
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+{
+    super.onActivityResult(requestCode, resultCode, data);
+
+    CollectionResp collectionResp =
+            (CollectionResp) mTradeApi.parseResponse(requestCode, resultCode, data);
+
+    if (collectionResp == null) {
+        return;
+    }
+
+    if (collectionResp.isSuccess()) {
+        Transaction transaction = collectionResp.getPayResult();
+    } else {
+        // handle the error
+        Log.e(TAG, "onActivityResult: collection error message is " +
+                collectionResp.getErrorMsg());
+    }
+}
+```
 
 ### Refund
 
 Calling a refund request:
 
-<Link href="@site/static/img/android/invoke__refund.png" target="_blank"> ![Refund](@site/static/img/android/invoke__refund.png)</Link>
+```java
+ITradeAPI mTradeApi = TradeApiFactory.createTradeApi(XXXActivity, this);
+
+RefundReq refundReq = new RefundReq(qfOrderId);//the order id from HaoJin
+
+int ret = mTradeApi.doTrade(refundReq);
+```
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__refund.png" target="_blank"> ![Refund](@site/static/img/android/parse__refund.png)</Link>
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+{
+    super.onActivityResult(requestCode, resultCode, data);
+
+    RefundResp refundResp = (RefundResp) mTradeApi.parseResponse(requestCode,
+            resultCode, data);
+
+    if (refundResp == null) {
+        return;
+    }
+
+    if (refundResp.isSuccess()) {
+        Transaction transaction = refundResp.getRefundResult();
+    } else {
+    }
+}
+```
 
 ### Query Multiple Transaction
 
 Calling a query request:
 
-<Link href="@site/static/img/android/multiple__query.png" target="_blank"> ![Query Multiple Transaction](@site/static/img/android/multiple__query.png)</Link>
+```java
+GetTransListReq getTransListReq = new GetTransListReq();
+
+getTransListReq.setChannels(selectedChannel);//pay channel, like wexin/alipay
+
+getTransListReq.setTypes(selectedType);//pay type, like payment/refund
+
+getTransListReq.setMonth(month);//query by month
+
+getTransListReq.setStartTime(startTime);//query by custom start time
+
+getTransListReq.setEndTime(endTime);//query by custom end time
+
+getTransListReq.setPageSize(pageSize);//split page size
+
+getTransListReq.setPageNum(pageNum);//split page number
+```
 
 :::note
 <br/>
@@ -164,139 +236,444 @@ Calling a query request:
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__multiple__query.png" target="_blank"> ![Query Multiple Transaction](@site/static/img/android/parse__multiple__query.png)</Link>
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+{
+    super.onActivityResult(requestCode, resultCode, data);
+
+    GetTransListResp getTransListResp =
+            (GetTransListResp) mTradeApi.parseResponse(requestCode, resultCode, data);
+
+    if (getTransListResp == null) {
+        return;
+    }
+
+    if (getTransListResp.isSuccess()) {
+        List<Transaction> transactions = getTransListResp.getTransList();
+    } else {
+    }
+}
+```
 
 ### Query Transaction Details
 
 Calling a query request:
 
-<Link href="@site/static/img/android/query__details.png" target="_blank"> ![Query Transaction Details](@site/static/img/android/query__details.png)</Link>
+```java
+GetTransReq getTransReq = new GetTransReq(qfOrderId);
+
+int ret = mTradeApi.doTrade(getTransReq);
+```
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__query__details.png" target="_blank"> ![Query Transaction Details](@site/static/img/android/parse__query__details.png)</Link>
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+{
+    super.onActivityResult(requestCode, resultCode, data);
+
+    GetTransResp getTransResp =
+            (GetTransResp) mTradeApi.parseResponse(requestCode, resultCode, data);
+
+    if (getTransResp == null) {
+        return;
+    }
+
+    if (getTransResp.isSuccess()) {
+        Transaction transaction = getTransResp.getTrans();
+    } else {
+    }
+}
+```
 
 ### View Transaction Summary
 
 Calling a view transaction summary request:
 
-<Link href="@site/static/img/android/view__summary.png" target="_blank"> ![View Transaction Summary](@site/static/img/android/view__summary.png)</Link>
+```java
+CheckTradeSumReq checkTradeSumReq = new CheckTradeSumReq();
+
+int ret = mTradeApi.doTrade(checkTradeSumReq);
+```
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__view__summary.png" target="_blank"> ![View Transaction Summary](@site/static/img/android/parse__view__summary.png)</Link>
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+{
+    super.onActivityResult(requestCode, resultCode, data);
+
+    CheckTradeSumResp checkTradeSumResp = (CheckTradeSumResp)
+            mTradeApi.parseResponse(requestCode, resultCode, data);
+}
+```
 
 ### Query Transaction Channel Configuration(Deprecated)
 
 This interface has been marked as deprecated and can be replaced with the GetUserConfig interface. See [Query User Configuration Information](#query-user-configuration-information) for details. <br/>
 Calling a Query transaction channel configuration request:
 
-<Link href="@site/static/img/android/query__channel__config.png" target="_blank"> ![Query Transaction Channel Configuration(Deprecated)](@site/static/img/android/query__channel__config.png)</Link>
+```java
+GetChannelConfigReq channelConfigReq = new GetChannelConfigReq();
+
+int ret = getTradeApi().doTrade(channelConfigReq);
+```
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__query__channel__config.png" target="_blank"> ![Query Transaction Channel Configuration(Deprecated)](@site/static/img/android/parse__query__channel__config.png)</Link>
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+{
+    super.onActivityResult(requestCode, resultCode, data);
+
+    GetChannelConfigResp getChannelConfigResp = (GetChannelConfigResp)
+            mTradeApi.parseResponse(requestCode, resultCode, data);
+
+    if (getChannelConfigResp == null) {
+        return;
+    }
+
+    if (getChannelConfigResp.isSuccess()) {
+        List<Channel> channels = getChannelConfigResp.getChannels();
+    } else {
+    }
+}
+```
 
 ### Query User Configuration Information
 
 Call a query user configuration information request:
 
-<Link href="@site/static/img/android/quey__user__info.png" target="_blank"> ![Query User Configuration Information](@site/static/img/android/quey__user__info.png)</Link>
+```java
+GetUserConfigReq getUserConfigReq = new GetUserConfigReq();
+
+int ret = getTradeApi().doTrade(getUserConfigReq);
+```
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__query__user__info.png" target="_blank"> ![Query User Configuration Information](@site/static/img/android/parse__query__user__info.png)</Link>
+```java
+UserConfig userConfig = getUserConfigResp.getUserConfig();
+
+if (userConfig == null) {
+    Log.e(TAG, "handleChannelsResp: get user config info failed.");
+    return;
+}
+
+// the list of transaction channel
+List<Channel> channels = userConfig.getTransChannels();
+
+// the currency code of transaction
+int currencyCode = userConfig.getCurrency();
+```
 
 ### Pre-authorization Transaction Deduction
 
 Call a pre-authorization transaction deduction request:
 
-<Link href="@site/static/img/android/pre-aut__deduct.png" target="_blank"> ![Pre-authorization Transaction Deduction](@site/static/img/android/pre-aut__deduct.png)</Link>
+```java
+PreAuthTransDeductReq preAuthTransDeductReq = new PreAuthTransDeductReq(transId);
+
+int ret = mTradeApi.doTrade(preAuthTransDeductReq);
+
+if (ret != Config.ResponseCode.SUCCESS) {
+}
+```
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__pre-aut__deduct.png" target="_blank"> ![Pre-authorization Transaction Deduction](@site/static/img/android/parse__pre-aut__deduct.png)</Link>
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+    super.onActivityResult(requestCode, resultCode, data);
+
+    PreAuthTransDeductResp deductResp = (PreAuthTransDeductResp)
+            mTradeApi.parseResponse(requestCode, resultCode, data);
+
+    if (deductResp.isSuccess()) {
+        Log.i(TAG, "onActivityResult: success");
+    }
+}
+```
 
 ### Pre-authorization Transaction Cancel
 
 Call pre-authorization transaction cancel request:
 
-<Link href="@site/static/img/android/pre-aut__cancel.png" target="_blank"> ![Pre-authorization Transaction Cancel](@site/static/img/android/pre-aut__cancel.png)</Link>
+```java
+PreAuthTransCancelReq preAuthTransCancelReq = new PreAuthTransCancelReq(transId);
+
+int ret = mTradeApi.doTrade(preAuthTransCancelReq);
+
+if (ret != Config.ResponseCode.SUCCESS) {
+}
+```
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__pre-aut__cancel.png" target="_blank"> ![Pre-authorization Transaction Cancel](@site/static/img/android/parse__pre-aut__cancel.png)</Link>
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+    super.onActivityResult(requestCode, resultCode, data);
+
+    PreAuthTransCancelResp cancelResp = (PreAuthTransCancelResp)
+            mTradeApi.parseResponse(requestCode, resultCode, data);
+
+    if (cancelResp.isSuccess()) {
+        Log.i(TAG, "onActivityResult: success");
+    }
+}
+```
 
 ### Pre-authorization Transaction List
 
 Call pre-authorization transaction list request:
 
-<Link href="@site/static/img/android/pre-aut__list.png" target="_blank"> ![Pre-authorization Transaction List](@site/static/img/android/pre-aut__list.png)</Link>
+```java
+int pageSize = 10;
+
+int pageNum = 1;
+
+PreAuthTransListReq preAuthTransListReq = new PreAuthTransListReq(pageSize, pageNum);
+
+int ret = mTradeApi.doTrade(preAuthTransListReq);
+
+if (ret != Config.ResponseCode.SUCCESS) {
+}
+```
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__pre-aut__list.png" target="_blank"> ![Pre-authorization Transaction List](@site/static/img/android/parse__pre-aut__list.png)</Link>
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+    super.onActivityResult(requestCode, resultCode, data);
+
+    PreAuthTransListResp transListResp =
+            (PreAuthTransListResp) mTradeApi.parseResponse(requestCode, resultCode, data);
+
+    List<PreAuthTransactions> transactions = transListResp.getTransList();
+}
+```
 
 ### Pre-authorization Transaction Detail
 
 Call pre-authorization transaction detail request:
 
-<Link href="@site/static/img/android/pre-aut__detail.png" target="_blank"> ![Pre-authorization Transaction Detail](@site/static/img/android/pre-aut__detail.png)</Link>
+```java
+String transId = "123123123123";
+
+PreAuthTransDetailReq preAuthTransDetailReq = new PreAuthTransDetailReq(transId);
+
+int ret = getTradeApi().doTrade(preAuthTransDetailReq);
+
+if (ret != Config.ResponseCode.SUCCESS) {
+}
+```
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__pre-aut__detail.png" target="_blank"> ![Pre-authorization Transaction Detail](@site/static/img/android/parse__pre-aut__detail.png)</Link>
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+    super.onActivityResult(requestCode, resultCode, data);
+
+    PreAuthTransDetailResp transDetailResp =
+            (PreAuthTransDetailResp) mTradeApi.parseResponse(requestCode, resultCode, data);
+
+    PreAuthTransaction transaction = transDetailResp.getTrans();
+}
+```
 
 ### Card Refund
 
 Calling a refund request:
 
-<Link href="@site/static/img/android/card__refund.png" target="_blank"> ![Card Refund](@site/static/img/android/card__refund.png)</Link>
+```java
+ITradeAPI mTradeApi = TradeApiFactory.createTradeApi(XXXActivity.this);
+
+CardRefundReq cardRefundReq = new CardRefundReq(qfOrderId); // the order id from HaoJin
+
+int ret = mTradeApi.doTrade(cardRefundReq);
+```
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__card__refund.png" target="_blank"> ![Card Refund](@site/static/img/android/parse__card__refund.png)</Link>
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+{
+    super.onActivityResult(requestCode, resultCode, data);
+
+    RefundResp refundResp = (RefundResp) mTradeApi.parseResponse(requestCode,
+            resultCode, data);
+
+    if (refundResp == null) {
+        return;
+    }
+
+    if (refundResp.isSuccess()) {
+        Transaction transaction = refundResp.getRefundResult();
+    } else {
+    }
+}
+```
 
 ### Query Multiple Card Transactions
 
 Calling a query request:
 
-<Link href="@site/static/img/android/multiple__card__query.png" target="_blank"> ![Query Multiple Card Transactions](@site/static/img/android/multiple__card__query.png)</Link>
+```java
+GetCardTransListReq cardTransListReq = new GetCardTransListReq();
+
+int ret = mTradeApi.doTrade(cardTransListReq);
+```
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__multiple__card__query.png" target="_blank"> ![Query Multiple Card Transactions](@site/static/img/android/parse__multiple__card__query.png)</Link>
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+    super.onActivityResult(requestCode, resultCode, data);
+
+    GetTransListResp getTransListResp =
+            (GetTransListResp) mTradeApi.parseResponse(requestCode, resultCode, data);
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+    super.onActivityResult(requestCode, resultCode, data);
+
+    GetTransListResp getTransListResp =
+            (GetTransListResp) mTradeApi.parseResponse(requestCode, resultCode, data);
+    
+    // Index not found
+    if (getTransListResp == null) {
+        return;
+    }
+
+    if (getTransListResp.isSuccess()) {
+        List<Transaction> transactions = getTransListResp.getTransList();
+    } else {
+    }
+}
+    if (getTransListResp == null) {
+        return;
+    }
+
+    if (getTransListResp.isSuccess()) {
+        List<Transaction> transactions = getTransListResp.getTransList();
+    } else {
+    }
+}
+```
 
 ### Query Card Transaction Details
 
 Calling a query request:
 
-<Link href="@site/static/img/android/query__card__details.png" target="_blank"> ![Query Card Transaction Details](@site/static/img/android/query__card__details.png)</Link>
+```java
+GetCardTransReq getCardTransReq = new GetCardTransReq(orderId);
+
+int ret = mTradeApi.doTrade(getCardTransReq);
+```
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__query__card__details.png" target="_blank"> ![Query Card Transaction Details](@site/static/img/android/parse__query__card__details.png)</Link>
-<Link href="@site/static/img/android/parse__query__card__details2.png" target="_blank"> ![Query Card Transaction Details](@site/static/img/android/parse__query__card__details2.png)</Link>
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+    super.onActivityResult(requestCode, resultCode, data);
+
+    GetTransResp getTransResp =
+            (GetTransResp) mTradeApi.parseResponse(requestCode, resultCode, data);
+
+    if (getTransResp == null) {
+    return;
+}
+
+if (getTransResp.isSuccess()) {
+    Transaction transaction = getTransResp.getTrans();
+} else {
+}
+}
+```
 
 ### Card Adjust
 
 Calling an adjust request:
 
-<Link href="@site/static/img/android/card__adjust.png" target="_blank"> ![Card Adjust](@site/static/img/android/card__adjust.png)</Link>
+```java
+CardAdjustReq cardAdjustReq = new CardAdjustReq(orderId);
+
+int ret = mTradeApi.doTrade(cardAdjustReq);
+
+if (ret != Config.ResponseCode.SUCCESS) {
+}
+```
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__card__adjust.png" target="_blank"> ![Card Adjust](@site/static/img/android/parse__card__adjust.png)</Link>
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+    super.onActivityResult(requestCode, resultCode, data);
+
+    CardAdjustResp cardAdjustResp = (CardAdjustResp)
+            mTradeApi.parseResponse(requestCode, resultCode, data);
+
+    if (cardAdjustResp == null) {
+        return;
+    }
+
+    if (cardAdjustResp.isSuccess()) {
+        Transaction transaction = cardAdjustResp.getCardTrans();
+    } else {
+    }
+}
+```
 
 ### Card Settle
 
 Calling a settle request:
 
-<Link href="@site/static/img/android/card__settle.png" target="_blank"> ![Card Settle](@site/static/img/android/card__settle.png)</Link>
+```java
+CardSettleReq cardSettleReq = new CardSettleReq();
+
+int ret = mTradeApi.doTrade(cardSettleReq);
+
+if (ret != Config.ResponseCode.SUCCESS) {
+}
+```
 
 Parse the return value:
 
-<Link href="@site/static/img/android/parse__card__settle.png" target="_blank"> ![Card Settle](@site/static/img/android/parse__card__settle.png)</Link>
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+    super.onActivityResult(requestCode, resultCode, data);
+
+    CardSettleResp cardSettleResp = (CardSettleResp)
+            getTradeApi().parseResponse(requestCode, resultCode, data);
+
+    if (cardSettleResp == null) {
+        return;
+    }
+
+    List<SettleData> settleDataList = cardSettleResp.getSettleDataList();
+}
+```
 
 ## Reference
 
