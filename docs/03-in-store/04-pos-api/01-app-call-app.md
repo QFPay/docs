@@ -1,158 +1,107 @@
+---
+id: android-sdk-doc
+title: App Call App Android SDK
+sidebar_label: App Call App Android SDK
+description: This document explains how to integrate the QFPay HaoJin Android SDK to enable App-to-App payment features, including payment, refund, transaction query, pre-authorisation, and card settlement.
+---
+
 import Link from '@docusaurus/Link';
 
-# App call App Android SDK
+# App Call App Android SDK
 
-## Latest Update
+## Latest Version Changelog
 
-:::note
-version 2.3.4.jar
+**version 2.3.4.jar**
 
-1. sdk support specify MPM or CPM payment
+1. SDK supports setting scan type:
 
-        `CollectionReq.SCAN_TYPE_SCAN`: MPM payment
-        `CollectionReq.SCAN_TYPE_QRCODE`：CPM payment
+   * `CollectionReq.SCAN_TYPE_SCAN`: Scan customer QR code
+   * `CollectionReq.SCAN_TYPE_QRCODE`: Display QR code for customer to scan
 
-Setting Method：
+Example:
 
+```java
+CollectionReq req = new CollectionReq(Long.parseLong(money));
+req.setScan_type(scan_type); // Set scan type: CollectionReq.SCAN_TYPE_SCAN / CollectionReq.SCAN_TYPE_QRCODE
 ```
-    CollectionReq req = new CollectionReq(Long.parseLong(money));
-    req.setScan_type(scan_type);//set scan type，
-    CollectionReq.SCAN_TYPE_SCAN/CollectionReq.SCAN_TYPE_QRCODE
-```
-
-:::
-
 :::note
-version 2.3.3.jar
-
-1. Transaction add `getOut_trade_no` and getCardscheme method
-
+If the merchant wishes to force QR code display mode (e.g. showing a static QR code for the customer to scan), it is recommended to use `SCAN_TYPE_QRCODE`. The default camera used is the rear camera.
 :::
-
-:::note
-version 2.3.2.jar
-Update：
-
-1. Transaction related
-    1.1 Transaction support passing in `out_trade_no` :
-    1.2 Support setting card payment（card_payment/unionpay_card/amex_card）wait timeout time `wait_card_timeout`（optional）,If `wait_card_timeout` is not set,
-    Default timeout time is 120s, the parameter must be greater than 0, if it is passed in a value less than or equal to 0, the default timeout time is 120s
-    Setting method：
-
-    ```
-        CollectionReq req = new CollectionReq(Long.parseLong(money));
-        req.setWait_card_timeout(wait_card_timeout);//设置刷卡超时时间
-        req.setOut_trade_no(out_trade_no);//设置外部订单号
-    ```
-
-2. Query
-    2.1 Support using `out_trade_no` to query transaction information,
-        `order_id` and `out_trade_no` must be passed in at least one, or both
-    Setting method：
-
-    ```
-        GetTransReq req = new GetTransReq(order_id);
-        req.setOut_trade_no(out_trade_no);
-    ```
-:::
-
-:::note
-version 2.3.1.jar
-
-1、app call app sdk support specify payment method when make payment
-Using `CollectionReq setPay_method` to set specific payment method，if not set specific payment method, or account has not opened specific payment method it will pop up payment method selection box to let self choose
-
-`pay_method` field type `String`, reference value as follows：
-        pay_method            desc
-        （1）、card_payment        Card payment(master/visa)
-        （2）、wx                  WeChat Pay
-        （3）、alipay              Alipay
-        （4）、payme               PayMe
-        （5）、union               UnionPay
-        （6）、fps                 FPS
-        （7）、octopus             Octopus
-        （8）、unionpay_card       union card pay
-        （9）、amex_card           amex card pay
-
-2、sdk support set front and back camera
-Using `CollectionReq setCamera_id` to set front and back camera(optional), default is back camera
-    `camera_id` field  type `Int` , reference value as follows：
-    0：CAMERA_PARAM_BACK  back camera
-    1：CAMERA_PARAM_FROT  front camera
-
-e.g.
-```
-    CollectionReq req = new CollectionReq(Long.parseLong(money));
-    req.setPay_method(current_paymethod);
-    req.setCamera_id(current_camera);
-```
-:::
+---
 
 ## Introduction
 
-HaoJin is a mobile phone software that provides aggregate collection services for merchants. This document describes the interface calls that HaoJin is open to, and third-party applications can implements the collection function through these interfaces.
-HaoJin supports below third-party functions:
+HaoJin is a mobile app offering integrated payment collection for merchants. This document describes the SDK integration interfaces for third-party apps.
 
-<br/>
-1. Collection, Refund, Query Multiple Transaction Records, Query Transaction Details.
-<br/>
-2. View Transaction Summary, Query Transaction Channel Configuration.
-<br/>
-3. Sale/Void/Query/Adjust Endpoints for card.
+HaoJin supports:
 
-<Link href="/img/android/architecture__diagram.png" target="_blank"> ![Introduction](@site/static/img/android/architecture__diagram.png)</Link>
+1. Initiating payment, refund, querying multiple transactions and transaction detail.
+2. Retrieving transaction summary and channel configuration.
+3. Handling card transaction query/cancel/adjustment.
 
-## How to use
+<Link href="/img/android/architecture__diagram.png" target="_blank">
+  ![Introduction](@site/static/img/android/architecture__diagram.png)
+</Link>
 
-### Add Permissions
+---
 
-Add the following code to the AndroidManifest.xml file.
-Note: In order to ensure that you can get permission, please install the haojin
-application first.
+## Installation & Setup
+
+### Permission Setup
+
+Add the following to `AndroidManifest.xml` (requires HaoJin App installed):
 
 ```xml
 <uses-permission android:name="com.qfpay.haojin.permission.OPEN_API"/>
 ```
-### Add Jar Package Dependency
 
-Integrated the [qfpay_haojin_api_xxx.jar](@site/static/files/qfpay_haojin_api_2.3.6.zip) file in the third party application.
+### Integrate JAR
 
-place jar file under /libs
+Place `qfpay_haojin_api_x.x.x.jar` ([Download Latest](@site/static/files/qfpay_haojin_api_2.3.6.zip)) into `/libs`, and import in `build.gradle`.
 
-### Config Target Application Id
+### Set Target App ID
 
 ```java
 Config.setTargetAppId("in.haojin.nearbymerchant.oversea");
 ```
 
-### Add Proguard Rule
+### Proguard Rules
 
-Add follow code to the proguard-rules.pro file.
+Add to `proguard-rules.pro`:
 
 ```proguard
 -dontnote com.qfpay.haojin.model.**
-
 -keep class com.qfpay.haojin.model.** {*;}
 ```
 
-## Third-party Interface Invoke Sample
+### API Usage Example
 
-### Collection
+#### Collection
 
-Calling a collection request:
+Send a collection request:
 
 ```java
 ITradeAPI mTradeApi = TradeApiFactory.createTradeApi(XXXActivity, this);
 
+// Create CollectionReq instance
 CollectionReq collectionReq = new CollectionReq(100);
 
+// Set parameters
+collectionReq.setScan_type(CollectionReq.SCAN_TYPE_SCAN);  // scan mode
+collectionReq.setOut_trade_no("EXT202312345");            // external order ID
+collectionReq.setWait_card_timeout(120);                  // wait timeout
+collectionReq.setPay_method("card_payment");              // payment method
+collectionReq.setCamera_id(0);                            // 0 = back camera
+
+// Send request
+int ret = mTradeApi.doTrade(collectionReq);
+
 @Override
-public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
-{
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
 
     CollectionResp collectionResp =
-            (CollectionResp) mTradeApi.parseResponse(requestCode, resultCode, data);
+        (CollectionResp) mTradeApi.parseResponse(requestCode, resultCode, data);
 
     if (collectionResp == null) {
         return;
@@ -161,35 +110,32 @@ public void onActivityResult(int requestCode, int resultCode, @Nullable Intent d
     if (collectionResp.isSuccess()) {
         Transaction transaction = collectionResp.getPayResult();
     } else {
-        // handle the error
-        Log.e(TAG, "onActivityResult: collection error message is " +
-                collectionResp.getErrorMsg());
+        Log.e(TAG, "collection error: " + collectionResp.getErrorMsg());
     }
 }
 ```
 
-### Refund
+:::warning
+The returned result may be `null`. Always perform a null check before accessing any data fields.
+:::
 
-Calling a refund request:
+#### Refund
+
+Send refund request:
 
 ```java
-ITradeAPI mTradeApi = TradeApiFactory.createTradeApi(XXXActivity, this);
-
-RefundReq refundReq = new RefundReq(qfOrderId);//the order id from HaoJin
-
+RefundReq refundReq = new RefundReq(qfOrderId); // QF order ID
 int ret = mTradeApi.doTrade(refundReq);
 ```
 
-Parse the return value:
+Parse response:
 
 ```java
 @Override
-public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
-{
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
 
-    RefundResp refundResp = (RefundResp) mTradeApi.parseResponse(requestCode,
-            resultCode, data);
+    RefundResp refundResp = (RefundResp) mTradeApi.parseResponse(requestCode, resultCode, data);
 
     if (refundResp == null) {
         return;
@@ -197,482 +143,314 @@ public void onActivityResult(int requestCode, int resultCode, @Nullable Intent d
 
     if (refundResp.isSuccess()) {
         Transaction transaction = refundResp.getRefundResult();
-    } else {
     }
 }
 ```
 
-### Query Multiple Transaction
-
-Calling a query request:
+#### Query Multiple Transactions
 
 ```java
 GetTransListReq getTransListReq = new GetTransListReq();
-
-getTransListReq.setChannels(selectedChannel);//pay channel, like wexin/alipay
-
-getTransListReq.setTypes(selectedType);//pay type, like payment/refund
-
-getTransListReq.setMonth(month);//query by month
-
-getTransListReq.setStartTime(startTime);//query by custom start time
-
-getTransListReq.setEndTime(endTime);//query by custom end time
-
-getTransListReq.setPageSize(pageSize);//split page size
-
-getTransListReq.setPageNum(pageNum);//split page number
+getTransListReq.setChannels(selectedChannel);
+getTransListReq.setTypes(selectedType);
+getTransListReq.setMonth(month);
+getTransListReq.setStartTime(startTime);
+getTransListReq.setEndTime(endTime);
+getTransListReq.setPageSize(pageSize);
+getTransListReq.setPageNum(pageNum);
+int ret = mTradeApi.doTrade(getTransListReq);
 ```
 
 :::note
-<br/>
-1. Check the supported channels.<br/>
-2. Only support querying of two transaction types (payment, refund)<br/>
-3. Querying by time period has higher priority than querying by month.<br/>
-4. The time format is "yyyy-MM-dd HH:mm:ss"<br/>
-5. The month format is "yyyyMM"<br/>
-6. Split page number starts from one.<br/>
+1. Please ensure the selected payment channel is supported.  
+2. Only two transaction types are supported: payment and refund.  
+3. Custom time range takes precedence over monthly query.  
+4. Time format must be “yyyy-MM-dd HH:mm:ss”.  
+5. Month format must be “yyyyMM”.  
+6. Pagination starts from page 1.  
 :::
 
-Parse the return value:
+:::note
+If both time range and month are provided, the SDK will prioritise the time range.  
+Use monthly queries for full-month reports and time range queries for precise statistics.  
+:::
+
+
+Parse:
 
 ```java
 @Override
-public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
-{
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-
     GetTransListResp getTransListResp =
-            (GetTransListResp) mTradeApi.parseResponse(requestCode, resultCode, data);
-
-    if (getTransListResp == null) {
-        return;
-    }
-
-    if (getTransListResp.isSuccess()) {
+        (GetTransListResp) mTradeApi.parseResponse(requestCode, resultCode, data);
+    if (getTransListResp != null && getTransListResp.isSuccess()) {
         List<Transaction> transactions = getTransListResp.getTransList();
-    } else {
     }
 }
 ```
 
-### Query Transaction Details
-
-Calling a query request:
+#### Query Transaction Detail
 
 ```java
 GetTransReq getTransReq = new GetTransReq(qfOrderId);
-
+getTransReq.setOut_trade_no("EXT20230123");
 int ret = mTradeApi.doTrade(getTransReq);
 ```
 
-Parse the return value:
+Parse:
 
 ```java
 @Override
-public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
-{
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-
     GetTransResp getTransResp =
-            (GetTransResp) mTradeApi.parseResponse(requestCode, resultCode, data);
-
-    if (getTransResp == null) {
-        return;
-    }
-
-    if (getTransResp.isSuccess()) {
+        (GetTransResp) mTradeApi.parseResponse(requestCode, resultCode, data);
+    if (getTransResp != null && getTransResp.isSuccess()) {
         Transaction transaction = getTransResp.getTrans();
-    } else {
     }
 }
 ```
 
-### View Transaction Summary
-
-Calling a view transaction summary request:
+#### View Summary
 
 ```java
 CheckTradeSumReq checkTradeSumReq = new CheckTradeSumReq();
-
 int ret = mTradeApi.doTrade(checkTradeSumReq);
 ```
 
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    CheckTradeSumResp resp = (CheckTradeSumResp)
+        mTradeApi.parseResponse(requestCode, resultCode, data);
+}
+```
+
+#### Deprecated: Get Channel Config
+
+:::danger
+This API has been deprecated. Please use the `GetUserConfigReq` API to achieve the same functionality.
+:::
+
+```java
+GetChannelConfigReq req = new GetChannelConfigReq();
+int ret = getTradeApi().doTrade(req);
+```
+
 Parse the return value:
 
 ```java
 @Override
-public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
-{
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-
-    CheckTradeSumResp checkTradeSumResp = (CheckTradeSumResp)
-            mTradeApi.parseResponse(requestCode, resultCode, data);
-}
-```
-
-### Query Transaction Channel Configuration(Deprecated)
-
-This interface has been marked as deprecated and can be replaced with the GetUserConfig interface. See [Query User Configuration Information](#query-user-configuration-information) for details. <br/>
-Calling a Query transaction channel configuration request:
-
-```java
-GetChannelConfigReq channelConfigReq = new GetChannelConfigReq();
-
-int ret = getTradeApi().doTrade(channelConfigReq);
-```
-
-Parse the return value:
-
-```java
-@Override
-public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
-{
-    super.onActivityResult(requestCode, resultCode, data);
-
-    GetChannelConfigResp getChannelConfigResp = (GetChannelConfigResp)
-            mTradeApi.parseResponse(requestCode, resultCode, data);
-
-    if (getChannelConfigResp == null) {
-        return;
-    }
-
-    if (getChannelConfigResp.isSuccess()) {
-        List<Channel> channels = getChannelConfigResp.getChannels();
-    } else {
+    GetChannelConfigResp resp = (GetChannelConfigResp)
+        mTradeApi.parseResponse(requestCode, resultCode, data);
+    if (resp == null) return;
+    if (resp.isSuccess()) {
+        List<Channel> channels = resp.getChannels();
     }
 }
 ```
+---
 
-### Query User Configuration Information
-
-Call a query user configuration information request:
+## Query User Configuration
 
 ```java
 GetUserConfigReq getUserConfigReq = new GetUserConfigReq();
-
 int ret = getTradeApi().doTrade(getUserConfigReq);
 ```
 
-Parse the return value:
+Parse response:
 
 ```java
 UserConfig userConfig = getUserConfigResp.getUserConfig();
-
 if (userConfig == null) {
-    Log.e(TAG, "handleChannelsResp: get user config info failed.");
+    Log.e(TAG, "Failed to get user config info.");
     return;
 }
-
-// the list of transaction channel
 List<Channel> channels = userConfig.getTransChannels();
-
-// the currency code of transaction
 int currencyCode = userConfig.getCurrency();
 ```
 
-### Pre-authorization Transaction Deduction
+:::warning
+If `userConfig` cannot be retrieved properly, it usually indicates an authorisation issue or incomplete account configuration. Please contact technical support.
+:::
 
-Call a pre-authorization transaction deduction request:
+---
+
+## Pre-authorization: Deduct
+
+:::note
+Pre-authorisation transactions are suitable for scenarios such as hotel check-ins or equipment rentals, where an amount can be frozen first and later charged or cancelled after the service is completed.
+:::
 
 ```java
-PreAuthTransDeductReq preAuthTransDeductReq = new PreAuthTransDeductReq(transId);
-
-int ret = mTradeApi.doTrade(preAuthTransDeductReq);
-
-if (ret != Config.ResponseCode.SUCCESS) {
-}
+PreAuthTransDeductReq req = new PreAuthTransDeductReq(transId);
+int ret = mTradeApi.doTrade(req);
 ```
 
-Parse the return value:
+Parse response:
 
 ```java
 @Override
 public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-    super.onActivityResult(requestCode, resultCode, data);
-
-    PreAuthTransDeductResp deductResp = (PreAuthTransDeductResp)
-            mTradeApi.parseResponse(requestCode, resultCode, data);
-
-    if (deductResp.isSuccess()) {
-        Log.i(TAG, "onActivityResult: success");
+    PreAuthTransDeductResp resp = (PreAuthTransDeductResp)
+        mTradeApi.parseResponse(requestCode, resultCode, data);
+    if (resp.isSuccess()) {
+        Log.i(TAG, "Success");
     }
 }
 ```
 
-### Pre-authorization Transaction Cancel
-
-Call pre-authorization transaction cancel request:
+## Pre-authorization: Cancel
 
 ```java
-PreAuthTransCancelReq preAuthTransCancelReq = new PreAuthTransCancelReq(transId);
-
-int ret = mTradeApi.doTrade(preAuthTransCancelReq);
-
-if (ret != Config.ResponseCode.SUCCESS) {
-}
+PreAuthTransCancelReq cancelReq = new PreAuthTransCancelReq(transId);
+int ret = mTradeApi.doTrade(cancelReq);
 ```
 
-Parse the return value:
+Parse response:
 
 ```java
 @Override
 public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-    super.onActivityResult(requestCode, resultCode, data);
-
     PreAuthTransCancelResp cancelResp = (PreAuthTransCancelResp)
-            mTradeApi.parseResponse(requestCode, resultCode, data);
-
+        mTradeApi.parseResponse(requestCode, resultCode, data);
     if (cancelResp.isSuccess()) {
-        Log.i(TAG, "onActivityResult: success");
+        Log.i(TAG, "Cancel success");
     }
 }
 ```
 
-### Pre-authorization Transaction List
-
-Call pre-authorization transaction list request:
+## Pre-authorization: List
 
 ```java
-int pageSize = 10;
-
-int pageNum = 1;
-
-PreAuthTransListReq preAuthTransListReq = new PreAuthTransListReq(pageSize, pageNum);
-
-int ret = mTradeApi.doTrade(preAuthTransListReq);
-
-if (ret != Config.ResponseCode.SUCCESS) {
-}
+PreAuthTransListReq listReq = new PreAuthTransListReq(10, 1);
+int ret = mTradeApi.doTrade(listReq);
 ```
 
-Parse the return value:
+Parse response:
 
 ```java
 @Override
 public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-    super.onActivityResult(requestCode, resultCode, data);
-
-    PreAuthTransListResp transListResp =
-            (PreAuthTransListResp) mTradeApi.parseResponse(requestCode, resultCode, data);
-
-    List<PreAuthTransactions> transactions = transListResp.getTransList();
+    PreAuthTransListResp listResp = (PreAuthTransListResp)
+        mTradeApi.parseResponse(requestCode, resultCode, data);
+    List<PreAuthTransactions> transactions = listResp.getTransList();
 }
 ```
 
-### Pre-authorization Transaction Detail
-
-Call pre-authorization transaction detail request:
+## Pre-authorization: Detail
 
 ```java
-String transId = "123123123123";
-
-PreAuthTransDetailReq preAuthTransDetailReq = new PreAuthTransDetailReq(transId);
-
-int ret = getTradeApi().doTrade(preAuthTransDetailReq);
-
-if (ret != Config.ResponseCode.SUCCESS) {
-}
+PreAuthTransDetailReq detailReq = new PreAuthTransDetailReq(transId);
+int ret = getTradeApi().doTrade(detailReq);
 ```
 
-Parse the return value:
+Parse response:
 
 ```java
 @Override
 public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-    super.onActivityResult(requestCode, resultCode, data);
-
-    PreAuthTransDetailResp transDetailResp =
-            (PreAuthTransDetailResp) mTradeApi.parseResponse(requestCode, resultCode, data);
-
-    PreAuthTransaction transaction = transDetailResp.getTrans();
+    PreAuthTransDetailResp detailResp = (PreAuthTransDetailResp)
+        mTradeApi.parseResponse(requestCode, resultCode, data);
+    PreAuthTransaction transaction = detailResp.getTrans();
 }
 ```
 
-### Card Refund
+---
 
-Calling a refund request:
+## Card Refund
 
 ```java
-ITradeAPI mTradeApi = TradeApiFactory.createTradeApi(XXXActivity.this);
-
-CardRefundReq cardRefundReq = new CardRefundReq(qfOrderId); // the order id from HaoJin
-
-int ret = mTradeApi.doTrade(cardRefundReq);
+CardRefundReq refundReq = new CardRefundReq(qfOrderId);
+int ret = mTradeApi.doTrade(refundReq);
 ```
 
-Parse the return value:
+Parse response:
 
 ```java
 @Override
-public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
-{
-    super.onActivityResult(requestCode, resultCode, data);
-
-    RefundResp refundResp = (RefundResp) mTradeApi.parseResponse(requestCode,
-            resultCode, data);
-
-    if (refundResp == null) {
-        return;
-    }
-
-    if (refundResp.isSuccess()) {
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    RefundResp refundResp = (RefundResp) mTradeApi.parseResponse(requestCode, resultCode, data);
+    if (refundResp != null && refundResp.isSuccess()) {
         Transaction transaction = refundResp.getRefundResult();
-    } else {
     }
 }
 ```
 
-### Query Multiple Card Transactions
-
-Calling a query request:
+## Card Transactions: List
 
 ```java
-GetCardTransListReq cardTransListReq = new GetCardTransListReq();
-
-int ret = mTradeApi.doTrade(cardTransListReq);
+GetCardTransListReq req = new GetCardTransListReq();
+int ret = mTradeApi.doTrade(req);
 ```
 
-Parse the return value:
+Parse response:
 
 ```java
 @Override
 public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-    super.onActivityResult(requestCode, resultCode, data);
-
-    GetTransListResp getTransListResp =
-            (GetTransListResp) mTradeApi.parseResponse(requestCode, resultCode, data);
-@Override
-public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-    super.onActivityResult(requestCode, resultCode, data);
-
-    GetTransListResp getTransListResp =
-            (GetTransListResp) mTradeApi.parseResponse(requestCode, resultCode, data);
-    
-    // Index not found
-    if (getTransListResp == null) {
-        return;
-    }
-
-    if (getTransListResp.isSuccess()) {
-        List<Transaction> transactions = getTransListResp.getTransList();
-    } else {
-    }
-}
-    if (getTransListResp == null) {
-        return;
-    }
-
-    if (getTransListResp.isSuccess()) {
-        List<Transaction> transactions = getTransListResp.getTransList();
-    } else {
-    }
+    GetTransListResp resp = (GetTransListResp)
+        mTradeApi.parseResponse(requestCode, resultCode, data);
+    List<Transaction> transactions = resp.getTransList();
 }
 ```
 
-### Query Card Transaction Details
-
-Calling a query request:
+## Card Transaction: Detail
 
 ```java
-GetCardTransReq getCardTransReq = new GetCardTransReq(orderId);
-
-int ret = mTradeApi.doTrade(getCardTransReq);
+GetCardTransReq detailReq = new GetCardTransReq(orderId);
+int ret = mTradeApi.doTrade(detailReq);
 ```
 
-Parse the return value:
+Parse response:
 
 ```java
 @Override
 public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-    super.onActivityResult(requestCode, resultCode, data);
-
-    GetTransResp getTransResp =
-            (GetTransResp) mTradeApi.parseResponse(requestCode, resultCode, data);
-
-    if (getTransResp == null) {
-    return;
-}
-
-if (getTransResp.isSuccess()) {
-    Transaction transaction = getTransResp.getTrans();
-} else {
-}
+    GetTransResp getTransResp = (GetTransResp)
+        mTradeApi.parseResponse(requestCode, resultCode, data);
+    if (getTransResp != null && getTransResp.isSuccess()) {
+        Transaction transaction = getTransResp.getTrans();
+    }
 }
 ```
 
-### Card Adjust
-
-Calling an adjust request:
+## Card Adjustment
 
 ```java
-CardAdjustReq cardAdjustReq = new CardAdjustReq(orderId);
-
-int ret = mTradeApi.doTrade(cardAdjustReq);
-
-if (ret != Config.ResponseCode.SUCCESS) {
-}
+CardAdjustReq req = new CardAdjustReq(orderId);
+int ret = mTradeApi.doTrade(req);
 ```
 
-Parse the return value:
+Parse response:
 
 ```java
 @Override
 public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-    super.onActivityResult(requestCode, resultCode, data);
-
-    CardAdjustResp cardAdjustResp = (CardAdjustResp)
-            mTradeApi.parseResponse(requestCode, resultCode, data);
-
-    if (cardAdjustResp == null) {
-        return;
-    }
-
-    if (cardAdjustResp.isSuccess()) {
-        Transaction transaction = cardAdjustResp.getCardTrans();
-    } else {
-    }
+    CardAdjustResp resp = (CardAdjustResp)
+        mTradeApi.parseResponse(requestCode, resultCode, data);
+    Transaction transaction = resp.getCardTrans();
 }
 ```
 
-### Card Settle
-
-Calling a settle request:
+## Card Settlement
 
 ```java
-CardSettleReq cardSettleReq = new CardSettleReq();
-
-int ret = mTradeApi.doTrade(cardSettleReq);
-
-if (ret != Config.ResponseCode.SUCCESS) {
-}
+CardSettleReq req = new CardSettleReq();
+int ret = mTradeApi.doTrade(req);
 ```
 
-Parse the return value:
+Parse response:
 
 ```java
 @Override
 public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-    super.onActivityResult(requestCode, resultCode, data);
-
-    CardSettleResp cardSettleResp = (CardSettleResp)
-            getTradeApi().parseResponse(requestCode, resultCode, data);
-
-    if (cardSettleResp == null) {
-        return;
-    }
-
-    List<SettleData> settleDataList = cardSettleResp.getSettleDataList();
-}
+    CardSettleResp resp = (CardSettleResp)
+        mTradeApi.parseResponse(requestCode, resultCode, data);
 ```
 
 ## Reference
@@ -751,3 +529,73 @@ public void onActivityResult(int requestCode, int resultCode, @Nullable Intent d
 | 205 | Login status expired |
 | 206 | Refund is confirming |
 | 207 | Refund Failed |
+
+## Version History
+
+### version 2.3.3.jar
+1. The `Transaction` class added two new methods: `getOut_trade_no` and `getCardscheme`.
+
+---
+
+### version 2.3.2.jar
+
+#### 1. Transaction Features:
+1. Transactions now support passing an external order number (`out_trade_no`).
+2. Card swipe timeout (`wait_card_timeout`) can be configured (default is 120 seconds, must be greater than 0).
+
+Example usage:
+```java
+CollectionReq req = new CollectionReq(Long.parseLong(money));
+req.setWait_card_timeout(wait_card_timeout);
+req.setOut_trade_no(out_trade_no);
+```
+
+#### 2. Query Features:
+1.	Supports querying transaction data using out_trade_no.
+Example usage:
+```java
+GetTransReq req = new GetTransReq(order_id);
+req.setOut_trade_no(out_trade_no);
+```
+:::warning
+The timeout value must be a positive integer. If not set or set incorrectly (e.g. ≤ 0), it will default to 120 seconds.
+:::
+
+---
+
+### version 2.3.1.jar
+1.	SDK now supports specifying payment methods:
+Set via CollectionReq.setPay_method.
+
+Available `pay_method` values:
+- `card_payment`: Credit Card
+- `wx`: WeChat Pay
+- `alipay`: Alipay
+- `payme`: PayMe
+- `union`: UnionPay
+- `fps`: FPS
+- `octopus`: Octopus
+- `unionpay_card`: UnionPay Card
+- `amex_card`: American Express
+
+:::danger
+If the account is not enabled for the specified payment method, the SDK will fall back to the payment method selection screen.
+:::
+
+2.	Support for camera selection:
+Use `CollectionReq.setCamera_id` to specify front or back camera (default is back camera).
+
+Available camera_id values:
+- `0`: CAMERA_PARAM_BACK (Back Camera)
+- `1`: CAMERA_PARAM_FRONT (Front Camera)
+
+:::danger
+Only values `0` and `1` are supported. Any other values will be ignored and default to the back camera.
+:::
+
+Example usage:
+```java
+CollectionReq req = new CollectionReq(Long.parseLong(money));
+req.setPay_method(current_paymethod);
+req.setCamera_id(current_camera);
+```
