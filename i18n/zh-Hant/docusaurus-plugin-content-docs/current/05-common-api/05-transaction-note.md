@@ -1,60 +1,63 @@
-# 订单备注
+---
+id: transaction-notes
+title: 交易備註 API 指南
+description: 商戶可透過本接口為交易添加備註，便於後續查詢與報表顯示。
+sidebar_label: 交易備註 API
+---
+
+# 交易備註 API 指南
 
 :::note
-这个 API 端点仅适用于未传入 `mchid` 的商户
+此接口僅適用於未傳入 `mchid` 的商戶。
 :::
 
-商户可以使用该接口为交易添加备注. 该备注值将显示在商户管理系统(MMS)和交易报告中.
+商戶可使用本接口為交易添加備註文字，該備註內容將顯示於商戶後台及交易報表中，便於識別與對帳。
 
-## 订单备注API端点
 
-```plaintext
-请求头部:
+## API 請求範例
 
-{
-  Content-Type: application/x-www-form-urlencoded;
-  X-QF-APPCODE: D5589D2A1F2E42A9A60C37**********
-  X-QF-SIGN: 6FB43AC29175B4602FF95F8332028F19
-}
+```http
+POST /trade/v1/add_note
+Content-Type: application/x-www-form-urlencoded
+X-QF-APPCODE: D5589D2A1F2E42A9A60C37**********
+X-QF-SIGN: 6FB43AC29175B4602FF95F8332028F19
 
-请求本体:
-
-{
-  code=A6A49A6******DFE94EA95032&note=add_note&syssn=20190722000200020081075691
-}
+code=A6A49A6******DFE94EA95032&note=add_note&syssn=20190722000200020081075691
 ```
+---
 
-> 上述指令会返回结构如下的JSON代码:
+> 上述請求將回傳如下 JSON 結構：
 
 ```json
 {
   "resperr": "Success",
-  "respcd": 0000,
+  "respcd": "0000",
   "respmsg": "",
-  "data":
-{
-  "syssn": "20190722000200020081084545"
-}
+  "data": {
+    "syssn": "20190722000200020081084545"
+  }
 }
 ```
 
-### HTTP请求
+## HTTP 請求說明
 
-`POST ../trade/v1/add_note`
+**接口路徑**：`/trade/v1/add_note`  
+**請求方法**：`POST`
 
-### 请求参数
+## 請求參數
 
-|参数名称|参数编码|是否必须|参数类型|描述|
-|----    |---|----- |-----   |----- |
-|商户App编码| `code`   |是   |String(32)   | 由QFPay 提供 |
-|订单号 | `syssn` | 是 |String(40) | 交易成功后QFPay 返回的订单号 |
-|备注信息| `note`   |是   |String(200）   | 备注值  |
+| 參數名稱 | 必填 | 類型        | 說明                                                                 |
+|----------|------|-------------|----------------------------------------------------------------------|
+| `code`   | 是   | String(32)  | 商戶應用代碼，由 QFPay 分配                                         |
+| `syssn`  | 是   | String(40)  | QFPay 交易號（交易完成後由系統返回）                               |
+| `note`   | 是   | String(200) | 備註內容，將顯示於商戶後台與交易報表中                             |
 
-### 响应参数
 
-|参数编码|参数类型| 参数名称 |描述|
-|----    |---|-----   |-----   |
-| `resperr`   |String(128)   |下单结果描述   |  |
-| `respmsg`   |String(128)  |响应错误信息   |    |
-| `respcd`    |String(4)  |返回码   |   0000 = 接口调用成功 |
-| `syssn`     |String(40)   |订单号  | 交易成功后QFPay 返回的订单号 |
+## 回應參數
+
+| 參數名稱   | 類型        | 說明                                            |
+|------------|-------------|-------------------------------------------------|
+| `resperr`  | String(128) | 接口執行結果訊息                               |
+| `respmsg`  | String(128) | 錯誤訊息（如有）                                |
+| `respcd`   | String(4)   | 返回碼，`0000` 代表接口調用成功                |
+| `syssn`    | String(40)  | 系統返回的交易號（與請求中相同）               |

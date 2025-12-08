@@ -29,7 +29,7 @@ const FeatureList = [
     ),
     links:[
       {title:<Translate id="homepage.features.online-shop.checkout-integration">Checkout Integration</Translate>, url:"docs/category/checkout-integration"},
-      {title:<Translate id="homepage.features.online-shop.integration-by-payment-type">Integration by Payment Type</Translate>, url:"/docs/category/integration-by-payment-type"},
+      {title:<Translate id="homepage.features.online-shop.integration-by-payment-type">Integration by Payment Type</Translate>, url:"docs/category/integration-by-payment-type"},
       {title:<Translate id="homepage.features.online-shop.integration-by-use-case">Integration by Use Case</Translate>, url:"docs/category/integration-by-use-case"},
     ]
   },
