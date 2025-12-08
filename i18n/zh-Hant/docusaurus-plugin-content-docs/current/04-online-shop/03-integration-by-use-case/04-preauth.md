@@ -134,7 +134,7 @@ import Link from '@docusaurus/Link';
 
 ## 异步通知
 
-一般通知规则适用。详细信息请参考文档中的异步通知部分 (../common-api/asynchronous-notification)
+一般通知规则适用。详细信息请参考文档中的异步通知部分 (../common-api/async-notifications)
 
 在以下操作成功执行后，您将会收到收到通知：
 

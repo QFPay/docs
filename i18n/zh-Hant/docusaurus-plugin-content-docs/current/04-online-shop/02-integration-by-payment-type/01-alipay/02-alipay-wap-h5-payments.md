@@ -53,7 +53,7 @@ import Link from '@docusaurus/Link';
 | `out_trade_no` | 是       | 商戶自訂訂單編號，需唯一                   |
 | `txdtm`        | 是       | 交易時間，格式：YYYY-MM-DD hh:mm:ss       |
 | `return_url`   | 是       | 成功付款後跳轉用戶的頁面                  |
-| `notify_url`   | 是       | 異步通知商戶後端付款結果的接收端點        |
+| `notify_url`   | 是       | 非同步通知商戶後端付款結果的接收端點        |
 | `goods_name`   | 是       | 商品名稱（僅部分錢包強制）                 |
 | `mchid`        | 是       | 商戶號，如由 QFPay 分配則為必填           |
 | `openid`       | 視情況    | 僅適用於 `800107`，即服務窗 H5 授權碼     |
@@ -324,11 +324,11 @@ ob_end_flush();
 
 <Link to="/img/alipay_h5_process.jpg" target="_blank">![Alipay H5 process-flow](@site/static/img/alipay_h5_process.jpg)</Link>
 
-## 異步通知說明
+## 非同步通知說明
 
-支付完成後，QFPay 將透過異步通知（`notify_url`）發送交易結果。
+支付完成後，QFPay 將透過非同步通知（`notify_url`）發送交易結果。
 
-- 通知格式請參考：[異步通知 API 文檔](/docs/common-api/asynchronous-notification)
+- 通知格式請參考：[非同步通知 API 文檔](/docs/common-api/async-notifications)
 - 建議使用 [交易查詢 API](/docs/common-api/transaction-enquiry) 進行最終結果確認
 
 :::warning

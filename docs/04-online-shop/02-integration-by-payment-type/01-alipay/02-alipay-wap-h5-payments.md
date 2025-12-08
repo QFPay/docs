@@ -331,7 +331,7 @@ Refer to [Public Response Parameters](/docs/api-reference/response-format) for s
 
 After payment is completed, QFPay will notify your backend via the `notify_url`.
 
-- See format and signature verification in [Asynchronous Notification](/docs/common-api/asynchronous-notification)
+- See format and signature verification in [Asynchronous Notification](/docs/common-api/async-notifications)
 - Use [Transaction Enquiry](/docs/common-api/transaction-enquiry) API to verify final status
 
 :::warning

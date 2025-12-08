@@ -26,7 +26,7 @@ import Link from '@docusaurus/Link';
 QFPay 將透過非同步通知方式將交易結果傳送至商戶後台。
 :::
 
-詳情請參閱 [非同步通知說明文件](/docs/common-api/asynchronous-notification)，了解通知格式與簽名驗證方式。
+詳情請參閱 [非同步通知說明文件](/docs/common-api/async-notifications)，了解通知格式與簽名驗證方式。
 
 > 範例通知資料：
 

@@ -26,7 +26,7 @@ Merchants can choose from two integration options:
 QFPay will send an asynchronous notification to your backend to confirm the transaction result.
 :::
 
-Refer to [Asynchronous Notification](/docs/common-api/asynchronous-notification) for details on the notification format and signature verification.
+Refer to [Asynchronous Notification](/docs/common-api/async-notifications) for details on the notification format and signature verification.
 
 > Example Notification Payload:
 

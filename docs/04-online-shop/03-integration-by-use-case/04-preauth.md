@@ -138,7 +138,7 @@ For integration, please refer to the "Common API" section of the documentation. 
 
 ## Notifications
 
-General notification rule applies. For details, please refer to the [Asynchronous Notifications section](/docs/common-api/asynchronous-notification) in the documentations.
+General notification rule applies. For details, please refer to the [Asynchronous Notifications section](/docs/common-api/async-notifications) in the documentations.
 
 Upon successful execution of the following actions, you should be able to receive a notification
 

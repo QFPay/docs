@@ -33,7 +33,7 @@ For build and manage subscriptions, the following API resources are required:
 
 :::info
 Current flow of subscription creation
-1. [**Config your notification address**](/docs/common-api/asynchronous-notification.), you will receive notification to get token_id and track the state change of subscription.
+1. [**Config your notification address**](/docs/common-api/async-notifications.), you will receive notification to get token_id and track the state change of subscription.
 2. [**Create customer object**](#create-customer-object) and get `customer_id`
 3. [**Integrate with our element service**](/docs/online-shop/checkout-integration/0payment-element) and use elements.createEnhance() and payment.pay() for token creation page. Then use `customer_id` and card information to create token and get `token_id`
 4. [**Create product object**](#create-product-object) and get `product_id`, your subscription transaction amount for each billing cycle and the interval between two billing cycles will be defined in product object.
