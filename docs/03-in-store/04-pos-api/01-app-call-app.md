@@ -1,5 +1,5 @@
 ---
-id: android-sdk-doc
+id: app-call-app
 title: App Call App Android SDK
 sidebar_label: App Call App Android SDK
 description: This document explains how to integrate the QFPay HaoJin Android SDK to enable App-to-App payment features, including payment, refund, transaction query, pre-authorisation, and card settlement.

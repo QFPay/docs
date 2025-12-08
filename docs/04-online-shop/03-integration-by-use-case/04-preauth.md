@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 
 # Online Pre-authorisation Payment APIs
 
-- [Online Pre-authorisation Payment APIs](#online-pre-authorisation-payment-apis)
+- Online Pre-authorisation Payment APIs
 	- [Common APIs](#common-apis)
 	- [Creating and capturing payments](#creating-and-capturing-payments)
 		- [Step 1: Create Pre-Authorisation Payment](#step-1-create-pre-authorisation-payment)
