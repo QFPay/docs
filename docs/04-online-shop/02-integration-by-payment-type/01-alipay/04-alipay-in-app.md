@@ -50,16 +50,18 @@ To begin integration, download the official SDK packages below:
 | `seller_id`      | Yes      | String      | Alipay seller account                                                       |
 | `mchid`          | Yes      | String(16)  | QFPay assigned Merchant ID                                                  |
 
+See [Public Payment Parameters](/docs/api-reference/request-format/#public-payment-request-parameters) for shared fields.
+
+
 ---
 
 ## Optional Parameters
 
-| Parameter              | Type        | Description                                                                 |
-|------------------------|-------------|-----------------------------------------------------------------------------|
-| `goods_info`           | String      | Product description (avoid special characters)                              |
-| `goods_detail`         | String      | Detailed product info                                                       |
-| `trade_name`           | String      | Trade name shown to customer                                                |
-| `pay_tag`              | String(16)  | Default: `ALIPAYHK`; Use `ALIPAYCN` for Alipay Mainland                     |
+| Parameter Name     | Parameter Key     | Required                     | Type        | Description                                                                 |
+|--------------------|-------------------|------------------------------|-------------|-----------------------------------------------------------------------------|
+| Product Description | `goods_info`      | No                           | String      | Required by Alipay. Special characters are not allowed.                      |
+| Payment Tag        | `pay_tag`          | No                           | String(16)  | Default: ALIPAYHK<br/>For Alipay Mainland use: ALIPAYCN                      |
+| Order Expiry Time  | `expired_time`    | No<br/>(Main-scan only)       | String(3)   | Expiration time in minutes. Default is 30 minutes. Min: 5, Max: 120.<br/>Applicable to WeChat Pay and Alipay |
 
 ## Sample Request (Form Payload)
 ```plaintext
@@ -82,29 +84,32 @@ txamt=1
 
 These fields are returned by QFPay and should be passed into the Alipay SDK.
 
-| Field                        | Description                                                          |
-|-----------------------------|----------------------------------------------------------------------|
-| `partner`                   | Alipay partner ID                                                    |
-| `seller_id`                 | Seller account ID                                                    |
-| `subject`                   | Product name                                                         |
-| `body`                      | Product description                                                  |
-| `total_fee`                 | Total transaction amount                                             |
-| `notify_url`                | Callback URL for payment result                                      |
-| `service`                   | Usually `mobile.securitypay.pay`                                     |
-| `payment_type`              | Payment type                                                         |
-| `_input_charset`            | Encoding format (e.g. UTF-8)                                         |
-| `it_b_pay`                  | Transaction timeout                                                  |
-| `return_url`                | Return URL                                                           |
-| `payment_inst`             | Payment institution (e.g. ALIPAYHK)                                  |
-| `currency`                 | Currency code (e.g. HKD)                                              |
-| `product_code`             | Alipay product code                                                  |
-| `sign`                     | RSA signature                                                        |
-| `sign_type`                | Signature type (e.g. RSA)                                            |
-| `secondary_merchant_id`    | Sub-merchant ID                                                      |
-| `secondary_merchant_name`  | Sub-merchant name                                                    |
-| `secondary_merchant_industry`| Industry code of sub-merchant                                      |
+| Parameter Key  | Sub Parameter Key               | Description                                      |
+|----------------|----------------------------------|--------------------------------------------------|
+| `pay_params`   | `partner`                        | Partner ID                                       |
+|                | `seller_id`                      | Unique Alipay user ID of the receiving account  |
+|                | `subject`                        | Product title / trade title / order title        |
+|                | `body`                           | Detailed description of the transaction. For multiple items, concatenate descriptions into this field |
+|                | `total_fee`                      | Total order amount                               |
+|                | `notify_url`                     | Notification callback URL                       |
+|                | `service`                        | Service name                                    |
+|                | `cardcd`                         | Card number                                     |
+|                | `payment_type`                   | Payment type                                    |
+|                | `_input_charset`                | Character encoding format                      |
+|                | `it_b_pay`                       | Custom timeout parameter                       |
+|                | `return_url`                     | Redirect URL after payment                     |
+|                | `payment_inst`                   | Payment institution                            |
+|                | `currency`                       | Currency code                                  |
+|                | `product_code`                   | Product code                                   |
+|                | `sign`                           | RSA signature (Required)                      |
+|                | `sign_type`                      | Signature type                                 |
+|                | `secondary_merchant_id`          | Secondary merchant ID                          |
+|                | `secondary_merchant_name`        | Secondary merchant name                        |
+|                | `secondary_merchant_industry`    | Secondary merchant industry                    |
+| `chnlsn`       |                                  | Channel transaction number                     |
+| Common Response Parameters | —                        | —                                              |
 
-See [Public Payment Parameters](/docs/preparation/paycode#public-payment-parameters) for shared fields.
+
 
 
 ## Sample QFPay Response
@@ -168,6 +173,6 @@ _input_charset="UTF-8"&body="goods_info"&currency="HKD"&forex_biz="FP"&it_b_pay=
 :::note
 Make sure you:
 - Follow the correct SDK version and region (HK vs CN)
-- Use the exact key names and values returned in pay_params
+- Use the exact `key` names and `values` returned in `pay_params`
 - Keep your sign logic consistent with Alipay SDK format
 :::

@@ -1,32 +1,126 @@
+---
+id: alipay-in-app
+title: 支付寶 App 內支付（In-App）
+description: 使用 AlipayHK 或 AlipayCN SDK 進行 App 內支付的整合指南。
+sidebar_label: 支付寶 In-App
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# 支付宝In-App支付
+# 支付寶 App 內支付（Alipay In-App）
 
-<Link to="/img/alipay-in-app.png" target="_blank">![Alipay APP Payment process-flow](@site/static/img/alipay-in-app.png)</Link>
+本文件說明如何使用支付寶 SDK（AlipayHK 或 AlipayCN）整合 App 內支付。此支付方式適用於原生 App 環境，提供流暢且無跳轉的使用者支付體驗。
 
-请参考该[链接](https://global.alipay.com/docs/ac/app/client_integration)下载支付宝海外SDK. <br/>
-请参考该[链接](https://global.alipay.com/docs/ac/app_hk/download)下载支付宝香港SDK. <br/>
-请参考该[链接](https://global.alipay.com/docs/ac/hkapi/securitypay_pay)了解如何触发支付宝香港SDK.
+<Link to="/img/alipay-in-app.png" target="_blank">
+  ![Alipay APP Payment process-flow](@site/static/img/alipay-in-app.png)
+</Link>
 
-## HTTP请求
+---
 
-`POST ../trade/v1/payment` <br/>
-`PayType: 801110 Oversea Merchants` <br/>
-`PayType: 801510 Hong Kong Merchants`
+## SDK 下載
 
-## 请求参数
+請先下載官方 SDK 套件以開始整合：
+
+- [支付寶海外 SDK 文件](https://global.alipay.com/docs/ac/app/client_integration)
+- [AlipayHK SDK 下載](https://global.alipay.com/docs/ac/app_hk/download)
+- [AlipayHK SDK 觸發支付指南](https://global.alipay.com/docs/ac/hkapi/securitypay_pay)
+
+---
+
+## HTTP 請求
+
+**接口位址**：`/trade/v1/payment`  
+**HTTP 方法**：`POST`
+
+| PayType  | 說明                              |
+|----------|-----------------------------------|
+| `801110` | 支付寶 App 內支付（海外商戶）     |
+| `801510` | 支付寶 App 內支付（香港商戶）     |
+
+---
+
+## 必填參數
+
+| 參數名稱        | 是否必填 | 類型        | 說明                                                               |
+|------------------|----------|-------------|--------------------------------------------------------------------|
+| `txamt`          | 是       | Int         | 交易金額（單位：分），例如 100 = $1                                |
+| `txcurrcd`       | 是       | String(3)   | 幣別代碼（如：HKD）                                                 |
+| `pay_type`       | 是       | String(6)   | Alipay CN 使用 801110，AlipayHK 使用 801510                        |
+| `out_trade_no`   | 是       | String(128) | 商戶唯一交易訂單號                                                 |
+| `txdtm`          | 是       | String(20)  | 交易時間格式：`YYYY-MM-DD hh:mm:ss`                                |
+| `goods_name`     | 是       | String      | 商品名稱                                                           |
+| `return_url`     | 是       | String      | 支付完成後的跳轉網址                                               |
+| `seller_id`      | 是       | String      | 支付寶商戶帳號                                                     |
+| `mchid`          | 是       | String(16)  | QFPay 指派的商戶 ID                                                |
+
+共用欄位請參考：
+[公共支付參數](/docs/api-reference/request-format#公共支付請求參數)
+
+
+---
+
+## 選填參數
+
+| 參數名稱       | 參數編碼        | 是否必填                  | 參數類型     | 描述                                                                 |
+|----------------|------------------|----------------------------|---------------|----------------------------------------------------------------------|
+| 商品描述       | `goods_info`     | 否                         | String        | 支付寶必填，且不得包含特殊字符                                        |
+| 支付標記       | `pay_tag`        | 否                         | String(16)    | 預設為 ALIPAYHK<br/>若為支付寶大陸版本請傳值：ALIPAYCN                |
+| 訂單過期時間   | `expired_time`   | 否<br/>(僅限主掃支付)     | String(3)     | 以分鐘為單位的過期時間。預設為 30 分鐘，最小值為 5 分鐘，最大值為 120 分鐘<br/>適用於微信與支付寶 |
+---
+
+## 範例請求（Form 方式）
 
 ```plaintext
-
-请求本体:
-
-txamt=1&txcurrcd=HKD&pay_type=801510&out_trade_no=052711570017898&txdtm=2021-05-27+11%3A57%3A00&goods_name=goods_name&goods_info=goods_info&mchid=nDB64h9qJ1An&trade_name=trade_name&goods_detail=goods_detail&return_url=https%3A%2F%2Fwww.qfpay.global%2F&pay_tag=ALIPAYHK&seller_id=testoverseas9191%40alipay.com
-
+txamt=1
+&txcurrcd=HKD
+&pay_type=801510
+&out_trade_no=052711570017898
+&txdtm=2021-05-27 11:57:00
+&goods_name=goods_name
+&goods_info=goods_info
+&mchid=nDB64h9qJ1An
+&trade_name=trade_name
+&goods_detail=goods_detail
+&return_url=https://www.qfpay.global/
+&pay_tag=ALIPAYHK
+&seller_id=testoverseas9191@alipay.com
 ```
 
-> QFPay 平台响应:
+## 回傳欄位（pay_params）
+
+以下欄位由 QFPay 回傳，需原樣傳入支付寶 SDK 使用：
+
+| 參數編碼       | 二級參數編碼                    | 參數名稱              |
+|----------------|----------------------------------|------------------------|
+| `pay_params`   | `partner`                        | 合作夥伴              |
+|                | `seller_id`                      | 收款支付寶帳號對應的支付寶唯一用戶號 |
+|                | `subject`                        | 商品標題／交易標題／訂單標題／關鍵詞等 |
+|                | `body`                           | 對該筆交易的具體描述；若為多件商品，請將商品描述合併傳入 body |
+|                | `total_fee`                      | 訂單總金額             |
+|                | `notify_url`                     | 通知位址               |
+|                | `service`                        | 服務名稱               |
+|                | `cardcd`                         | 卡號                   |
+|                | `payment_type`                   | 支付類型               |
+|                | `_input_charset`                 | 編碼格式               |
+|                | `it_b_pay`                       | 自訂超時參數           |
+|                | `return_url`                     | 回跳頁面目標位址       |
+|                | `payment_inst`                   | 支付機構               |
+|                | `currency`                       | 幣別                   |
+|                | `product_code`                   | 產品代碼               |
+|                | `sign`                           | RSA 簽名值（必填）     |
+|                | `sign_type`                      | 簽名類型               |
+|                | `secondary_merchant_id`          | 二級商戶編號           |
+|                | `secondary_merchant_name`        | 二級商戶名稱           |
+|                | `secondary_merchant_industry`    | 二級商戶所屬行業       |
+| `chnlsn`       |                                  | 通道交易編號           |
+| 常用回應參數   | —                                | —                      |
+
+
+---
+
+## QFPay 回傳範例
 
 ```json
 {
@@ -61,7 +155,7 @@ txamt=1&txcurrcd=HKD&pay_type=801510&out_trade_no=052711570017898&txdtm=2021-05-
     "partner": "2088231067382451",
     "secondary_merchant_industry": "5941",
     "product_code": "NEW_WAP_OVERSEAS_SELLER",
-    "return_url": "https://www.qfpay.global",
+    "return_url": "https://www.qfpay.global/",
     "subject": "goods_name"
   },
   "respcd": "0000",
@@ -69,50 +163,27 @@ txamt=1&txcurrcd=HKD&pay_type=801510&out_trade_no=052711570017898&txdtm=2021-05-
   "cardcd": ""
 }
 ```
+---
 
-使用支付宝SDK发送请求：
+## 使用支付寶 SDK
 
-(当您在调用支付宝SDK收到 `pay_params` 后, the `orderinfo` 请求参数需要被调整成如下格式:
-将所有数组值以 `key="value"` 的格式组合起来, 请求参数需根据参数名称升序排列, 然后使用 `&` 将参数连接起来.
-`sign` 和 `sign_type` 参数需要放置在末尾.)
+取得回傳的 `pay_params` 後，需依以下格式組合成 `orderInfo` 字串：
+
+1. 依格式拼接：`key="value"`
+2. 依 key 值進行字母排序（A-Z）
+3. 使用 `&` 連接
+4. 將 `sign` 與 `sign_type` 放在最後
+
+### 範例
 
 ```plaintext
-Sample:
-
 _input_charset="UTF-8"&body="goods_info"&currency="HKD"&forex_biz="FP"&it_b_pay="30m"&notify_url="https://test-o2-hk.qfapi.com/trade/alipay_hk/v1/notify"&out_trade_no="20210527154100020004180921"&partner="2088231067382451"&payment_inst="ALIPAYHK"&payment_type="1"&product_code="NEW_WAP_OVERSEAS_SELLER"&return_url="https://www.qfpay.global/"&secondary_merchant_id="1000007081"&secondary_merchant_industry="5941"&secondary_merchant_name="IFlare Hong Kong Limited (external) - online"&seller_id="2088231067382451"&service="mobile.securitypay.pay"&subject="goods_name"&total_fee="0.01"&sign="iU1yXUnsCK7rJAu0DoN61arVexbIfo3GLR5jr3QzjkZ29INSPhcA4e%2F2%2BdPrsf5huzQAkxVKP0CTfvaGPMYqNkxmhoaJWUH0ZhgYDgKugMvtweBvRqOX2W0h3A%2F%2FIdJuxeyOAuh7bHiuazSB3ZH%2BEQwRGP%2Bkk8Jpha930gHwPtw%3D"&sign_type="RSA"
 
 ```
 
-|参数名称 | 参数编码  |是否必填 | 参数类型 | 描述 |
-|:----    |:---|:----- |-----   |----   |
-|常用支付参数 |—|— |—   |—   |
-|商品描述    |`goods_info`|否 | String  | 支付宝必传 不得包含特殊字符   |
-|支付标记    |`pay_tag`|否 | String(16)  | 默认值是ALIPAYHK<br/>支付宝大陆版本传值：ALIPAYCN |
-|订单过期时间 | `expired_time` | 否<br/> (仅限正扫支付) | String(3)  | 以分钟为单位的过期时间. 默认的过期时间为30分钟, 最小值5分钟，最大值120分钟<br/> 适用于微信和支付宝|
-
-## 响应参数
-
-|参数编码 | 二级参数编码  | 参数名称 |
-|:----    |:---|:----- |
-| `pay_params` | `partner`                      | 合作伙伴 |
-|              | `seller_id`                    | 收款支付宝账号对应的支付宝唯一用户号 |
-|              | `subject`                      | 商品的标题/交易标题/订单标题/订单关键字等 |
-|              | `body`                         | 对一笔交易的具体描述信息。如果是多种商品，请将商品描述字符串累加传给body |
-|              | `total_fee`                    | 订单总金额  |
-|              | `notify_url`                   | 通知地址 |
-|              | `service`                      | 服务 |
-|              | `cardcd`                       | 卡号  |
-|              | `payment_type`                 | 支付类型 |
-|              | `\_input_charset`              | 编码格式 |
-|              | `it_b_pay`                     | 自定义超时参数  |
-|              | `return_url`                   | 需要回跳的目标地址 |
-|              | `payment_inst`                 | 支付机构 |
-|              | `currency`                     | 币种 |
-|              | `product_code`                 | 产品码 |
-|              | `sign`                         | 是否必填 |
-|              | `sign_type`                    | 签名类型 |
-|              | `secondary_merchant_id`        | 二级商户标识 |
-|              | `secondary_merchant_name`      | 二级商户名称 |
-|              | `secondary_merchant_industry`  | 二级商户行业 |
-| `chnlsn`     |                                | 渠道编码 |
-| 常用响应参数   | —                              | — |
+:::note
+請務必注意：
+- 使用正確地區對應的 SDK（HK 或 CN）
+- `pay_params` 內的所有 `key` 與 `value` 必須完全一致
+- 簽名邏輯需與支付寶 SDK 規範完全相符
+:::
