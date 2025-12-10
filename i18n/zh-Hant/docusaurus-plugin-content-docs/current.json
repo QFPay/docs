@@ -51,6 +51,10 @@
     "message": "支付寶",
     "description": "The label for category Alipay in sidebar qfpaySidebar"
   },
+  "sidebar.qfpaySidebar.category.FPS": {
+    "message": "FPS",
+    "description": "The label for category FPS in sidebar qfpaySidebar"
+  },
   "sidebar.qfpaySidebar.category.Shared Endpoints": {
     "message": "共用端點",
     "description": "The label for category Common API in sidebar qfpaySidebar"
