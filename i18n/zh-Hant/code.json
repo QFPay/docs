@@ -35,7 +35,7 @@
   "homepage.features.online-shop.checkout-integration": {
     "message": "結帳方式整合"
   },
-  "homepage.features.online-shop.integration-by-use-case.recurring": {
+  "homepage.features.online-shop.integration-by-use-case": {
     "message": "按支付場景整合"
   },
   "homepage.features.online-shop.integration-by-payment-type": {
