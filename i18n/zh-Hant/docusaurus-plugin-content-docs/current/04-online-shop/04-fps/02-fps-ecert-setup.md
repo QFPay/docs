@@ -1,13 +1,17 @@
 ---
-
+id: fps-ecert-setup
 title: FPS 電子憑證申請與設定指南
-description: FPS App-to-App 互聯付款隱示 SSL 憑證申請與設定指南，特別適用於 HSBC 商戶。
+description: FPS App-to-App 互聯付款中 SSL 憑證申請與設定指南，特別適用於 HSBC 商戶。
 sidebar_label: FPS 電子憑證設定指南
-------------------------------
+---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
+
+:::info
+本指南適用於使用 App-to-App 付款的 FPS 商戶，特別是與滙豐銀行（HSBC）進行對接的商戶。
+:::
 
 ---
 
@@ -33,6 +37,13 @@ import Link from '@docusaurus/Link';
 
 若使用多個子網域（如 `fps.payment.example-shop.com`），每個網域都需單獨申請 e-Cert，將產生額外費用與等待時間。
 
+商戶必須在其 DNS 設定中新增以下 **CNAME 記錄**：
+```
+主機名稱（Host）：fps.merchant.com
+類型（Type）：CNAME
+指向（Value）：hk.qfapi.com
+```
+
 ---
 
 ## FPS 電子憑證申請流程
@@ -47,6 +58,7 @@ import Link from '@docusaurus/Link';
 | 6 | 等待約 10 個工作天審核，包含網域與電郵驗證 |
 | 7 | 審核通過後憑 CSR 核發憑證 |
 | 8 | 下載電子憑證並安裝於您的 HTTPS 伺服器上 |
+| 9 | 將**憑證檔案與私鑰檔案**提交給 QFPay 技術支援團隊，以進行 FPS 支付網址（Pay URL）設定 |
 
 ---
 
@@ -85,6 +97,15 @@ openssl req -new -SHA256 -newkey rsa:2048 -nodes \
 * 公司設立證 (CI) 複本
 * 域名擁有證明 (e.g. 訂單發票，DNS 畫面截圖)
 
+---
+
+## 憑證簽發後的責任
+
+:::info
+此外，香港郵政會在憑證過期前 **30 天與 14 天** 發送電郵提醒至商戶註冊的電郵地址，請商戶留意郵件並準時辦理續期。
+
+憑證核發完成後，商戶需將 **私鑰 (.key) 與憑證檔案 (.crt 或 .cer)** 提供給 QFPay 技術支援團隊，以便完成 FPS 支付網址的後端配置。
+:::
 ---
 
 ## FPS 技術標準據點

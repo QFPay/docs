@@ -95,7 +95,7 @@ const sidebars = {
         },
         {
           type: 'category',
-          label: 'Integration by Payment Types',
+          label: 'Integration by Payment Type',
           link: {
             type: 'generated-index'
           },

@@ -35,9 +35,9 @@
     "message": "結帳方式整合",
     "description": "The label for category Checkout Integration in sidebar qfpaySidebar"
   },
-  "sidebar.qfpaySidebar.category.Integration by Payment Types": {
+  "sidebar.qfpaySidebar.category.Integration by Payment Type": {
     "message": "按支付方式整合",
-    "description": "The label for category Integration by Payment Types in sidebar qfpaySidebar"
+    "description": "The label for category Integration by Payment Type in sidebar qfpaySidebar"
   },
   "sidebar.qfpaySidebar.category.Integration by Use Case": {
     "message": "按支付場景整合",

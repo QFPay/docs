@@ -1,4 +1,5 @@
 ---
+id: fps-ecert-setup
 title: FPS e-Cert Certificate Application and Setup Guide
 description: Guide for applying and configuring SSL certificates for FPS App-to-App integration, particularly for HSBC merchants.
 sidebar_label: FPS e-Cert Setup Guide
@@ -34,6 +35,13 @@ This requirement comes from FPS Technical Specification 6.9.2.
 The **certificate domain name** is assigned and configured by QFPay based on the integration context. Merchants do not select this domain themselves.
 
 Each **distinct domain** requires a **separate e-Cert application** (e.g. `fps.payment.example-shop.com`), which incurs additional application cost and processing time.
+
+Merchants must also add the following **CNAME record** in their DNS configuration:
+```
+Host: fps.merchant.com
+Type: CNAME
+Value: hk.qfapi.com
+```
 :::
 
 ---
@@ -50,6 +58,8 @@ Each **distinct domain** requires a **separate e-Cert application** (e.g. `fps.p
 | 6 | Wait ~10 working days for approval and domain/email validation |
 | 7 | Upon approval, submit CSR to issue certificate |
 | 8 | Download and install the e-Cert to your HTTPS server |
+| 9 | Send **certificate and private key files** to QFPay technical support for FPS pay URL configuration |
+
 
 ---
 
@@ -84,6 +94,19 @@ openssl req -new -SHA256 -newkey rsa:2048 -nodes \
 - Business Registration (BR) Copy  
 - Company Incorporation (CI) Copy  
 - Domain Ownership Proof (e.g. invoice, DNS panel screenshot, domain email confirmation)
+
+---
+
+## Post-Issuance Responsibilities
+
+:::info
+Hongkong Post will send **expiration reminders** to the merchant’s registered email **30 days and 14 days before the certificate expires**.  
+Merchants are responsible for timely renewal and communication with QFPay.
+:::
+
+Once the certificate is approved and issued:
+- Merchant must **send the certificate (.cer/.crt) and private key (.key)** to QFPay Technical Support.
+- QFPay will complete backend setup for the FPS pay URL endpoint.
 
 ---
 
