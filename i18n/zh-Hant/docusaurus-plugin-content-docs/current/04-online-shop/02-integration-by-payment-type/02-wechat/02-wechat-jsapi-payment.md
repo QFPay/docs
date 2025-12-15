@@ -171,13 +171,9 @@ def get_open_id(data):
 
 ## 發起支付
 
-```placeholder
-Python 程式碼：呼叫 /trade/v1/payment，傳入 sub_openid 觸發支付
-```
-
 ### HTTP 請求
 
-`POST ../trade/v1/payment`（PayType: 800207）
+`POST ../trade/v1/payment`（PayType: `800207`）
 
 ### 請求參數
 
@@ -197,34 +193,6 @@ Python 程式碼：呼叫 /trade/v1/payment，傳入 sub_openid 觸發支付
 | `package` | String(128) | 預支付憑證資訊（prepay_id） |
 | `signType` | String(32) | 簽名類型（預設 MD5） |
 | `paySign` | String(64) | 簽名值 |
-
-## 調用支付模組
-
-```placeholder
-GET 請求格式：跳轉至 QFPay 提供的支付入口
-```
-
-### 請求參數
-
-| 參數名稱 | 是否必填 | 類型 | 描述 |
-|----------|----------|------|------|
-| `mchntnm` | 是 | String(128) | 商戶名稱，若為中文須以 UTF-8 編碼 |
-| `txamt` | 是 | Int(11) | 金額（如 100 = $1） |
-| `currency` | 是 | String(3) | 幣別 |
-| `redirect_url` | 是 | String(512) | 支付完成後導向的 URL（需 urlencode） |
-| `package`、`timeStamp`、`signType`、`paySign`、`appId`、`nonceStr` | 是 | 各類型 | 請使用前段 API 回傳之 pay_params |
-
----
-
-如需進一步使用範例或測試請求，請聯絡技術支援團隊取得測試憑證與公眾號授權資訊。
-
-
-
-## 微信申请支付
-
-```plaintext
-有关代码说明，请选择带有以下选项卡的 Python。
-```
 
 ```python
 def payment(openid):
@@ -288,39 +256,22 @@ if __name__ == '__main__':
     app.run(host="127.0.0.1",port = 80)
 ```
 
-商户可选择开通微信实名认证。 目前实名认证仅适用于中国大陆公民，包括真实姓名和身份证号码。 如果提供身份证明，付款人的钱包信息（例如连接的银行卡）必须与商家提供的数据相同。 如果客户尚未将微信账户绑定银行卡，仍可进行付款。
-
-### HTTP 请求
-
-`POST ../trade/v1/payment` `PayType: 800207`
-
-### 请求参数
-
-|参数名字|  参数编码 | 是否必填| 参数类型 | 描述 |
-|:----    |:---|:----- |-----   |-----   |
-|公共支付参数 |—  |— |—  | 请参阅有关交易的[公共支付参数](/docs/preparation/paycode#支付API端点) |
-|微信授权码   |`sub_openid`|是  |String    |微信 OpenID. 请参阅 **GET openid** 文档   |
-|指定付款方式   |`limit_pay`|否|String   |用于限制信用卡交易   |
-|扩展客户信息   |`extend_info`|否|Object   | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](/docs/preparation/paycode#支付类型)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
-
-### 响应参数
-
-|参数编码| 二级参数编码 | 参数类型 | 参数名字 | 描述 |
-|:----    |:---|:----- |-----   |-----   |
-|`pay_params`|`appId`   |String(16)  | 公众号id  | App ID由开发者在微信开发者平台注册小程序后由腾讯提供 |
-|— |`timeStamp`  |String(32) | 时间戳  | 当前时间 |
-|— |`nonceStr`  |String(32) | 随机字符串  | 不超过32位的随机字符串 |
-|— |`package`   |String(128)| 交易明细  | 接口返回的`prepay_id`参数值格式为：prepay_id=** |
-|— |`signType`   |String(32) | 签名方法  | 签名方法, 默认：MD5|
-|— |`paySign`    |String(64) | 签名   | 签名方法, 签名：MD5|
-|— |公共响应参数    |— |—   | 请参阅有关交易的[公共支付参数](/docs/preparation/paycode#支付API端点)|
-|`txcurrcd`  | |  String(3) |  | 交易货币。 查看[货币](/docs/preparation/paycode#支付币种) 表以获取可用货币的完整列表 |
-
-## 调用微信支付模块
-
-:::note 直接向接口提交相关参数，此步骤无需在HTTP header中定义`X-QF-APPCODE`或`X-QF-SIGN`。
-:::
-
-### HTTP 请求
+## 調用微信支付模組
 
 `GET https://o2-hk.qfapi.com/q/direct`
+
+### 請求參數
+
+| 參數名稱 | 是否必填 | 類型 | 描述 |
+|----------|----------|------|------|
+| `mchntnm` | 是 | String(128) | 商戶名稱，若為中文須以 UTF-8 編碼 |
+| `txamt` | 是 | Int(11) | 金額（如 100 = $1） |
+| `currency` | 是 | String(3) | 幣別 |
+| `redirect_url` | 是 | String(512) | 支付完成後導向的 URL（需 urlencode） |
+| `package`、`timeStamp`、`signType`、`paySign`、`appId`、`nonceStr` | 是 | 各類型 | 請使用前段 API 回傳之 pay_params |
+
+---
+
+如需進一步使用範例或測試請求，請聯絡技術支援團隊取得測試憑證與公眾號授權資訊。
+
+
