@@ -1,70 +1,87 @@
+---
+id: wechat-pay-h5
+title: WeChat H5 Payment (Third-Party Browser)
+description: This guide helps merchants integrate WeChat H5 payment for non-WeChat browser environments, including scene configuration and redirect handling.
+sidebar_label: WeChat H5 Payment
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# WeChat Pay H5 (in mobile browser)
+# WeChat H5 Payment (Third-Party Browser)
 
 <Link href="/img/wechat-h5.png" target="_blank">![WeChat H5 process-flow](@site/static/img/wechat-h5.png)</Link>
 
+---
+
 ## HTTP Request
 
-**Endpoint** : `/trade/v1/payment`
+`POST /trade/v1/payment`
+`pay_type: 800212` (WeChat H5 Payment)
 
-**Method** : `POST`
-
-**PayType** : `800212`
+---
 
 ## Request Parameters
 
-|  Attribute | Mandatory| Type | Description |
-|:---|:----- |-----   |-----   |
-|Public payment parameters |—  |—   | Please refer to the [Public Payment Section](/docs/preparation/paycode#public-payment-parameters) for more details |
-|`extend_info`|Yes|Object||
+| Field Name            | Field Code    | Required | Type   | Description                                                    |
+| --------------------- | ------------- | -------- | ------ | -------------------------------------------------------------- |
+| Common Payment Params | —             | Yes      | —      | See [Payment API Reference](/docs/api-reference/request-format) |
+| Extended Info         | `extend_info` | Yes      | Object | See below                                                      |
+
+### `extend_info` Structure
 
 ```js
-extend_info:
-{
-  "scene_info":{ //场景类型
-    "h5_info": { // h5支付固定传"h5_info"
-      "type": "Wap", //场景类型
-      "wap_url": "https://qfpay.global/h5/pay", //WAP网站URL地址
-      "wap_name": "qfpay" //WAP 网站名
-    }              
+extend_info: {
+  "scene_info": { // Scene info
+    "h5_info": {
+      "type": "Wap", // Scene type
+      "wap_url": "https://qfpay.global/h5/pay", // WAP site URL
+      "wap_name": "qfpay" // WAP site name
+    }
   },
-  "spbill_create_ip": "192.168.1.10"// 用户真实ip地址获取指引 https://pay.weixin.qq.com/wiki/doc/api/H5.php?chapter=15_5
+  "spbill_create_ip": "192.168.1.10" // User's real IP address
 }
 ```
 
-### extend_info
+For IP acquisition details, see [WeChat Docs](https://pay.weixin.qq.com/wiki/doc/api/H5.php?chapter=15_5)
 
-|Attribute| Secondary Attribute | Third Attribute | Mandatory| Type | Description |
-|:----    |:---|:----- |-----   |-----  |-----   |
-|`scene_info`|||Yes|Object||
-||`h5_info`||Yes|Object||
-|||`type`|Yes|String|scene type **"Wap"**|
-|||`wap_url`|Yes|String|mobile website address|
-|||`wap_name`|Yes|String|mobile website name|
-|`spbill_create_ip`|||Yes|String|IP address of user|
+### Extended Info Parameters
+
+| Field Code         | Subfield Code | Sub-subfield Code | Required | Type   | Description             |
+| ------------------ | ------------- | ----------------- | -------- | ------ | ----------------------- |
+| `scene_info`       |               |                   | Yes      | Object | —                       |
+|                    | `h5_info`     |                   | Yes      | Object | —                       |
+|                    |               | `type`            | Yes      | String | Fixed value `Wap`       |
+|                    |               | `wap_url`         | Yes      | String | URL of the mobile site  |
+|                    |               | `wap_name`        | Yes      | String | Name of the mobile site |
+| `spbill_create_ip` |               |                   | Yes      | String | Customer's IP address   |
+
+---
 
 ## Response Parameters
 
-|Attribute| Secondary Attribute| Type|Description|
-|:----    |:---|:----- |----   |
-|Public response parameters    |—  |— | Please refer to the [Public Payment Section](/docs/preparation/paycode#public-payment-parameters) for more details |
-|`pay_url`|Yes|String||
+| Field Code             | Subfield Code | Type   | Field Name  | Description                                                    |
+| ---------------------- | ------------- | ------ | ----------- | -------------------------------------------------------------- |
+| Common Response Params | —             | —      | —           | See [Payment API Reference](/docs/api-reference/response-format) |
+| Payment URL            | `pay_url`     | String | Payment URL | URL to redirect user to complete payment                       |
 
-:::warning
-In normal process after payment, the user will return to the page where payment is initiated. If you want user to return to the specified page, you can insert redirect_url parameter to returned payment URL. For example, if you want user to jump to [https://www.wechatpay.com.cn](https://www.wechatpay.com.cn), it can be processed as follows:
-:::
+### Example `pay_url`
 
-### pay_url
-
-```plaintext
+```
 https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx20161110163838f231619da20804912345&package=1037687096
 ```
 
-### Payment URL after redirect_url inserted
+### Appended with `redirect_url`
 
-```plaintext
+```
 https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx20161110163838f231619da20804912345&package=1037687096&redirect_url=https%3A%2F%2Fwww.wechatpay.com.cn
 ```
+
+---
+
+## Additional Notes
+
+* Applicable for App-embedded browsers, mobile websites, etc. **Not supported within the WeChat in-app browser**.
+* The fields `wap_url` and `wap_name` must be correctly set, or WeChat may reject the payment request.
+* Make sure the IP address submitted is the real IP of the user device, to avoid risk rejection by WeChat.

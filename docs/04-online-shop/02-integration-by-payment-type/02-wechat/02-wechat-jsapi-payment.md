@@ -109,14 +109,11 @@ def get_out_code():
 
 ## GET openid
 
-```plaintext
-
-HTTP Request:
-
+**HTTP Request:**  
+```http
 {
   https://test-openapi-hk.qfapi.com/tool/v1/get_weixin_openid?code=011QipnO1yMIla1VJdoO1FUrnO1Qipnv
 }
-
 ```
 
 ```python
