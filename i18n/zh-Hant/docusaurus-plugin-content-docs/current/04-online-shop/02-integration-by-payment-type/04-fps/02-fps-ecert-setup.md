@@ -43,7 +43,7 @@ import Link from '@docusaurus/Link';
 類型（Type）：CNAME
 指向（Value）：hk.qfapi.com
 ```
-
+:::
 ---
 
 ## FPS 電子憑證申請流程
