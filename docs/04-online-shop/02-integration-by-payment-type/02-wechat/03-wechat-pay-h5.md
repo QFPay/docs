@@ -26,7 +26,7 @@ import Link from '@docusaurus/Link';
 
 | Field Name            | Field Code    | Required | Type   | Description                                                    |
 | --------------------- | ------------- | -------- | ------ | -------------------------------------------------------------- |
-| Common Payment Params | —             | Yes      | —      | See [Payment API Reference](/docs/api-reference/request-format) |
+| Common Payment Params | —             | Yes      | —      | See [Request Format](/docs/api-reference/request-format) |
 | Extended Info         | `extend_info` | Yes      | Object | See below                                                      |
 
 ### `extend_info` Structure
@@ -63,7 +63,7 @@ For IP acquisition details, see [WeChat Docs](https://pay.weixin.qq.com/wiki/doc
 
 | Field Code             | Subfield Code | Type   | Field Name  | Description                                                    |
 | ---------------------- | ------------- | ------ | ----------- | -------------------------------------------------------------- |
-| Common Response Params | —             | —      | —           | See [Payment API Reference](/docs/api-reference/response-format) |
+| Common Response Params | —             | —      | —           | See [Response Format](/docs/api-reference/response-format) |
 | Payment URL            | `pay_url`     | String | Payment URL | URL to redirect user to complete payment                       |
 
 ### Example `pay_url`
