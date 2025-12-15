@@ -22,7 +22,7 @@ The table below lists the service URL for each environments
 ### Authentication method
 credential `code` & `key` are provided, the data consumer can generate `X-QF-SIGN` header to access the APIs.
 Required Parameter Settings in HTTP Header 
-Please refer to the following URL [Signature requirement](/docs/api-reference/request-format#signature-requirement)
+Please refer to the following URL [Signature requirement](/docs/api-reference/signature-generation)
 
 
 ### API Common Response Format

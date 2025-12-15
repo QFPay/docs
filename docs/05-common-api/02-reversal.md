@@ -367,7 +367,7 @@ ob_end_flush();
 }
 ```
 
-## Reversal vs Close
+## Reversal vs Close {#reversal-vs-close}
 
 Some wallets (e.g. WeChat Pay MPM) support the `/trade/v1/close` endpoint instead of reversal.
 

@@ -339,7 +339,7 @@ The returned `qrcode` field should be rendered into an actual QR Code for custom
 |------------------|---------------|--------------------------|----------|-------------|-------------|
 | Transaction Amount | `txamt`       | –                        | Yes      | Int(11)     | Amount in minor unit (e.g. 100 = $1). Must be integer. Suggest value > 200 to avoid risk flags. |
 | Currency          | `txcurrcd`    | –                        | Yes      | String(3)   | See [Supported Currencies](/docs/api-reference/currencies). |
-| Payment Type      | `pay_type`    | –                        | Yes      | String(6)   | Always use `800201` for WeChat QR Code Payment. See [Payment Types](/docs/api-reference/paytypes#支付類型). |
+| Payment Type      | `pay_type`    | –                        | Yes      | String(6)   | Always use `800201` for WeChat QR Code Payment. See [Payment Types](/docs/api-reference/paytypes#paytypes). |
 | Merchant Order ID | `out_trade_no`| –                        | Yes      | String(128) | Merchant-defined order ID. Must be unique per transaction. |
 | Transaction Time  | `txdtm`       | –                        | Yes      | String(20)  | Format: `YYYY-MM-DD hh:mm:ss` |
 | Expiry Time       | `expired_time`| –                        | No       | String(3)   | Time (in minutes) until QR expires. Default is 30. Range: 5–120 mins. |

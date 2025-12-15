@@ -32,7 +32,7 @@ import TabItem from '@theme/TabItem';
 :::
 
 
-## 支付類型
+## 支付類型 {#paytypes}
 
 | 編碼    | 描述 |
 |---------|------|

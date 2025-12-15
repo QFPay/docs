@@ -14,8 +14,8 @@ import Link from '@docusaurus/Link';
 
 支付类型 | 描述
 --------- | -------
-800201 | 微信线上WEB支付 (香港商户), 详情请参阅[微信扫码支付](/docs/online-shop/wechat/wechat-web-qr-payment)
-801514 | 支付宝线上WEB支付 (香港商戶), 详情请参阅[支付宝线上WEB支付](/docs/online-shop/alipay/alipay-web-payments)
+800201 | 微信线上WEB支付 (香港商户), 详情请参阅[微信扫码支付](/docs/online-shop/integration-by-payment-type/wechat/wechat-web-qr-payment)
+801514 | 支付宝线上WEB支付 (香港商戶), 详情请参阅[支付宝线上WEB支付](/docs/online-shop/integration-by-payment-type/alipay/alipay-web-payments)
 800714 | 银联云闪付 PC-Web Payment (香港商户)
 805814 | PayMe 线上WEB支付 (香港商戶)
 

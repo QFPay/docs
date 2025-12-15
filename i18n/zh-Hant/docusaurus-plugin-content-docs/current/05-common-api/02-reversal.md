@@ -354,7 +354,7 @@ ob_end_flush();
 
 ---
 
-## Reversal(沖正) vs Close（關閉訂單）
+## Reversal(沖正) vs Close（關閉訂單）{#reversal-vs-close}
 
 部分錢包採用關閉訂單接口 `/trade/v1/close` 取代沖正。
 

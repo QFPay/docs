@@ -1,48 +1,71 @@
+---
+id: wechat-jsapi-payment
+title: 微信 JSAPI 支付（公眾號）
+description: 商戶可依此指引整合微信公眾號支付（JSAPI），包括使用實名認證與非認證模式，支援 OAuth 流程與支付參數構造。
+sidebar_label: 微信 JSAPI 支付
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# 微信 JSAPI 支付（微信公众号）
+# 微信 JSAPI 支付（公眾號）
 
 <Link href="/img/wechat_jsapi_process.jpg" target="_blank">![WeChat JSAPI process-flow](@site/static/img/wechat_jsapi_process.jpg)</Link>
 
 :::warning
-公众号支付必须从微信应用内浏览器发起。 它们无法从其他浏览器（例如 Chrome 或 Safari）启动。
+JSAPI 支付僅能從微信內建瀏覽器發起，無法從 Chrome、Safari 等外部瀏覽器開啟。
 :::
 
-**JSAPI 支付类型**
+## JSAPI 支付類型
 
-Note: 加拿大地区的商户，请参阅[此](/docs/online-shop/alipay/alipay-web-payments)部分了解支付请求和响应参数，其中“pay_type”为800207。<br/>
+:::info
+加拿大地區的商戶請參閱 [此文檔](/docs/online-shop/alipay/alipay-web-payments)（pay_type 為 800207）。
+:::
 
-JSAPI 支付有两种不同的实现方法。
+JSAPI 提供兩種整合方式：
 
-<br/>
+### 1. 擁有實名認證的公眾號
 
-**1. 拥有实名认证的公众号JSAPI支付**
+商戶需註冊並完成實名認證的微信公眾號，且該帳號需與商戶之 QFPay 帳號綁定。流程如下：
 
-对于这种集成，商户需要在微信上注册自己的公众号，我们会将公众号与商户的QFPay支付账户绑定。 在这种情况下，商家可以创建和发布自己的内容、访问客户信息并收集自己的关注者。 选择该实现方式时，商户需要获取“oauth_code”、用户“openid”，并通过<Link href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_1">官方微信平台</Link>触发微信支付。 商户只需参考QFPay[交易查询API接口](/docs/common-api/transaction-enquiry)即可。
+- 獲取 `oauth_code` 和 `openid`
+- 發起支付請求 `/trade/v1/payment`
+- 跳轉至微信支付頁面
 
-**Step 1:** 开发者在微信公众号平台完成实名认证后，即可使用微信公众号支付。 认证完成后，开发者可以获得认证公众账号的openid参数。 请参考官方[微信文档](https://developers.weixin.qq.com/doc/offiaccount/en/Getting_Started/Overview.html)，了解更多信息。
+詳細步驟：
 
-**Step 2:** 通过提供指定的`openid`请求QFPAY订单支付接口`/trade/v1/ payment`并返回`pay_params`数据，具体说明请参考 [支付API端点](/docs/preparation/paycode#支付API端点).
+- Step 1：完成公眾號實名認證，獲得用戶 `openid`，詳見 [官方微信說明](https://developers.weixin.qq.com/doc/offiaccount/en/Getting_Started/Overview.html)
+- Step 2：呼叫 QFPay 的 `/trade/v1/payment` 並傳入 `openid`，參見 [HTTP 請求](/docs/api-reference/request-format#http-request)
+- Step 3：於支付授權目錄中發起支付，詳見 [微信支付文檔](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6)
 
-**Step 3:** 商户认证申请时打开JSAPI支付授权目录发起支付。 更多详情请参考 [微信支付官方文档](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6).
+### 2. 使用 QFPay 公眾號（非認證公眾號）
 
-<br/>
+此方式由 QFPay 提供微信公眾號並代為結算。適用於未擁有實名公眾號的商戶。
 
-**2. 未拥有实名认证的公众号JSAPI支付**
+流程包括：
+- 透過 QFPay API 取得 `oauth_code`
+- 根據 code 換取 `openid`
+- 呼叫支付介面
 
-对于此类支付，商户可以基于QFPay的公众号进行。 此整合仅适用于使用间接结算选项（即由 QFPay 提供结算）的商户。 对于此实现，商户应使用 QFPay 的 API 获取“oauth_code”、用户“openid”并触发微信支付，如下所述。
+## 取得微信 oauth_code
 
-## 获取微信oauth_code
-
-```plaintext
-GET WeChat oauth_code request:
-
-{
-  https://test-openapi-hk.qfapi.com/tool/v1/get_weixin_oauth_code?app_code=5D81D64E602043F7AF51CEXXXXXXXXXX&sign=F4D8FB00894F213993B33116BC1B4E10&redirect_uri=https://sdk.qfapi.com
-}
+以獲取微信 `oauth_code` 為例，GET 請求的完整 URL 結構如下：
+```http
+https://test-openapi-hk.qfapi.com/tool/v1/get_weixin_oauth_code?app_code=<你的 App Code>&sign=<簽名值>&redirect_uri=<跳轉網址>
 ```
+
+### 說明
+
+| 參數名稱       | 是否必填 | 描述 |
+|----------------|----------|------|
+| `app_code`     | 是       | 開發者憑證，由 QFPay 分配。 |
+| `sign`         | 是       | 使用參數與密鑰生成的 MD5 簽名，參考 [簽名生成](/docs/api-reference/signature-generation)。 |
+| `redirect_uri` | 是       | 認證完成後跳轉的網址，需為 URL 編碼格式。 |
+
+:::note
+此 URL 必須在 **微信內部瀏覽器** 中發起，否則將無法正常獲取 `oauth_code`。
+:::
 
 ```python
 import hashlib
@@ -82,40 +105,39 @@ def get_out_code():
     return environment+"/tool/v1/get_weixin_oauth_code?app_code="+app_code+"&sign="+sign+"&redirect_uri="+redirect_uri #+"&mchid="+mchid
 ```
 
-> Redirect to URL after the GET oauth_code request has been successful:
+:::info
+成功取得 oauth_code 後將自動跳轉至 redirect_uri 並帶上 `code`。
+:::
 
-```json
-{
-  "http://xg.fshop.top/index.php/wap/pay/wxredirect?showwxpaytitle=1&code=011QipnO1yMIla1VJdoO1FUrnO1Qipnv"
-}
-```
+## 取得 openid
 
-### HTTP请求
+獲得 `oauth_code` 後，需呼叫以下 API 以取得用戶的 `openid`。
 
-`GET ../tool/v1/get_weixin_oauth_code`
+:::note
+每次呼叫支付前，皆需重新獲取新的 `oauth_code` 與 `openid`。
+:::
 
-`app_code` 和 `sign` 都必须作为参数提交，而不是在 http 标头中提交。 该URL请求必须在微信环境中发送。 每次发起支付都需要重新获取微信`oauth_code`和`openid`。
+### HTTP 請求
 
-### 请求参数
+`GET ../tool/v1/get_weixin_openid`
 
-|參數名稱| 參數編碼 | 是否必填 | 參數類型 | 描述 |
-|:----    |:---|:----- |-----   |-----   |
-|开发者ID | `app_code` | 是 | String(32) | app_code由QFPay分配给合作伙伴  |
-|回调地址 |`redirect_uri` | 是 |  String(512) | 请求成功后，用户将被重定向到回调地址 |
-|商戶ID | `mchid` | 否 | String(16) | “mchid”是QFPay为每个商户分配的唯一标识  |
-| 簽名| `sign`  | 是 | String | 根据统一框架获得的签名 |
 
-## 获取微信openid
+### 請求參數
 
-```plaintext
+| 參數名稱 | 是否必填 | 類型 | 描述 |
+|----------|----------|------|------|
+| `code`   | 是       | String | 從上一步 oauth_code 取得的授權碼，僅可使用一次 |
+| `mchid`  | 否       | String(16) | QFPay 分配的商戶代碼 |
 
-HTTP Request:
+:::info
+該請求需於 HTTP Header 中加入以下欄位：
 
-{
-  https://openapi-hk.qfapi.com/tool/v1/get_weixin_openid?code=011QipnO1yMIla1VJdoO1FUrnO1Qipnv
-}
+- `X-QF-APPCODE`：QFPay 發放的 App Code  
+- `X-QF-SIGN`：根據簽名規則計算所得簽名
 
-```
+參考：[簽名規則說明](/docs/api-reference/signature-generation)
+:::
+
 
 ```python
 def get_open_id(data):
@@ -132,7 +154,11 @@ def get_open_id(data):
         print("An exception occurred")
 ```
 
-> 上述指令會回傳如下結構的 JSON：
+### 回應參數
+
+| 參數名稱 | 類型       | 描述 |
+|----------|------------|------|
+| `openid` | String(64) | 使用者的微信 OpenID |
 
 ```json
 {
@@ -143,25 +169,56 @@ def get_open_id(data):
 }
 ```
 
-:::note 每次调用支付接口都必须获取新的`oauth_code`和`openid`。 为了请求“openid”，必须在 http 标头中提交“X-QF-APPCODE”和“X-QF-SIGN”。
-:::
+## 發起支付
 
-### HTTP请求
+```placeholder
+Python 程式碼：呼叫 /trade/v1/payment，傳入 sub_openid 觸發支付
+```
 
-`GET ../tool/v1/get_weixin_openid`
+### HTTP 請求
 
-### 请求参数
+`POST ../trade/v1/payment`（PayType: 800207）
 
-|参数编码|二级参数编码 | 是否必填| 参数类型 | 描述 |
-|:-----  |:-----|----- |----- |----- |
-|微信 oauth_code|  `code` |是  | String | 该代码由 [GET oauth_code 请求](#获取微信oauth_code) 返回。 它是唯一的，只能使用一次。 |
-|商户ID|  `mchid`  |否  | String(16) | “mchid”是QFPay为每个商户分配的唯一标识 |
+### 請求參數
 
-### 响应参数
+| 參數名稱 | 是否必填 | 類型 | 描述 |
+|----------|----------|------|------|
+| `sub_openid` | 是 | String | 使用者的 openid，需從上述步驟取得 |
+| `limit_pay` | 否 | String | 限制信用卡類型（如不允許信用卡） |
+| `extend_info` | 否 | Object | 實名資訊，如身份證號與真實姓名（僅限中國大陸） |
 
-|参数编码| 二级参数编码 | 参数类型 | 参数名字 | 描述 |
-|:-----  |:-----|----- |----- |----- |
-|`openid`|   | String(64)  | 微信 openid | 每个微信用户都会分配一个唯一的openid |
+## 回應參數（pay_params）
+
+| 參數名稱 | 類型 | 描述 |
+|----------|------|------|
+| `appId` | String(16) | 小程序或公眾號 ID |
+| `timeStamp` | String(32) | 時間戳記 |
+| `nonceStr` | String(32) | 隨機字串 |
+| `package` | String(128) | 預支付憑證資訊（prepay_id） |
+| `signType` | String(32) | 簽名類型（預設 MD5） |
+| `paySign` | String(64) | 簽名值 |
+
+## 調用支付模組
+
+```placeholder
+GET 請求格式：跳轉至 QFPay 提供的支付入口
+```
+
+### 請求參數
+
+| 參數名稱 | 是否必填 | 類型 | 描述 |
+|----------|----------|------|------|
+| `mchntnm` | 是 | String(128) | 商戶名稱，若為中文須以 UTF-8 編碼 |
+| `txamt` | 是 | Int(11) | 金額（如 100 = $1） |
+| `currency` | 是 | String(3) | 幣別 |
+| `redirect_url` | 是 | String(512) | 支付完成後導向的 URL（需 urlencode） |
+| `package`、`timeStamp`、`signType`、`paySign`、`appId`、`nonceStr` | 是 | 各類型 | 請使用前段 API 回傳之 pay_params |
+
+---
+
+如需進一步使用範例或測試請求，請聯絡技術支援團隊取得測試憑證與公眾號授權資訊。
+
+
 
 ## 微信申请支付
 
@@ -267,19 +324,3 @@ if __name__ == '__main__':
 ### HTTP 请求
 
 `GET https://o2-hk.qfapi.com/q/direct`
-
-### 请求参数
-
-| 参数类型 | 是否必填 | 参数类型 | 描述 |
-|----------------|-----------|----------------|-------------|
-|`mchntnm` | 是 | String(128) | 自定义企业名称。 如果参数是汉字，则需要**UTF-8**编码 |
-|`txamt`  | 是  | Int(11) | 金额（100 = $1），建议数值大于200，避免因支付金额过低而被交易风控。|
-|`currency`   | 是  | String(3)|  |
-|`goods_name`   | 否  | String(64)|  定制商品名称。 如果参数是汉字，则需要**UTF-8**编码 |
-|`redirect_url`   | 是  | String(512)| 付款完成后重定向 URL。 **urlencode** 处理该参数 |
-|`package`     | 是 | String(128) | 微信调用支付接口后返回参数   |
-|`timeStamp`     | 是 | String(32) | 微信调用支付接口后返回参数  |
-|`signType`      | 是 | String(32) | 微信调用支付接口后返回参数 |
-|`paySign`       | 是 | String(64) | 微信调用支付接口后返回参数 |
-|`appId`        | 是 | String(16) | 微信调用支付接口后返回参数  |
-|`nonceStr`  | 是 | String(32) | 微信调用支付接口后返回参数  |

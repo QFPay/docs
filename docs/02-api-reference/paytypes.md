@@ -26,7 +26,7 @@ Include `pay_type` in your payment request payload. For example:
 Not all `pay_type` values are enabled for every merchant. Please refer to your onboarding configuration or contact technical.support@qfpay.com for clarification.
 :::
 
-## Supported Payment Types
+## Supported Payment Types {#paytypes}
 
 Code   | Description
 ------ | -------
@@ -117,4 +117,4 @@ Code   | Description
 
 - **802001**:  This payment method **does not support refunds**.
 
-<!-- - ****:  For complete request and response details, please refer to the [API Reference section](https://sdk.qfapi.com/docs/online-shop/alipay/alipay-web-payments#alipay-web-payments).-->
+<!-- - ****:  For complete request and response details, please refer to the [API Reference section](https://sdk.qfapi.com/docs/online-shop/alipay/alipay-web-payments).-->

@@ -4,7 +4,7 @@ title: Request Format
 sidebar_label: Request Format
 ---
 
-### HTTP Request
+### HTTP Request {#http-request}
 
 `POST ../trade/v1/payment`
 

@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-### HTTP 請求
+### HTTP 請求 {#http-request}
 
 `POST ../trade/v1/payment`
 

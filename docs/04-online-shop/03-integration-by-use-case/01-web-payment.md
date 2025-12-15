@@ -15,7 +15,7 @@ Customers make purchases on a merchant website with Web Payment methods. The use
 PayType | Description
 --------- | -------
 800201 | Wechat Online WEB Payment (HK Merchants), details please refer to [Wechat WEB QRC Payments](/docs/online-shop/wechat/wechat-web-qr-payment)
-801514 | Alipay Online WEB Payment (HK Merchants), details please refer to [Alipay Online Payments](/docs/online-shop/alipay/alipay-web-payments)
+801514 | Alipay Online WEB Payment (HK Merchants), details please refer to [Alipay Online Payments](/docs/online-shop/integration-by-payment-type/alipay/alipay-web-payments)
 800714 | UNIONPAY PC-Web Payment (HK Merchants)
 805814 | PayMe Online WEB (in browser Chrome etc.) Payment (HK Merchants)
 
