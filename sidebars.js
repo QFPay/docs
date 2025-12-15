@@ -119,7 +119,7 @@ const sidebars = {
                 type: 'generated-index'
               },
               items: [
-                'online-shop/integration-by-payment-type/wechat/wechat-web-qrc-payments',
+                'online-shop/integration-by-payment-type/wechat/wechat-web-qr-payment',
                 'online-shop/integration-by-payment-type/wechat/wechat-pay-jsapi',
                 'online-shop/integration-by-payment-type/wechat/wechat-pay-h5',
                 'online-shop/integration-by-payment-type/wechat/wechat-mini-programs',
