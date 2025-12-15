@@ -120,7 +120,7 @@ const sidebars = {
               },
               items: [
                 'online-shop/integration-by-payment-type/wechat/wechat-web-qr-payment',
-                'online-shop/integration-by-payment-type/wechat/wechat-pay-jsapi',
+                'online-shop/integration-by-payment-type/wechat/wechat-jsapi-payment',
                 'online-shop/integration-by-payment-type/wechat/wechat-pay-h5',
                 'online-shop/integration-by-payment-type/wechat/wechat-mini-programs',
                 'online-shop/integration-by-payment-type/wechat/wechat-in-app-payments',
