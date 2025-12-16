@@ -67,7 +67,7 @@
     "message": "App call App",
     "description": "The label for the doc item App call App in sidebar qfpaySidebar, linking to the doc in-store/pos-api/app-call-app"
   },
-  "sidebar.qfpaySidebar.doc.Recurring Payments": {
+  "sidebar.qfpaySidebar.category.Recurring Payments": {
     "message": "定期付款",
     "description": "The label for the doc item Recurring Payments in sidebar qfpaySidebar, linking to the doc in-store/pos-api/app-call-app"
   },
