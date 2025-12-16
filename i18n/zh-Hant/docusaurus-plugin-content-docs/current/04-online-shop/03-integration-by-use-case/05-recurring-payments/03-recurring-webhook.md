@@ -20,8 +20,7 @@ import Link from '@docusaurus/Link';
 ## 如何設定通知 URL
 
 :::note
-如需設定 Webhook 接收端點，請將以下資訊寄送至
-`technical.support@qfpay.com`：
+如需設定 Webhook 接收端點，請將以下資訊寄送至 `technical.support@qfpay.com`：
 - Webhook URL
 - 商戶 ID
 - 門店 ID

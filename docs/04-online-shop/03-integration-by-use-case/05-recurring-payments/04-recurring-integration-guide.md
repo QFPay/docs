@@ -43,7 +43,7 @@ The complete recurring payment integration consists of the following steps:
 
 ## Best Practices
 :::note
-Use [Query API](/docs/recurring-api-reference#query-subscription) for retry, reconciliation, or syncing subscription states to your CRM.
+Use [Query API](/docs/recurring-api-reference#query-subscription) for  syncing subscription states to your CRM.
 :::
 
 :::tip
