@@ -152,7 +152,19 @@ const sidebars = {
             'online-shop/integration-by-use-case/wap-payment',
             'online-shop/integration-by-use-case/in-app-payment',
             'online-shop/integration-by-use-case/preauth',
-            'online-shop/integration-by-use-case/qfpay-recurring-payment'
+            {
+              type: 'category',
+              label: 'Recurring Payments',
+              link: {
+                type: 'generated-index'
+              },
+              items: [
+                'online-shop/integration-by-use-case/recurring-payments/recurring-overview',
+                'online-shop/integration-by-use-case/recurring-payments/recurring-api-reference',
+                'online-shop/integration-by-use-case/recurring-payments/recurring-webhook',
+                'online-shop/integration-by-use-case/recurring-payments/recurring-integration-guide'
+              ]
+            },
           ]
         },
       ],
