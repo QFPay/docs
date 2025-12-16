@@ -1,57 +1,76 @@
+---
+id: wap-payment
+title: WAP Payment (Mobile Browser)
+description: This document explains how to initiate WAP (H5) payments using different wallet types through QFPay from mobile browsers like Chrome or Safari.
+sidebar_label: WAP Payment
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# WAP Payment
+# WAP Payment (Mobile Browser)
 
-## Introduction
+WAP (or H5) payment allows merchants to trigger wallet payment flows from mobile browsers such as Chrome or Safari.
 
-WAP Payment or H5 Payment enables merchants to call up digital wallet module in mobile browser Chrome etc. to collect payment.
-
-::: note
-For WAP/H5 payments, it is recommended that merchants guide users to open the link using mobile browsers such as Chrome, Safari, or Edge. Due to the uncontrollable limitations of social apps like WhatsApp, Facebook Messenger, and WeChat, QFPay cannot guarantee that these apps can automatically invoke other wallet apps. For example, the WeChat app cannot automatically open the Alipay app. These are limitations of non-browser environments that are beyond our control.
+:::note
+For WAP/H5 payments, merchants are advised to guide users to open the payment link in a mobile browser such as Chrome, Safari, or Edge. Due to uncontrollable restrictions in social apps like WhatsApp, Facebook Messenger, or WeChat, QFPay cannot guarantee that these apps can automatically invoke external wallet apps. For example, Alipay cannot be automatically opened within the WeChat app — this is a browser limitation beyond QFPay's control.
 :::
+
+---
+
 ## HTTP Request
 
-**Endpoint** : `/trade/v1/payment`
+`POST ../trade/v1/payment`
 
-**Method** : `POST`
+You can find the corresponding `pay_type` for each wallet in the table below:
 
-**PayType**: you can find the different digital wallets `pay_type` from the table below.
+| PayType | Description |
+|---------|-------------|
+| 800212 | WeChat H5 Payment — see [WeChat H5 Payment](/docs/online-shop/integration-by-payment-type/wechat/wechat-pay-h5) |
+| 801512 | Alipay HK WAP Payment — see [Alipay H5 Payment](/docs/online-shop/integration-by-payment-type/alipay/alipay-wap-h5-payments) |
+| 800712 | UnionPay WAP Payment |
+| 805812 | PayMe WAP Payment |
 
-PayType | Description
-------- | -------
-800212 | WeChat H5 Payment, details please refer to [WeChat Pay H5 (in mobile browser)](/docs/online-shop/wechat/wechat-pay-h5)
-801512 | Alipay Hong Kong WAP payment, details please refer to [Alipay Service Window H5](/docs/online-shop/alipay/alipay-wap-h5-payments)
-800712 | UNIONPAY WAP Payment
-805812 | PayMe Online WAP Payment
+---
 
-### Request Parameters
+## Request Parameters
 
-Attribute | Mandatory | Type | Description
--------- | --------- | ------- | -------
-`txamt` | Yes | Int(11) | Payment amount of the transaction. Unit in cents (i.e. 100 = $1). Suggest value > 200 to avoid risk control
-`txcurrcd` | Yes | String(3) | Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies
-`pay_type` | Yes | String(6) | Payment type e.g. PayMe WAP Payment = 805812
-`out_trade_no` | Yes | String(128)| API Order Number, external transaction number / Merchant platform transaction number: This parameter must be unique for each payment and refund request under the same merchant account in the system.
-`txdtm` | Yes | String(20) | Request transaction time format：<br/> YYYY-MM-DD hh:mm:ss
-`goods_name` | No | String(64) | Product name identification, Goods Name / Marking: Cannot exceed 20 alphanumeric or contain special characters. Cannot be empty for app payment. Parameter needs to be **UTF-8** encoded if it is written in Chinese characters.
-`mchid` | No | String(16) | QFPay merchant number. May or may not be given to merchant. If MCHID is given, it is mandatory to provide the MCHID .On the contrary, if MCHID is not provided, merchants shall not pass the MCHID field in the API request.
-`udid` | No | String(40) |  Unique transaction device ID. Is displayed on the merchant portal.
-`return_url` | No | String(255) | Redirect URL that the user will be redirected to when the payment finishes.
-`notify_url` | No | String(255) | Notification URL that the merchant will receive notification when the payment finishes.
+| Name | Parameter | Required | Type | Description |
+|------|-----------|----------|------|-------------|
+| Transaction Amount | `txamt` | Yes | Int(11) | Amount in smallest unit (e.g. 100 = $1). Recommended to be > 200 to avoid risk control failures. |
+| Currency | `txcurrcd` | Yes | String(3) | Transaction currency. See [Currency List](/docs/api-reference/currencies). |
+| Payment Type | `pay_type` | Yes | String(6) | e.g. PayMe WAP Payment = 805812 |
+| Order Number | `out_trade_no` | Yes | String(128) | Unique order number per merchant account across all payment/refund requests. |
+| Transaction Time | `txdtm` | Yes | String(20) | Format: `YYYY-MM-DD hh:mm:ss` |
+| Product Name | `goods_name` | No | String(64) | Product name/identifier. Max 20 alphanumeric chars or Chinese in UTF-8. |
+| QFPay Merchant ID | `mchid` | No | String(16) | Assigned by QFPay. Required if present in backend configuration. |
+| Device ID | `udid` | No | String(40) | Unique device ID shown in merchant dashboard. |
+| Redirect URL | `return_url` | No | String(255) | URL the user is redirected to after payment completes. |
+| Notification URL | `notify_url` | No | String(255) | URL to receive asynchronous notifications after payment. |
 
-### Response Parameters
+---
 
-Attribute | Type | Description
---------- | -------- | -------
-`pay_type` | String(6) | Payment type, e.g. PayMe Wap Payment
-`sysdtm` | String(20) | System transaction time, format：YYYY-MM-DD hh:mm:ss <br/> This parameter value is used as the cut-off time for settlements.
-`txdtm` | String(20) | Request transaction time, format：YYYY-MM-DD hh:mm:ss
-`resperr` | String(128) | Response message
-`txamt` | Int(11) | Payment amount. 
-`respmsg` | String(128) | Other message information
-`out_trade_no` | String(128) | External transaction number  
-`syssn` | String(40) |QFPay transaction number
-`respcd` | String(4) | Return code, 0000 = Request successful. <br/> 1143/1145 = merchants are required to continue to query the transaction result. <br/> All other return codes indicate transaction failure. Please refer to the page [Transaction Status Codes](/docs/preparation/paycode#transaction-status-codes) for a complete list of response codes.  
-`pay_url` | String(512) | Payment URL, generate QR code in Desktop web; redirect URL in WAP
+## Response Parameters
+
+| Name | Parameter | Type | Description |
+|------|-----------|------|-------------|
+| Payment Type | `pay_type` | String(6) | e.g. PayMe WAP Payment |
+| System Time | `sysdtm` | String(20) | `YYYY-MM-DD hh:mm:ss`. Used as settlement cutoff. |
+| Transaction Time | `txdtm` | String(20) | As sent in request. |
+| Response Message | `resperr` | String(128) | Description or status message. |
+| Amount | `txamt` | Int(11) | Transaction amount. |
+| Debug Info | `respmsg` | String(128) | Internal response/debug message. |
+| External Order No. | `out_trade_no` | String(128) | Returned for reference. |
+| QFPay Order No. | `syssn` | String(40) | QFPay system-generated order number. |
+| Response Code | `respcd` | String(4) | `0000` = success, `1143/1145` = retry with status check, others = failure. See [Status Codes](/docs/api-reference/status-codes). |
+| Payment URL | `pay_url` | String(512) | Redirect URL (mobile browser), or QR code display URL (PC browser). |
+
+---
+
+## Summary
+
+* Suitable for mobile browser environments (not within WeChat or social apps).
+* Ensure the `return_url` and `notify_url` are set correctly if redirection or backend notification is required.
+* Use the `pay_url` to display the QR code or redirect the user to complete the payment.
+* Consider polling or transaction enquiry APIs to confirm payment result if response code is not `0000`.
