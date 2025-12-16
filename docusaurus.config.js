@@ -38,7 +38,7 @@ const config = {
         label: 'English',
       },
       'zh-Hant': {
-        label: '中文',
+        label: '繁體中文',
         direction: 'ltr',
       }
     }

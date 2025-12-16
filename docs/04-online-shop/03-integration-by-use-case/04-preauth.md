@@ -1,158 +1,195 @@
+---
+id: preauth
+title: Online Pre-authorisation API
+description: This document explains how to use QFPay's pre-authorisation APIs to freeze funds, capture payments, unfreeze unused amounts, and issue refunds.
+sidebar_label: Pre-authorisation Payment
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# Online Pre-authorisation Payment APIs
+# Online Pre-authorisation API
 
-- Online Pre-authorisation Payment APIs
-	- [Common APIs](#common-apis)
-	- [Creating and capturing payments](#creating-and-capturing-payments)
-		- [Step 1: Create Pre-Authorisation Payment](#step-1-create-pre-authorisation-payment)
-		- [Step 2: Capture payment for pre-authorised transactions](#step-2-capture-payment-for-pre-authorised-transactions)
-		- [Request Parameters](#request-parameters)
-		- [Response Parameters](#response-parameters)
-	- [Unfreeze amount for `PRE-AUTHORISED` transactions](#unfreeze-amount-for-pre-authorised-transactions)
-		- [Request Parameters](#request-parameters-1)
-		- [Response Parameters](#response-parameters-1)
-	- [Refunding Completed (`CAPTURED`) Transactions](#refunding-completed-captured-transactions)
-	- [Notifications](#notifications)
+Pre-authorisation allows merchants to **freeze a specific amount of customer funds** without immediately charging. The merchant can then **capture (charge)** the full or partial amount within a set period or **unfreeze** the remaining amount if not used.
 
-## Common APIs
+---
 
-Instructions on general integration with the development environment is available on [https://sdk.qfapi.com/#introduction](/docs/preparation/introduction)
+## When to Use Pre-authorisation
 
-For instance you may find the following useful before you start the integration:
+Pre-authorisation is especially useful in scenarios where the final charge amount is not confirmed upfront or the service is provided later:
 
-- API credentials to be used
-- testing environments
-- signature generation for api requests
-- Common error codes
+- **Hotel bookings**: Freeze a deposit at check-in, charge final amount at checkout
+- **Car or equipment rental**: Freeze a guarantee or holding amount at pickup
+- **E-commerce with delayed shipment**: Reserve funds on order, charge on dispatch
+- **Subscriptions or deferred services**: Verify funding ability before providing service
+- **High-risk or variable pricing cases**: Avoid payment failures and fraud
 
-You can also find common APIs that are also applicable to pre-authorisation payments:
+---
+
+## Valid Capture Period
+
+Depending on your industry and channel, different maximum capture periods are supported:
+
+| Industry Type       | Max Capture Window |
+|---------------------|--------------------|
+| General merchants   | Up to **7 days**   |
+| Hotels / Rentals    | Up to **28 days**  |
+
+:::note
+Actual capture duration is subject to your agreement with QFPay and the payment channel’s capability. Please confirm before go-live.
+:::
+
+---
+
+## Key APIs
+
+Please first familiarise yourself with:
+
+- [API Integration Overview](/docs/api-request)
+- API credentials (AppCode / AppKey)
+- Test vs Production environment
+- Signature generation method
+- Common error codes and resolution
+
+Other relevant APIs:
 
 - [Transaction Enquiry](/docs/common-api/transaction-enquiry)
-- [Transaction Refund](/docs/common-api/refund)
+- [Refund API](/docs/common-api/refund)
 
-## Creating and capturing payments
+---
+
+## Pre-authorisation Flow
 
 ![Pre-authorisation payment flow](https://www.plantuml.com/plantuml/png/XOynJWKX441xJZ6r2HUmCDzu0HihOp61mIM1WSpE57fwTv4biJ0_eHZ8UpouxOgYLelRSYIWslKB8kr1SjVSsBq_V83tJ_0gz6owDSdV51-X2tcSUpn1m33uFzmmNx2hoIc5t-b_z8sJ48s0pN72SAnafG3MPgoEcn8KIWejhOBRhVSc2Xr5CvOhw8WZd8Qxo54xlhOExjU5AcRE_0dSs8VfpVU0M_Aw-dPKhPOV)
 
-### Step 1: Create Pre-Authorisation Payment
+---
 
-The Pre-authorisation Step has to be achieved using the Payment Element component. For details of the integration, please refer to the respective sessions in the payment element documentation.
+## Step 1: Create Pre-authorised Transaction
 
-### Step 2: Capture payment for pre-authorised transactions
+This step is handled via **Payment Element SDK** and involves freezing the customer's funds.
 
-Capture the amount booked by the customer in pre-authorised transactions
+No actual deduction happens here.
 
-**Endpoint** :   `/trade/v1/authtrade`
+:::note
+Please refer to the [Payment Element Integration Guide](/docs/online-shop/checkout-integration/payment-element) for front-end SDK usage.
+:::
 
-**Method** : `POST`
+---
 
-**Header**:
+## Step 2: Capture (Deduct) Funds
 
-| Header name    | Mandatory | Description |
-| -------------- | --------- | ----------- |
-| `X-QF-APPCODE` | Yes 	     | app code    |
-| `X-QF-SIGN`    | Yes 	     | app key 	   |
+Within the valid capture window, merchants can **charge** part or all of the frozen amount.
 
-### Request Parameters
+:::note
+✅ Multiple partial captures are allowed, but the **total cannot exceed the authorised amount**.
+:::
 
-| Attribute      | Mandatory | Description       								   |
-| -------------- | --------- | --------------------------------------------------- |
-| `txamt`        | Yes    	 | transaction amount. Suggest value > 200 to avoid risk control								   |
-| `txcurrcd`     | No    	 | transaction currency 							   |
-| `mchid`        | No    	 | mchid, merchant id 								   |
-| `syssn`        | Yes    	 | original transaction ID from pre-authorised payment |
+**Endpoint**: `POST /trade/v1/authtrade`
 
-### Response Parameters
+### Headers
 
-```json
-{
-	 "sysdtm": "2024-02-26 15:04:12",
-	 "paydtm": "2024-02-26 15:04:12",
-	 "udid": "qiantai2",
-	 "txcurrcd": "HKD",
-	 "txdtm": "2024-02-26 07:04:11",
-	 "txamt": "500",
-	 "resperr": "交易成功",
-	 "respmsg": "Capture received",
-	 "out_trade_no": "",
-	 "syssn": "20240226180500020000014116",
-	 "orig_syssn": "20240226180500020000014079",
-	 "respcd": "0000",
-	 "chnlsn": "",
-	 "cardcd": ""
-}
-```
-
-## Unfreeze amount for `PRE-AUTHORISED` transactions
-
->Only the non-captured (`pre-authorised amount - captured amount`) amount in the transaction can be unfreezed (released back to the customer). This action can only be done ONCE.
-
-**Endpoint** :   `/trade/v1/unfreeze`
-
-**Method** : `POST`
-
-**Header**:
-
-| Header name    | Mandatory | Description |
-| -------------- | --------- | ----------- |
-| `X-QF-APPCODE` | Yes 		 | app code    |
-| `X-QF-SIGN` 	 | Yes 		 | app key 	   |
+| Header          | Required | Description     |
+|-----------------|----------|-----------------|
+| `X-QF-APPCODE`  | Yes      | Your App Code   |
+| `X-QF-SIGN`     | Yes      | API Signature   |
 
 ### Request Parameters
 
-| Attribute      | Mandatory | Description        		  |
-| -------------- | --------- | -------------------------- |
-| `txamt`        | Yes    	 | transaction amount. Suggest value > 200 to avoid risk control 		  |
-| `txdtm`        | Yes    	 | transaction time 		  |
-| `syssn`        | Yes    	 | original transaction ID 	  |
-| `out_trade_no` | Yes    	 | original merchant order id |
-| `mchid`        | No   	 | mchid, merchant id 		  |
+| Parameter     | Required | Description                                   |
+|---------------|----------|-----------------------------------------------|
+| `txamt`       | Yes      | Amount to capture (suggested > 200)           |
+| `txcurrcd`    | No       | Currency code                                 |
+| `mchid`       | No       | Merchant ID (for specific channels only)      |
+| `syssn`       | Yes      | Original pre-auth system order number         |
 
-### Response Parameters
+### Example Response
 
-```json
+ ```json
 {
-	 "sysdtm": "2024-02-26 17:17:05",
-	 "paydtm": "2024-02-26 17:17:06",
-	 "udid": "qiantai2",
-	 "txcurrcd": "HKD",
-	 "txdtm": "2024-02-26 09:17:05",
-	 "txamt": "2000",
-	 "resperr": "交易成功",
-	 "respmsg": "Void received",
-	 "out_trade_no": "",
-	 "syssn": "20240226180500020000014222",
-	 "orig_syssn": "20240226180500020000014220",
-	 "respcd": "0000",
-	 "chnlsn": "",
-	 "cardcd": ""
+"sysdtm": "2024-02-26 15:04:12",
+"paydtm": "2024-02-26 15:04:12",
+"udid": "qiantai2",
+"txcurrcd": "HKD",
+"txdtm": "2024-02-26 07:04:11",
+"txamt": "500",
+"resperr": "交易成功",
+"respmsg": "Capture received",
+"out_trade_no": "",
+"syssn": "20240226180500020000014116",
+"orig_syssn": "20240226180500020000014079",
+"respcd": "0000",
+"chnlsn": "",
+"cardcd": ""
 }
 ```
 
-## Refunding Completed (`CAPTURED`) Transactions
+---
 
-For integration, please refer to the "Common API" section of the documentation. Please note that the syssn used in the refund transaction should correspond to the syssn returned upon the /authtrade request.
+## Unfreeze Remaining Funds
 
-## Notifications
+Unused funds from a pre-authorised transaction can be **unfrozen** and returned to the customer.
 
-General notification rule applies. For details, please refer to the [Asynchronous Notifications section](/docs/common-api/async-notifications) in the documentations.
+:::warning
+- Only the *un-captured* amount can be unfrozen.
+- **Unfreeze can only be done ONCE**.
+- After unfreeze, no more capture can be made.
+:::
 
-Upon successful execution of the following actions, you should be able to receive a notification
+**Endpoint**: `POST /trade/v1/unfreeze`
 
-- payment completion (captured)
-- unfreeze funds
-- refund
+### Request Parameters
 
-These notifications will follow the same format as below. For different notification, the value of the field `notify_type` will differ
+| Parameter       | Required | Description                                  |
+|------------------|----------|----------------------------------------------|
+| `txamt`          | Yes      | Amount to unfreeze                           |
+| `txdtm`          | Yes      | Timestamp of the unfreeze                    |
+| `syssn`          | Yes      | Original pre-auth system order number        |
+| `out_trade_no`   | Yes      | Original merchant order number               |
+| `mchid`          | No       | Merchant ID (if applicable)                 |
 
-| Action Completed | notify_type value |
-| ---------------- | ----------------- |
-| Payment Captured | payment 		   |
-| Unfreeze funds   | unfreeze 		   |
-| Refund 		   | refund 		   |
+### Example Response
+
+```json
+{
+"sysdtm": "2024-02-26 17:17:05",
+"paydtm": "2024-02-26 17:17:06",
+"udid": "qiantai2",
+"txcurrcd": "HKD",
+"txdtm": "2024-02-26 09:17:05",
+"txamt": "2000",
+"resperr": "交易成功",
+"respmsg": "Void received",
+"out_trade_no": "",
+"syssn": "20240226180500020000014222",
+"orig_syssn": "20240226180500020000014220",
+"respcd": "0000",
+"chnlsn": "",
+"cardcd": ""
+}
+```
+
+---
+
+## Refund for Captured Payments
+
+If the customer was already charged (via capture), refund can be initiated using the [Refund API](/docs/common-api/refund).
+
+Use the `syssn` from the **capture** step (not the original pre-auth) when issuing the refund.
+
+---
+
+## Async Notification
+
+All major actions will trigger standard webhook notifications:
+
+| Operation       | `notify_type` value |
+|------------------|---------------------|
+| Capture          | `payment`           |
+| Unfreeze         | `unfreeze`          |
+| Refund           | `refund`            |
+
+### Notification Sample
 
 ```json
 {
@@ -179,3 +216,20 @@ These notifications will follow the same format as below. For different notifica
   "cardcd": ""
 }
 ```
+
+---
+
+## Best Practices & Warnings
+
+:::warning
+If you do **not** perform capture within the allowed time, the frozen funds will **automatically unfreeze**.  
+**Failure to capture may result in lost revenue** if the customer revokes authorisation or their account balance changes.
+:::
+
+:::note
+Capture, unfreeze, and refund operations can be performed via:
+- API calls  
+- QFPay merchant portal
+:::
+
+---

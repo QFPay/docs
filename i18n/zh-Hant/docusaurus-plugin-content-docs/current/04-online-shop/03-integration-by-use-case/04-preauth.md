@@ -1,69 +1,110 @@
+---
+id: preauth
+title: 線上預授權支付 API（Pre-authorisation）
+description: 本文件說明如何使用 QFPay 線上預授權支付 API，包含預授權建立、扣款（Capture）、解凍（Unfreeze）、退款（Refund）及相關注意事項。
+sidebar_label: 線上預授權支付
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# 线上预授权支付API
+# 線上預授權支付 API（Pre-authorisation）
 
-- [线上预授权支付API](#线上预授权支付api)
-  - [常用API](#常用api)
-  - [Creating and capturing payments](#creating-and-capturing-payments)
-    - [第一步: 創建预授权支付訂單](#第一步-創建预授权支付訂單)
-    - [第二步: 预授权支付扣款](#第二步-预授权支付扣款)
-  - [预授权 （`PRE-AUTHORISED`）支付金额解冻](#预授权-pre-authorised支付金额解冻)
-  - [已扣款预授权交易 (`CAPTURED`) 退款](#已扣款预授权交易-captured-退款)
-  - [异步通知](#异步通知)
+線上預授權支付（Pre-authorisation）允許商戶**先向消費者帳戶凍結一筆資金**，在實際提供商品或服務後，再於指定期限內進行實際扣款（Capture）或解凍未使用金額（Unfreeze）。
 
-## 常用API
+---
 
-对接开发环境的常规指引可以参考 [https://sdk.qfapi.com/#introduction](/docs/preparation/introduction)
+## 預授權適用場景
 
-在開始對接前，建議先參考以下內容：
+預授權支付特別適合以下業務場景：
 
-- API凭据：在對接过程中，您将需要使用相应的API凭据来进行验证和授权。
-- 测试环境：为了确保顺利的對接和开发，我们提供了测试环境，供您进行测试和调试。
-- API请求签名生成：为了确保请求的安全性和完整性，您需要生成正确的API请求签名。详细的签名生成方法将在文档中提供。
-- 常见错误代码：在对接过程中，了解常见的错误代码和对应的含义将有助于您更好地诊断和解决问题。
+- **酒店 / 住宿業**：入住前凍結押金，退房後依實際消費扣款
+- **租車 / 設備租賃**：取車或取件時凍結保證金
+- **電商延後出貨**：訂單成立時保留金額，出貨後再扣款
+- **訂閱 / 延期確認服務**：先確認付款能力，再於服務完成後扣款
+- **高風險或可變金額交易**：避免事後扣款失敗造成損失
 
-此外，我们还为预授权支付提供了以下常用API接口供您参考：
+---
 
-- [交易查询](/docs/common-api/transaction-enquiry)
+## 預授權扣款期限（Capture 時效）
+
+依不同產業與渠道設定，預授權交易支援不同的**最長扣款期限**：
+
+| 行業類型 | 最長 Capture 天數 |
+|---------|----------------|
+| 一般行業 | 最多 **7 天** |
+| 特定行業（如酒店、租車） | 最多 **28 天** |
+
+
+:::note
+實際可用天數依商戶簽約設定與支付渠道為準，請於上線前向 QFPay 確認。
+:::
+---
+
+## 常用 API
+
+對接與驗證相關說明請先參考：
+[API 對接總覽](/docs/api-request)
+
+建議在開始前熟悉以下內容：
+
+- API 憑據（AppCode / AppKey）
+- 測試環境與正式環境差異
+- API 簽名生成方式
+- 常見錯誤碼與處理方式
+
+相關 API：
+
+- [交易查詢](/docs/common-api/transaction-enquiry)
 - [交易退款](/docs/common-api/refund)
 
-## Creating and capturing payments
+---
+
+## 建立與扣款流程
 
 ![Pre-authorisation payment flow](https://www.plantuml.com/plantuml/png/XOynJWKX441xJZ6r2HUmCDzu0HihOp61mIM1WSpE57fwTv4biJ0_eHZ8UpouxOgYLelRSYIWslKB8kr1SjVSsBq_V83tJ_0gz6owDSdV51-X2tcSUpn1m33uFzmmNx2hoIc5t-b_z8sJ48s0pN72SAnafG3MPgoEcn8KIWejhOBRhVSc2Xr5CvOhw8WZd8Qxo54xlhOExjU5AcRE_0dSs8VfpVU0M_Aw-dPKhPOV)
 
-### 第一步: 創建预授权支付訂單
+---
 
-预授权步骤需要使用支付元素组件 (Payment Element) 来完成。有关對接的详细信息，请参考支付元素文档中相应的章节。
+### 第一步：建立預授權交易
 
-### 第二步: 预授权支付扣款
+建立預授權交易需透過 **（支付組件）Payment Element** 完成。  
+此步驟會凍結消費者資金，但**不會實際扣款**。
 
-扣取客户在预授权交易中授权的金额
+:::note
+請參閱[支付組件 (Element) SDK](/docs/online-shop/checkout-integration/payment-element)以完成前端整合。
+:::
+---
 
-**URL位址** :   /trade/v1/authtrade
+### 第二步：預授權扣款（Capture）
 
-**请求方法** : POST
+在預授權有效期限內，商戶可對已凍結的金額進行實際扣款。
 
-**HTTP 标头**:
+> ✅ **扣款可執行多次**（累計金額不可超過預授權金額）
 
-| HTTP 标头 | 必填 | 描述 |
-| -------------- | ---- | ------------------ |
-| X-QF-APPCODE | 是 | app code |
-| X-QF-SIGN | 是 | app key |
+**URL**：`/trade/v1/authtrade`  
+**Method**：`POST`
 
-**参数** :
+#### HTTP Header
 
-| 参数          | 必填 | 描述        |
-| -------------- | ---- | ------------------ |
-| txamt          | 是   | 扣款金额，建议数值大于200，避免因支付金额过低而被交易风控。|
-| txcurrcd       | 否    | 扣款币种 |
-| mchid          | 否    | 商户编号（只适用于个别渠道商户） |
-| syssn          | 是   | 预授权交易唯一订单号 |
+| Header | 必填 | 說明 |
+|------|------|------|
+| `X-QF-APPCODE` | 是 | App Code |
+| `X-QF-SIGN` | 是 | API 簽名 |
 
-**回应** :
+#### 請求參數
 
-```json
+| 參數 | 必填 | 說明 |
+|-----|-----|-----|
+| `txamt` | 是 | 本次扣款金額（建議 > 200） |
+| `txcurrcd` | 否 | 扣款幣別 |
+| `mchid` | 否 | 商戶編號（僅部分渠道） |
+| `syssn` | 是 | 預授權交易的系統訂單號 |
+
+#### 回應範例
+
+ ```json
 {
 "sysdtm": "2024-02-26 15:04:12",
 "paydtm": "2024-02-26 15:04:12",
@@ -82,33 +123,23 @@ import Link from '@docusaurus/Link';
 }
 ```
 
-## 预授权 （`PRE-AUTHORISED`）支付金额解冻
+## 預授權金額解凍 (Unfreeze)
 
-> 在交易中，只有未扣款的金额（预授权金额 减去 已扣款总金额）可以被解除冻结（退还给客户）。此操作只能执行一次。
+> 只限預授權未被扣款的金額。只能操作一次，操作後無法再次解凍或扣款
 
-**URL位址** :   /trade/v1/unfreeze
+**API Endpoint**: `POST /trade/v1/unfreeze`
 
-**请求方法** : POST
+**Body**:
 
-**HTTP 标头**:
+| 參數             | 是否必填 | 描述            |
+| -------------- | ---- | ------------- |
+| `txamt`        | 是    | 解凍金額          |
+| `txdtm`        | 是    | 解凍時間          |
+| `syssn`        | 是    | 預授權 syssn     |
+| `out_trade_no` | 是    | 預授權商戶定義編號     |
+| `mchid`        | 否    | 商戶 ID (限個別通道) |
 
-| HTTP 标头 | 必填 | 描述 |
-| -------------- | ---- | ------------------ |
-| X-QF-APPCODE | 是 | app code |
-| X-QF-SIGN | 是 | app key |
-
-**参数** :
-
-| 参数          | 必填 | 描述        |
-| -------------- | ---- | ------------------ |
-| txamt          | 是    | 解冻金额      |
-| txdtm          | 是    | 解冻时间         |
-| syssn          | 是    | 预授权交易唯一订单号 |
-| out_trade_no   | 是    | 预授权交易商户订单号 |
-| mchid          | 否    | 商户编号（只适用于个别渠道商户） |
-
-**回应** :
-
+### 回應範例
 ```json
 {
 "sysdtm": "2024-02-26 17:17:05",
@@ -128,27 +159,31 @@ import Link from '@docusaurus/Link';
 }
 ```
 
-## 已扣款预授权交易 (`CAPTURED`) 退款
+---
 
-有关对接请参考文档中的「常用API」部分。请注意，退款交易中使用的唯一订单号（syssn）应与/authtrade请求返回的订单号对应。
+## 已扣款交易退款 (Refund)
 
-## 异步通知
+預授權扣款後，如需退款，請使用退款 API。
 
-一般通知规则适用。详细信息请参考文档中的异步通知部分 (../common-api/async-notifications)
+*Refund* 操作針對 *Capture* 產生的 syssn 進行退款。
 
-在以下操作成功执行后，您将会收到收到通知：
+請參閱相關文件：[Refund API](/docs/common-api/refund)
 
-- 预授权交易扣款
-- 解冻资金
-- 退款
+---
 
-这些通知将采用以下相同的格式。对于不同的通知，字段 `notify_type` 的值将不同。 
+## 當前操作的當事通知
 
-| 操作（成功） |  `notify_type` 值 |
-| -------------- | ------------------ |
-| 预授权交易扣款 | payment |
-| 解冻资金 | unfreeze |
-| 退款 | refund |
+預授權操作支援非同步同樣通知
+
+當成功執行下列操作時，會發送 notify_url 通知：
+
+| 操作          | notify_type 值 |
+| ----------- | ------------- |
+| Capture 扣款  | `payment`     |
+| Unfreeze 解凍 | `unfreeze`    |
+| Refund 退款   | `refund`      |
+
+**Notify 格式範例**:
 
 ```json
 {
@@ -175,3 +210,20 @@ import Link from '@docusaurus/Link';
   "cardcd": ""
 }
 ```
+---
+
+## 最佳實踐與注意事項
+
+:::warning
+若您未在有效期限內執行扣款（Capture），預授權的資金將會自動解凍。
+如顧客撤回授權或帳戶餘額變動，未及時扣款可能導致資金損失。
+:::
+
+:::note
+以下操作皆可透過 API 或 QFPay 商戶後台執行：
+- 扣款（Capture）
+- 解凍（Unfreeze）
+- 退款（Refund）
+:::
+
+---
