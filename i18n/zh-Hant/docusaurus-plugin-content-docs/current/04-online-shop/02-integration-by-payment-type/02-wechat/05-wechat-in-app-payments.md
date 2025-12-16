@@ -1,36 +1,118 @@
+---
+id: wechat-in-app-payments
+title: 微信 In-App 支付（App 內微信支付）
+description: 本文件說明如何整合微信 In-App 支付（WeChat App Payment），適用於原生 App 內透過微信 SDK 完成付款流程。
+sidebar_label: 微信 In-App 支付
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# 微信in-APP支付
+# 微信 In-App 支付（App 內微信支付）
 
-<Link href="/img/wechat-in-app.png" target="_blank">![WeChat APP Payment process-flow](@site/static/img/wechat-in-app.png)</Link>
+<Link href="/img/wechat-in-app.png" target="_blank">![WeChat App Payment Flow](@site/static/img/wechat-in-app.png)</Link>
 
-### HTTP 请求
+微信 In-App 支付適用於 **原生 App（iOS / Android）** 內的支付場景，透過微信官方 SDK 呼叫支付模組，讓使用者在 App 內直接完成付款。
 
-`POST ../trade/v1/payment`
-`PayType: 800210`
+---
 
-微信应用内支付需要在微信开放平台正式申请。 商户必须注册账户和APP，然后收到“appid”才能进行支付。 更多信息请参考官方
-[Wechat documentation](https://pay.weixin.qq.com/wiki/doc/api/wxpay/en/pay/In-AppPay/chapter6_2.shtml#menu1).
+## 前置申請與條件
 
-商户可选择开通微信实名认证。 目前实名认证仅适用于中国大陆公民，包括真实姓名和身份证号码。 如果提供身份证明，付款人的钱包信息（例如连接的银行卡）必须与商家提供的数据相同。 如果客户尚未将微信账户绑定银行卡，仍可进行付款。
+* 於 **微信開放平台** 正式申請 App 支付能力
+* 註冊 App 並取得對應的 **AppID**
+* App 必須完成微信平台審核
 
-下载微信SDK请参考这里 [链接](https://developers.weixin.qq.com/doc/oplatform/Downloads/iOS_Resource.html).
+詳細申請流程請參考微信官方文件：
+[WeChat In-App Payment 官方說明](https://pay.weixin.qq.com/wiki/doc/api/wxpay/en/pay/In-AppPay/chapter6_2.shtml#menu1)
 
-### 请求参数
+---
 
-```plaintext
+## 實名認證（選用）
 
-请求正文：
+商戶可選擇啟用 **微信實名認證（Real-name Verification）**。
 
+實名認證規則：
+
+* 若已提供身份資料，付款人微信錢包（如綁定銀行卡）需與資料一致
+* 即使未綁定銀行卡，仍可完成付款
+* 是否強制實名，依商戶與 PayType 開通狀態為準
+
+---
+
+## SDK 下載
+
+請依平台下載並整合對應的微信 SDK：
+[微信官方 SDK 下載頁](https://developers.weixin.qq.com/doc/oplatform/Downloads/iOS_Resource.html)
+
+---
+
+## API 呼叫說明
+
+### HTTP 請求
+
+* **Method**：`POST`
+* **Endpoint**：`/trade/v1/payment`
+* **PayType**：`800210`（微信 In-App 支付）
+
+---
+
+### 請求參數
+
+| 參數名稱   | 參數編碼           | 是否必填 | 類型        | 說明                                             |
+| ------ | -------------- | ---- | --------- | ---------------------------------------------- |
+| 商戶 ID  | `mchid`        | 否    | String    | QFPay 於商戶入網時分配的唯一商戶識別碼                         |
+| 外部訂單號  | `out_trade_no` | 是    | String    | 商戶系統內唯一的交易訂單編號                                 |
+| 交易金額   | `txamt`        | 是    | Int       | 以最小幣值單位表示（例如 100 = $1），**建議金額大於 200** 以避免風控    |
+| 交易幣別   | `txcurrcd`     | 是    | String(3) | 交易貨幣，請參閱[支援貨幣](/docs/api-reference/currencies) |
+| 人民幣標記  | `rmb_tag`      | 否    | String(1) | 香港微信支付使用 `rmb_tag=Y` 且 `txcurrcd=CNY` 表示人民幣交易  |
+| 交易時間   | `txdtm`        | 是    | String    | 格式：`YYYY-MM-DD hh:mm:ss`                       |
+| 裝置識別碼  | `udid`         | 否    | String    | App 裝置唯一識別碼                                    |
+| 回傳網址   | `return_url`   | 否    | String    | 付款完成後跳轉網址（部分支付方式為必填）                           |
+| 客戶擴展資訊 | `extend_info`  | 否    | Object    | 實名認證資料（`user_creid`, `user_truename`），僅限中國大陸公民 |
+
+:::note
+`extend_info` 詳細格式
+
+如需提交中國大陸用戶的實名資訊，請使用下列格式：
+```json
+{
+  "user_creid": "430067798868676871",
+  "user_truename": "\u5c0f\u6797"
+}
+```
+`user_creid` 中包含消費者**身分證號碼**，`user_truename`中必須提供編碼形式或漢字書寫的付款人**真實姓名**。 
+:::
+
+### 請求範例
+
+```html
 {
   goods_info=test_app&goods_name=qfpay&out_trade_no=O5DNgEgL1XpvbvQSfPhN&pay_type=800210&txamt=10&txcurrcd=HKD&txdtm=2019-09-13 04:53:03&udid=AA
 }
-
 ```
 
-> 上面的命令返回 JSON 结构如下：
+---
+
+## API 回應說明
+
+### 回應參數
+
+| 參數名稱           | 類型         | 說明                     |
+| -------------- | ---------- | ---------------------- |
+| `syssn`        | String(40) | QFPay 系統產生的交易訂單編號      |
+| `out_trade_no` | String     | 商戶提供的外部訂單號             |
+| `txdtm`        | String     | 商戶提交的交易時間              |
+| `txamt`        | Int        | 實際交易金額                 |
+| `sysdtm`       | String     | QFPay 系統交易完成時間（作為清算依據） |
+| `respcd`       | String(4)  | 回應代碼，`0000` 表示成功       |
+| `respmsg`      | String     | 回應訊息說明                 |
+| `resperr`      | String     | 錯誤描述（若有）               |
+| `cardcd`       | String     | 卡號（遮罩後）                |
+| `txcurrcd`     | String     | 交易貨幣                   |
+| `pay_params`   | Object     | 提供給微信 SDK 的支付參數資料      |
+
+### 回應範例
 
 ```json
 {
@@ -60,31 +142,17 @@ import Link from '@docusaurus/Link';
   "chnlsn": ""
 }
 ```
+---
 
-| 参数名称 | 参数编码 | 是否必填 | 参数类型 | 描述 |
-|:----    |:---|:----- |-----   |----   |
-|商户ID    | `mchid`  | 否 | String  | 唯一的商户ID是由QFPay在商户入网过程中创建的。 |
-|外部订单编号    | `out_trade_no` | 是 | String    |开发者平台交易订单编号 |
-|交易金额    | `txamt`  | 是 | String |实际消费金额，最高抵扣金额不能超过冻结资金。建议数值大于200，避免因支付金额过低而被交易风控。|
-|货币 | `txcurrcd` | 是 | String(3) | 交易货币。 查看货币表以获取可用货币的完整列表|
-|RMB 标签 | `rmb_tag` | 否 | String(1) | 香港微信支付使用“rmb_tag”=Y 和“txcurrcd”=CNY 来表示交易币种为人民币。|
-|交易请求时间    | `txdtm`   | 是 | String      | 格式: YYYY-MM-DD hh:mm:ss|
-| 设备ID   | `udid`   | 否 | String         |必须是唯一的|
-| 重定向网址   | `return_url`   | 否 | String        | 付款成功后重定向至地址。 为 GrabPay Online 提交的强制参数。 支付宝 WAP 将 `return_url` 限制为最多 200 个字符。 |
-|扩展客户信息   | `extend_info`  | 否 | Object  | 实名客户身份识别。 该参数目前仅适用于中国大陆公民，并且需要针对所选的[PayType](/docs/preparation/paycode#支付类型)使用微信显式激活。 参数“user_creid”中包含消费者的**身份证号码**，“user_truename”中必须提供编码形式或汉字书写的付款人**真实姓名**。 一个例子如下所示； extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
+## 呼叫微信 SDK
 
-### 响应参数
+成功取得 `pay_params` 後，商戶需依照 **微信官方 SDK 規範**，將回傳資料傳入 SDK 並觸發支付流程。
 
-| 参数编码 | 参数类型 | 参数名字 | 描述 |
-|:----    |:---|:----- |-----   |
-|`syssn` |   String(40) | QFPay 交易编号 | QFPay 交易编号, 支付完成后系统返回 |
-|`orig_syssn`    |String(40)| 外部交易编号 | 开发者平台交易编号 |
-|`txdtm`     | String(20) | 交易请求时间 | 格式: YYYY-MM-DD hh:mm:ss  |
-|`txamt`    |Int(11)| 交易金额 | |
-|`sysdtm`     |String(20)| 系统交易时间 |格式: YYYY-MM-DD hh:mm:ss <br/> 该参数值用作清算截止时间。|
-|`respcd`    |String(4)| 返回码 |  |
-|`respmsg`    |String(128)| 信息说明|  |
-|`resperr`     |String(128)| 描述错误 |  |
-|`cardcd`     |String| 卡号 |  |
-|`txcurrcd`      |String| 货币  | 交易货币。 查看[货币](/docs/preparation/paycode#支付币种) 表以获取可用货币的完整列表 |
-|`pay_params`      |Object| 支付数据  | 调用微信SDK的支付数据 |
+---
+
+## 小結
+
+* 微信 In-App 支付僅適用於 **原生 App 內場景**
+* 必須先於微信開放平台完成 App 支付申請與審核
+* 成功交易後，實際付款流程由微信 SDK 負責
+* 建議搭配交易查詢 API 確認最終交易狀態

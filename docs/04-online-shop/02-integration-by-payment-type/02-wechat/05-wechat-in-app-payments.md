@@ -1,92 +1,173 @@
+---
+id: wechat-in-app-payments
+title: WeChat In-App Payments (Native App)
+description: This document explains how to integrate WeChat In-App payments using the official SDK within iOS or Android apps.
+sidebar_label: WeChat In-App Payment
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
 
-# WeChat in-APP Payments
+# WeChat In-App Payments (Native App)
 
-<Link href="/img/wechat-in-app.png" target="_blank">![WeChat APP Payment process-flow](@site/static/img/wechat-in-app.png)</Link>
+<Link href="/img/wechat-in-app.png" target="_blank">![WeChat App Payment Flow](@site/static/img/wechat-in-app.png)</Link>
 
-## HTTP Request
+WeChat In-App Payment is designed for **native mobile apps (iOS / Android)**. This method allows users to complete payments directly within the app using the official WeChat SDK.
 
-**Endpoint** : `/trade/v1/payment`
+---
 
-**Method** : `POST`
+## Prerequisites
 
-**PayType** : `800210`
+To use WeChat In-App payments, merchants must:
 
-WeChat in-APP payments require a formal application on the WeChat Open Platform. Merchants have to register an account and the APP and then receive an `appid` to enable payments. For more information, please refer to the official [Wechat documentation](https://pay.weixin.qq.com/wiki/doc/api/wxpay/en/pay/In-AppPay/chapter6_2.shtml#menu1).
+* Register an account on the **WeChat Open Platform**
+* Create an App and obtain the corresponding **AppID**
+* Complete all WeChat approval processes
 
-Optionally merchants can activate real-name authentication with WeChat. Currently real-name identification is only available for Mainland Chinese citizens and include a person's real name and national ID card number. In case identification is provided the payer's wallet information like a connected bank card must be identical with the data provided by merchants. If customers did not yet bind their WeChat account to a bank card the payment will go through regardless.
+More details: [WeChat Official In-App Payment Guide](https://pay.weixin.qq.com/wiki/doc/api/wxpay/en/pay/In-AppPay/chapter6_2.shtml#menu1)
 
-To download Wechat SDK please refer to this [link](https://developers.weixin.qq.com/doc/oplatform/Downloads/iOS_Resource.html).
+---
 
-## Request Parameters
+## Real-name Verification (Optional)
 
-```plaintext
+Merchants may choose to enable **real-name verification**.
 
-Request Body:
+* Applies to Mainland China citizens only
+* The user's WeChat Wallet (e.g., linked bank card) must match the submitted identity information
+* Users can still pay without a linked bank card
+* This feature depends on the merchant account and PayType support
 
+---
+
+## SDK Downloads
+
+You can download the official SDK from the [WeChat SDK Download Page](https://developers.weixin.qq.com/doc/oplatform/Downloads/iOS_Resource.html)
+
+---
+
+## API Request
+
+### HTTP Request
+
+* **Method**: `POST`
+* **Endpoint**: `/trade/v1/payment`
+* **PayType**: `800210`
+
+### Request Parameters
+
+| Field Name        | Param Code     | Required | Type      | Description                                                        |
+| ----------------- | -------------- | -------- | --------- | ------------------------------------------------------------------ |
+| Merchant ID       | `mchid`        | No       | String    | Unique merchant ID assigned by QFPay                               |
+| External Order ID | `out_trade_no` | Yes      | String    | Unique transaction ID within merchant system                       |
+| Amount            | `txamt`        | Yes      | Int       | Amount in cents. Suggested: > 200 to avoid risk flags              |
+| Currency          | `txcurrcd`     | Yes      | String(3) | Currency code. See [Currency List](/docs/api-reference/currencies) |
+| RMB Tag           | `rmb_tag`      | No       | String(1) | Use `rmb_tag=Y` and `txcurrcd=CNY` to indicate RMB transaction     |
+| Transaction Time  | `txdtm`        | Yes      | String    | Format: `YYYY-MM-DD hh:mm:ss`                                      |
+| Device ID         | `udid`         | No       | String    | Unique identifier of the mobile device                             |
+| Return URL        | `return_url`   | No       | String    | Redirect URL after payment (required for some channels)            |
+| Real-name Info    | `extend_info`  | No       | Object    | Required only for Mainland China real-name flows                   |
+
+:::note
+`extend_info` detailed format
+
+If you need to submit real‑name verification information for users in Mainland China, please use the following format:
+```json
 {
-  goods_info=test_app&goods_name=qfpay&out_trade_no=O5DNgEgL1XpvbvQSfPhN&pay_type=800210&txamt=10&txcurrcd=HKD&txdtm=2019-09-13 04:53:03&udid=AA
+  "user_creid": "430067798868676871",
+  "user_truename": "\u5c0f\u6797"
 }
+```
+- `user_creid` contains the consumer’s **Mainland China ID card number**
+- `user_truename` must contain the payer’s **real name**, provided either as **Unicode‑encoded text** or **Chinese characters**
+:::
 
+### Sample Request (JSON format)
+
+```json
+{
+  "goods_info": "test_app",
+  "goods_name": "qfpay",
+  "out_trade_no": "O5DNgEgL1XpvbvQSfPhN",
+  "pay_type": "800210",
+  "txamt": "10",
+  "txcurrcd": "HKD",
+  "txdtm": "2019-09-13 04:53:03",
+  "udid": "AA"
+}
 ```
 
-> The above command returns JSON structured like this:
+---
+
+## API Response
+
+### Response Parameters
+
+| Param Code     | Type       | Description                                               |
+| -------------- | ---------- | --------------------------------------------------------- |
+| `syssn`        | String(40) | QFPay-generated transaction ID                            |
+| `out_trade_no` | String     | Merchant's external order ID                              |
+| `txdtm`        | String     | Transaction request time                                  |
+| `txamt`        | Int        | Transaction amount                                        |
+| `sysdtm`       | String     | QFPay system processing time (used for settlement cutoff) |
+| `respcd`       | String(4)  | Response code. `0000` indicates success                   |
+| `respmsg`      | String     | Message description                                       |
+| `resperr`      | String     | Error description (if any)                                |
+| `cardcd`       | String     | Card number (if available)                                |
+| `txcurrcd`     | String     | Currency code                                             |
+| `pay_params`   | Object     | Data to be passed into the WeChat SDK                     |
+
+### Sample Response
 
 ```json
 {
   "sysdtm": "2019-09-13 12:53:04",
   "paydtm": "2019-09-13 12:53:04",
   "txcurrcd": "HKD",
-  "respmsg": "",    
-  "pay_params": 
-        {
-        "package": "Sign=WXPay",
-        "timestamp": 1568350384,
-        "sign": "XwFjohEKWdkhhT4ueg7BxeDn8tT9LcqoZYdXzifTMYyDGe3/tRchpii6vWgOn21tPSaAtqo766gvifXgDEOwR+ILKN8t97r624IJlrH0EkvSUSLh9E/cga9scXGVy0jPWHM/oVvVzJIvXew79CwZFCNTSJok2KmpSm9X9oPg7PGXbqvNMHltf+YlIOsuiz391qVmFtTE5A/cpA50+06T7iW8GYsOJQTTJed75VY+aSzNo5C6ju6WSgJKpAJJ0ocl+ONtmOp6GLVBSQXaMC4PitQcebcoP2J6fFgQ+YcPwHXasCYEnn4LaFN7zT/AjGg3E3gdCx3ksGNBOazYBRVz+g==",
-        "partnerid": "316525492",
-        "appid": "wx3c6896fa9b351f2a",
-        "prepayid": "wx131253044253463a81dc336e1254149882",
-        "noncestr": "7786db42d9a245c2b1cfc717ac59376e"
-        },
+  "respmsg": "",
+  "pay_params": {
+    "package": "Sign=WXPay",
+    "timestamp": 1568350384,
+    "sign": "[sign string]",
+    "partnerid": "316525492",
+    "appid": "wx3c6896fa9b351f2a",
+    "prepayid": "wx131253044253463a81dc336e1254149882",
+    "noncestr": "7786db42d9a245c2b1cfc717ac59376e"
+  },
   "pay_type": "800210",
-  "cardcd": "",    
+  "cardcd": "",
   "udid": "AA",
   "txdtm": "2019-09-13 04:53:03",
   "txamt": "10",
-  "resperr": "交易成功",
+  "resperr": "Transaction successful",
   "out_trade_no": "O5DNgEgL1XpvbvQSfPhN",
-  "syssn": "20190913152100020001567741",   
+  "syssn": "20190913152100020001567741",
   "respcd": "0000",
   "chnlsn": ""
 }
 ```
 
-| Attribute | Mandatory | Type | Description |
-|:---|:----- |-----   |----   |
-| `mchid`  | No | String  | The unique merchant ID is created by QFPay during the merchant onboarding process. |
-| `out_trade_no` | Yes | String    | External transaction number|
-| `txamt`  | Yes | String |The actual amount of consumption, the maximum deduction amount cannot exceed the fozen funds. Suggest value > 200 to avoid risk control|
-| `txcurrcd` | Yes | String(3) | Transaction currency. View the Currencies table for a complete list of available currencies|
-| `rmb_tag` | No | String(1) | WeChat Pay in Hong Kong uses `rmb_tag` = Y together with `txcurrcd` = CNY to indicate that the transaction currency is RMB.|
-| `txdtm`   | Yes | String      | Format: YYYY-MM-DD hh:mm:ss|
-| `udid`   | No | String         |Device ID, must be unique|
-| `return_url`   | No | String        | Redirect URL, redirect to address after successful payment. Mandatory parameter to submit for GrabPay Online. Alipay WAP restricts the `return_url` to maximum 200 characters.|
-| `extend_info`  | No | Object  |Extended Customer Info, real name customer identification. This parameter is currently only available for Mainland Chinese citizens and needs to be explicitly activated with WeChat for the selected [PayType](/docs/preparation/paycode#payment-codes). The consumer's **national ID card number** is contained in the parameter `user_creid` and the payer's **real name** in encoded form or written in Chinese characters must be provided in `user_truename`. An example looks like this; extend_info = '\{"user_creid":"430067798868676871","user_truename":"\\\u5c0f\\\u6797"\}' |
+---
 
-## Response Parameters
+## Calling the WeChat SDK
 
-| Attribute | Type | Description |
-|:----    |:---|-----   |
-|`syssn` |   String(40) |  QFPay transaction number, returned by the system once payment is completed |
-|`orig_syssn`    |String(40)| External transaction number |
-|`txdtm`     | String(20) | Transaction request time, format: YYYY-MM-DD hh:mm:ss  |
-|`txamt`    |Int(11)| Transaction amount |
-|`sysdtm`     |String(20)| System transaction time, format: YYYY-MM-DD hh:mm:ss  This parameter value is used as the cut-off time for settlements.|
-|`respcd`    |String(4)| Return code|
-|`respmsg`    |String(128)| Information description|
-|`resperr`     |String(128)| Description error|
-|`cardcd`     |String| Card number|
-|`txcurrcd`      |String|Transaction currency. View the [Currencies](/docs/preparation/paycode#currencies) table for a complete list of available currencies |
-|`pay_params`      |Object|Payment data to call Wechat SDK |
+After receiving `pay_params`, pass the values into the WeChat SDK according to [WeChat SDK documentation](https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_12&index=2) for Android or iOS.
+
+Ensure the parameters are mapped correctly:
+
+* `appid`
+* `partnerid`
+* `prepayid`
+* `package`
+* `noncestr`
+* `timestamp`
+* `sign`
+
+---
+
+## Summary
+
+* This payment method is for **native app integrations only**
+* Requires prior WeChat platform registration and AppID approval
+* All payment handling is passed to the official SDK
+* For final transaction status confirmation, use the [Transaction Enquiry API](/docs/common-api/transaction-enquiry)
