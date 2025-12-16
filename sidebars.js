@@ -148,8 +148,8 @@ const sidebars = {
             type: 'generated-index'
           },
           items: [
-            'online-shop/integration-by-use-case/wap-payment',
             'online-shop/integration-by-use-case/web-payment',
+            'online-shop/integration-by-use-case/wap-payment',
             'online-shop/integration-by-use-case/in-app-payment',
             'online-shop/integration-by-use-case/preauth',
             'online-shop/integration-by-use-case/qfpay-recurring-payment'
