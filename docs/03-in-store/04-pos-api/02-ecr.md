@@ -306,7 +306,7 @@ QFPay Transaction ID (same as `syssn` or `out_trade_no`)
 2. Follow the USB communication protocol to construct the data. See [Section 10: Communication Protocol](#10-cash-register--pos-communication-protocol-usb).
 3. Data response: the received payload must be parsed according to the protocol and decrypted via AES.
 
-## 8. HTTP Protocol
+## 8. HTTP/HTTPS Protocol
 
 1. HTTP transmission requires POS host IP and port. Default port: `9001`.
 2. Data Format:
@@ -328,6 +328,8 @@ QFPay Transaction ID (same as `syssn` or `out_trade_no`)
 
 5. Response:  
    - Response must be decrypted using AES to obtain result content.
+
+For HTTPS setup, please refer to the [ECR Integration HTTPS](../ecr-https/) documentation.
 
 ## 9. TCP Protocol
 

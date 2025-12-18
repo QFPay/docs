@@ -68,6 +68,11 @@ const sidebars = {
             },
             {
               type: 'doc',
+              label: 'ECR Integration HTTPS',
+              id:'in-store/pos-api/ecr-https'
+            },
+            {
+              type: 'doc',
               label: 'App call App',
               id:'in-store/pos-api/app-call-app'
             },
