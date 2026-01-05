@@ -1,39 +1,38 @@
-.wrap {
-  position: relative;
+.container {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
 }
 
-/* Ask AI button inside search bar */
-.kapaBtn {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+/* Ask AI button styled as secondary control */
+.askAiBtn {
+  height: 32px;
+  padding: 0 14px;
 
-  height: 24px;
-  padding: 0 10px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
 
   border-radius: 999px;
   border: 1px solid var(--ifm-color-emphasis-300);
-  background: var(--ifm-color-emphasis-100);
+  background: var(--ifm-background-surface-color);
 
-  font-size: 12px;
-  line-height: 1;
+  font-size: 13px;
+  font-weight: 500;
   white-space: nowrap;
-  color: var(--ifm-font-color-base);
+
   cursor: pointer;
 }
 
-/* Optional: slightly mute the text so it feels secondary */
-.label {
-  opacity: 0.85;
+.askAiBtn:hover {
+  background: var(--ifm-color-emphasis-100);
 }
 
-/* Make room for the wider button */
-.wrap :global(input) {
-  padding-right: 84px; /* adjust if needed */
+.askAiBtn:active {
+  background: var(--ifm-color-emphasis-200);
+}
+
+.askAiBtn:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
 }
