@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - docusaurus-developer-center
+      - docusaurus-developer-center-test
     # Review gh actions docs if you want to further define triggers, paths, etc
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
 
@@ -46,14 +46,14 @@ jobs:
       #     user_email: 41898282+github-actions[bot]@users.noreply.github.com
 
       - name: Restore the orignal files
-        run: aws s3 cp s3://sdk.qfapi.com/ s3://sdk.qfapi.com/backup_$(date +%Y%m%d%H%M%S) --recursive --exclude "backup_*"
+        run: aws s3 cp s3://sdk-test.qfapi.com/ s3://sdk-test.qfapi.com/backup_$(date +%Y%m%d%H%M%S) --recursive --exclude "backup_*"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }} 
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: 'ap-east-1'
 
       - name: Upload to AWS S3
-        run: aws s3 cp ./build s3://sdk.qfapi.com/ --recursive --force
+        run: aws s3 cp ./build s3://sdk-test.qfapi.com/ --recursive --force
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
