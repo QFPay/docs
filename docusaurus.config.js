@@ -141,13 +141,13 @@ const config = {
       {
         src: "https://widget.kapa.ai/kapa-widget.bundle.js",
         "data-website-id": "0177b9e9-7caa-4573-85c9-685d2ca7ef95",
-        "data-project-name": "Ask QFPay AI",
+        "data-project-name": "QFPay SDK Doc",
         "data-project-color": "#0676FF",
         "data-project-logo": "https://is2-ssl.mzstatic.com/image/thumb/Purple113/v4/15/46/03/154603d8-3566-ce79-5256-061ab2895d18/source/512x512bb.jpg",
-        
+        "data-modal-title": "Ask QFPay AI",
         // testing inclusion to search bar
         "data-button-hide": "true",
-        "data-modal-override-open-selector-search": "#kapa-search-trigger",
+        "data-modal-override-open-selector": "#kapa-search-trigger",
         
         async: true,
       },

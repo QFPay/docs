@@ -7,22 +7,25 @@
 /* Ask AI button inside search bar */
 .kapaBtn {
   position: absolute;
-  right: 8px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  height: 30px;
+
+  height: 24px;
   padding: 0 10px;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 
-  border-radius: 8px;
+  border-radius: 999px;
   border: 1px solid var(--ifm-color-emphasis-300);
-  background: var(--ifm-background-surface-color);
-  cursor: pointer;
+  background: var(--ifm-color-emphasis-100);
 
   font-size: 12px;
+  line-height: 1;
   white-space: nowrap;
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
 }
 
 /* Optional: slightly mute the text so it feels secondary */
