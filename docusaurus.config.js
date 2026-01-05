@@ -137,6 +137,16 @@ const config = {
         }
       }
     }),
+  scripts: [
+      {
+        src: "https://widget.kapa.ai/kapa-widget.bundle.js",
+        "data-website-id": "0177b9e9-7caa-4573-85c9-685d2ca7ef95",
+        "data-project-name": "QFPay - Docs AI",
+        "data-project-color": "#0676FF",
+        "data-project-logo": "https://is2-ssl.mzstatic.com/image/thumb/Purple113/v4/15/46/03/154603d8-3566-ce79-5256-061ab2895d18/source/512x512bb.jpg",
+        async: true,
+      },
+    ],
 };
 
 export default config;
