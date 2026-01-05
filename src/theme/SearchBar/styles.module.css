@@ -1,0 +1,36 @@
+.wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Ask AI button inside search bar */
+.kapaBtn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 30px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-surface-color);
+  cursor: pointer;
+
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* Optional: slightly mute the text so it feels secondary */
+.label {
+  opacity: 0.85;
+}
+
+/* Make room for the wider button */
+.wrap :global(input) {
+  padding-right: 84px; /* adjust if needed */
+}
