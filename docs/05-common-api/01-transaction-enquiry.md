@@ -331,21 +331,3 @@ These fields are explained in [Common API Response Format](/docs/api-reference/r
   ]
 }
 ```
-
----
-
-
-## Account Statement
-
-Clearing statements are periodically generated per payment channel. Requests for historical reports are only supported in **production environment**.
-
-### API Endpoint for Statement Download
-
-* **Endpoint** : `/download/v1/trade_bill`
-* **Method** : `GET`
-
-### Request Parameter
-
-| Parameter    | Type       | Required | Description                             |
-| ------------ | ---------- | -------- | --------------------------------------- |
-| `trade_date` | String(10) | Yes      | Format: `YYYY-MM-DD`. E.g. `2023-04-01` |
