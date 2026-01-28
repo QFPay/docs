@@ -34,7 +34,7 @@ export default function HomepageCard(props) {
   };
 
   return (
-    <Card className={[clsx('col col--4'), "qf-homepage-card"]}>
+    <Card className={[clsx('col col--4'), "qf-homepage-card", "qf-card-modern"]}>
       <CardMedia
         component="img"
         image={props.url}

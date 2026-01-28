@@ -4,21 +4,39 @@
  * work well for content-centric websites.
  */
 
+/* Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* You can override the default Infima variables here. */
+/* Temporarily removed Inter font import */
+@import url('https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css');
+
 :root {
-  --ifm-color-base: #333;
-  --ifm-color-primary: #007bff;
-  --ifm-color-primary-dark: #006fe6;
-  --ifm-color-primary-darker: #0069d9;
-  --ifm-color-primary-darkest: #0056b3;
-  --ifm-color-primary-lighter: #268fff;
-  --ifm-color-primary-lightest: #4da3ff;
+  /* 更新為現代化色彩方案 */
+  --ifm-color-base: #1a1a1a;
+  --ifm-color-primary: #0066cc;
+  --ifm-color-primary-dark: #0052a3;
+  --ifm-color-primary-darker: #004d99;
+  --ifm-color-primary-darkest: #003d7a;
+  --ifm-color-primary-lighter: #338fff;
+  --ifm-color-primary-lightest: #80c1ff;
+
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* 保持其他設置 */
   --ifm-code-font-size: 95%;
   --ifm-navbar-height: 104px;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --ifm-font-family-base: Poppin,system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont,
-    'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol';
+
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+  /* 保持原有卡片變數 */
   --homepage-card-bg: white;
   --homepage-card-action-bg: white;
   --ifm-container-width: 1320px;
@@ -192,13 +210,151 @@
 
 }
 
+
+/* 玻璃擬態導航欄效果 */
+.navbar {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: var(--glass-bg);
+  border-bottom: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-soft);
+}
+
+/* 導航欄連結樣式 */
+.navbar__link {
+  border-radius: 24px;
+  transition: all 0.3s ease;
+}
+
+.navbar__link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+/* 現代化按鈕樣式 */
+.qf-btn-modern {
+  background: var(--gradient-primary);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s ease;
+  border: none;
+  color: white;
+  font-weight: 500;
+}
+
+.qf-btn-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* 現代化卡片樣式 */
+.qf-card-modern {
+  background: white;
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.qf-card-modern:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* 搜尋框現代化 */
+.qf-search-modern {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+}
+
+.qf-search-modern:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #667eea;
+}
+
+/* 側邊欄現代化 */
+.menu {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px;
+}
+
+.menu__link {
+  border-radius: 8px;
+  margin: 2px 8px;
+  transition: all 0.2s ease;
+}
+
+.menu__link:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateX(4px);
+}
+
+/* 代碼區塊現代化 */
+.theme-code-block {
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* 響應式設計優化 */
 @media screen and (max-width: 996px) {
   .qf-display-link{
-    position: relative; 
+    position: relative;
     top: 0;
     /* padding-left:0; */
   }
   .qf-display-link{
     padding-left: var(--ifm-menu-link-padding-horizontal);
   }
+
+  /* 移動端優化 */
+  .qf-card-modern {
+    border-radius: 12px;
+  }
+
+  .navbar {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
+/* ===== 隱藏默認的 Docusaurus 佈局 ===== */
+
+/* 隱藏默認的 Docusaurus 導航欄和佈局 */
+.navbar {
+  display: none !important;
+}
+
+.theme-doc-sidebar-container,
+.theme-doc-sidebar-menu {
+  display: none !important;
+}
+
+/* 確保 Tailwind 的基礎樣式不會與 Docusaurus 衝突 */
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Remove borders from sidebar buttons */
+aside nav button,
+aside button {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+aside nav button:focus,
+aside button:focus,
+aside nav button:active,
+aside button:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
 }
