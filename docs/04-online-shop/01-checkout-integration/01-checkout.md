@@ -51,7 +51,7 @@ For base URLs and environment details, please refer to the [Environment Document
 | `goods_name` | String(64) | No | Product name (≤20 chars; no special chars) |
 | `udid` | String(40) | No | Device ID |
 | `expired_time` | String(3) | No | QRC expiration (5–120 minutes; WeChat, Alipay only) |
-| `checkout_expired_time` | String(13) | No | Expiration in ms (e.g. `1715686118000`) |
+| `checkout_expired_time` | String(13) | No | Checkout page expiration time. Accepts minutes (up to 3 digits, e.g. 120) or Unix timestamp in milliseconds (13 digits, e.g., 1715686118000) |
 | `limit_pay` | String | No | `no_credit` to block credit cards (WeChat only) |
 | `lang` | String(5) | No | UI language: `zh-hk`, `zh-cn`, `en` |
 | `cancel_url` | String | No | URL when user cancels checkout |

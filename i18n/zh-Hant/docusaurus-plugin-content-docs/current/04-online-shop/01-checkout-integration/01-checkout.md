@@ -57,7 +57,7 @@ API 環境相關請參考[環境設定](/docs/preparation/environment)。
 | `goods_name` | String(64) | 否 | 商品名稱，不可含特殊字元，建議不超過 20 字 |
 | `udid` | String(40) | 否 | 裝置代碼 |
 | `expired_time` | String(3) | 否 | 二維碼有效時間（單位為分鐘，範圍 5–120） |
-| `checkout_expired_time` | String(13) | 否 | 客戶端結帳頁逾時時間（毫秒） |
+| `checkout_expired_time` | String(13) | 否 | 客戶端結帳頁逾時時間。支援格式：（最多3位，如 120）或 Unix timestamp 毫秒（13位，如 1715686118000) |
 | `limit_pay` | String(3) | 否 | 禁用信用卡，僅 WeChat Pay 支援 |
 | `lang` | String(5) | 否 | 語言代碼：zh-hk、zh-cn、en |
 | `cancel_url` | String(256) | 否 | 結帳頁「返回商店」按鈕的跳轉連結 |
